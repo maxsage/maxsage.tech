@@ -1,0 +1,47 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>DG Notes</h2>
+                <h3>SQLite Error</h3>
+                <p>I was getting an exception message from the DG.WPF.SQLite.Model SQLite.cs class:</p>
+                <img src="./app/assets/images/dgen/sqlite3 error.png" />
+                <p>I resolved this by copying the sqlite3.dll to the project folder and then right-clicking 
+                and selecting properties. I then set the Copy to Output directory option to Copy Always:</p>
+                <img src="./app/assets/images/dgen/sqlite3 resolution.png" />
+                <h3>Binding to the Visibility Attribute using a TypeConverter</h3>
+                <p>The XAML code snippet below shows the binding I was using against the Visibility attribute of each 
+                    of the controls used to represent the three different QuestionTypes:</p>
+                <ul>
+                    <li>SingleChoiceSingleAnswer – utilizing a single text box for the user to type a reply.</li>
+                    <li>MultipleChoiceSingleAnswer – utilizing a listbox bound to the Answers with RadioButton controls for the user to select the single correct answer. The RadioButton controls were given the same GroupName to make them mutually exclusive.</li>
+                    <li>MultipleChoiceMultipleAnswer – utilizing a listbox bound to the Answers with CheckBox controls for the user to select the multiple correct answers.</li>
+                </ul>
+                <code>"{Binding Path=CurrentQuestion.QuestionTypeId, Converter={x:Static my:QuestionTypeToVisibilityConverter.Instance}, ConverterParameter=2}"</code>
+                <p>Using this technique all three controls were still present on the Window even if only one of them
+                    was Visible.</p>
+                <p>The problem with this is because the RadioButton controls were mutually exclusive and were bound 
+                    to the same Answers property as the CheckBox controls I could only select one checkbox. If I 
+                    attempted to select another checkbox the TwoWay binding would cause the relevant RadioButton 
+                    to be selected which would mean the previously selected one was deselected and so was the 
+                    CheckBox!</p>
+                <h3>Useful Links</h3>
+                <a href="http://www.codeproject.com/Articles/323187/MVVMLight-Using-Two-Views">http://www.codeproject.com/Articles/323187/MVVMLight-Using-Two-Views</a>
+                <p>Details how to create an application using MVVM Light with multiple views in one window. I used 
+                    this technique (modified slightly) in order to display a different View for each QuestionType.</p>
+                <h2>Close a Window from the ViewModel</h2>
+                <p>I used this process for closing the DoQuizWindow:</p>
+                <a href="http://www.codeproject.com/Tips/499977/Closing-View-from-ViewModel">http://www.codeproject.com/Tips/499977/Closing-View-from-ViewModel</a>
+                <h3>Using Automapper to map QuizSessionQuestionViewModel objects to QuizSessionQuestion objects</h3>
+                <p>QuizSessionQuestion objects don’t have a single Id property. Instead they utilize a composite 
+                    key made up from QuizSessionId and QuestionId. When mapping from QuizSessionQuestionViewModel 
+                    objects to QuizSessionQuestion objects I used Automapper to map the QuizSessionQuestionViewModel 
+                    objects Id field to the QuizSessionQuestion objects QuestionId field.</p>
+                <a href="http://www.codeproject.com/Articles/61629/AutoMapper">http://www.codeproject.com/Articles/61629/AutoMapper</a>
+            </div>
+        </div>
+    </div>
+</div>

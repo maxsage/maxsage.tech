@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Building Nested Components</h2>
+    <h3>Introduction</h3>
+    <p>Our user interface design may include features that are complex enough to be separate components, or that are
+      reusable across our views. Welcome back to "Angular 2: Getting Started" from Pluralsight. My name is Deborah
+      Kurata and in this module we see how to build components designed to be nested within other components, and we'll
+      discover how to establish communication between the nested component and its container. Just like nesting dolls,
+      we can nest our components. We can nest a component within another component and nest that component within yet
+      another component and so on. And because each component is fully encapsulated we expose specific inputs and
+      outputs for communication between a nested component and its container, allowing them to pass data back and
+      forth. There are two ways to use a component and display the component's template. We can use a component as a
+      directive. We saw how to use a component as a directive when we displayed the App Component template in the
+      index.html file. The mh-app directive is defined as the App Component selector. The template is then displayed
+      within the directive text. We use the same technique with nested components. Alternatively, we can use the
+      component as a routing target, so it appears to the user that they've traveled to another view. The template is
+      then displayed in a full page style view. We'll use this technique later in this course to route to our Product
+      List View. Our Product List View is currently used as a directive, but that's only because we have not yet covered
+      routing. In this course module we'll focus on building a nested component. So, what makes a component nest-able?
+      Technically speaking, any of our components could be nested if they have a selector defined in the component
+      decorator. But, does it really make sense to nest a large view such as our Product List? For our purposes we'll
+      define a component as nest-able if its template only manages a fragment of a larger view, if it has a selector so
+      it can be used as a directive, and, optionally, if it communicates with its container. In this module we'll build
+      a nested component, then we'll review how to use that nested component as a directive in a container component.
+      We'll examine how to pass data to the nested component using a property with the @Input decorator. And how to pass
+      data out of the nested component by raising an event to find with the @Output decorator. In our sample
+      application, to improve the user experience we want to replace the rating number displayed in the Product List
+      Component with stars. In this module we'll build the Star Component and nest it within the Product List Component.
+      Let's get started.</p>
+    <h3>Building a Nested Component</h3>
+    <p>Here is a visual representation of a component that is nest-able. Here is another component. It wants to use the
+      nest-able component in its template. We then refer to the outer component as the container or parent component.
+      And we refer to the inner component as the nested or child component. When building an interactive application the
+      nested component often needs to communicate with its container. The nested component receives information from its
+      container using input properties, and the nested component outputs information back to its container by raising
+      events. In our sample application we want to change the display of the five-star rating from this to
+      this. Displaying the rating number using a visual representation such as stars makes it quicker and easier for the
+      user to interpret the meaning of the number. This is the nested component we'll build in this module. For the Star
+      Component to display the correct number of stars, the container must provide the rating number to our Star
+      Component as an input. And if the user clicks on the stars we want to raise an event to notify the container.
+      Let's jump right in and build our Star Component. When we last saw our sample application we had completed the
+      Product List Component. Now, of course, we want to change it. Instead of displaying a number for the rating here
+      we want to display stars. Instead of adding the code to the Product List Component to display the stars, we want
+      to build it as a separate component. This keeps the template and logic for that feature encapsulated and makes it
+      reusable. So let's begin by creating a Star Component. The Star Component can be used by any feature of the
+      application, so it really doesn't belong in our Products folder, we'll instead put it in a shared folder where
+      we'll put all our shared components. If you are using the starter files I've already created this folder and
+      included the template and style sheet for our component here. Now we are ready to build the Star Component. We
+      begin by creating a new file. We'll name it "star.component.ts". We then create this component just like we'd
+      create any other component, starting with the class. export class StarComponent. What's next? Yup, we decorate the
+      class with the component decorator. Recall that it is this component decorator that makes this class a component.
+      As always, it shows as a syntax error here because we're missing, yup, our import. Now, we're ready to set the
+      component decorator properties. For the selector we don't want to use the pm prefix because this component could
+      be reused anywhere in our company, not just on the Product Management Application. We'll instead prefix the
+      selector with an abbreviation for our company, which in this case is "ai" for "Acme Inc". For the templateurl we
+      provide the path to the HTML file provided in our starter files. We add the styleurls property, and in the array
+      we'll set the first element to the path of the style sheet that was also provided. Now let's take a peek at the
+      Star Component template. Here it displays five stars, it then crops the stars based on a defined width. This
+      technique can then display partial stars such as four and a half of the five stars by setting the width, such that
+      only four and a half of the stars appear. Recall what this syntax is called? This is property binding. We're using
+      it here to set the style width, and here to bind the title property to display the numerical rating value. For
+      theses bindings to work we need two properties and the component's class, the rating and the star width. Let's add
+      these two properties. We want the rating property, which is a number and defines the rating value. Since we don't
+      yet have a way to get this value let's hardcode it to four for now so we'll see some stars. And we need the star
+      width. This value is calculated based on the rating. So, where do we put that calculation? Well, we'd want to
+      start width recalculated anytime the container changes the rating number, so let's tap into the OnChanges
+      lifecycle hook as we discussed in the last module. We'll add OnChanges to the import statement. We'll implement
+      the OnChanges interface and we'll write code for the ngOnChanges method, identified the OnChanges interface. In
+      this method we'll convert the rating number to a star width based on the width of our stars. Our component is now
+      complete and we're ready to nest it in another component. How do we do that?</p>
+    <h3>Using a Nested Component</h3>
+    <p>Now we are ready to nest our new component>within another component.>We do that by using our nested component as
+      a directive, and following the same steps we covered earlier in this course. Here is a shorten form of the code
+      for a container component and its template. And here is the nested component we just created. Instead of
+      displaying the star rating number we want to display the stars, so the container component uses the nested
+      component by specifying its directive here. This identifies where in the container to place the nested component's
+      template. As we've seen in prior demos, when we use a component as a directive we need to tell Angular how to find
+      that directive. We do that by declaring the nested component in an Angular module. How do we know which Angular
+      module? Well, you still only have one Angular module, AppModule, but if we had multiple modules we'd add it to
+      each Angular module that declares a component that uses the directive. In our example, the Product List
+      Component's template wants to use the Star Component, so we add the declaration to the same Angular module that
+      declares the Product List Component. We define the nested component in the declaration's array of the @NgModule
+      decorator, and as always, define what we need by adding an import statement. Let's jump right back to our demo.
+      Our Star Component is now shown here in the right. We want to use our Star Component in the Product List
+      template that is here on the left. In the table data element we want to replace the display of the star rating
+      number with our Star Component. To do that we simply replace the binding with our ai-star directive. Now our
+      Product List template will display our stars here. Next we need to tell Angular where to find this directive.
+      Since we only have one Angular module we'll add the declaration for the nested component there. Because we know by
+      now that we'll need it, we'll add the import for the Star Component first, then we add the Star Component to the
+      declaration's array passed into the @NgModule decorator. And since we imported the component first, IntelliSense
+      helps us here. These are the same steps we followed earlier on this course to use a component as a directive.
+      Nothing new here so far. Let's see what we did. We have stars! Yes! Hmm, but we see five of them. Let's clear up
+      the filter. Yes, we see five every time. Hover over the stars and we see our hardcoded star rating is four. It
+      seems that our star width is not being set. Let's look at the code again. We set the star width property in the
+      ngOnChanges method when the OnChanges lifecyle event occurs, but the OnChanges lifecycle event never occurs
+      because OnChanges only watches for changes to input properties. We don't have any input properties. So we have two
+      problems here: our OnChanges event does not fire and we don't currently have a way to get the correct rating
+      number from the container. Let's see how input properties can solve both of these issues. </p>
+    <h3>Passing Data to a Nested Component Using @Input</h3>
+    <p>If a nested component wants to receive input from its container, it must expose a property to that container. The
+      nested component exposes a property it can use to receive input from its container using the aptly named "@Input"
+      decorator. We use the @Input decorator to decorate any property in the nested component's class. This works with
+      any property type, including an object. In this example, we want the rating number passed into the nested
+      component, so we mark that property with the @Input decorator. The container component then passes data to the
+      nest component by setting this property with property binding. When using property binding we enclose the binding
+      target in square brackets, we set the binding source to the data that the container wants to pass to the nested
+      component. In this example the Product List template passes the product's star rating number. The only time we can
+      specify a nested component's property as a property binding target on the left side of an equals is when that
+      property is decorated with the @Input decorator. So in this example the Product List template can bind to the
+      rating but not the star width. Let's give this a try. Going back to our Star Component let's add @Input to our
+      import statement 'cause we know we're going to need it. The Star Component wants to expose the rating property to
+      its container so the container can provide the rating number. We'll add the @Input decorator then to the rating
+      property. The @Input decorator is a function, so we add parenthesis. We don't need to pass anything to this
+      function, so that's it. And let's remove this default value. Now that we can get the value from the container we
+      don't need that here. In our example we decorate only one property of the nested component with the @Input
+      decorator but we are not limited to one, we can expose multiple input properties as needed. In the container's
+      template we use property binding and define the nested component's input property as the target of the binding.
+      Then we set the binding source to the value we want to pass into the nested component. In this example, we pass
+      the product's star rating. That's it, the product's star rating property is now bound to the rating input property
+      of the nested component. Anytime the container data changes, the OnChanges lifecycle event is generated and the
+      star width is recalculated, the appropriate number of stars are then displayed. Let's check it out in the browser.
+      That looks better. Well, we're not really displaying the .2 stars here, our algorithm could use some improvement,
+      but you get the idea. But, what if we want to send data back from our nested component to our container? Let's
+      look at that next.</p>
+    <h3>Passing Data from a Component Using @Output</h3>
+    <p>We just saw how the container passes data to the nested component by binding to a nested component property that
+      is decorated with the @Input decorator. If the nested component wants to send information back to its container,
+      it can raise an event. The nested component exposes an event it can use to pass output to its container using the
+      aptly named "@Output" decorator. We can use the @Output decorator to decorate any property of the nested
+      component's class. However, the property type must be an event. The only was a nested component can pass data back
+      to its container is with an event. The data to pass becomes the event payload. In Angular an event is defined with
+      an EventEmitter object, so here we create a new instance of an EventEmitter. Notice the syntax here. TypeScript
+      supports generics. If you are not familiar with generics, this syntax allows us to identify a specific type that
+      the object instance will work with. When creating an EventEmitter, the generic argument identifies the type of the
+      event payload. If we want to pass a string value to the container in the event payload, we define "string" here.
+      If we want to pass an integer, we define "number" here. If we want to pass multiple values, we can specify an
+      "object" here. In this example we define a notify event with a string payload. When the user clicks on the stars
+      the Star Component receives that click event, we use event binding in the Star Component template to call the Star
+      Component's onClick method. In the onClick method we use the notify event property and call its emit method to
+      raise the notify event to the container. If we want to pass data in the event payload, we pass that data into the
+      emit method. In this example the onClick method raises the notify event and sets the event payload to a string
+      message. The container component receives that event with the specified payload. In the container component's
+      template we use event binding to bind to this notify event and call a method. We access the event payload using
+      "$event". The only time we can specify a nested component's property as an event binding target on the left side
+      of an equals is when that property is decorated with the @Output decorator. Lastly, the container component
+      provides the method to execute when the notify event occurs. Since the event payload is a string, this function
+      takes in a string. Here we can perform any desired action. Hmm, lots of moving parts here. Let's jump into the
+      code and try it out. We are back in the sample application looking at the Star Component. We'll add @Output and
+      EventEmitter to our import statement because we know we're going to need 'em. We want to expose an event to the
+      container, so let's define a ratingClicked event property. We define the type of this property to be EventEmitter,
+      and we want the event payload to be a string, so we specify "string" as the generic argument. We set the
+      ratingClicked property to new instance of EventEmitter. We decorate this property with the @Output decorator to
+      expose it so that the container can respond to this event. The @Output decorator is a function so we add
+      parenthesis. In this example we are decorating only one property of the nested component with the @Output
+      decorator but we are not limited to one, we can expose multiple output properties as needed. Moving to the
+      template, we use event binding to bind the div element's clicked event to a local onClick method. Then let's
+      implement this onClick method in the component. When the Star Component processes the clicked event on the div, it
+      wants to raise an event to the container and pass along a message. We use the event property and call its emit
+      method passing in the desired string. In this example, we use the ES2015 back text to define a template
+      string, this allows us to bind the rating directly into the string using dollar syntax. Our Star Component is then
+      complete. Now, let's respond to this event in our container. The Product List Component wants to listen for this
+      ratingClicked event, so let's update the Product List template. Here, in the nested component's directive, we'll
+      add event binding to respond to the ratingClicked event exposed by the Star Component, and we'll get the event
+      payload. We'll respond by calling our own local method, we'll call it onRatingClicked. The event payload is
+      available using $event, so we pass that in to the onRatingClicked method. We then need to write code for this new
+      method in the container's class. In the Product List Component we define the onRatingClicked method. We'll add it
+      on the bottom with our other methods. We define a "message: string" parameter for the event payload. To keep
+      things simple, we'll just modify the pageTitle to display "Product List" and the message from the nested
+      component. Okay, yeah, that is not a very real world example but I wanted to keep this as straightforward as
+      possible. We'd have a better example if the nested component contained an input box and we could pass the user's
+      input in the event payload, but you get the general idea here. Let's see how this works in the browser. We'll
+      clear filter by, click on the star rating, and we see the page title changed to display the message received from
+      the nested component. Success! We just saw how the container passes data to the nested component by binding to a
+      nest component property that is decorated with the @Input decorator, and how the nested component uses an event
+      property decorated with the @Output decorator to raise events. We can think of the properties decorated with the
+      @Input or @Output decorators as a public API of the nest-able component. Everything else in the component is
+      encapsulated and only accessible to the component's template and class. Let's finish up this module with some
+      checklists we can use as we build nest-able components. </p>
+    <h3>Checklists and Summary</h3>
+    <p>We build a nested component using the same techniques we use to build any other Angular component. We won't
+      review that again here, let's instead lay out a checklist for inputs and outputs. Decorate a nested component
+      property with the Input decorator any time it needs input data from its container. Any type of component property
+      can be decorated with the Input decorator. Don't forget the @ prefix, and since the Input decorator is a function,
+      follow it with opening-closing parenthesis. Decorate a nested component property with the Output decorator anytime
+      it needs to raise events and optionally pass information back to its container. Only properties of type
+      EventEmitter should be marked with the Output decorator. Use the EventEmitter's generic argument to specify the
+      type of the event payload. And use the "new" keyword to create an instance of the EventEmitter. Don't forget the @
+      prefix, and since the Output decorator is a function suffix it with opening-closing parenthesis. In a container
+      component's template use the nested component as a directive. For the name of the directive see the nested
+      component's selector property. Use property binding to pass data to the nested component. Any property of the
+      nested component that is decorated with the Input decorator can be used as a binding target. Use event binding to
+      respond to events from the nested component. Any event that is decorated with the Output decorator can be used as
+      the binding target. And use $event to access the event payload passed from the nested component. This module was
+      all about nested components. We began by building a component that could be nested within other components. We
+      then walked through how to use the nested component within a container. We saw how to pass data into the nested
+      component by binding to a property marked with the Input decorator. And we discovered how to pass data out of the
+      nested component by raising an event marked with the Output decorator. In this module we built the Star
+      Component and nested it within the Product List Component. We can reuse this component in any other component of
+      the application such as the Product Detail Component. Next up, let's check out how to build an Angular service so
+      we won't need hardcoded product data in our component.
+    </p>
+    <script src="bundle.js"></script>
+  </body>
+</html>

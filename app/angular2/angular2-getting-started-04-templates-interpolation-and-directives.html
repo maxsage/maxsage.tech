@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Templates, Interpolation, and Directives</h2>
+    <h3>Introduction</h3>
+    <p>To build a user interface for our application in Angular, we create a template with HTML. To really power up that
+      user interface, we need Angular's data binding and directives. Welcome back to Angular 2: Getting Started from
+      Pluralsight. My name is Deborah Kurata and in these next two modules we create our user interface using templates,
+      directives, and data binding. Web applications are all about the user interface. And Angular makes it easier to
+      build rich and powerful user interfaces. Angular gives us data binding so we can easily display information and
+      respond to user actions. With Angular directives we add logic to our HTML, such as If statements and For loops.
+      And with Angular components we build nested user interface fragments. Such as an image rotator or rating stars.
+      We've seen that and Angular component is a view defined with a template. It's associated code defined with a class
+      and additional information defined with metadata and set using a component decorator. In these next two modules,
+      we'll focus on techniques for building the template. In this module, we evaluate the different ways we can build a
+      template for our component.And demonstrate how to create a linked template for our view. Then we'll build a
+      component associated with that template and use it as a directive. We'll detail how to set up data binding using
+      interpolation and display the value of our component class properties in the view. We need some basic logic in the
+      template, so we'll leverage Angular's built in directives. In the next module, we'll look at additional data
+      binding techniques. Looking at our application architecture, we currently have the index.html file and our root
+      App Component in place. So we have a working sample application, but it doesn't look like much. What we really
+      want is a list of products. In this module we'll begin work on the Product List Component to display that list of
+      products. Let's get started.</p>
+    <h3>Building a Template</h3>
+    <p>In the prior module, we built an inline template for our App Component. We used the template property to define
+      the template directly in the component's metadata. But this is not the only way we can build a template for our
+      components. We can use the template property and define an inline template using a simple quoted string with
+      single or double quotes. Or we can define an inline template with a multi-line string by enclosing the HTML in ES
+      2015 back ticks. The back ticks allow composing a string over several lines, making the HTML more readable. We
+      used this technique to build our template in the last module. There are some advantages to defining an inline
+      template using one of these two techniques. The template is directly defined within the component, keeping the
+      view and the code for that view in one file. It is then easy to match up our data bindings with the class
+      properties such as the page title in this example. However, there are disadvantages as well. When defining the
+      HTML in a string, most development tools don't provide IntelliSense, automatic formatting, and syntax checking.
+      Especially as we define more HTML in the template, these issues become challenges. In many cases the better option
+      is to define a linked template with the HTML in its own file. We can then use the template URL property in the
+      component metadata to define the URL of our HTML file. Let's use this technique and build a linked template for
+      our product list view. Here is our ultimate goal for the product list view. The view has a nice heading. A Filter
+      by box at the top allows the user to enter a string. The user entered string is displayed here and the list of
+      products is filtered to only those with a product name containing that string. The products are listed in a neat
+      table with a nicely formatted header. The Show Image button shows an image for each product. The product name is
+      link that displays the product detail view which we'll build later in this course. To make this page look nice
+      with very little effort, we use the Twitter Bootstrap styling framework. You don't need to have experience with
+      this framework and if you're using the starter files, you don't even have to install it. I've already included
+      what we need. But if you want to find out more about the Twitter Bootstrap styling framework, check out this link.
+      Now let's jump into a demo and start building the template for our product list view. When we last saw our sample
+      application, we had completed the App Component. Now we want to add an external template for the Product List
+      Component. By convention each feature of the application has its own folder under the app folder. So let's add a
+      new folder here and name it products. In that folder, we'll create the template for our Product List Component. By
+      convention, the name of the template is the same name as the component with an HTML extension. We'll call our
+      Product List Component, product-list.component.html. Let's widen that up a little bit. Now we are ready to create
+      the HTML for our template. Let's start with the heading. We're using Twitter Bootstrap style classes here to
+      display the content in a panel and display the heading as the panel heading. In the heading we display, Product
+      List. If you don't want to type in all of this code, you can copy it from the APM final folder provided in my
+      GitHub repository as detailed in the First Things First module earlier in this course. Next is the filter by. We
+      define an input box for entry of the filter string. And we add text that displays the user entered filter. We
+      again use Twitter Bootstrap style classes to lay out the input box and text into rows. Now let's build the table.
+      We use Twitter Bootstrap's table style classes. We have a table header. The first column header is a button to
+      show the product image. And here is the table body. Hmm, we definitely don't want to hard code in the products
+      here, so let's leave the table body empty for now. So we have the start of a template defined for our component.
+      Now what? If you said we need to build the component, you are exactly right.</p>
+    <h3>Building the Component</h3>
+    <p>Remember the steps for building a component that we covered in the last module? We define a class. We add a
+      component decorator to define the metadata and specify the template. And we import what we need. The only thing
+      that's really different from the component we created in the last module is the template property. Here we are
+      using template URL to define the location of our linked template instead of defining an HTML string. Let's jump
+      right back to the demo and give this a try. We are back with the sample application exactly where we left it and
+      we are ready to build a new component. We start by creating a new file in the products folder. We'll name it using
+      the component naming convention. .component because it is an Angular component and .ts for the extension. Then we
+      create the class, export class ProductListComponent. We're exporting this class so it is available to other parts
+      of the application. Next, we decorate the class with a component decorator. It is the component decorator that
+      makes this class a component. And we know what that underline means. We need the import statement. Let's pass an
+      object into the component decorator with the appropriate properties. For the selector, we'll set pm-products.
+      We'll use the same prefix as in the App Component to distinguish the selector as part of the product management
+      application. Then we define the template URL. Here we provide the path to our HTML file. Notice that the path is
+      relative to the index.html file. So we specify the app folder and products sub-folder before defining the name of
+      the HTML file. We'll look at relative pathing in the More On Components module later in this course. So now we
+      have our template defining our view. Our class which defines our associated code. And the component decorator that
+      defines the metadata. Our component is complete and we're ready to use it. But, how?</p>
+    <h3>Using a Component as a Directive</h3>
+    <p>Here is our newly created Product List Component. And here is the App Component we created earlier. Note that
+      I've excluded some of the code here on this slide, such as the import statements and class details for a better
+      fit. We'll see the complete code when we get back to the demo. When a component has a selector defined, as we have
+      here, we can use the component as a directive. This means that we can insert this component's template into any
+      other component's template by using the selector as an HTML tag, like this. The Product List Component's template
+      is then inserted into this location in the App Component's template. So this is the first step when using a
+      component as a directive. Use the name defined in the selector as an HTML tag in another component's template.
+      When this template is displayed, Angular looks for a component that has a selector with this name. We could have
+      hundreds of components in our application, how does our application know where to look for this selector? The
+      application looks to the Angular module that owns this component to find all of the directives that are visible to
+      this component. Remember the Angular module we looked at earlier in this course when we saw how to Bootstrap our
+      App Component? Every Angular application must have at least one Angular module, the root application module,
+      commonly called AppModule. I had provided the first cut of this Angular module with the starter files. Currently
+      our AppModule declares our root application component, AppComponent. A component must belong to one and only one
+      Angular module. Because the AppModule declares the AppComponent, the AppComponent belongs to the AppModule. The
+      AppModule bootstraps the application with this component, so it is the first component that is loaded for our
+      application. Our AppModule also imports the system BrowserModule to pull in the features it needs to run this
+      application in a browser. So this is what our AppModule currently looks like. An Angular module defines the
+      boundary or context within which the component resolves its directives and dependencies. So when a component
+      contains a directive, Angular looks to the component's module to determine which directives are visible to that
+      component. What does that mean for us? Well, for Angular to find the pm products directive used in the
+      AppComponent, the ProductList Component must also be declared in this Angular module. This is the second step when
+      using a component as a directive. We need to ensure that the directive is visible to any component that uses it.
+      There are two ways to expose a directive in an Angular module. We can declare the component in the Angular module
+      as we show here. Or if the component is already declared in another Angular module, we can import that module
+      similar to how we import BrowserModule here. Now let's jump back to the demo and give this a try. We are back in
+      our sample app. We defined a selector for our Product List Component here so we can use it as a directive in any
+      other component. Let's use it in the App Component. Open the App Component file. So instead of displaying my first
+      component, we'll display our new product list template here. Replace the div tags with pm-products. Are we ready
+      to see our result in the browser? And our page does not display. Let's use our F12 tools to see why. The key part
+      of this error is that we have a Template parse error, pm-products is not a known element. And with this error,
+      Angular gives us a solution. If pm-products is an Angular component, and in our case it is, then verify that it is
+      part of this module. Ah, yes. We didn't do step two and declare it in our applications Angular module. Let's go
+      back to the code. We'll open the app module and add ProductListComponent to the declarations array. We'll we're
+      getting a squiggly line here, that means we have an error. Any guess as to what's wrong? If you said we're missing
+      the import, you are correct. Everything we declare, must be imported. We add all of the import statements at the
+      top of the file. Okay, our syntax error is gone. Now let's try it again. There's our Loading App message. And our
+      page. It's not complete and it's not interactive yet, but we have the basics in place. So we successfully used our
+      Product List Component as a directive. We added the selector as the directive in the containing component's
+      template. We declared the component to the application's Angular module. And we added the appropriate import
+      statement. Now we are ready to power up our user interface with data binding and some built in Angular directives.
+    </p>
+    <h3>Binding with Interpolation</h3>
+    <p>In Angular, binding coordinates communication between the component's class and its template and often involves
+      passing data. We can provide values from the class to the template for display. And the template raises events to
+      pass user actions or user entered values back to the class. The binding syntax is always defined in the template.
+      Angular provides several types of binding and we'll look at each of them. In this module, we cover interpolation.
+      The remaining data binding techniques are covered in the next module. The double curly braces that signify
+      interpolation are readily recognizable. The pageTitle in this example is bound to a property in the component's
+      class. Interpolation is a one-way binding from the class property to the template. So the value here shows up
+      here. Interpolation supports much more than simple properties. We can perform operations such as concatenation or
+      simple calculations. We can even call a class method such as getTitle shown here. We use interpolation to insert
+      the interpolated strings into the text between HTML elements as shown here. Or we can use interpolation with
+      element property assignments as in this example. Here we assign the innerText property of the h1 element to a
+      bound value. Both of these examples display the same result. The syntax between the interpolation curly braces is
+      called a template expression. Angular evaluates that expression using the component as the context. So Angular
+      looks to the component to obtain property values or to call methods. Angular then converts the result of the
+      template expression to a string and assigns that string to an element or directive property. So any time we want
+      to display read only data, we define a property for that data in our class and use interpolation to display that
+      data in the template. And if we need to perform simple calculations or get a result from a method, we can do that
+      with interpolation as well. Let's give this a try. Looking at the product list template from our sample
+      application, we hard coded in the page title here in the heading. Binding the heading to a property in the class
+      instead of hard coding it in the HTML makes it easier to see and change when working on the code. And we could
+      later retrieve this text from a file or database. Let's start by adding a property in the class for the page
+      title. We'll open the component to the right and close down the Explorer. Here in the class, we specify the
+      property name. We'll call it pageTitle and because we are using TypeScript, we define the type for this property.
+      Lastly we assign a default value, Product List. With the page title property in place, we can now bind to the page
+      title property in the template. We replace the hard coded Product List here with interpolation and specify the
+      name of the property. Now when this template is displayed, Angular assigns the string value of the pageTitle
+      property to the inner text property of this div element. And Product List will be displayed. Let's see the result
+      in the browser. With our binding, the page title appears as before. So we can confirm that it works, I've
+      rearranged the windows so that we can see both the code and the browser. Now let's make a change to our pageTitle
+      here. And we immediately see it in the browser. So our interpolation works. So anytime we want to display the
+      value of a component property, we simply use interpolation. Now we're ready to add some logic to our template.
+    </p>
+    <h3>Adding Logic with Directives: ngIf</h3>
+    <p>We can think of a directive as a custom HTML element or attribute we use to power up and extend our HTML. We can
+      build our own custom directives or use Angular's built-in directives. Previously in this module, we've seen how to
+      build a component and use it as a custom directive. We use the pm-products directive to display our product list
+      template. In addition to building our own custom directives, we can use Angular's built-in directives. The
+      built-in Angular directives we'll look at are structural directives. A structural directive modifies the structure
+      or layout of a view by adding, removing, or manipulating elements and their children. They help us to power up our
+      HTML with If logic and For loops. Notice the asterisk in front of the directive name. That marks the directive as
+      a structural directive. Let's look at ngIf first. ngIF is a structural directive that removes or recreates a
+      portion of the dom tree based on an expression. If the expression assigned to the ngIf evaluates to a false value,
+      the element and its children are removed from the dom. If the expression evaluates to a true value, a copy of the
+      element and its children are reinserted into the dom. For example, say we only wanted to show the HTML table if
+      there are some products in a list of products. We use ngIf on the table element and set it to products and
+      products.length. If the products variable has a value and the products list has length, the table appears in the
+      dom. If not, the table element and all of its children are removed from the dom. But didn't we just say that an
+      Angular module defines the boundary or context within which the component resolves its directives and
+      dependencies? How will our application find this ngIf directive? Looking back at the illustration of our
+      AppModule, we see that it imports BrowserModule. Luckily for us, BrowserModule exposes the ngIf and ngFor
+      directives. So any component declared by the AppModule can use the ngIf or ngFor directives. With that settled,
+      let's try out the ngIf directive. We are back in the sample application looking at the Product List Component and
+      its template. We only want to display this table of products if there are some products to display. So the first
+      thing we need is a property to hold the list of products. Where do we define that products property? In the
+      component's class, of course. We'll add a products property here. Hmm, but what is the type of this property?
+      Well, we want an array of product instances, but we don't currently have anything that defines what a product is.
+      We'll have a better solution in a later module, but for now, we'll just define products as an array of any. In
+      TypeScript, we use any as the data type any time we don't know or don't care what the specific data type is. We
+      need to populate our array, but where do we get the data? In many cases, we would communicate with a back end
+      server to get this data. We'll look at how to do that later in this course. For now, we'll just hard code in a set
+      of products. If you are coding along, consider copying a few of the products from the products.json file provided
+      with the starter files under the api products folder. With the products property in place, we're ready to use it
+      in the HTML. We want to put it on the table element because that is the element we want to add or remove from the
+      dom. Type *ngIf equals and then our expression enclosed in quotes. We only want to show the table if there is a
+      list of products and that list of products contains some elements. Let's see what this looks like in the browser.
+      We see the table header so we know our table is displayed. Let's try this. Let's comment out the product property
+      assignment. Bring up the browser again, and we see that the table disappeared. Now if we uncomment out our table,
+      and look again at the browser, our table reappears. With ngIf, the associated element and its children are
+      literally added or removed from the dom. But notice that we still aren't populating the table with our products.
+      Let's do that next.</p>
+    <h3>Adding Logic with Directives: ngFor</h3>
+    <p>Another structural directive is ngFor. ngFor repeats a portion of the dom tree once for each item in an iterable
+      list. So we define a block of HTML that defines how we want to display a single item and tell Angular to use that
+      block for displaying each item in the list. For example, say we want to display each product in a row of a table.
+      We define one table row and its child table data elements. That table row element and its children are then
+      repeated for each product in the list of products. The let keyword here creates a template input variable called
+      product. We can reference this variable anywhere on this element, on any sibling element, or on any child element.
+      And notice the of instead of in here. We'll talk more about that in a moment. For now, let's jump back to our
+      demo. We are once again looking at the Product List Component and its template. Here in the table body, we want to
+      repeat a table row for each product in the list of products. In the table body, we'll add a tr element for the
+      table row. And in the tr element, we'll specify the ngFor. *ngFor = "let product of products". Next, we'll add the
+      child elements. We'll insert a td or table data element for each property of the product that we want to display
+      in the table. We'll need to match them up with the table header elements. The first column displays the product
+      image. Let's skip the image for now. We'll add that in the next module, but we'll still add the td element as a
+      placeholder. The next table header says Product, so in this column we want the product name. We'll use
+      interpolation to bind to the product's name by using the local variable, product, and a . to drill down to the
+      product properties. We want productName here. How did we know that property name? Looking here at the Product List
+      Component, we see the product property names here. So these are the names we use in the interpolation template
+      expressions. Next, I'll add td elements for some of the other product properties. So for each product in our list
+      of products, we will get a tr element for a table row and td elements for table data. Want to see how this looks
+      in the browser? Wow, we have our products. Doesn't that look nice? Well, our price is not very well formatted and
+      it doesn't have a currency symbol. We'll fix that with pipes in the next module. Looking back at the component, we
+      defined an array for our list of products. In the template, we laid out the HTML to display one product. The
+      product is displayed in a table row with product properties in the appropriate columns. Using an ngFor structural
+      directive, we repeat this table row and its columns for each product in the list of products. So why is this ngFor
+      syntax product of products and not product in products? The reasoning for this has to do with ES 2015 For loops.
+      ES 2015 has both a for of loop and a for in loop. The for of loop is similar to a for each style loop. It iterates
+      over an iterable object such as an array. For example, say we have an array of person's nicknames. If we use for
+      of to iterate over this list, we'll see each nickname logged to the console. The for in loop interates over the
+      properties of an object. When working with an array such as this example, the array indexes are innumerable
+      properties with integer names and are otherwise identical to general object properties. So we see each array index
+      logged to the console. To help remember the difference, think of in as iterating the index. Since the ngFor
+      directive iterates over iterable objects, not their properties, Angular selected to use the of keyword in the
+      ngFor expression. Now let's finish up this module with some checklists we can use as we work with templates,
+      interpolation, and directives.</p>
+    <h3>Checklists and Summary</h3>
+    <p>Checklists are a great way to recheck our understanding and our work. Let's start with a template. Use an inline
+      template when building shorter templates. Then specify the template property in the component decorator. Use
+      double or single quotes to define the template string. Or use the ES 2015 back ticks to lay out the HTMl on
+      multiple lines. When using inline templates there is often no design time syntax checking. So pay close attention
+      to the syntax. Use linked templates for longer templates. Specify the templateUrl property in the component
+      decorator and define the path to the external template file. This one is a more visual checklist. After building
+      the template, we built its component and learned how to use that component as a directive. Remember our steps?
+      First, we use the directive as an element in the template for any other component. We use the directive component
+      selector as the directive name. We then declare the component so it is available to any template associated with
+      this Angular module. We add the component to the declarations array passed into the NgModule decorator of the
+      Angular module. Angular's data binding was introduced in this module with a look at interpolation. Interpolation
+      is one way binding from a component class property to an element property. Interpolation is defined with curly
+      braces and a template expression. That expression can be a simple property, a concatenation, a calculation, or a
+      method call. Note that no quotes are needed when using interpolation. And we saw how to use two of Angular's
+      structural directives. ngIf and ngFor. When using these structural directives be sure to prefix them with an
+      asterisk. And assign them to a quoted string expression. Use ngIf to add or remove an element and its children
+      from the dom based on an expression. If the assigned expression is evaluated to be a true value, the element is
+      added to the dom. If false, the element is removed from the dom. Use ngFor to repeat an element and its children
+      in the dom for each element in an iterable list. Define the local variable with let and use of, not in, when
+      defining the ngFor expression. In this module, we evaluated the differences between an inline template and a
+      linked template. And we created a linked template. We then built a component for that template and learned how to
+      use that component as a directive. We took a first look at Angular data binding through interpolation. And powered
+      up our template by using built in Angular directives. Here, once again, is our application architecture. In this
+      module, we started the Product List Component. Next up, let's discover more of Angular's data binding features and
+      add interactivity to the product list template.
+    </p>
+    <script src="bundle.js"></script>
+  </body>
+</html>

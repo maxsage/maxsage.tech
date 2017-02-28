@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Introduction to Components</h2>
+    <h3>Introduction</h3>
+    <p>In the last module we set up the infrastructure for our Angular application.>Now we are ready to build our first
+      component. Welcome back to Angular 2: Getting Started from Pluralsight. My name is Deborah Kurata and in this
+      module we walk through building a very basic component with a focus on clearly defining the component's parts,
+      their meaning and their purpose. We can think of our Angular application as a set of components. We create each
+      component then arrange them to form our application. If all goes well, those components work together in harmony
+      to provide the user with a great experience. In this module we take a closer look at what an Angular component is
+      and examine the code we need to build one. We walk through how to create the component's class and how and why we
+      need to define metadata. We look at how to import what we need from external modules, and we discover how to
+      bootstrap the component we've built to bring our application to life. At this point we'll have the world's
+      simplest working Angular application. We'll continue to add to this application throughout this course. Looking
+      again at the application architecture that we defined in the first module, we currently have the index.html file
+      in place. In this module we'll build the app component. Let's get started.</p>
+
+    <h3>What Is a Component?</h3>
+    <p>An Angular component includes a template which lays out the user interface fragment>to finding a view for the
+      application. It is created with HTML and defines what is rendered on the page. We use Angular binding and
+      directives in the HTML to power up the view. We'll cover binding and directives in a later module. Add to that a
+      class for the code associated with the view. The class is created with TypeScript. The class contains the
+      properties or data elements available for use in the view. For example, if we want to display a title in the view,
+      we define a class property for that title. The class also contains methods which are the functions for the logic
+      needed by the view. For example, if we want to show and hide an image, we'd write the logic in a class method. A
+      component also has metadata which provides additional information about the component to Angular. It is this
+      metadata that defines this class as an Angular component. The metadata is defined with a decorator. A decorator is
+      a function that adds metadata to a class, its members or its method arguments. So a component is a view defined in
+      a template. Its associated code defined with a class and metadata defined with a decorator. Want to see what a
+      component looks like in TypeScript? Here is a simple component. It might look complex at first, so let's break
+      this component into chunks starting at the bottom. Here is our class. It defines the properties and methods needed
+      by our view. Here is the component decorator that defines the metadata. The metadata includes the template that
+      lays out the view managed by this component. And here we import the members that we need. Let's examine each of
+      these chunks in more detail, starting at the bottom with a class.
+    </p>
+
+    <h3>Creating the Component Class</h3>
+    <p>If you have done any object-oriented programming in languages such as C#, VB.NET, Java, or C++, this code should
+      look familiar. A class is a construct that allows us to create a type with properties that define the data
+      elements and methods that provide functionality. We define a class using the class keyword followed by the class
+      name. A common Angular convention is to name each component class with a feature name, then append the word
+      component as the suffix. Also, by convention, the root component for an application is called AppComponent as
+      shown here. This class name is used as the component name when the component is referenced in code. The expert
+      keyword here at the front exports this class, thereby making it available for use by other components of the
+      application. And as we learned in the last course module, since this file exports something, this file is now an
+      ES module, and will be loaded by our module loader. No need to add a script tag for it. Within the body of the
+      class are the properties and methods. In this example we only have one property and no methods. A property defines
+      a data element associated with a class. We start with the property name, which by convention, is a noun describing
+      the data element and it is in camelCase, whereby the first letter of the name is lowercase. In this example, it is
+      the title of the page. Using TypeScript's strong typing, we follow the property name with a colon and its data
+      type. In this example, the page title property is a string. We can optionally assign a default value to the
+      property as shown in this example. Methods are normally defined within the class body after all of the
+      properties. Method names are often verbs that describe the action the method performs. Method names are also in
+      camelCase whereby the first letter of the name is lowercase. So that's it for the class. But a class alone is not
+      enough to define a component. We need to define the template associated with this component class. How do we
+      provide this extra information to Angular? With metadata. Let's look at that next.</p>
+
+    <h3>Defining the Metadata with a Decorator</h3>
+    <p>A class becomes an Angular component>when we give it component metadata. Angular needs that metadata to
+      understand how to instantiate the component, construct the view, and interact with the component. We define a
+      component's metadata with the Angular component function. In TypeScript we attach that function to the class as a
+      decorator. A decorator is a function that adds metadata to a class, its members or its method arguments. A
+      decorator is a JavaScript language feature that is implemented in TypeScript and proposed for ES2016. The scope of
+      the decorator is limited to the feature that it decorates. A decorator is always prefixed with an at sign. Angular
+      has several built-in decorators we use to provide additional information to Angular. We can also build our own
+      decorators, but that is out of the scope of this course. We apply a decorator by positioning it immediately in
+      front of the feature we are decorating. When decorating a class as in this example, we define the decorator
+      immediately above the class signature. Notice that there is no semicolon here. This syntax is similar to
+      attributes used in other programming languages. We use the at component decorator to identify the class as a
+      component. Since the decorator is a function, we always add parentheses. We pass an object to the component
+      function as indicated with the curly braces. The object we pass in has many properties, we are only using two of
+      them here. If we plan to reference the component in any HTML, we specify a selector. The selector defines the
+      component's directive name. A directive is simply a custom HTML tag. Whenever this directive is used in the HTML,
+      Angular renders this component's template. We'll see how this works in the upcoming demo. A component should
+      always have a template. Here we define the layout for the user interface fragment or view managed by this
+      component. The double curly braces indicate data binding. We bind the H1 element value to the page title property
+      of the class so when this HTML is rendered, the H1 element displays Acme Product Management. We'll see that in the
+      upcoming demo as well, and we'll cover more about binding in a later module. There is one more key task before our
+      component is complete. Importing.</p>
+
+    <h3>Importing What We Need</h3>
+    <p>Before we can use an external function or class, we need to tell the module loader where to find it. We do that
+      with an import statement. The import statement is part or ES2015 and implemented in TypeScript. It is conceptually
+      similar to the import statement in Java or the C# using statement. The import statement allows us to use exported
+      members from external modules. Remember how we just exported our class using the export keyword? That means that
+      other modules in our application can import our exported class if needed. We'll use the import statement
+      throughout our code to import any third-party library, any of our own modules, or from Angular itself. We can
+      import from Angular, because Angular is modular. It is a collection of library modules. Each library is itself a
+      module made up of several related feature modules. When we need something from Angular, we import it from an
+      Angular library module, just like we import from any other external module. Use this link if you want to view the
+      list of available Angular 2 library packages and their current versions. In our component code, we use the
+      component decorator function from Angular to define our class as a component. We need to tell the module loader
+      where to find this function, so we add an import statement, an import component from Angular core like this. We
+      start with the import keyword. We identify the name of the member we need within curly braces. In this case we
+      need the component decorator function, and we define the path to the module containing that member. In this case
+      the Angular core library module. If we need multiple members from the same module, we can list them all in the
+      imports list separated by commas. We'll see examples of that later in this course. So this is a component. Now
+      we're ready to build the first component for our sample application. Let's jump in.</p>
+
+    <h3>Demo: Creating the App Component</h3>
+    <p>In this demo we build our app component which is the root of our application. Here we are in the editor with the
+      APM folder open. This is the folder we set up in the last module from the starter files I provided. Let's open the
+      app folder. I provided the app component as part of the starter file, so that we could run the application right
+      away. I named the file app.component.ts. The file naming convention that we'll follow throughout this course is to
+      start with the feature name. This is our root application component, so by convention, it is called app. Then a
+      dot, then the type of ES module defined in this file, in this case, component, to identify this ES module as a
+      component, another dot and the extension. Since we are using TypeScript, we'll use ts as the extension. In VS
+      code, I can click the Explorer icon to close the Explorer and see more of the code. I can reopen the Explorer by
+      clicking the icon again. Now I'll delete this starter code for this file so we can build the app component from
+      scratch. I like to start coding by building the class, but the order of these steps really don't matter. When we
+      build the class, we first type in the export keyword to ensure that other parts of the application can use this
+      class. Next we type in the class keyword, then the name of the class. Since this is our application component
+      class, we'll follow conventions and name it AppComponent. Inside this class we'll define one property, the page
+      title. We type the property name followed by a colon and the property data type, which for the pageTitle is a
+      string. Notice how IntelliSense helps us here. For this property we want to define a default value for the
+      pageTitle. Next we define the component decorator above the class. The component decorator always begins with an
+      at sign then the name of the decorator. And we're using the component decorator. The component decorator is a
+      function, so we type parentheses. And we're going to pass in an object, so we type in curly braces. Notice how
+      TypeScript has underlined the component decorator and flagged it as an error. The error is Can't Find Name
+      Component. Any guesses on what the problem is? If you said that we are missing the import statement, you are
+      right. We need to import the component decorator from Angular core. Now the error underline goes away and we can
+      complete the metadata. In the component metadata we specify a selector for the name of this component when used as
+      a directive in the HTML. Now that we've imported the appropriate module, we get IntelliSense for these properties.
+      We set the selector to pm-app, the current convention is to prefix each selector with something to identify it as
+      part of our application. So we selected pm for product management. The second part of the name represents the
+      component, so we used app, since this is our app component. Next we define the template. To specify another
+      property here, we enter a comma, and then the name of the other property. We want to define template, any valid
+      HTML can be specified in the template. We'll dive deeper into templates in a later module. So for this example,
+      I'll just paste in the HTML, and we're done. We have now created the first component for our application. Yay! But
+      how do we use it?>How do we display its template?</p>
+
+    <h3>Bootstrapping Our App Component</h3>
+    <p>Have you heard the saying, "Pulling yourself up by your bootstraps?" Originally meaning to improve your situation
+      by your own efforts. In tech it has come to mean a self-starting process that loads and goes. We need to tell
+      Angular to load our root component through a process that's called bootstrapping. And we need to setup the
+      index.html file to host our application. Let's look at both of these steps. Most Angular applications have an
+      index.html file that contains the main page for the application. This index.html file is often the one true web
+      page of the application, hence an application is often called a single-page application or SPA. But don't worry,
+      it will look to the user like we have lots of pages as we saw in the demo at the beginning of this course. What we
+      do is insert bits of HTML into the one HTML page to find index.html. Let's see how that works. Here again is our
+      app.component just shifted to the right. Recall that the selector is the name of the component when we use it as a
+      directive in HTML, and the template defines the HTML that we want to display. So in the index.html file, we simply
+      add the selector where we want our template displayed. Here in the template we call this a directive. A directive
+      is basically a custom element. When the root element is loaded, the loading app message appears. As soon as the
+      loading is complete, the HTML defined in the component template is inserted between the selector element tags and
+      appears on the page. Let's go through the Angular application startup process in detail. I've already set this
+      process up for our sample application, but it's useful to know how it works as you start to build your own
+      applications. We have the index.html file setup to host the application by specifying the selector from the root
+      application component as a directive in the body tag. But how does the module loader find our root application
+      component? Recall from the last course module that we configured systemjs, our module loader, in index.html to
+      start up the application by importing an ES module from the app folder and we saw that the systemjs configuration
+      file defined the main entry point of the application as main. So main is the first ES module loaded for our
+      application. And it looks like this. The main ts file bootstraps our first Angular module, providing a starting
+      point to kick off our application. For this sample application, we want the Angular compile to compile the
+      application in the browser dynamically and then launch the application. So we begin by importing
+      platformBrowserDynamic. Other bootstrapping options are covered in the Angular 2 Setup Revisited module later in
+      this course. Here we specify where the module loader can find our Angular application module by adding an import
+      statement to import AppModule. Then we call a function that bootstraps our first Angular module. Once we've
+      bootstrapped our Angular application, we can leave the main.ts file and never look upon it again. Here is our
+      application's Angular module. We talked about Angular modules in the last course module. Angular modules help us
+      organize our application into cohesive blocks of functionality and provide boundaries within our application. We
+      define an Angular module with a class. We identify the class as an Angular module by attaching the NgModule
+      decorator and passing in metadata defining the details of this Angular module and importing what we need. In the
+      declarations array, we define which of our components belong to this module. By convention our main application
+      component, AppComponent, belongs to the application's Angular module, app.module, so we declare it here. We can
+      add other components here as well. We'll cover best practices for organizing our application into Angular modules
+      later in this course. In the imports array, we define the external modules that we want to have available to all
+      of the components that belong to this Angular module. External modules could be modules provided by Angular, a
+      third-party or our own Angular modules. Here we import BrowserModule, which every browser application must import.
+      BrowserModule registers important application service providers such as air handling. The bootstrap array defines
+      the root component of the application, which is our AppComponent. This root component should contain the selector
+      we use in the index.html file, which it does. When this component is loaded, the template defined here appears
+      within the directive tags and the user sees the user interface for our component. So, index.html loads and
+      executes the ES6 module main, main bootstraps the application's Angular module AppModule which in turn bootstraps
+      the root application component, AppComponent and the component's template appears in the browser. Luckily we only
+      need to set up the bootstrapping process once. Now let's see this bootstrapping process in action.
+    </p>
+    <h3>Demo: Bootstrapping Our App Component</h3>
+    <p>In this demo, we'll set up index.html to host our application, and bootstrap the app component to bring our
+      application to life. Here we are back with our sample application exactly how we left it. Let's open the
+      index.html file. To host our application, we use the component selector as a directive here within the body
+      element. We can think of a directive as simply a custom HTML tag. Now let's delete our extra text here and if we
+      want to display a message on the page while the application is loading, we add that text between the component
+      tags. The bootstrapping code we discussed in the slides is already in place. So index.html loads and executes the
+      ES module main. Main bootstraps the application's Angular module AppModule, which in turn bootstraps the root
+      application component, AppComponent. Now we're ready to run. We saw in the last module how to start the
+      application by typing npm start in a terminal or command window. We'll first see the original loading app message,
+      and when the root component is loaded, that message is replaced with HTML from our component. And the binding in
+      that HTML is replaced with a value of our page title property. We now have a working, albeit very small,
+      application. And since the npm start command set up the TypeScript compiler to watch for changes, we can make a
+      change to the code and immediately see the results in the browser. Cool. Before closing the browser, let's take a
+      moment and look at the browser developer tools. With the browser window active, press F12. The exact tools you see
+      here depend on the browser you are using. I am using Chrome. Most modern browsers provide a Console tab as part of
+      the development tools. This is always the first place to look if the page does not appear as expected or doesn't
+      appear at all. Errors, warnings, and other information is displayed here. Use the Elements tab or DOM Explorer to
+      view the HTML displayed in the page. This is a depiction of the DOM or Document Object Model. The Document Object
+      Model is a document model loaded into the browser and represents our HTML as a node tree where each node is a part
+      of our HTML. Here is the HTML from the index.html file. And here is our selector tag. Open the selector tag and we
+      see the HTML that we defined in our component's template. This view is a great way to see the HTML for the
+      rendered page. There is also a debugger option available here on the Sources tab to view and debug our code. Now
+      let's finish up this module with some checklists we can use as we build our own components.</p>
+
+    <h3>Checklists and Summary</h3>
+    <p>Angular is all about components. So our first set of checklists are for building a component. We create a class
+      for the component with code to support the view. We use a decorator to define the component metadata which
+      includes the HTML for the component's template. And we import what we need from any third-party library, from our
+      modules, or from Angular itself. When creating the component class, we give it a clear name. This is not only the
+      name of the class, but the name of the component as well. Be sure to watch the casings since JavaScript is case
+      sensitive. By convention, use PascalCasing, whereby every word of the name is capitalized. It is common to append
+      component to the end of the class name to make it clear that it is a component class. Be sure to include the
+      export keyword on the class signature. Recall what the export keyword does? It makes the class accessible to be
+      imported by other parts of the application. If the component view displays data, such as a title, the data element
+      is defined as a property of the class. To leverage TypeScript's strong typing, be sure to set the appropriate data
+      type for each property and set a default value where appropriate. Use camelCase for property names with the first
+      letter lowercase. If the component view has functionality, such as hiding and showing an image, the logic is to
+      find as methods in the class. Use camelCase for method names with the first letter lowercase. How do we find the
+      metadata for our component? If you said a component decorator, you are right. A class is not a component unless it
+      has a component decorator. Be sure to prefix the decorator with an at, since the decorator is a function, add
+      parentheses, and pass in the appropriate object properties. Use the selector property to define the name of the
+      component when used as a directive in HTML. Be sure to prefix the selector for clarity. Note that the selector
+      property is not needed if the component is not used in any HTML, as we'll see later in this course. Use the
+      template property in the component metadata to define the view's HTML. Since we define the HTML in a string
+      literal, we often get no IntelliSense or syntax checking, so take care to define correct HTML syntax. We'll see
+      alternate ways to create the template for a component in the next module. So, why do we need to use import? The
+      import statement tells Angular where to find the members that this component needs from any external modules. The
+      import statement requires the import keyword followed by the member name and module path. Take care when defining
+      the member name as it is case sensitive. The path to the module file must be enclosed in quotes and is also case
+      sensitive. And remember that we don't need to specify the file extension. So, what do you do if you follow the
+      steps, but the sample application doesn't work for you? You follow the something's wrong checklist. First press
+      the F12 key in the browser to view the developer tools and check the console. The Angular error messages are often
+      quite clear. If you repass the initial line of technical details. Second, recheck your code. For any HTML, be sure
+      the tags are all correctly closed, and that all of the Angular directives are correctly spelled and cased. Angular
+      directives are case sensitive. For the TypeScript code, be sure the braces are all properly closed. And just like
+      JavaScript, TypeScript is case sensitive. So, in short, everything has the appropriate case. If there doesn't
+      appear to be anything wrong with the code, check my blog post as described in the first course module. Here's the
+      link. I'll add common sample application problems and their solutions to this post. Note that I don't get notified
+      if you post comments on my blog, so consider posting comments elsewhere as described next. If there's nothing on
+      my blog that solves your issue, post a comment on the discussion page for the course. Here's the link. I normally
+      get notified of every post to the discussion page. Plus other Pluralsight subscribers will see your post and can
+      respond. Following these steps should get you back on the path to success with Angular. In this module, we
+      detailed what a component was and how to build one by creating a component class, defining the metadata, and
+      importing what we need. And we discovered how to bootstrap the component we built to bring our application to
+      life. Here again is our application architecture. In this module we built the app component and have the very
+      basics of our application working. Next up, let's take a closer look at templates and how Angular can power them
+      up with binding and directives as we start building the product list component.
+    </p>
+    <script src="bundle.js"></script>
+  </body>
+</html>

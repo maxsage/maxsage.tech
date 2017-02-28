@@ -1,7 +1,1186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Current File" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="" />
+    <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/angular/FigA-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/angular/FigA-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/angular/FigA-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/angular/FigN-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/angular/FigN-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/angular/FigN-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/dgen/sqlite3 error.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/dgen/sqlite3 resolution.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/odata/Fig0101.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudio/VSCommandsZoom.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudio/WordNextKeyboardShortcut.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/bower.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/codehint.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/codehintmessage.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/debugger.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/emmet.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/explorer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/git.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/gulp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/npm.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/preview.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/search.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/sourceview.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/statusbar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/typescript.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/viewbar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/visualstudiocode/yeoman.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/babel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/browsersync.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/express.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/git.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/github.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/localtunnel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/node.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/npm.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/npmscripts.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/typescript.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/webpack.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/images/webstorm.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig00-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig01-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-052.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-053.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-054.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-055.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-056.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-057.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-058.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-059.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-060.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-061.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-062.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-063.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-064.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-065.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-066.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-067.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-068.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-069.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-070.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-071.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-072.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-073.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-074.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-075.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-076.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-077.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-078.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-079.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-080.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-081.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-082.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-083.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-084.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-085.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-086.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-087.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-088.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-089.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-090.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-091.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-092.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-093.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-094.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-095.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-096.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-097.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-098.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-099.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-101.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-102.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-103.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-104.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-105.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig02-106.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-052.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-053.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-054.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-055.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-056.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-057.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-058.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-059.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-060.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-061.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-062.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-063.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-064.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-065.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-066.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-067.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig03-068.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-052.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-053.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-054.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-055.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-056.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-057.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig04-058.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-052.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-053.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-054.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-055.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-056.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-057.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-058.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-059.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-060.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-061.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-062.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-063.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-064.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-065.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-066.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-067.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-068.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-069.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-070.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-071.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-072.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-073.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-074.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-075.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-076.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-077.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-078.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-079.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-080.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-081.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-082.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-083.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-084.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-085.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-086.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-087.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-088.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-089.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-090.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-091.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-092.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-093.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-094.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-095.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-096.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-097.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-098.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-099.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-101.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-102.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-103.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-104.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-105.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-106.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-107.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-108.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-109.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig05-110.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-05.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-052.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-053.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-054.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-055.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-056.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-057.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-058.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-059.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-060.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-061.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-062.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-063.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-064.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-065.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-066.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-067.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-068.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-069.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-070.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-071.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-072.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-073.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-074.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-075.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-076.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-077.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-078.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-079.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-080.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-081.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-082.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-083.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-084.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-085.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-086.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-087.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-088.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-089.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-090.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-091.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-092.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-093.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-094.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-095.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-096.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-097.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-098.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-099.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-101.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-102.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-103.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-104.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-105.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-106.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-107.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-108.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-109.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-110.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-111.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-112.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-113.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-114.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-115.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-116.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-117.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-118.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-119.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-120.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-121.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-122.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-123.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-124.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-125.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-126.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-127.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-128.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-129.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-130.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-131.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-132.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-133.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-134.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-135.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-136.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-137.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-138.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-139.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-140.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-141.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-142.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-143.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-144.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-145.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-146.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-147.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-148.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-149.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-150.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig06-151.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-001.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-002.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-003.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-004.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-005.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-006.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-007.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-008.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-009.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-010.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-011.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-012.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-013.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-014.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-015.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-016.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-017.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-018.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-019.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-020.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-021.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-022.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-023.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-024.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-025.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-026.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-027.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-028.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-029.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-030.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-031.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-032.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-033.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-034.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-035.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-036.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-037.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-038.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-039.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-040.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-041.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-042.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-043.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-044.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-045.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-046.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-047.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-048.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-049.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-050.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-051.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-052.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-053.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-054.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-055.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-056.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-057.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-058.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-059.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-060.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-061.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-062.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-063.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-064.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-065.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-066.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-067.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-068.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-069.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-070.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-071.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-072.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-073.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-074.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-075.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-076.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-077.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-078.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-079.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-080.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-081.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-082.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-083.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-084.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-085.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-086.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-087.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-088.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-089.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-090.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-091.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-092.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-093.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-094.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-095.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-096.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-097.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-098.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-099.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-101.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-102.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-103.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-104.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-105.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-106.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-107.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-108.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-109.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-110.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-111.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-112.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-113.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-114.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-115.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-116.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-117.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-118.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-119.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-120.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-121.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-122.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-123.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-124.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-125.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-126.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-127.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-128.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-129.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-130.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-131.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-132.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-133.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-134.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-135.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-136.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-137.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-138.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-139.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-140.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-141.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-142.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-143.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-144.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-145.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-146.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-147.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-148.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-149.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-150.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-151.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-152.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-153.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-154.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-155.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-156.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-157.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-158.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-159.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-160.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-161.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-162.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-163.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-164.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-165.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-166.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-167.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-168.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-169.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-170.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-171.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-172.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-173.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-174.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-175.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-176.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-177.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-178.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-179.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-180.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-181.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-182.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-183.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-184.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-185.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-186.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-187.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-188.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-189.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-190.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-191.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-192.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-193.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-194.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-195.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-196.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-197.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-198.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-199.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-200.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-201.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-202.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-203.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-204.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-205.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-206.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-207.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-208.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-209.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-210.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-211.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-212.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-213.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-214.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-215.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-216.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-217.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-218.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-219.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-220.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-221.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-222.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-223.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-224.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-225.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-226.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-227.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-228.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-229.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-230.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-231.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-232.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-233.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-234.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-235.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-236.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-237.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-238.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-239.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-241.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-242.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-243.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-244.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-245.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-246.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-247.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-248.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-249.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-250.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-251.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-252.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-253.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-254.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-255.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-256.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-257.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-258.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-259.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-260.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-261.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-262.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-263.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-264.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-265.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-266.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-267.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-268.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-269.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-270.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-271.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-272.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-273.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-274.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-275.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-276.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-277.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-278.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-279.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-280.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-281.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-282.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-283.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-284.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-285.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/Fig07-286.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig01-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig02-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig02-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-04.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-05.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-06.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-07.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-08.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-09.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-17.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-18.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-19.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-04.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-05.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-06.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-07.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-08.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-09.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-17.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-18.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-19.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-20.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-21.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-22.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-23.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-24.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-25.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-26.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-27.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-28.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-29.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-30.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-31.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-32.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-33.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-34.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-35.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-36.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-04.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-05.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-06.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-07.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-08.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-09.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-17.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-18.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-19.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-20.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-21.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-22.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-23.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-24.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-25.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-26.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-27.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-28.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-29.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-30.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-31.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-32.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-33.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-34.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-35.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-36.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-37.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-38.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-39.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-41.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-42.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-43.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-04.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-05.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-06.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-07.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-08.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-09.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-17.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-18.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-19.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-20.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-21.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-22.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-23.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-24.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-25.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-26.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-27.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-28.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-29.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-30.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-31.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-32.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-33.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-34.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-35.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-36.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-37.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-38.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-39.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-41.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-42.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-43.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-44.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-45.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-46.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-47.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-48.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-49.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-50.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-51.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-52.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-53.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-54.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-55.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-contents.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-overview.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-overview.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-01-introduction.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-01-introduction.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-02-first-things-first.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-02-first-things-first.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-03-introduction-to-components.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-03-introduction-to-components.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-04-templates-interpolation-and-directives.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-04-templates-interpolation-and-directives.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-05-data-binding-and-pipes.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-05-data-binding-and-pipes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-06-more-on-components.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-06-more-on-components.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-07-building-nested-components.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-07-building-nested-components.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-08-services-and-dependency-injection.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-08-services-and-dependency-injection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-09-receiving-data-using-http.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-09-receiving-data-using-http.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-10-navigation-and-routing-basics.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-10-navigation-and-routing-basics.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-11-navigation-and-routing-additional-techniques.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-11-navigation-and-routing-additional-techniques.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-12-angular-modules.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-12-angular-modules.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-13-angular2-setup-revisited.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-13-angular2-setup-revisited.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-14-final-words.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2-getting-started-14-final-words.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular2gettingstartedOLDMASTER.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/angular_2_first_look.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/darcula.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/highlight.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/angular2/main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/app.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/app.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/app.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/bootstrap/bootstrap3.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/bootstrap/bootstrap3.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/bootstrap/bootstrap3.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/bootstrap/bootstrap3.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/csharp/csharp.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/csharp/csharp.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/csharp/csharp.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/csharp/csharp.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dgen/dgen.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dgen/dgen.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dgen/dgen.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/dgen/dgen.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/emmet/emmet.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/emmet/emmet.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/emmet/emmet.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/emmet/emmet.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/home/welcome.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/home/welcome.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/home/welcome.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/home/welcome.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/darcula.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/highlight.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-00-course-contents.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-01-you-need-a-starter-kit.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-02-editors-and-configuration.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-03-package-management.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-04-development-web-server.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-05-automation.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-06-transpiling.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-07-bundling.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-08-linting.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-09-testing-and-continuous-integration.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-10-http-calls.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-11-project-structure.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-12-production-build.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-13-production-deploy.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript-development-environment-course-contents.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/javascript.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/javascript/main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/jquery/jquery.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/jquery/jquery.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/jquery/jquery.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/jquery/jquery.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/main.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/main.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/odata/odata.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/odata/odata.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/odata/odata.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/odata/odata.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/Car.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/Car.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/Car.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/typescript.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/typescript.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/typescript.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/typescript/typescript.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudio/visualstudio.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudio/visualstudio.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudio/visualstudio.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudio/visualstudio.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudiocode/visualstudiocode.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudiocode/visualstudiocode.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudiocode/visualstudiocode.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/visualstudiocode/visualstudiocode.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/css/site-specific.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.js.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth00.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth01.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth02.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth03.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth04.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth05.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth06.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth07.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth08.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth09.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepthFULL.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth_coursecontents.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfmvvmindepth.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfmvvmindepth.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfmvvmindepth00.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/wpf/wpfmvvmindepth_coursecontents.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sftp-config.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tsconfig.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/typings.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/typings/browser.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/typings/browser/ambient/es6-shim/index.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/typings/main.d.ts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/typings/main/ambient/es6-shim/index.d.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -16,14 +1195,130 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="angular2.component.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/angular2/angular2.component.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                  <caret line="9" column="65" lean-forward="false" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="angular2.component.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/angular2/angular2.component.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="289">
+                  <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+                  <folding>
+                    <element signature="e#0#42#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="angular2-getting-started-00-course-overview.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-overview.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                  <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#20#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="app.component.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/app.component.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="629">
+                  <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#0#42#0" expanded="true" />
+                    <element signature="e#130#213#0" expanded="true" />
+                    <marker date="1488299129103" expanded="true" signature="1230:3028" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="1270:3009" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="1318:1846" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="1441:1727" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="1905:2986" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="1957:2959" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="3077:3272" ph="..." />
+                    <marker date="1488299129103" expanded="true" signature="3173:3253" ph="..." />
+                    <marker date="1488299129103" expanded="false" signature="3198:3204" ph="©" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Using the Speech Recognition</find>
+      <find>app/wpf/</find>
+      <find>&quot;img</find>
+      <find>Production de</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>&quot;images</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpf.component.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth_coursecontents.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpfmvvmindepth_coursecontents.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth00.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpfdatabindingindepth01.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpfmvvmindepth00.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpfmvvmindepth.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript.component.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-coursecontents.html" />
+        <option value="$PROJECT_DIR$/app/angular2/angular2-getting-started-coursecontents.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-01-you-need-a-starter-kit.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-02-editors-and-configuration.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-03-package-management.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-04-development-web-server.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-05-automation.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-06-transpiling.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-07-bundling.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-08-linting.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-09-testing-and-continuous-integration.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-10-http-calls.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-11-project-structure.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-12-production-build.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-00-course-overview.html" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript-development-environment-course-contents.html" />
+        <option value="$PROJECT_DIR$/app/angular2/angular2.component.ts" />
+        <option value="$PROJECT_DIR$/app/angular2/angular2.component.html" />
+        <option value="$PROJECT_DIR$/app/app.component.ts" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -59,6 +1354,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxsage.tech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxsage.tech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxsage.tech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="maxsage.tech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="angular2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -67,9 +1394,78 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files (x86)/nodejs/node" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Development\maxsage.tech\app\wpf\images\wpfmvvmindepth" />
+      <recent name="C:\Development\maxsage.tech\app\wpf" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -78,33 +1474,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1488216241592</updated>
-      <workItem from="1488216242810" duration="601000" />
+      <workItem from="1488216242810" duration="22576000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="601000" />
+    <option name="totallyTimeSpent" value="22576000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24980299" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23167849" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22681215" sideWeight="0.50157607" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22681215" sideWeight="0.49842396" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,5 +1513,346 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpfdatabindingindepth00.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig01-001.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpfmvvmindepth.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="813">
+          <caret line="2422" column="0" lean-forward="false" selection-start-line="2422" selection-start-column="0" selection-end-line="2422" selection-end-column="0" />
+          <folding>
+            <element signature="e#21331#21335#0" expanded="false" />
+            <element signature="e#21343#21347#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpfmvvmindepth00.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpfdatabindingindepth01.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="56" column="70" lean-forward="false" selection-start-line="56" selection-start-column="70" selection-end-line="56" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-contents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="7" lean-forward="true" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-12-production-build.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-873">
+          <caret line="42" column="20" lean-forward="true" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-11-project-structure.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-10-http-calls.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-09-testing-and-continuous-integration.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-08-linting.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-07-bundling.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-06-transpiling.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-05-automation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-04-development-web-server.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7780">
+          <caret line="461" column="20" lean-forward="false" selection-start-line="461" selection-start-column="20" selection-end-line="461" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-13-production-deploy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-01-you-need-a-starter-kit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-02-editors-and-configuration.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-03-package-management.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="415" column="20" lean-forward="false" selection-start-line="415" selection-start-column="20" selection-end-line="415" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/typescript/typescript.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpfdatabindingindepth_coursecontents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="862">
+          <caret line="309" column="7" lean-forward="true" selection-start-line="304" selection-start-column="19" selection-end-line="309" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpfmvvmindepth_coursecontents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="83" column="99" lean-forward="false" selection-start-line="83" selection-start-column="99" selection-end-line="83" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-course-contents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/javascript/javascript-development-environment-00-course-contents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="3028" column="27" lean-forward="true" selection-start-line="3028" selection-start-column="27" selection-end-line="3028" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#ul#0;n#td#2;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/csharp/csharp.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/bootstrap/bootstrap3.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-overview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular2.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="65" lean-forward="false" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular2.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#130#213#0" expanded="true" />
+            <marker date="1488299129103" expanded="true" signature="1230:3028" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="1270:3009" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="1318:1846" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="1441:1727" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="1905:2986" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="1957:2959" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="3077:3272" ph="..." />
+            <marker date="1488299129103" expanded="true" signature="3173:3253" ph="..." />
+            <marker date="1488299129103" expanded="false" signature="3198:3204" ph="©" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

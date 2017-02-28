@@ -1,0 +1,75 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>C#</h2>
+                <h3>An Explanation of Delegates, Events and Lambda Expressions</h3>
+                <ul>
+                    <li>Pro C# 5.0 and the .NET 4.5 Framework.pdf
+                        <ul>
+                            <li>Chapter 10 - Delegates, Events, and Lambda Expressions 		Whole chapter</li>
+                        </ul>
+                    </li>
+                    <li>Pro ASP.NET MVC 5.pdf
+                        <ul>
+                            <li>Chapter 7 - SportStore: A Real Application				Page 182</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Used initially in the UnitTest1 unit test:</p>
+                <code>
+                // Arrange - set up the delegate using a lambda expression<br />
+                Func&lt;int, string&gt; pageUrlDelegate = i => "Page" + i;<br />
+
+                // Act<br />
+                MvcHtmlString result = myHelper.PageLinks(pagingInfo, pageUrlDelegate);<br />
+
+                Func(T, TResult) Delegate (System) on MSDN<br />
+                </code>
+                
+                <a href="http://www.dotnetperls.com/func">C# Func on DotNetPerls</a>
+
+                <p>And then in the List.cshtml view</p>
+
+                <code>@Html.PageLinks(Model.PagingInfo, x =&gt; Url.Action("List", new { page = x }))</code>
+                <p>Here is the PageLinks Extension method</p>
+                
+                <code>
+                    <pre>
+                    namespace SportsStore.WebUI.HtmlHelpers
+                    {
+                    public static class PagingHelpers
+                    {
+                    public static MvcHtmlString PageLinks(this HtmlHelper html,
+                    PagingInfo pagingInfo,
+                    Func&lt;int, string&gt;
+                        pageUrl)
+                        {
+                            StringBuilder result = new StringBuilder();
+                            for(int i = 1; i <= pagingInfo.TotalPages; i++)
+                            {
+                                TagBuilder tag = new TagBuilder("a");
+                                tag.MergeAttribute("href", pageUrl(i));
+                                tag.InnerHtml = i.ToString();
+                                if(i == pagingInfo.CurrentPage)
+                                {
+                                    tag.AddCssClass("selected");
+                                    tag.AddCssClass("btn-primary");
+                                }
+                                tag.AddCssClass("btn btn-default");
+                                result.Append(tag.ToString());
+                                }
+                                return MvcHtmlString.Create(result.ToString());
+                                }
+                            }
+                        }
+                    </pre>
+                </code>
+
+            </div>
+        </div>
+    </div>
+</div>

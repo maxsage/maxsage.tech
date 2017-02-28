@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>First Things First</h2>
+    <h3>Introduction</h3>
+    <p>First things first. Before we can start coding with Angular 2, there are some preparatory steps. Welcome back to
+      Angular 2, Getting Started from Pluralsight. My name is Deborah Kurata, and in this module, we set up what we
+      need to work with Angular 2. A little preparation goes a long way towards a successful adventure. Before we take
+      that first step on our journey with Angular 2, we need to make some decisions, gather our tools, and get
+      everything ready. In this module, we evaluate several languages we could use to build an Angular 2 application,
+      and select one. Once we've picked a language, we select an editor that fully supports development in that
+      language. Then, we set up the boilerplate code for an Angular 2 application. Then, we talk about modules and what
+      they mean in Angular 2. Let's get started.</p>
+
+    <h3>Selecting a Language</h3>
+    <p>When building Angular 2 applications, we have many language choices available to us. First, some background. The
+      JavaScript language specification standard is officially called ECMAScript, or ES. Up until recently, the ES
+      versions were defined by a sequential number. ES 3 is supported by older browsers. ES 5 is the version currently
+      supported by most modern browsers. The ES 6 specification was recently approved and renamed ES 2015. Most browsers
+      don't yet support ES 2015. So, ES 2015 code must first be transpiled to ES 5. What does that mean? Code developed
+      with ES 2015 must be compiled by a tool that converts the ES 2015 syntax to comparable ES 5 syntax, before the
+      browser executes it. That way, we as developers get the benefits of the new ES 2015 productivity features, and the
+      browsers still get code they understand. Since Angular is a JavaScript library, we could use any of the many
+      compiled of JaveScript languages to build our Angular 2 application. But, the most common language choices for
+      Angular 2 include, the ES 5 version of JavaScript. ES 5 code runs in the browser today without transpilation, so
+      no compile step is required. If we wanted to take advantage of some of the new ES 2015 features to improve our
+      productivity, such as classes, the let statement, and arrow syntax, we can write our Angular 2 code using ES 2015.
+      We then transpile our code to ES 5 before running it. Another language option is TypeScript. TypeScript is a
+      superset of JavaScript, and must be transpiled. One of the key benefits of TypeScript is its strong typing,
+      meaning that everything has a data type. Because of this strong typing, TypeScript has great tooling, including
+      inline documentation, syntax checking, code navigation, and advanced refactorings. So, TypeScript helps us better
+      reason about our code. The Angular team itself takes advantage of these benefits and uses TypeScript to build
+      Angular 2. Most of the demo code in the Angular documentation at present also uses TypeScript. For these reasons,
+      TypeScript is the language of choice for many Angular 2 developers, and is the language we use in this
+      course. Dart is another option. It is a non-JavaScript-based language for building Angular 2 applications. Because
+      we'll use TypeScript throughout this course, let's take a moment to look at what TypeScript is all about.
+      TypeScript is an open source language that is a superset of JavaScript and compiles to plain JavaScript through
+      transpilation. It is strongly typed, so every variable, every function, and every function parameter can have a
+      data type. How does TypeScript determine the appropriate types when using JavaScript libraries that are not
+      strongly typed? By using TypeScript type definition files. These files contain the definition of each type in a
+      library. These files are named with the library name .d.ts. TypeScript implements the ES 2015 class-based
+      object-orientation, plus more. It implements classes, interfaces, and inheritance. So if you have experience with
+      object-oriented programming language, such as C#, C++, or Java, using TypeScript may feel very natural to you.
+      This course does not require any prior knowledge of TypeScript. I'll cover what you need as you need it. But if
+      you want to learn more about TypeScript, check out the TypeScript Playground. This website allows you to do live
+      coding with TypeScript, see the transpiled JavaScript, and run the result, all without installing anything. There
+      are also several TypeScript courses in the Pluralsight Library, including TypeScript Fundamentals, Angular with
+      TypeScript, which walks through using TypeScript with Angular 1, and Using ES6 with TypeScript, which details all
+      of the new ES 2015 features, such as let and arrow syntax. Again, you do not have to know TypeScript for this
+      course. We'll learn it as we go. Now that we've selected TypeScript as our Angular 2 language, let's pick an
+      appropriate code editor. </p>
+
+    <h3>Selecting an Editor</h3>
+    <p>There are many editors that fully support TypeScript, either out of the box or with a plugin, including all of
+      these. Select one of these, or whichever editor suits you best, but keep in mind, that your experience with
+      TypeScript will be much more pleasurable if you select an editor that understands TypeScript. For this course, I
+      am using Visual Studio Code. Visual Studio Code runs on Linux, Windows, and OS X. It has great features that
+      support TypeScript, such as Auto Completion and Telesense syntax checking and refactoring. If you wanted to use VS
+      Code as your editor, you can download and install it from this URL. If you are interested in using Visual Studio
+      Code and want to learn more, check out their website or this Pluralsight course. But, you are free to use
+      whichever editor you choose. Now that we've picked a language and selected and installed an editor, let's set up
+      our environment.
+    </p>
+    <h3>Setting up Our Environment</h3>
+    <p>Setting up our development environment for Angular requires two basic steps, install npm or Node Package
+      Manager, and set up the Angular 2 application. There's no need to manually install Angular or TypeScript or any
+      other library. However, this step two is really quite a process. But, first thing's first, what is npm? Npm, or
+      Node Package Manager, is a command line utility that interacts with the repository of open source projects. Npm
+      has become the Package Manager for JavaScript. Using npm, we can install libraries, packages, and applications,
+      along with their dependencies. We'll need npm to install all of the libraries for Angular, and to execute scripts
+      to transpile our code and launch our Angular 2 application. If you don't already have npm, you can download it
+      from this link. Let's take a look. Here is the npm website. To install npm, scroll down to Getting Started. You
+      click here. That takes us to the Download page for Node. Angular suggests npm version three or better, so click
+      Current to get the latest features. Then, select the installer appropriate for your OS and Install Node, which
+      installs npm. Feel free to pause the video and install npm now if you don't already have it. Okay, with npm
+      installed, we are ready to set up our Angular 2 application.
+    </p>
+    <h3>Setting up an Angular 2 Application</h3>
+    <p>Setting up an Angular 2 application can be somewhat laborious. Before we begin, let's list the required steps.
+      Then, we'll look at ways we can set up Angular without actually performing all of these steps. But to manually set
+      up an Angular 2 application, we'd need to create an application folder add package definition and configuration
+      files, install the packages, create the application's Root Angular Module, because every application needs at
+      least one Angular Module, then create the main.ts file to load that Angular Module, and create the host web page,
+      normally index.html. Luckily, we have some options. We can manually perform each of these steps. The detailed
+      instructions for each step are provided in the Angular documentation at Angular IO. Or, we can simply download the
+      result of these quick start steps from Github. Alternatively, we could use tooling, such as AngularCli. AngularCli
+      is a command line tool for generating the setup files and boilerplate code for an Angular 2 application, including
+      scaffolding the unit and end-to-end tests. The AngularCli can be found here. We'll look more at the Cli when we
+      visit Setup later in this course. To keep the grunt work for our sample application to a minimum, I've prepared
+      another option, starter files. I've created the initial files we need for our Angular 2 application. These files
+      are available in my Github repository. In addition to the basic setup files for an Angular 2 application, the
+      starter files include extra files we need as we build our sample application. So, let's go with this option. I've
+      navigated to my Github repository following the URL from the slide. If you are comfortable with Git, you can clone
+      this repository. Otherwise, click this button to download all of the files as a single ZIP file. The APM-Final
+      folder contains the completed code for our sample application. Use these files if you want to see the end result.
+      The AMP-Start folder contains the starter files. These are the files we will use as the starting point for
+      building our Angular 2 application. After downloading the files, copy or extract the files in the APM-Start folder
+      to a working directory called just APM. Your APM folder should then look like this. Now, let's open the APM folder
+      with a code editor. I've opened the APM working folder in my selected editor, VS Code. First, let's talk about the
+      directory structure. By convention, all of the files specific for our application are under a folder called app.
+      We only have a few folders and files here now, but we'll add more as we progress through this course. For
+      applications for any size, we'll have subfolders under the app folder for each major feature in the
+      application. These are the setup files. To get us going quickly, we won't dive into these files now. We'll learn
+      what these files, what they contain, and what they do in the Angular 2 Setup Revisited Module later in this
+      course. So, the last thing we need to do is install all of the libraries required to develop and run our
+      application. Open a Command Prompt or terminal. Be sure it is set to the root folder for the application, which
+      should be the working directory we named APM. Type npm install. This installs all of the libraries we
+      need, including the libraries to run the application, such as Angular, and for development, such as TypeScript.
+      Note that you may see warnings and errors during this installation process, like these. In most cases, you can
+      ignore them. If you see something like this tree structure at the end, the install completed successfully. Note
+      that you may see different version numbers than what I have here. If it ended with an error, try running npm
+      install a second time. That often completes the installation. Going back to the editor, notice that we now have a
+      node_modules folder here. This is where npm installed all of our libraries, and we have a typings folder where it
+      installed the TypeScript definition file we needed. We talk more about TypeScript definition files in the Angular
+      2 Setup Revisited Module. Now that we have everything installed, let's try running the sample application.
+    </p>
+    <h3>Running an Angular 2 Application</h3>
+    <p>To get us started, I've included enough additional code with a set of files to run the sample application. So,
+      let's give it a try. Back at the command prompt, or terminal, type npm start. The start script starts a file
+      server to launch our application called lite-server, an it runs the TypeScript Compiler called tsc in Watch Mode.
+      The TypeScript Compiler and the file server watch for any code changes. So anytime we save a change to any of our
+      files, TypeScript recompiles them and the file server refreshes the browser automatically so we can immediately
+      see our changes. We'll try that out in a moment. If all is well, the application appears in the browser and
+      displays some text, as shown here. If you get errors, ensure that you ran npm install as defined in the prior
+      clip. As you can see, our application doesn't look like much, but we'll fix that on our journey through Angular 2.
+      Looking back at our code, notice that we now have a .js file and a .map, or a MAP file, for each of our .ts
+      files. The start script started the TypeScript Compiler, which transpiled all of our TypeScript files, or our .ts
+      files, to ES 5 JavaScript that the browser can understand. The MAP file is a source map that is generated by the
+      compiler to debug TypeScript code. I've moved the videos around so that we could see the editor, the browser, and
+      the command prompt, or terminal window. Let's see what happens when we make a code change. Any editor will open
+      the index.html file. We'll scroll down to the bottom, and we'll make a change. We immediately see here that our
+      watchers saw the file change, our code is recompiled, the browser refreshes, and we see our updated text. So
+      anytime we make a change to our application, we'll be able to immediately see the effect of the change. You may
+      have noticed that I actually didn't save the change. When using VS Code, we can set it to automatically save our
+      changes. Here under File, Preferences, Workspace Settings, I have a setting in place to automatically save after a
+      short delay. When we are finished working with the browser, we can close it, but the Compiler and file server keep
+      running. To stop them, press Control C, and Y, then you can exit. Use npm start anytime you want to run the
+      application and keep it running to watch the effect of your code changes. Before we go any further, let's take a
+      moment and talk about modules.</p>
+
+    <h3>About Modules</h3>
+    <p>With JavaScript, there is always the problem of namespaces. If we are not careful, we can easily end up with
+      variables or functions in the global namespace. In addition, JavaScript didn't provide features to help with code
+      organization. Modules help resolve these issues. Angular 1 has modules to help us organize our code and resolve
+      some namespacing issues. TypeScript also has modules that help keep things out of the global namespace. ES 2015
+      set a standard for defining a module. In ES 2015, a module is a file, and a file is a module. So when coding in ES
+      2015, we don't need to define or name modules. Just create a file, write some code, export or import something,
+      and bang, the file becomes a module. Angular 2, leverages ES 2015 modules. So as we could code files and import or
+      export something, we create the modules for our application. But wait, there's more. Angular 2 also has Angular
+      Modules. Angular Modules are separate and different from Angular's implementation of ES 2015 Modules. Let's look
+      at how Angular 2 makes use of ES 2015 Modules. Then, we'll introduce Angular Modules. How do ES 2015 Modules
+      work? Say we create a code file called product.ts, and export a class named Product from that file. This file then
+      becomes a module. Because the class is exported, we can use that class in any other module by importing it. So
+      here, we have a file called product-list.ts, and we import our Product class. This file also becomes a module
+      because we imported something. Notice the syntax here. In curly braces, we find the name we want to import, in
+      this case, Product, and we define the file we want to import it from. Here, we want to import from product.js.
+      Wait, what? The Product class is in product.ts. But when we compile, the TypeScript file is transpiled into an ES
+      5 JavaScript file. So at runtime, we are importing from the .js file. But, notice that we don't list the extension
+      here anyway. We'll see why in a moment. Now, let's look at Angular Modules. Angular Modules help organizing an
+      application into cohesive blocks of functionality. Every Angular application has at least one Angular Module, by
+      convention called At Module. As an application gets more features, we can group those features into their own
+      feature modules. We can even define shared or common modules for code used by multiple Angular Modules. This keeps
+      the code organized and provides a cohesive unit we can unit we can load on start, or lazy load as needed. In each
+      Angular Module, we declare the set of components and other code files associated with the module, and the
+      dependencies needed by those components. Each component we create is declared in and belongs to one, and only one,
+      Angular Module. We'll talk much more about Angular Modules throughout this course. Let's clarify the difference
+      between ES 2015 Modules and Angular Modules. ES Modules are code files that import or export something. Angular
+      Modules are code files that organize the application into cohesive blocks of functionality. ES Modules organize
+      our code files. Angular Modules organize our application. ES Modules modularize our code. Angular Modules
+      modularize our application. ES Modules promote code reuse. Angular Modules promote boundaries within our
+      application. So, ES Modules are about code files, and Angular Modules are about our application. To keep these
+      terms straight, I'll refer to the ES 2015 as ES Modules and Angular Modules as Angular Modules. With that, we are
+      ready to look at how we load our ES Modules and host our application.
+    </p>
+
+    <h3>Loading ES Modules and Hosting Our Application</h3>
+    <p>When a user accesses our web application, the first file that is downloaded to them is the index.html file. It is
+      in this file that we define our link and script tags, set up our Module Loader, host our application, and display
+      our first view. We can think of it as the entry point for our application. Let's look at it. In the index.html
+      file, we have link tags to define our stylesheets, and script tags to load up the libraries we need. I cover what
+      these files are in the Angular 2 Setup Revisited Module later in this course. The next part of the index.html
+      file, configure system .js for loading library, third-party, or our own modules. In other words, it loads all of
+      our code files for us, so we don't need to add script tags for each file we add to the application. Here, we pull
+      in the script file that configures systemjs for our application. This line of code starts our application by
+      loading the ES 2015 Module that's in the path app. Recall from the prior clip that an ES 2015 Module is just a
+      code file that imports or exports something. How does systemjs know which file in the app path to load? It's
+      defined in the systemjs.config file. Here at the bottom, we find app, and see that the main entry point is
+      main.js. So, systemjs loads and runs the module named main that is located in the app folder. We'll look at that
+      main module in the next course module. And we see that the default extension for all modules loaded from the app
+      folder is .js. This is why we don't have to specify the extension when importing modules. We'll talk more about
+      this configuration file in the Angular 2 Setup Revisited Module of this course. Going back to the index.html file,
+      here is the body of our HTML page. It is here that we host our Angular 2 application. We'll cover hosting in the
+      next course module. With that, we have everything we need in place to build our first Angular 2 application. Since
+      we won't be referring to Angular 1 again, from this point forward, I'll often refer to Angular 2 just as
+      Angular.</p
+
+    <h3>Summary</h3>
+    <p>In this module, we discussed several languages and selected TypeScript.>TypeScript has all of the productivity
+      features of ES 2015, plus strong typing for better tooling. We then selected an editor. Which editor you use for
+      TypeScript is a personal preference. For the best experience, be sure your selected editor fully supports
+      TypeScript. We then installed npm and looked at the laborious process required to manually set up the boilerplate
+      code for an Angular 2 application. Instead of manually setting this up, we downloaded the starter files from my
+      Github repository. We then saw how to install, run, and edit the sample application. We covered ES Modules and how
+      TypeScript uses ES Module syntax to export and import functionality from our ES Modules. We introduced Angular
+      Modules and how they organize our application and promote application boundaries. And, we saw how to configure the
+      ES Module Loader. Recall the architecture for the sample application we are building that we outlined in the first
+      module? So far, we only have the index.html file defined. In the next module, we'll start writing some Angular 2
+      code and build the app component shown here.
+    </p>
+    <script src="bundle.js"></script>
+  </body>
+</html>

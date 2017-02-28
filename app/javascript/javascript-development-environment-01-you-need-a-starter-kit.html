@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Building a JavaScript Development Environment</title>
+  </head>
+  <body>
+
+    <h1>Git and Github</h1>
+    <h2>Git</h2>
+    <img src="images/git.jpg" height="225" width="225"/>
+    <p>Git is a version control system (VCS) for tracking changes in computer files and coordinating work on those
+      files among multiple people. It is primarily used for software development, but it can be used to keep track of
+      changes in any files.</p>
+    <h3>Installing Git</h3>
+    <p>We are going to install Git for source control. To install Git browse to
+      <a href="https://git-scm.com">https://git-scm.com</a> and install Git accepting the defaults during
+      installation.</p>
+    <h2>Github</h2><img src="images/github.jpg" height="242" width="208"/>
+    <p>Browse to <a href="https://github.com">https://github.com</a> and setup an account (or use an existing one).
+      Create a new repository (making sure you Initialize the repository with the <code class="hljs">.gitignore:
+        Node</code> set so that Git
+      ignores the <code class="hljs">node_modules</code> folder. Its huge so you dont want to check it in).</p>
+    <p>The final step is to clone the repository to your development machine. You do this by clicking the green
+      Clone or download button and then copying the Url that is displayed.</p>
+    <p>Now run the <code class="hljs">git clone</code> command from a terminal session:</p>
+    <pre><code>git clone https://github.com/maxsage/pluralsight-js-dev-env.git</code></pre>
+    <p>This command will clone your repository into a local directory with the same name as your repository.</p>
+    <p>There are three commands that let you commit your work to Git and Github</p>
+    <ul>
+      <li>1. Stage all the files you changed:</li>
+      <pre><code>git add . </code></pre>
+      <li>2. Commit your changes locally:</li>
+      <pre><code>git commit -m "your message here"</code></pre>
+      <li>3. Push your work to Github:</li>
+      <pre><code>git push</code></pre>
+    </ul>
+
+    <script src="bundle.js"></script>
+
+
+  </body>
+</html>

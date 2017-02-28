@@ -1,0 +1,103 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>OData</h2>
+                <h2>Torbay Councillors</h2>
+                <h3>Creating the WebAPI/OData and Model Projects</h3>
+                <ul>
+                    <li>Create and populate an SQL Database called <strong>TorbayCouncillors.</strong></li>
+                    <li>Ensure the relationships between tables have been configured and primary keys setup etc.</li>
+                    <li>Make sure you have downloaded and installed the Entity Framework 6 Tools for Visual Studion 2013 from
+                        <a href="https://www.microsoft.com/en-us/download/details.aspx?id=40762">here</a>.</li>
+                    <li>Create a new solution called <strong>TorbayCouncillors</strong></li>
+                    <li>Create a class library project called <strong>TorbayCouncillors.Model</strong>
+                        <ul>
+                            <li>Delete the <strong>Class1.cs</strong> file.</li>
+                            <li>Add the Entity Framework Reverse POCO generator to generate model classes for the project. Follow
+                                the installation and usage notes <a href="https://visualstudiogallery.msdn.microsoft.com/ee4fcff9-0c4c-4179-afd9-7a2fb90f5838">here</a>
+                                <ul>
+                                    <li>Use <strong>NuGet</strong> to install <strong>EntityFramework</strong> to the project.</li>
+                                    <li>Add a connection string to the database created above in <strong>app.config</strong></li>
+                                    <li>Right click on the project and select “add – new item”</li>
+                                    <li>Select Online, and search for "reverse poco" if it is not already available from a previous
+                                        download.</li>
+                                    <li>Select “EntityFramework Reverse POCO Generator”</li>
+                                    <li>Give the file a name, such as <strong>Database1.tt</strong> and click Add.</li>
+                                    <li>Edit the <strong>Database1.tt</strong> file and specify the connection as <strong>“MyDbContext”</strong>                                        which matches your name in <strong>app.config</strong></li>
+                                    <li>Save the <strong>Database1.tt</strong> file, which will now generate the <strong>Database1.cs</strong>                                        file</li>
+                                    <li>There are many options you can use to customise the generated code. All of these settings
+                                        are in the
+                                        <strong>Database1.tt</strong> files.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Add a <strong>New Project</strong> and select the <strong>ASP.NET Web Application</strong> and set the
+                        options as follows:
+                        <img src="./app/assets/images/odata/Fig0101.png" />
+                    <li>Delete the <strong>Models</strong> folder</li>
+                    <li>Add the relevant connection string into the <strong>Web.config</strong> file.
+                        <ul>
+                            <li>Use <strong>NuGet</strong> to install <strong>EntityFramework</strong> to the project.</li>
+                            <li>Use NuGet to install the OData packages by typing <strong>Install-Package Microsoft.AspNet.Odata</strong>                                in the Package Manager Console.</li>
+                            <li>Add a reference to the <strong>TorbayCouncillors.Model</strong> project.</li>
+                            <li>Add the relevant references to the top of the <strong>WebApiConfig.cs</strong> file.</li>
+                            <li>Comment out the routing in <strong>WebApiConfig.cs</strong> and replace it with OData specific
+                                routing.</li>
+                            <li>Add a <strong>Web API 2 Controller - Empty</strong> called <strong>CouncillorsController.cs</strong>                                to the <strong>Controllers</strong> folder.
+                                <ul>
+                                    <li>Change the class inheritance from <strong>ApiController</strong> to <strong>OdataControlller</strong></li>
+                                    <li>Add the relevant using statements for <strong>OData</strong> and the <strong>Models</strong>                                        project to the top of the class.</li>
+                                    <li>Add a using statement for <strong>System.Web.OData.Extensions</strong></li>
+                                    <li>Add methods to return all Councillors and a single Councillor.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Run the project specifying the following Urls:
+                        <ul>
+                            <li>http://localhost:50995/Councillors - returns all Councillors</li>
+                            <li>http://localhost:50995/Councillors?$expand=Ward – returns all Councillors with related Ward information.</li>
+                            <li>http://localhost:50995/Councillors?$select=Forename,Surname – returns all Councillors but with
+                                only a subset of the available fields (Forename and Surname)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h2>Links</h2>
+                <h3>Entity Framework Reverse POCO Generator</h3>
+                <a href="https://www.microsoft.com/en-us/download/details.aspx?id=40762">https://www.microsoft.com/en-us/download/details.aspx?id=40762</a>
+                <hr />
+                <h3>Web API</h3>
+                <a href="http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api">http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api</a>
+                <hr />
+                <h3>OData</h3>
+                <a href="http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint">http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint</a>
+                <p>The following blog link covers OData routing. It is the process that I used in the TorbayCouncillors project:</p>
+                <a href="http://blogs.msdn.com/b/alexj/archive/2012/08/15/odata-support-in-asp-net-web-api.aspx">http://blogs.msdn.com/b/alexj/archive/2012/08/15/odata-support-in-asp-net-web-api.aspx</a><br
+                />
+                <a href="http://bitoftech.net/2014/04/16/create-read-only-odata-endpoint-using-asp-net-web-api/">http://bitoftech.net/2014/04/16/create-read-only-odata-endpoint-using-asp-net-web-api/</a><br
+                />
+                <a href="http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api">http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api</a><br
+                />
+                <a href="http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api/using-$select,-$expand,-and-$value">http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api/using-$select,-$expand,-and-$value</a><br
+                />
+                <a href="http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions">http://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api/odata-routing-conventions</a><br
+                />
+                <a href="http://www.timecockpit.com/devblog/2014/09/12/10-OData-FAQs">http://www.timecockpit.com/devblog/2014/09/12/10-OData-FAQs</a><br
+                />
+                <hr />
+                <h2>Entity Framework</h2>
+                <p>If you need to use the <strong>Include</strong> lambda extension method (probably redundant to some extent
+                    when using OData and the <strong>$expand</strong> command) don’t forget to add the following using statement:</p>
+                <code>using System.Data.Entity</code>
+                <p>See the following link for details:</p>
+                <a href="http://stackoverflow.com/questions/4950445/idbset-and-exposing-include-method-via-extension-method">http://stackoverflow.com/questions/4950445/idbset-and-exposing-include-method-via-extension-method</a>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>TypeScript</h1>
+                <h2>Pluralsight Courses</h2>
+                <h3>TypeScript Fundamentals - Dan Wahlin and John Papa</h3>
+                <a href="https://app.pluralsight.com/library/courses/typescript/table-of-contents">TypeScript Fundamentals</a><br/>
+                <p>Date Completed: 17/11/2016</p>
+                <p>Rating: *****</p>
+                <h4>Course Description</h4>
+                <p>TypeScript Fundamentals walks you through the key concepts and features that you need to know to get started with TypeScript, and use it to build large (and small) scale JavaScript applications. Updated March 25, 2016 for TypeScript 1.8.</p>
+                <h4>Getting Started with TypeScript</h4>
+                <p>The first module covers the concept of TypeScript and what it offers you as a JavaScript Developer.</p>
+                <h4>Type, Variables, and Functions</h4>
+                <p>Module two covers the differences between statically and dynamically typed languages.</p>
+                <h4>Classes and Interfaces</h4>
+                <p>This module talks about clasess and how members can be organized to make them all play together nicely.</p>
+                <p>We'll then talk about interfaces and introduce the concept of what an interface is and how we can use it to drive consistency in our code.</p>
+                <h4>Modules</h4>
+                <p>To build on the concept of seperating and organizing your code we will talk about what modules are and how they emit different kinds of modules in JavaScript</p>
+                <h2>Sublime Text Integration</h2>
+                <h3>Excluding .js and .js.map files from the SideBar View</h3>
+                <p>When using TypeScript it can be useful to hide the resulting .js and .js.map files produced by
+                the compilation of the .ts file. This is because in theory you shouldn't need to edit the .js file
+                directly. Any changes you made to the .js file would be overwritten when the .ts file is compiled
+                anyway.</p>
+                <p>From SublimeText select Preferences>Settings and add the following to the Preferences.sublime-settings file:</p>
+                <pre>"file_exclude_patterns": ["*.js", "*.js.map"]</pre>
+                <h3>Adding a new Build System to compile TypeScript files from Sublime Text</h3>
+                <p>Sublime test can be configured to compile .ts files by performing the following steps:</p>
+                <ul>
+                    <li>Install the typescript compiler</li>
+                    <li>Download the Sublime Text Syntax Highlight definition file</li>
+                    <li>Add a new Build System to Sublime Text</li>
+                </ul>
+                <h4>Installing the TypeScript compiler</h4>
+                <p>Use the Node Package Manager from a Node Command Prompt to install the TypeScript compiler:</p>
+                <pre>npm install typescript -g</pre>
+                <h4>Download the Sublime Text Syntax Highlight definition file</h4>
+                <p>Browse to the following location and download the TypeScript.tmLanguage file (I downloed the whole GitHub project as a Zip File and saved the required file from there):</p>
+                <a href="https://github.com/Microsoft/TypeScript-Sublime-Plugin">TypeScript-Sublime-Plugin</a>
+                <p>Save this file to the Sublime Text User Packages directory which will be somewhere like:</p>
+                <p>C:\Users\csit011\AppData\Roaming\Sublime Text 3\Packages\User</p>
+                <h4>Add a new Build System to Sublime Text</h4>
+                <p>In Sublime Text select Tools > Build System > New Build System and paste in the following
+                (note in line 3 the use of tsc and not tsc.cmd): </p>
+                <pre>
+{
+    "selector": "source.ts",
+    "cmd": ["tsc", "$file"],
+    "file_regex": "^(.+?) \\((\\d+),(\\d+)\\): (.+)$"
+}
+                </pre>
+                <p>I saved the file as typescript.sublime-build in my user packages directory.</p>
+            </div>
+        </div>
+    </div>
+</div>

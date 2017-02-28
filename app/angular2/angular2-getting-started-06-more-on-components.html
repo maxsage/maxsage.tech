@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>More on Components</h2>
+    <h3>Introduction</h3>
+    <p>When building clean components, we want to ensure everything is strongly typed, our styles are encapsulated, we
+      respond to appropriate lifecycle events, and we transform data to user-friendly values as needed. Welcome back to
+      Angular 2: Getting Started, from Pluralsight. My name is Deborah Kurata, and in this module, we learn several ways
+      to improve upon our components. Components are one of the key building blocks of our application. The cleaner,
+      stronger, and more durable we make these blocks, the better are our application. So, how can we make our
+      components better? Strong typing helps minimize errors through better syntax checking and improved tooling. But
+      what if there is no pre-defined type for a property? To strongly type a property that has no pre-defined type, we
+      define the type ourselves using an interface. If a component needs special styles, we can encapsulate those styles
+      within the component to ensure they don't leak out to any other component in the application. A component has a
+      lifecycle managed by Angular. Angular provides a set of lifecycle hooks we can use to tap into key points in that
+      lifecycle, adding flexibility and responsiveness to our application. As we saw in the last module, pipes provide a
+      convenient way to transform bound data before displaying it in the view. But Angular doesn't have built-in pipes
+      for sorting or filtering iterable lists. And we may have other application-unique data transformation
+      requirements. Luckily, we can build our own custom pipes. Our components often refer to external template and
+      stylesheet files. We reference these files in the component meta data using an absolute path from the application
+      root. We can instead use a component relative path approach if we set module Ids. In this module, we explain
+      interfaces and demonstrate how to use them to strongly type our objects. We look at how to encapsulate component
+      styles. We introduce the component lifecycle and how hook into its events. We detail how to build a custom pipe.
+      And we see how to change to relative paths by setting the module Id. Looking at our Application Architecture, in
+      this module we'll add features to improve the product list component. Let's get started.</p>
+    <h3>Defining Interfaces</h3>
+    <p>One of the benefits of using TypeScript is that strong typing. Every property has a type, every method has a
+      return type, and every method parameter has a type. This strong typing helps minimize errors through better syntax
+      checking and tooling. In some cases however, we have a property or method that does not have a pre-defined type,
+      such as our products array here. We defined our products array as any, which negates the benefits of strong
+      typing. To specify custom types, we can define an interface. An interface is a specification identifying a related
+      set of properties and methods. A class commits to supporting the specification by implementing the interface. That
+      means the class includes code for each property and method identified in the interface. We can then use the
+      interface as a data type. ES 5 and ES 2015 do not support interfaces, but TypeScript does. So interfaces are
+      transpiled out and are not found in the resulting JavaScript. This means that interfaces are development time
+      only. Their purpose is to provide strong typing and better tooling support as we build, debug, and maintain our
+      code. Here is an example of a TypeScript interface. We define an interface using the interface keyword, followed
+      by the interface name, which is often the name of the business object that the interface describes. By many naming
+      conventions, the interface is prefixed with an I for interface, though some TypeScript developers leave off this
+      prefix. The export keyword here at the front exports this interface, thereby making it available for use anywhere
+      in the application. The body of the interface defines the set of properties and methods appropriate for this
+      business object. For each property, the interface includes the property name, a colon, and the property data
+      type. For each method, the interface includes the method name, the list of parameters along with their data types,
+      a colon, and the method return type. To use the interface as a data type, we import the interface, then use the
+      interface name as the data type. Looks easy enough. Let's try it out. We back in the sample application, looking
+      at the product list component. Here, we see that we defined our products array as any. So let's create an
+      interface that defines what a product is. We'll put the interface into its own file in the products folder. We'll
+      name that file product.ts, after the business object it defines. We first type the export keyword to ensure the
+      other parts of the application can use this interface. That is, after all, why we are creating it. Next, we type
+      in the interface keyword. Then, the name of the interface. I like to use the I prefix to distinguish the interface
+      from the business object. And we are defining a product, so Iproduct. Inside the interface, we define the
+      properties and methods appropriate for the business object. For our sample application, we only need properties.
+      For each property, we define the property name, a colon, and the type of the property. Notice that we are typing
+      the release date as a string. If we later work with this value as the date object, we could change this type to a
+      date. That's it, that's all we have to do to define an interface. Now we can use this interface as our data type
+      in the product list component. Before we do though, let's try something. Let's introduce a typographical error
+      into our products array. No error is detected. We won't even know we made a mistake until we see the application
+      in the browser. And we notice that no image is displayed for one of the products. As you can imagine, these kinds
+      of errors could cause hard to find bugs. Now let's replace the any with Iproduct. We get a syntax error. What did
+      we miss? Yep, we need an import. And, bang. Now that our array of products is strongly typed, we are notified that
+      we made an error in our product array property. We don't even have to view it in the browser to see that something
+      is amiss. So this is a good demonstration of one of the benefits of strong typing. Let's fix that error. Notice
+      that we get intellisense now for these properties. Another great benefit of strong typing. Let's check this out in
+      the browser. Now everything works as it did. In our interface file, we could define a class for the product
+      business object here as well. Something like this. In general, we only create a business object class if that
+      class provides some functionality that we want to use throughout our application, such as this calculate discount
+      method. And if we think we might want to create a business object at some point in the future, then we definitely
+      want to add the I prefix to our interface. But for our sample application, we don't need any product methods. So
+      we don't really need a product class. We will use this interface throughout the application to strongly type our
+      products. Before we move on, let's make one change. Notice that we're getting lots of files here. Unless we want
+      to look at them, we really don't need to open the .js or .map files. Let's hide them from the editor. In VS code,
+      we do that by selecting file, preferences, workspace settings. I'll paste exclude entries for the .js and .map
+      files. Now we see that the .js and .map files don't appear in the explorer window here on the left. And we can
+      more easily find the files we need to edit. Neat! Next, let's look at encapsulating component styles. </p>
+    <h3>Encapsulating Component Styles</h3>
+    <p>When we build the template for a component, we sometimes need styles unique to that template. For example, if we
+      build a sidebar navigation component, we may want special li or div elements styles. When we nest a component that
+      requires special styles within a container component, we need a way to bring in those unique styles. One option is
+      to define those styles directly in the template's HTML. But that makes it harder to see, reuse, and maintain those
+      styles. Another options is to define the styles in an external stylesheet. That makes them easier to maintain, but
+      that puts the burden on the container component to ensure the external stylesheet is linked in the
+      index.html. That makes our nested component somewhat more difficult to reuse. But there is a better way. To help
+      us out with this issue, the component decorator has properties to encapsulate styles as part of the component
+      definition. These properties are styles and styleUrls. We add unique styles directly to the component using the
+      styles property. This property is an array so we can add multiple styles separated by commas. A better solution is
+      to create one or more external stylesheets and identify them with the styleUrls property. This property is an
+      array so we can add multiple stylesheets separated by commas. By encapsulating the styles within the component,
+      any defined selectors or style classes are only applicable to the component's template and won't leak out into any
+      other part of the application. Let's try this out. Before we change any code, let's look again at our product list
+      view in the browser. Notice the table headers. They could use a little color. So let's build an external
+      stylesheet for our product list component. We'll add a new file in the products folder, and since this file only
+      contains the styles for our product list component, we'll call it product-list.component.css. In this stylesheet
+      we add a table header style. We can modify the t head element styles directly, because the stylesheet is
+      encapsulated in this component. And the styles defined here won't affect any other component in the
+      application. We could add any other styles as needed to jazz up our product list component. To use this new
+      stylesheet, we modify the product list component. In the component decorator, we specify our unique stylesheet. We
+      add the styleUrls property and pass it in array. In the first element to the array, we specify the path to our
+      stylesheet. Note that the style path is relative to the index.html file. We could add more stylesheets here,
+      separated with commas. Let's review the result in the browser. And we see that the table header is now a nice,
+      blue color. We can use the styles or styleUrls property of the component decorator anytime we want to encapsulate
+      unique styles for our component. Next up, let's dive into lifecycle hooks.</p>
+    <h3>Using Lifecycle Hooks</h3>
+    <p>A component has a lifecycle, managed by Angular. Angular creates the component, renders it, creates and renders
+      its children, processes changes when its data-bound properties change, and then destroys it before removing its
+      template from the DOM. Angular provides a set of lifecycle hooks we can use to tap into this lifecycle and perform
+      operations as needed. Since this is a getting started course, we'll limit our focus to the three most commonly
+      used lifecycle hooks. Use the OnInit lifecycle hook to perform any component initialization after Angular has
+      initialized the data-bound properties. This is a good place to retrieve the data for the template from a back-end
+      service, as we'll see later in this course. Use the OnChanges lifecycle hook to perform any action after Angular
+      sets data-bound input properties. We have not yet covered input properties. We'll see those in the next module.
+      Use the OnDestroy lifecycle hook to perform any cleanup before Angular destroys the component. To use a lifecycle
+      hook, we implement the lifecycle hook interface. We talked about interfaces earlier in this module. Since Angular
+      itself is written in TypeScript, it provides several interfaces we can implement, including one interface for each
+      lifecycle hook. For example, the interface for the OnInit lifecycle hook is OnInit. Notice that it is not prefixed
+      with an I. We are using the OnInit interface from Angular, so any guesses as to our next step? Yep, we need to
+      import the lifecycle hook interface. We can then write the hook method. Each lifecycle hook interface defines one
+      method whose name is the interface name prefixed with ng for Angular. For example, the OnInit interface hook
+      method is named ngOnInit. Our first step here of implementing the interface is actually optional. Recall from our
+      discussion of interfaces earlier in the module that neither ES 5 nor ES 2015 support interfaces. They are features
+      of TypeScript. That means that the interfaces are transpiled out of the resulting JavaScript. So we don't really
+      have to implement the interface to use lifecycle hooks. We can simply write code for the hook method. However, it
+      is good practice, and provides better tooling, when we implement the interface. At this point in our application,
+      we don't need to implement any lifecycle hooks, but we'll use them in later modules. So let's try them out now. We
+      are looking at the product list component. We'll add the OnInit lifecycle hook to this component. First, we
+      implement the interface by adding it to the class signature. Type implements and the name of the interface,
+      OnInit. The interface name is showing an error and we know why. We don't have the import. Let's add that
+      now. Since OnInit is also imported from Angular Core, we simply add it to our first import statement by typing a
+      comma and OnInit. Now we have another syntax error here. Class product list component incorrectly implements
+      interface OnInit. As the message states, now that we've implemented the interface, we must write code for every
+      property and method in that interface. The OnInit interface only defines one method, ngOnInit. So we need to write
+      the code for the ngOnInit method. We'll add it down here by the other methods. Since we don't really need to do
+      anything with this at this point, we'll just use console.log to log a message to the console. We can view the
+      application in the browser and use the F12 developer tools to open the console and view the logged message. We can
+      see our message here. We'll use ngOnInit later in this course. Up next, we'll build a custom pipe. </p>
+    <h3>Building Custom Pipes</h3>
+    <p>As we saw in the last module, we use pipes for transforming bound properties before displaying them in a view.
+      There are built-in pipes that transform a single value or an iterable list of data.>We covered these in the last
+      module. In this module, we want to build our own custom pipe. The code required to build a custom pipe may look
+      somewhat familiar at this point. It uses patterns similar to other code we've created in this course. Here is the
+      class. We implement a PipeTransform interface, which has one method, transform. We write code in the transform
+      method to transform a value and return it. The first parameter of the transform method is the value we are
+      transforming. In this example, we transform an array of products into a filtered array of products. Notice that we
+      are using the Iproduct interface to strongly type the array that's passed in. That is the interface we created
+      earlier in this module. The second parameter here is for any arguments we need to perform the transformation. In
+      our case, we want to pass in the filter criteria entered by the user. The method return type is also defined as an
+      array of products, because we are returning the filtered array of products. We add a pipe decorator to the class
+      to define it as a pipe. Similar to the other decorators we've used, this is a function so we add parentheses. We
+      pass an object to the function specifying the name of the pipe. This is the name for the pipe used in the
+      template, as we'll see shortly. And of course, we have our imports to import what we need. Notice how similar this
+      looks to the components we've created in this course? Angular provides a very consistent coding experience. To use
+      a custom pipe in a template, simply add a pipe and the pipe name. Include any arguments required by the
+      transformation, separated by colons. But of course, that is not enough. We also need to tell Angular where to find
+      this pipe. We add the pipe to an Angular module. How do we know which Angular module? At this point, that's easy
+      because we only have one, AppModule. But if we had multiple modules, we'd add it to the module that declares the
+      component that needs the pipe. In our example, the product list component template needs the pipe. So we add the
+      declaration to the same Angular module that declares the product list component. We define the pipe in the
+      declarations array of the NgModule decorator. Now lets build our custom pipe and filter our list of products.
+      Since our custom pipe is currently designed to only filter products, we'll add it to the products folder. We'll
+      create a new file and call it product-filter.pipe.ts, following our naming conventions. We'll start by writing the
+      code for the class. Export, so we can import this pipe where we need it. Class, and the class name. We'll call it
+      product filter pipe. We want to implement the pipe transform interface, so we add that here. The syntax error
+      is because we don't have the import statement. So let's add that next. We still have a syntax error, because when
+      we implement the pipe transform interface, we are required to implement every property and method defined in that
+      interface. For the pipe transform interface, there is only one method, transform. Notice, right away that we have
+      yet another syntax error. We are defining the value parameter to be an array of Iproduct. But we have not yet
+      imported that interface. So let's do that now. And we can add a return statement to get rid of this last syntax
+      error. Next, we need to decorate the class with the pipe decorator. Here, we specify the pipe's name. And we'll
+      add pipe to our import statement. Now it's time to implement the transform method. I'll pace the code so that we
+      can talk through it, but don't worry if you haven't seen some of the syntax before. This is mostly JavaScript and
+      is not critical for learning Angular. But what does this code do? Our goal is to transform the passed list of
+      products to a filtered list based on a user-entered filter string. This first line of code uses a JavaScript
+      conditional operator to handle the possibility that no filterBy string was defined. If there is a filterBy, this
+      code converts it to lowercase. Why convert it to lowercase? So we can compare apples to apples when we filter the
+      product list. We want a case insensitive comparison. If there is no filterBy, this code sets the filterBy to
+      null. Then we return the filtered list of products. Let's break this down. This code also uses the JavaScript
+      conditional operator. If our filter variable has a true value, meaning that it is defined and not null, then we
+      filter the list. Otherwise, there was no filter specified and we return the original value, which is our full list
+      of products. Let's look closer at this filter statement. We are using the array filter method to create a new
+      array with elements that pass the test defined in the provided function. We're using the ES 2015 arrow syntax to
+      define that filter function. For each product in the list, the product name is converted to lowercase and the
+      IndexOf is used to determine if the filtered text is found in the product name. If so, the element is added to the
+      filtered list. See the MDN entry for filter at this link for more information on the array filter function. Now we
+      are ready to use our pipe in the product list component. We'll filter the list of products here. In our ngfor
+      clause, we'll add the pipe character and the name of our pipe, productFilter. Be sure to insert within the
+      quotes. We also need to pass in our pipe argument. In this example, we pass in the listfilter property. That
+      property contains the value the user entered in the filterBy input box. Let's give this a try. Oh, our page did
+      not display. And using the F12 tools, we can see why. The pipe, productFilter, could not be found. What did we
+      forget? Recall from the slides that we need to tell Angular about our new pipe. We do that by declaring the pipe
+      in an Angular module. Our product list components template wants to use the productFilter pipe. So we open the
+      Angular module that declares the ProductListComponent, which is our app module. We then add ProductFilterPipe to
+      the declarations array. And we import the ProductFilterPipe. Now any component declared in App module can use our
+      product filter pipe. Are we ready to see the result? Our default filter is cart, so now we only see the garden
+      cart. Change the filter, and we see different entries. It's working! Not too shabby, not too shabby at all! So to
+      create a custom pipe, we built a class, implemented the pipe transform interface, and decorated the class with the
+      pipe decorator. To use the pipe in a template, we specify a pipe character, the pipe name, and any pipe
+      arguments. And we declare the pipe in the Angular module's declarations array. Next up, let's look at how we can
+      replace the absolute paths in our components with relative paths. </p>
+    <h3>Relative Paths with Module Id</h3>
+    <p>Our components often refer to external template and stylesheet files. We reference these files in the component
+      metadata, using an absolute path from the application root. As an example, here is our product list component. We
+      specify the location to the template with an absolute path from the application root, which is the location of the
+      index.html file. Because of our folder structure, our path is app/products. We use the same absolute path for the
+      location of our stylesheet file. There are several downsides to using absolute paths. They make it harder to
+      adjust our folder structure over time as the application grows. They make it harder to reuse our components in
+      other applications. And some tools, such as the ahead of time compiler that we'll discuss later in this course,
+      require component relative paths. So what do we do? We can instead use a component relative path approach if we
+      set moduleId. Here we set the component's module Id, so we can change to component relative URLs. What is this
+      module id? The module id is a semi-global variable that is available when using the CommonJS module format. It
+      contains the absolute URL of the component class module file. Using module id requires that we write our modules
+      in the CommonJS format. We are writing our modules in CommonJS format as we've defined in our tsconfig.jason file.
+      We'll discuss this file more in the Angular 2 Set-up Revisited module later in this course. Using module.id also
+      requires that we use a module loader, such as SystemJS. We saw in the First Things First module, at the beginning
+      of this course, that we are indeed using the SystemJS module loader. So we are all set up such that we can use
+      module.ids. Let's give this a try. Here, in our product list component, we'll add the module.id property to the
+      component decorator. Then we can remove the absolute paths from both the template URL and the style URL. Running
+      the application, we can see that it still works. And if we look at the command window, we see that Angular
+      determined the appropriate full path for us. Specify a module.id anytime you want to use component relative paths
+      for the template and stylesheet URLs. Note that the sample code in this course uses absolute paths and no
+      module.ids, just to keep the code simple. Feel free to add module.ids and use component relative paths if
+      desired. Now let's finish up this module with some checklists we can use as we work more with components. </p>
+    <h3>Checklists and Summary</h3>
+    <p>We've covered several discrete topics in this module, so we have a checklist for each one. First, interfaces. We
+      use interfaces to specify custom types, such as product in our sample application. Interfaces are a great way to
+      promote strong typing in our applications. When creating an interface, use the interface keyword in the body of
+      the interface to find the appropriate properties and methods along with their types. And don't forget to export
+      the interface, so it can be used anywhere in our application. We implement an interface, including built-in
+      Angular interfaces, to ensure that our class defines every property and method identified in that interface. Add
+      the implement's keyword and the interface name to the class signature. Then be sure to write code for every
+      property and method in the interface. Otherwise, TypeScript displays a syntax error. We can encapsulate the styles
+      for our component in the component itself. That way the styles required for the component are associated with the
+      component alone and don't leak into any other parts of the application. Use the styles property of the component
+      decorator to specify the template styles as an array of strings. Use the styleUrls property of the component
+      decorator to identify an array of external stylesheet paths. The specified styles are then encapsulated in the
+      component. Lifecycle hooks allow us to tap into a component's lifecycle to perform operations. The steps for using
+      a lifecycle hook are import the lifecycle hook interface, implement the lifecycle hook interface in the component
+      class. This step is not required, but highly recommended. Then, write the code for the hook method defined in the
+      lifecycle hook interface. To build a custom pipe, import Pipe and PipeTransform. Create a class that implements
+      the PipeTransform interface. This interface has one method, transform. Be sure to export the class so the pipe can
+      be imported from other components. Write code in the Transform method to perform the needed transformation. And
+      decorate the class with Pipe decorator. We can use a Custom Pipe in any template, anywhere we can specify a pipe.
+      In an Angular module, import the pipe. In the meta data, declare the pipe in the declarations array. Then any
+      template associated with a component declared in that Angular module, can use that pipe. In a template,
+      immediately after the property to transform, type a pipe character, specify the pipe name, and enter the pipe
+      arguments, if any, separated by colons. Our components often refer to external template and stylesheet files. To
+      use a component relative path when specifying template URL and style URLs, set moduleids. Set the moduleid
+      property of the component decorator to module.id. Then change each Url to a component-relative path in the
+      templateUrl or styleUrl properties. This module provided a set of techniques for improving our components. We
+      walked through how to use an interface to strongly type our custom objects. We saw how to encapsulate styles
+      within a component. We were introduced to the component lifecycle and how to tap into that lifecycle with
+      lifecycle hooks. And we discovered how to build a Custom Pipe that we can use in any component template. We also
+      saw how to change to relative paths by setting the Module Id. So in this module, we've completed the Product List
+      Component. Yay!>Next up, we'll see how to build nested components and build this Star Component.</p>
+    <script src="bundle.js"></script>
+  </body>
+</html>
