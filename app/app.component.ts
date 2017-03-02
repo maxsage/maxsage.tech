@@ -5,7 +5,7 @@ import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/route
 
 import { WelcomeComponent } from './home/welcome.component';
 
-import { Angular2Component, Angular2GettingStarted00CourseContentsComponent} from './angular2/angular2.component';
+import { Angular2Component, Angular2GettingStarted00CourseContentsComponent } from './angular2/angular2.component';
 import { JQueryComponent } from './jquery/jquery.component';
 import { Bootstrap3Component } from './bootstrap/bootstrap3.component';
 import { VisualStudioComponent } from './visualstudio/visualstudio.component';
@@ -20,7 +20,6 @@ import { WPFComponent } from './wpf/wpf.component';
 import { ODataComponent } from './odata/odata.component';
 
 import { DGenComponent } from './dgen/dgen.component';
-
 
 @Component ({
     selector: 'pm-app',
@@ -71,6 +70,7 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/welcome', name: 'Welcome', component: WelcomeComponent, useAsDefault: true },
     { path: '/wpf', name: 'WPF', component: WPFComponent },
     { path: '/angular2', name: 'Angular2', component: Angular2Component },
+    { path: '/angular2-getting-started-00-course-contents', name: 'Angular2GettingStarted00CourseContents', component: Angular2GettingStarted00CourseContentsComponent},
 
     { path: '/jquery', name: 'JQuery', component: JQueryComponent },
     { path: '/bootstrap', name: 'Bootstrap3', component: Bootstrap3Component },
