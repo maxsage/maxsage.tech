@@ -1,0 +1,177 @@
+  <h2>Retrieving Data Using HTTP</h2>
+  <h3>Introduction</h3>
+  <p>The data for our application is on a server somewhere in cloud, at the office, under our desk. How do we get that
+    data into our view? Welcome back to Angular 2 getting started from Pluralsight. My name is Deborah Kurata, and in
+    this module we learn how to use Http with observables to retrieve data. Most Angular applications obtain data
+    using Http. The application issues an Http get request to a web service. That web service retrieves the data,
+    often using a database, and returns it to the application in an Http response. The application then processes that
+    data. In this module, we begin with an introduction to observables and the reactive extensions. We then examine
+    how to send an Http request and map the result to an array. We add some exception handling, and we look at how to
+    subscribe to observables to get the data for our view. We finished the first cut of a product data service in the
+    last module, but it still has hard-coded data. Now we'll replace that hard-coded data with Http calls. Let's get
+    started.</p>
+  <h3>Observables and Reactive Extensions</h3>
+  <p>Observables help us manage asynchronous data, such as data coming from a backend service. Observables treat
+    events as a collection. We can think of an observable as an array whose items arrive asynchronously over time. On
+    the timeline to the left, the first marble comes in, then the second, and some time later the third. Observables
+    are a proposed feature for ES 2016, the next version of JavaScript. To use observables now, Angular uses a
+    third-party library called reactive extensions. Don't confuse this with React, which is another thing entirely.
+    Observables are used within Angular itself, including Angular's event system and its Http client service, which is
+    why we are covering them here. Observables allow us to manipulate sets of events with operators. Operators are
+    methods on observables that compose new observables. Each operator transforms the source observable in some way.
+    Operators do not wait for all of the values and process them at once. Rather, operators on observables process
+    each value as it is emitted. Some examples of operators include map, filter, take, and merge. Data sequences can
+    take many forms, such as a response from a backend web service, a set of system notifications, or a stream of
+    events, such as user input. In this diagram, our stream contains three elements. Reactive extensions represent a
+    data sequence as an observable sequence, commonly just called an observable. A method in our code can subscribe to
+    an observable to receive asynchronous notifications as new data arrives. The method can then react as data is
+    pushed to it. The method is notified when there is no more data or when an error occurs. Observables support
+    operators, such as the map operator. The map operator allows us to transform the incoming data. The argument to
+    the map operator is an arrow function that says to take each data item and transform it to 10 times its value. So
+    when we receive one, it is mapped to 10. When we receive two, it is mapped to 20, and so on. This depiction is
+    called a marble diagram and is helpful for visualizing observable sequences. This is a screenshot from Rxmarbles
+    at this URL. You may have worked with asynchronous data in JavaScript previously using promises. Observables are
+    different from promises in several ways. A promise returns a single future value. An observables emits multiple
+    asynchronous values over time. A promise is not lazy. By the time you have a promise, it's on its way to being
+    resolved. An observable is lazy by default. Observables will not emit values until they are subscribed to. A
+    promise is not cancellable. It is resolved or rejected and only once. An observable can be cancelled by
+    unsubscribing. Plus an observable supports map, filter, reduce, and similar operators. Note, however, that you can
+    use promises instead of observables when calling Http in Angular if you wish. An example is provided in the
+    Angular documentation. In this module, we'll do Http using observables. </p>
+  <h3>Sending an HTTP Request</h3>
+  <p>We often encapsulate the data access for our application into a data service that can be used by any component or
+    other service that needs it. In the last module, we did just that, but our product data service still contains a
+    hard-coded list of products. We instead want to send an Http request to get the products from a backend web
+    server. Angular provides an Http service that allows us to communicate with a backend web server. Using the
+    familiar Http request and response protocol. For example, we call a get method of the Http service, which in turn
+    sends a get request to the web server. The web server response is returned from the Http service to our product
+    data service as an observable. What does this look like in code? This is the product service we built in the last
+    module modified to retrieve the products using Angular's Http service. Let's walk through this code. First we
+    specify a URL to the products on the web server. This defines where we send our Http requests. Note that this URL
+    is shown for illustration purposes only and is not a real URL. Next we add a constructor. Recall from the last
+    course module that we use a constructor to inject dependencies. In this case, we need Angular's Http service, so
+    we inject it here. Recognize this syntax? It creates a private_http variable and assigns the injected service
+    instance to that variable. And since we are strongly typing this variable to Http, we import Http from the
+    @angular/http package here. As a side note, we had mentioned earlier that in some cases the injectable decorator
+    was optional. Now that our product service has an injected dependency, the injectable decorator is required.
+    Recall also from the last course module that before we can inject a service in as a dependency, we need to
+    register that service's provider with Angular's injector. The Http service provider registration is done for us in
+    the Http module included in the @angular/http package. To include the features of this external package in our
+    application, we add it to the imports array of our application's Angular module, AppModule. Recall that the
+    declarations array is for declaring components, directives, and pipes that belong to this module. The imports
+    array is for pulling in external modules, so we use the imports array to pull in this external HttpModule. Now our
+    Angular module illustration looks like this. We declare our components. We declare the directives and pipes that
+    those components require, and we import the external modules that we need. And for Http, we need HttpModule. Going
+    back to the product service, in getProducts we use the injected Http service instance and call the get method,
+    passing in the desired URL. The Http service then sends a get request using the specified URL. But what does this
+    method now return? Since we are using strong typing, we should have a function return value here. The getProducts
+    method returns an observable of Response. Does this generic syntax look familiar? We used it earlier in this
+    course to define the event payload when passing event information from a nested component to its container.
+    Observables take advantage of generics to define the type of data it is observing in the observable sequence. In
+    this case, it's the Http Response. It's important to note that Http calls are single asynch operations, meaning
+    that the observable sequence contains only one element, which is the Http Response object. And we need to import
+    Response from the @angular/http package and observable from rxjs/Observable. But let's think about this return
+    value for a moment. Do we really want an observable of Response? Our components, such as the product list
+    component, are expecting to receive a list of products, not an Http response. So we need to translate the Response
+    object to an array of products. We do that with the map operator. The map operator takes the raw Http Response
+    object returned from the Http get method and translates it into an array of products. The argument to the map
+    method is an arrow function that transforms the response to a JSON object. We use a casting operator to cast the
+    JSON object to an array of products. So now our getProducts returns an observable of IProduct array, which is much
+    more useful for our components. Note that depending on your server, the JSON result may be wrapped in another
+    property, such as a data property. If that is the case, use response.json.data here. To use the map operator, we
+    need to load it using an import statement. Using the import statement like this is a bit unusual. It tells the
+    module loader to load this library but actually doesn't import anything. When a library loaded, its JavaScript is
+    executed, and for this particular library, executing the JavaScript loads the map operator. So this particular
+    syntax imports the module for its side-effects only, without actually importing any of its features. Now let's add
+    Http to our product service. We are looking at our applications Angular module we called AppModule. Recall from
+    the slides that Angular registers its Http service provider in an Angular module called HttpModule. In our
+    application's Angular module, we import the HttpModule. This module is located in the @angular/http package. We
+    then pull that module into our application by adding HttpModule to the imports array here. Now we can inject the
+    Angular Http service into any class that needs it. Here is the product data service we created in the last module
+    with all of the hard-coded data. We want to modify our product service to get the product data using Http. Let's
+    start at the top with the import statements. We import the Http client service and the Http Response from
+    @angular/http. We important observable from rxjs/Observable. And we import the map operator using the special
+    syntax that loads the operator without actually importing anything. We want Angular to provide us an instance of
+    the Http client service, So we identify it as a dependency in the constructor. We don't have a constructor yet, so
+    let's add that first. Then we specify the parameter. Angular will then inject the Http client service instance
+    into this variable. Now we need to identify the location of our web server. Hmm, this doesn't look like a valid
+    URL to a web server. To keep things simple, the demonstration reads the data from a local JSON file that was
+    provided with the starter files. That way we don't need to set up an actual web server. To change this code to
+    work against a web server, simply change this URL to point to an appropriate web server. And, of course, you need
+    to write the server-side code to return the list of products. It's finally time to delete our hard-coded data. So
+    let's delete the hard-coded products from the getProducts method. Gone. We'll call the http.get method here
+    instead, passing in the defined URL. When we get a response back, we use the map operator to map the Http response
+    to a product array using response.json. We'll need to change the return type as well. Now this method returns an
+    observable of IProduct array. We can't try this out at this point, because we are not yet subscribing to the
+    observable returned from the service. Let's add some exception handling first, then modify the product list
+    component to subscribe to the observable list of products. </p>
+  <h3>Exception Handling</h3>
+  <p>As you can imagine, there are many things that can go wrong when communicating with a backend service. Everything
+    from an invalid request to a lost connection. So let's add some exception handling. We'll add a catch and pass it
+    the name of an error-handling method. The error-handling method gets one parameter, the error: Response object. In
+    that method, we can handle the error as appropriate. We can send the error information to the remote logging
+    infrastructure or throw an error to the calling code. And notice here one more thing, the observable has a do
+    operator that allows us to peek at the data returned from the server without disrupting the flow. We can use this
+    operator when debugging to log data to the console, for example. Notice we also need two more import statements,
+    one for each additional operator we are using. Now let's add exception handling to our product service. This code
+    is not really complete without the exception handling. So we'll add the appropriate imports and use the catch
+    operator to call a local handleError method. In this method, we can log or handle errors any way we want. For our
+    sample application, we simply log to the console and throw an error to the calling code. Let's also try out the do
+    operator. The do operator lets us peek at the response data. We use JSON.stringify to display that data in a nicer
+    format. So our getProducts method is complete. We can add other methods here to post or put data as well. We can't
+    see the result of our hard work yet because we are not subscribing to this observable. Let's do that next.</p>
+  <h3>Subscribing to an Observable</h3>
+  <p>If you are familiar with promises, you know that you receive the result of the promise, X in this illustration,
+    by calling then. Then takes two arguments, a value function that is called when the promise completes successfully
+    and an error function to handle any error condition. If we define X as an observable instead, we simply replace
+    the then with subscribe. Since observables handle multiple values over time, the value function is called for each
+    value the observable emits. In some cases, we want to know when the observable completes, so observables provide
+    an optional third handler that is executed on completion. The subscribe function returns a subscription. We could
+    use that subscription to call unsubscribe and cancel the subscription if needed. Now that our product data service
+    is returning an observable, any class that needs product data, such as our product list component, can call our
+    service and subscribe to the returned observable like this. As we stated earlier, observables are lazy. An
+    observable doesn't start emitting values until subscribe is called, so this line of code calls the product data
+    service getProducts method and kicks off the Http get request. It is then set up to asynchronously receive data
+    and notifications from the observable. The first function passed to the subscribe method specifies the action to
+    take whenever the observable emits an item. The method parameter is that emitted item. Since Http calls are single
+    asynch operations, only one item is emitted, which is the Http response object that was mapped to our product
+    array in the service. So the parameter is our array of products. This code then sets the local products property
+    to the returned array of products. The second function is executed if the observable fails. In this example, it
+    sets a local error message variable to the returned error. A third function not used here specifies the action to
+    take when the observable ends with a completed notification. The third function is rarely used when working with
+    Http requests since they automatically complete after emitting the single response. And we aren't using the return
+    value here since we have not provided an option for the user to cancel the request. Let's give this a try. Here in
+    the product list component, we see a syntax error. Type observable of IProduct array is not assignable to IProduct
+    array. Now that we've changed the product service to return an observable, we cannot assign the result to our
+    product property directly. Rather, we subscribe to the returned observable. When the observable emits the data, we
+    set our product property to the returned array of products. And since that product property is bound in the
+    components template, the retrieved data just appears in the view. But things don't always go as expected. To
+    handle any errors, let's add an error message property. If our request for products fails, our error message
+    property is set to the error. What is this any syntax? This is a casting operator. We are casting the error
+    returned from the observable to the any data type. Are we ready to try it out? There are our products. Success. We
+    have more products here now because we are retrieving the products form the provided product.json file.
+    Sweet. Remember the do we added to the Http get pipeline? It displays the retrieved data. If we open the F12
+    developer tools, we see that data in the console here. So the recommended way to use Http is to encapsulate it in
+    a service like our product service, then expose an observable for use by any class that needs product data. The
+    class simply subscribes to the observable and waits for data or a notification. Let's finish up this module with
+    some checklists we can use as we work with Http and observables. </p>
+  <h3>Checklists and Summary</h3>
+  <p>Before we can use Angular's Http client service, some setup is required.>We need to ensure that the service
+    prodiver is registered with the Angular injector. This registration is done for us in the Http module included in
+    the Angular Http package. So all we need to do is pull the Http module into our application. We do this by adding
+    Http module to the imports array of one of our application's Angular modules. Build a data access service to wrap
+    Http requests. In that data service, specify the needed imports, define a dependency for the Angular Http client
+    service using a constructor parameter. Create a method for each Http request. In the method, call the desired Http
+    method, such as get, and pass in the URL to the desired server. Use a map operator to transform the raw Http
+    response to a JSON object. And do error handling as desired. In any class that needs data from a data service,
+    call the subscribe method to subscribe to the observable. Provide a function to execute when the observable emits
+    an item. This often assigns a property to the returned JSON object, and if that property is bound to a template,
+    the retrieved data appears in the view. And add an error function to handle any returned errors. This module was
+    all about Http and observables. We began with an overview of observables and reactive extensions. We examined how
+    to build a data access service that sends requests for data over Http. We walked through how to set up some
+    basic exception handling, and we saw how to subscribe to the returned observable and ultimately display the
+    resulting data in the view. We've now removed the hard-coded data from the product data service. Yay. And instead
+    retrieved the data using Http.>In our sample application, we are using Http to retrieve the data from a local JSON
+    file. But the techniques are the same for retrieving data from a backend service.>Next up, we'll see how to
+    display multiple pages with navigation and routing.</p>
+<script src="bundle.js"></script>

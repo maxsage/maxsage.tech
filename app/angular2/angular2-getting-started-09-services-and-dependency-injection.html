@@ -1,0 +1,154 @@
+<h2>Services and Dependency Injection</h2>
+<h3>Introduction</h3>
+<p>Components are great and all, but what do we do with data or logic that is not associated with a specific view or
+    that we want to share across components? We build services. Welcome back to Angular 2: Getting Started, from
+    Pluralsight. Deborah Kurata here, at your service. And in this module, we create a service and use dependency
+    injection to inject that service into any component that needs it. Applications often require services, such as a
+    product data service or a logging service. Our components depend on these services to do the heavy
+    lifting. Wouldn't it be nice if Angular could serve us up those services on a platter? Well, yes it can. But what
+    are services, exactly? A service is a class with a focused purpose. We often create a service to implement
+    functionality that is independent from any particular component, to share data or logic across components, or
+    encapsulate external interactions, such as data access. By shifting these responsibilities from the component to a
+    service, the code is easier to test, debug, and reuse. In this module, we start with an overview of how services
+    and dependency injection work in Angular. Then we'll build a service, we'll register that service, and we'll
+    examine how to use the service in a component. We currently have several pieces of our application in place, but
+    we hard coded our data directly in the product list component. In this module, we'll shift the responsibility for
+    providing the product data to a product data service. Let's get started.</p>
+<h3>How Does It Work?</h3>
+<p>Before we jump into building a service, let's take a look at how services and dependency injection work in
+    Angular. In this diagram, our service is here, and our component that needs the service is here. There are two
+    ways our component can work with this service. The component can create an instance of the service class and use
+    it. That simple, and it works. But the instance is local to the component, so we can't share data or other
+    resources, and it will be more difficult to mock the service for testing. Alternatively, we can register this
+    service with Angular. Angular then creates a single instance of this service class, called a singleton, and holds
+    onto it. Specifically, Angular provides a built-in injector. We register our services with the Angular injector,
+    which maintains a container of created service instances. The injector creates and manages the single instance, or
+    singleton, of each registered service as required. In this example, the Angular injector is managing instances of
+    three different services, log, math, and myService, which is abbreviated svc. If our component needs a service,
+    the component class defines the service as a dependency. The Angular injector then provides, or injects, the
+    service class instance when the component class is instantiated. This process is called dependency injection.
+    Since Angular manages the single instance, any data or logic in that instance is shared by all of the classes that
+    use it. This technique is the recommended way to use services, because it provides better management of service
+    instances. It allows sharing of data and other resources, and it's easier to mock the services for testing
+    purposes. Now, let's look at a more formal definition of dependency injection. Dependency injection is a coding
+    pattern in which a class receives the instances of objects it needs, called its dependencies, from an external
+    source rather than creating them itself. In Angular, this external source is the Angular injector. Now that we've
+    got a general idea of how services and dependency injection work in Angular, let's build a service.
+</p>
+<h3>Building a Service</h3>
+<p>Are we ready to build a service? Here are the steps. Create the service class, define the metadata with a
+    decorator, and import what we need. Look familiar? These are the same basic steps we followed to build our
+    components and our custom pipe. Let's look at the code for a simple service. Here is the class. We export it so
+    this service can be used from any other parts of the application. This class currently has one method,
+    getProducts. This method returns an array of products. Next, we add a decorator for the service metadata. When
+    building services, we often use the Injectable decorator. This decorator is only really required here if the
+    service itself has an injected dependency. However, it is recommended that every service class use the Injectable
+    decorator for clarity and consistency. Lastly, we import what we need. In this case, Injectable. Now, let's build
+    our service. I've opened the folder for the sample application and the editor once again. Since our service will
+    only provide product data, we'll add it to the Products folder. We'll create a new file and call it
+    product.service.ts, to follow our naming conventions. We're then ready to create the service class. I bet you can
+    do it in your sleep by now. Export, class, and the class name. Since the service provides products, we'll call it
+    ProductService. Next, we decorate the class with the Injectable decorator. And we'll add the import statement for
+    that decorator. As we discussed earlier, this decorator is optional, unless the service has an injected dependency
+    of its own, but it is good practice to add it to every service, so we added it here. Now that we have the
+    structure in place, we can add properties or methods to the class as needed. Unless marked private or protected,
+    the properties and methods defined in the class are accessible to any class that uses this service. For our
+    product service, we want a getProducts method that returns the list of products. We strongly typed this return
+    value using our IProduct interface. So we need to import this interface. In the next module, we'll see how to
+    retrieve the products using HTTP. For now, we'll hard code them in here. If you're coding along, feel free to copy
+    some products from the products.json file in the API products folder. Notice that we have no properties defined in
+    this class, so we are not using this particular service to share data. We are using it to encapsulate the data
+    access features. By using this service to provide the list of products, we take the responsibility for managing
+    the data away from the individual component. That makes it easier to modify or reuse this logic. So we're done
+    with our service for now. How do we use it? Well, a service is just really an ordinary class until we register it
+    with an Angular injector. Let's do that next.</p>
+<h3>Registering the Service</h3>
+<p>As illustrated in this diagram, we register the service with an Angular injector, and the injector provides the
+    service instance to any class that defines it as a dependency. So what's actually involved with registering a
+    service with the injector? To register a service, we must register a provider. A provider is code that can create
+    or return a service, typically the service class itself. How do we register a provider? We define it as part of
+    the component or Angular module metadata. If we register a provider in a component's metadata, the Angular
+    injector can inject this service into the component and any of its children. So we should take care to register
+    the provider at the appropriate level of the application component tree. If we register a provider in an Angular
+    module, the service is registered with the Angular injector at the application's root, making the service
+    available everywhere in the application. We'll talk more about registering a service provider in an Angular module
+    when we cover Angular modules in detail later in this course. For now, we'll focus on registering a service with a
+    component. If we register the provider for the product data service in the product list component, the Angular
+    injector can inject the service into the product list component and any of its children. It could not inject the
+    service into the product detail component, unless we registered the provider again in the product detail
+    component. Note that if we did register the provider for the service twice, we would no longer have a singleton.
+    The Angular injector would manage two instances of the service, one for the product list component and its
+    children, another for the product detail component and its children. If instead, we register the provider in the
+    root app component, the Angular injector can inject the service into any component of the application. Since we
+    know the product detail component will also need the product data service, let's register it at the root. Here is
+    the app component we built early on in this course. To register a provider that creates our service, we add the
+    providers property to the component decorator. The providers property is an array, so we could register multiple
+    providers. To register a provider for our product service, we specify ProductService here, and import it here.
+    Let's do that now. Here is the app component. In the metadata, we'll add the providers property, and specify our
+    product service. So we, of course, need to import our product service. An instance of the product service is then
+    available for injection in the app component or any of its child components. Now, we can specify where we need
+    this service to be injected. </p>
+<h3>Injecting the Service</h3>
+<p>Here, again, is our diagram. In the last clip, we saw how to register the service with the Angular injector. Now,
+    we just need to define it as a dependency so the injector will provide the instance in the classes that need
+    it. So, how do we do dependency injection in Angular? Well, the better question is, how do we do dependency
+    injection in TypeScript? The answer is, in the constructor. Every class has a constructor that is executed when an
+    instance of the class is created. If there is no explicit constructor defined for the class, an implicit
+    constructor is used. So far, we have not needed an explicit class constructor, but if we want to inject
+    dependencies, such as an instance of a service, we need an explicit constructor. In TypeScript, a constructor is
+    defined with a constructor function. What type of code normally goes into the constructor function? As little as
+    possible. Since the constructor function is executed when the component is created, it is primarily used for
+    initialization, and not for code that has side effects or takes time to execute. We identify our dependencies by
+    specifying them as parameters to the constructor function, like this. Here, we define a private variable to hold
+    the injected service instance. We create another variable as the constructor parameter. When this class is
+    constructed, the Angular injector sets this parameter to the injected instance of the requested service. We then
+    assign the injected service instance to our local variable. We can then use this variable anywhere in our class to
+    access service properties or methods. This is such a common pattern that TypeScript defined a shorthand syntax for
+    all of this code. We simply add the accessor keyword, such as private here, to the constructor parameter. Then,
+    this is the shortcut for declaring this variable, defining a parameter, and setting the variable to the
+    parameter. Neat. You'll see this technique used throughout the Angular documentation and other code
+    examples. Ready to give it a try? We want to use our service to get products in the product list component, so
+    we'll define our product service as a dependency in the product list component. We don't have to add the providers
+    array here, because the product service is already registered in the app component, which is the parent of this
+    component. All we need is a constructor. The constructor is normally defined after all of the properties. So we'll
+    add it here. We'll use the shorthand syntax to define the dependency, private_productService. We use an underscore
+    here to denote that this is a private variable. Then, because we are using TypeScript, we type colon and the type,
+    which is ProductService. Note that the accessor doesn't have to be private. This shorthand syntax works with
+    public and protected as well. So, now we have a syntax error here. I bet you know why. Yep, we need to import
+    ProductService so we can use it as the data type here. Now, when an instance of the product list component is
+    created, the Angular injector injects in the instance of the product service. We are at the point now where we can
+    actually use the product service. First, let's delete the hard coded products from here. We'll instead get them
+    from the service. Now, the question is, where should we put the code to call the service? One thought might be to
+    put in the constructor. But, ultimately, our product service will go out to a back-end server to get the data. We
+    don't want all of that executed in the constructor. Other thoughts? Remember our discussion about lifecycle hooks?
+    Earlier in this course, we said that the OnInit lifecycle hook provides a place to perform any component
+    initialization. And it's a great place to retrieve the data for the template. Let's use the OnInit lifecycle
+    hook. We want to set the product's property to the product's return from our service. To call the service, we use
+    our private variable containing the injected server instance, this._productService. We then type a dot, and the
+    name of the method we want to call. Notice how IntelliSense helps us with all of this. Let's make one more little
+    change. Let's remove the default list filter value, so we'll see all of the products in the list. We should be all
+    set to see our result in the browser. And here are our products. Yay. Notice that we have more products displayed
+    now because I hard coded more products into the service. Let's finish up this module with some checklists we can
+    use as we build our services. </p>
+<h3>Checklists and Summary</h3>
+<p>We build a service using the same techniques as when we build components and custom pipes. We start by creating
+    the service class. We specify a clear class name, appropriate for the services it provides. Use
+    PascalCasing, where each word of the name is capitalized. Append Service to the name, and don't forget the export
+    keyword. We then decorate the service class with the Injectable decorator. Don't forget the @ prefix, and since
+    the decorator is a function, follow it with open and closing parenthesis. This particular decorator is not always
+    required, but it is a good practice to add it. And be sure to define the appropriate imports. We can register a
+    service in a component or in an Angular module. We'll talk more about registering services in Angular modules
+    later in this course. When using a component, the first step to registering the service is to select the
+    appropriate level in the component hierarchy that the service should be registered. Use the root app component if
+    the service is shared throughout the application. If only one component needs the service, register it directly
+    within that component. Otherwise, select a common ancestor of the components that need the service. In the
+    selected component's metadata, use the providers property to register the service. Pass the service provider as an
+    element of an array, and be sure to define the appropriate imports. In any class that needs the service, specify
+    the service as a dependency. Use a constructor parameter to define the dependency. The Angular injector will
+    inject an instance of the service when the component is instantiated. This module was all about services. We began
+    with an overview of how services and dependency injection work in Angular. Then we walked through how to build a
+    simple service. We defined how and where to register the service with Angular, and we examined how to define the
+    service as a dependency, so the service instance is injected into any class that needs it. In this module, we
+    built the product data service and registered it with the app component, so our product list component no longer
+    has hard coded products. Next up, we'll see how to modify the service to retrieve data using HTTP.</p>
+<script src="bundle.js"></script>

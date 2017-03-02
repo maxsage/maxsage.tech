@@ -1,201 +1,189 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-  </head>
-  <body>
-    <h2>Navigation and Routing Basics</h2>
-    <h3>Introduction</h3>
-    <p>A single view does not an application make. Welcome back to Angular Two, Getting Started from Pluralsight. My
-      name is Deborah Kurata and in the next two modules we define routes to navigate between multiple views in our
-      application. Users like to have all of the information they need at their fingertips, so our applications often
-      provide multiple sets of data in multiple layouts across multiple views. Routing provides a way for the user to
-      navigate between those many views of the application, whether there are five, 10, or hundreds. In this module, we
-      start with an overview of how routing works in Angular. We examine how to configure routes and tie routes to
-      actions and we define where to place the router component's view. Currently, our app component embeds our Product
-      List Component as a Nested Component. We instead want to define a set of routes so the user can navigate to the
-      welcome view, product list view, or product detail view. We've already built the Product List Component and I've
-      provided the Welcome Component with the starter files in the Github Repository for this course. As part of the
-      demos in this module, we'll build the shell for the Product Detail Component. When we're finished with this
-      module, we'll have a simple application that routes to multiple views. </p>
-    <h3>How Routing Works</h3>
-    <p>An Angular application is a single page application. That means all of our views are displayed within one page,
-      normally defined in the index.html file. So each of the five, ten, or hundreds of views take turns appearing on
-      that one page. How do we manage which view to display when? That's the purpose of routing.>We configure a route
-      for each component that wants to display its view on the page. As part of our application design, we provide a
-      menu, a toolbar, buttons, images, or data links that allow the user to select the view to display. We tie a route
-      to each option or action. When the user selects the option or performs the action, the associated route is
-      activated. Activating a component's route displays that component's view. So for example, the user selects a menu
-      option to display the product list. The product list route is activated and it displays its view. Hmm, let's look
-      at that process again with an illustration. Here is the menu that we'll add to our sample application. We tie a
-      route to each menu option using a built-in router directive called Router Link. When the user clicks on the
-      product list option for example, the Angular router navigates to the product's route. The browser's location URL
-      changes to match this path segment and we see slash products appear in the address bar. By default, Angular uses
-      html five style URLs which don't require the hash symbol to indicate local navigation. By using the hmtl five
-      style URLs, you need to configure your web server to perform URL rewriting. How this is done depends on your web
-      server. See the documentation for your web server on how to configure URL rewriting. Angular also supports hash
-      style routing which does not require URL rewriting. We'll look at how to use hash style routing later in this
-      module. When the browser's URL changes, the Angular router looks for a route definition matching the path segment,
-      Products in this example. The route definition includes the component to load when this route is activated. In
-      this case, the Product List Component. The Angular router loads the components template. Where does it display
-      this template? Where we specified with the built-in routing directive called Router Outlet and the Product List
-      appears. So that's how routing works. We'll examine these steps in further detail and try them out in demos as we
-      journey through this course module. But first, let's add in these two missing components. I provided the Welcome
-      Component as part of the starter files so we only need to build the Product Detail Component. The Product Detail
-      Component should ultimately look like this but we want to focus on routing, not building another component, so
-      let's just create a shell for the Product Detail Component so we can route to it. In the Products folder, create a
-      new file called Product dash detail dot component dot ts and a new Template called product dash detail dot
-      component dot html. In the html file, put some placeholder text and use interpellation to bind a page title so
-      we'll have something to display on the page. We'll see this in action a little later. Now how about the
-      component? Recall how to build the basics of a component? Consider pausing the video now and creating a first cut
-      of the Product Detail Component with a page title and product properties. Continue the video when you want to see
-      my solution. Here's what I came up with for the first cut of the Product Detail Component. We import the component
-      decorator. We import the I product interface so we can use it as the data type of our product property. We export
-      the Product Detail Component class. We define properties for the page title and product and we decorate the class
-      with the component decorator defining our view using template URL. Is this close to what you came up with? Notice
-      that I don't have a selector property here. The selector property is only required if the component will be nested
-      within another component and we don't need to nest this component. We'll instead display the component's view as
-      part of routing. There is one more step here we need to take. Any idea what it might be? Every time we add a
-      component to the application, we need to declare that component in an Angular module. We currently only have one
-      Angular module, AppModule. So we'll add the Product Detail and Welcome Component to the declaration's array for
-      the app module. Let's do that now. Here we are, looking at the app module. We first import the Welcome Component
-      and the Product Detail Component. Then we add them both to the declarations array. With that, we are ready to add
-      routing to our application. </p>
-    <h3>Configuring Routes</h3>
-    <p>Routing is component-based, so we identify the set of components that we want to provide as routing targets and
-      define a route for each one. Let's see how this is done. An Angular application has one router that is managed by
-      Angular's router service and we know that before we can use that service, we need to register the service provider
-      in an Angular module, similar to the http module, Angular provides a RoutherModule in the Angular router package
-      that registers the router service provider. To include the features of this external module in our application, we
-      need to add it to the imports array of our application's Angular module. In addition to registering the router
-      service provider, the RoutherModule also declares the router directives. In the last clip we mentioned two router
-      directives, router link and router outlet. By importing the RoutherModule, our component templates can use these
-      or any other router directive. RoutherModule also exposes the routes we configure. Before we can navigate to a
-      route, we need to ensure that the routes are available to the application. We do this by passing the routes to
-      RoutherModule like this. We call the RoutherModules forRoot method and pass our array of routes to that method.
-      This establishes the routes for the root of our application. If we want to use hash style routes instead of html
-      five style routes, we change this code to set useHash as shown here. With that, we are ready to configure some
-      routes. The router must be configured with a list of route definitions. Each definition specifies a route object.
-      Each route requires a path. The path property defines the URL segment for the route. When this route is activated,
-      this URL path segment is appended to the URL of our application. The user can type in or bookmark the resulting
-      URL to return directly to the associated components view. In most cases we also specify a component, which is the
-      component associated with the route. It is this component's template that is displayed when the route is
-      activated. These are all examples of route definitions. The first route simply maps a specific URL path segment to
-      a specific component. So this URL displays the template from the Product List Component. The colon ID in the
-      second route represents a route parameter. The Product Detail Page displays the detail for one product so it needs
-      to know which product to display. The Product Detail Component reads the ID from this path segment and displays
-      the defined product. We can define any number of parameters here separated wit slashes. What does this route
-      do? Yep, this URL displays the template from the Welcome Component. This one defines the default route. The
-      redirect here translates the empty route to the desired default path segment. In this example, the welcome route.
-      A redirect route requires a path match property to tell the router how to match the URL path segment to the path
-      of a route. We only want this default route when the entire clan side portion of the path is empty, so we set the
-      path match to full. The asterisks in the last route denote a wildcard path. The router matches this path if the
-      requested URL doesn't match any prior paths defined in the configuration. This is useful for displaying a 404 Not
-      Found Page or redirecting to another route. A few things to note here. There are no leading slashes in our path
-      segments and the order of the routes in this array matters. The router uses a first match win strategy when
-      matching the routes. This means that more specific routes should always be before less specific routes, such as
-      the wildcard route. Ready to try this out? We are back in the sample application with index.html file open. We
-      want to add a base element just after the head tag. This element tells the router how to compose the navigation
-      URLs. Since the app folder is the application route, we'll set the hRef for the base tag to slash. Now we are
-      ready to configure the route definitions. For that, we go to our Angular module, add the appropriate import
-      statement, then add RoutherModule to the imports array. This registers the router's service provider, declares the
-      router directives, and exposes the configured routes. How does the RoutherModule know about our configured routes?
-      We pass them into the RoutherModule by calling forRoot method. We then can figure the routes here by passing them
-      in using an array. Let's start with the product routes. For each route, we specify the path and a reference to the
-      component. The template defined in the specified component will display when the router navigates to this path.
-      Next we add the route to display our Welcome Page. We'll set the path to Welcome and specify the Welcome
-      Component. When the application loads, we want to default to the template from the Welcome Component so we'll
-      specify a default route that redirects to our Welcome Component. And let's define a wildcard path in case the
-      requested URL doesn't match any prior paths defined in the configuration. This is often used for displaying a 404
-      Not Found page but in our simple example, we'll use it to redirect back to the Welcome Page. There's a lot of
-      stuff here now in our route application module. In a later course module, we'll look at how to refactor this
-      module into multiple Angular modules for a separation of concerns.</p>
-    <h3>Tying Routes to Actions</h3>
-    <p>With routing, the user can navigate through the application in several ways. The user can click a menu option
-      link, image, or button that activates, or navigates to, a route. The user can type the associated URL segment in
-      the address bar after the application URL or use a bookmark to that URL, or the user can click the browser's
-      forward or back buttons. The route configuration handles the URLs so the last techniques will just work. We need
-      to handle the first technique by tying routes to the user actions. We need to decide how we will show the routing
-      options to the user. We could display a navigation pane with links. We can provide a toolbar or images or we can
-      build a navigation menu like this one. In a more full-featured application, the menu could have many more options
-      and sub-options but this will do for our purposes. We define that menu as part of this component's template. We
-      then need to tie a route to each menu option. We do that using the router link directive. The router link is an
-      attribute directive so we add it to an element such as the anchor tag here and we enclose it in square brackets.
-      We bind it to a template expression that returns a link parameters array. The first element of this array is the
-      string path of a route. Additional elements can be added to this array to specify optional route parameters. The
-      router uses this array to locate the associated route and build up the appropriate URL based on any provided
-      parameters. when the user selects the option, the associated route is activated. Activating a component route
-      displays that component's view. Now let's add a menu and use the router link directive so the user can navigate to
-      the views in our sample application. First, we need to decide how to show the routing options to the user. For our
-      sample application, we'll build a menu. We want to add that menu at the root of our application so we'll add it to
-      the app component. In the app component template currently, we're nesting the Product List Component. Let's
-      replace that with a navigation menu. This menu uses the nav element and the navbar classes from the Twitter
-      bootstraps styling framework. Let's see how this look in the browser. Here is our new menu, but clicking on the
-      menu options don't do anything yet and our product list no longer appears. We need to tie routes to these menu
-      options. Note that we currently have some runtime errors because we have not completed all of the steps needed for
-      routing. Depending on your selected editor, you many not be able to run the application at this point with these
-      errors. We'll be finishing up routing soon. We'll use the router link directive to tie a route to each of these
-      menu options. For the Home menu option, we'll add the router link to the anchor element, but we could use any
-      clickable element. We want to tie the welcome route to the Home menu option, so we specify Welcome here. Pay close
-      attention to this syntax. We assign the router link's directive to an array defined within quotes. The first
-      element of the array is a string, so it is also enclosed in quotes. We'll use similar syntax to tie the product's
-      route to the Product List menu option. And since we are no longer nesting the Product List Component, we can
-      remove its selector. Now we just need to tell Angular where to place our views and display the routed components
-      template. </p>
-    <h3>Placing the Views</h3>
-    <p>When a route is activated, the associated component's view is displayed, but displayed where? How do we specify
-      where we want the routed component to display its view? We use the router outlet directive. We place that
-      directive in the host component's template. The routed component's view then appears in this location. Let's add
-      the router outlet to our sample application. We are back looking at the app component because it is the host for
-      our router. We add the router outlet in the template where we want to display the routed component's view. We'll
-      put it here. Whenever a route is activated, the associated component's view displays here. Let's see how that
-      looks in the browser. Oh my, where did that page come from? That's the welcome page provided in the starter files.
-      When the application launches, the default route is activated and the welcome view displays. If we click on the
-      Product List menu, the router link directive now activates the Product List route and the list view appears,
-      sweet. Our application component can now route to multiple views. Notice the URL. The URL segment we defined for
-      the route is displayed here. If we type in something, like welcome, the welcome component's view is displayed. Now
-      that we have our routing place, let's review how these routing features work together. When a user navigates to a
-      feature tied to a route with a router link directive, the router uses the link parameter's array to compose the
-      URL segment. The browser's location URL is changed to the application URL plus the composed URL segment. The
-      router searches through the list of valid route definitions and picks the first match. The router locates or
-      creates an instance of the component associated with that route. The component's view in injected in the location
-      defined by the router outlet directive and the page is displayed. We now have basic routing in our sample
-      application, yay! As we've seen in this course module, routing is rather intricate, requiring code in multiple
-      files and strings such as parameter names and route paths that must match across those files, so let's finish up
-      this module with some checklists that can help ensure all of the bits of routing are in the right places.</p>
-    <h3>Checklists and Summary</h3>
-    <p>To route or to nest, that is the question. When creating components we need to think about how they will be
-      displayed. For components to be nested within other components we need to define a selector as part of the
-      component decorator. This selector provides the name of the directive and then we nest the component within
-      another component using directive to define where the component template appears. The component does not then need
-      a route. For components to be dispalyed as a view within our single application page, the component needs no
-      selector, but we do need to configure routes. We then tie those routes to actions and action activates a route to
-      display the view. If we want to do routing in our application, we need to configure the reroute definitions, tie
-      routes to actions, and place the view. Let's do checklists for each of these tasks. The first step for doing
-      routing in an application is to configure the routes. Begin by defining the base element in the index.html file.
-      Add RouterModule to an Angular Module's imports array, then add each route to the array, passed through the
-      RouterModule's forRoot method. And remember that order matters. The router will pick the first route that matches.
-      Each route definition requires a path which defines the URL path segment for the route. Be sure the path has no
-      leading slash. Use an empty path for a default route and two asterisks for a wildcard route, which is matched if
-      no prior path matches. Most route definitions also include a component. The component is a reference to the
-      component itself. It is not a string name and is not enclosed in quotes. Once we have the routes configured, we
-      need to tie those routes to actions. First we identify which actions to tie to which routes. Then we add the
-      router link directive as an attribute to any clickable element in a component's template. We can use them in menu
-      options, toolbars, buttons, links, images, and so on. Be sure to enclose the router link in square brackets. Bind
-      the router link to a link parameters array. The first element of the link parameters array is the route's
-      path. All other elements in the array are values for the route parameters. Use the router outlet to identify where
-      to display the routed component's view. This is most often specified in the host component template. When a route
-      is activated, the route component's view is displayed at the location of the router outlet. This module was all
-      about navigation and routing. We began with a look at how routing works. We then walked through how to configure
-      routes, tie routes to actions, and define where the router component's view should appear. Our app component had
-      embedded our Product List Component as a nested component. In this module, we were finally able to remove that
-      nesting. We set up routing so we can now navigate to our Welcome and Product List Components. We've covered the
-      basics of routing in this module, but there is so much more. In the next module, we'll look at some additional
-      routing techniques and add navigation to the product detail component.</p>
-    <script src="bundle.js"></script>
-  </body>
-</html>
+<h2>Navigation and Routing Basics</h2>
+<h3>Introduction</h3>
+<p>A single view does not an application make. Welcome back to Angular Two, Getting Started from Pluralsight. My
+name is Deborah Kurata and in the next two modules we define routes to navigate between multiple views in our
+application. Users like to have all of the information they need at their fingertips, so our applications often
+provide multiple sets of data in multiple layouts across multiple views. Routing provides a way for the user to
+navigate between those many views of the application, whether there are five, 10, or hundreds. In this module, we
+start with an overview of how routing works in Angular. We examine how to configure routes and tie routes to
+actions and we define where to place the router component's view. Currently, our app component embeds our Product
+List Component as a Nested Component. We instead want to define a set of routes so the user can navigate to the
+welcome view, product list view, or product detail view. We've already built the Product List Component and I've
+provided the Welcome Component with the starter files in the Github Repository for this course. As part of the
+demos in this module, we'll build the shell for the Product Detail Component. When we're finished with this
+module, we'll have a simple application that routes to multiple views. </p>
+<h3>How Routing Works</h3>
+<p>An Angular application is a single page application. That means all of our views are displayed within one page,
+normally defined in the index.html file. So each of the five, ten, or hundreds of views take turns appearing on
+that one page. How do we manage which view to display when? That's the purpose of routing.>We configure a route
+for each component that wants to display its view on the page. As part of our application design, we provide a
+menu, a toolbar, buttons, images, or data links that allow the user to select the view to display. We tie a route
+to each option or action. When the user selects the option or performs the action, the associated route is
+activated. Activating a component's route displays that component's view. So for example, the user selects a menu
+option to display the product list. The product list route is activated and it displays its view. Hmm, let's look
+at that process again with an illustration. Here is the menu that we'll add to our sample application. We tie a
+route to each menu option using a built-in router directive called Router Link. When the user clicks on the
+product list option for example, the Angular router navigates to the product's route. The browser's location URL
+changes to match this path segment and we see slash products appear in the address bar. By default, Angular uses
+html five style URLs which don't require the hash symbol to indicate local navigation. By using the hmtl five
+style URLs, you need to configure your web server to perform URL rewriting. How this is done depends on your web
+server. See the documentation for your web server on how to configure URL rewriting. Angular also supports hash
+style routing which does not require URL rewriting. We'll look at how to use hash style routing later in this
+module. When the browser's URL changes, the Angular router looks for a route definition matching the path segment,
+Products in this example. The route definition includes the component to load when this route is activated. In
+this case, the Product List Component. The Angular router loads the components template. Where does it display
+this template? Where we specified with the built-in routing directive called Router Outlet and the Product List
+appears. So that's how routing works. We'll examine these steps in further detail and try them out in demos as we
+journey through this course module. But first, let's add in these two missing components. I provided the Welcome
+Component as part of the starter files so we only need to build the Product Detail Component. The Product Detail
+Component should ultimately look like this but we want to focus on routing, not building another component, so
+let's just create a shell for the Product Detail Component so we can route to it. In the Products folder, create a
+new file called Product dash detail dot component dot ts and a new Template called product dash detail dot
+component dot html. In the html file, put some placeholder text and use interpellation to bind a page title so
+we'll have something to display on the page. We'll see this in action a little later. Now how about the
+component? Recall how to build the basics of a component? Consider pausing the video now and creating a first cut
+of the Product Detail Component with a page title and product properties. Continue the video when you want to see
+my solution. Here's what I came up with for the first cut of the Product Detail Component. We import the component
+decorator. We import the I product interface so we can use it as the data type of our product property. We export
+the Product Detail Component class. We define properties for the page title and product and we decorate the class
+with the component decorator defining our view using template URL. Is this close to what you came up with? Notice
+that I don't have a selector property here. The selector property is only required if the component will be nested
+within another component and we don't need to nest this component. We'll instead display the component's view as
+part of routing. There is one more step here we need to take. Any idea what it might be? Every time we add a
+component to the application, we need to declare that component in an Angular module. We currently only have one
+Angular module, AppModule. So we'll add the Product Detail and Welcome Component to the declaration's array for
+the app module. Let's do that now. Here we are, looking at the app module. We first import the Welcome Component
+and the Product Detail Component. Then we add them both to the declarations array. With that, we are ready to add
+routing to our application. </p>
+<h3>Configuring Routes</h3>
+<p>Routing is component-based, so we identify the set of components that we want to provide as routing targets and
+define a route for each one. Let's see how this is done. An Angular application has one router that is managed by
+Angular's router service and we know that before we can use that service, we need to register the service provider
+in an Angular module, similar to the http module, Angular provides a RoutherModule in the Angular router package
+that registers the router service provider. To include the features of this external module in our application, we
+need to add it to the imports array of our application's Angular module. In addition to registering the router
+service provider, the RoutherModule also declares the router directives. In the last clip we mentioned two router
+directives, router link and router outlet. By importing the RoutherModule, our component templates can use these
+or any other router directive. RoutherModule also exposes the routes we configure. Before we can navigate to a
+route, we need to ensure that the routes are available to the application. We do this by passing the routes to
+RoutherModule like this. We call the RoutherModules forRoot method and pass our array of routes to that method.
+This establishes the routes for the root of our application. If we want to use hash style routes instead of html
+five style routes, we change this code to set useHash as shown here. With that, we are ready to configure some
+routes. The router must be configured with a list of route definitions. Each definition specifies a route object.
+Each route requires a path. The path property defines the URL segment for the route. When this route is activated,
+this URL path segment is appended to the URL of our application. The user can type in or bookmark the resulting
+URL to return directly to the associated components view. In most cases we also specify a component, which is the
+component associated with the route. It is this component's template that is displayed when the route is
+activated. These are all examples of route definitions. The first route simply maps a specific URL path segment to
+a specific component. So this URL displays the template from the Product List Component. The colon ID in the
+second route represents a route parameter. The Product Detail Page displays the detail for one product so it needs
+to know which product to display. The Product Detail Component reads the ID from this path segment and displays
+the defined product. We can define any number of parameters here separated wit slashes. What does this route
+do? Yep, this URL displays the template from the Welcome Component. This one defines the default route. The
+redirect here translates the empty route to the desired default path segment. In this example, the welcome route.
+A redirect route requires a path match property to tell the router how to match the URL path segment to the path
+of a route. We only want this default route when the entire clan side portion of the path is empty, so we set the
+path match to full. The asterisks in the last route denote a wildcard path. The router matches this path if the
+requested URL doesn't match any prior paths defined in the configuration. This is useful for displaying a 404 Not
+Found Page or redirecting to another route. A few things to note here. There are no leading slashes in our path
+segments and the order of the routes in this array matters. The router uses a first match win strategy when
+matching the routes. This means that more specific routes should always be before less specific routes, such as
+the wildcard route. Ready to try this out? We are back in the sample application with index.html file open. We
+want to add a base element just after the head tag. This element tells the router how to compose the navigation
+URLs. Since the app folder is the application route, we'll set the hRef for the base tag to slash. Now we are
+ready to configure the route definitions. For that, we go to our Angular module, add the appropriate import
+statement, then add RoutherModule to the imports array. This registers the router's service provider, declares the
+router directives, and exposes the configured routes. How does the RoutherModule know about our configured routes?
+We pass them into the RoutherModule by calling forRoot method. We then can figure the routes here by passing them
+in using an array. Let's start with the product routes. For each route, we specify the path and a reference to the
+component. The template defined in the specified component will display when the router navigates to this path.
+Next we add the route to display our Welcome Page. We'll set the path to Welcome and specify the Welcome
+Component. When the application loads, we want to default to the template from the Welcome Component so we'll
+specify a default route that redirects to our Welcome Component. And let's define a wildcard path in case the
+requested URL doesn't match any prior paths defined in the configuration. This is often used for displaying a 404
+Not Found page but in our simple example, we'll use it to redirect back to the Welcome Page. There's a lot of
+stuff here now in our route application module. In a later course module, we'll look at how to refactor this
+module into multiple Angular modules for a separation of concerns.</p>
+<h3>Tying Routes to Actions</h3>
+<p>With routing, the user can navigate through the application in several ways. The user can click a menu option
+link, image, or button that activates, or navigates to, a route. The user can type the associated URL segment in
+the address bar after the application URL or use a bookmark to that URL, or the user can click the browser's
+forward or back buttons. The route configuration handles the URLs so the last techniques will just work. We need
+to handle the first technique by tying routes to the user actions. We need to decide how we will show the routing
+options to the user. We could display a navigation pane with links. We can provide a toolbar or images or we can
+build a navigation menu like this one. In a more full-featured application, the menu could have many more options
+and sub-options but this will do for our purposes. We define that menu as part of this component's template. We
+then need to tie a route to each menu option. We do that using the router link directive. The router link is an
+attribute directive so we add it to an element such as the anchor tag here and we enclose it in square brackets.
+We bind it to a template expression that returns a link parameters array. The first element of this array is the
+string path of a route. Additional elements can be added to this array to specify optional route parameters. The
+router uses this array to locate the associated route and build up the appropriate URL based on any provided
+parameters. when the user selects the option, the associated route is activated. Activating a component route
+displays that component's view. Now let's add a menu and use the router link directive so the user can navigate to
+the views in our sample application. First, we need to decide how to show the routing options to the user. For our
+sample application, we'll build a menu. We want to add that menu at the root of our application so we'll add it to
+the app component. In the app component template currently, we're nesting the Product List Component. Let's
+replace that with a navigation menu. This menu uses the nav element and the navbar classes from the Twitter
+bootstraps styling framework. Let's see how this look in the browser. Here is our new menu, but clicking on the
+menu options don't do anything yet and our product list no longer appears. We need to tie routes to these menu
+options. Note that we currently have some runtime errors because we have not completed all of the steps needed for
+routing. Depending on your selected editor, you many not be able to run the application at this point with these
+errors. We'll be finishing up routing soon. We'll use the router link directive to tie a route to each of these
+menu options. For the Home menu option, we'll add the router link to the anchor element, but we could use any
+clickable element. We want to tie the welcome route to the Home menu option, so we specify Welcome here. Pay close
+attention to this syntax. We assign the router link's directive to an array defined within quotes. The first
+element of the array is a string, so it is also enclosed in quotes. We'll use similar syntax to tie the product's
+route to the Product List menu option. And since we are no longer nesting the Product List Component, we can
+remove its selector. Now we just need to tell Angular where to place our views and display the routed components
+template. </p>
+<h3>Placing the Views</h3>
+<p>When a route is activated, the associated component's view is displayed, but displayed where? How do we specify
+where we want the routed component to display its view? We use the router outlet directive. We place that
+directive in the host component's template. The routed component's view then appears in this location. Let's add
+the router outlet to our sample application. We are back looking at the app component because it is the host for
+our router. We add the router outlet in the template where we want to display the routed component's view. We'll
+put it here. Whenever a route is activated, the associated component's view displays here. Let's see how that
+looks in the browser. Oh my, where did that page come from? That's the welcome page provided in the starter files.
+When the application launches, the default route is activated and the welcome view displays. If we click on the
+Product List menu, the router link directive now activates the Product List route and the list view appears,
+sweet. Our application component can now route to multiple views. Notice the URL. The URL segment we defined for
+the route is displayed here. If we type in something, like welcome, the welcome component's view is displayed. Now
+that we have our routing place, let's review how these routing features work together. When a user navigates to a
+feature tied to a route with a router link directive, the router uses the link parameter's array to compose the
+URL segment. The browser's location URL is changed to the application URL plus the composed URL segment. The
+router searches through the list of valid route definitions and picks the first match. The router locates or
+creates an instance of the component associated with that route. The component's view in injected in the location
+defined by the router outlet directive and the page is displayed. We now have basic routing in our sample
+application, yay! As we've seen in this course module, routing is rather intricate, requiring code in multiple
+files and strings such as parameter names and route paths that must match across those files, so let's finish up
+this module with some checklists that can help ensure all of the bits of routing are in the right places.</p>
+<h3>Checklists and Summary</h3>
+<p>To route or to nest, that is the question. When creating components we need to think about how they will be
+displayed. For components to be nested within other components we need to define a selector as part of the
+component decorator. This selector provides the name of the directive and then we nest the component within
+another component using directive to define where the component template appears. The component does not then need
+a route. For components to be dispalyed as a view within our single application page, the component needs no
+selector, but we do need to configure routes. We then tie those routes to actions and action activates a route to
+display the view. If we want to do routing in our application, we need to configure the reroute definitions, tie
+routes to actions, and place the view. Let's do checklists for each of these tasks. The first step for doing
+routing in an application is to configure the routes. Begin by defining the base element in the index.html file.
+Add RouterModule to an Angular Module's imports array, then add each route to the array, passed through the
+RouterModule's forRoot method. And remember that order matters. The router will pick the first route that matches.
+Each route definition requires a path which defines the URL path segment for the route. Be sure the path has no
+leading slash. Use an empty path for a default route and two asterisks for a wildcard route, which is matched if
+no prior path matches. Most route definitions also include a component. The component is a reference to the
+component itself. It is not a string name and is not enclosed in quotes. Once we have the routes configured, we
+need to tie those routes to actions. First we identify which actions to tie to which routes. Then we add the
+router link directive as an attribute to any clickable element in a component's template. We can use them in menu
+options, toolbars, buttons, links, images, and so on. Be sure to enclose the router link in square brackets. Bind
+the router link to a link parameters array. The first element of the link parameters array is the route's
+path. All other elements in the array are values for the route parameters. Use the router outlet to identify where
+to display the routed component's view. This is most often specified in the host component template. When a route
+is activated, the route component's view is displayed at the location of the router outlet. This module was all
+about navigation and routing. We began with a look at how routing works. We then walked through how to configure
+routes, tie routes to actions, and define where the router component's view should appear. Our app component had
+embedded our Product List Component as a nested component. In this module, we were finally able to remove that
+nesting. We set up routing so we can now navigate to our Welcome and Product List Components. We've covered the
+basics of routing in this module, but there is so much more. In the next module, we'll look at some additional
+routing techniques and add navigation to the product detail component.</p>
+<script src="bundle.js"></script>

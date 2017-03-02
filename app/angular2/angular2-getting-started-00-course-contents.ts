@@ -1,3 +1,6 @@
-import { Component } from 'angular2/core';
-import { ROUTER_DIRECTIVES } from 'angular2/router';
+import './main.css';
+import './default.css'
+import './darcula.css'
+import hljs from './highlight.min'
 
+hljs.initHighlightingOnLoad();

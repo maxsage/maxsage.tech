@@ -1,0 +1,321 @@
+<h2>Angular Modules</h2>
+<h3>Introduction</h3>
+<p>As we've seen throughout this course Angular modules are a key part of any Angular application. Welcome back to
+  Angular Two, getting started from Pluralsight. My name is Deborah Kurata and in this course module we focus on
+  Angular modules and how to use them to better organize our code. Ooo, it's so beautiful. No, it's not a van Gogh,
+  not even a Picasso. And yeah, it sort of looks like a metro map. This is a picture of what our application could
+  look like if leverage the power of Angular modules instead of one large app module like we have now, there are
+  multiple modules, and each piece of our application has a logical place within one of those modules. This keeps
+  each module smaller and more manageable. In this course module we take another look at the definition and purpose
+  of an Angular module. We then focus in on the Angular module Metadata to better understand how to use it. We
+  leverage that knowledge to create a feature module for our application, and take it one step further defining a
+  shared module to reduce duplication. Lastly, we reexamine our applications root Angular module. Let's get
+  started.</p>
+<h3>What Is an Angular Module?</h3>
+<p>What is an Angular module?>As we've seen earlier in this course, an Angular module is a class with an NgModule
+  decorator. It's purpose, to organize the pieces of our application, arrange them into cohesive blocks of
+  functionality, and extend our application with capabilities from external libraries. Angular modules library the
+  environment for resolving the directives and pipes in our components templates. We'll talk more about those in a
+  few moments. End modules are a great way to selectively aggregate classes from other modules, and re-export them
+  in a consolidated convenience module. BrowserModule, HttpModule and RouterModule are all examples of this, and
+  we'll create our own convenience module when we build a shared module a little later. An Angular module can be
+  loaded eagerly when the application starts or it can be lazy loaded asynchronously by the router. Lazy loading is
+  out of the scope of this course, but it's discussed in detail in the Angular documentation. How does an Angular
+  module organize our application? An Angular module declares each component, directive and pipe that it manages.
+  Every component, directive and pipe we create belongs to an Angular module. An Angular module bootstraps our root
+  application component. Defining the component needed to display our first template. An Angular module can export
+  components, directives, pipes and even other Angular modules, making them available for other modules to import
+  and use. An Angular module imports other Angular modules. This brings in the export functionality from those
+  imported modules. An Angular module can register service providers with the Angular injector, makign the services
+  available to any class in the application. We can think of Angular module as a box. Inside that box we declare
+  each of our components. If those components need any functionality that functionality also needs to be
+  defined within this box. The AppComponent sets up the routing for our main menu using routerLink and includes the
+  router outlet directive, so it needs the the router directive's router service and routes which are defined in
+  RouterModule. The ProductList-Component uses ngModel, so it needs the forms module. The ProductList-Component also
+  used ngFor and ngIf, so it needs the BrowserModule. The ProductList-Component used the ProductFilterPipe, so it
+  needs that too. The ProductList-Component also uses the starRating components directive, so it needs that as well
+  and so until the box contains everything that each our components needs. Saying this another way, for each
+  component that belongs to an Angular module that Angular module provides the environment for template
+  resolution. The module defines which set of components, directives, and pipes are available to the components
+  template. Each declared components template is resolved using only the capabilities provided within that module.
+  Let's look at our ProductList-Component as an example. The ProductList-components template used ngModel, so
+  ngModel must be available within this module. We achieve that by importing the Angular Forms-Module. The
+  ProductList-components template also uses a directive we created, the Star-Component. So the Star-Component must
+  be available within this module. Since the Star-Component is one we created we can either declare the
+  Star-Component within the module directly, or we can import another module that exports the Star-Component.
+  Importing an Angular module brings in the functionality exported by that module, and we'd need to do one or the
+  other, never both. We didn't need to thin about template resolution much in our sample application up until now
+  because all of the pieces of our application are in one Angular module, but we will need to keep this in mind as
+  we split our application into multiple Angular modules. Let's take a quick look at our current app module. Here's
+  the Angular module we defined throughout this course, it is the application's root Angular module, and by
+  convention is called AppModule. The AppModule imports the system Angular modules we need, including the
+  RouterModule which is where we configured our routes. It declares each component and pipe that we created in this
+  course. It registers the service provider for our ProductDetailGuard, and it bootstraps the application with the
+  root application component, AppComponent. We have a lot of information in here, and we're mixing up basic
+  application pieces such as our WelcomeComponent with pieces specific to our product feature. And look at all those
+  import statements. Let's journey through the NgModule MetaData to better understand how Angular modules work, so
+  we can then refactor our app module into multiple modules for better code organization. </p>
+<h3>Bootstrap Array</h3>
+<p>As we have seen, every Angular application has at least one Angular module called the Root Application Module or
+  AppModule. And an Angular application has at least one component called the root application component or
+  AppComponent. The AppModule bootstraps the AppComponent to provide the directive use in index.html file. We cover
+  the bootstrap in-process in the introduction to components earlier in this course. The bootstrap array of the
+  NgModule decorator defines the component that is the starting point of the application. This is the component that
+  is loaded  when the application is launched. Here are some things to keep in mind  when using the bootstrap array.
+  Every application must bootstrap at least one component, the root application component. We do this by simply
+  adding the root application component to the bootstrap array of the root application module. The bootstrap array
+  should only be used in the root application module, AppModule. As we build other Angular modules we won't use the
+  bootstrap array. </p>
+<h3>Declarations Array</h3>
+<p>Every component, directive, and pipe we create is declared by an Angular module. We use the declarations array of
+  the NgModule decorator to define the components, directives, and pipes that belong to this Angular module. Here
+  are some things to keep in mind when using the declarations array. Every component, directive, and pipe we create
+  has to belong to one and only one Angular module. In our sample application all of our components are defined in
+  one Angular module, AppModule. It would be better to divide the components into multiple modules with basic
+  application pieces in the app module and feature pieces in appropriate feature modules. We'll do that a little
+  later in this course module. As we separate out our pieces it is important to remember that each component,
+  directive, and pipe belongs to one and only one Angular module. Only declare components, directives and pipes.
+  Don't add other classes, services or modules to the declarations array. Never re-declare components, directives or
+  pipes that belong to another module. This is a corollary to truth number one. If we re-declare than the component,
+  directive or pipe no longer belongs to one and only Angular module. For example, the Star-Component directive
+  belongs to Module B so we should never re-declare Star-Component in Module A. We should only declare components,
+  directives and pipes that belong to this module. All declared components, directives and pipes are private by
+  default. They are only accessible to other components, directives and pipes declared in the same module. So if we
+  declare the Star-Component in Module B by default that component is not available to components in other Angular
+  modules. We share components, directives and pipes by exporting them. We'll talk more about exporting in a few
+  moments. The Angular module provides the template resolution environment for its components templates. When we
+  include a component in the declarations array of an Angular module, the component belongs to that Angular module.
+  That components templates, directives, and pipes are then resolved within that module. When we use a directive in
+  a components template, like the ai-star directive shown here, Angular looks to the module for the definition of
+  that directive. If the component defining that directive is not declared within the same Angular module or
+  exported from an imported module, Angular won't find the directive and will generate an error. For this example,
+  the Star-Component must be declared in the same module as the ProductList-Component so Angular can find the
+  template for the ai-star directive. Or the Star-Component must be exported from an imported module, never
+  both. </p>
+<h3>Exports Array</h3>
+<p>The exports array of the NgModule decorator allows us to share an Angular module's components, directives and
+  pipes with other modules. We can export any of this module's components, directives and pipes so they can be
+  pulled in when another module imports this module. We can also re-export system Angular modules. such as
+  FormsModule and HttpModule. We can re-export 3rd party modules such as Material Design. Material Design is a set
+  of high quality user interface components including buttons and dialogs. And we can re-export out own modules.
+  Here are some things to keep in mind when using the exports array. Export any component, directive or pipe if
+  another component needs it. A module can export any of its declared components, directives or pipes. Re-export
+  modules to re-export their components, directives, and pipes. This is useful when consolidating features from
+  multiple modules to build a convenience or shared module. We can re-export something without importing it first.
+  An Angular module only needs to import the components, directives and pipes that are required by the components
+  declared in the module. But the Angular module can still provide capabilities to other modules that import it by
+  re-exporting. In this example my SharedModule exports the FormsModule even though it did not import it. So any
+  module that imports the SharedModule will have access to the NgModule and other forms directives. We'll see this
+  in an upcoming demo. Never export a service. Services added to the the provider's array of an Angular module are
+  registered with a root application injector. Making them available for injection into any class on the
+  application. So there is no point in exporting them. They are already shared throughout the application. </p>
+<h3>Imports Array</h3>
+<p>An Angular module can be extended by importing capabilities from other Angular modules. The imports array of the
+  NgModule decorator allows us to import supporting modules that export components, directives or pipes. We then use
+  those exported components, directives and pipes within the templates of components that are declared in this
+  module. Many Angular system libraries are Angular modules such as the FormsModule and HttpModule we've used in
+  this course. We can import Angular modules to use their capabilities. Many 3rd part libraries are also Angular
+  modules such as Material Design. We can import 3rd part Angular modules to use their capabilities. We can import
+  our own modules to extend our application with additional features or share capabilities across several
+  modules. We'll see that in an upcoming demo, and we could separate out our route configurations into it's own
+  module or set of modules and import that. Here are some things to keep in mind when using the imports array.
+  Importing a module makes available any exported components, directives and pipes from that module. We call that we
+  are using ngModel in our ProductList-Component for two way binding. The ngModel directive is exported in the
+  FormsModule. By importing the FormsModule into our AppModule we can use ngModel in any component declared in our
+  AppModule. Only import what this module needs. Only import modules who's exported components, directives or pipes
+  are needed by this modules component templates. Don't import anything this module does not need. Importing a
+  module does not provide access to its imported modules. Hmm, let's look at that with a picture. Here we have
+  AppModule which declares the ProductList-Component, and a SharedModule that declares and exports the
+  StarComponent. AppModule imports the SharedModule so the SharedModule's exports are available to the AppModule's
+  component templates. This mean that the ProductList-Component can use the StarComponent directive. If the
+  SharedModule imports FormsModule then the FormsModule's exports are available to the SharedModule, and the
+  StarComponent could use the ngModel directive, but the FormsModule exports are not available to the AppModule. So
+  the ProductList-Component could not use the ngModel directive. I've heard this role also stated another way,
+  imports are not inherited. Note however, that if the SharedModule re-exported the FormsModule then the FormsModule
+  exports are available to the AppModule, and the ProductList-Component could use the ngModel directive. So when
+  thinking about the relationship between modules think of a module more as a box than as a tree structure. </p>
+<h3>Providers Array</h3>
+<p>Angular modules can also register service providers for our application. We can register services we develop such
+  as the ProductService we created earlier in this course. The products array of the NgModule decorator allows us
+  register service providers at the module level. This is similar to the providers array of the component decorator
+  that allows us to register services at the component level. We call that at this point our sample application
+  registers the ProductService provider at the component level, and the ProductDetailGuard at the module level. Here
+  are some things to keep in mind when using the NgModule providers array. Any service provider added to the
+  providers array is registered at the root of the application. So the service is available to be injected into any
+  class on the application. Say for example we have a feature module called ProductModule, we add the ProductService
+  to the providers array of this module. At first glance we may think we have encapsulated the ProductService into
+  the ProductModule, but that is not the case. Any service provider added to the providers array is registered at
+  the root of the application, and is available to any class. Even classes in other feature modules. So if we want
+  to ensure a particular service is encapsulated and only accessible within a specific component or set of
+  components, add the service provider to the providers array of an appropriate component instead of an Angular
+  module. Note that this is not the case for lazy loaded services. See the Angular documentation for more
+  information on lazy loading. Don't add services to the providers array of a shared module. As discussed in the
+  services independencey injection module, there should only be one instance of a service that is an application
+  wide singleton. So a service should not be included in the providers array for any module that is meant to be
+  shared. Instead consider building a CoreModule for services and importing it once in the AppModule. This will help
+  ensure that the the services are only registered one time. We could even add code to the code modules constructor
+  to ensure that it is never imported a second time. See the Angular documentation for details. Routing guards must
+  be added to the providers array of an Angular module. We discussed this in an earlier course model when adding
+  guards to routes. The guard service provider must be defined at the module level so that the router can use these
+  services during the navigation process. Now that we've covered the basics of the NgModule decorator let's refactor
+  our application into multiple Angular modules.</p>
+<h3>Feature Modules</h3>
+<p>So far in this course we created the root application module, AppModule. It declares all of our components and
+  our pipe. It imports the system Angular modules that our components need. It also registers the routing guard that
+  we built, but this is getting a little unwieldy. We have no separation of responsibilities. Here we are mixing our
+  basic application features such as the WelcomeComponent, with our product features such as the product components,
+  with our shared features such as the StarComponent. As we add more features sets to this application such as
+  customer management, invoicing and so on, this is only going to get harder to manage. So lets organize and
+  refactor to break this into multiple Angular modules. The first thing we want to do is extract some of these
+  pieces into feature sets, we can then create a feature module for each feature set. Using feature modules helps us
+  partition our application into logical groupings with separate concerns. Our first step is to define a new feature
+  module. Creating a feature module involves defining a new module file, ProductModule in this example, and
+  reorganizing the pieces of the application so that all of the associated feature pieces and everything they need
+  are here in this module. In the declarations array of the features module we add the appropriate components that
+  provide the features for the application. In this example we add the ProductList-Component and
+  ProductDetail-Component. Then as we did we the box example at the beginning of this course module, we start to
+  look at what each component needs. In this example the ProductList-Component uses the ProductFilterPipe so we need
+  that. And both the ProductList and ProductDetail components use the StarComponent so we'll need that here as well.
+  But that's not enough, the ProductList-Component uses ngModel and ngFor, and both components use ngIf and routing.
+  How do we get that? We import these needed capabilities from other Angular modules. Our product components use
+  routing so we import the system RouterModule. The ProductList-Component use ngModel so we import the systems
+  FormsModule. And we need ngFor and ngIf, so do pull in the system BrowserModule? Nope, the BrowserModule should
+  only be imported into the root application module, AppModule. Instead we import the system CommonModule. The
+  CommonModule exposes the ngFor and ngIf directives. Not surprisingly the BrowserModule itself actually imports and
+  exports the CommonModule which is why we have access to ngFor and ngIf When we import BrowserModule in our
+  AppModule. Lastly we add any related services we want to declare at the module level which make the services
+  available to be injected into any class in the application. In this example we add the ProductService and the
+  ProductDetailGuard which must be at the module level. So even though these module level services are available
+  application wide, we include them in ProductModule and not the AppModule to keep the code better organized and
+  easier to find. Our feature module is looking pretty good here, but how do we use it? Now that we've removed these
+  features from the root application module, how will the application find all of these features? What's that,
+  imports array did you say? That's correct, we need to import the ProductModule into the AppModule. That extends
+  the AppModule with the ProductModule features. You want to try this out? We are back in the sample application.
+  Let's begin by adding a new file for the ProductModule. We'll add it to the products folder and name it
+  product.module.ts. We start with a class. We add the NgModule decorator and the required import statement. We add
+  the declarations array and in that array we add the ProductList-Component, ProductDetail-Component and
+  ProductFilterPipe. We also need the StarComponent. All those red squigglys? Yeah, we need some import
+  statement. Now we can remove these from the app module. Next we define the imports array. We'll add the
+  FormsModule, CommonModule and RouterModule, and their associated import statement. Now we can remove the
+  FormsModule from the AppModule and it's associated import statement. When we added the RouterModule to the imports
+  array in the AppModule we called forRoot to pass in the configured routes for our root component. Now that we are
+  adding the RouterModule to the imports array of a feature module, we don't call forRoot. Rather we called forChild
+  and there we pass in the routes related to products. Let's cut the product routes from the AppModule, and paste
+  them here in our ProductModule. And we need to import the ProductDetailGuard. We call that the
+  RouterModule. Registers the Router service provider, declares the router directives, and exposes our configured
+  routes. But as we've discussed previously, we never want to register a service more than once. So when we use
+  forRoot to pass in our configured routes, the RouterModule knows to register the router service provider. When we
+  use forChild as we did here, the RouterModule knows not to re-register the router service. Note that we could also
+  consider moving the routes into their own modules. We'll look at that a little later. Lastly, we add the providers
+  array. We add the ProductService and ProductDetailGuard to that array, and insert their appropriate import
+  statements. Now we can remove the ProductDetailGuard and its import statement from AppModule. Let's remove some
+  our remaining import statements, and the ProductService from the app components providers array. Moving the
+  ProductService to the ProductModule is optional, we could leave it in the app components providers array. Now, do
+  you think our application will run? Our welcome page comes up, but clicking on the Product List option does not
+  display the Product List page. Any idea what could be wrong? We know have this ProductModule, but our application
+  which is bootstrapped with the AppModule, doesn't know anything about this new module. We have to import this
+  module in our AppModule. So here we add the import statement and add the ProductModule to the imports array. Now
+  we should be good to go. And our application works as expected. So we now have our first working feature module,
+  but let's think about this for a moment. As we build our application we'll build more features. Each logical set
+  of features will have their own feature module, and each feature module will most likely need the CommonModule for
+  common directives such as ngFor and ngIf. The FormsModule for ngModel and two way binding, and we may have other
+  features that want to reuse our StarComponent. Do we really want to repeat all of this in each feature
+  module? There has to be a better way. Yep, we can define a shared module. </p>
+<h3>Shared Module</h3>
+<p>The purpose of a shared module is to organize a set of commonly used pieces into one module, and export those
+  pieces so they are available to any module that imports the shared module. This allows us to selectively aggregate
+  our reusable components and any external modules, and re-export them in consolidated convenience module. Creating
+  a shared module involves defining a new module file, SharedModule in this example, and reorganizing the pieces of
+  the application so that the shared pieces are here in this module. First we add the components, directives, and
+  pipes that we want to share throughout our application to the declarations array. In this example we only want to
+  add the StarComponent. Then we add to the imports array anything that the shared component needs. In this example
+  we import the CommonModule because our StarComponent may need it. We don't import FormsModule because we don't
+  need it here. If our StarComponent did use two way binding or we added another component here that did, we'd need
+  to import FormsModule as well. We then need to export everything that we want to share. The exports array defines
+  what this Angular module shares with any module that imports it. We export the StarComponent that way it is
+  available to the components in any module that imports the SharedModule. We re-export the CommonModule and
+  FormsModule so their directives and other features are available to any module that imports the SharedModule. And
+  notice here at we can export something without importing it first. To use the SharedModule we import it into every
+  feature module that needs the shared capabilities such as our ProductModule. Let's give this a try. We want to
+  build a new shared module. We'll add it to the Shared folder that was provided with the starter files. We'll begin
+  by adding a new file and name is shared.module.ts. We'll start with the class and add NgModule decorator, and we
+  of course need to import that decorator. Next we define the declarations array and add the appropriate components
+  to that array. In our example we'll add the StarComponent, and we'll need it to associate an import statement.
+  Next we define the imports array and add the CommonModule and it's associated import statement. Lastly, we define
+  what we actually want to share. In the exports array we add CommonModule, FormsModule and StarComponent, and we
+  need one more import statement. Now we want to use the SharedModule in our ProductModule. What do we need to
+  do? We start by adding the SharedModule to the imports array of the ProductModule, and we need it's import
+  statement. We can now delete FormsModule, CommonModule and the StarComponent, and their associated import
+  statements here since these pieces are now coming from the imported SharedModule. Are we good to go? Yep, our
+  application comes up as it did before. Looking back at our code, notice now that our feature module,
+  ProductModule, only contains product pieces and the SharedModule. And the SharedModule is clean, only including
+  the pieces we want to share. We can reuse the SharedModule and any future featured modules as we add functionality
+  to our application. </p>
+<h3>Revisiting AppModule</h3>
+<p>We now know that every application has a root application module that is by convention called AppModule. The main
+  purpose of the AppModule is to orchestrate the application as a whole. And now that we've removed the feature and
+  shared pieces from this module, it's purpose is easier to see. Let's take another look. We've reduced the code and
+  AppModule such now that it fits on one page. The AppModule normally imports BrowserModule. This the module that
+  ever browser application must import. BrowserModule registers critical application service providers. It also
+  imports and exports CommonModule which declares and exports directives such as ngIf and ngFor. These directives
+  are then available to any of the app modules component templates. We also import HttpModule to register the
+  Angular http client service provider. We import RouterModule and call forRoot passing in the configured routes for
+  the root of the application. Here we configure our default route and any wild card routes. Then we import each
+  feature module. In this example we have only one feature module, ProductModule. The declarations array identifies
+  the list of components that belong to this module. In this example the root component, AppCOmponent, and the
+  applications WelcomeComponent, are declared here. The bootstrap array identifies the root component, AppComponent,
+  as the bootstrap component. When Angular launches the application it loads this component and displays it's
+  template inside the PM app directive in the index.html file. We could take the refactoring a step further and
+  separate the routing into it's own module. We could create one Angular module for our root application routes, and
+  another Angular module for our product feature routes. Let's go back to the slides and see what that code would
+  look like. If we wanted to refactor our root application routes into their own module this is what it might look
+  like. We export a class, add the NgModule decorator, and import what we need. We add the RouterModule to the
+  imports array passing in our root application routes including our default route and our wild card route. Notice
+  that we call forRoot here to ensure that register the routing service provider, and the export RouterModule so we
+  can use it from any module that imports this module. We import the AppRoutingModule and the AppModule here. We can
+  do the same to refactor our product feature routes into their own module. The key difference here is when we
+  import RouterModule in any feature module, we pass the configured routes to the forChild method instead of the
+  forRoot method. This ensures that we don't register the routing service provider a second time. And we import this
+  ProductRoutingModule into ProductModule as shown here. Now let's finish up this course module with some checklists
+  and a summary. </p>
+<h3>Checklists and Summary</h3>
+<p>Your application architecture depends on many factors including the size and scope of the application you are
+  working on, your team's size and experience, and your project's goals. But here are some suggestions based on what
+  we covered in this course module. Every application must always have a root application module by convention
+  called AppModule. This is normally the module that bootstraps the root application component, AppComponent. For
+  smaller applications this could be the only Angular module for the application, as was the case with out simple
+  application prior to this course module. As the application gets more features considering define a separate
+  Angular module for each feature set. For example, a product module, a customer module, and an invoice module. This
+  keeps the code organized, separates the concerns, and prevents the app module from getting excessively large and
+  unwieldy. As you add feature modules you may find components, pipes and directives that you want to share across
+  feature modules. Define one or more SharedModules for these shared pieces. SharedModules primarily use the exports
+  and declarations arrays with most of the declared pieces exported as well. If you have a set of services that you
+  want to ensure are loaded when the application is loaded consider defining a core module for those services. Be
+  sure that the core module is imported only once in the root application module. Since the core module is for
+  services they primarily have providers, none of which are exported. We did not create a core module for our sample
+  application since our service needs are limited, but you may find them useful for your applications. And as we
+  discussed in the last clip, we can also refactor our routes into their own routing modules. When creating an
+  Angular module we build create a class and decorate it with the NgModule decorator. The NgModule Metadata includes
+  the bootstrap array for defining the list of startup components. In many cases there is only one, the root
+  component of the application. The declarations array declares which components, directives and pipes belong to
+  this module. The exports array identifies the list of components, directives and pipes that an importing module
+  can use. The imports array lists supporting modules. These modules provide components, directives and pipes needed
+  by the components in this module. The providers array lists the service providers. Angular registers each provider
+  with Angular's root application injector. So these services are available to be injected into any class in the
+  application. This course module was all about Angular modules. We took a second look at the definition and purpose
+  of an Angular module. We then focused in on the Angular module Metadata and covered the truths to keep in mind
+  when using that Metadata. We leveraged that knowledge to create a feature module for our application, and took it
+  one step further defining a shared module to reduce duplication in our application. Lastly, we re-examined our
+  root application route Angular module and saw how it orchestrates the application as a whole. If you are building
+  a small application, such as the sample application we've created in this course, you may only need the one route
+  application model as shown here, but as your application grows you'll want to refactor into feature models and
+  shared modules like this. Here we organized our application into multiple modules. We have our feature module,
+  ProductModule, that encapsulates all the product features. There will be more feature modules as our application
+  grows. We have our SharedModule that shares commonly used components, directives, and pipes with any module that
+  imports it. Currently we import it into the ProductModule. As build more feature modules we'll import it into them
+  as well. And we have our AppModule that orchestrates the application. Each feature module is added to the
+  AppModule's imports array to extend the application with those features. Ooo, it's been quite a journey. Now let's
+  circle back to the beginning. When we set up Angular in the First Things First module we skipped over the
+  explanation of the set up files. Next up, let's revisit the Angular set up process and look at these boiler played
+  files. What they are, how to use them, and when you'll want to change them. </p>
+<script src="bundle.js"></script>

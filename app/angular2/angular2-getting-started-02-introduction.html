@@ -1,0 +1,118 @@
+<h2>Introduction</h2>
+<h3>Introduction</h3>
+<p>Whether you are new to Angular or new to Angular 2, you want to come up to speed quickly with Angular 2's
+  components, templates and services. Welcome to Angular 2 Getting Started from Pluralsight. My name is Deborah
+  Kurata and this course provides the basics you need to get started building an Angular 2 application. As we
+  journey through this course, we'll discover Angular's many features and uncover the answers to key questions. For
+  example, what is a component? Where do we put the HTML for our user interface? When should we use data binding?
+  Why do we need a service? And how, how do we build an Angular 2 application? The who of course is you. This course
+  guides you down the right path making your own journey with Angular 2 more pleasant and productive. As we start
+  this journey, let's get the lay of the land and take a high level look at Angular. Simply stated, Angular is a
+  JavaScript framework for building client-side applications using HTML, CSS and a programming language such as
+  JavaScript. Why Angular and not some other JavaScript framework? And there are lots of JavaScript frameworks out
+  there. Angular makes our HTML more expressive. It powers up our HTML with features such as if conditions, for
+  loops and local variables. Angular has powerful data binding. We can easily display fields from our data model,
+  track changes and process updates from the user. Angular promotes modularity by design. Our applications become a
+  set of building blocks making it easier to create and reuse content and Angular has built-in support for
+  communication with a back-end service. This makes it easy for our web applications to integrate with a back-end
+  service to get in post data or execute server side business logic. No wonder Angular is so very popular with
+  millions of web developers. With so any developers already using Angular 1, why do we need an Angular 2? Angular 2
+  is built for speed. It has faster initial loads, faster change detection and improved rendering times. Angular 2
+  is modern. It takes advantage of features provided in the latest JavaScript standards and beyond such as classes,
+  modules and decorators yet it supports both green field and legacy browsers, Edge, Chrome, Firefox and Internet
+  Explorer. Angular 2 has a simplified API. It has fewer built-in directives to learn, simpler binding and a lower
+  overall concept count and Angular 2 enhances our productivity to improve our day to day workflow. You'll see these
+  productivity improvements as we go through this course and we'll discern a consistency of patterns for building
+  the blocks that form an Angular application. In this first module, we lay out the anatomy of an Angular 2
+  application. We consider several suggestions for getting the most from this course. We explore the sample
+  application that we'll build throughout this course and we'll look at the topics we'll cover in the remainder of
+  this course. Okay then, let's check out the anatomy of an Angular 2 application.</p>
+
+<h3>Anatomy of an Angular 2 Application</h3>
+<p>In Angular 2, an application is comprised of a set of components  and some services that provide functionality
+  across those components.  So the next obvious question is what is an Angular 2 component? Each component is
+  comprised of a template which is the HTML for the user interface fragment defining a view for the application.
+  Add to that a class for the code associated with the view. The class contains the properties or data elements
+  available for use in the view and methods which perform actions for the view such as responding to a button click.
+  A component also has metadata which provides additional information about the component to Angular. It is this
+  metadata that identifies the class as an Angular component.  So a component is a view defined with a template, its
+  associated code defined with a class and additional information defined with metadata. We'll look at this in more
+  detail in the upcoming modules. As we build these components, how do we pull them together into an application? We
+  define Angular modules.  Angular modules help us organize our application into cohesive blocks of functionality.
+  Every Angular application has at least one Angular module called the Application's root Angular module. An
+  application can have any number of additional Angular modules including feature modules that consolidate the
+  components for a specific application feature. We'll see much more about Angular modules along our journey. For
+  now, let's look at some tips for getting the most from this course. </p>
+
+<h3>Get the Most from This Course</h3>
+<p>First are the prerequisites. This is a beginner level course but this course assumes you have some basic
+  knowledge of JavaScript for code, HTML for building the user interface and Cascading Style Sheets or CSS for
+  styling. You don't have to have much experience but a working knowledge of each will help you get the most from
+  this course. Though not required, it is helpful if you have had some exposure to Object-oriented programming
+  concepts maybe through coding with C++, C#, Java or PHP but if you don't have any exposure to OOP, that's okay.
+  You do not need any prior knowledge of Angular, Angular 2 or TypeScript. We'll cover what you need in this course.
+  Another way to get the most from this course is to join the discussion. Thoughts, comments or questions as you
+  watch this course? Feel free to use the Discussion tab. You can find the link to the Discussion on the Pluralsight
+  page for this course or follow me on Twitter. It would be great to hear about your experiences with Angular
+  2. There is also a blog post specifically for this course at the URL shown here. This posts lists common issues
+  along with their solutions. If you are having problems with the code for the course, check here first. There may
+  already be a solution posted. Keep this URL handy as you work through the course. When building web
+  applications regardless of the technologies we use, there are often lots of steps and places where things can do
+  wrong. That's where a good checklist can come in. I'll present checklists at the end of each module and we'll use
+  them as a brief review of what was covered in that module. Feel free to jump ahead to the checklist if you have
+  any problems when coding along with the demos in the module and consider referencing these checklists as you start
+  building your own Angular 2 applications. Coding along on this journey is another great way to get the most from
+  this course. Though not required, it is often helpful to try out the presented code as you navigate through the
+  course. To get you started, I've set up a public GitHub repository specifically for this course. It is called
+  Angular 2 Getting Started and you can find it at this URL. The starter files for the sample application are here.
+  You can use these files as a starting point if you want to code along with the demos. If you'd prefer to follow
+  along with the completed code, you can find that here. If you're new to GitHub, simply click this button to
+  download all of this code as a zip file. So what is this sample application? Let's take a look.</p>
+
+<h3>Sample Application</h3>
+<p>To demonstrate the basic features of Angular 2, we'll build a simple application step by step as we journey
+  through this course. Let's see the finished sample application in action. Welcome to Acme Product Management. As
+  its name implies, this application manages our current list of products. Here at the top is our menu for access to
+  the key features of the application. In a full featured application, there would of course be more options
+  here but we want to limit this sample application to the features we can build within this course. Clicking on the
+  Product List option displays the Product List page. We see the page title and a table containing the list of
+  products. If the user clicks the Show Image button, the product images appear and the button changes to Hide
+  Image. Click the button again to hide the images and compress the display. Notice the nice formatting of our price
+  and instead of a number for the rating, we display the rating in stars. Here at the top is an input box where the
+  user can enter a filter string. When the input box contains a value, a Filtered by message appears and the product
+  list is filtered to only those with a product name that contained the entered string. Click on a product name to
+  navigate to the product details. On the Product Detail page, we see the page title with the name of the product
+  and all of the product details including a product description, the nicely formatted price and the star rating.
+  Click the Back button to navigate back to the Product List page. So not a huge app but big enough to demonstrate
+  the basics of Angular 2. As with any Angular 2 application, this application is comprised of a set of components
+  including a nested component for the rating stars. It has a service to get the data and it incorporates routing to
+  navigate between the pages. Now that we've seen the sample application, how do we build it? As stated earlier, an
+  Angular 2 application is comprised of a set of components and services that provide data and logic across those
+  components. With that in mind, let's break the sample application into components and services. For the Welcome
+  page, we'll build a Welcome component. For the Product List page, we'll build a Product List component. Recall
+  that we had a nice visual display of stars for our ratings. We want to reuse that feature so we'll build a
+  separate nestable Star component. Clicking on a product in the Product List page displayed the product detail.
+  We'll build a component for that as well and reuse the Star component then we need an App component that ties our
+  application pieces together and our application gets data so we'll want a product data service. Lastly, we need
+  the obligatory index.html file. We'll build the basics of each of these pieces and learn how to organize them into
+  Angular modules as we journey through this course. </p>
+
+<h3>Course Outline</h3>
+<p>We start with first things first. We'll select a language and editor to use then walk through how to setup an
+  Angular 2 application. Next, we'll dive into components. We'll build the App component using a simple template and
+  minimal component code and metadata. We'll see how to build the user interface for our application using
+  templates, interpolation and directives. We'll power up that user interface with data binding and nicely format
+  our data with pipes. Next, we'll tackle some additional component techniques. We'll define interfaces, encapsulate
+  styles and leverage life cycle hooks to build better components. We'll see how to build a component designed to be
+  nested within other components and how to communicate between the nested component and its container. We often
+  have logic or data that is needed across components. We'll learn how to build services specifically for this
+  purpose and use dependency injection to inject those services into the components that need them. Most web
+  applications need to communicate with a back-end server to get our post data and to execute back-end business
+  logic. In this module, we'll leverage Http to retrieve the data for our application. Our sample application
+  displays multiple views. We'll see how to set up routing to navigate between those views. Next is Angular
+  modules. We learn about and use the root Angular module throughout this course but as the application grows, we
+  want to separate its concerns. This course module reviews the basics of Angular modules and refactors our
+  application into logical blocks using multiple Angular modules. We're covering a lot of territory and by the end
+  of our journey, we'll have a simple but fully operational Angular 2 application. You can use that application as a
+  reference for your own development. Let's start our journey through Angular 2. </p>
+<script src="bundle.js"></script>

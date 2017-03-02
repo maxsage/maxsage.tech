@@ -1,0 +1,182 @@
+<h2>Navigation and Routing Additional Techniques</h2>
+<h3>Introduction</h3>
+<p>Now that we know the basics of routing, we are ready for more. Welcome back to Angular 2, Getting Started from
+  Pluralsight. My name is Deborah Kurata, and in this module, we look at several additional routing techniques. With
+  what we learned in the prior module, a user can now navigate to any defined route in our application. But that
+  only covered the very basic routing scenarios. What if we need to pass parameters to a route? Or activate a route
+  with code, instead of with a clickable element? Or what if we need to protect a route, and only allow access to it
+  in special cases or by certain users? Or ask a user to save changes before leaving a route? In this second module
+  on routing, we examine how to pass parameters to a route, how to activate a route with code, and how to protect
+  our routes with guards. When we're finished with this module, we'll know how to handle additional routing
+  scenarios, including routing to a component that requires parameters, such as our product detail component. Let's
+  get started.</p>
+<h3>Passing Parameters to a Route</h3>
+<p>We sometimes need to pass parameters to a route. For example, to navigate to the product detail view, we need to
+  define which product's details to display. The first step to passing parameters to a route is to configure the
+  route with parameters. We've already done this step to route to our product detail component. Here, we define a
+  slash, a colon, and a placeholder for the parameter. If multiple parameters are needed, we'd repeat this with
+  another slash, colon, and placeholder. With the route definition in place, we can decide where we want the user to
+  activate this route. Will we add a menu option or a data link? It is there we set the router link and pass in the
+  required parameter. In the product list component template, we display a table of products. Each table row
+  contains the product name. We'll add an anchor tag to the product name that activates the product detail route,
+  and displays that product's data. So we add a router link to this anchor tag, and assign it to the link parameters
+  array. The first element to the array is the string path of the route. The second element of the array is the
+  value for the route parameter. When the router composes the URL, it uses this array element to construct the
+  defined parameter. To display the appropriate product, the product detail component reads this parameter from the
+  URL. It then uses the parameter to retrieve the appropriate product and display it in the view. To get the
+  parameter from the URL, we use the activated route service, provided by the router. We want an instance of the
+  service, so we define it as a dependency in our constructor. We've seen this syntax before. This line of code
+  defines a private variable called _route, and it assigns it to the instance of the activated route provided by the
+  angular service injector. Then we use the instance of the activated route service to get the desired parameter.
+  There are two different ways to get the parameter. We could use a snapshot, or we could use an observable. Use the
+  snapshot approach if you only need to get the initial value of the parameter. The code is then a one liner as
+  shown here. In our example, the user is always returned to the list page before navigating to another product, so
+  the snapshot approach would be sufficient. If you expect the parameter to change without leaving the page, use an
+  observable. For example, if we had a next button on the product detail page to display the next product, the URL
+  will change to the next product's ID, so you'd want to use an observable instead. We use the activated route
+  snapshot method here, and access the appropriate parameter from its parameter array. The string specified here
+  must match the name of the parameter from the path. Let's give this a try. We already have the product detail
+  components route configured with a parameter. Looking at that route, here in the path, we provide any parameters
+  prefixed with a colon and separated by slashes. For the product detail component, we pass a product ID, so the
+  view knows which product's detail to display. Next, we need to decide where to tie this route to a user action. We
+  can't add the product detail to the menu, because we don't have an easy way for the user to specify the ID of the
+  desired product. Let's instead modify the list of products in the product list view, such that each product name
+  is a link, then the user can click on the product to display its details. In the product list template, we'll add
+  an anchor tag so the product name becomes a link. We add the router link directive to the anchor tag, and set up
+  the link parameters array. In the array, we define the path of the route to activate the first element, and pass
+  the parameter value in the second element. In this example, we want to pass the product's ID. When we view the
+  result in the browser, we see that the product names are now links. And if we click a link, we see the ID and the
+  URL, and we navigate to the product detail component. Yay! But that component does not yet get the parameter from
+  the URL. Let's do that next. We add code in the product detail component to get the parameter passed in on the
+  URL. We use the activated route service provided by the router to help us. First, we import the service. We don't
+  have to register this service, because it is registered as part of the router module, we add it to the imports
+  array in the last course module. We then set activated route as a dependency by defining it as a parameter to the
+  constructor function. The activated route instance is then injected into this component class. Now, let's get the
+  ID from the route and store it in a local variable. We'll use the snapshot approach here, because we don't expect
+  the URL to change. Where do we put the code to read the parameter? We don't want it in the constructor. We'll
+  instead use the OnInit life cycle hook. Recall from earlier in this course how to use a life cycle hook? We start
+  by importing OnInet from Angular core. Then we implement OnInet and write the code for the ngOnInit method. We
+  start by routing the parameter into a variable. We use let here, which is new in ES2015, and defines a block
+  scoped variable. We then use this._route.snapshot to get the parameter. We pass in the name of the parameter we
+  want to read. The parameter name we defined in the route configuration is ID, so that's the parameter name we
+  specify here. And because the parameter is provided as a string, we'll add a plus here at the beginning. The plus
+  is a Javascript shortcut to convert the parameter string to a numeric ID. To make it easy to see the ID we got
+  from the URL, let's display it as part of the page title. Here, we use the ES2015 back text to define a template
+  string and display the ID. Let's see the result in the browser. Click the menu option to display the product list,
+  then click a product. The URL changes to include the parameter and the product detail page is displayed. If
+  everything worked, the title displays the same parameter as shown in the URL, yay! To get back to the product
+  list, we could use the menu option here, but it would be nicer to have a back button. Let's add a back button and
+  see how to activate a route with code.</p>
+
+<h3>Activating a Route with Code</h3>
+<p>We want to add a back button to our product detail page that navigates back to the product list page. We could
+  activate this route using the router link directive in the component template, just like we did with the menu
+  options. But it's also possible to route with code. So let's try that out instead. When would you want to navigate
+  with code instead of the router link directive in a template? One example is a save button, where you need to
+  execute some code to save the data, and then route. To route with code, we use the router service. We import the
+  router service from angular router. We define a dependency on the router service using a constructor
+  parameter. The router instance is then injected into this component class. Every time we inject a service
+  dependency into a class, we should ask ourselves, hmm, did we register this service with the angular injector? In
+  the case of router, it is registered in router module, which we've added to our application's angular module
+  imports array. We use this router instance to activate a route. Here, we define a method that we can call from the
+  template based on a user action. The code uses the navigate method of the router service, and passes in the same
+  link parameter array we use when binding the router link. In this example, we route to the product's route and
+  don't pass any arguments. Let's give this a try. Here we are looking at the product detail component. We want the
+  product detail component to navigate back to the product list component. We start by importing the router service
+  from angular router. Next we define the dependency by adding another constructor parameter. When this component
+  class is constructed, we'll get an instance of both the activated route service and the router service. Now we can
+  build a method that navigates with code. Since the purpose of this method is to navigate back, we'll call it
+  onBack. It doesn't return anything, so we'll set its return type to void. In this method, we use the this._router
+  instance, and call the navigate method. We pass it a link parameters array. In this example, we want to navigate
+  back to the product list component, and we don't need any parameters. We just define the route path, which is
+  products. In the product detail template, we'll add a button. We again use the twitter bootstrap style classes to
+  give the button some style. We use event binding to bind the click event of the button to the onBack method we
+  defined in the class. Now let's check it out in the browser. Click on the menu option to display the product list,
+  then click on a product. The product detail page is displayed. We click our back button, and we are back on the
+  product list page. Let's try another one. We see the detail page, now we're back on the product list page. Our
+  code-based navigation is working. So routing with code involves importing the router and using its navigate method
+  to activate the route. Now that we have several routes in place, let's look at how to protect them with
+  guards. </p>
+<h3>Protecting Routes with Guards</h3>
+<p>There may be times that we want to limit access to a route. We want routes only accessible to specific users,
+  such as an administrator, for example. Or we want the user to confirm a navigation operation, such as asking
+  whether to save before navigating away from an edit page.>For that, we use guards. The angular router provides
+  several guards, including CanActivate to guard navigation to a route, CanDeactivate, to guard navigation away from
+  the current route, Resolve, to prefetch data before activating a route, and CanLoad, to prevent asynchronous
+  routing. In this clip, we work through how to implement the CanActivate guard. You can use the same techniques
+  we're covering here to implement any other type of route guard. We'll build a guard that prevents navigation to
+  the product detail route, unless a specific condition is true. Building a guard clause follows the common pattern
+  used throughout Angular. Create a class, add a decorator, and import what we need. Here, we define a
+  ProductDetailGuard class. Since we are implementing this guard as a service, we use the injectable decorator, and
+  we import what we need. This class implements CanActivate. To create one of the other kinds of guards, change this
+  to implement one of the other guard types. We then implement the canActivate method. For simple cases, this method
+  can return a boolean value, true to activate the route, and false to cancel the route activation. For more complex
+  cases, we could return an observable or a promise from this method. Because the guard class is a service, we need
+  to register the service provider with angular's injector. Unlike other services, however, the guard service
+  provider must be provided at the angular module level. By providing this service at the module level, the router
+  can use these services during the navigation process. So in this example, we register it in our app module, by
+  adding it to the providers array. Using a guard is simple. We built the guard to protect the product detail route,
+  so we add the guard to the product detail route. We add canActivate and set it to an array containing the guards
+  to execute before this route is activated. In our case, there is only one, our product detail guard. Let's give
+  this a try. We want to build a guard that prevents navigation to the product detail component, of the provided URL
+  parameter is not valid, Recall that the route definition for the product detail component includes an ID. But
+  there is nothing here that defines that this ID has to be numeric or greater than zero. So our guard should
+  prevent navigation to the product detail route if the ID is zero or not a number. We begin by creating a new file
+  for the guard service. Since this guard is only for the product detail route, we'll add it to the products
+  folder. We'll select new file and name it product-guard.service.ts. As always, we start with the class. Since this
+  particular guard should be checked before activating the product detail route, we implement canActivate. So we
+  need the import for that. The router guards are imported from angular router. Since this is a service, we'll add
+  the injectable decorator, and the import for that. Next, we need to implement the canActivate method. And we'll
+  return a simple boolean. What do we want this method to do? We need to check the route URL and ensure that the ID
+  passed in is valid. Luckily for us, canActivate has a parameter that gives us the activated route snapshot. The
+  activated route snapshot contains the information about the route at any particular moment in time. Now I'll paste
+  the code for the method body, and we can talk through it. The product detail route URL is comprised of two
+  segments. Product and the requested ID. We only care about the ID, so we pull the path from the second element,
+  which is index of one. The plus here at the beginning converts the URL path string to a number. If the resulting
+  value is not a number, or less than one, we display an alert, direct the user to the product list page, and return
+  false to abort the current operation. Notice that this code is the same code we used to activate a route with code
+  that we saw in the last clip. And as we saw in the last clip, to use the router, we need to inject it in to the
+  constructor, and add it to the imports. Here, we return false to abort the current navigation. And here, we return
+  true to continue activating the route. Now, we don't normally want to display an alert from our application. In a
+  real application, we'd route to an error page that would notify the user of the problem, and optionally provide a
+  button for navigating back to the product list page. But this is good enough for our purposes. Because this class
+  is a service, we need to register the service with angular's injector. As we discussed on the slides, the guard's
+  service provider must be provided at the angular module level. We'll start by importing our product guard service.
+  We don't have a providers array defined for our app module yet, so let's add one. Then add the product detail
+  guard to the providers array. Now the router can use this service during the navigation process. Next, we need to
+  hook up this guard to the appropriate route. We add the canActivate property to the route definition for the
+  product detail component, and set it to an array. In the array we specify each guard we want to execute when
+  activating the product detail route. In this case, we have only one. That should do it, let's give it a try. If we
+  view the product list page, and select a product, our URL is valid and we navigate to the page. If we instead type
+  in a URL that is not a number, we see our message. The product detail route navigation is cancelled, and we are
+  redirected to the product list page. It works. Use route guards anytime you want to prevent access to a route,
+  confirm navigation away from a route, or preload data for a route. So let's finish up this module with some
+  checklists. </p>
+<h3>Checklists and Summary</h3>
+<p>We can pass any number of parameters to a route, separated by slashes. Add the parameter to the route
+  configuration path by specifying a slash, a colon, and the parameter name. Pass the parameter value by adding it
+  to an element of the link parameters array>bound to the router link directive. Read the parameter value in the
+  navigated component using the activated route service. Notice here that the parameter name, ID in this example, is
+  exactly the same as in the route definition. To activate a route with code, use the router service. Be sure to
+  import the service and define it as a dependency on the constructor. Create a method that calls the navigate
+  method of the router service instance, and pass in the link parameters array. Add a user interface element and use
+  event binding to call the created method. We can use guards to prevent access to a route, confirm navigation away
+  from a route, or to preload data for a route. To create a router guard, we build a guard service, implement the
+  guard type, in our case, CanActivate, and create the associated method. We then register the guard service
+  provider which must be registered in a module, not a component. Lastly, we add the guard to the desired route. In
+  this module, we covered some additional routing techniques including passing parameters to a route, activating a
+  route with code, and protecting routes with guards. We now have routing to our product detail component, yay!
+  However, the product detail component and its associated template are not finished. We only wired up the bare
+  minimum to demonstrate routing. As a homework assignment, try building the remainder of the product detail
+  template and code. To check your answer, you can find the completed application on my GitHub, as described in the
+  First Things First module. There you will also find a version of the product data service that retrieves one
+  product by ID. You'll need that to get the data for the product detail component. There is one important thing in
+  the product detail template that I wanted to draw your attention to. Here is the completed product detail
+  component template. Notice this ngIf here. When this page is loaded, it retrieves the selected product, and
+  displays the product data. However, since the data access is asynchronous, there is a good change that the page
+  will display before the data is retrieved. When that happens, the product property is not set, and the page
+  generates binding errors. Adding this ngIf prevents that problem. Keep this ngIf trick in mind if you decide to
+  tackle the homework assignment, and when binding to retrieve data in your own Angular applications. At this point,
+  our appModule is looking a little cluttered and hard to manage. Up next, let's spend some more time with Angular
+  modules and look at how to refactor our application into more manageable pieces. </p>
+<script src="bundle.js"></script>

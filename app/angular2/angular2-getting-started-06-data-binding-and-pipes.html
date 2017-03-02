@@ -1,0 +1,177 @@
+<h2>Data Binding &amp; Pipes</h2>
+<h3>Introduction</h3>
+<p>There's more to data binding than just displaying component properties. we want to bind DOM elements to component
+    properties so the component can change the look and feel as needed. We can use bindings to change element colors
+    or styles based on data values, update font size based on user preferences, or set an image source from a database
+    field, and we want notification of user actions and other events from the DOM so the component can respond
+    accordingly. For example, we respond to a click on a button to hide or show images. And sometimes, we want the
+    best of both worlds using two-way binding to set an element property and receive event notifications of user
+    changes to that property. In this module, we'll use Angular's property binding to set HTML-element properties in
+    the DOM. We walk through how to handle user events such as a button click with event binding and how to handle a
+    user input with two-way binding. Lastly, we'll discover how to transform bound data with pipes. And here once
+    again is our application architecture. We have the first cut of our product list component, but it doesn't have
+    any interactivity. In this module, we'll use data binding features to add interactivity to the product list
+    component. Let's get started.</p>
+<p>Welcome back to Angular Two: Getting Started from Pluralsight. My name is Deborah Kurata and in this module, we
+    explore more data binding features and transform bound data with pipes. To provide a great interactive user
+    experience,</p>
+<h3>Property Binding</h3>
+<p>Property binding allows us to set a property of an element to the value of a template expression. Here, we bind
+    the source property of the image element to the image URL property of the product, effectively defining the source
+    of the image from information in our component class. Our binding target is always enclosed in square brackets to
+    the left of the equals and identifies a property of the element. The binding source is always enclosed in quotes
+    to the right of the equals and specifies the template expression. For comparison, here is a similar binding using
+    interpolation. Note that in this case, the element property is not enclosed in square brackets and the template
+    expression is enclosed in curly braces with no quotes. Like interpolation, property binding is one way from the
+    source class property to the target element property. It effectively allows us to control our template's DOM from
+    our component class. When we can use property binding or interpolation to achieve the same result, which one is
+    better? The general guideline is to prefer property binding over interpolation. However, if you need to include
+    the template expression as part of a larger expression such as this example, you may need to use interpolation.
+    Now let's add some property binding to our sample application. Here we are back in the editor, looking at the
+    product list component and its associated template. Let's use property binding to bind the source of our product
+    image. We use an image element to display our product image and we'll use property binding to bind the image's
+    source or SRC property so we enclose the SRC in square brackets. On the right side of the equals, we define the
+    template expression in quotes. We want to bind to the product's image URL property from the product list component
+    class. Let's also use property binding to bind the title property of the image to the product's name. Let's check
+    out the result in the browser. Whoa, they're big, but we do see images. If we hover over an image, we see the
+    image title, but this image is rather large for display in our table. Let's use property binding to set some style
+    properties. Let's add properties for the image width and image margin to our component class. The image width is a
+    number so we specify its type with a colon and then number. Let's set it to 50. The image margin is also a number
+    and we'll set it two. Back in the template, we use property binding to bind the image styles. We want to bind the
+    style property width in pixels. We'll bind that to the image width property from the component class. Notice that
+    we don't prefix this property with product because image width is a property of the component class, not the
+    product object. And we do the same with the style margin in pixels and set that to the image margin class
+    property. So now we've seen how to use property binding to bind several properties of the image element to
+    properties of the components class. Looking again at the browser, that looks much better, but our images are
+    always displayed. The show image button doesn't work yet. To hook up the button, we need to respond to user
+    events. Let's do that next.</p>
+<h3>Handling Events with Event Binding</h3>
+<p>So far, all of our data binding has been one way from the component class property to the element property, but
+    there are times we need to send information the other way to respond to user events, for example to perform an
+    operation when the user clicks a button. A component listens for user actions using event binding as shown
+    here. Notice how similar this syntax is to property binding. In this example, the component listens for the click
+    event on a button. The name of the bound event is enclosed in parentheses, identifying it as the target event. To
+    the right of the equals is the template statement. This is often the name of a component class method followed by
+    open and closing parentheses and enclosed in quotes. If the defined event occurs, the template statement is
+    executed calling the specified method in the component. Wondering where you might find a list of valid DOM events?
+    Check out this link. The Mozilla Developer Network provides a thorough list of standard events along with some
+    documentation. Now let's give event binding a try. In this demo, we want to implement our show image button.
+    First, we define a class property that keeps track of whether the images are currently displayed. We'll call that
+    property show image. Since this property is true or false, we define its type as Boolean and let's set its default
+    value to false so the images are not displayed when the page is first loaded. Next, we build the method that the
+    event binding will call. By convention, methods are normally created after all of the properties are defined so
+    we'll put it down here. Let's name the method toggle image. Notice that TypeScript does not require any keyword
+    such as function. Following the method name with open and closing parentheses identifies it as a method. Our
+    method won't have a return type so we specify the return type as void. The body of the method simply toggles the
+    state of the show image property. Back in the template, we are ready to set up the event binding. On the button
+    element, we define the click as the target event by enclosing it in parentheses. We assign it to our method
+    enclosed in quotes. When the user clicks the button, the binding calls our method. So the only thing left is to
+    actually hide or show the image. Recall how we add logic to add or remove HTML elements from the DOM? If you said
+    the NGF directive, you are right. We'll add NGF to the image element. We only want this image element if the show
+    image flag is true. So we type star NGF equals quote show image. The image element will then only be added to the
+    DOM if show image is true. Let's see if this works. Are we ready to give it a try? Click the button and the image
+    appears. Click the button again and the image disappears. Oh, very cool. The only odd thing is the button text.
+    When the image is displayed, the button text should change to hide image. So up here where we have the button
+    text, let's use interpolation. When show image is true, we want the button text to say hide image. And when show
+    image is false, we want the button text to say show image. We accomplish this using a JavaScript conditional
+    operator. We specify the condition which is show image and a question mark. Then we specify the true expression so
+    when show image is true, we want to display hide image. Then we add a colon and the false expression so when show
+    image is false, we want it to say show image. Basically, we can read this syntax as if show image is true, display
+    hide. Otherwise, display show. Let's check this out in the browser. So our button text now says show image. If we
+    click it, it says hide image. That seems a little more user friendly, cool. Now that we have our images
+    working, let's tackle the filter by box. And for that, we need two-way binding. </p>
+<h3>Handling Input with Two-way Binding</h3>
+<p>When working with user entry HTML elements such as an input element, we often want to display a component class
+    property in the template and update that property when the user makes a change. This process requires two-way
+    binding. To specify two-way binding in Angular, we use the ngModel directive. We enclose ngModel in square
+    brackets to indicate property binding from the class property to the input element and parentheses to indicate
+    event binding to send a notification of the user-entered data back to the class property. We assign this directive
+    to a template expression. To help us remember which order to put the two sets of brackets, visualize a banana in a
+    box. Square brackets for the box on the outside and parentheses for the banana on the inside. So now we have
+    another Angular directive that we can use, every time we want to use an Angular directive in a template, we need
+    to consider how to make that directive visible to the component associated with that template. Recall that an
+    Angular module defines the boundary or context within which the component resolves its directives and
+    dependencies. The illustration of our AppModule currently looks like this. We want to use the ngModel directive in
+    our product list component which is owned by AppModule. So in the AppModule, we need to import the appropriate
+    system module that exposes the ngModel directive. Since the ngModel directive is most often used when building
+    data entry forms, ngModel is part of FormsModule so we import that here. Now, the ngModel directive and any of the
+    other Angular forms directives are visible to any component declared by AppModule, including our product list
+    component. Now let's give this a try. We are back in the editor and looking at the product list component and its
+    associated template. Recall that we defined a filter by input box here and display the entered filter here. We'll
+    later use the filter to filter our list of products. Let's start by adding a component class property for the list
+    filter. This property is a string and we'll set a default initial value for filtering the list of products. We
+    hard code the filter string here, but you can imagine that we store the user's last entered filter and use that as
+    the default instead. With that, we can set up the two-way binding. On the input element, we draw a banana in a box
+    and specify the ngModel directive. We bind to the component class list filter property. We want to display the
+    list filter here so we use interpolation. Recall that interpolation has no quotes. Are we done? Not quite. Let's
+    see what happens if we try to run. The page doesn't appear. If we press F12, we see the error is can't bind to
+    ngModel model since it isn't a known property of input. This is telling us that Angular can't find the ngModel
+    directive. Recall from the slides that the ngModel directive is part of the Angular module for forms called
+    FormsModule. To expose this directive to our product list component, we need to import the FormsModule in the
+    module that owns the product list component which is our AppModule. We start by importing FormsModule from Angular
+    forms. We then add FormsModule to the imports array for the NG module decorator. Why the imports array and not the
+    declarations? Our directive's components and pipes are declared here in the declarations array. Directives,
+    components and pipes we use from other sources, such as Angular itself or third parties, are defined in external
+    Angular modules we add to the imports array here. Now that we've told Angular where to find the ngModel, let's see
+    the result. When the page displays, we see cart as the default value. It is displayed here and here. If we modify
+    the entry, notice that the displayed filter text is also updated. That's because we are using two-way binding.
+    Notice that the list of products is not yet filtered. We'll do that in the next module. There is one more thing we
+    do want to address now and that is the data formatting. That price should really look like a price and show the
+    appropriate currency symbol. </p>
+<h3>Transforming Data with Pipes</h3>
+<p>With Angular's data binding, displaying data is easy. Just bind an element property to a class property and we're
+    done. Well, not always. Sometimes the data is not in a format appropriate for display. That's where pipes come in
+    handy. Pipes transform bound properties before they are displayed so we can alter the property values to make them
+    more user friendly or more local appropriate. Angular provides some built-in pipes for formatting values such as
+    date, number, decimal, percent, currency, uppercase, lowercase, and so on. Angular also provides a few pipes for
+    working with objects such as the JSON pipe to display the content of an object as a JSON string, which is helpful
+    when debugging, and a slice pipe which selects a specific subset of elements from a list. We can also build our
+    own custom pipes as we'll see in the next module. Let's start with a simple example. Say we want to display the
+    product code in lowercase. We can add the pipe character after the property in the template expression and then
+    specify the lowercase pipe. The product code is then transformed into lowercase before it is displayed. We can
+    also use pipes and property bindings. Add the pipe after the property in the template expression and specify the
+    desired pipe. In this example, we specified the uppercase pipe so the image title will appear in all caps. If
+    needed, we can chain pipes. In this example, the price is transformed into a currency. By default, the currency
+    pipe adds the all caps three-letter abbreviation of the local currency to the amount. If we want to display that
+    abbreviation in lowercase, we can transform it again by simply adding another pipe. Some pipes support
+    parameters. Parameters are defined by specifying a colon and a parameter value. For example, a currency pipe has
+    three parameters, the desired currency code, a Boolean value indicating whether to display the currency symbol,
+    and digit info. The digit info consists of the minimum number of integer digits, the minimum number of fractional
+    digits, and the maximum number of fractional digits. The value here of 1.2-2 means at least one digit to the left
+    of the decimal and at least two digits to the right of the decimal and no more than two digits to the right of the
+    decimal, effectively defining two decimal places. With that, let's jump back to the demo. We specified the pipes
+    in the template so we are looking at the product list component template. Let's add a lowercase pipe for the
+    product code and a currency pipe for the price. For the product code, we simply insert the pipe character after
+    the property in the template expression and type lowercase, that's it. For the price, we insert a pipe character
+    and currency. That's all that is required, but let's try out a few of the parameters. We'll specify USD true to
+    display the dollar sign instead of the currency abbreviation and 1.2-2 to specify that we want at least one number
+    to the left of the decimal place and two and only two numbers to the right of the decimal place. Let's see how we
+    did. Looking at the result, we now see the product code in lowercase and the price displayed nicely as a currency.
+    So we can easily perform simple data transformations using the built-in pipes in the template expressions for our
+    bindings. Feel free to try out some of the other pipes from the slides. Let's finish up this module with some
+    diagrams and a checklist we can use as we work with bindings and pipes. </p>
+<h3>Checklists and Summary</h3>
+<p>Data binding makes it easy to display class properties from our component and set DOM element properties to our
+    class property values to better control the view. And the component can listen for events from the DOM to respond
+    as needed for an interactive user experience. There are four basic types of binding in Angular. Here is a diagram
+    as a memory aid. Interpolation inserts interpolated strings into the text between HTML elements or assigns element
+    properties. Be sure to wrap the template expression in curly braces and no quotes. Property binding sets an
+    element's property to the value of a template expression. The binding target specifies a property of the element
+    and must be enclosed in square brackets. The binding source specifies the template expression and must be enclosed
+    in quotes. Event binding listens for events and executes a template statement when the event occurs. The target
+    event specifies an event name and must be enclosed in parentheses. The template statement often defines the name
+    of the method to call when the event occurs and must be enclosed in quotes. Two-way binding displays the component
+    class property and updates the property when the user makes a change. Use the banana in a box syntax with the
+    ngModel directive. The binding source specifies the template expression and must be in enclosed in quotes. Here
+    are some things to remember when using ngModel. Define ngModel within the banana in a box for two-way binding. Be
+    sure to add FormsModule from the Angular forms package to the imports array of an appropriate Angular module. In
+    this case, AppModule. This ensures that the ngModel directive is available to any template defined in a component
+    associated with that module. We'll talk more about Angular modules later in this course. The data we have in our
+    component may not be in the format we want for display. We can use a pipe and a template to transform that data to
+    a more user-friendly format. To use a pipe, specify the pipe character, the name of the pipe and any pipe
+    parameters separated with colons. Here is an example of the currency pipe with three parameters. This module
+    covered data binding and pipes. We looked at property binding, event binding and two-way binding. Lastly, we
+    discovered how to transform bound data to a more user-friendly format using built-in pipes. And here once again is
+    our application architecture. In this module, we finished more of the product list component, but it could be
+    better. Next up, we'll see several techniques for improving our component.</p>
+<script src="bundle.js"></script>
