@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var JavaScriptComponent;
+    var core_1, router_1;
+    var JavaScriptComponent, BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             JavaScriptComponent = (function () {
@@ -24,13 +27,28 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 }
                 JavaScriptComponent = __decorate([
                     core_1.Component({
-                        templateUrl: 'app/javascript/javascript.component.html'
+                        templateUrl: 'app/javascript/javascript.component.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], JavaScriptComponent);
                 return JavaScriptComponent;
             }());
             exports_1("JavaScriptComponent", JavaScriptComponent);
+            BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent = (function () {
+                function BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent() {
+                    this.pageTitle = "Building A JavaScript Development Environment - CourseContents";
+                }
+                BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/javascript/building-a-javascript-development-environment-00-course-contents.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent);
+                return BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent;
+            }());
+            exports_1("BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent", BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent);
         }
     }
 });

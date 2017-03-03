@@ -32,9 +32,25 @@ import { VisualStudioCodeComponent } from './visualstudiocode/visualstudiocode.c
 import { EmmetComponent } from './emmet/emmet.component';
 
 import { CSharpComponent } from './csharp/csharp.component';
-import { JavaScriptComponent } from './javascript/javascript.component';
+import {JavaScriptComponent, BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent} from './javascript/javascript.component';
 import { TypeScriptComponent } from './typescript/typescript.component';
-import { WPFComponent } from './wpf/wpf.component';
+
+import {
+    WPFComponent,
+    WPFDataBindingInDepth00CourseContentsComponent,
+    WPFDataBindingInDepth01CourseOverviewComponent,
+    WPFDataBindingInDepth02DataBindingOverviewComponent,
+    WPFDataBindingInDepth03DataSourcesComponent,
+    WPFDataBindingInDepth04BindingCoreConceptsComponent,
+    WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent,
+    WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent,
+    WPFDataBindingInDepth07DesignTimeDataBindingComponent,
+    WPFDataBindingInDepth08ContainersAndCollectionControlsComponent,
+    WPFDataBindingInDepth09DataInputValidationComponent, WPFMVVMInDepth00CourseContentsComponent, WPFMVVMInDepth01MVVMPatternFundamentalsComponent,
+    WPFMVVMInDepth02FirstTasteOfMVVMComponent, WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent,
+    WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent, WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent,
+    WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent
+} from './wpf/wpf.component';
 
 import { ODataComponent } from './odata/odata.component';
 
@@ -87,7 +103,26 @@ import { DGenComponent } from './dgen/dgen.component';
 })
 @RouteConfig([
     { path: '/welcome', name: 'Welcome', component: WelcomeComponent, useAsDefault: true },
+
     { path: '/wpf', name: 'WPF', component: WPFComponent },
+    { path: '/wpf-data-binding-in-depth-00-course-contents', name: 'WPFDataBindingInDepth00CourseContents', component: WPFDataBindingInDepth00CourseContentsComponent },
+    { path: '/wpf-data-binding-in-depth-01-course-overview', name: 'WPFDataBindingInDepth01CourseOverview', component: WPFDataBindingInDepth01CourseOverviewComponent },
+    { path: '/wpf-data-binding-in-depth-02-data-binding-overview', name: 'WPFDataBindingInDepth02DataBindingOverview', component: WPFDataBindingInDepth02DataBindingOverviewComponent },
+    { path: '/wpf-data-binding-in-depth-03-data-sources', name: 'WPFDataBindingInDepth03DataSources', component: WPFDataBindingInDepth03DataSourcesComponent },
+    { path: '/wpf-data-binding-in-depth-04-binding-core-concepts', name: 'WPFDataBindingInDepth04BindingCoreConcepts', component: WPFDataBindingInDepth04BindingCoreConceptsComponent },
+    { path: '/wpf-data-binding-in-depth-05-unleashing-the-full-power-of-bindings', name: 'WPFDataBindingInDepth05UnleashingTheFullPowerOfBindings', component: WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent },
+    { path: '/wpf-data-binding-in-depth-06-deep-dive-into-datatemplates', name: 'WPFDataBindingInDepth06DeepDiveIntoDataTemplates', component: WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent },
+    { path: '/wpf-data-binding-in-depth-07-design-time-data-binding', name: 'WPFDataBindingInDepth07DesignTimeDataBinding', component: WPFDataBindingInDepth07DesignTimeDataBindingComponent },
+    { path: '/wpf-data-binding-in-depth-08-containers-and-collection-controls', name: 'WPFDataBindingInDepth08ContainersAndCollectionControls', component: WPFDataBindingInDepth08ContainersAndCollectionControlsComponent },
+    { path: '/wpf-data-binding-in-depth-09-data-input-validation', name: 'WPFDataBindingInDepth09DataInputValidation', component: WPFDataBindingInDepth09DataInputValidationComponent },
+
+    { path: '/wpf-mvvm-in-depth-00-course-contents', name: 'WPFMVVMInDepth00CourseContents', component: WPFMVVMInDepth00CourseContentsComponent },
+    { path: '/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals', name: 'WPFMVVMInDepth01MVVMPatternFundamentals', component: WPFMVVMInDepth01MVVMPatternFundamentalsComponent },
+    { path: '/wpf-mvvm-in-depth-02-first-taste-of-mvvm', name: 'WPFMVVMInDepth02FirstTasteOfMVVM', component: WPFMVVMInDepth02FirstTasteOfMVVMComponent },
+    { path: '/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm', name: 'WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVM', component: WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent },
+    { path: '/wpf-mvvm-in-depth-04-view-viewmodel-communication-in-wpf', name: 'WPFMVVMInDepth04ViewViewModelCommunicationInWPF', component: WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent },
+    { path: '/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation', name: 'WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigation', component: WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent },
+    { path: '/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection', name: 'WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjection', component: WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent },
 
     { path: '/angular2', name: 'Angular2', component: Angular2Component },
     { path: '/angular2-getting-started-00-course-contents', name: 'Angular2GettingStarted00CourseContents', component: Angular2GettingStarted00CourseContentsComponent},
@@ -107,7 +142,6 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/angular2-getting-started-14-angular2-setup-revisited', name: 'Angular2GettingStarted14Angular2SetupRevisited', component: Angular2GettingStarted14Angular2SetupRevisitedComponent},
     { path: '/angular2-getting-started-15-final-words', name: 'Angular2GettingStarted15FinalWords', component: Angular2GettingStarted15FinalWordsComponent},
 
-
     { path: '/jquery', name: 'JQuery', component: JQueryComponent },
     { path: '/bootstrap', name: 'Bootstrap3', component: Bootstrap3Component },
     
@@ -116,7 +150,10 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/emmet', name: 'Emmet', component: EmmetComponent },
 
     { path: '/csharp', name: 'CSharp', component: CSharpComponent },
+
     { path: '/javascript', name: 'JavaScript', component: JavaScriptComponent },
+    { path: '/building-a-javascript-development-environment-00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },
+
     { path: '/typescript', name: 'TypeScript', component: TypeScriptComponent },
 
     { path: '/odata', name: 'OData', component: ODataComponent },

@@ -1,0 +1,883 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>Design Time Data Binding</h2>
+            </div>
+            <div class="panel-body">
+                <h3>Introduction</h3>
+                <p>Hi, this is Brian Noyes. In this module, we're going to look into some of the Design Time Data features that Visual Studio has to help you
+                    get your UI's hooked up, data-bound, and even generate UI elements based on your data model.
+                </p>
+                <p>We'll also look at how you can use sample data in the Design-Time environment to help get your UI laid out and to have that data to visualize
+                    what it's going to look like in the UI as you're designing it.
+                </p>
+                <p>First, we're going to look at two windows within the Visual Studio environment, the Data Sources Window and the Properties Window.</p>
+                <p>Data Sources Window lets you generate data-bound UI elements based on your data model or hook up existing elements, and the Properties Window
+                    lets you hook up bindings to individual properties for the elements you're working with in the designer.
+                </p>
+                <p>Next, we're going to look at working with DataTemplates in the designer. Visual Studio carries over some features from Blend where you can
+                    actually design DataTemplates in the designer as a stand-alone resource, and then switch back into the main design mode of the designer when
+                    you're done.
+                </p>
+                <p>Finally, we'll look at how you can use the overall feature that's referred to as Design Time Data, which is mainly a set of properties and
+                    markup extensions that you can use within your XAML that makes certain things available to the designer, but they go away at runtime. And
+                    this includes being able to pull in some sample data that will populate your UI in the designer, but not be there at runtime.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Data Sources and Properties Windows</h3>
+                <p>One window that's been in Visual Studio for a long time and actually dates back to the Windows Forms 2.0 days, is the Data Sources Window,
+                    but it carries over and works wonderfully with WPF and other XAML technologies as well.
+                </p>
+                <img src="images/Fig06-001.png" class="image"/>
+                <p>Basically, this Data Sources Window lets you point to different object types and it will provide the information about those object types so
+                    you can use it to hook up data binding. You can drag-and-drop those entities or the individual properties of an entity onto the XAML
+                    Designer. And what will happen is, if you drop in an open area on the Designer, it's going to generate new UI elements and hook up the
+                    appropriate properties on those elements with bindings based on what you dragged and dropped.
+                </p>
+                <p>In addition, it's going to generate a CollectionViewSource in the Resource section for the entity type that was dropped and hook that up as
+                    the data source for the new bound UI elements that were generated. At design time, this gives the designer enough information to be able to
+                    generate the right controls and hook up the bindings to the properties, but at runtime you'll just need to write the code that will populate
+                    those CollectionViewSources so that at runtime they have real data.
+                </p>
+                <p>In addition to generating brand-new UI elements by dragging and dropping, you can drag-and-drop from properties or entities within the Data
+                    Sources Window onto existing controls, and that will just hook up bindings to appropriate properties on those controls.
+                </p>
+                <p>The icons in this window:</p>
+                <img src="images/Fig06-002.png" class="image"/>
+                <p>Represent the kind of control that's going to be generated. And you can see drop-down arrows next to the selected item, the Product, in this
+                    case, that allows you to change what those mappings are, so you can change what control is going to be generated when you do your
+                    drag-and-drop directly through the UI, and you can also go into an Options dialog and you can change what set of controls are available when
+                    you do the drop-down for a given property type.
+                </p>
+                <p>In addition to the Data Sources Window, there is the Properties Window, which anyone who's done any UI design in Visual Studio over the years
+                    is certainly familiar with. What you may not be familiar with are the data binding features that are within the Properties Window. So first
+                    off, next to each property there's a little tiny square there:
+                </p>
+                <img src="images/Fig06-003.png" class="image"/>
+                <p>that's kind of subtle what it is, but if you click on that, it'll bring up a context menu and in that context menu there's an option to
+                    create a data binding.
+                </p>
+                <img src="images/Fig06-004.png" class="image"/>
+                <p>If you click on that, you get a dialog that lets you basically set everything you need to set at a property level for data binding:</p>
+                <img src="images/Fig06-005.png" class="image"/>
+                <p>So if you take the aggregate of all the fine-grained properties that we covered in various modules earlier in the course, things like, what
+                    are the different kinds of data sources a binding can have, DataContext, Source, RelativeSource, ElementName, and so on, then based on which
+                    of those you pick, on the right of the dialogue box you can set the Path to a property on the source object.
+                </p>
+                <p>Down at the bottom of this dialogue box you can see you can set up a Converter and the More settings will expand and give you access to all
+                    those other fine-grained properties, such as UpdateSourceTrigger, IsAsync, Mode, and so on.
+                </p>
+                <p>So let's dive into a series of demos that shows us the full power of the Data Sources Window and the Properties Window in the designer.</p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Generating DataGrids with Data Sources</h3>
+                <p>In this demo, I want to get you familiar with some of the Design Time Data capabilities in Visual Studio 2012 and 2013. We're going to go
+                    ahead and start with a fresh new project. We'll make it a WPF project called DesignTimeData:
+                </p>
+                <img src="images/Fig06-006.png" class="image"/>
+                <p>I'm going to add into the solution my data layer that I've been using in other demos, so I'll add an existing project and I'll go find my
+                    ZzaData project.
+                </p>
+                <img src="images/Fig06-007.png" class="image"/>
+                <p>I need to update my NuGet packages to make sure both projects use Entity Framework. So now I've added Entity Framework to both projects.</p>
+                <img src="images/Fig06-008.png" class="image"/>
+                <p>I need a connectionString in my App.config that's pointing to my Zza database:</p>
+                <img src="images/Fig06-009.png" class="image"/>
+                <p>The other thing I did here is add a reference from the DesignTimeData project to the ZaaData project so we can use it as our data layer.</p>
+                <p>So the way you're going to get started with the Design-Time features is to use the Data Sources Window.</p>
+                <p>You can get to it through View, Other Windows, Data Sources. You can see this is going to start up blank and you can click on Add New Data
+                    Source:
+                </p>
+                <img src="images/Fig06-010.png" class="image"/>
+                <p>There's four choices here, but only one of them, Object, is the main one you're going to use.</p>
+                <img src="images/Fig06-011.png" class="image"/>
+                <p>Database is going to put SQL statements and connections and things, directly into your Views, which is a bad idea from a Separation of
+                    Concerns perspective.
+                </p>
+                <p>Service is doing nothing more than shortcutting to the Add Service Reference dialog to hook up to a WCF Service, generate a proxy and data
+                    contracts, so that you can start calling that service. You can do that outside of this dialog.
+                </p>
+                <p>SharePoint, I'm not going to get into here, but Object is the one I want to focus on.</p>
+                <p>So if I click Next, what I'm going to be presented are all the namespaces in my solution, and I can drill down and find the data objects that
+                    I want to work with. So I'm going to select Customer here as the object I want to work with.
+                </p>
+                <img src="images/Fig06-012.png" class="image"/>
+                <p>I click Finish, and Visual Studio is basically going to reflect on that assembly and that type, and generate some information here in the
+                    Data Sources Window that we can then use to start generating data-bound UI through drag-and-drop operations.
+                </p>
+                <p>You can see that it starts off with a customer and presents all the properties defined on that customer.</p>
+                <img src="images/Fig06-013.png" class="image"/>
+                <p>By default, if I drag this out onto my UI here into the main window, it's going to generate a DataGrid with columns for each of the
+                    properties mapped to specific column types.
+                </p>
+                <img src="images/Fig06-014.png" class="image"/>
+                <p>Now if we go look at the XAML that was generated, we can see it generated a DataGrid, it set up a binding that just says,
+                    ItemsSource="(Binding)":
+                </p>
+                <img src="images/Fig06-015.png" class="image"/>
+                <p>So it's expecting a collection of customers to come down into this from somewhere, I'll show that in a moment, and then it defines explicit
+                    columns for each of the properties that it found on that data object, with each of those columns bound to the appropriate property on the
+                    customer object.
+                </p>
+                <p>It also generated up above, notice the Window.Resources created a CollectionViewSource:</p>
+                <img src="images/Fig06-016.png" class="image"/>
+                <p>which we covered a little bit before and we'll cover more in a later module, but it's an ICollectionView object that wraps some data
+                    collection.
+                </p>
+                <p>By default, it uses some DesignTimeData attributes that we'll be talking more about later in this module. But you can see, basically, it's
+                    specifying that the Collection Type is the Customer Type:
+                </p>
+                <img src="images/Fig06-017.png" class="image"/>
+                <p>and it indicates that it is a list of objects, and then it sets the DataContext on the root Grid element to point to that
+                    CollectionViewSource.
+                </p>
+                <img src="images/Fig06-018.png" class="image"/>
+                <p>So it basically wires everything up so that the designer knows about the type of the object it's binding to, it can use the Type information
+                    from that object to generate the bindings for the columns, and it sets up the bindings so that if you populate this CollectionViewSource at
+                    runtime with a collection of Customers, the binding is going to kick in and you'll see that data.
+                </p>
+                <p>Now it also wired up the loaded event of the window and if we go into the code-behind we can see that it's stubbed out some lines of code
+                    here:
+                </p>
+                <img src="images/Fig06-019.png" class="image"/>
+                <p>where it gets a reference to the customerViewSource through a FindResource call:</p>
+                <img src="images/Fig06-020.png" class="image"/>
+                <p>and then it just has some commented-out code that says, if you set the Source property of that CollectionViewSource to a collection, then
+                    things are going to be ready to go.
+                </p>
+                <p>So I could drop in here and replace this commented-out line of code with a call through our ZzaDBContext to go get the Customers as a list
+                    and push those into the Source property.
+                </p>
+                <img src="images/Fig06-021.png" class="image"/>
+                <p>And with just that much effort, I can go and start and we can see our data being rendered out in a Grid.</p>
+                <img src="images/Fig06-022.png" class="image"/>
+                <p>Obviously, we have some layout to do here, the columns are probably not in the order that you want by default. You can go and start moving
+                    those around in the editor, and in the case of a DataGrid, moving those around is nothing more than grabbing a column and sliding it up and
+                    down within the environment. So those are the basics of generating a DataGrid through the Data Sources Window based on some data-bound
+                    object type.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Generating Input Forms</h3>
+                <p>Now in this demo I want to show you how you can go a little further with the Data Sources Window. I'm going to slide the DataGrid that we did
+                    in the last demo up to the top so I have some room at the bottom here, and I'm going to expand my overall UI a little bit.
+                </p>
+                <img src="images/Fig06-023.png" class="image"/>
+                <p>I'm going to go back to the Data Sources Window. Now when I did the drag-and-drop before, we got a DataGrid because of this selection. It's
+                    the default selection that when you do a drag-and-drop of a given entity type, it's going to generate a DataGrid for that.
+                </p>
+                <img src="images/Fig06-024.png" class="image"/>
+                <p>You can see there's other options here including List that's going to generate a ListViewControl, which is mostly obsolete at this point by
+                    the DataGrid, and then the one I really want to show here is the Details View.
+                </p>
+                <p>If I select Details View, the other thing I can do is you can see you have drop-down boxes at the individual property level, and this is
+                    where it figures out what kind of column within the DataGrid or what kind of field when you're doing details it's going to generate.
+                </p>
+                <img src="images/Fig06-025.png" class="image"/>
+                <p>So I can leave most of these to TextBox, but I can also exclude certain ones by saying (None). So I'll exclude a few of these and say that we
+                    just want the Id, FirstName, LastName, Email, and Phone properties to be generated as the DataForm or DetailsView.
+                </p>
+                <img src="images/Fig06-026.png" class="image"/>
+                <p>Now if I do my drag-and-drop, you can see that what it generates is a Grid or a little data form.</p>
+                <img src="images/Fig06-027.png" class="image"/>
+                <p>Now the ordering of the properties may not be what you want again. It's going to go in alphabetical order, by default, but we can move those
+                    around later. If we go look at what it generated, first off, at the top, notice there's no additional CollectionViewSource.
+                </p>
+                <img src="images/Fig06-028.png" class="image"/>
+                <p>It saw that we did a drag-and-drop of the same exact entity type and so it just can reuse that same CollectionViewSource. If we dropped a
+                    different entity type, then a new CollectionViewSource would have shown up here.
+                </p>
+                <p>Down below our DataGrid, it added the root grid that's containing all those labels and TextBoxes, and it sets up the appropriate column and
+                    row definitions to get that nice rectangular layout.
+                </p>
+                <img src="images/Fig06-029.png" class="image"/>
+                <p>Then it basically generates a Label based on the property, and an input field based on the property:</p>
+                <img src="images/Fig06-030.png" class="image"/>
+                <p>And you saw from those drop-downs where the given input field type was coming from.</p>
+                <p>On the appropriate property for that input field, such as Text on a TextBox, it's going to set up a binding.</p>
+                <img src="images/Fig06-031.png" class="image"/>
+                <p>The binding is going to have the Path to the property on the data-bound object. It's always going to declare the Mode TwoWay for input
+                    controls, even though in WPF, most of these are TwoWay by default. It does that so it can have the same DesignTime experience for
+                    Silverlight and Windows 8 applications where there is no default of TwoWay for editable controls. It also puts a couple of additional
+                    properties that have to do with validation on here. We'll get to those in a later module.
+                </p>
+                <p>So you can see it just sets up a Label and input for each of the properties that you had selected that you wanted to generate input for, and
+                    puts them all in a parent grid, nicely laid out.
+                </p>
+                <p>Now if you wanted to start reordering these, maybe you wanted Id, then FirstName, then LastName, you could just drop in here and start
+                    tweaking the row numbers of the individual controls:
+                </p>
+                <img src="images/Fig06-032.png" class="image"/>
+                <p>and then you'd probably want to move the XAML around, as well, so that it's in a linear layout in the XAML that matches the way it's laid out
+                    in the screen, but ultimately it's the Row numbers that derive which grid cell it shows up in.
+                </p>
+                <p>So that shows how you can use the Details view of the Data Sources Window to drag-and-drop and generate a data form.</p>
+                <p>Additionally, you can drag out individual properties, so I could drag out LastName here, for example, and we can see it generates a single
+                    grid with two columns to i
+                </p>
+                <img src="images/Fig06-033.png" class="image"/>
+                <p>one for the Label and one for the input, and you could drag these out as individual grids on a per-property basis if you have some more
+                    exotic layout that you need.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Using the Properties Window</h3>
+                <p>Now another Design-Time capability that you can leverage in Visual Studio is the Properties Window. If I just drag an unbound control out
+                    here, such as the TextBox here:
+                </p>
+                <img src="images/Fig06-034.png" class="image"/>
+                <p>And I want to start data binding this, I can go to the Properties Window, select the property that I want to data bind, and go to this little
+                    square over to the right of the input here.
+                </p>
+                <img src="images/Fig06-035.png" class="image"/>
+                <p>If I click on that, you can see a Context menu comes up that includes Create Data Binding:</p>
+                <img src="images/Fig06-036.png" class="image"/>
+                <p>If I click on that, I get a dialog here that lets me start to specify how I want to hook up the data binding.</p>
+                <img src="images/Fig06-037.png" class="image"/>
+                <p>At the top, you can see, is a drop-down that lets you pick what kind of source to use.</p>
+                <p>DataContext is the default, and if there is a Design-Time DataContext available, such as the one shown here:</p>
+                <img src="images/Fig06-038.png" class="image"/>
+                <p>You can see that it knows about this Customer List and this is because of the Grid that this TextBox sits within has a DataContext set using
+                    DesignTimeData, which we'll get more into later in the module.
+                </p>
+                <p>So I could just pick the property over on the right here and that's setting the Path property of the binding that's going to result from
+                    this. I could also do ElementName bindings, RelativeSource bindings, and StaticResource or Source bindings, by selecting those here.
+                </p>
+                <img src="images/Fig06-039.png" class="image"/>
+                <p>And when I do, then the inputs change to let met pick from what's out there that I can select as the ElementName and what property on that
+                    element to use to set the Path:
+                </p>
+                <img src="images/Fig06-040.png" class="image"/>
+                <p>We'll just use DataContext here, say FirstName as our property.</p>
+                <p>Down at the bottom you can see if there are Converters out there, you can either add one dynamically here and it'll let you go create the
+                    class and create it as a Resource or if there's ones already in the Resource Dictionary it'll show them here.
+                </p>
+                <p>And then the More settings expands and shows all those other properties we covered in a previous module:</p>
+                <img src="images/Fig06-041.png" class="image"/>
+                <p>for things like StringFormat, the Mode property, the UpdateSourceTrigger, FallbackValues, TargetNullValues, and so on.</p>
+                <p>A bunch of these properties on the right have to do with validation, which we'll cover in a later module. So once we click OK there, if we go
+                    and inspect the XAML:
+                </p>
+                <img src="images/Fig06-042.png" class="image"/>
+                <p>We can see here is our TextBox, and all it was really doing there is creating a binding.</p>
+                <p>And you can see sometimes it does a little bit strange bindings. Really all we needed was FirstName here, but it adds /FirstName.</p>
+                <p>So ultimately, once you get comfortable with bindings, I generally find it's just as productive to type the code in the XAML Editor as to use
+                    the Properties Window, but that may be a more expeditious path for you when you're getting familiar with the syntax.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Customizing Data Sources Control Mappings</h3>
+                <p>Another thing you can do with the Data Sources Window, is customize what the set of controls are that it's capable of generating when you do
+                    your drag-and-drop operations. If you drop-down this list, I already covered the fact that the defaults here include DataGrid, List, and
+                    Details.
+                </p>
+                <img src="images/Fig06-043.png" class="image"/>
+                <p>The reason for that is, it assumes when you add an entity type or an object here, that you're talking about a collection of those. If we go
+                    to Customize here, you can see the dialog comes up that allows us to change the mapping there:
+                </p>
+                <img src="images/Fig06-044.png" class="image"/>
+                <p>and you can see the checkboxes there for DataGrid and List and Details is just kind of a built-in one that generates a form as we talked
+                    about before, but the important thing is at the top you can see it's mapped to a DataType of (List), a conceptual collection of a given
+                    entity type.
+                </p>
+                <p>If you drop that down and go to something like String:</p>
+                <img src="images/Fig06-045.png" class="image"/>
+                <p>then what this is showing is if you're dealing with an individual property of an entity that's of type String, this is the collection of
+                    controls it's going to show as options when you go to customize what it's going to generate on drag/drop.
+                </p>
+                <img src="images/Fig06-046.png" class="image"/>
+                <p>You can see at the bottom there's a link you can even add custom controls of your own and third party component libraries will show up in
+                    this list as well. And you can just check additional things. So, for example, if I wanted to go back to the List and say I want to be able
+                    to generate a ComboBox when I drag-and-drop an entity type that represents a list. I can click OK there
+                </p>
+                <img src="images/Fig06-047.png" class="image"/>
+                <p>and then now I could drop this down, select ComboBox, drag-and-drop, and you can see the sizing is kind of funky, but it generated a
+                    ComboBox:
+                </p>
+                <img src="images/Fig06-048.png" class="image"/>
+                <p>and if we go look at the XAML:</p>
+                <img src="images/Fig06-049.png" class="image"/>
+                <p>what it created for me was a ComboBox with the ItemsSource bound to the current DataContext, because it saw that that ComboBox was dropped
+                    inside of a Grid that already had a customerViewSource hooked up, so it could data bind to that.
+                </p>
+                <img src="images/Fig06-050.png" class="image"/>
+                <p>Now notice a couple other things about dropping a ComboBox like this. One is that it hooks up two other properties relative to data binding
+                    that are important, the DisplayMemberPath property indicates what property on the individual objects in the collection your binding to
+                    should be used to render text in the ComboBox. And the SelectedValuePath is going to be used to point to another property on that same
+                    object that can be used to track a value, typically a primary key type of value.
+                </p>
+                <p>You can see by default here, it set both of those to the same property.</p>
+                <p>And if we look at our Data Sources Window and expand the Customer, we can see it picked City, even though that was marked None:</p>
+                <img src="images/Fig06-051.png" class="image"/>
+                <p>and that's because it's the first string property that it found on the Customer alphabetically.</p>
+                <p>So as I talked about when dragging and dropping and generating a form, it's always going to generate things based on the alphabetical order
+                    of the properties on the object, so you may have to do some tweaking of the XAML afterwards.
+                </p>
+                <p>And the DisplayMemberPath and SelectedValuePath it's rarely going to get correct, so you're always going to want to take a look at those and
+                    adjust the values to the appropriate property for your scenario.
+                </p>
+                <p>The other thing it did here is on a ComboBox it always adds this ItemsPanel customization:</p>
+                <img src="images/Fig06-052.png" class="image"/>
+                <p>setting it to a virtualizing StackPanel. There are various reasons the Design Team chose to do that, but in general, you can kill that out of
+                    there.
+                </p>
+                <p>A virtualizing StackPanel is only needed when you have a very large number of items that you're going to present in a data-bound control. If
+                    you are putting hundreds or thousands of items in a ComboBox, you are just torturing your users, so please don't do that, for user
+                    experience sake, and if you don't do that, then you don't need the virtualizing StackPanel.
+                </p>
+                <p>So notice that you can also customize at the individual property level:</p>
+                <img src="images/Fig06-053.png" class="image"/>
+                <p>and this is where those other type mappings such as string come in. The set of controls presented here are based on whatever that property
+                    type is in this dialog.
+                </p>
+                <img src="images/Fig06-054.png" class="image"/>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Hook Up Existing Controls</h3>
+                <p>So far, the examples I've shown of using the Data Sources Window have been for generating the UI, as well as the bindings on the UI
+                    properties of that control.
+                </p>
+                <p>Data Sources Window is also capable of just hooking up the binding on an existing control. So, for example, if I go to the Toolbox and go
+                    grab a TextBox and put it out here on the UI:
+                </p>
+                <img src="images/Fig06-055.png" class="image"/>
+                <p>I could then decide what I want to put in that TextBox. In this case, I'm going to add another Data Source, so I'm going to grab the Object
+                    Data Source:
+                </p>
+                <img src="images/Fig06-056.png" class="image"/>
+                <p>I'm going to go to my ZzaData, and we'll pick Product this time and click Finish.</p>
+                <img src="images/Fig06-057.png" class="image"/>
+                <p>You can see the icon here:</p>
+                <img src="images/Fig06-058.png" class="image"/>
+                <p>that it's mapped to the DataGrid by default, and you can see our customizations from a previous demo there:</p>
+                <img src="images/Fig06-059.png" class="image"/>
+                <p> that ComboBox also shows up now.</p>
+                <p>What I could do is expand and say that maybe it's the Name of the property that I want to put into this TextBox:</p>
+                <img src="images/Fig06-060.png" class="image"/>
+                <p>So I can drag-and-drop that onto the existing TextBox, and you can see that the icon changes to a shortcut arrow.</p>
+                <img src="images/Fig06-061.png" class="image"/>
+                <p>If I release, basically it made no modifications to the control in terms of its layout or position, all it did is added a binding for the
+                    default property for that control type, so the Text property for a TextBox:
+                </p>
+                <img src="images/Fig06-062.png" class="image"/>
+                <p>and it bounded to the property on the data-bound object we dragged onto it, so Name in this case.</p>
+                <p>It also added a couple other things. As I talked about in a previous demo, it's always going to put Mode TwoWay on there for an input
+                    control. It puts these validation properties on here that we'll get to in a later module, and then in this case, because we dragged and
+                    dropped a new entity type that didn't already have a Data Source, you can see it hooked it up using a Source binding, pointing to some
+                    Resource.
+                </p>
+                <img src="images/Fig06-063.png" class="image"/>
+                <p>If we go back up to the top of our UI now, we can see it added a new CollectionViewSource with a DesignInstance Type of Data:Product.</p>
+                <img src="images/Fig06-064.png" class="image"/>
+                <p>So, similar to what I had covered before for creating this Customer Source that it reused for all the different drag-and-drops of customers,
+                    it's going to create one CollectionViewSource for a given entity type and then all the subsequent drag-and-drops will use that single
+                    CollectionViewSource if they're using that same entity type.
+                </p>
+                <p>You can certainly break that up on your own and change things around, use MVVM to point to properties on a ViewModel or create different
+                    instances of CollectionViewSources, possibly for the same entity type that you populate with different sets of collections. But the Designer
+                    is just trying to map it to a Type, so it sets up a single CollectionViewSource per Type.
+                </p>
+                <p>We could also do something similar for a collection-oriented control. I can drag-and-drop a ListBox out here:</p>
+                <img src="images/Fig06-065.png" class="image"/>
+                <p>We won't worry too much about the presentation there.</p>
+                <p>If I then go back to my Data Sources Window and drag-and-drop an entity type onto that ListBox and go look at the XAML and what it did
+                    there:
+                </p>
+                <img src="images/Fig06-066.png" class="image"/>
+                <p>we can see the ListBox was pre-existing in this case, so all it hooked up for us were the data binding properties again.</p>
+                <p>So it sets up the ItemSource, again, pointing to that ProductViewSource that was already up in the Resource section and it sets the
+                    DisplayMemberPath and SelectedValuePath to the first string property that it finds on that entity type, which in this case was Description.
+                </p>
+                <p>Again, you're generally going to have to tweak those to what you intend them to be, probably Name or the DisplayMemberPath on a Product, and
+                    Id for the ProductId. So that's how you can use drag-and-drop operations to hook up data bindings to existing controls.
+                </p>
+                <p>In the end, as you can see, it's not really writing that much code for you. As an experienced XAML developer, I find it easier to just drop
+                    into the XAML and write the bindings myself, especially because in Visual Studio 2012 they added IntelliSense for bindings.
+                </p>
+                <p>You can see here I get IntelliSense down to the properties of a binding:</p>
+                <img src="images/Fig06-067.png" class="image"/>
+                <p>where I can set the Path equal to Name, and I can set Source equal to a StaticResource or productViewSource.</p>
+                <img src="images/Fig06-068.png" class="image"/>
+                <p>But the one thing it did do, which was nice, was the declaration of that CollectionViewSource for me up in the Resources section, and getting
+                    this all hooked up. So that can definitely save you a little bit of time getting things wired up.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Editing Data Templates</h3>
+                <p>Now another feature of Visual Studio you can take advantage of if you don't want to spend all your time just banging out XAML in the Editor,
+                    is the Visual Studio DataTemplate editing feature.
+                </p>
+                <p>This is something that came over because in Visual Studio 2012 and later, the Designer is really the same designer that Blend for Visual
+                    Studio is using and this is a feature that already existed in Blend. Basically, what you can do is graphically add DataTemplates in the
+                    designer.
+                </p>
+                <p>You can go up to an existing control, you can say you want to set up a DataTemplate for it, it will generate that DataTemplate and give you a
+                    graphical design experience on top of it. You can add controls to the template, set properties on those controls, and even hook up data
+                    binding to the properties of those controls.
+                </p>
+                <p>Now if you go and compare this to the similar features in Blend, it's a little bit limited, but it gives you a little more flexibility to go
+                    to any resource in your project and get a graphical editing experience on it.
+                </p>
+                <p>The feature I'm going to show you here in Visual Studio is just for a given control on your UI that you want to hook up a DataTemplate to,
+                    and you'll see from the demo that there's a lot of pointing and clicking and mouse movement involved to get this done. If your DataTemplate
+                    is fairly simple, you may find, as I usually do, it's easier to just bang out the XAML, but I want to get you exposed to the features. You
+                    can try it out and decide which works best for you.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Editing Data Templates</h3>
+                <p>Now another nice capability that's available in the Visual Studio designer relative to data binding is the ability to work with DataTemplates
+                    directly from the designer.
+                </p>
+                <p>So I can go to something like my ListBox that's selected in the bottom left, I can right-click on it, and if I go to EditTemplate here, this
+                    has to do with ControlTemplates, not data binding, but if I go to Edit Additional Templates, you can see Edit Generated Items
+                    (ItemTemplate), and basically what we're doing here is creating an ItemTemplate for use with that control.
+                </p>
+                <img src="images/Fig06-069.png" class="image"/>
+                <p>I can say, Create Empty:</p>
+                <img src="images/Fig06-070.png" class="image"/>
+                <p>give it a name, we'll call this ProductTemplate. You can see there's some selections down below about where it's going to go:</p>
+                <img src="images/Fig06-071.png" class="image"/>
+                <p>Those don't actually work correctly and you have no way to change them, so you just say OK here.</p>
+                <p>And what you end up with doesn't seem like a very impressive designer experience at first, because what you've got here is just this little
+                    box in the Designer:
+                </p>
+                <img src="images/Fig06-072.png" class="image"/>
+                <p>A very important window in Visual Studio when working in this mode is the Document Outline View.</p>
+                <img src="images/Fig06-073.png" class="image"/>
+                <p>You can see that the Document Outline View shows that we are working with the DataTemplate and it's got a single Grid within it. In fact, if
+                    we go look at the XAML, that's exactly what we're looking at, a DataTemplate named ProductTemplate with a Grid inside of it:
+                </p>
+                <img src="images/Fig06-074.png" class="image"/>
+                <p>but what we've got is a Design-Time experience for working with that.</p>
+                <p>So I can zoom in a little bit here, we'll go to 800%, and we can see we have the same kinds of Design-Time experience working with that
+                    Grid:
+                </p>
+                <img src="images/Fig06-075.png" class="image"/>
+                <p>So say I want to set this up similar to the ProductTemplate we used in a previous module. We could click here to add a column to my Grid, so
+                    now I have two columns in my Grid.
+                </p>
+                <p>I could go to the Toolbox and grab another Grid, and put it in the right cell. I can shrink it down so that it's fully within that cell,
+                    right-click, say Reset Layout, All:
+                </p>
+                <img src="images/Fig06-076.png" class="image"/>
+                <p>and now we'll take off all sizing and positioning so that Grid fills the right cell.</p>
+                <p>Then on the edges of that Grid in the designer, you can see I could split it up into two rows.</p>
+                <img src="images/Fig06-077.png" class="image"/>
+                <p>Now I've got a place to put an image on the left, the name on the top, and the description on the bottom, similar to the ProductTemplate that
+                    we used in a previous module.
+                </p>
+                <p>So now I just need to add those controls, put the image in the leftmost cell, get it shrunk down so that it's fully within it, do another
+                    Reset Layout, All. Then I can select the Right Grid so that I can see the guidelines on there, go to the Toolbox, grab a TextBlock, put it
+                    in the upper right:
+                </p>
+                <img src="images/Fig06-078.png" class="image"/>
+                <p>Now this one gets a little harder to resize because it's so darn big compared to that tiny little thing, but I can just shrink it down, get
+                    it fully within the cell:
+                </p>
+                <img src="images/Fig06-079.png" class="image"/>
+                <p>right-click, Reset Layout, All, and you can see things get a little wonky here because of the text being in there in a certain text size, but
+                    I could go edit that text and zero it out and then things shrink back down to something reasonable.
+                </p>
+                <p>So then I could do something similar, do another TextBlock into the bottom cell, again, it's too large, let's get rid of the text, click out,
+                    click back in, and this is where this Document window comes in really handy:
+                </p>
+                <img src="images/Fig06-080.png" class="image"/>
+                <p>Sometimes it's hard, especially with these semi-non-visual controls, like how do I grab the TextBlock in here? You don't, you grab it in the
+                    Document Outline, and it will select it down below.
+                </p>
+                <p>And then from there, I can say Reset Layout, All, grab it up here, say Reset Layout, All, and you can see you have a little bit more control
+                    from the Document Outline.
+                </p>
+                <p>We can do things with our Grid, such as changing sizing to Auto sizing. Go to the Sizing, Auto size on that, select the top level Grid, go to
+                    the sizing of the columns and Auto size those, and now if we look at the resulting XAML:
+                </p>
+                <img src="images/Fig06-081.png" class="image"/>
+                <p>we have something fairly close to what we had done before manually by pasting in some code top level Grid with two columns, the inner Grid
+                    with two rows, an Image in the left cell, the TextBlocks in the right cell, and no other sizing or positioning there.
+                </p>
+                <p>Now we need to hook up data binding on these controls to the appropriate properties of a product. Obviously, I could drop right in the XAML
+                    here and bang out the code quick enough, but just to show you the designer way of doing it, I could go to my Image in the Document Outline
+                    to make sure it's selected:
+                </p>
+                <img src="images/Fig06-082.png" class="image"/>
+                <p>go F4 to bring the Properties Window out, and go to the Source property.</p>
+                <img src="images/Fig06-083.png" class="image"/>
+                <p>I go to this little square to the right of its input field and say, Create Data Binding, and we get back to our Properties data binding
+                    window that I've covered before:
+                </p>
+                <img src="images/Fig06-084.png" class="image"/>
+                <p>We would say that we're going to use the DataContext, which is going to flow down into that DataTemplate as we've covered, and we would use a
+                    custom Path up here to say that we're going to use the Image property of whatever that DataContext object is.
+                </p>
+                <img src="images/Fig06-085.png" class="image"/>
+                <p>Then, likewise, we could go to this TextBlock, F4 for its properties, go to the Text property, Create Data Binding, set it to DataContext,
+                    Path of Name for this one:
+                </p>
+                <img src="images/Fig06-086.png" class="image"/>
+                <p>Other TextBox, F4, Create Data Binding, DataContext, and Description for this one.</p>
+                <img src="images/Fig06-087.png" class="image"/>
+                <p>So you can see that's a lot of mouse movement and a lot of clicking and pointing, and generally I just found it would be a lot quicker to
+                    drop into the XAML and write those expressions myself, but I just wanted to get you exposed to the designer-based way of setting bindings as
+                    well.
+                </p>
+                <p>Now if we go back to the Design surface, you can see we're still in this, sort of, zoomed-in focus where we're designing just the
+                    DataTemplate:
+                </p>
+                <img src="images/Fig06-088.png" class="image"/>
+                <p>How do we get out of this and back to the main Designer View?</p>
+                <p>Over here in the Document Outline you see this up arrow, Return scope to (Window) in the upper left of the Document Outline:</p>
+                <img src="images/Fig06-089.png" class="image"/>
+                <p>So we just click on that and we kind of zoom back out.</p>
+                <img src="images/Fig06-090.png" class="image"/>
+                <p>Now you can see the Document Outline transforms to the top-level Window hierarchy, and we get our normal designer back.</p>
+                <p>What if we want to drop back in there and make more tweaks? We can just go select the Control again, right-click, Edit Additional Templates,
+                    Edit Generated Items (Item Template), and then Edit Current:
+                </p>
+                <img src="images/Fig06-091.png" class="image"/>
+                <p>and we'll go right back into that existing DataTemplate.</p>
+                <img src="images/Fig06-092.png" class="image"/>
+            </div>
+            <div class="panel-body">
+                <h3>Design Time Data</h3>
+                <p>Now let's look at an aggregate feature that's referred to as Design-Time Data in Visual Studio. Basically what this is, is for Visual Studio
+                    to really light up and give you a lot of support in the designer for working with data binding, the designer is going to have to know what
+                    data you're working with.
+                </p>
+                <p>At a minimum, that includes what type of entities you're working with so it knows about the properties and the type of those properties to
+                    facilitate some of the dialogs and things that you've seen in previous demos. In addition, if you have sample data available, it can render
+                    that in the Design-Time environment. Having this information can help you out in a number of ways with the graphical design of your user
+                    interface.
+                </p>
+                <p>First off, in hooking up the code you get better binding IntelliSense. In Visual Studio 2012, the binding properties show up when you're
+                    typing in the XAML Editor, but you don't have much information about the actual data that you're working with.
+                </p>
+                <p>One new feature in Visual Studio 2013 is that anything that's wired up as a DataContext in the Design-Time environment will show up in the
+                    IntelliSense list. And if you pick those, it's going to set those up to hook up the Path Property of the binding.
+                </p>
+                <p>In addition, you saw the Properties Binding Window can populate with the properties on your current DataContext object or on other Resource
+                    objects that you point to with a Source binding. In order to do that, it has to know what those types are. In terms of the sample data, that
+                    can help out a lot with getting your UI laid out appropriately.
+                </p>
+                <p>By having that data there in the Designer, you can visualize more what your controls are going to look like once they are populated with
+                    data, and that can help you decide on the sizing and positioning of those controls.
+                </p>
+                <p>Now one important thing to realize is that your UI elements are alive in the designer. And what I mean by that is the elements themselves are
+                    actually being constructed and loaded to render in the designer, just like they do at runtime.
+                </p>
+                <p>This means that anything you construct in the XAML is also alive too. That means they're going to be constructed and will be invoked from the
+                    designer.
+                </p>
+                <p>So, for example, if you're wiring up your ViewModel to the DataContext property in the XAML, that's going to be constructed. And in your
+                    Constructor, if you've tried to call to a service or a database, that's not going to work out because you don't have a full execution
+                    context there, specifically, you don't have any application configuration and your host executable is actually Visual Studio, not your
+                    normal host executable that you're building.
+                </p>
+                <p>So things like database and service calls will generally fail, calls out to certain frameworks may not work correctly, but basic construction
+                    of objects, setting of properties and things like that should work just fine. Now to start leveraging this Design-Time Data, you need to
+                    start using some framework features that are available.
+                </p>
+                <p>First off, there's a d:namespace that you're going to pull into your XAML. You can see it as expression/blend in the namespace name, and
+                    that's because that's where these features were originally introduced back in 2008.
+                </p>
+                <p>Next, you have certain properties that you can set on objects that are only available in the Design-Time environment. So d:DataContext is one
+                    that is similar to the normal DataContext property on an element, but if you set this on an element, it's only going to set the DataContext
+                    in the Design-Time environment, and it will basically be ignored at runtime as if it wasn't there. But in the Design-Time environment,
+                    whatever object you point this to is going to be available in the designer and can be used to render out things in bindings, and it's going
+                    to flow down the visual tree just like a normal DataContext does.
+                </p>
+                <p>Another property like this you can use is on a CollectionViewSource, is the d:DesignSource property. So this is the equivalent of the Source
+                    property on a CollectionViewSource, which you normally point to whatever the collection is that is wrapping. d:DesignSource just provides a
+                    Design-Time collection to use.
+                </p>
+                <p>Next, there's the d:DesignInstance markup extension. So this is a markup extension with curly braces that you can use on the right side of
+                    the assignment from something like DesignSource or DataContext. And what you do is you provide it a Type through an x:Type markup extension,
+                    and it's basically saying, create me an instance of this object type for the Design-Time environment so that the designer can reflect on it,
+                    find out about its properties and the types of those properties and so on, but it will basically be an empty default values for all the
+                    properties.
+                </p>
+                <p>Last, there's the d:DesignData property, and this is one that you can point to a XAML file or an XML file that can be turned into an object
+                    model, and once that object model is created, if it has the same properties as you expect for your runtime objects, those can be rendered
+                    out through the bindings.
+                </p>
+                <p>So you can use d:DesignData to set d:DataContext or d:DataSource, and instead of just getting the Type information, you actually get a whole
+                    built-up object model with values for all the properties. So let's take a look at a demo of using all these features.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Design Time Data Features</h3>
+                <p>In this demo, I want to get you more familiar with working with DesignTimeSampleData and some of the d:namespace markup extensions that
+                    assist you in the Design-Time environment.
+                </p>
+                <p>The starting point here is a simple WPF application project.</p>
+                <img src="images/Fig06-093.png" class="image"/>
+                <p>The only thing I've added here is I've added in the Zza data layer project that we've been using for our data, and I added a ViewModel where
+                    this ViewModel class is just set up to expose a Customers collection:
+                </p>
+                <img src="images/Fig06-094.png" class="image"/>
+                <p>and it has some hard-coded data in there right now for a couple of customers that are being put into that collection, but only if you're not
+                    in the Design-Time environment:
+                </p>
+                <img src="images/Fig06-095.png" class="image"/>
+                <p>So this is one of the first things that, you know, starts tying in with the sample data here, is you can see that you have this switch
+                    available to you that we've used before to make sure the database calls did not get executed in the designer, and here I've set it up the
+                    way I did before where it's guarding out the initialization of our data.
+                </p>
+                <p>But in this case, because this data is static data, it turns out this would work okay in the designer, so I'm going to get rid of the not
+                    symbol here:
+                </p>
+                <img src="images/Fig06-096.png" class="image"/>
+                <p>and make it so that this data is only there if we're in the designer. Now this ViewModel is not hooked up to anything yet, we'll hook this up
+                    in a bit.
+                </p>
+                <p> So if I go into my MainWindow and go to the design surface, you can see how I already added Data Sources for some of the primary entities
+                    we'll be working with:
+                </p>
+                <img src="images/Fig06-097.png" class="image"/>
+                <p>So I'm going to add one more for my ViewModel itself, because it is just a Data Object that I can bind to its properties:</p>
+                <img src="images/Fig06-098.png" class="image"/>
+                <p>So I'm going to drill down in here:</p>
+                <img src="images/Fig06-099.png" class="image"/>
+                <p>and check the box for my MainWindowViewModel.</p>
+                <p> Now as we've seen before in other demos, I could then drag this Customers collection out onto my MainWindow and it would generate a DataGrid
+                    for me, it would hook up the data binding for that DataGrid, and it would also generate a CollectionViewSource for Customers.
+                </p>
+                <img src="images/Fig06-100.png" class="image"/>
+                <p>I'm going to Reset Layout, All, and I'm going to drag up the bottom and bring out a TextBox from the Toolbox that we'll also use in this
+                    demo.
+                </p>
+                <img src="images/Fig06-101.png" class="image"/>
+                <p>Now if we go into the XAML and inspect what was generated from the drag-and-drop of the ViewModel, it's a little bit more complicated than
+                    some of the demos we've seen before, but the thing I want to focus on here is this part of the CollectionViewSource.
+                </p>
+                <img src="images/Fig06-102.png" class="image"/>
+                <p>I pointed it out before, but it generated a CollectionViewSource for the object that we dragged and dropped, and it uses this d:DesignSource
+                    property. So this d:namespace is a special namespace declared up above:
+                </p>
+                <img src="images/Fig06-103.png" class="image"/>
+                <p>that contains a bunch of custom markup extensions that are able to detect whether they are in the designer or not. And they're really just
+                    using that same code that I showed in the ViewModel to do that detection. So, markup extensions like this d:DesignInstance:
+                </p>
+                <img src="images/Fig06-104.png" class="image"/>
+                <p>Can basically null themselves out or make themselves so they do nothing when you're not in the designer. So it's as if these properties are
+                    not even here if you're at runtime.
+                </p>
+                <p>So d:DesignSource functions like the Source property of a CollectionViewSource, but it will only set the source if you're in the designer.
+                    What it's setting it to is a DesignInstance. So a DesignInstance is a markup extension that can create a Design-Time instance of some
+                    object. The object type it's going to create in this case is our ViewModel Type, specified through an x:Type markup extension.
+                </p>
+                <p>And you can see over here</p>
+                <img src="images/Fig06-105.png" class="image"/>
+                <p>As we've talked about before, the CreateList=True is part of the CollectionViewSource to say, even though we're talking about an Entity type
+                    here, make it a collection of those entities.
+                </p>
+                <p>So this just gives the designer information about the Type that's going to be used, and that allows it to populate some of those Design-Time
+                    features, such as the Create data binding dialog from the Properties window that I showed earlier.
+                </p>
+                <p>However, if we're doing the MVVM pattern, we actually don't want all this extra junk in the way, so I'm going to strip out the loaded event
+                    that it added:
+                </p>
+                <img src="images/Fig06-106.png" class="image"/>
+                <p>I'm going to kill these CollectionViewSources</p>
+                <img src="images/Fig06-107.png" class="image"/>
+                <p>I'm going to get rid of this DataContext on the root Grid:</p>
+                <img src="images/Fig06-108.png" class="image"/>
+                <p>and I'm going to set the binding on the DataGrid to be the Customers property that we expect to be exposed from our ViewModel:</p>
+                <img src="images/Fig06-109.png" class="image"/>
+                <p>Now I'm going to drop in here and set the DataContext to the Window to our ViewModel.</p>
+                <img src="images/Fig06-110.png" class="image"/>
+                <p>This would be a fairly standard structuring for MVVM. Now the reason I'm doing this is to emphasize something about the designer. I'm going
+                    to go ahead and build here, and then we'll go over to the design surface itself, and we see that there is immediately data there.
+                </p>
+                <img src="images/Fig06-111.png" class="image"/>
+                <p>And that is because if we go back to our ViewModel, if you remember, we put this statement in here that says, only if you're in Design mode,
+                    populate the Customers with these hard-coded data values:
+                </p>
+                <img src="images/Fig06-112.png" class="image"/>
+                <p>And it emphasizes the fact that in the Design-Time environment, what you're seeing in the designer is live code basically. It is constructing
+                    all the elements in the element tree and anything done during their construction process is going to be live data. So it constructed the
+                    Window:
+                </p>
+                <img src="images/Fig06-113.png" class="image"/>
+                <p>And then to set the DataContext property it constructed the MainViewModel:</p>
+                <img src="images/Fig06-114.png" class="image"/>
+                <p>And in the MainViewModel's constructor, it checked and said, yes I am in Design mode, so I'll new up this collection of customers and set
+                    those properties:
+                </p>
+                <img src="images/Fig06-115.png" class="image"/>
+                <p>because we're setting customers here and it raises PropertyChanged:</p>
+                <img src="images/Fig06-116.png" class="image"/>
+                <p>events fire, and you're actually looking at running code in the designer here.</p>
+                <p>And so, this is one way you can get some sample data into your Design-Time environment, is if you have some hard-coded sample data that will
+                    be part of the construction process of the elements that are declared, then it's going to show up there and you can use that to help get
+                    your layout right and visualize exactly what it's going to look like.
+                </p>
+                <img src="images/Fig06-117.png" class="image"/>
+                <p>The problem with that approach is you probably don't want to have all this hard-coded data:</p>
+                <img src="images/Fig06-118.png" class="image"/>
+                <p>especially any complex object model, cluttering up your production code like this, and that's where some of the other Design-Time data
+                    features come in.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Demo: Design Time Sample Data</h3>
+                <p>So what if you wanted to get this hard-coded data out of your ViewModels and model objects and so on? You want to get it out into some
+                    separate data files that would not even be loaded at runtime.
+                </p>
+                <p>So what I could do instead, I'm going to put the not symbol back in here:</p>
+                <img src="images/Fig06-119.png" class="image"/>
+                <p>so that now these customers will only be populated at runtime. And again, if I simply build and go back to the Designer, now we can see our
+                    data is gone.
+                </p>
+                <img src="images/Fig06-120.png" class="image"/>
+                <p>Now I want to provide some sample data there, and there's a couple ways to go about this. There's one very simple and crude way, which is
+                    that you can go into your project and you can add a new Resource Dictionary which really just gives you a flat XAML file, and we'll call
+                    this MyDesignData:
+                </p>
+                <img src="images/Fig06-121.png" class="image"/>
+                <p>Once I'm in here, I can add in other namespaces, such as my Zza.Data namespace</p>
+                <img src="images/Fig06-122.png" class="image"/>
+                <p>And then I could change the root element to be some object from that namespace:</p>
+                <img src="images/Fig06-123.png" class="image"/>
+                <p>Once I've done that, I could drop in here and just start setting properties on the Customer. So I could set my Id equal to a GUID, I could
+                    set my FirstName equal to some value:
+                </p>
+                <img src="images/Fig06-124.png" class="image"/>
+                <p>Now I have a sample data object that I can actually use in the Design-Time environment, so I'll save that and show you the direct way of
+                    using it.
+                </p>
+                <p>If I go into the XAML of my MainWindow, I'm going to drop down to that TextBox I put at the bottom. I can add a DataContext to just this
+                    element using the d:DataContext property that we saw before, and what I'm going to set it to is a d:DesignData markup extension. This takes
+                    a Source property, which can point to a XAML file:
+                </p>
+                <img src="images/Fig06-125.png" class="image"/>
+                <p> It's all pointed to MyDesignData, and it's basically going to look into that XAML file, take the root element, create an instance of it, and
+                    use that as the DataContext.
+                </p>
+                <p>Then I can take the text here and just set up a binding to FirstName:</p>
+                <img src="images/Fig06-126.png" class="image"/>
+                <p>And as soon as I do that, in the designer we can see it's pulling Brian out of that DesignTimeData file.</p>
+                <img src="images/Fig06-127.png" class="image"/>
+                <p>Now setting up those data files by hand can be a little bit of work. Unfortunately, there's no direct support in Visual Studio for this, but
+                    if you just drop over to Blend for Visual Studio, I'm going to fire up Blend for Visual Studio 2012, and certainly this still works with
+                    2013 as well, I'm just sticking to 2012 since 13 just came out.
+                </p>
+                <p>I can go and open the same project, and once we're in here we can go to this Data tab over on the right:</p>
+                <img src="images/Fig06-128.png" class="image"/>
+                <p>And we can select at a Project level, and in the upper right corner you can see Create Sample Data:</p>
+                <img src="images/Fig06-129.png" class="image"/>
+                <p>We'll say, New Sample Data, and you can also create sample data from a class, but I'm just going to show you the raw experience here.</p>
+                <img src="images/Fig06-130.png" class="image"/>
+                <p>I'll say, Create Sample Data, and we'll accept Sample Data Source:</p>
+                <p>And what it starts out with here is it's got a root level collection, which we'll call Customers:</p>
+                <img src="images/Fig06-131.png" class="image"/>
+                <p>Just like the Customers property hanging off of our ViewModel. And then it's got a couple of properties declared here, first off, a string,
+                    so we'll rename that one to be FirstName.
+                </p>
+                <p>This other one is set to a Boolean, we'll switch that to be a string as well, and you can see there's various options depending on the Type
+                    that you select, and we'll call this Id:
+                </p>
+                <img src="images/Fig06-132.png" class="image"/>
+                <p>Now you can see there's not a one-to-one match here, our ID is actually a GUID, a GUID is not an option for the sample data, but for getting
+                    the UI laid out and stuff, this can get you pretty close.
+                </p>
+                <p>Now as soon as that's done, what I can do is go over here to my DataGrid and I'm going to delete this DataGrid out of here that was already
+                    here.
+                </p>
+                <img src="images/Fig06-133.png" class="image"/>
+                <p>I'm going to go into the Toolbox here, find a DataGrid:</p>
+                <img src="images/Fig06-134.png" class="image"/>
+                <p>Select my root Grid here in the MainWindow, and double-click on the DataGrid.</p>
+                <img src="images/Fig06-135.png" class="image"/>
+                <p>That's going to add a new instance of it. I'm going to go ahead and Reset Layout, All:</p>
+                <img src="images/Fig06-136.png" class="image"/>
+                <p>It's going to end up overlaying my TextBox, but we're not going to use that anymore anyway.</p>
+                <p>Now that I have an empty DataGrid here, I can drag-and-drop the Customers collection from my Sample Data Source onto my DataGrid:</p>
+                <img src="images/Fig06-137.png" class="image"/>
+                <p>And we can see it immediately populates with some sample data.</p>
+                <img src="images/Fig06-138.png" class="image"/>
+                <p>Now I'm just going to save what I did and jump back over to Visual Studio. We'll Reload All:</p>
+                <img src="images/Fig06-139.png" class="image"/>
+                <p>and let's take a look at what it did for us. First off, you can see it added a Sample Data subfolder, the SampleDataSource, and under that a
+                    XAML file with an xsd.
+                </p>
+                <img src="images/Fig06-140.png" class="image"/>
+                <p>The structure of that XAML file is kind of similar to what we were setting up by hand.</p>
+                <img src="images/Fig06-141.png" class="image"/>
+                <p>It's got a single root object, it has a Customers collection property, and then it's got individual customer items underneath that.</p>
+                <p>Now you can see it called these CustomersItem instead of Customer. That shouldn't matter. Bindings don't actually couple to the type of the
+                    object that they're binding to, only to the property names on the containing objects.
+                </p>
+                <p>So as long as this:</p>
+                <img src="images/Fig06-142.png" class="image"/>
+                <p>Matches up with our Customers property on our ViewModel and the properties we put on our CustomerItems match up with the properties on a
+                    Customer:
+                </p>
+                <img src="images/Fig06-143.png" class="image"/>
+                <p>we should be good to go for getting this all hooked up.</p>
+                <p>Because we selected Project Level, it declared an instance of that SampleDataSource as an object inside of our application-scoped Resource
+                    Dictionary and gave it a key of SampleDataSource.
+                </p>
+                <img src="images/Fig06-144.png" class="image"/>
+                <p>In the MainWindow, you can see what it did is declared our DataGrid from our drag-and-drop operation:</p>
+                <img src="images/Fig06-145.png" class="image"/>
+                <p>and it set the DataContext on that equal to that SampleDataSource.</p>
+                <img src="images/Fig06-146.png" class="image"/>
+                <p>Now it should have, and sometimes does, use the d:DataContext here.</p>
+                <img src="images/Fig06-147.png" class="image"/>
+                <p>You really only want that to be the DataContext on this DataGrid for DesignTimeData. For runtime, we want our DataContext to flow down from
+                    the Window:
+                </p>
+                <img src="images/Fig06-148.png" class="image"/>
+                <p>especially if we're doing MVVM like this.</p>
+                <p>So I can build, and go back to the designer, and just prove that our sample data is still there.</p>
+                <img src="images/Fig06-149.png" class="image"/>
+                <p>But now, because our ViewModel was populating our Customers collection, if we are not in the designer, and because this DataContext is only
+                    going to overwrite what DataContext comes down the visual tree if we're in Design-time, it means that we can run this and we can see that
+                    our data coming from our ViewModel is there at runtime:
+                </p>
+                <img src="images/Fig06-150.png" class="image"/>
+                <p>But in the designer we've got our sample data there.</p>
+                <p>So you can see these d:namespace markup extensions:</p>
+                <img src="images/Fig06-151.png" class="image"/>
+                <p>And properties give you a lot of power and flexibility to declare things that will be there in the Design-Time environment. These can help
+                    you in getting your UI laid out, visualizing what it's going to look like, handle things like localization, but then at runtime, that data
+                    can be replaced automatically with your real runtime data.
+                </p>
+            </div>
+            <div class="panel-body">
+                <h3>Summary</h3>
+                <p>Okay, in this module you saw that Visual Studio provides a lot of features there for giving you a more graphical user interface WYSIWYG
+                    experience for working with data binding.
+                </p>
+                <p>You saw that from the Data Sources Window you can drag-and-drop entities or individual properties and generate DataGrids, Detail Forms or
+                    even individual fields just through a simple drag/drop operation. And it not only generates the UI elements, it generates them with decent
+                    layout, and it hooks up the bindings on the appropriate properties to get it all data bound to the entity or property that you dragged out.
+                </p>
+                <p>Additionally, you saw that you can hook up existing controls. So if you want to first lay out all your controls and then hook them up to data
+                    objects, you can simply drag-and-drop from the Data Sources Window onto the existing control, and it won't generate any UI, but it will set
+                    the appropriate properties using bindings.
+                </p>
+                <p>You saw that while working with the Data Sources Window, the set of mapped controls that get generated is customizable. It has a default set
+                    based on the individual property types. You can customize that to add other control types that are in the framework, or you can bring in
+                    your own custom controls or third party libraries to that list as well.
+                </p>
+                <p>You saw that the VS Designer inherits, if you will, from Blend, because it really is the Blend Designer under the covers, a nice little
+                    feature for graphically defining your DataTemplate.
+                </p>
+                <p>Now it does involve a lot of point-and-click and drag-and-drop, and mouse movement, so in general, if it's a simple template you may be able
+                    to do it faster by typing it, but you saw that you can just right-click on a control, say you want to edit the template for that control,
+                    and the designer switches into a Resource editing mode for a single DataTemplate.
+                </p>
+                <p>Finally, you saw you can bring in some sample data into the Design-Time environment. You can either use the designer properties get is in
+                    Design mode and have some hard-coded data back inside your model objects or your ViewModel objects that's only used at Design-time, or you
+                    can use some of the properties and markup extensions from the d:namespace to pull in sample data from XAML files or XML files and use that
+                    to populate your UI in the Design-Time environment only, allowing that data to be overwritten or substituted at runtime with your real-time
+                    data.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
