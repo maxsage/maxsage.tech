@@ -1,0 +1,406 @@
+Services, Dependency Injection, and Component Lifecycle Hooks
+
+Services, DI, and Lifecycle Hooks
+
+Our demo application, the storyline tracker, retrieves data about the characters and stories and it does this
+from several components, so it makes sense that we don't duplicate that kind of code. In this module we'll see
+how to isolate data management in reusable services and use dependency injection with Angular 2 to make the
+services available when and where they're needed. Our storyline tracker also needs to load character data as the
+character list component is loaded and its template is rendered. This will be accomplished using lifecycle
+hooks, specifically the ngOnInit hook. This module is going to introduce how to share logic across the story
+tracker application using a service. A service provides anything our application needs, such as access to
+character and vehicle data. We used good separation patterns in Angular 1 that we're pretty familiar with, and
+we're going to see that again here in Angular 2, specifically separating features such as components and
+services into their own modules using dependency injection to provide an instance of a class to another Angular
+feature. And we're going to explore how to answer questions such as how do we load data before a component
+starts or how do we run code whenever a change is made to a data binding? The answer to these lies with a
+component lifecycle hook, which is going to allow us to tap into specific moments in the application lifecycle
+to perform logic. All three of these features play an important role in the storyline tracker demo app, so let's
+learn how to use them.
+
+Services
+
+We need a place for shared logic in our applications. Services fulfill that role. A service provides anything
+our app needs and then we can share that across the entire application. They're the ultimate form of code reuse.
+Let's take a look how things have changed from Angular 1 to Angular 2. In Angular 1 we had factories and we had
+services and providers and constants and values. All of them were ultimately a provider, but we had to pick and
+choose how we wanted to use them. In Angular 2 we just have a class, so instead of having to pick what we want
+to use, we just effectively create a class and we're good to go. There is no service object in Angular. Let's
+take a look at some code. Here we've got a vehicle service and we're just pulling out a list of hard coded
+vehicles. Notice that are VehicleService class is just a class and we're exporting it and it provides something
+of value, in this case it's a getVehicles function which brings back an array of three vehicles. This logic
+could be shared in multiple different components that might need vehicle information. And we can use this for a
+variety of things, we could use it to get data, like we're doing here, or we could use it as a logger or
+exception handler or message service, any place we need to share data or logic. And you notice there's no
+Angular code inside this class, it's simply just a class. And a service plays an important role inside of any
+application, especially our storyline tracker. Let's take a look how we can use the service to go get some data
+and share it across our application.
+
+Refactoring for Services
+
+It's time to apply what we just learned about services to creating a demo app. So let's go down to our demo in
+line 17 here, Need Services, because it needs some services. We'll open it up and it's got a list of four
+different characters, we select one, we see the selection. Pretty simple. For now, let's go ahead and close out
+the preview and we'll open up the character-list.component TypeScript file. Notice in here on line 12 we're
+actually setting a hard coded list of characters. We don't actually want to do because, well multiple reasons,
+one of them is that we don't want to have a hard coded list here because if we want to use that list somewhere
+else, well now we've got to copy and paste it where you might have multiple components that need to use this.
+And we may actually want to put this into a backend service, which we'll do later on in the course. But for now,
+let's abstract this out to a service that provides this list of characters. So first, we'll right click on the
+app and we'll create a new file and let's call this character.service and we .service as a suffix because that
+is one of the conventions in the Angular style guide and it makes it easy to identify it. Now in our service
+let's go ahead and first pull in and injectable, and this is a decorator we're going to need, and it's going to
+come out of the Angular Core ES module. Now once we have that, we're going to define our class called
+CharacterService and we're going to use that injectable right up here and decorate the class with it. Don't
+worry about this guy too much right now, we'll learn more about why we did this later on in this particular
+module, but for now it's a good idea just to know that we always use injectable on the services. Then we needed
+to have a function on this guy, we want him to return our characters. So we'll have a getCharacters function and
+he's going to return an array. We'll go ahead and define that array in just a moment, but before we get that
+array we need to know what type it's going to be, that's going to be a character, right? So we're going to go
+back into our service and we'll import the type character. Now where is that coming from? That module is
+relative, it's one I created, and it's coming from the character file. Cool. So we're going to return back a
+character array. Now that we have that type, let's go back to our component list and let's copy out the array,
+just the array itself, we'll leave characters there and we'll come back to that guy in just a moment. Our
+character.service now, we're going to remove the empty array and we're going to paste in the array that we just
+grabbed and then I'm going to indent these just a little bit so we can see what they look like. Now you can see
+why we grabbed the character on line 3 because we're actually using that as a constructor to create our four
+characters. So now our service is ready to go, but how do we use that over inside of our list component? Well if
+you go back to the list, the characters is nothing now, we don't even know what type it is. First let's define
+the type of this guy, he's going to be an array of character, and that's a generic array of character type and
+the character type is still here on line 3, so we're good there, but we have not yet set it. So the next thing
+we need to do is we need to create a constructor and in that constructor we'll create a private instance
+variable of characterService and that's going to be of type CharacterService, like that. So what we're telling
+Angular is go look up in your Angular injector for this thing called a CharacterService, if you find one, please
+put it in this local variable here, this instance variable of this class. So then we can say, okay I want to set
+my characters and I want to use this new characterService and call this getCharacters function and if you're
+anything like me, you're probably getting tired of typing the word characters. So right here, we're saying go
+get that characterService, pull it in if you find it, and then use it to go ahead and set and initialize my
+character list. Now we haven't told Angular in this file where to get CharacterService, we still have to import
+it up here. So we want to go to the relative file to get this CharacterService out of that ES module. And that
+would be ./ again and we can use the name of the file, so it'll be character.service. Now there's one more thing
+we have to do, but just to demonstrate that and kind of show how the error messages work inside of Angular,
+let's run this and then we'll take a look at the developer tools. Okay nothing rendered, good. We've got our
+error and if I scroll to the top we're going to see here, if we scroll down a little bit to class AppComponent
+and inline template had an error. We'll that's not telling us much other than there's an error, but now here's
+the good part. No provider for CharacterService. It's actually yelling at us, no provider for CharacterService!
+That's exactly what it is. We know we created a CharacterService, but Angular is saying I don't know what that
+is, you didn't provide it to me. And think about the words, the words are very important in the error messages,
+it's saying you didn't provide it. So there's a thing called providers in Angular, and we're going to learn more
+about these, but first let's create one and use one. Now there's a couple ways we could do this. This component
+needs to know about that service, so we need to provide it somewhere. Angular has an injector at the component
+level, which means that this component, if we provide the service here, will be able to use that service and any
+child component that's created by this component. So we could say provide the CharacterService to this
+component, and look what happened, as soon as I typed that line in. The right hand side just lit up and we are
+good to go. We've got our list and our application is functional. Now the problem with this is, let's say we had
+another component like the character.component down here, if that's not a child of this one, it's not going to
+be able to get to this characterService and we'd get that same error about there's no provider. So how do you
+deal with this? Do you provide it again? Well that's not a great idea because you may not want to have multiple
+instances of this service everywhere. The whole point of the service is to share it, in this case. So we're
+going to take this line out of here and we're going to break out app, and instead we're going to go to the
+app.module. The app.module also has a way to provide things. So at the app.module level we're going to say go
+ahead and provide the CharacterService. Now it's not going to work here because we haven't imported it yet, so
+I'll go back to our character-list.component, we'll copy that import statement on line 4, go back to our
+app.module, and now we'll import it right there. Now as long as that's the same path our app should work. So you
+might be like, well what's the big deal? What's the difference here? The big difference here in this app isn't
+so big because it's only two components and one module, but what we're learning here is that each component has
+its own Angular injector. Angular has a hierarchical injector tree that matches and parallels the components
+tree. So each component where you provide it will then have a service and any child it creates can access it.
+But if you don't want to deal with that, if you want it to be available to anybody in that module, you can
+provide the service in the app.module, and that will make it available to everybody who's in that module. So in
+this case I might want to use characters on multiple different components, I'm going to put it in the app.module
+and that's going to save my day. So let's review our service real quick, we defined our CharacterService, we've
+exported it, we defined a function that goes and gets some data, and then our character-list.component will set
+up the constructor to inject it, it's going to ask for that CharacterService on line 17, which is going to go
+look in the injector in this component, it's not going to find it there, and then it's going to go up to the
+app.module and go, hey I found it in my injector, it's going to give it to us, that instance will then be used
+to get the characterService and get the list, set our characters and display on the screen. And that is how we
+create a service.
+
+Dependency Injection
+
+Now we've created our first service. We can understand how the storyline tracker could use these services to
+share the logic for making data calls throughout the app. We've also learned how to tell Angular about the
+service and how to let a component gain access to a service by using constructor parameters. Welcome to
+dependency injection in Angular. Dependency injection is also known as DI for short, it's how we provide an
+instance of a class to another Angular feature. It's how we got the characterService over into the
+character-list.component, right? Well let's take a look at some more examples and break this down. When we
+create a list component, sometimes we need to inject other services into it, maybe to get that list. So here
+we're going to inject a service into a component and Angular is going to locate the service in the Angular
+injector, then it's going to inject the service into that constructor, right here. And then name of that
+variable that we're highlighting could be any name, we just happened to by convention name it the same thing as
+the type with a lowercase v in this case. The type is important though because that's what it's going to go look
+for. Alright so visually, let's take a look at the same thing. We've got a component and inside that component
+we might have a constructor where we're saying go get this service please. Well Angular is going to go out and
+say yes siree, it's right here, there's my service. So that service is going to be injected into the component's
+constructor for us. Now if this seems new and you've been with Angular 1, it's actually not too new. There was
+dependency injection concepts then too. In Angular 1 we did this thing called $inject to help minify save our
+code. So here we used injection with this $inject to say there's a thing with the string name inside of Angular
+known as VehicleService, please grab that and match it up with the first parameter of the vehicle's controller
+function, and that's how the injection went out and got that. In Angular 2 we don't need that string thing.
+Let's look how this works over here. We've got the injection, we're saying that type is VehicleService and we're
+putting it into this property called VehicleService. That's how we actually inject in Angular 2, we didn't need
+to worry about a string name, which is also an easy way to make some kind of a typo. But what about when we want
+to get a service and inject it into another service? This is a pretty common scenario. Well Angular comes with a
+service called HTTP, let's get a preview on how that works. This is the same concept as when we're injecting
+into a component. In this case the @Injectable is kind of like that Angular 1's $inject, but now we're using a
+decorator instead of a funky property name or a member name like $inject. And we have strong typing instead of
+strings. So here what we're saying is go get this thing called HTTP, which is an Angular service and it's going
+to inject it into our constructor. What about that @Injectable? That is going to provide metadata about the
+injectables. Whoa, wait a minute here, now the name of this is a little weird because it sounds like this
+VehicleService is injectable, and while the VehicleService is injectable, that's not really what it means. This
+@Injectable is basically telling us that this VehicleService may have things that are injectable into it, and
+now it does, right? It's got this HTTP service, which is going to be injected into it. So that @Injectable, why
+do we need it? We need it because our service has an injected dependency. We need it because Angular requires a
+constructor parameter metadata in order to inject it. TypeScript only generates metadata for classes that have a
+decorator. Ah-hah. So because TypeScript will generated metadata for us about this class, metadata, again,
+something that describes the class, it'll go ahead and do that because we stuck this @Injectable on top of it,
+just like we had @Components or @Pipe, the @Injectable is going to provide information to Angular about this
+HTTP type that we're injecting into it. Well that's going to be key because now Angular can learn about the HTTP
+and know where to find it. Now if we want to be picky, we actually don't need the @Injectable if our constructor
+doesn't pass anything in, but if we have something later, let's say we added the HTTP to the constructor later
+and we forgot to stick that injectable on, we'd be in trouble, we'd get an error. So the general rule of thumb
+and the convention we follow in Angular, and check this out in the style guide, is all services we stick
+@Injectable onto it. It really just future proofs our code and it's quite simple to do. We need to provide that
+service to the Angular injector. If we don't provide it to the Angular injector, it's still not going to go
+anywhere. We learned that when we saw the error message earlier in the demo. In Angular 1 we still had to do
+this, but in Angular 1 it was a little bit different. So Angular 1 we provided a service by saying hey there's a
+service called VehicleService and we're going to give it a string name of VehicleService so you know how to find
+it. Angular 1 only had one global injector so we just told it right away, hey there's the thing you need, go get
+it. Angular 2 has a hierarchical injector tree and it's got one at the app root, as we learned. We used both of
+them in the previous demo. So how does this work again? We're going to provide a service in Angular 2. First,
+we're going to list out our AppModule, and notice we have providers here. The first provider is going to show us
+that the service is available in the application's root injector. So now VehicleService is going to be available
+anywhere to any component or service that is inside of AppModule. And then we can inject it into one of those
+guys. Angular is going to register all startup module providers with the application root injector. The services
+created from that root injector providers are still available to the entire application and this makes the
+VehicleService available to any module that is eagerly loaded and don't worry about eager and lazy loading,
+we'll learn more about that when we get to the routing chapter later on in the course. We talked about this
+component that we have and a constructor, let's see how this actually works with the injector this time. There's
+this thing called the injector we've been looking at and let's say it's the root app injector and we go ask for
+one of these services. If we had registered and provided these services in the app ngModule, then if we ask for
+one of them, the injector can provide it for us. And this means that each of these services in this app root
+injector that are provided throughout the application, we're going to get a singleton of those in this case
+because there's only going to be the same instance being used by all of them. And that my friends are the
+fundamentals of services dependency injection with the Angular injectors.
+
+Injectors
+
+We just learned how to create and service and provide it the app's root injector and inject into a component or
+service to use it. Let's learn a little bit more about injectors. We learned about how each component has an
+injector and Angular's application root has one. Well let's talk about this a little bit more because when
+Angular goes and looks for a service, it's actually going to look in the appropriate injectors for it. So it's
+critical to know that it's got one injector for the application root. We did this in the previous demo when we
+injected the VehicleService into our component and it had to go look for it and it looked for it in the app
+module's injector. So by registering the service in the appModule, the app's root, it lands into the root app
+injector. And what does that really mean? It means that everyone within that module has access to it, so Angular
+has that one injector for the app root, but remember it also has a hierarchical DI system with a tree of
+injectors that parallel the application's component tree. Whoa, what does that mean? Okay, let's look at a
+picture. So in the component tree, we might have a root component. That root component which has a template and
+it's also got other components that it uses like Component A and Component B, each component also has its own
+injector, which means we could provide, using the provider's array, into each of those components. Now let's say
+that we had this tree here of Component A having C and D as well, if we provided a service at the Component A,
+only Component A, C, and D would be able to get access to it and inject it. If Component B tried to do it, we'd
+get that funky error that we saw earlier about hey there is no provider for this service. If Component B
+provides a service, A, C, and D won't be able to get access to it either. So how do we make it available
+everywhere? Well one way to do it is to put it at the root component itself and then anybody in that tree will
+be able to get to it or we could put it in the Angular module, that in this case would be our app root, the main
+ngModule for our application. Angular has a very powerful DI mechanism. So it's important to understand the
+different ways that we can work this through, but it's also important to try to keep things simple, right? So
+you might be asking yourself, where do we actually set the providers John? In the component or do I do it in the
+Angular module? Let's try to make it easy for these both. If you provide it in a component it's going to be
+available to the component and anything in its tree, like this here. You'd want to provide it here in the
+component. A good rule of thumb is to register the service in the component's providers array only if the
+service must be hidden from components that are outside of this component's tree. I find this is a rare use
+case. Now the way I like to go is to provide it in an Angular Module or an ngModule. Here lazy-loaded modules
+and their components can inject the AppModule services and they cannot inject the AppComponent services. We're
+going to talk more about lazy-loading later, because it's a great concept inside of Angular, when we get to the
+router chapter. But by using the providers at the module level, that means our modules can access it whether
+they're eagerly or lazily loaded, and we don't have to worry about services being boxed into a certain component
+tree if we really want them to be available everywhere, because Angular is going to register all the startup
+module providers with the application root injector and they're available to the entire application. So again,
+we had that vehicles.component, that list, and we can provide it to the component, and that makes it accessible
+to this component and its tree, but not outside of it, or we can do it inside the app.module right here in that
+provider's list, which makes it accessible everywhere inside of that. So I'm big on rules of thumb and
+conventions and style guides, and what I like to do is I prefer registering my providers in the Angular Modules,
+and you really only want to do this once, not twice, because providing a service once will allow you to get a
+singleton and in this case I'm getting data from other places, I only want one copy of that service. Well the
+storyline tracker retrieves data about characters and stories from several components, so let's see how to
+isolate data management in reusable services that use DI to make the services available when and where they're
+needed.
+
+Changing Where the Services are Provided in Storyline Tracker
+
+Let's go take a look at some providers in action and how we can tinker with the injectors to see how they can
+behave differently. We'll do this by looking at the storyline tracker demo inside of our samples. Notice on the
+dashboard we see a list of characters, that component is using a characterService. Well our character-list also
+is using a characterService and it shows the list right here. So how are they both sharing this? Well let's go
+ahead and close down the preview and let's explore inside the app folder, we see characters, character-list,
+here's our component, and then on line 21 we're injecting the characterService, but notice we're not providing
+it here, so it's coming from somewhere, right, because line 21 is saying Angular give me that characterService,
+so somebody has to have it. Well the dashboard also has to use that characterService. So right here on line 23,
+he's injecting it as well, but nobody's providing it inside the @Component. So somebody's got it. Who has that
+service? Well the service is under the models folder, right here, that's our characterService and it's got that
+addCharacter, deleteCharacter, getCharacter. What we're doing is we're providing it down at the AppModule's
+ngModule decorator, right on line 31. So now everybody gets it because it's at the app root injector. So let's
+prove this out. Let's go into the characterService and inside of the constructor, right here in between lines 18
+and 19, let's put a console statement. In that console statement we're just going to say the characterService
+was created and then we'll run the application and we'll open the developer tools and when we open those tools
+up, we'll clear out the console just so we can see everything happening, and you notice we've got a
+characterService created right away. We'll make this a little bit bigger. Right down in the bottom right hand
+corner. Alright well let's click on the Characters screen up here and we click on Characters, it's not creating
+another instance, it's using the same one that was already there. So the first time the injector gets asked for
+the service, if an instance has not been created, it creates one and gives it to you. The second time, it gives
+you the already existing instance between we're only sharing that same one, so I can go back and forth and we're
+not recreating that characterService, we only have one of those messages. But what if we put this inside of the
+providers for the component? Let's try that out. So back in app.module, we've got this guy right here, right.
+Now let's go ahead and take him and let's also put him inside of let's say the dashboard. Alright so our
+dashboard is going to be up here and we're going to put a provider statement right on line, well between 13 and
+14, let's say 13.5, and we don't have it, yes we do, okay we've got the characterService 14 and we're importing
+it on line 6. So now we're providing it twice there, once inside the app.module and once inside this particular
+dashboard component. So let's clear this out again just to see it and we'll rerun it with a refreshing of the
+live preview. Now when it's loading up here, we loaded the characterService for the dashboard, now let's go back
+over to characters and notice we got a second instance. The first one got loaded for the dashboard. Now what
+happened is the dashboard, the way it works is it says hey, you asked for a characterService down here in my
+constructor, does my component have that or one of my parent components? This component has one provided to it
+in line 14, so it used that one. The characters component didn't have this so it used the one in the app.module.
+And just to prove that these guys have to be at a level where they can access them, let's go back to the
+app.module and let's comment out the provider's down here. The only one we have is the characterService, now the
+dashboard has its own, remember, but the character component does not have a way of getting to it. So the
+application will load, giving us the false sense of security here that everything is going to be okay. And we
+can see here we get the characterService created in the console. Clear the messages out, now we click on the
+characterService and when we do that we're getting an error and we're going to get that famous no provider for
+characterService. And this is how providers work.
+
+Component Lifecycle Hooks
+
+It is really helpful in application development to know when things are being created, when they're being
+destroyed and other moments in time. In Angular 2 these are referred to as lifecycle hooks. Let's talk a little
+bit about component lifecycle hooks. These are hooks that allow us to tap into a specific moment in time in our
+lifecycle to do things like go get data when the component starts up or destroy any references we want to get
+rid of before the component goes away. Let's take a look at how these work. First using TypeScript, we can
+implement an interface like OnInit. There's a lifecycle hook called OnInit that we can use. By implementing that
+interface, we'll get a little bit of tooling help to tell us, hey you didn't implement a function called
+ngOnInit. Oh wait, here it is right here. So when we implement that, we won't get the error anymore and not it
+tells us, okay so now when I see this ngOnInit I'm going to fire up this function as soon as the component
+initializes. This makes it an ideal place to do things like going and getting data to initialize my component.
+Now I don't need to use the interface OnInit, but I like to do it. Why? Because if I don't do that and I left
+the implements OnInit, let's say I spelled ngOnInit wrong, I can name a function anything I want to, let's say I
+called it Ng with a capital N, it's not going to actually get picked up by Angular because it's not spelled
+right, it's case sensitive, or maybe I spelled it wrong completely like I called it foo or activate. It's a
+valid function so there's no errors here, at runtime it would just never get called. That's because Angular
+looks for certain keywords during its lifecycle. So by using the interface it'll actually tell us right at
+development time, hey wait a minute. Now you might thing, hey should we call getCharacters function inside of
+the constructor? And the answer to that is a no. Why? Because years of experience and many shortcuts have taught
+us all to keep complex logic out of the constructor, especially anything that might call a server, like data
+access method is sure to do. We should be able to create a component in a test and not worry that it might do
+real work, like calling a server and getting data before we tell it to do so. So the way we avoid that is to not
+put it in the constructor, but somebody has to initialize our data, right? Well Angular will call it if we
+implement the ngOnInit, so that's what we do. Angular offers a number of interfaces for tapping in a critical
+moment in time in the component lifecycle. Some key ones are like onChanges, that'll come up whenever an input
+property changes. There's also the time of creation or initialization, that's the OnInit. And there's things
+like AfterViewInit and maybe we have a different change to that data binding value again for the input. And then
+when the component goes away, it's OnDestroy. And these are the most common lifecycle hooks we use for a
+component. There are a few others, you can check these out on the Angular io docs. And remember, while you don't
+have to use the interface, it definitely is going to help you out so you don't make any mistakes or any typos.
+Now that we've learned more about the lifecycle hooks, let's go back into our demo app and instead of getting
+our characters and our vehicles inside the constructor, let's use the new component lifecycle hooks to do that.
+
+Implementing Lifecycle Hooks and Their Interfaces
+
+Let's take a look at our example number 19, the Component Lifecycle Hooks. We'll click on View Sample and it'll
+open up. And over here as I select on somebody, it's going to change the selection and I can also clear out the
+selection. Let's take a look what's actually happening inside the code though. So if I have this list right here
+of character components, and we'll close out the preview, we can see that we're getting the characterService and
+then we're going to get that character list on line 22, set a local property called characters, and we're also
+going to set a selected character property when we click on Select inside the template. So here's my template
+and when I select somebody by clicking on it up here on line 3, that click event is going to fire the select,
+select the character, and notice on line 9 we're actually using a my character subcomponent, a nested child.
+We're passing in the selected character to him and then he's going to accept it and we'll take a look at him, he
+has an input parameter, and then we just log out the messages of what we did with that character, which
+particular lifecycle hook actually changed. So let's watch this happening in the console because we're console
+logging all of these. We'll open the developer tools up and we'll go back to our preview and we'll close the
+code there, and again we'll clear out the console, which makes it easier. First I'm going to click on Han Solo.
+Now when I did that, notice we're seeing all the different events that are firing off. First we saw an onChanges
+happened and then onInit. So first of all we changed the value of the input and then the onInit fired and then
+we hit AfterViewInit. Now let's change it to Kylo. When we did that, we didn't create a new component there, we
+just had the onInit fire the first time, but now the only thing that fired for Kylo was the onChanges because we
+changed it. So we change it for Rey now, it goes down to Rey. We'll click on Rey again, nothing's happening
+because nothing changed. Now what happens if we clear the selection? What we're doing in the code is we're
+actually taking the selected character on the parent component and we're setting it back to undefined. That's
+going to pass it in and it's actually going to destroy that child component. So the child component has only
+been created once at this point. Now we go back and we select Luke and it recreates it, has the onChanges,
+OnInit, and AfterViewInit. Now this is pretty cool, but let's take a look at what happens inside of our code if
+we play around a little bit. First we'll go inside of our character.component because that's where we're
+tracking the lifecycle events, and over here what if we changed ngOnChanges to something else, like NGOnChanges,
+like that? It's still valid code, right, that's just a function. Or what if you change the onInit down here,
+we'll change that to NGOnInit as well. Now let's run it, we'll clear out the console again, and when we do this,
+what happens over on the right? We click on Han and AfterViewInit happened, notice nothing's happening now. It's
+because the onChanges and the onInit are not found. Angular is going to look for those particular names, those
+events, in a lifecycle of a component and if they're there, it'll use them and fire them. Now we can call this
+function ourselves if we want to because it's just a function, but if we name it this way, Angular will find
+those. So you see this implements up here on line 10? We're implementing interfaces for OnChanges, OnInit,
+AfterViewInit and OnDestroy. Each of those has a corresponding function that we see here starting on line 13.
+The advantage of implementing the interface is that when you're in a tool, an editor like Visual Studio Code,
+which we just happen to have here because I've downloaded the code locally by clicking on this download cloud
+button and opening up, and we've got an editor like this and we implement OnInit, for example, in this
+particular place. What happens if we change that to NGOnInit like this? Notice we've got a red line on line 11.
+It's telling us that this CharacterListComponent is incorrectly implementing the interface OnInit, and very
+specifically it says, hey look, there's a property called ngOnInit that's missing in this type. Now you don't
+have to implement the interface, the code will still work without the interface, but in this case it's going to
+run and it's just not going to know what's going on because it's not going to fire this. However, you can also
+run it without the interface if you spell them correctly. But obviously the advantage to having the interface
+there is to protect us. So in a place you get a lot of interfaces especially, like here in the
+character.component. Here we've got four different interfaces we're implementing. If I don't implement those and
+I spell each of those wrong, let's say I go to each one of those, we'll do that real quick, and I type in
+something like foo_ in front of each one of them. Now it's going to tell me up top that you've made a whole lot
+of mistakes here. We're incorrectly implementing everything. Basically, start over. But if we delete these
+implementations up top, we don't get that error message, so that doesn't safeguard us. So I like to implement
+those interfaces and I like to make sure it helps me so I don't have to worry about spelling things correctly.
+Now where do you get those from? They come out of Angular Core, you can see them, I'm importing them up on line
+1. So when we're in a tool like Plunker, we're not getting that IntelliSense and all the help, but when you go
+to a tool like a WebStorm or a VS Code, you're going to get that help because TypeScript is going to help us
+out. And this is how the lifecycle components work and how the editor helps us write better code.
+
+The Role of Lifecycle Hooks in Storyline Tracker
+
+We just saw how we can use the lifecycle events in the application and log out some messages, seeing when they
+exactly happen, but let's see them in a larger app. When we click on the storyline tracker here in Plunker, we
+get this application, and then we're going to click this download button right here, and then we're going to
+download the zip file and then we're going to open it up inside of a folder. So once you've done that, open it
+up in a tool like Visual Studio Code. Now if you use an editor like Code or Atom or WebStorm, these things are
+going to automatically give you a lot of cool features. For example, inside of the vehicle-list.component, which
+is in the app, vehicles, vehicle-list folder, we can now hover over different things and we get a little bit of
+IntelliSense. So for example, when I click on top of this vehicle-list.component with the Command key or the
+Windows key and I hover, I can see the implementation of this class. Well it's even more helpful if I do
+something like this, alright there's a VehicleService, if I hover over that now I can look inside that other
+file, and if I click on it while holding the Command, it'll actually take me to that file. So I can navigate
+back and forth just like any editor would do and there's a lot of cool features here. Now one of the nice things
+about implementing interfaces like the OnInit is it helps us do things the proper way. Notice that we're in the
+constructor, we're just injecting things, we're getting our filterService, we're getting our vehicleService, but
+we're not running any code. There's nothing between these two little curly braces on line 24. So how's the data
+getting there? We're implementing OnInit and we're using the ngOnInit function right here. So it's going through
+and doing our startup logic for the page, doing a little DOM interaction. It's going to get our vehicles and
+when there's a subscription back, which we'll learn about subscriptions and RxJS in the upcoming chapter. We can
+go get our vehicles and return them. And then we get those vehicles and it's going to load them onto our page,
+here's our local getVehicles function. So ngOnInit is allowing us to have a moment in time when the component is
+ready to receive information and do something with it. And we'll use the ngOnInit pattern for getting data in a
+lot of our different components. For example, if we go look at the vehicle.component right down here, we can see
+that there we also have a constructor and the constructor is injecting all these different services. We're
+implementing different interfaces up top and if we slide on down, we can see there's an ngOnInit, which is going
+to go get the particular vehicle that we need for whatever parameter was passed in. It's a widespread pattern
+with Angular 2 to do because it allows us to capture a moment in time with ngOnInit where we can use this to get
+the data or do something we need for that component.
+
+Summary
+
+We just saw a demo how we put together all the services, the DI, and the lifecycle hooks in our storyline
+tracker application. All these features really help us build out a robust application and the services and DI
+especially help us make it more reusable. We learned a lot of things in this chapter, we learned about how to
+separate things with services, so we can get our character data in multiple different places, but we don't have
+to worry about duplicating that logic, or any of the instances because we're sharing those too. And the cool
+thing about dependency injection is that we just have to ask Angular for it. As long as we register the services
+with the providers, then the injector knows about them and then we can inject them with constructors. And of
+course, if we want to tap in at any moment in time, like when we're creating a component or it's going away, but
+whenever any changes happen we can tap into the components lifecycle where we can perform any logic we need to
+and be guaranteed they're going to run exactly when we need them.
+

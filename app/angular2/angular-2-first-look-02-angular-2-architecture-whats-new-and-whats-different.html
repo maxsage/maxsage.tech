@@ -1,0 +1,463 @@
+Angular 2 Architecture, What's New, and What's Different
+
+Angular 2: What's New and What's Different
+
+Let's get started with some Angular 2 Architecture. We'll cover what's new and what's different. This module
+we're going to show you how the concepts we know from Angular 1 are still fundamental in Angular 2, and more
+importantly how our Angular 1 skills can translate to Angular 2. We'll discuss the different language options we
+have and then we'll take a brief look at the impact of Angular 1 on the modern JavaScript landscape. This is
+going to help us understand why a good migration of Angular 1 skills to Angular 2 skills is really important. Of
+course we're going to highlight some of the most compelling features and walk through some examples step by step
+of Angular 1 side by side with Angular 2. And then finally we're going to cover some resources that may be worth
+exploring afterwards. Let's get started.
+
+Language Choices
+
+When we start to dive into Angular 2, we have many choices of languages that we can use. This isn't unique to
+Angular, it's part of the evolution of JavaScript and the web. There's four main choices, let's explore each of
+these. We'll start with ES5. It's been around for years and all modern browsers support it out of the box, it's
+just JavaScript. It doesn't require any compilation, it just works. ES5 is also the most common language that
+people use to write Angular 1. Next, ES6 is another option we have. It offers modern language features, such as
+classes, import and export of modules, ES6 destructuring, and the simple but effective let statement. It's a
+much cleaner way to develop, but we need some help getting all browsers to process it. But this is easy when we
+use compiler like Babel. ES5 and ES6 both don't support types, but TypeScript does. TypeScript is an evolution
+of JavaScript, always adopting the standards and adding a few extra features. Their mantra is JavaScript is a
+valid TypeScript. And did you know that the Angular team is actually writing Angular 2 in TypeScript? Most
+notably it adds interfaces and types, so TypeScript's big advantage is that it helps detect errors while we
+type. The modern editors use the TypeScript compiler to check the code and alert us when we make a mistake. They
+can also help give us hints on parameter signatures and available members of a class. Like Babel, with
+TypeScript we also use a compiler to use ES5 so browsers can use it. The good news is ES6 is a super set of ES5.
+And the better news is TypeScript is a super set of ES6, and TypeScript adopts emerging standards such as
+decorators. We're going to see these in just a bit. The fourth option, Dart, is another way we can go. But
+adoption for it is the lowest among these. Now I appreciate getting hints when I type something wrong and I love
+having IntelliSense and autocomplete when I type, so in this course we're going to be using TypeScript, but in
+your everyday programming you can pick which one you want.
+
+Angular 1's Impact
+
+Let's take a look at the impact that Angular 1 has had on the modern development landscape. Angular 1 is really
+widely used and it's got a massive ecosystem, so what does that mean? Well there's a lot of community efforts
+behind Angular and there's some great products like Firebase and internationalization for Angular material, and
+those are just to name a few. So why such a huge ecosystem? Well maybe it's because there's 1.1 million
+developers that have used Angular, according to Brad Green the director of the Angular team. So let's take a
+look at how we can lean on our Angular 1 skills to kind of get us to Angular 2. Our Angular 1 skills matter, and
+you know what, there's less to learn in Angular 2. So let's go over seven things that we'll all be familiar with
+in our transition from Angular 1 to Angular 2.
+
+Angular Modules
+
+Let's start by taking a look at Angular Modules. First in Angular 1 we used to have this IIFE, where we had a
+function and then inside of it we used the angular.module function to define a module called app in this case,
+and it had no dependencies. And then we would refer to that module name inside of our HTML, and our dependencies
+if we had any would go in here and that became our root module. Now in Angular 2 the module concept is a little
+different, in fact we're going to call them Angular modules. So these Angular modules, or NgModules, are a
+little different because you import them from Angular and then you use them as a decorator on a class, we define
+a class called AppModule and then we use the decorator to tell this module where is it going to get its imports
+from. Effectively we're going to run this in the browser so we're going to import the browser module, which
+Angular provides to us. We'll learn a lot more about modules, because they're an integral part to Angular 2,
+throughout this entire course. So here we're defining our too module, which every application has.
+
+First Look at NgModules
+
+We're going to flip over to a browser and we're going to type in the address of where we're going to find all
+the samples. That's at angular2-first-look.azurewebsites.net. And on the site you're going to see a list of all
+the samples and then over on the right hand side you can click on the button to view the sample. We'll do that
+in just a sec. You can also get to the source code for all these at GitHub link up here in the right hand corner
+or go to the Angular 2 docs or my blog for more information. Let's start by clicking on the example for Angular
+2 Component, which is right here. Now it's going to open up two tabs, the second tab is actually going to be a
+Plunker, a Plunker is an online editor we can run our code, and you can see over here in the tree view, we've
+got a module and a component. Let's take a look at a module, since that's what we were just talking about. Let's
+take a step back since it's the first time we're in Plunker here, to understand what we're looking at. On the
+right we've got a preview, in the middle we've got our editor, and on the left we've got our tree view for our
+files. Let's say you wanted to make some more space, we could actually click on the file right there and there's
+going to toggle that. Or we could use Alt+F. You can also check out the settings in here and change your theme,
+increase your font size, or the refresh interval because every time we type into the editor it's automatically
+going to rerun the code. For example, if I come over here and I just put a couple of enter keys here, it's going
+to reload on the right hand side. Great. And if you want to download the files, you can just click on the cloud
+in the upper right hand corner. Feel free to explore in Plunker, it's a pretty cool tool. Now let's take a look
+at the modules here, on line 6 you can see we've got an @NgModule decorator. That decorator is decorating what's
+on line 11, the class. So our AppModule, which is something we're going to have in every single Angular 2
+project, it's the root module, is what defines what our application is going to use. We'll telling it, okay this
+guy is going to import the browser module. We always tell Angular what our platform is. In this case our
+platform is the browser. And then we have to declare any components we're going to use, in this case we're
+declaring a story component and we'll learn more about those in just a moment. And then we have to tell Angular
+in our root module, our application module here, what we're going to bootstrap the application with, and what
+does that mean? Bootstrapping is the process of telling Angular - where do I start. We're telling it start with
+this story component because after all we could have like hundreds of components if we wanted to. So we want to
+tell it which one is the starting place. And then up top you might see these import statements, those are
+TypeScript imports. We can also do these kinds of things in ES6 as well. You might have also seen in older
+versions of Node, we can use require statements, or if you're familiar with .NET maybe in C# use using
+statements. These are ways of referring to other modules. So in this case, we're referring to other ES6 modules
+like a story component, that's our code. Or referring to the NgModule or browser module that Angular provides to
+us. So we reference those, pull them in and use them to define this module. So we've effectively created a
+simple application module that's going to run on the browser and it's going to start at StoryComponent. And how
+do we kick this off? For that we start over in main.ts. Main.ts effectively is our kick off point for our
+application. It says, what am I running? In this case I'm running the platform browser. And then I want to
+bootstrap my root module called AppModule. So the application starts here, kicks off the AppModule, which is
+over there, and then it reads this AppModule to figure out what does this application need. Awesome. Now that we
+know about modules, we'll take a look at the next step.
+
+Controllers to Components
+
+In Angular 1 we had a controller, we define that in our template with like ng-controller, or we could do it in a
+route, and then we refer to the name of the controller, such as here it's StoryController, and that would refer
+back to some code where we defined that controller. So we had a template and we had some code. In Angular 2,
+what goes in the template is just a reference to what is my component name? Well in this case we call it
+my-story. And the code that it's referring to is the selector in the component down below. In our code,
+TypeScript in this case, we import the component decorator and then inside of there we define that this class,
+this story component, is going to be known as my-story in the HTML templates. And our template is going to be an
+h3 that just puts the story name there. Let's go take a look at an example.
+
+First Look at Components
+
+We'll flip back to our demo application and we'll go down to number 2, Angular 2 Component, and we'll open the
+same example, and here, remember we had this app.module and it was declaring on line 8 that we're going to have
+a StoryComponent and that was also where we're bootstrapping? Well let's go look at that StoryComponent in this
+file. How do I know it's that file? Well obviously it's the only other file in this project, but also on line 4
+of the app.module, notice it's referring to story.component, we leave off the .ts. That's how we import that ES6
+module. So let's click on the story.component and we can see the same things we saw in the slides, here we're
+importing the component and then we're using that decorator to say okay this class here on line 12,
+StoryComponent, is going to be something that's got a story property and a color property, and then we can use
+those inside of our template. Now notice the template is being defined in line, inside the decorator, and we're
+also using this back tick, that is not a quote. I quote you, that is not a quote. That's a back tick. Now you
+might have never seen it on the keyboard before, it's up in the upper left hand corner, basically if I don't use
+that and I put in a single quote, watch what happens here. Things just don't go so well for the application and
+it doesn't load on the right hand side, because you can't have a multiline string. So we need the back tick, and
+this is something that was introduced in TypeScript, that we can use. So now we have a multiline template
+string. And here we've got an h3 and a div and some other things, and we'll explore that these things do, but
+you can see on the right hand side we're just putting the name of the movies on the right. So our component is
+made up of a class that might have properties and functions, and then it also has a selector to define it inside
+the HTML. As you might guess there's going to be a my-story selector tag inside of our index.html. And then we
+define what that template is going to be. So back in the index.html, we can see here on line 11 we have a
+my-story and then what's in between those is going to disappear once it loads, and then it shows all the content
+that was in the template we defined.
+
+Structural Directives
+
+In Angular 1 we had different directives that we could use for things like looping through a list or maybe
+optionally showing different content, ng-repeat and ng-if in this case. Well we have something very similar in
+Angular 2, and get ready for it, they are ngFor and ngIf. Now the syntax is a little bit different. Here you can
+we've got to precede it with a star and then we say ng and then we use the camel case to do For. Same thing with
+the ngIf. And the syntax inside them is slightly different too. So we can look at the ng-repeat and the ngFor
+first. In the ngFor we're saying let the vehicle of vehicles. Now vehicles in the far right is the list we're
+going to go through, maybe an array of vehicles, and then we're going to say let vehicle, it's basically
+defining a variable, to loop through those. So for every iteration of this li tag, we're going to have a
+different vehicle. And then we can use vehicle.name to display it. Let's take a look at the if. The if just
+evaluates an expression and if it's truthy or falsey, it's going to display or not display the content. Now you
+might be wondering about those stars, let's talk about them for a minute. In Angular 2 these things are called
+structural direction. Whenever we see that star, yeah it's a structural directive because it's changing the
+structure of our DOM. So that star is important. It's a shorthand syntax where instead of having to list out the
+template tag, which is part of HTML5, it's telling us, okay I'm going to take care of that for you, just precede
+this with a star and I'm going to replace this with a template, so I can basically just rubber stamp all these
+different li's into your application for all the vehicles. There aren't too many structural directives in
+Angular, but these are two of the most popular that we're going to use, and that let vehicle, that's going to be
+a local variable that we can reference inside of the li. Let's go take a look at an example.
+
+First Look at Structural Directives
+
+Back in our sample we can scroll down a little bit and we can see sample 4 is going to show us an Angular 2
+Structural Directive. Sample 3 right above it, is an Angular 1 if you want to get a refresher. We're going to
+click on sample 4, open it up in Plunker, and then it's going to run our demo. We're just showing three
+different vehicles. Let's go click on the vehicles.component.html. Here we can see we've got a components HTML
+for the template, which is showing us our li's that we're looping through and then an ngIf. And how's that
+getting loaded? If we go over to the vehicles.component.ts or TypeScript file, notice now the template on line 6
+is referring to a template URL property. So it's not embedding the template inside of the component, instead
+it's pointing to a URL right here, vehicles.component.html, and it's going to find it right there, side by side.
+So back over here, if we change this ngFor up a little bit, we could say let vehicle of vehicles and then we can
+change it to like v, notice it's not going to render over here now, we just see three dots because it's listing
+three things, but it doesn't know what a vehicle is. Once I change that to a v to match it, it should load and
+launch it there. Now we can also change things down here, like the vehicle's length. Once we make that a falsey
+value, it's not going to show anything. So it says we have three vehicles, well what if we didn't have three?
+What if we say if it equals 5 or 55? Now it's going to load on the right hand side and we don't see that message
+down at the bottom. Once we make that a value that it equals, like 3, it's going to show it. So we can show that
+we can put any kind of expression here that shows truthy or falsey. Some people like to say things like length
+is greater than 0, and that works too and there's nothing wrong with that. I happen to like to write the shorter
+hand of just length because length is going to evaluate to 0 or 3 and if 0 is a falsey number, so it wouldn't
+show it, and 3 is truthy so it does. So here we can see different ways to use ngFor and ngIf.
+
+Data Binding
+
+One of my favorite topics about Angular is the way it does data binding. Let's explore what data binding is and
+how it works with Angular. First we're got a DOM, that's our browser, and then we've got a component, our code.
+And we need to get the data to pass from the component to the DOM and sometimes back. So we have different ways
+to do this. We've got Interpolation, which sends the data one way up to the DOM, we also have One Way Binding,
+which again sends it one way up, we have Event Binding so we can talk from the DOM with user actions back to the
+component, maybe like a click event, and then we have Two Way Binding. Let's look at each one of these. In
+Angular 1 we had interpolation as well, we used the double mustaches or handle bars or curly braces as you call
+it, and we put in there the expression we want to evaluate and it would show that value. In Angular 2 we've got
+pretty much the same thing, we've got those handle bars again, but this time we don't actually need the context
+of vm, we recommended that with Angular 1 in the style guide because it gave it a context. Well our context is
+the component now in Angular 2, so we don't need that. Okay so what about one way binding? In Angular 1 we could
+also do ng-bind, a built in directive. Well that would display the value, sure. In Angular 2 we don't actually
+need ng-bind, we can now just say take a property in HTML, innerText in this case, and let's bind it to a
+component's property, the story.name. So as you might imagine, there's a story object that has a name property
+in my component, and its value would then display inside the innerText. Now those square brackets are the way
+that we do the one way binding in Angular 2. So we put the square brackets around any valid property in HTML.
+That's really important. So you can do things really cool like this. Now we can say there's a div, I want to set
+the style's color, style is a property on the div and it's got a color property, so we can say okay bind that
+up, put those square brackets around it, to a color property in my component, red, blue, green, whatever, and
+then it'll set the style's color. We can bind to any HTML element property. This is super important and super
+powerful and it gets rid of a ton of directives that we used to have to have in Angular 1. Okay that's one way
+binding and interpolation, now let's take a look at event binding. Sometimes we need to be able to take user
+actions and send them from the DOM back down to the component. In Angular 1 we used ng-click, ng-blur, ng-focus,
+all that kind of fun stuff, a bunch of built in directives. In Angular 2 we just use the parenthesis to wrap
+around existing events on HTML elements. So we might have an event like click or blur that are already in HTML,
+so let's just take advantage of them and wrap them with parenthesis and say when you see this, when you see
+click, go ahead and call this function called log in my component. Easy huh? Alright two way data binding. In
+Angular 1 we use a thing called ng-model to do this. We have to go up from the component to the DOM and then
+from the DOM back to the component when something changes. Most commonly you'll see this with input elements. We
+load the story, somebody wants to change the story's name, and it goes back into the component. In Angular 2 we
+have a helper directive here, a built in directive called ngModel, same name, slightly different spelling,
+instead of a dash we're using camel case. And now we're wrapping it with parenthesis and square brackets. Now at
+first you might do what I did and go whoa what's that thing? But it actually makes sense. You see, what we
+really want to do is we want to take the story name and load it from the component to the DOM. Well that would
+imply we need the square brackets. Cool, we go those. And we also want to take the input from the user when
+they're typing it in and send it back to the component. Well that would imply the parenthesis. So we use both of
+these. And if you took out the model ngModel in there, what you really have is a football in a box. So that's
+how you remember that the parenthesis go inside of the square brackets. Now let's go take a look at how we do
+data binding and some code examples.
+
+First Look at Data Binding
+
+Back in our demo let's slide on down to the data binding examples, number 6 is Angular 2 Two Way Data Binding,
+we'll click on that. And inside of here, we've got an application which has got a couple different inputs. Well
+let's take a look at our component TypeScript first. Notice line 6 we point to a templateUrl of
+app.component.html. And then we've got two properties, title and story. So we're going to take a look at the
+story name, The Empire Strikes Back, because that's we're binding to over here, and we can go look at the
+app.component.html to see how that works. We can see in line 5 we've got an ngModel and that does the two way
+data binding. Line 7 we've got interpolation, that's going to go from the component up to our presentation and
+our view, and the same thing with line 10, we've got an input but we're only binding to the value property with
+the story name, so we're not accepting any input back. So let's prove this out. Let's go over to the two way
+data binding and let's remove that, notice it wiped out everything else, and we'll put in something like Jedi.
+Now notice when I did that it reflected in the other two boxes. Well I can't change this here because that's
+just a P tag, but I can change Jedi to something like Clone. And when I do that it's not reflecting up top,
+that's because we're not accepting the input in line 10. We don't have those parentheses. Let's go ahead and add
+a button to our application so we can do a click event. And in that button we'll put OK. Now when we click that
+button, we have to use the click event here, and we can tell it to go run some code. Well what do you want to
+tell it to do? We can tell it to change the story name if we really wanted to. So let's say we'll call a
+function called changeName. Now back into our component, we can go write a little function inside of here, and
+we called it changeName and we tell it to change the story's name. And for now we'll just type something in here
+like Jeki Rules. Now over here in the application, when I click on this button, notice it changed all the places
+to Jedi Rules. So we're just showing ways that we can change the events, we used all four types of binding here.
+We used a two way binding up top here on line 5, interpolation line 7, one way binding on line 10, and then we
+used an event binding on line 12.
+
+Less Built-in Directives
+
+The fifth concept we'll cover is now Angular 2 removes the need for many of the directives we used to know in
+Angular 1. For example, we had an ng-style, an ng-source, an ng-href in Angular 1. So we could set the style
+based upon some condition or we could set the source or href to a line or an image path. In Angular 2 we don't
+need any of those directives. We can simply just bind to style.visibility or to src in image or to the href
+inside of an anchor. So that's bye-bye to three more of those directives. In fact, there's over 40 Angular 1
+built in directives that go away in Angular 2. Angular 1 we also had ng-click, ng-focus, ng-blur, ng-keyup, all
+the mouse ones, all those, we don't need them in Angular 2. Now we can just bind to the events on that
+particular element, like click, focus, blur or keyup. If you think about it, that's pretty powerful. That means
+that you no longer have to worry about is there a directive in Angular that supports some property or an event
+on the DOM. Now any event or property of the DOM, you can just bind to it.
+
+First Look at HTML Element Property and Event Binding
+
+Let's go back to our demo and we'll slide on down to element 7 and 8 down here for property binding, Angular 1,
+we'll take a quick look at that and just see an example of how we did it. So if you go look over in the
+index.html, we can see the way we did things with ng-model and we also see ng-style, ng-src, ng-href, over here
+to get the links and then also the image source. Well we don't necessarily need those. I'm going to close those
+out and then let's go into Angular 2 Property Binding. So when we look at this example, notice inside the
+app.component.html, it looks the same on the right, but now we don't need the ng-src or the ng-href or the
+ng-style. Instead we can just take the HTML property for style visibility, the one for src, and the one for href
+and bind right to them. So that's three different directives we don't need any more in Angular 2. We'll let's
+take a look at how events work. If we slide on down to number 9, there's Angular 1 Event Binding. We'll look at
+that first to remember how it used to work. So inside of the index.html, look at all those ng's we have,
+mouseover, mousedown, mouseleave, mouseup, oh my gosh, there's so many mouses, or is it mice? And then you've
+got ng dashes in here. So let's click out of there and now let's go look here for the big reveal in Angular 2
+event binding. And in this one we've got an app component. Now we've got mouseover, mousedown, mouseleave, we
+have all the same events, but instead of the ng dashes, we just take the built in events that are in the DOM and
+then we wrap them with the parenthesis. So we can just mouse over the A, we see that there, I can click on it,
+and you can see the different events being trapped. I can also see the focus and leave and the key presses. And
+as you can imagine, this is pretty powerful because we now can remove all that code from Angular 1 that we
+didn't need any more in Angular 2 because we just bind to HTML properties and HTML events.
+
+Services
+
+Number 6 of our features is services. Now in Angular 1 we had factories and you might have said, well maybe
+instead of a factory I want to create a service or did I want a provider? But did you know there's also
+constants and values? There's actually five kinds of services in Angular 1. And one of the most popular Stack
+Overflow posts that I've read is one that says which one do I use? Well guess what? In Angular 2, do you know
+how many of these still exist? None. We just have a class. When we want to create a service in Angular 2 we just
+define a class and it can represent any of those things that we want. Let's take a look at how we do that here.
+In Angular 1 we would define a module that had a service or a factory or one of those other things, and then
+define that service. In Angular 2 it's very similar, we just write some code and instead of telling it it's a
+service, we just export a class and we give it a name, and by convention we give it a suffix of service. You
+don't have to do that, but it's a nice convention so you can recognize it in other code. But notice here it's
+just a class, that's it. You don't have to pick what kind of thing you want. So I can give that class state if I
+want to or functions like get my vehicles.
+
+Dependency Injection
+
+Number 7, now to go along with services, when you've got a service sometimes you want to be able to inject it
+into something else. For example, I have a service, I want to use it from a component. Well the term we use for
+that is dependency injection. So let's say we've got a component, maybe our story component, and then we want to
+inject something into it so we use the constructor and we tell it go get this service, my vehicle service, my
+story service, whatever it happens to be. And then Angular will go find that service and inject it into our
+component. Pretty cool. So the way this works, in Angular 1 we had something similar. We would define our
+service like this, there's our VehicleService, and what we're really doing is up top we're registering with
+Angular this dictionary, this registration of this VehicleService, there's a string name, and then it's
+associated with this function called VehicleService. Well in Angular 2 we still have to register with Angular.
+But now we do it in a different way. Notice here we've got this class, an AppModule. Now this AppModule class,
+remember we might have one of these in every one of our apps, is going to have a providers list and the
+providers are things we're providing to Angular, we're saying hey this module has a thing called VehicleService,
+go ahead and register it. Notice there's no magical string here on the right hand side either. So in Angular 2
+we're going to register the service via the providers. And we're most commonly going to do this in the root
+module or the AppModule just one time. And then when somebody goes and asks for it, it'll be available. And
+speaking of, in Angular 1, the way we'd ask for it is maybe a VehiclesController wants it, so we tell it to
+inject the VehicleService, that code look familiar? We used to have to do this $inject, so we go get the strings
+or minification, it makes our code safe. And then in the function we refer to the VehicleService. In Angular 2,
+inside the constructor of the VehiclesComponent, we just say go get me the variable called VehicleService, and
+the important part is the type, VehicleService. So now it'll go look up with the Angular injector and say do I
+have something called VehicleService? Uh yes, you provided that to me earlier in that AppModule that we just
+looked at, so yeah you can have that. One of the cool side effects of this is there's no more magical strings so
+there's no more worrying about minification safe code and there's no more worrying about mistyping it.
+
+First Look at Services and Dependency Injection
+
+Let's take a look at our demo and slide on down to our Services and DI example. One here on number 12 is one for
+Angular 2 and we'll click on that. And first let's run it and make sure it works. We've got a service that's
+going to give us three different vehicles, let's take a look at the vehicle.service, and here it is. It's got a
+getVehicles method, which is going to return those three different objects. If I change the second one from Tie
+Fighter to something like Jedi Fighter, it should reflect in the right hand side, and there we go. Now how did
+this get there? Our component, here our vehicles.component, is injecting that service. So let's make some room.
+Here we can see that on line 13 we're injecting in this VehicleService type, right here in the right hand side.
+That VehicleService is going to be looked up inside the Angular injector to say hey do you have something called
+that? Well where's that coming from? Well just because we created this file doesn't mean it's going to exist and
+it's going to be able to go get it. We have to tell Angular, we have to provide it to Angular. So our AppModule,
+this is the root of our application, we tell it on line 11, we have a provider for VehicleService, we import it
+on line 6 from that ES6 module and then we provide it on line 11. Well what happens if we don't provide it? Over
+on the right, you notice we're not getting anything. Well let's open up the developer tools and over here let's
+clear that out for a moment just to look at it. We'll make a little bit of room by clicking on the File Explorer
+and let's put a space in the provider just to let it rerun, when it reruns we'll get the error message. Now
+there's a lot there. Let's scroll to the top. And you might be thinking, uh-oh error messages, I'll never be
+able to figure this out. Well the cool thing in Angular 2 is the error messages actually are pretty darn good.
+So right here the first one says the class VehiclesComponent Host, well we can figure out what that is, the
+VehiclesComponent, has an inline template and it says no provider for VehicleService because we don't have a
+provider. So that's a good hint that the component that's using it is called VehiclesComponent and somebody has
+to provide it, but it couldn't figure out who was going to do that. So when we go back over here and we put this
+back in place, it should rerun and we should see our code on the right hand side. So we declare our components
+in the module on line 10 and then we provide our services on line 11. Now when you get a much larger
+application, we can change the structure of how we provide and declare different things, and we'll talk about
+that later on in the course. But for now just know that declarations are for things like directives or
+components, and providers are for services that we're providing or registering with the application.
+
+Your Skills Translate
+
+We just took a look at Angular 1 compared to Angular 2 and the new things that we can do, but there's seven
+comparisons we did that shows us there's a lot of familiarity between Angular 1 and Angular 2. For example, we
+still have some concept of a module, which gives us a context of our application. And we also have components
+instead of controllers. We also looked at data binding and the four ways we can do it. Do you remember them?
+Okay, there's interpolation, which goes from the component to the DOM; there's also one way binding, we can do
+that with property binding with the square brackets, and that also goes from the component to the DOM; and then
+if we want to go within the DOM back to the component we use an event binding with the parenthesis; and then the
+fourth one, yeah that's the ngModule, that's our two way data binding, and we use that term that we called the
+football in a box, the square brackets and then inside of it the parenthesis. And who doesn't like to get rid of
+code? So we talked about how we removed a bunch of concepts in Angular 2 that used to exist in Angular 1, those
+things like ng-whatever. We had 40 of them we got rid of. We also looked at structural directives, the *ngIf and
+the *ngFor, and then we talked about services and how they got much simpler in Angular 2, and of course, how
+dependency injection evolved, and we'll talk more about these concepts again later on in the course. But that's
+not all that Angular 2 has. There's other things you might have heard about. We talked about services and we're
+going to talk more about those later, but what about filters that we had in Angular 1? Well we've got pipes in
+Angular 2, very similar concept. And we still use that pipe character. There's also a router in Angular 2 so we
+can do routing and navigation with pages, there's even eager and lazy loading, and there's some pretty cool
+other features there too. Of course we can get data using HTTP. We can also raise events and we can use promises
+if we want to or we can use things like RxJS, right with Angular. So a lot of things that you may have used in
+the past are also going to translate to things that you're doing in Angular 2.
+
+Putting It all Together in Context of an App
+
+Now that we've take a whirlwind ride through different features of Angular 2 that you're probably familiar with
+if you came from Angular 1, let's take a look at a larger demo that we're going to refer to at the end of each
+module for this course. So I'll flip back over to our demo and the very first demo at the top is 0, Angular 2
+Storyline Tracker. We click on this one, it's a much larger example. It shows a lot of different things. So
+we'll let it load, but on the left you can already see there's a lot more folders and files than we were looking
+at earlier. Here we can see we've got an API folder. We have a fake API basically in memory. We're going to get
+a list of characters or vehicles. That's so we don't have to have a database. And then we've got admin,
+characters, core, dashboard, lots of different things going on in here. Now notice on the right hand side we're
+loading up a dashboard, so let's close the code and we can look at the application. We'll explore what we're
+actually going to be using. So here we've got our top characters, we've got Chewy, and Rey and Luke, all sorts
+of great people. We can also look at the characters list over here. And now we can look at those people and if
+we want we can filter them down, like type in c for C-3PO. If we want to edit somebody we click on them and then
+we can look in here and we can change the name, we can save it or if we want we can type in a different name
+like Ken and then we can press Cancel to change that. Or if we start typing in something and we try to leave the
+page, it'll actually ask us, do you want to cancel those changes? Yes or no? In this case I'm going to say yeah.
+So we're navigating around the application. We've also got vehicles in the application. Here we can see
+Millennium Falcon. We also have an admin section, which - oh what happened here? We click on Admin and it didn't
+go there. We've got a little bit of security using routing guards so we don't actually allow us to go to the
+Admin page, we have to log in first, and then once we log in, which we're faking in this case, it actually flips
+back over to our Admin page, so now we can flip around between vehicles and then back to Admin and then once we
+log out we'll no longer be able to get to our secured site page like Admin again. And don't worry if you change
+your data around, you can always click on Reset Data and that will reset all the data because it's just in
+memory. So let's explore what's actually happening in this application. And for that I'm going to flip back over
+to Visual Studio Code, but remember you can download the code too and look at it on your local drive if you just
+click this little cloud button in the upper right hand corner to download the whole directory, and it'll
+download the application as a zip file to your machine. I've already done that, so now we can open up inside of
+Visual Studio Code and here's all the examples. The storyline tracker is a larger app. If we look inside the app
+folder we can start with first looking at the app.module. Notice there's a lot more things we're declaring in
+this module. Here we are importing into NgModule or BrowserModule because we're going to run it with the
+browser. And we're telling it we're going to use HTTP and our login and we've got a lot of other things here
+too. It's bootstrapping our AppComponent, line 32. So let's go down a little bit to the dashboard because we
+knew that was the screen we were looking at. Inside the dashboard, we have this dashboard.component. Now you'll
+see a couple familiar things in here like an ngFor. We're looping through a list of characters and then for each
+one of those we're going to display this story-dashboard-button, that's our own component that we're creating.
+And then we're binding to it the character that we just looped through through a character property. So let's go
+look at that dashboard-button for a moment. That's going to be inside of here. Now we can see our
+dashboard-button-component, it's just a button with a lot of classes and styles on it and then we display the
+character name, pretty simple. So back out inside the dashboard-component, we may wonder how we got the
+characters. Let's look inside associated dashboard.component.ts. Here we can see we're importing a character
+service on line 6, well we're importing that from a different module and then down below inside of our
+DashboardComponent class, you can see our constructor on line 21 actually imports 4 different things, it's going
+to inject this router, this CharacterService, wait a minute - CharacterService, yeah that's what we were looking
+for. So CharacterService is being constructor injected using our dependency injection along with the Router and
+the ToasterService as well. So let's go take a look at that CharacterService because if we're going to inject it
+in this component, somebody has to provide it. We learned that earlier. So on line 6 we're going to the
+CharacterService in app/models. We'll just navigate using the tree for now, but we could use the editor too. So
+over here we've got a character.service. Now in this service, notice that we're telling it here we've got this
+CharacterService class, we're still not providing it, so who's providing it? Well back in our app.module, here
+we are providing the CharacterService on line 31. So our AppModule, which is the root of our app, is going to
+launch the application and it's going to provide that service, it's going to launch the series of components and
+when a component asks for, hey can you inject CharacterizedService, kind of like the dashboard component is
+doing here on line 23, it's going to say yep I have that on my injector and I'm going to give you that. We also
+saw some editing in the application. So what if we went down and looked at the characters themselves and then we
+looked inside of the character-list we could see a component, which is looping through again a list of
+characters, and then the character buttons in there are going to let me click on them, but what about actually
+editing the character like under a character.component? Here we can see a more complex component, which has got
+a bunch of buttons on it like save or click, but it's also got our ngModel. Notice here on line 12 we have an
+ngModel on an input tag, and there's our input. So that way we could actually enter a different name in if we
+want to and then we've got our click events to allow saving and canceling and deleting. Now the idea of this is
+just to show you that we've got a larger application that has a little bit of everything of Angular, just so you
+can see it all in one place. Throughout this course we're going to show little pieces of examples, small point
+examples, which will show all the different concepts on their own, isolated, and that'll make it easier to kind
+of grock what's happening with that little piece. For example, we'll look at services and just look at a service
+and how that works. But then at the end of the module we're going to take a look at this storyline tracker app
+and see how it all fits into the bigger picture. So hopefully by showing it in isolation and then showing it in
+a larger app, we can kind of learn how this works together. And remember, all this code is yours as well, you
+can grab it off Plunker or go to the GitHub page.
+
+Angular 2 Resources
+
+There's some great nuggets up on the Angular.io website that could really help you out. First they've got an
+Angular cheat sheet, which they have one for each language type. This one here is a snippet of the one for
+TypeScript. So if you're looking for a little bit of syntax here or there, this is a great one stop shop. They
+also have a tutorial called the Tour of Heroes, which will walk you step by step through building an application
+where the application is a list of heroes and we get to walk through creating components and services and go
+through all the basics of Angular. Here's the angular.io website and if we click up on Docs, we'll see over here
+on the left there's a developer guide and there's a tutorial. Let's click on Developer Guides and the first
+thing under there is the cheat sheet. If we click on that we can see down here it shows us how we can boostrap
+our templating syntax, it also shows all the built-in directives we have. Notice how short that list is. You
+definitely want to bookmark this. If we go over to the tutorial, you can see the Tour of Heroes, which walks you
+through the different steps that are there, and they're adding steps all the time. Of course there's also a 5
+minute quickstart and some testing guides and API docs. In this chapter we saw how we can leverage our Angular 1
+skills for Angular 2. While we can choose a bunch of different languages, TypeScript is the one we used for this
+course and it's the one I prefer because it gives me the most tooling support as well. There were over 40
+directives in Angular 1 which no longer exist in Angular 2 because we combined any HTML element property or
+event. We still have all the great things that we learned in Angular 1 that map over to Angular 2, like our
+services, controllers are not components, we still have templates, we have data binding. So while there are
+syntax changes and under the covers things operate differently, the way we actually interact with Angular 2 is
+very similar to what we do with Angular 1, all those concepts are still there. This chapter was an overview of a
+lot of those concepts, but we'll take a deeper look at each one of those throughout the rest of this course.

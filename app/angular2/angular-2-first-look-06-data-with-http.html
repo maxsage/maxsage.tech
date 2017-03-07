@@ -1,0 +1,314 @@
+Data with Http
+
+Getting Data with Http
+
+While building components and services are central to Angular applications, the app wouldn't be very useful
+without data and we often get data from remote sources through asynchronous communication. In this module we'll
+learn how to connect with the server to get data using http. We'll see how to do this with promises and with
+observables using reactive extensions. We'll kick things off by taking a look at how we use http now in Angular
+2 and see how it differed from Angular 1. Then we'll explore observables and subscriptions and how we use those
+with reactive extensions, and you may remember we covered pipes earlier, there's a special one though called
+async, and we're going to take advantage of this one here with the new things that we learn and how to get data
+from http. And if you used Angular 1, you definitely took advantage of promises, so we'll take a look at how you
+can use promises in Angular 2 as well. Our storyline tracker app needs data and in this module we'll learn how
+to use http to do that.
+
+Http
+
+We are definitely going to need to get and send data over http for our storyline tracker app. Well let's learn
+how that works with Angular 2. We will need http for our gets, posts, puts, and deletes. Now we could use either
+promises or observables with RxJS and we're going to learn about both of these in this chapter. First let's take
+a look at where we came from with Angular 1 and how this compares to Angular 2. And you'll be happy to know,
+either way, when we want to do a get, it's very similar. We have a service called http in Angular 1 with a
+dollar sign in front of it and in Angular 2 it just lacks the dollar sign. So we go ahead and get http.get, we
+pass in the URL, and the difference is actually in how it's returned. We can return a promise if we want to with
+Angular 2, but by default we get back an RxJS observable. Before we actually execute the http calls, let's learn
+how we establish our project with what we need to use http. First we need to pull in the provider. Why? Because
+http is just a service like we use any other service in the application and when we use a service we need to
+provide it to Angular. So we have to give Angular the http service and it's actually contained within an
+HttpModule. So we do that right here. We go get the imported module, http, from the ES6 module that Angular
+exposes, and then we import it into our NgModule. Now our application knows about it. Next we define a service.
+We can go create a vehicle service and instead of hard coding the list of vehicles or characters like we've done
+earlier, now we can actually take advantage of it back end. Here we make our call for http.get against an API
+for vehicles, and then we're going to map this observable response so we get out the data that we need because
+we get back a response and the response isn't just the data, it's got other stuff in it. In this case the
+response has a JSON function which is going to then give us the data in JSON format and we're going to dive into
+there and get a data property. And of course we want to handle any errors. I recommend you always, always have
+an error handler on all http calls. Alright once we have our service, now we have to listen to it. So we might
+have a component, like a vehicle-list.component here, and we inject our vehicleService. Now notice he doesn't
+inject http because the service is doing that, it's handling all the http calls for us. Now in the component we
+just get back our raw set of vehicles. So we need to subscribe to the observable that is exposed by the service.
+The component's handed that observable, right here, and we subscribe to it using the subscribe function. And
+then inside of there we pull out the vehicles that we need, and we can also display an error if we want to,
+maybe put it on the screen for the user, we could do some logging, pretty much whatever your user experience
+team wants you to do with it. Now we just showed the code and how to make all this work, but let's review
+because these are important three steps. First we need to make sure that we import the HttpModule and we'll do
+that in our app root. That way all of our services in the application can use it. And then we call http.get in a
+service and return that mapped result. Finally somebody's going to have to subscribe to that, probably in a
+component, we'll subscribe to that result from the service and then do what we want to do with that data. Well
+it's time for a demo. Let's go ahead and code up some http in one of our examples.
+
+Using Http in Angular 2
+
+Let's take a look at our demo application and slide on down to Needs Http, number 20. Before you click on that,
+this is the one where we're going to add http to the app. If you want to see the completed solution, click on
+number 21 and you can just follow along. But I'm going to click on 20. We're going to open this guy up and right
+now we've got a list of fighters, basically the X-Wing, B-Wing, and Y-Wing from our vehicles-list.component. And
+those are all coming in from a service. So let's move this over to the right and we can see our vehicleService
+is being injected and we're getting it back synchronously. We'll go back to the VehicleService now and there it
+is. We don't actually want to get them like that though, so we'll comment that out. Let's change some things up.
+We'll kill the preview for now. Now first we said we want to use http, so let's import http and the response
+from the Angular ES module, for angular/http. Now we've imported that module here, we're going to inject it into
+our constructor for the VehicleService. So we have to add a constructor because we didn't have one yet and we'll
+create that right there. We'll make it private lowercase http variable of type Http. Once we have that, now we
+can call http and we need to have a place to call to. For ease of use in Plunker I've got this vehicles.json
+file right here. So we're going to call that. So back in this guy we're going to say return this.http.get and
+then we need to pass to it the API call. So mine's going to be API as a folder and then vehicles.json. If you
+have a backend like ASP.NET Core or Node Serve, NGINX or Java, you could just point to wherever that backend
+happens to be. Now once we get that response we're not quite done because we could return this to our
+components, but we should really shape the data up and make sure we got what we need. So we're going to use a
+function called map, we're getting back an observable, we're going to map in the response and that's of type
+Response, and we're going to use a lambda here, this is just a function that returns something. We want it to
+return a list of vehicles, so it's going to be a vehicle array and it's going to be the response.json. So we're
+going into the response, we're using its JSON function to get the JSON out, and we're going to go get the data
+object out of there and then we're going to cast that into a vehicle array. And then we can end our command. Now
+looking inside vehicles we can see there's a data property right there, that's how we said data. So now our
+service has what it needs to handle getting the data from a backend and vehicle is right here, we have our model
+defined on line 4, 5, and 6. We've got a response and our http that we injected in the constructor and they're
+imported up at the top of the page as well. Now before we could use our vehicleService we had to provide it to
+our application, so we flip over to our AppModule and we can see it right there on line 17. Perfect. But we're
+also using http now, where is that coming from? If we flip back into the vehicle.service we can see we're asking
+for it on line 10, but right now the way it's written, Angular is going to say I don't know what that is. In
+fact, let's just see what happens over here if we run it and we look at the error messages. Right now it's
+telling us, um we've got a problem. The application component is caused by no provider for http. Yes, exactly.
+We need to provide it. So I'll go back into the AppModule and let's do that. This looks like a good place, up at
+the top of the page let's go get the HttpModule and we're going to get that from, there's a nice convention for
+these, it's going to be http just like that. You can see all these things are in @angular/ and then the
+submodule. Now what do we do with it once we pull that reference in? We have to import it inside of our imports
+list for the NgModule. So we'll stick it right there at the end, I happen to like to alphabetize them, makes it
+easier to find. Now once we have http, it's actually going to make that call. We still have a problem because
+our component isn't hooked up to talk to our service using the observable yet. So it shouldn't run quite yet,
+but let's check out the error, we should get a different error message this time. Alright so now our error
+message is this.http.get...map is not a function. That's true. What happened to the map? Well if we flip back
+over to our vehicle.service, we used this map function, that is a function that RxJS helps us with. So how do we
+use that function? One way to do that is to import it directly from RxJS. So we're going to import everything
+inside of RxJS, don't worry, not the whole library. We're going to go specifically into add/operator, and then
+we're going to look for map. So we're going to pull out just that one operator. Now let's run it again, make
+sure we've got what we need. We're going to get a different error message this time. This time after the map
+error message we slide on down and now we're seeing that we have an issue where the NgFor is only supporting
+binding to iterables such as arrays. This problem was happening inside of our component. We can see that right
+here, the vehicle-list.component. That's because we're returning an observable from here on line 16 back to our
+vehicle-list.component and this guy is expecting a synchronous array, well that's not what we're getting. So
+let's change this line up. We'll comment out that out so we can see it side by side. We're still going to go out
+and call the vehicleService, like that, and it's still called getVehicles. That part didn't change. But now we
+need to subscribe to this. And the subscribe is going to return to us different things that we can operate on,
+and the first one is going to be, okay if it works, what do you want to do? Here's the function that you insert
+and handle. We're going to get a parameter called vehicles and we're going to pass it in and set our local
+instance of vehicles to that. Now we could have called this v and that v as well, but I like to make it more
+explicit to make it easier to read. So here our subscriber is saying got get the vehicles and set those for me
+please. Now the reason that we have this subscribe in here is because we're returning back an observable, and
+make sure you don't say vehciles, like I did there. We get that observable back and we're subscribing to the
+response and it's taking a function where the parameter is vehicles and we're setting our local this.vehicles
+equal to that. Now if we run our application let's see what happens. Here's our demo, and there's our list.
+Perfecto.
+
+Adding Exception Handling for Http
+
+Our code is only as good as our error handling, right? So down here we have no error handling so we should add
+in a catch statement. So we'll do that and we're going to call local function to handle that error, just to make
+it a little bit cleaner, and then we'll make a private local function down here and it's going to accept a
+parameter for the error, that's of type Response, which we already have imported on line 2, and then we're going
+to console out the error message and we're going to use a message variable, and we're going to go grab that
+error message object now. So we're going to say let msg and we're going to use template strings, those are back
+ticks, not quotes, and first we're going to say although what's the error message? Status coe is going to be
+what? We're going to use this replacement for error.status and we're going to say it's on URL of what? And here
+we're going to use error.url. Both those are properties inside of the error object. Great and for right now
+we're going to do that and we have to do to handle it even more down here. But there's some clean up we have to
+do. For example, right now we're using the catch statement right there, but we're not pulling it in from RxJS,
+that's another operator. So we've got to pull that add/operator/catch into our code as well. So now we've got
+our catch, we've got handle error, we're just console erroring the message out and let's go ahead and put
+something in here like a bunch of X's before vehicle, let's open up our developer tools and we'll run the live
+preview. Now let's see what kind of an error message we get. Should be consoling out to our station here. So we
+scroll up a little bit, status code 404 on URL and here's the Plunker URL at the end of it with all those X's
+vehicles.json. So still not great, but now we know how to get the information out. So the next step is what do
+we do with it? Well remember the caller is expecting an observable. One common mistake is to do this and then
+after this line 23 we console out, we don't actually do anything after it. But the problem is the component is
+going to get back nothing and it's not even observable at this point really. So what we want to do is return
+back an Observable.throw, and we're going to send the same message back. Now to do this, we don't yet have the
+observable symbol so we're going to pull that out up here, out of RxJS, and that's going to use destructuring to
+pull it out of RxJS, and on the Observable we're chaining the throw message, so that one's going to need to go
+get the throw. So here we're going to add in not operator, but observable/throw. So we're pulling in just the
+pieces of Rx that we want. Now there's a couple of lines of code to do that through lines 4 through 7, really 4,
+5, and 7, but the nice thing about this is we're not pulling in all of RxJS, we're just pulling in the pieces
+that we want to use, which will make our size of our app a little bit smaller. So now our application is
+returning that observable/throw. So what do we do with that? Remember back inside of our component over here,
+vehicle-list.component, we had a subscribe. Well the first parameter of subscribe is what happens if it works
+and the second parameter is, yeah you guessed it, what happens if it doesn't work? So we're going to get an
+error object back, that error parameter right there is the response from this observable.throw, so we can get to
+that message. So let's take that and do something with it. Here we happen to have an errorMessage property,
+which is up on line 12, which is a string, that we can show on the page. So we'll just say it's of type any and
+it's an error because we don't really know what we're getting back in this case. So now if we run the
+application and we get an error because we still have a bad URL, we're looking at the error URL on the screen,
+which is a little bit easier. Now obviously you don't want to display this exact thing to your user, but this
+gives you an idea of how you can flow errors back through your application and then do something with them in
+the component level. I recommend logging them at the service level and then at the UI level making the choice of
+either do you retry or do you show it to the user or what do you do at that point?
+
+RxJs
+
+We were just dabbling in the world of RxJS with our Angular code, but what exactly were we doing and how does it
+work? Well RxJS is not part of Angular, but it's something that's widely used throughout Angular 2. And it's
+pretty darn cool actually. You can learn more about it at this reactiveex.io website and there's Rx for many
+different languages, this is RxJS, but there's one for .NET, for Swift, for Java, and so on. So you can learn
+more about those other languages too. What it really does for us is it implements an asynchronous observable
+pattern and yeah we can do the same kind of thing with promises if all we want to do is just go get a value and
+then find out what happens when it comes back, but RxJS adds more to it, as we started to get a glimpse of when
+we saw the mapping and the catching and throwing. One way to get RxJS was to go get just the individual
+operators that we had, another way to do it is to import all of RxJS. Now that's one way of going, but then
+you're going to get everything that it's got and when you actually go to bundle and deploy, that's going to be a
+lot, a lot, a lot of code, right? Because it's a large library. So for production you only want to import the
+modules that you require, like we did in the demo previously. So here's the technique I like to do. I usually
+create app.module.ts anyway and inside of there I'll import this file, rxjs-extensions, it's a file I create,
+and then I'll go in that file and I'll import all the different RxJS operators that I need to pull in. So this
+way I'm preferring to only import the things I'm actually going to use and I get the smallest possible payload
+when I bundle and deploy my application. So our catch and our map, those were things we had earlier and we also
+had the throw, which came out of RxJS at observable. You can put any of the ones you want in here. Another way
+of going is what we did in the demo where we just did each one of the ones that we needed inside of the service
+that used them themselves. So really, it's just your preference. But how does RxJS operate? In RxJS you're going
+to define an observable and that observable is going to have different people listening to it. In this case
+maybe the RxJS observable is going to be something that delivers a message of here's your data, and then the
+other guys, over here on the right, are people subscribing or listening to that observable, and it doesn't just
+have to be data, it could be some kind of a messaging system where you're saying somebody logged out so you want
+to let other people know in your application that that log out occurred so those components can react to it.
+Alright so that message just happened, when those pipelines are there, those pipelines allow those guys to
+subscribe to the observable and then when a new event occurs the observable gets it and that subscription is
+sent to all of the listeners, the subscribers. Now this is an eventing system so each one of those subscribers
+needs to basically unsubscribe later. The great thing about the http object, the service that Angular gives us,
+is when it gives us back the observable, it'll automatically unsubscribe when it's done. So we don't have to
+worry about cleaning up that particular one. If we create a manual observable and subscription, then we're going
+to have to clean up our own subscriptions. We'll take a look at that a little later too. So we mentioned http,
+let's take a look again and what we did. We used http.get to go off and get our data and we mapped back the
+response, that was part of the observable we have. We don't return the response it, we return the JSON that came
+out of it. The service does all the work and the consumer simply gets whatever data we wanted. This is our
+chance in the map to take that data and basically manipulate it and massage it a little bit and bring it back to
+our components. Let's not forget about exception handling. So here we've got our map, we also have a catch,
+which calls a local function, it does some work for us to gather the information, and then we'll pass some of
+that information back to the component to the consumer for some presentation. So what about that component? Well
+that guy is listening, right? He's the one subscribing to the observable and he uses that subscribe function to
+do it. And then we use the vehicles and then the error parameters for both the success and the failure functions
+to handle those different cases. And these are the basics of using RxJS with Angular 2 and http.
+
+Async Pipe
+
+We learned about pipes in a previous chapter, but we didn't learn too much about the async pipe. And this one
+works really well with promises or observables. Let's take a look. The Angular async pipe is a remarkable
+example of how you can receive a promise or observable as input and then subscribe to the input automatically.
+Eventually it's going to return the values. So as values change and come back through the pipeline, you're going
+to see them on the screen. Now the cool part is, if you want to use a pipe and take the existing code we had,
+very little has to change. First our service stays exactly the way it was, which is cool because now our service
+just emits an observable and in our component, instead of writing the code to handle that observable, we just
+get an observable and return it to the screen. Wait, how do we do that? So here instead of having vehicles of
+type vehicle array, it's going to be an observable of vehicle array. So we're going to grab the observable and
+set it to a local property, and then we're going to bind that property to the screen. So the component is
+simplified, there's less code here. So what changes in the template? Very simply we add the pipe up there and we
+say async, and that will subscribe to the vehicles and return the stream right to the template. The async pipe
+is a self cleaning pipe, async will automatically unsubscribe to the observable when the template goes away.
+Well let's take a look at our existing example and add an async pipe to it and show the differences.
+
+Adding an Async Pipe with an Observable
+
+It's time for us to go play with some pipes, so we go down in our demo here, we can see that we've got 21 that's
+Http and then 22 is the completed example with the pipe already in it. So if you want to look at the complete
+one, go to 22, but we're going to add together on line 21 here, the http example, we're going to add the async
+pipe to it. So I'll go into this guy, he's already getting back a list, we're good to go, and he's got a
+service, which is returning back our observable. Perfect. Let's go inside the vehicle list because that's what
+we're going to change this pipe. We'll just pull the preview over for now, and first we know that if we're
+getting back an async pipe we don't need to process and subscribe like this inside of here, so I'll comment that
+out just to show what it looks like, and instead of calling that and then doing a subscribe, instead we'll set
+that equal to vehicles, like that. Now we've got vehicles, but right now the vehicles is an array of vehicles,
+we don't want that. We want an observable of vehicle array. And because we're referencing observable now, we
+have to come back up to the top and import that from Rx, so we'll pull that observable from rxjs/Observable. Now
+we've got an observable coming out of our service and we remove those four lines of code, so let's go into the
+template itself and up top here we can see we're getting a vehicles list and we're going to say async like that,
+after the pipe character. And now you can see we've got an Imperial Star Destroyer. You might be wondering
+though, what about error messages, if something happens? Well we can still go back inside our
+vehicle-list.component and we can put a catch on here, and then handle the error. So we can chain the catch off
+of this with no problem. And we can see with the async pipe it makes it a little bit easier to flow the data
+from the service through the component up to the template.
+
+Promises with Http and the Async Pipe
+
+Well it's time to take a look at how we use promises instead of observables, because that's just another option
+we have. So let's flip back to our demos, and inside of our demos we can see we've got the Http example in 21
+and the Http with Async Pipe on 22, well 23 is completed with Http and Promises and let's click on that one and
+see how the differences are. Now our service over here, for the same kind of application, looks slightly
+different, and in that sense what it's doing is we're saying return http.get, we're still mapping it, but
+there's one extra line, line 16, toPromise. So we're going toPromise instead of returning an observable. Now
+because we're using toPromise here, we have to make sure that our Rx extensions is actually pulling in
+toPromise, right there on line 6 of the Rx extensions file. So we've got that. He's returning a promise, let's
+check out what the component does with that promise. Now we have two options here, just like with observables,
+we could take the observable and stream it up to the template using the async pipe, which is what we're doing
+here, or we could do a .then. So let's use the async pipe here. We've got the this vehicles equal to our promise
+now. So line 19 sets the vehicles to a promise, it means line 14 has to change to be a promise of vehicle array
+and then we have to make sure that we're good to go with this vehicles list by looking inside the component, and
+notice it's exactly the same code up here. The async pipe on line 2 can handle a promise or an observable. Now
+if we wanted to use a promise and not the async pipe, we would remove that async here, go back to our component,
+don't make it be a promise, just make it be a vehicle array, like that, but now we couldn't do this line of
+code, instead what we'd have to do is type in, although go get our vehicles, and then with a then, we have a
+function here where we pass in our response for vehicles and then we could set the vehicles inside of this call
+back. Then we could also do a catch statement here too. Just kind of similar like to what we did with the
+observable here. But the async pipe makes it a little bit simpler to do. So what does all this mean? It means
+that we have options and options are pretty good. We can use observables or promises and we can use it in code
+or we can use the async pipe.
+
+Http in the Storyline Tracker
+
+Well let's take a look now how we put all these things together inside of the storyline tracker using the async
+pipe and the observables. Flipping over to our example demos, if you haven't done so already, once you open the
+storyline tracker, you can click on this little cloud with the arrow on it to download the file or directory and
+then it pulls down a zip file. And then you can take that file and you can open it up inside of a folder. If
+you'd like to follow along inside of the Plunker, that's fine too. But I'm going to open it up inside of Visual
+Studio Code. So first let's take a look at the vehicleService, if you can't find that go ahead and hit Command+P
+and you can type in vehicle and then you can type in part of the word, like type veh.ser, like this, it'll
+actually pattern match it, you can find the vehicleService. Scrolling down we can see we've got a getVehicles
+and we've got a getVehicle and then we've got an updateVehicle, we've got delete as well and we've got an add.
+All of these actions are in here for handling our http requests, and you can see right here on line 42 we're
+actually going off and calling http and we're getting the vehicles by URL, we're mapping the response, we're
+handling an error, and then we're hiding a spinner with a finally at the end. The map, the catch, and the
+finally are all different functions we can operate on the observable. So notice we're returning an observable of
+vehicle array on line 42. The point of this is we're going to do something with that observable and that's going
+to be handled in the component. So let's go look at the vehicle-list.component. We can either navigate there
+over on the left to the vehicle-list or, again, we can hit Command+P up top and then we can type in vehicle and
+maybe type in list, like that. Now we find the vehicle-list and we can see on line 30 we've got a getVehicles
+function. He's calling the vehicleService getVehicles and then he's subscribing to it, taking that response, and
+then manipulating it and then showing it on the screen so that this.vehicles on line 34, that's getting set, is
+a property of this class and that property is set right up here on line 18, and that's bound in the template.
+Well there's another way that we can handle these, right? This is not using the async pipe, but we do have a
+place that does that. Let's go check out our characterService and that service, if we go up and look for him,
+it's going to be character.ser, he also has an add and a delete and a getCharacters. Same kind of code we had
+with the vehicles, and how's that going to be handed in the character-list.component? Let's go find out. If we
+type in car list and then we go look at that guy, he also has a characters array here and he's going to pull
+them out by subscribing to them, but characters are used by more than one screen. There's the character screen
+and there's also the dashboard. So let's go find the dashboard component and the dashboard component, notice on
+line 18 we have a characters property and that's an observable of character array, so down in getCharacters,
+we're just setting this characters to the getCharacters function, and then we're using a do on there that's a
+side effect that we can use to say okay, show up the toaster and then we can handle any errors here, but what's
+nice about this is it looks a little more straightforward, looks as little less asynchronous in a way, so we're
+just saying take this property and set it to the response of this, which is going to be an observable of
+character array, and then our template for dashboard HTML, we can go see the async right there on line 6, so we
+say let character of characters pipe async. And that's going to pull the observable in and every time we get the
+data back from that service to the component, it's going to stream it up to the view. So here are a couple
+different examples of how we're using observables with and without the async pipe in the storyline tracker.
+
+Putting It All Together
+
+We learned quite a bit this chapter on how to get our data for the storyline tracker app. We pulled in
+characters and vehicles using http. Let's look back at how we used http because we got that library, we pulled
+it in, and we imported it, we told ourselves about the http providers, but then we had to use observables and
+subscribe to them. When we use http.get we get back an observable and then we subscribe to that inside of our
+component. But we also have the option of just linking an async pipe directly to it. So we tried that too and
+that make our code a little bit cleaner. And for when we want to use a promise, we can also use that from
+http.gets as well by just doing the toPromise method. And by using what we learned about http in this chapter,
+we no longer have to rely on getting hard coded values for vehicles and characters, we can go call API for that
+and we also have additional power because we're not just getting data, we're putting and posting and deleting
+our characters and vehicles, which lets us build a more robust app.
