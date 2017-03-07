@@ -12,7 +12,7 @@
 
     <h1>Git and Github</h1>
     <h2>Git</h2>
-    <img src="images/git.jpg" height="225" width="225"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/git.jpg" height="225" width="225"/>
     <p>Git is a version control system (VCS) for tracking changes in computer files and coordinating work on those
       files among multiple people. It is primarily used for software development, but it can be used to keep track of
       changes in any files.</p>
@@ -20,7 +20,7 @@
     <p>We are going to install Git for source control. To install Git browse to
       <a href="https://git-scm.com">https://git-scm.com</a> and install Git accepting the defaults during
       installation.</p>
-    <h2>Github</h2><img src="images/github.jpg" height="242" width="208"/>
+    <h2>Github</h2><img src="images/buildingajavascriptdevelopmentenvironment/github.jpg" height="242" width="208"/>
     <p>Browse to <a href="https://github.com">https://github.com</a> and setup an account (or use an existing one).
       Create a new repository (making sure you Initialize the repository with the <code class="hljs">.gitignore:
         Node</code> set so that Git
@@ -43,7 +43,7 @@
     <h1>Editors</h1>
     <h2>WebStorm</h2>
     <p>There is a wonderful selection of powerful editors these days but the one I will use is WebStorm:</p>
-    <img src="images/webstorm.jpg" height="225" width="225"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/webstorm.jpg" height="225" width="225"/>
     <p>WebStorm is many peoples favourite but it is also the only paid option on this list.</p>
     <h2>.editorconfig</h2>
     <p>In WebStorm, VSCode etc. you can drop a file named <code class="hljs">.editorconfig</code> and place it in the
@@ -73,7 +73,7 @@
       <li>volo</li>
     </ul>
     <h3>npm</h3>
-    <img src="images/npm.png" height="149" width="338"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/npm.png" height="149" width="338"/>
     <p>npm has matured by fixing friction points for front end developers. Node has grown enormously in popularity and
       bundlers have continued to become more powerful. Today npm is the most popular JavaScript package manager. We
       will use npm for the remainder of this course.</p>
@@ -82,7 +82,7 @@
       going to store the
       references to all the packages that we are going to use for our development environment.</p>
     <h3>Installing Node</h3>
-    <img src="images/node.png" height="176" width="287"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/node.png" height="176" width="287"/>
     <p>Browse to <a href="https://nodejs.org/en/">https://nodejs.org/en/</a> and download Node. npm will be installed
       along with Node.</p>
     <h3>Adding package.json</h3>
@@ -129,14 +129,14 @@
 
     <h1>Development Web Servers</h1>
     <h2>Express</h2>
-    <img src="images/express.png"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/express.png"/>
     <p>Express is lightweight but still feature rich. It is highly configurable and can be used for more than just
       static files. It can be used as a dev and production server. If your building API's in Node then this is a big win
       which makes using Express as your development server an easy choice.</p>
 
     <a href="http://expressjs.com/">http://expressjs.com/</a>
     <h2>Browsersync</h2>
-    <img src="images/browsersync.png" height="100" width="158"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/browsersync.png" height="100" width="158"/>
     <p>Browsersync makes your browser testing workflow faster by synchronising URLs, interactions and code changes
       across multiple devices.</p>
     <p>Browsersync automatically sets up a dedicated IP address on you network so that you or anyone that can hit the
@@ -159,7 +159,7 @@
     <pre><code class="hljs">node buildScripts/srcServer.js</code></pre>
     <h2>Sharing Work-in-progress</h2>
     <h3>localtunnel</h3>
-    <img src="images/localtunnel.png" height="225" width="225"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/localtunnel.png" height="225" width="225"/>
     <p>You can use localtunnel to expose your localhost via a public Url. It punches a hole in your firewall so that
       your local machine can operate as a web server. To get started issue the following command in a terminal
       session: </p>
@@ -173,7 +173,7 @@
     <h1>Automation</h1>
     <p>The automation tool we will use in this course is NPM Scripts. NPM scripts are declared directly in your
       <code class="hljs">package.json</code> file in the <code>scripts</code> section.</p>
-    <img src="images/npmscripts.png"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/npmscripts.png"/>
     <h2>Creating a startup script using npm scripts</h2>
     <p>In a previous module we created <code class="hljs">srcServer.js</code> which configures express to serve up our
       <code class="hljs">index.html</code>. Now let's create an npm script that will start our development environment.
@@ -285,7 +285,7 @@ console.log(chalk.green('Starting app in dev mode...'));
       <li>Elm</li>
     </ul>
     <h2>Babel</h2>
-    <img src="images/babel.png"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/babel.png"/>
     <p>Babel's selling point is that it allows you to use all the new features of JavaScript (even those that are
       still experimental) in a standards based way. Babel transpiles the latest version of JavaScript down to ES5 so
       you can use all these new features but run them everywhere ES5 is supported. Some of the advantages of Babel
@@ -298,7 +298,7 @@ console.log(chalk.green('Starting app in dev mode...'));
       <li>ES6 imports are statically analyzable</li>
     </ul>
     <h2>TypeScript</h2>
-    <img src="images/typescript.png"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/typescript.png"/>
     <p>TypeScript is a superset of JavaScript so just as ES6 added features to JavaScript TypeScript adds additional
       functionality to JavaScript. Most notably, type annotations which add type safety. This type safety means you
       can enjoy rich auto completion support and safer refactoring by leaning on explicit type signatures. Some of the
@@ -459,7 +459,7 @@ console.log(chalk.green('Starting app in dev mode...'));
       <li>Roll up</li>
       <li>JSPM</li>
     </ul>
-    <img src="images/webpack.jpg"/>
+    <img src="images/buildingajavascriptdevelopmentenvironment/webpack.jpg"/>
     <p>In this tutorial we will implement ES6 modules and bundle them via Webpack. Webpack handles more than just
       Javascript. It is even smart enough to intelligently bundle and generate your CSS, images, fonts and even HTML.
       This means you can do things like inline images via base 64 encoding when there small enough to justify saving

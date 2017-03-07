@@ -65,12 +65,12 @@
                     So the starting point for these demos is that we have a solution here with a basic data bound form, it's got a DataGrid in it, I can fire it
                     up here, and you can see that we have customers from the Zza database that we're using for sample data in this course.
                 </p>
-                <img src="app/wpf/images/Fig03-001.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-001.png" class="image"/>
                 <p>The data access is being done through a data layer that's part of the solution. It just has plain old CLR objects for the data entities:
                 </p>
-                <img src="app/wpf/images/Fig03-002.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-002.png" class="image"/>
                 <p>And it's got a DBContext and an Entity Framework DBContext that we're doing the data access through.</p>
-                <img src="app/wpf/images/Fig03-003.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-003.png" class="image"/>
                 <p>
                     Again, how you do your data access is up to you, just get it into Entities and you're ready to data bind.
                 </p>
@@ -79,13 +79,13 @@
                     is bound to a Customers collection that we're exposing on our DataContext, and each of the columns is bound to properties on the individual
                     Customer object that's being rendered out.
                 </p>
-                <img src="app/wpf/images/Fig03-004.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-004.png" class="image"/>
                 <p>
                     As we talked about before, when a DataGrid renders its rows it sets the DataContext for the current row to the current object, which will be
                     a customer in this case, so these bindings on the columns are relative to a single customer. Then we need to set the DataContext to a
                     collection of Customers, and we do that from the code-behind.
                 </p>
-                <img src="app/wpf/images/Fig03-005.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-005.png" class="image"/>
                 <p>
                     Here you can see we're using our DBContext to execute a query on top of the Customers collection, push that into an observable collection
                     that we called Customers, and exposed as a DependencyProperty from our code-behind, similar to previous demos.
@@ -97,12 +97,12 @@
                 <p>
                     So I'll delete that from the code-behind:
                 </p>
-                <img src="app/wpf/images/Fig03-006.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-006.png" class="image"/>
                 <p>
                     I'll switch over to the XAML and go up to the top to the window element, and I'll add in the declaration here that sets the DataContext
                     declaratively through a binding, and remember, that binding would normally use the DataContext as its Source object.
                 </p>
-                <img src="app/wpf/images/Fig03-007.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-007.png" class="image"/>
                 <p>
                     Well, that's going to get you in kind of a recursive thing here, which isn't going to work, so we need the XAML equivalent here of pointing
                     to the this reference on the Window and we can do that with a RelativeSource Self binding.
@@ -123,30 +123,30 @@
                     I'm going to drop into my code-behind here and go down to the bottom here, and the idea is that we want to have a method that looks like
                     this on Delete customer that takes in a customer reference and removes it and possibly deletes it from our database.
                 </p>
-                <img src="app/wpf/images/Fig03-008.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-008.png" class="image"/>
                 <p>In this case, I'm just going to remove it from the data bound collection, and we need a way to target that method in a data bound way.
                 </p>
                 <p>
                     Now a common way to do that would be to use a command object, so I'm going to add in a new DependencyProperty here called
                     DeleteCustomerCommand:
                 </p>
-                <img src="app/wpf/images/Fig03-009.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-009.png" class="image"/>
                 <p>
                     DeleteCustomerCommand is of type RelayCommand&lt;T&gt;, and that's a type that's in my solution here, it's a common pattern in data bound
                     scenarios where you use the ICommand interface of WPF to create an object that can target some other object's method and invoke it when this
                     Command object gets executed.
                 </p>
-                <img src="app/wpf/images/Fig03-010.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-010.png" class="image"/>
                 <p>
                     RelayCommand just uses delegates under the covers to point to that method on some other object. The method we're going to be targeting is
                     our DeleteCustomer method and some other object will be the Window itself.
                 </p>
-                <img src="app/wpf/images/Fig03-011.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-011.png" class="image"/>
                 <p>
                     So now we need to initialize this DeleteCustomerCommand to an instance of a RelayCommand that points to OnDeleteCustomer. So I'll just go up
                     here to the constructor of the Window and add a line of code that sets that property to an instance of the RelayCommand:
                 </p>
-                <img src="app/wpf/images/Fig03-012.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-012.png" class="image"/>
                 <p>
                     and the RelayCommand constructor takes a delegate reference to the target method, which is our OnDeleteCustomer. So we're just using
                     Delegate Inference here in C# to pass the method name directly, and it turns it into an action delegate reference that gets passed in as the
@@ -157,7 +157,7 @@
                     So now we just need a way to execute this command, but doing it with data binding from the button within the view, so let's go add that
                     button. To add the button, I'm going to go into the DataGrid itself and just drop in here and add a new column at the front here.
                 </p>
-                <img src="app/wpf/images/Fig03-013.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-013.png" class="image"/>
                 <p>
                     And the kind of column that I added here is a DataGridTemplateColumn. A DataGridTemplateColumn uses a DataTemplate, which we'll get into a
                     lot more detail on in a later module, to specify the structure that we want to put into each cell within that column.
@@ -170,7 +170,7 @@
                     Now we need this button to be able to invoke our command or execute that command. So Buttons have a Command property on them which we can
                     use to set a binding:
                 </p>
-                <img src="app/wpf/images/Fig03-014.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-014.png" class="image"/>
                 <p>
                     and basically we need to be able to point this binding to that Command object in our code-behind. The challenge is, this binding is part of
                     the column definition, and as we saw in other column definitions, the DataContext for those bindings is a single row object.
@@ -186,7 +186,7 @@
                     RelativeSource. So RelativeSource lets you walk up the visual tree from where you're at to get to some parent element and then look at
                     properties on it.
                 </p>
-                <img src="app/wpf/images/Fig03-015.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-015.png" class="image"/>
                 <p>
                     So now I've fleshed out this binding and I'm setting a RelativeSource property on it like I did with the RelativeSource Self binding, but in
                     this case I'm going to use a different mode of the RelativeSource object, which is to specify an ancestor. An ancestor would be a parent
@@ -211,7 +211,7 @@
                     set the CommandParameter to a binding and that binding can just use the current DataContext of the Button, which as I talked about a moment
                     ago, is going to be a Customer object, the one we want to delete.
                 </p>
-                <img src="app/wpf/images/Fig03-016.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-016.png" class="image"/>
                 <p>
                     So I can just use binding with nothing else on it here, and it's going to grab the whole DataContext object and pass it as the
                     CommandParameter. With that code in place, I can start and run.
@@ -219,7 +219,7 @@
                 <p>
                     You can see the Delete button there, and I can start deleting, and we can see the rows are, in fact, deleting.
                 </p>
-                <img src="app/wpf/images/Fig03-017.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-017.png" class="image"/>
                 <p>
                     So those are the primary forms of RelativeSource bindings you'll use. An AncestorType one to walk up the element tree to find some parent
                     element that's a given type, and then use a path off of that current object to get to where you want to go for a value.
@@ -240,18 +240,18 @@
                     is define a new DependencyProperty that's a Command we can target from the separate button we're going to add.
                 </p>
                 <p>So I'm going to add a DeleteSelectedCommand that's also a RelayCommand&lt;Customer&gt;:</p>
-                <img src="app/wpf/images/Fig03-018.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-018.png" class="image"/>
                 <p>And we're going to end up targeting that same OnDeleteCustomer as the Execute method for that command. We're going to need to initialize
                     that, so we'll add an initializer up here in the constructor to set that property to an instance of a RelayCommand:
                 </p>
-                <img src="app/wpf/images/Fig03-019.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-019.png" class="image"/>
                 <p>But this one's going to pass an extra method here to the constructor of the RelayCommand.</p>
                 <p>RelayCommand supports the concept of executing a target method. It also supports having a CanExecute handler as a target method. And the
                     CanExecute will be called first to determine whether the command should actually execute the target method, so we need to add that method to
                     our class as well.
                 </p>
                 <p>That method takes this kind of signature:</p>
-                <img src="app/wpf/images/Fig03-020.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-020.png" class="image"/>
                 <p>It takes in the same parameter as the Execute method does, a Customer, and it returns a Boolean. The Boolean, if it's true, says that the
                     command is enabled, you can go ahead and invoke the Execute method. If it returns false, then it should not only, not invoke the Execute
                     method, if it's hooked up to something like a Button, that Button will be disabled.
@@ -263,7 +263,7 @@
                     changes, so whenever the SelectedItem changes, we want it to re-query this. The way you do that with the RelayCommand is you call
                     RaiseCanExecuteChanged on it whenever the affected state is modified.
                 </p>
-                <img src="app/wpf/images/Fig03-021.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-021.png" class="image"/>
                 <p>So we have our SelectionChanged handler for DataGrid, we can just call that anytime Selection changes, and that's going to cause the
                     CanDeleteCustomer method to be called by the Button to re-query the state and get a new true or false value.
                 </p>
@@ -273,27 +273,27 @@
                 <p>I'm going to go ahead and add a Button that simply says, Content="Delete" on it, so it's just going to sit right on top of our DataGrid and
                     be a Delete button:
                 </p>
-                <img src="app/wpf/images/Fig03-022.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-022.png" class="image"/>
                 <p>Now we need to hook this up to our command. Well hooking it up to the Command is actually easier here than it was down inside the DataGrid
                     because the overall DataContext is flowing down to this from up above and that DataContext is the Window itself.
                 </p>
                 <p>So we just need to get to the exposed property on the Window that is the Command, so we can use a straightforward binding that goes to the
                     DeleteSelectedCommand:
                 </p>
-                <img src="app/wpf/images/Fig03-023.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-023.png" class="image"/>
                 <p>Now we also need to pass a CommandParameter, so I'm also going to use the CommandParameter property and set that equal to a binding. But this
                     binding needs to point to the Customer that needs to be deleted, and how do we know where that is? Well, it happens to be the SelectedItem
                     on the DataGrid. So we basically need to turn the DataGrid into our Source object and you can do that through an ElementName binding. So I'm
                     just going to say ElementName=customerDataGrid, which you can see down below is the x:Name of the DataGrid:
                 </p>
-                <img src="app/wpf/images/Fig03-024.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-024.png" class="image"/>
                 <p>That makes that the Source object for this binding and then I just need the Path to point to the SelectedItem property of that Source
                     object.
                 </p>
                 <p>With that in place, we're ready to go. I can go ahead and run. We can see our button up at the top is disabled because of the CanExecute
                     checks, and there is no SelectedItem currently:
                 </p>
-                <img src="app/wpf/images/Fig03-025.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-025.png" class="image"/>
                 <p>As soon as I select an item, the event handler fires, it raises CanExecuteChanged, and the Command calls that CanExecute handler again and
                     sees that it can enable.
                 </p>
@@ -307,14 +307,14 @@
                 <p>The last binding source we're going to look at here is the Source property on a binding. If I wanted to get customers down into my DataGrid
                     here:
                 </p>
-                <img src="app/wpf/images/Fig03-026.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-026.png" class="image"/>
                 <p>And I didn't want to rely on the DataContext being set to something that exposed that Customers collection, I would point explicitly to some
                     Source object that contained the Customer collection.
                 </p>
                 <p>Now the way you're typically going to do this when working with the Source property on a binding, is to define a resource on the current view
                     that you're working with.
                 </p>
-                <img src="app/wpf/images/Fig03-027.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-027.png" class="image"/>
                 <p>It could be an application-scoped resource in the window itself down in some user control that you're working with, but a resource that's
                     in-scope for the element that's going to have the binding. And what I'm using here is a class called the CollectionViewSource.
                 </p>
@@ -330,17 +330,17 @@
                 <p>So we just need to go up and grab our Resource name that we just created, which is CustomerViewSource, and put that in the StaticResource
                     markup extension:
                 </p>
-                <img src="app/wpf/images/Fig03-028.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-028.png" class="image"/>
                 <p>And you can see the squigglies go away, it's now pointing to that CustomerViewSource object, that's coming in as the Source object, and will
                     provide the collection to the ItemsSource.
                 </p>
                 <p>So with that in place and one minor change to the code-behind, I had to move my Commands up to before I set the Customers context:</p>
-                <img src="app/wpf/images/Fig03-029.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-029.png" class="image"/>
                 <p>Because as the Customers bind, it actually changes the selection, tries to use this command object, and if it wasn't initialized yet, it's
                     null, that's going to throw a null reference exception. So we generally want to set up our commands earlier, I meant to put those before the
                     loading of the data, so I've corrected that now.
                 </p>
-                <img src="app/wpf/images/Fig03-030.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-030.png" class="image"/>
                 <p>So with that in place I go ahead and run, and we can see we have our Customers collection bound again:</p>
                 <p>But now we're doing it through an explicit Source reference on our binding that points to an object that provides a collection, which in this
                     case happens to be a CollectionViewSource object that has bound itself through a DataContext binding to the Customers collection on the
@@ -355,7 +355,7 @@
                     determines the property path. Typically it's going to be a simple value, but it could be a complex path.
                 </p>
                 <p>Basically, the path to the binding can be passed one of two ways:</p>
-                <img src="app/wpf/images/Fig03-031.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-031.png" class="image"/>
                 <p>If you use the syntax on the left, which we've seen a number of times, where we just say Binding and Name, you're actually calling a
                     parameterized constructor on the binding markup extension object and that name gets passed into the parameterized constructor and is used
                     under the covers to set a Path property.
@@ -375,18 +375,18 @@
                     Product-related object, we can dot down to that, and then finally dot down to the name once we get down to a discrete value that we're
                     trying to set through our binding, we're ready to go.
                 </p>
-                <img src="app/wpf/images/Fig03-032.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-032.png" class="image"/>
                 <p>You can also add no path at all. So you can basically let the bindings say, give me the whole Source object, and we've seen a couple of these
                     in previous demos as well. You can express this with just Binding and no arguments whatsoever, and you're basically saying Path=. is the
                     equivalent syntax, dot meaning the current object, similar to a file system path.
                 </p>
-                <img src="app/wpf/images/Fig03-033.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-033.png" class="image"/>
                 <p>Now an important concept related to binding paths is how you go about debugging bindings that are not working for you. Basically, you want to
                     always be paying attention to the output window when you're hooking up data binding and trying to get it working. If you have an error in
                     one of your bindings, particularly the path is incorrect, what you're going to get is some information dumped to the Output window and it
                     looks kind of like this.
                 </p>
-                <img src="app/wpf/images/Fig03-034.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-034.png" class="image"/>
                 <p>You can either have data warnings or data errors and it's going to tell you detailed information including what property was not found on
                     what Source object, in this case, 'Idx' and 'Customer', and then it's also going to tell you what the target element property and type is as
                     well. So this is something you can stare at and then go inspect those objects and figure out whether you've actually got something that
@@ -395,7 +395,7 @@
                 <p>By default, Visual Studio is going to show both warnings and errors. If you want to only show errors, which are the more severe form, you can
                     go through Tools Options and there's a place under the debugging section where you can change the data binding WPF Trace Settings.
                 </p>
-                <img src="app/wpf/images/Fig03-035.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-035.png" class="image"/>
                 <p>So let's take a look at Property Paths and debugging in a demo.</p>
             </div>
             <div class="panel-body">
@@ -405,9 +405,9 @@
                     that we've been using here.
                 </p>
                 <p>Most of the bindings we've looked at take on a form like this:</p>
-                <img src="app/wpf/images/Fig03-036.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-036.png" class="image"/>
                 <p>which is really saying the Binding Path property is equal to Customers:</p>
-                <img src="app/wpf/images/Fig03-037.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-037.png" class="image"/>
                 <p>The way it works out without the Path property is that the Binding markup extension itself has a parameterized constructor that takes one
                     argument and it'll use that argument to set the Path property.
                 </p>
@@ -415,13 +415,13 @@
                     the Binding object.
                 </p>
                 <p>Now another path we saw in one of the last demos was this Path=DataContext.DeleteCustomerCommand.</p>
-                <img src="app/wpf/images/Fig03-038.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-038.png" class="image"/>
                 <p>Remember this was with the RelativeSource binding where we were walking up the visual tree to get to the DataGrid and then basically saying,
                     go to its DataContext property, which happened to be the Window in that demo, and then dot your way down into that object to get to the
                     DeleteCustomerCommand.
                 </p>
                 <p>Well you can take this to the nth degree if you need to, so I'm going to go up here to our StackPanel and I'm going to add in a label:</p>
-                <img src="app/wpf/images/Fig03-039.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-039.png" class="image"/>
                 <p>and set the content of that label using a binding. That binding is going to be pointing to the DataContext, which is our Window, which
                     exposes a Customers collection.
                 </p>
@@ -435,15 +435,15 @@
                 <p>Now I just need to make sure that my query loads up all those related objects, so I'll go into the code-behind and replace my line of code
                     that's loading up Customers so that .Includes all the related collections and objects there.
                 </p>
-                <img src="app/wpf/images/Fig03-040.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-040.png" class="image"/>
                 <p>With that in place, I can go ahead and run, and notice up here next to the Delete button we have Taj Mahal is the name of the product that is
                     on the related objects there.
                 </p>
-                <img src="app/wpf/images/Fig03-041.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-041.png" class="image"/>
                 <p>Now one other thing that's related to property paths that's important is debugging when binding goes wrong. If I have a typo in my path here,
                     say I put an inadvertent x on the end of my DeleteSelectedCommand:
                 </p>
-                <img src="app/wpf/images/Fig03-042.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-042.png" class="image"/>
                 <p>I go ahead and run, the app is not going to blow up, it's just going to start up and run, and then you'll wonder why, in this case, the
                     Delete button is enabled and I'm clicking away on it and nothing's happening, and you'll kind of wonder what's going on there and wonder how
                     to debug it.
@@ -451,12 +451,12 @@
                 <p>The important thing is when you have that kind of thing going on you always want to look at your output window. If we go back up in our
                     output window here, we'll see this entry that says, System.Windows.Data Error: BindingExpression path error:
                 </p>
-                <img src="app/wpf/images/Fig03-043.png" class="image"/> <img src="app/wpf/images/Fig03-044.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-043.png" class="image"/> <img src="app/wpf/images/wpfdatabindingindepth/Fig03-044.png" class="image"/>
                 <p>and it basically breaks it down for you and it says, this property was not found on this object, which is the DataContext object.</p>
                 <p>And if you scroll over some more it tells you the BindingExpression path equals this, the DataItem is that DataContext object, and then it
                     even tells you the target element, the thing you were trying to set was the 'Button' 'Command' property.
                 </p>
-                <img src="app/wpf/images/Fig03-045.png" class="image"/> <img src="app/wpf/images/Fig03-046.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-045.png" class="image"/> <img src="app/wpf/images/wpfdatabindingindepth/Fig03-046.png" class="image"/>
                 <p>So when you screw up a binding path, you always want to be looking for these System.Windows.Data Errors in your output window for debugging
                     your bindings.
                 </p>
@@ -494,28 +494,28 @@
                     starting point for this demo is a simple little data app that has a data entry form for a Customer object here and it has this button to
                     trigger a customer change.
                 </p>
-                <img src="app/wpf/images/Fig03-047.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-047.png" class="image"/>
                 <p>If you watch the Name field when I click on that, it's going to go programmatically set the name of the Customer. Now the current structure
                     of the code is we're setting the DataContext to the Window itself through a RelativeSource binding like we saw earlier in this module:
                 </p>
-                <img src="app/wpf/images/Fig03-048.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-048.png" class="image"/>
                 <p>We've got the grid as a whole, bound to a Customer property exposed from the Windows code-behind:</p>
-                <img src="app/wpf/images/Fig03-049.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-049.png" class="image"/>
                 <p>and then the individual fields are just using DataContext bindings to point to the properties of that Customer object.</p>
-                <img src="app/wpf/images/Fig03-050.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-050.png" class="image"/>
                 <p>Now by default, a binding has a Mode, and the Default Mode depends on the property that you're binding on the control itself. Data entry
                     controls, such as TextBoxes, ComboBoxes, DatePickers, and so on, set the Default Mode for their primary Edit properties to be a TwoWay
                     binding. That means that if I run here and we edit the field and tab out of it, we can see from this breakpoint that the set block on our
                     Name property on the Customer object is being called.
                 </p>
-                <img src="app/wpf/images/Fig03-051.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-051.png" class="image"/>
                 <p>So the normal flow is from the Source object to the element with the binding, but if we edit it in the bound element, then that property is
                     going to change and push the value down into the Source object in a TwoWay data binding fashion. And as long as that object supports
                     Property Change Notifications, if it gets changed programmatically like with our button, it will update on the screen. That's your typical
                     TwoWay data binding scenario.
                 </p>
                 <p>Now we could modify the behavior here by going into our binding and setting the Mode property equal to one of the other values.</p>
-                <img src="app/wpf/images/Fig03-052.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-052.png" class="image"/>
                 <p>I'll start with OneWay. If we explicitly set it to be a OneWay binding and we have that same breakpoint on our Customer object behind the
                     scenes, I can modify that Name property and tab out of the field, but we never hit our breakpoint because it never pushed that value down
                     into the Source object, because it's set to be a OneWay binding.
@@ -524,13 +524,13 @@
                     the Mode to OneWayToSource. If we do OneWayToSource and start up, we can see that our form starts up in the field as blank, even though
                     there is a value in the underlying Customer object for Name:
                 </p>
-                <img src="app/wpf/images/Fig03-053.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-053.png" class="image"/>
                 <p>it didn't read it because it's only got the one direction in the opposite direction that a binding normally works.</p>
                 <p>But if we change the value and tab out of the field, you can see that we called a set block on our bound object.</p>
-                <img src="app/wpf/images/Fig03-054.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-054.png" class="image"/>
                 <p>Now that's a pretty rarely used value, generally you want OneWay or TwoWay, but that's an option if you have a specialized scenario.</p>
                 <p>Another option you have there is OneTime.</p>
-                <img src="app/wpf/images/Fig03-055.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-055.png" class="image"/>
                 <p>OneTime means that it will do normal data binding from source to target one time, but if it changes behind the scenes, even if it's raising
                     Change Notifications, notice if I click on the Trigger Customer Change here, under the covers we can see the property is being set, but the
                     UI does not update because the mode of OneTime basically says, do data binding one time and then pretend that this binding is not even
@@ -543,20 +543,20 @@
                 <p>Now, in this demo, I want to show you how the Default mode really works based on the property that you're binding. When controls are created
                     and their properties are defined as DependencyProperties that can be bound to:
                 </p>
-                <img src="app/wpf/images/Fig03-056.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-056.png" class="image"/>
                 <p>By default, binding will only be supported one way, but there's a property you can set on the DependencyProperty itself to make it so it will
                     be a TwoWay binding by default.
                 </p>
                 <p>To show this, I'm going to create a custom control, just a simple User Control, and we'll call it MyCustomControl. For the content of that
                     CustomControl, I'm just going to put a rectangle with a fill of gray by default and give it a name of "TheContent":
                 </p>
-                <img src="app/wpf/images/Fig03-057.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-057.png" class="image"/>
                 <p>Then I'm going to drop into the code-behind of that control and define a DependencyProperty:</p>
-                <img src="app/wpf/images/Fig03-058.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-058.png" class="image"/>
                 <p>So this DependencyProperty is going to be of type Brush called MyBackground, and what's different about the declaration of this
                     DependencyProperty, is notice this down here.
                 </p>
-                <img src="app/wpf/images/Fig03-059.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-059.png" class="image"/>
                 <p>With the default code snippet, it's going to define just a PropertyMetadata object here and allow you to set the default and possibly hook up
                     a Change handler.
                 </p>
@@ -568,38 +568,38 @@
                     have this FrameworkPropertyMetadataOptions, and you see that there's an option to say BindsTwoWayByDefault. Then I also hook up a Change
                     handler here (<span class="code">OnBrushChanged</span>):
                 </p>
-                <img src="app/wpf/images/Fig03-060.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-060.png" class="image"/>
                 <p>so that whenever my background gets set I'm going to go set the Fill property of the rectangle that's my content.</p>
                 <p>Im also going to drop into the contstructor of my Custom Control here and add an EventHandler for the MouseDown event on my rectangle that's
                     my content.
                 </p>
-                <img src="app/wpf/images/Fig03-061.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-061.png" class="image"/>
                 <p>And what I'm going to do when I get that click on is I am going to explicitly set the MyBackground property to red so that we can see that
                     that change actually occurred.
                 </p>
                 <p>So I'm going to go out here to my MainWindow now and drop into the XAML and add an instance of our CustomControl:</p>
-                <img src="app/wpf/images/Fig03-062.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-062.png" class="image"/>
                 <p>Notice that I'm setting the MyBackground property to a Brush returned from the current DataContext called TheBrush. So I need to go declare
                     that in the code-behind in my MainWindow that is my DataContext.
                 </p>
                 <p>So I add this DependencyProperty called TheBrush to my code-behind:</p>
-                <img src="app/wpf/images/Fig03-063.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-063.png" class="image"/>
                 <p>And it's just a standard DependencyProperty with a Change handler that's hooked up here so we can set a breakpoint and tell when the binding
                     has actually set that value for us:
                 </p>
-                <img src="app/wpf/images/Fig03-064.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-064.png" class="image"/>
                 <p>And then I'm just going to go into my constructor and set an initial value for my Property of Chartreuse.</p>
-                <img src="app/wpf/images/Fig03-065.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-065.png" class="image"/>
                 <p>So with that in place, if I go ahead and run, we can see it starts up with our chartreuse rectangle:</p>
-                <img src="app/wpf/images/Fig03-066.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-066.png" class="image"/>
                 <p>Remember that I have a MouseDown handler inside the CustomControl that's going to set the MyBackgroundProperty. That's equivalent to
                     something like a TextBox setting the Text property when I do data input on the control here.
                 </p>
-                <img src="app/wpf/images/Fig03-067.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-067.png" class="image"/>
                 <p>And we want to see that that value flows to the Source object because the data binding is TwoWay. So when I click on this, we can see that
                     our breakpoint is being hit in our Change handler for TheBrush property and our DataContext:
                 </p>
-                <img src="app/wpf/images/Fig03-068.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig03-068.png" class="image"/>
                 <p>So the TwoWay data binding has worked out for us and is passing that value in.</p>
                 <p>So the default mode for a binding is basically going to be OneWay unless the DependencyProperty that you're binding to has gone and set its
                     default to be TwoWay with this FrameworkPropertyMetadataOptions.

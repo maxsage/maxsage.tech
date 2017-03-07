@@ -6,6 +6,27 @@ import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/route
 import { WelcomeComponent } from './home/welcome.component';
 
 import {
+    WPFComponent,
+    WPFDataBindingInDepth00CourseContentsComponent,
+    WPFDataBindingInDepth01CourseOverviewComponent,
+    WPFDataBindingInDepth02DataBindingOverviewComponent,
+    WPFDataBindingInDepth03DataSourcesComponent,
+    WPFDataBindingInDepth04BindingCoreConceptsComponent,
+    WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent,
+    WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent,
+    WPFDataBindingInDepth07DesignTimeDataBindingComponent,
+    WPFDataBindingInDepth08ContainersAndCollectionControlsComponent,
+    WPFDataBindingInDepth09DataInputValidationComponent,
+    WPFMVVMInDepth00CourseContentsComponent,
+    WPFMVVMInDepth01MVVMPatternFundamentalsComponent,
+    WPFMVVMInDepth02FirstTasteOfMVVMComponent,
+    WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent,
+    WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent,
+    WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent,
+    WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent
+} from './wpf/wpf.component';
+
+import {
     Angular2Component,
     Angular2GettingStarted00CourseContentsComponent,
     Angular2GettingStarted01CourseOverviewComponent,
@@ -25,35 +46,35 @@ import {
     Angular2GettingStarted15FinalWordsComponent,
 } from './angular2/angular2.component';
 
+import { TypeScriptComponent
+} from './typescript/typescript.component';
+
+import {
+    JavaScriptComponent,
+    BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent,
+    BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKitComponent,
+    BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfigurationComponent,
+    BuildingAJavaScriptDevelopmentEnvironment03PackageManagementComponent,
+    BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServerComponent,
+    BuildingAJavaScriptDevelopmentEnvironment05AutomationComponent ,
+    BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent,
+    BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent,
+    BuildingAJavaScriptDevelopmentEnvironment08LintingComponent,
+    BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegrationComponent,
+    BuildingAJavaScriptDevelopmentEnvironment10HTTPCallsComponent,
+    BuildingAJavaScriptDevelopmentEnvironment11ProjectStructureComponent,
+    BuildingAJavaScriptDevelopmentEnvironment12ProductionBuildComponent,
+    BuildingAJavaScriptDevelopmentEnvironment13ProductionDeployComponent,
+
+} from './javascript/javascript.component';
+
 import { JQueryComponent } from './jquery/jquery.component';
 import { Bootstrap3Component } from './bootstrap/bootstrap3.component';
 import { VisualStudioComponent } from './visualstudio/visualstudio.component';
 import { VisualStudioCodeComponent } from './visualstudiocode/visualstudiocode.component';
 import { EmmetComponent } from './emmet/emmet.component';
-
 import { CSharpComponent } from './csharp/csharp.component';
-import {JavaScriptComponent, BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent} from './javascript/javascript.component';
-import { TypeScriptComponent } from './typescript/typescript.component';
-
-import {
-    WPFComponent,
-    WPFDataBindingInDepth00CourseContentsComponent,
-    WPFDataBindingInDepth01CourseOverviewComponent,
-    WPFDataBindingInDepth02DataBindingOverviewComponent,
-    WPFDataBindingInDepth03DataSourcesComponent,
-    WPFDataBindingInDepth04BindingCoreConceptsComponent,
-    WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent,
-    WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent,
-    WPFDataBindingInDepth07DesignTimeDataBindingComponent,
-    WPFDataBindingInDepth08ContainersAndCollectionControlsComponent,
-    WPFDataBindingInDepth09DataInputValidationComponent, WPFMVVMInDepth00CourseContentsComponent, WPFMVVMInDepth01MVVMPatternFundamentalsComponent,
-    WPFMVVMInDepth02FirstTasteOfMVVMComponent, WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent,
-    WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent, WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent,
-    WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent
-} from './wpf/wpf.component';
-
 import { ODataComponent } from './odata/odata.component';
-
 import { DGenComponent } from './dgen/dgen.component';
 
 @Component ({
@@ -74,14 +95,14 @@ import { DGenComponent } from './dgen/dgen.component';
                         <ul class='nav navbar-nav'>
                             <li><a [routerLink]="['WPF']">WPF</a></li>
                             <li><a [routerLink]="['Angular2']">Angular 2</a></li>
+                            <li><a [routerLink]="['TypeScript']">TypeScript</a></li>
+                            <li><a [routerLink]="['JavaScript']">JavaScript</a></li>
                             <li><a [routerLink]="['JQuery']">JQuery</a></li>
                             <li><a [routerLink]="['Bootstrap3']">Bootstrap 3</a></li>
                             <li><a [routerLink]="['VisualStudio']">Visual Studio</a></li>
                             <li><a [routerLink]="['VisualStudioCode']">Visual Studio Code</a></li>
                             <li><a [routerLink]="['Emmet']">Emmet</a></li>
                             <li><a [routerLink]="['CSharp']">C#</a></li>
-                            <li><a [routerLink]="['JavaScript']">JavaScript</a></li>
-                            <li><a [routerLink]="['TypeScript']">TypeScript</a></li>
                             <li><a [routerLink]="['OData']">OData</a></li>
                             <li><a [routerLink]="['DGen']">DGen</a></li>
 
@@ -142,20 +163,30 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/angular2-getting-started-14-angular2-setup-revisited', name: 'Angular2GettingStarted14Angular2SetupRevisited', component: Angular2GettingStarted14Angular2SetupRevisitedComponent},
     { path: '/angular2-getting-started-15-final-words', name: 'Angular2GettingStarted15FinalWords', component: Angular2GettingStarted15FinalWordsComponent},
 
+    { path: '/javascript', name: 'JavaScript', component: JavaScriptComponent },
+    { path: '/building-a-javascript-development-environment00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },
+    { path: '/building-a-javascript-development-environment01-you-need-a-starter-kit', name: 'BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKit', component: BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKitComponent },
+    { path: '/building-a-javascript-development-environment02-editors-and-configuration', name: 'BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfiguration', component: BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfigurationComponent },
+    { path: '/building-a-javascript-development-environment03-package-management', name: 'BuildingAJavaScriptDevelopmentEnvironment03PackageManagement', component: BuildingAJavaScriptDevelopmentEnvironment03PackageManagementComponent },
+    { path: '/building-a-javascript-development-environment04-development-web-server', name: 'BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServer', component: BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServerComponent },
+    { path: '/building-a-javascript-development-environment05-automation', name: 'BuildingAJavaScriptDevelopmentEnvironment05Automation', component: BuildingAJavaScriptDevelopmentEnvironment05AutomationComponent },
+    { path: '/building-a-javascript-development-environment06-transpiling', name: 'BuildingAJavaScriptDevelopmentEnvironment06Transpiling', component: BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent },
+    { path: '/building-a-javascript-development-environment07-bundling', name: 'BuildingAJavaScriptDevelopmentEnvironment07Bundling', component: BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent },
+    { path: '/building-a-javascript-development-environment08-linting', name: 'BuildingAJavaScriptDevelopmentEnvironment08Linting', component: BuildingAJavaScriptDevelopmentEnvironment08LintingComponent },
+    { path: '/building-a-javascript-development-environment09-testing-and-continuous-integration', name: 'BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegration', component: BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegrationComponent },
+    { path: '/building-a-javascript-development-environment10-http-calls', name: 'BuildingAJavaScriptDevelopmentEnvironment10HTTPCalls', component: BuildingAJavaScriptDevelopmentEnvironment10HTTPCallsComponent },
+    { path: '/building-a-javascript-development-environment11-project-structure', name: 'BuildingAJavaScriptDevelopmentEnvironment11ProjectStructure', component: BuildingAJavaScriptDevelopmentEnvironment11ProjectStructureComponent },
+    { path: '/building-a-javascript-development-environment12-production-build', name: 'BuildingAJavaScriptDevelopmentEnvironment12ProductionBuild', component: BuildingAJavaScriptDevelopmentEnvironment12ProductionBuildComponent },
+    { path: '/building-a-javascript-development-environment13-production-deploy', name: 'BuildingAJavaScriptDevelopmentEnvironment12ProductionDeploy', component: BuildingAJavaScriptDevelopmentEnvironment13ProductionDeployComponent },
+
+
     { path: '/jquery', name: 'JQuery', component: JQueryComponent },
     { path: '/bootstrap', name: 'Bootstrap3', component: Bootstrap3Component },
-    
     { path: '/visualstudio', name: 'VisualStudio', component: VisualStudioComponent },
     { path: '/visualstudiocode', name: 'VisualStudioCode', component: VisualStudioCodeComponent },
     { path: '/emmet', name: 'Emmet', component: EmmetComponent },
-
     { path: '/csharp', name: 'CSharp', component: CSharpComponent },
-
-    { path: '/javascript', name: 'JavaScript', component: JavaScriptComponent },
-    { path: '/building-a-javascript-development-environment-00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },
-
     { path: '/typescript', name: 'TypeScript', component: TypeScriptComponent },
-
     { path: '/odata', name: 'OData', component: ODataComponent },
     { path: '/dgen', name: 'DGen', component: DGenComponent },
     

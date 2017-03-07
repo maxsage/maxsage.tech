@@ -25,7 +25,7 @@
                     the end of the module, we'll start talking about other kinds of things besides entities including DataSets and XML Data Sources, and how you
                     can go about data binding to those.
                 </p>
-                <img src="images/Fig02-001.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-001.png" class="image"/>
             </div>
             <div class="panel-body">
                 <h3>Binding to Entities and Collections</h3>
@@ -62,7 +62,7 @@
                     In this series of demos, I want to cover some of the key concepts when it comes to data binding to entities. Our starting point for this
                     demo is a window that's laid out like this.
                 </p>
-                <img src="images/Fig02-002.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-002.png" class="image"/>
                 <p>
                     We're going to have a list of customers at the top in a drop-down ComboBox, we're going to have individual fields here for FirstName,
                     LastName, and Email on the SelectedCustomer that are editable so we can see some of the change impacts there. We've got a DataGrid in the
@@ -70,33 +70,33 @@
                     and add it to the collection up above. So those are the scenarios we want to support here and we are going to do it by data binding to
                     entities. The entities we're going to be working with are already defined in the solution here under this model folder.
                 </p>
-                <img src="images/Fig02-003.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-003.png" class="image"/>
                 <p>
                     We've got a customer as a top level object, you can see this is a Plain Old CLR Object, just simple auto-implemented properties here, for an
                     Id, a FirstName, a LastName, an Email, A collection of Orders as a list. And then notice you can also have computed properties here, ones
                     that are read-only, and in this case computed from the FirstName and LastName property and those are data bindable as well.
                 </p>
-                <img src="images/Fig02-004.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-004.png" class="image"/>
                 <p>
                     We've got an OrderObject that has an Id, a parent Customerid, an OrderDate, and a related object and OrderStatusId that will set through a
                     drop-down ComboBox, and then finally an ItemsTotal.
                 </p>
-                <img src="images/Fig02-005.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-005.png" class="image"/>
                 <p>
                     The OrderStatus object is just a simple lookup list kind of thing with an Id and a Name.
                 </p>
-                <img src="images/Fig02-006.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-006.png" class="image"/>
                 <p>
                     And then the way we're populating those entities for these demos is through an Entity Framework DbContext a Code First DbContext, and you
                     can see we're just exposing DbSets for Customers, Orders, OrderStatuses, and then we've got some ModelBuilder stuff down here.
                 </p>
-                <img src="images/Fig02-007.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-007.png" class="image"/>
                 <p>
                     Again, I don't expect you to necessarily know how to do Entity Framework at all to understand these demos. We're focusing on the data
                     binding, not how we get those objects in the memory. The code-behind of the MainWindow currently is mostly empty, it's just got stubbed out
                     event handlers for the drop-down list selection, the Add and Cancel buttons for adding orders.
                 </p>
-                <img src="images/Fig02-008.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-008.png" class="image"/>
                 <p>
                     So the first thing we might need is to expose some data that we can data bind to. For this demo, I'm just going to put things as properties
                     exposed from the MainWindow itself, so we're not doing MVVM, we just want to expose objects from our code-behind so that we can data bind to
@@ -104,7 +104,7 @@
                     customers here that I can put into my ComboBox, and I've got a SelectedCustomer that I can use to drive those individual input fields for
                     the SelectedCustomer.
                 </p>
-                <img src="images/Fig02-009.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-009.png" class="image"/>
                 <p>
                     I'm going to need an instance of my DbContext to go ahead and populate that data, and then I could go into my constructor here and go ahead
                     and execute a query through my DbContext to get back all the customers as a list and push those into my Customers property that I declared
@@ -112,13 +112,13 @@
                     then if I set the DataContext of the Window itself to a reference to the Window, then any of the properties exposed by the Window are now
                     accessible on the DataContext for bindings to use.
                 </p>
-                <img src="images/Fig02-010.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-010.png" class="image"/>
                 <p>
                     I need one other thing in the code-behind here before we go to the XAML is in our CustomerComboBox, when we make a selection, we need to set
                     that SelectedCustomer property, which is defined right up above, to the customer that was selected. So we can go out to the CustomersCombo,
                     grab the SelectedItem, cast it to a Customer, and set that as our Customer property.
                 </p>
-                <img src="images/Fig02-011.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-011.png" class="image"/>
                 <p>
                     Later in the course we'll get to, there's better ways to do this where you can do this through binding as well, but this will be sufficient
                     for what we're showing now. Now we need to get things hooked up in the XAML. So I'm going to switch over to XAML, I'm going to go down to
@@ -127,34 +127,34 @@
                     it to ToString that for us, so we'll set the DisplayMemberPath property to FullName, that computed property on our entity and we'll set the
                     SelectedValuePath to the Id property.
                 </p>
-                <img src="images/Fig02-012.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-012.png" class="image"/>
                 <p>
                     And then I'll go down to my data form here and I'll add a binding for the FirstName property, we'll point that binding to the
                     SelectedCustomer property that's on our DataContext, which is the Window, and then we can dot down to the FirstName property on that
                     SelectedCustomer to set the text there, likewise, for the LastName and for the Email.
                 </p>
-                <img src="images/Fig02-013.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-013.png" class="image"/>
                 <p>
                     So with that code in place, we can fire this thing up and we can see our ComboBox is bound.
                 </p>
-                <img src="images/Fig02-014.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-014.png" class="image"/>
                 <p>
                     The problem is, as we select things we can see that the TextBoxes (FirstName, LastName and Email) are not updating. To make matters worse,
                     if I go and edit something like Last Name here and tab out of the field, which is what causes it to get written
                 </p>
-                <img src="images/Fig02-015.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-015.png" class="image"/>
                 <p>
                     The Last Name jumps at that point to the actual value of the currently selected customer, but the First Name and Email are out of sync now.
                 </p>
-                <img src="images/Fig02-016.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-016.png" class="image"/>
                 <p>
                     And if I go look at the ComboBox list and go back to Derek, his Last Name hasn't been modified there:
                 </p>
-                <img src="images/Fig02-017.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-017.png" class="image"/>
                 <p>
                     But if I click on it then the modification shows up.
                 </p>
-                <img src="images/Fig02-018.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-018.png" class="image"/>
                 <p>
                     So things are wildly out of sync here because our entities are not properly defined to really support data binding. So in the next couple of
                     demos, we'll fix that by supporting Change Notifications when things are changing.
@@ -186,7 +186,7 @@
                     simple interface with a single member on it called PropertyChanged, an event that you're supposed to raise whenever the properties on your
                     object change.
                 </p>
-                <img src="images/Fig02-019.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-019.png" class="image"/>
                 <p>
                     Bindings are aware of this interface and when they go to data bind to a source object, they will query it to see if it supports this
                     interface. And if it does, then the binding itself will subscribe to that PropertyChanged event so it can be notified and refresh the bound
@@ -219,18 +219,18 @@
                 <p>
                     If we go to our Customer object, you can see it's just a simple Plain Old CLR Object.
                 </p>
-                <img src="images/Fig02-020.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-020.png" class="image"/>
                 <p>
                     Anytime you're doing data binding to a complex object like this, you're going to want it to support the INotifyPropertyChanged interface. To
                     do that, I'm going to modify the Customer class here and what I did is you can see it got a lot bigger. First off, I'm implementing the
                     INotifyPropertyChanged interface.
                 </p>
-                <img src="images/Fig02-021.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-021.png" class="image"/>
                 <p>
                     I'm going to call this INPC for short in a lot of the course here. So the INPC interface here requires that you expose a public event called
                     PropertyChanged on your type of Type PropertyChangedEventHandler.
                 </p>
-                <img src="images/Fig02-022.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-022.png" class="image"/>
                 <p>
                     Now this syntax at the end of the line above, if you haven't seen it, is kind of a nice trick called the delegate trick, that if you assign
                     an empty anonymous delegate into that event, then it's basically a no-op subscriber that's always there and can't be removed, so you no
@@ -240,27 +240,27 @@
                     You can see that our property is expanded to backing member variables and individual properties with getters and setters on those member
                     variables.
                 </p>
-                <img src="images/Fig02-023.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-023.png" class="image"/>
                 <p>
                     Now this Id property you might treat as invariant. In this case it's a GUID so it actually does have to be set. What you really want to be
                     doing on every property is what the other ones are doing, which is raising the PropertyChanged event, passing a reference for the object
                     sender of this, and then a PropertyChangedEventArg that takes the name of the property that's being changed.
                 </p>
-                <img src="images/Fig02-024.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-024.png" class="image"/>
                 <p>
                     So I should really add this PropertyChanged to the ID as well and make sure the name of the property is Id. So on any object that implements
                     INotifyPropertyChanged, the way to think about it is any of the public properties you expose that have a set block should raise
                     PropertyChanged. Now if we slide down to the bottom, we've still got our FullName property that we're actually binding to in the ComboBox,
                     and it's computed based off the FirstName and LastName.
                 </p>
-                <img src="images/Fig02-025.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-025.png" class="image"/>
                 <p>
                     It doesn't have a set block that we can put a PropertyChangedEvent in, but we basically need the PropertyChanged to fire on that whenever
                     FirstName or LastName changes. So a little trick for dealing with that is if we go up here to the two DependentProperties, FirstName and
                     LastName, we can raise other PropertyChanged events in their set block. The first PropertyChanged says yes, in fact the FirstName
                     PropertyChanged, but it also pretends that the FullName property has changed because effectively it has.
                 </p>
-                <img src="images/Fig02-026.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-026.png" class="image"/>
                 <p>
                     So if we raise PropertyChanged for FullName on both the DependentProperties, then the right thing will happen there. So if we go ahead and
                     run, now we modify Pucket's Last Name here and tab out of the field, and we see that it immediately updates in the ComboBox, both there and
@@ -341,12 +341,12 @@
                     But we still have that selection problem that when we selected things in the ComboBox, it wasn't updating on the UI. Now the reason for that
                     is this right here.
                 </p>
-                <img src="images/Fig02-027.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-027.png" class="image"/>
                 <p>
                     We're setting this SelectedCustomer property, but it's just a plain C# property itself, and raises no Change Notifications. So we have a
                     couple options to fix that. One is, we could go up there to the Window class and we could implement INotifyPropertyChanged up here:
                 </p>
-                <img src="images/Fig02-028.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-028.png" class="image"/>
                 <p>
                     and then expand the Customers and SelectedCustomer properties to raise PropertyChanged events as well. And if these properties were on
                     something like a ViewModel, that would be the right thing to do. However, since we're in a Window class, which is also a DependencyObject,
@@ -354,20 +354,20 @@
                     them back in using a code snippet that's built in to Visual Studio called propdp. I can hit tab, tab, and then I start filling in the
                     blanks,
                 </p>
-                <img src="images/Fig02-029.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-029.png" class="image"/>
                 <p>
                     The first one was my list of customers called Customers:
                 </p>
-                <img src="images/Fig02-030.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-030.png" class="image"/>
                 <p>
                     And then I tab down to the bottom right here and you can see it wants an Owner class that's going to be the main window, and then I'll tab
                     right one more time and there's a default value which I'll set to null.
                 </p>
-                <img src="images/Fig02-031.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-031.png" class="image"/>
                 <p>
                     So let me just clean that up a little bit:
                 </p>
-                <img src="images/Fig02-032.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-032.png" class="image"/>
                 <p>
                     So here you can see the cleaned up Customers DependencyProperty, and just to review these, if you haven't had a lot of exposure, a
                     DependencyProperty is a <span class="code">public static readonly</span> member variable on the class that declares it. That class will have
@@ -378,7 +378,7 @@
                 <p>
                     Then paired with your DependencyProperty, you'll always have what's called a wrapper property:
                 </p>
-                <img src="images/Fig02-033.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-033.png" class="image"/>
                 <p>
                     Which is always just a .NET property with the same name, Customers, and you can see it uses the DependencyObject base class to call <span
                         class="code">GetValue</span> and <span class="code">SetValue</span> to read and write the underlying value of that DependencyProperty.
@@ -402,7 +402,7 @@
                     updating with those selections because when SelectedCustomer changes, each of these is bound to select Customer and some property on that
                     and it knows to re-render based on that property change.
                 </p>
-                <img src="images/Fig02-034.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-034.png" class="image"/>
             </div>
             <div class="panel-body">
                 <h3>ObservableCollections</h3>
@@ -415,7 +415,7 @@
                     <span class="code">INotifyCollectionChanged</span> and you should see the similarity here to <span
                         class="code">INotifyPropertyChanged</span>.
                 </p>
-                <img src="images/Fig02-035.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-035.png" class="image"/>
                 <p>
                     <span class="code">INotifyCollectionChanged</span> raises a <span class="code">CollectionChanged</span> event, so it's the conceptual dual
                     or parallel to the INPC interface. And this one covers changes to the collection meaning additions and removals changes of what objects are
@@ -454,17 +454,17 @@
                     So first off, for the new order form at the bottom we're going to have an <span class="code">Order</span> object that those fields can bind
                     to called <span class="code">NewOrder</span>:
                 </p>
-                <img src="images/Fig02-036.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-036.png" class="image"/>
                 <p>
                     Then for the <span class="code">ComboBox</span> in the form we're going to have one called <span class="code">OrderStatuses</span> that's
                     going to be populated with the choices for <span class="code">OrderStatus</span> from the database.
                 </p>
-                <img src="images/Fig02-037.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-037.png" class="image"/>
                 <p>
                     Next we're going to need to populate the orders, so I'm going to go up here to where we are initializing our customer information in our
                     DataContext and add a few more things.
                 </p>
-                <img src="images/Fig02-038.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-038.png" class="image"/>
                 <p>
                     First off, we're going to populate that <span class="code">OrderStatuses</span> collection with the list of <span
                         class="code">OrderStatuses</span> from the database. We're still selecting the first <span class="code">Customer</span> like we were
@@ -474,7 +474,7 @@
                     Just to emphasize from the previous demo, I could actually move the line where the <span class="code">DataContext</span> is set now to some
                     point before we start populating the properties on whatever that DataContext is:
                 </p>
-                <img src="images/Fig02-039.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-039.png" class="image"/>
                 <p>
                     As long as those properties raise appropriate Change Notifications, which the DependencyProperties do, then it's okay to change these after
                     the fact of setting the DataContext.
@@ -483,7 +483,7 @@
                     Now we also need to populate that <span class="code">NewOrder</span> object, so if I go down to my <span
                         class="code">CustomerSelected</span> handler, and then add in some code:
                 </p>
-                <img src="images/Fig02-040.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-040.png" class="image"/>
                 <p>
                     That code is going to new up an <span class="code">Order</span> object and set it as the <span class="code">NewOrder</span>, and set the
                     <span class="code">CustomerId</span> of that <span class="code">NewOrder</span> to the <span class="code">SelectedCustomer</span> in the
@@ -495,14 +495,14 @@
                     Orders are supposed to show up in. I can add a binding here for the ItemsSource property pointing to that <span class="code">SelectedCustomer</span>
                     object and the <span class="code">Orders</span> collection that hangs off of it.
                 </p>
-                <img src="images/Fig02-041.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-041.png" class="image"/>
                 <p>
                     Now we don't have any columns to find here, so it's going to auto-generate the columns based on the properties on that object.
                 </p>
                 <p>
                     And then I'm going to slide down and update the fields in our order form to include appropriate bindings.
                 </p>
-                <img src="images/Fig02-042.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-042.png" class="image"/>
                 <p>
                     So you can see we're binding the <span class="code">OrderId</span> to the <span class="code">NewOrder</span> object's <span
                         class="code">Id</span>, <span class="code">NewOrder.OrderDate</span>, <span class="code">NewOrder.ItemsTotal</span>, and then for the
@@ -518,7 +518,7 @@
                 <p>
                     One other thing we're going to want to modify in the code-behind here is our <span class="code">Add</span> handler:
                 </p>
-                <img src="images/Fig02-043.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-043.png" class="image"/>
                 <p>
                     So I'm going to add some code to that that basically takes that <span class="code">NewOrder</span> object at the point where the <span
                         class="code">Add</span> button is pressed and adds that object into the <span class="code">Orders</span> collection on the <span
@@ -530,7 +530,7 @@
                 <p>
                     If I go ahead and run here, we've got the orders populated for the <span class="code">SelectedCustomer</span>.
                 </p>
-                <img src="images/Fig02-044.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-044.png" class="image"/>
                 <p>
                     If we pick another customer, you can see it's updating to show just the orders for that current customer. Now if I go to one that's only got
                     a couple showing here, and I go to enter a new order, I'll pick Halloween here as a date, we'll go with 99.90 as an Order Total, and an
@@ -547,29 +547,29 @@
                         class="code">Orders</span> collection on the <span class="code">SelectedCustomer</span> is just declared as a <span
                         class="code">List</span> of <span class="code">Order</span>.
                 </p>
-                <img src="images/Fig02-045.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-045.png" class="image"/>
                 <p>
                     If we set the <span class="code">Orders</span> property as a whole, changed out the whole collection, we would have been fine because a
                     PropertyChanged would have been raised and the binding would have re-bound to that new collection. But in this case we're not swapping out
                     the whole collection, we're just reaching into that collection and adding a new item. <span class="code">List&lt;T&gt;</span> has no Change
                     Notifications associated with that. So what we're going to want to do is change our property here to be an <span class="code">ObservableCollection&lt;T&gt;,</span>:
                 </p>
-                <img src="images/Fig02-046.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-046.png" class="image"/>
                 <p>
                     We will also have to go change the member variable, as well, to be an <span class="code">ObservableCollection</span>:
                 </p>
-                <img src="images/Fig02-047.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-047.png" class="image"/>
                 <p>
                     And there's one other place in the code-behind where we first populate that <span class="code">Orders</span> collection, so we're now newing
                     up an <span class="code">ObservableCollection</span> and passing in the <span class="code">IEnumerable</span> that comes out of this link
                     expression to populate that collection.
                 </p>
-                <img src="images/Fig02-048.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-048.png" class="image"/>
                 <p>
                     With that code in place, we can go ahead and run, we can make our selection, let's add a new order, this one for January 1, 33, and
                     Delivered, and watch the grid up above when we click Add.
                 </p>
-                <img src="images/Fig02-049.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-049.png" class="image"/>
                 <p>
                     It shows up immediately because that <span class="code">ObservableCollection</span> class raises a <span
                         class="code">CollectionChanged</span> event the bindings are watching for, and the binding will re-render the content based on that.
@@ -577,12 +577,12 @@
                 <p>
                     Now in a similar fashion, I really should go up here in the code-behind:
                 </p>
-                <img src="images/Fig02-050.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-050.png" class="image"/>
                 <p>
                     If you remember from previous demo, we had defined this list of customers that we were binding to. I'm going to replace that with <span
                         class="code">ObservableCollection</span> as the type of that collection:
                 </p>
-                <img src="images/Fig02-051.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-051.png" class="image"/>
                 <p>
                     Basically, anytime you're exposing a collection for data binding purposes, if there is any chance whatsoever that items will be added and
                     removed to it, then that collection should be an <span class="code">ObservableCollection</span>, not something like a list.
@@ -591,7 +591,7 @@
                     And because of that change, we have to change the initialization code for the <span class="code">Customers</span> collection in the
                     constructor:
                 </p>
-                <img src="images/Fig02-052.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-052.png" class="image"/>
                 <p>
                     We just do a similar thing. We call the constructor of <span class="code">ObservableCollection&lt;T&gt;</span>, passing in an enumerable to
                     populate it, and assigning that into our property.
@@ -643,13 +643,13 @@
                     changes on entities that you're data binding to. The starting point for this one is the ending point of previous demos in the module, and
                     what we're going to be focusing on here is the Order objects.
                 </p>
-                <img src="images/Fig02-053.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-053.png" class="image"/>
                 <p>
                     If we go ahead and run the app, the first thing to notice is that the DataGrid in WPF already has support for backing out changes or rolling
                     back changes as you edit an object. As soon as you put a row into Edit mode, like I've just done by clicking into a cell, and start
                     modifying the values there, as long as my focus stays on that row I can hit escape and you can see it backed out the changes.
                 </p>
-                <img src="images/Fig02-054.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-054.png" class="image"/>
                 <p>
                     So, really, while a row is in Edit mode it's creating a temporary object in memory and modifying the values on that. Now there's a data
                     binding Update mode we'll get to in a later module where it might be pushing those changes as you tab out of the field. So I could make this
@@ -658,7 +658,7 @@
                 <p>
                     If we hit escape, then it backs those things out.
                 </p>
-                <img src="images/Fig02-055.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-055.png" class="image"/>
                 <p>
                     Now whether you support the immediate update mode or not, you might want to have your object notified, because it might need to refresh its
                     values from the database, for example, instead of just directly from memory. So that's one place where <span
@@ -671,19 +671,19 @@
                     really should be supporting <span class="code">INotifyPropertyChanged</span> on this object. So the first change I'm going to make is to do
                     that.
                 </p>
-                <img src="images/Fig02-056.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-056.png" class="image"/>
                 <p>
                     So you can see I've added the <span class="code">INotifyPropertyChanged</span> interface and the corresponding event onto my Order object,
                     I've expanded all the properties to have backing member variables and to raise the <span class="code">PropertyChanged</span> event when
                     those change. So that's the starting point is make it a good object for data binding. The second part is to implement the <span
                         class="code">IEditableObject</span> interface, so I declare that I want to implement that interface:
                 </p>
-                <img src="images/Fig02-057.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-057.png" class="image"/>
                 <p>
                     I can stub out the implementation using Visual Studio. So you can see the interface defines three methods, <span
                         class="code">BeginEdit</span>, <span class="code">CancelEdit</span>, and <span class="code">EndEdit</span>:
                 </p>
-                <img src="images/Fig02-058.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-058.png" class="image"/>
                 <p>
                     The idea here is that when you go into an Edit mode, such as in the DataGrid row, you can call the <span class="code">BeginEdit</span>
                     method. If the user escapes and cancels those changes, it can call <span class="code">CancelEdit</span>, and if they complete the changes
@@ -693,12 +693,12 @@
                     In the case of the DataGrid, that would happen when the row focus changes to a different row. So what do we really need to do on these
                     methods? Well let me add some implementation:
                 </p>
-                <img src="images/Fig02-059.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-059.png" class="image"/>
                 <p>
                     And you can see what I'm doing here is I've got a <span class="code">TempValues</span> object that's declared as a member variable on the
                     class that is an <span class="code">Order</span> itself:
                 </p>
-                <img src="images/Fig02-060.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-060.png" class="image"/>
                 <p>
                     So it's just a place to stash the temporary values for each of our properties. And you can see I new up an <span class="code">Order</span>
                     object when we go into the <span class="code">BeginEdit</span> mode and stash off all the values of my properties into the properties of
@@ -707,28 +707,28 @@
                 <p>
                     If <span class="code">CancelEdit</span> is called, we just restore the property values to those original values:
                 </p>
-                <img src="images/Fig02-061.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-061.png" class="image"/>
                 <p>
                     If <span class="code">EndEdit</span> is called we throw away our temporary values because they're no longer needed
                 </p>
-                <img src="images/Fig02-062.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-062.png" class="image"/>
                 <p>
                     So just a simple, straightforward, brute-force kind of approach to implementing <span class="code">IEditableObject</span>.
                 </p>
                 <p>
                     With that in place, I can set some breakpoints here and go ahead and run:
                 </p>
-                <img src="images/Fig02-063.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-063.png" class="image"/>
                 <p>
                     Now we'll see as I click into a cell, <span class="code">BeginEdit</span> is called:
                 </p>
-                <img src="images/Fig02-064.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-064.png" class="image"/>
                 <p>
                     So we have a chance to stash off our values and we can go ahead and start editing that. I can tab off the fields and it's holding onto those
                     values, I can change the OrderStatusId to 3, maybe change the ItemsTotal to 99, and as long as I don't tab out, which will take me to the
                     next row, I can hit escape and now our <span class="code">CancelEdit</span> is being called.
                 </p>
-                <img src="images/Fig02-065.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-065.png" class="image"/>
                 <p>
                     So it just gives your code a chance to be involved in that <span class="code">EditCancel</span> process and to do whatever is necessary to
                     restore the state of your object on Cancel.
@@ -737,30 +737,30 @@
                     Now what if we wanted to leverage this for our entry form down below for creating a new order for when the Cancel button is hit? If we
                     wanted to back out the changes to the <span class="code">NewOrder</span> object that's being held in the window?
                 </p>
-                <img src="images/Fig02-066.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-066.png" class="image"/>
                 <p>
                     To do that, we'd want to go to the place where the <span class="code">NewOrder</span> is initiated and that editing can begin.
                 </p>
-                <img src="images/Fig02-067.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-067.png" class="image"/>
                 <p>
                     So in our case, that's as soon as the <span class="code">Customer</span> is selected we could call <span class="code">BeginEdit</span> on
                     the <span class="code">NewOrder</span> object. Then when the Add button is pressed, that's basically the success case, we would call <span
                         class="code">EndEdit</span>:
                 </p>
-                <img src="images/Fig02-068.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-068.png" class="image"/>
                 <p>
                     and then in <span class="code">Cancel</span>, naturally we would call <span class="code">CancelEdit</span>.
                 </p>
-                <img src="images/Fig02-069.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-069.png" class="image"/>
                 <p>
                     With those changes in place, we can run, we could go down here and start editing our Order object (Order Date, Order Total and Order
                     Status):
                 </p>
-                <img src="images/Fig02-070.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-070.png" class="image"/>
                 <p>
                     Then if I click the Cancel button, watch the fields revert back to their defaults.
                 </p>
-                <img src="images/Fig02-071.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-071.png" class="image"/>
                 <p>
                     So that's all there is to <span class="code">IEditableObject</span>, implement the interface, define the <span class="code">Begin</span>,
                     <span class="code">Cancel</span>, and <span class="code">End Edit</span> methods, stashing off the values somewhere appropriate, and being
@@ -804,11 +804,11 @@
                     current object within a data bound collection. And then we'll change the way our form works slightly so that when an order is selected in
                     the <span class="code">DataGrid</span> in the middle here:
                 </p>
-                <img src="images/Fig02-072.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-072.png" class="image"/>
                 <p>
                     Its details show up in the fields down below:
                 </p>
-                <img src="images/Fig02-073.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-073.png" class="image"/>
                 <p>
                     To do that implies some currency between the form at the bottom and the <span class="code">DataGrid</span> in the middle.
                 </p>
@@ -816,19 +816,19 @@
                     So the first thing I'm going to do is I'm going to go into the XAML and go find my <span class="code">DataGrid</span> and add another
                     property on it called <span class="code">IsSynchronizedWithCurrentItem</span>:
                 </p>
-                <img src="images/Fig02-074.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-074.png" class="image"/>
                 <p>
                     Now the key thing to understand here is, anytime you data bind to a collection, such as <span class="code">Orders</span> here:
                 </p>
-                <img src="images/Fig02-075.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-075.png" class="image"/>
                 <p>
                     <span class="code">Customers</span> here,
                 </p>
-                <img src="images/Fig02-076.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-076.png" class="image"/>
                 <p>
                     or <span class="code">OrderStatuses</span> here:
                 </p>
-                <img src="images/Fig02-077.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-077.png" class="image"/>
                 <p>
                     WPF is always going to be wrapping your collection in a <span class="code">CollectionView</span> and <span
                         class="code">CollectionViews</span> are something that support a number of things.
@@ -848,7 +848,7 @@
                         class="code">DataContext</span> for the grid as a whole to the exact same collection that my <span class="code">DataGrid</span> is bound
                     to:
                 </p>
-                <img src="images/Fig02-078.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-078.png" class="image"/>
                 <p>
                     When WPF wraps a collection in the <span class="code">CollectionView</span>, it'll create one <span class="code">CollectionView</span> for
                     all references to that same collection. So even though this <span class="code">DataContext</span> is pointing through this binding and this
@@ -865,7 +865,7 @@
                     and <span class="code">NewOrder.ItemsTotal</span>, we're just saying <span class="code">Id</span>, <span class="code">OrderDate</span>, and
                     <span class="code">ItemsTotal</span>:
                 </p>
-                <img src="images/Fig02-079.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-079.png" class="image"/>
                 <p>
                     Because the <span class="code">DataContext</span> has already been restricted down implicitly to a single order, even though the <span
                         class="code">DataContext</span> is pointing to an entire collection here when you have a binding that results in a single value like
@@ -878,7 +878,7 @@
                     have to do some additional gymnastics here for binding this <span class="code">ComboBox</span>, which really wants to get to the <span
                         class="code">OrderStatuses</span> collection that's on the window itself:
                 </p>
-                <img src="images/Fig02-080.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-080.png" class="image"/>
                 <p>
                     I'll get into more details on <span class="code">RelativeSource</span> bindings in the next module, but conceptually, what this binding is
                     doing is reaching up to the window level, dotting down to its <span class="code">DataContext</span>, which happens to be a reference to the
@@ -888,7 +888,7 @@
                     So with those bindings in place, I can now go ahead and run, and notice that when I select in the <span class="code">DataGrid</span>, the
                     order that the form is bound to at the bottom is changing along with my selections:
                 </p>
-                <img src="images/Fig02-081.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-081.png" class="image"/>
                 <p>
                     And that's happening even though the <span class="code">DataContext</span> for those individual elements is really a collection the bindings
                     themselves are smart enough to go to that collection, see it's a <span class="code">CollectionView</span>, ask for the <span class="code">Current</span>
@@ -898,7 +898,7 @@
                     Now what if we wanted to programmatically control what the <span class="code">CurrentItem</span> is, I'm going to go up here and replace my
                     <span class="code">DataGrid</span> with a <span class="code">StackPanel</span> that contains the <span class="code">DataGrid</span>:
                 </p>
-                <img src="images/Fig02-082.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-082.png" class="image"/>
                 <p>
                     Inside that <span class="code">StackPanel</span> I have two buttons sitting right atop the <span class="code">DataGrid</span> that allow me
                     to move the focus, if you will, or the selection within the <span class="code">DataGrid</span> up and down, and then I still have the <span
@@ -907,12 +907,12 @@
                 <p>
                     The additional stuff here is just some styling to make it very apparent what the selected row is by drawing a blue box around it:
                 </p>
-                <img src="images/Fig02-083.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-083.png" class="image"/>
                 <p>
                     Now I need some <span class="code">Click</span> event handlers for those buttons so I'll drop into the code-behind. So I'm just going to go
                     to the bottom of the code-behind here and add the event handlers.
                 </p>
-                <img src="images/Fig02-084.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-084.png" class="image"/>
                 <p>
                     In the <span class="code">MoveDown</span> one you can see what we're doing is we're going to a class called <span class="code">CollectionViewSource</span>,
                     and we call <span class="code">GetDefaultView</span>, and we pass it a reference to the same collection that was being data bound to by both
@@ -932,7 +932,7 @@
                     So with that code in place, I can run, I can click the down arrow, and you can see the highlight moving, click the up arrow and it moves
                     back up:
                 </p>
-                <img src="images/Fig02-085.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-085.png" class="image"/>
                 <p>
                     So we're able to control the <span class="code">currentPosition</span> programmatically using the <span class="code">ICollectionView</span>
                     interface. And, again, we'll see other things we can do <span class="code">CollectionViews</span> more in a later module.
@@ -993,18 +993,18 @@
                     The DataSet we're going to be using here is a typed DataSet, but I'll show you, you can also use untyped DataSets. The schema is the same
                     Zza database that we've been using and it's got Customer, Order, and OrderStatus as a minimal part of that schema.
                 </p>
-                <img src="images/Fig02-086.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-086.png" class="image"/>
                 <p>
                     The UI we'll be using for this demo is just the top portion of a demo that we've been using before that has the drop-down list of customers,
                     and when you select one it fills out the fields for First Name, Last Name, and Email for the SelectedCustomer:
                 </p>
-                <img src="images/Fig02-087.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-087.png" class="image"/>
                 <p>
                     If we go to the XAML, you can see here's our <span class="code">ComboBox</span> and the binding is not really going to look any different
                     here. It's going to say, I'm expecting my DataContext to provide me a property called Customers, and in that Customers I'm expecting a
                     bindable collection of something:
                 </p>
-                <img src="images/Fig02-088.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-088.png" class="image"/>
                 <p>
                     When working with DataSets, the bindable something is going to be what's called a DataRowView. It's a view on top of a data row similar to
                     the ICollectionView we talked about earlier, but one that's built in to the overall schema of DataSets, and bindings are aware of those.
@@ -1018,12 +1018,12 @@
                 <p>
                     Down below you can see we have SelectedCustomer.LastName, .FirstName, .Email, just like we had in earlier demos with entities:
                 </p>
-                <img src="images/Fig02-089.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-089.png" class="image"/>
                 <p>
                     So the syntax at a binding level is no different if you're working with DataSets or with entities. The only thing that's going to be a
                     little different is the way you do the data access.
                 </p>
-                <img src="images/Fig02-090.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-090.png" class="image"/>
                 <p>
                     So, the first thing I need to do is declare a couple of properties that the bindings were expecting in the XAML. Those are a Customers
                     collection and a SelectedCustomer. The types of those properties, if I'm starting with the typed DataSets are going to be a
@@ -1040,12 +1040,12 @@
                     That's going to return me with a strongly-typed DataSet, it returns me one of those <span id="code">CustomerDataTables</span>, which I can
                     just write directly into my wrapper property for my <span id="">DependencyProperty</span> Customers:
                 </p>
-                <img src="images/Fig02-091.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-091.png" class="image"/>
                 <p>
                     Next, I need to handle the Selection, so I'll set the <span class="code">SelectedCustomer</span> property to a <span class="code">DataRowView</span>,
                     which I can do by going to the <span class="code">CustomersCombo</span> and getting the <span class="code">SelectedItem</span>:
                 </p>
-                <img src="images/Fig02-092.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-092.png" class="image"/>
                 <p>
                     If you try to cast that to <span class="code">DataRow</span> it's going to fail because it's wrapped it in one of these <span class="code">DataRowViews</span>
                     at the point where you data bind to the <span class="code">Customers</span> collection.
@@ -1055,18 +1055,18 @@
                     out of the fields in the <span class="code">DataRow</span> from a <span class="code">DataTable</span> as opposed to working with entities
                     and properties.
                 </p>
-                <img src="images/Fig02-093.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-093.png" class="image"/>
                 <p>
                     Now just to show that this can also work with untyped DataSets, I'm going to replace my <span class="code">Customers</span> property here
                     with a <span class="code">DataTable</span> one, a non-strongly-typed <span class="code">DataTable</span>:
                 </p>
-                <img src="images/Fig02-094.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-094.png" class="image"/>
                 <p>
                     Then I'll go up to the top and replace my data loading by declaring a DataSet, an untyped DataSet, and then I create an instance of a <span
                         class="code">SqlDataAdapter</span>, do a <span class="code">"SELECT * FROM Customer"</span>, pass an appropriate connection to it, and
                     then do a <span class="code">Fill</span> on the adapter passing in the DataSet.
                 </p>
-                <img src="images/Fig02-095.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-095.png" class="image"/>
                 <p>
                     Then to populate my <span class="code">Customers</span> <span class="code">DataTable</span> property, I can just go to the <span
                         class="code">DataSet.Tables</span> collection and when you do a fill like this it names the Tables <span class="code">Table</span>,
@@ -1078,7 +1078,7 @@
                     I could go ahead and run again and we can see things are populating just fine even though we have no type information now, it's just an
                     untyped DataSet with columns and rows.
                 </p>
-                <img src="images/Fig02-096.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-096.png" class="image"/>
             </div>
             <div class="panel-body">
                 <h3>Binding to XML</h3>
@@ -1123,17 +1123,17 @@
                 <p>
                     So down here you can see we've got a Zza xml file that's really a dump of some of the customers and their orders from the Zza database:
                 </p>
-                <img src="images/Fig02-097.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-097.png" class="image"/>
                 <p>
                     That's going to be our data source for this. The window we're going to deal with is similar to the last demo, that we have a Customers
                     drop-down and we have some data bound fields on the current customer selected in that drop-down, and we want to support that same scenario,
                     put data binding directly to a collection of customers in XML.
                 </p>
-                <img src="images/Fig02-098.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-098.png" class="image"/>
                 <p>
                     Code-behind for this has absolutely nothing in it, and you'll see that we're going to keep it that way:
                 </p>
-                <img src="images/Fig02-099.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-099.png" class="image"/>
                 <p>
                     We're just going to load the XML directly into our XAML, which is definitely a point of coupling, but it's the most expeditious way to work
                     with XML in data binding.
@@ -1142,7 +1142,7 @@
                     So I'm going to drop into the XAML here and I'm going to declaratively hook up the <span class="code">DataContext</span> for the window to
                     an object called an <span class="code">XmlDataProvider</span>:
                 </p>
-                <img src="images/Fig02-100.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-100.png" class="image"/>
                 <p>
                     This is an object that you can point to an XML file with its source property, so this is really just a relative path within the project is
                     how it's resolving that.
@@ -1157,7 +1157,7 @@
                     And it's basically going to form a collection of XML elements within this <span class="code">DataProvider</span> as a source. Then I'm going
                     to go down here to our <span class="code">ComboBox</span> and add some data binding properties to it:
                 </p>
-                <img src="images/Fig02-101.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-101.png" class="image"/>
                 <p>
                     First off is an <span class="code">ItemsSource</span> that says I'm going to bind to the entire <span class="code">DataContext</span>. And
                     that <span class="code">DataContext</span>, again, was being set to a collection of <span class="code">Customer</span> objects through this
@@ -1177,7 +1177,7 @@
                     Next, we can drop down to the form fields of our little data form and add bindings to those, and here you can see we have a Text Binding,
                     but the way we specify the path in this case is we specify it as <span class="code">XPath</span>.
                 </p>
-                <img src="images/Fig02-102.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-102.png" class="image"/>
                 <p>
                     So in this case, because they are child elements with values in them, we can just say <span class="code">XPath</span> <span class="code">FirstName</span>,
                     <span class="code">LastName</span>, and <span class="code">Email</span>, and it's able to locate those and grab the value of those.
@@ -1185,20 +1185,20 @@
                 <p>
                     With that in place, we can go ahead and run:
                 </p>
-                <img src="images/Fig02-103.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-103.png" class="image"/>
                 <p>
                     And you can see our form already works just like it did before, even though we have no code-behind driving anything, it's just sucking XML
                     into the root, setting that as the <span class="code">DataContext</span> through this Provider:
                 </p>
-                <img src="images/Fig02-104.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-104.png" class="image"/>
                 <p>
                     To the collection of the <span class="code">Customer</span> elements within that XML binding to that as a collection:
                 </p>
-                <img src="images/Fig02-105.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-105.png" class="image"/>
                 <p>
                     and also binding to the current item, Fields through the concurrency of the underlying view.
                 </p>
-                <img src="images/Fig02-106.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig02-106.png" class="image"/>
                 <p>
                     So this might work great if you have a flat data file that's provided to you in XML that you just want to data bind to, and it is even
                     possible to do two-way data binding and push the values back in and then go and save that document off, but if you're really doing all that,

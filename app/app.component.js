@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router', './home/welcome.component', './angular2/angular2.component', './jquery/jquery.component', './bootstrap/bootstrap3.component', './visualstudio/visualstudio.component', './visualstudiocode/visualstudiocode.component', './emmet/emmet.component', './csharp/csharp.component', './javascript/javascript.component', './typescript/typescript.component', './wpf/wpf.component', './odata/odata.component', './dgen/dgen.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router', './home/welcome.component', './wpf/wpf.component', './angular2/angular2.component', './typescript/typescript.component', './javascript/javascript.component', './jquery/jquery.component', './bootstrap/bootstrap3.component', './visualstudio/visualstudio.component', './visualstudiocode/visualstudiocode.component', './emmet/emmet.component', './csharp/csharp.component', './odata/odata.component', './dgen/dgen.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, welcome_component_1, angular2_component_1, jquery_component_1, bootstrap3_component_1, visualstudio_component_1, visualstudiocode_component_1, emmet_component_1, csharp_component_1, javascript_component_1, typescript_component_1, wpf_component_1, odata_component_1, dgen_component_1;
+    var core_1, http_1, router_1, welcome_component_1, wpf_component_1, angular2_component_1, typescript_component_1, javascript_component_1, jquery_component_1, bootstrap3_component_1, visualstudio_component_1, visualstudiocode_component_1, emmet_component_1, csharp_component_1, odata_component_1, dgen_component_1;
     var AppComponent;
     return {
         setters:[
@@ -27,8 +27,17 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
             function (welcome_component_1_1) {
                 welcome_component_1 = welcome_component_1_1;
             },
+            function (wpf_component_1_1) {
+                wpf_component_1 = wpf_component_1_1;
+            },
             function (angular2_component_1_1) {
                 angular2_component_1 = angular2_component_1_1;
+            },
+            function (typescript_component_1_1) {
+                typescript_component_1 = typescript_component_1_1;
+            },
+            function (javascript_component_1_1) {
+                javascript_component_1 = javascript_component_1_1;
             },
             function (jquery_component_1_1) {
                 jquery_component_1 = jquery_component_1_1;
@@ -48,15 +57,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
             function (csharp_component_1_1) {
                 csharp_component_1 = csharp_component_1_1;
             },
-            function (javascript_component_1_1) {
-                javascript_component_1 = javascript_component_1_1;
-            },
-            function (typescript_component_1_1) {
-                typescript_component_1 = typescript_component_1_1;
-            },
-            function (wpf_component_1_1) {
-                wpf_component_1 = wpf_component_1_1;
-            },
             function (odata_component_1_1) {
                 odata_component_1 = odata_component_1_1;
             },
@@ -71,7 +71,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-app',
-                        template: "\n            <div class='navbar navbar-inverse'>\n                <div class='container'>\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span class=\"sr-only\">Toggle navigation</span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </button>\n                        <a [routerLink]=\"['Welcome']\" class=\"navbar-brand\">maxsage.tech</a>\n                    </div>\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class='nav navbar-nav'>\n                            <li><a [routerLink]=\"['WPF']\">WPF</a></li>\n                            <li><a [routerLink]=\"['Angular2']\">Angular 2</a></li>\n                            <li><a [routerLink]=\"['JQuery']\">JQuery</a></li>\n                            <li><a [routerLink]=\"['Bootstrap3']\">Bootstrap 3</a></li>\n                            <li><a [routerLink]=\"['VisualStudio']\">Visual Studio</a></li>\n                            <li><a [routerLink]=\"['VisualStudioCode']\">Visual Studio Code</a></li>\n                            <li><a [routerLink]=\"['Emmet']\">Emmet</a></li>\n                            <li><a [routerLink]=\"['CSharp']\">C#</a></li>\n                            <li><a [routerLink]=\"['JavaScript']\">JavaScript</a></li>\n                            <li><a [routerLink]=\"['TypeScript']\">TypeScript</a></li>\n                            <li><a [routerLink]=\"['OData']\">OData</a></li>\n                            <li><a [routerLink]=\"['DGen']\">DGen</a></li>\n\n                        </ul>\n                    </div>\n                </div>\n            </div>\n            <div class='container body-content'>\n                <router-outlet></router-outlet>\n                <hr />\n                <footer>\n                    <p>&copy; 2016 - maxsage.tech</p>\n                </footer>\n            </div>\n    ",
+                        template: "\n            <div class='navbar navbar-inverse'>\n                <div class='container'>\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span class=\"sr-only\">Toggle navigation</span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </button>\n                        <a [routerLink]=\"['Welcome']\" class=\"navbar-brand\">maxsage.tech</a>\n                    </div>\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class='nav navbar-nav'>\n                            <li><a [routerLink]=\"['WPF']\">WPF</a></li>\n                            <li><a [routerLink]=\"['Angular2']\">Angular 2</a></li>\n                            <li><a [routerLink]=\"['TypeScript']\">TypeScript</a></li>\n                            <li><a [routerLink]=\"['JavaScript']\">JavaScript</a></li>\n                            <li><a [routerLink]=\"['JQuery']\">JQuery</a></li>\n                            <li><a [routerLink]=\"['Bootstrap3']\">Bootstrap 3</a></li>\n                            <li><a [routerLink]=\"['VisualStudio']\">Visual Studio</a></li>\n                            <li><a [routerLink]=\"['VisualStudioCode']\">Visual Studio Code</a></li>\n                            <li><a [routerLink]=\"['Emmet']\">Emmet</a></li>\n                            <li><a [routerLink]=\"['CSharp']\">C#</a></li>\n                            <li><a [routerLink]=\"['OData']\">OData</a></li>\n                            <li><a [routerLink]=\"['DGen']\">DGen</a></li>\n\n                        </ul>\n                    </div>\n                </div>\n            </div>\n            <div class='container body-content'>\n                <router-outlet></router-outlet>\n                <hr />\n                <footer>\n                    <p>&copy; 2016 - maxsage.tech</p>\n                </footer>\n            </div>\n    ",
                         directives: [router_1.ROUTER_DIRECTIVES],
                         providers: [http_1.HTTP_PROVIDERS,
                             router_1.ROUTER_PROVIDERS]
@@ -113,14 +113,27 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                         { path: '/angular2-getting-started-13-angular-modules', name: 'Angular2GettingStarted13AngularModules', component: angular2_component_1.Angular2GettingStarted13AngularModulesComponent },
                         { path: '/angular2-getting-started-14-angular2-setup-revisited', name: 'Angular2GettingStarted14Angular2SetupRevisited', component: angular2_component_1.Angular2GettingStarted14Angular2SetupRevisitedComponent },
                         { path: '/angular2-getting-started-15-final-words', name: 'Angular2GettingStarted15FinalWords', component: angular2_component_1.Angular2GettingStarted15FinalWordsComponent },
+                        { path: '/javascript', name: 'JavaScript', component: javascript_component_1.JavaScriptComponent },
+                        { path: '/building-a-javascript-development-environment00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },
+                        { path: '/building-a-javascript-development-environment01-you-need-a-starter-kit', name: 'BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKit', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKitComponent },
+                        { path: '/building-a-javascript-development-environment02-editors-and-configuration', name: 'BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfiguration', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfigurationComponent },
+                        { path: '/building-a-javascript-development-environment03-package-management', name: 'BuildingAJavaScriptDevelopmentEnvironment03PackageManagement', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment03PackageManagementComponent },
+                        { path: '/building-a-javascript-development-environment04-development-web-server', name: 'BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServer', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServerComponent },
+                        { path: '/building-a-javascript-development-environment05-automation', name: 'BuildingAJavaScriptDevelopmentEnvironment05Automation', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment05AutomationComponent },
+                        { path: '/building-a-javascript-development-environment06-transpiling', name: 'BuildingAJavaScriptDevelopmentEnvironment06Transpiling', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent },
+                        { path: '/building-a-javascript-development-environment07-bundling', name: 'BuildingAJavaScriptDevelopmentEnvironment07Bundling', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent },
+                        { path: '/building-a-javascript-development-environment08-linting', name: 'BuildingAJavaScriptDevelopmentEnvironment08Linting', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment08LintingComponent },
+                        { path: '/building-a-javascript-development-environment09-testing-and-continuous-integration', name: 'BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegration', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegrationComponent },
+                        { path: '/building-a-javascript-development-environment10-http-calls', name: 'BuildingAJavaScriptDevelopmentEnvironment10HTTPCalls', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment10HTTPCallsComponent },
+                        { path: '/building-a-javascript-development-environment11-project-structure', name: 'BuildingAJavaScriptDevelopmentEnvironment11ProjectStructure', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment11ProjectStructureComponent },
+                        { path: '/building-a-javascript-development-environment12-production-build', name: 'BuildingAJavaScriptDevelopmentEnvironment12ProductionBuild', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment12ProductionBuildComponent },
+                        { path: '/building-a-javascript-development-environment13-production-deploy', name: 'BuildingAJavaScriptDevelopmentEnvironment12ProductionDeploy', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment13ProductionDeployComponent },
                         { path: '/jquery', name: 'JQuery', component: jquery_component_1.JQueryComponent },
                         { path: '/bootstrap', name: 'Bootstrap3', component: bootstrap3_component_1.Bootstrap3Component },
                         { path: '/visualstudio', name: 'VisualStudio', component: visualstudio_component_1.VisualStudioComponent },
                         { path: '/visualstudiocode', name: 'VisualStudioCode', component: visualstudiocode_component_1.VisualStudioCodeComponent },
                         { path: '/emmet', name: 'Emmet', component: emmet_component_1.EmmetComponent },
                         { path: '/csharp', name: 'CSharp', component: csharp_component_1.CSharpComponent },
-                        { path: '/javascript', name: 'JavaScript', component: javascript_component_1.JavaScriptComponent },
-                        { path: '/building-a-javascript-development-environment-00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },
                         { path: '/typescript', name: 'TypeScript', component: typescript_component_1.TypeScriptComponent },
                         { path: '/odata', name: 'OData', component: odata_component_1.ODataComponent },
                         { path: '/dgen', name: 'DGen', component: dgen_component_1.DGenComponent },

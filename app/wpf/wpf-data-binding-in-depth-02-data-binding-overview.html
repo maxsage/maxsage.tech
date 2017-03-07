@@ -100,7 +100,7 @@
                     service that you're making web service calls out to, but conceptually you're reading data in from a persistent store and writing it out and
                     putting it into objects in-memory.
                 </p>
-                <img src="images/Fig01-001.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-001.png"/>
                 <p>
                     Data binding, on the other hand, sits upstream of data access, so your initial focus is going to be on a screen that you're trying to
                     support. It could be a window or a user control or a view in conceptual terms that you have a set of elements on that you're going to put
@@ -110,7 +110,7 @@
                     changes on screen. From data binding's perspective, it shouldn't know or care where those data source objects came from or even be coupled
                     to what kind of object they are.
                 </p>
-                <img src="images/Fig01-002.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-002.png"/>
             </div>
             <div class="panel-body">
                 <h3>Sources and Targets</h3>
@@ -134,14 +134,14 @@
                     that are going to flow back and forth, where those values can be a single primitive value, they can be a complex object or they can be an
                     entire collection of complex objects.
                 </p>
-                <img src="images/Fig01-003.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-003.png"/>
                 <p>
                     Now it's important to note that the terms source and target can get a little confusing because in two-way data binding those fields on the
                     screen may be editable, and if you have two-way binding enabled, those arrows can reverse and allow data to flow from the target down into
                     the source object. The names don't change at that point. The source is still the source, the target is still the target, in data binding
                     terms, but just realize that the flow reverses in the case of two-way data binding when edits are made in the screen.
                 </p>
-                <img src="images/Fig01-004.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-004.png"/>
                 <p>
                     So another key thing to keep in mind is that the target properties of a binding must be DependencyProperties. That typically means that they
                     are a property defined on a framework element that's part of the WPF framework, but they could be custom DependencyProperties on your own
@@ -162,14 +162,14 @@
                     the child elements that sit underneath it. So if we set the DataContext to the window level, all of the child elements within that window
                     will have access to the same object that was set as the DataContext on the root window element.
                 </p>
-                <img src="images/Fig01-005.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-005.png"/>
                 <p>
                     The next concept are bindings. Bindings provide the glue between the single element property, such as the text property on a textbox and a
                     source object property such as the FirstName property on a customer. Bindings allow you to read data in from the source object property into
                     the target element property, and in two-way data binding you can also flow data back from the target element property back into the source
                     object property.
                 </p>
-                <img src="images/Fig01-006.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-006.png"/>
                 <p>
                     Another important concept to do with binding is the way XAML parsing works. If you have some chunk of XAML that's going to be rendered on
                     the screen, the XAML parser is going to kick in and start ripping through that XAML. Conceptually it's top to bottom and left to right, and
@@ -177,7 +177,7 @@
                     finds a binding, it goes ahead and does the initial evaluation of that binding, figures out what the source object is, it dereferences a
                     property, gets a value out of that source object property, and puts it into the target element property that the binding is sitting on.
                 </p>
-                <img src="images/Fig01-007.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-007.png"/>
                 <p>
                     Next there's the concept of Change Notifications. Change Notifications are important because if the data can change behind the scenes, you
                     want the view to stay in sync with the real state of the data. So if you have some field and it's data bound to some source object property,
@@ -186,7 +186,7 @@
                     Change Notifications, which can trigger the binding to push the value back down into the source object property. So it's these Change
                     Notifications that allow your real data behind the scenes to stay in sync with what the user sees in the screen.
                 </p>
-                <img src="images/Fig01-008.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-008.png"/>
             </div>
             <div class="panel-body">
                 <h3>DataContexts and Scopes</h3>
@@ -195,14 +195,14 @@
                     before, you can set the DataContext at a window level. You just set the DataContext property on that window object to some source data
                     object, and that becomes the ambient data source for all of the child elements within that window.
                 </p>
-                <img src="images/Fig01-009.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-009.png"/>
                 <p>
                     However, you can also set a DataContext at a more granular level. So in this example I could set a DataContext for the data grid and the
                     data entry form below it to a collection of customers, and that ambient source of data is just applying to those elements based on some
                     containing element that we set the DataContext on, and any bindings within that scope, by default, are going to be using that DataContext as
                     their source objects.
                 </p>
-                <img src="images/Fig01-010.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-010.png"/>
                 <p>
                     Now when it comes to data bound list controls, it's important to realize that they will dynamically set a DataContext of their own. A
                     DataGrid, for example, as it goes and renders out each row, each row is composed of a set of child elements and what it will do is set the
@@ -211,19 +211,19 @@
                     order object. And that means the bindings on the columns themselves, for example, can just bind to the properties of a single order object,
                     they don't have to know which particular order object they're rendering out.
                 </p>
-                <img src="images/Fig01-011.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-011.png"/>
                 <p>
                     You can also set a DataContext in a more granular fashion to a set of elements. And you would do that by setting the DataContext property on
                     some containing element such as a grid or stack panel. Then, as discussed before, that DataContext flows down to all child elements. That
                     means these individual TextBoxes will have that DataContext as a customer object in this case, and they can just data bind to the properties
                     on that customer object without needing to know about what the DataContext is for the rest of the form.
                 </p>
-                <img src="images/Fig01-012.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-012.png"/>
                 <p>
                     And finally, you could set it for an individual element. It's fairly rare that you would set DataContexts at that granular of level,
                     although I will do it in the demos just to show how it works.
                 </p>
-                <img src="images/Fig01-013.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-013.png"/>
             </div>
             <div class="panel-body">
                 <h3>Demo Intro</h3>
@@ -241,7 +241,7 @@
                     calling it a ViewModel, but the ViewModel I'm using here doesn't follow a number of other tenets of MVVM that you can learn in other courses
                     such as my Windows 8 MVVM course. So let's dive right into some coding.
                 </p>
-                <img src="images/Fig01-014.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-014.png"/>
             </div>
             <div class="panel-body">
                 <h3>Demo: Data Forms with No Data Binding</h3>
@@ -253,7 +253,7 @@
                     Entity Framework Database First edmx data model, partly so you can visualize the schema here. In later demos I'll mostly be using Entity
                     Framework Code First.
                 </p>
-                <img src="images/Fig01-015.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-015.png"/>
                 <p>
                     The UI that we'll be using in this demo is a simple crude data form here. At the top we have some current customer information, a Customer
                     ID has a label and a Customer Name has a TextBox. Then we have a Recent Orders list, which is a ListBox that's going to be populated with
@@ -261,35 +261,35 @@
                     We've got a Save button here so that we can modify the Customer Name and save it off to the database. And we'll add some other fields as we
                     go here to save off other modifications to the customer.
                 </p>
-                <img src="images/Fig01-016.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-016.png"/>
                 <p>
                     Now really a good starting point when it comes to considering data binding is to think about what does the code need to be to support a data
                     form like this when you don't have data binding. If we drop into the code-behind here, we can see that we've got our main window, we're
                     newing up an instance of our object context, our data model, we've got a loaded event handler hooked up:
                 </p>
-                <img src="images/Fig01-017.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-017.png"/>
                 <p>
                     In that event handler we go out through our object context, execute a query to get the first customer in the customer's collection.
                 </p>
-                <img src="images/Fig01-018.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-018.png"/>
                 <p>
                     Then comes the part that gets really tedious about not using data binding is we have to go field by field and grab out values of properties
                     on our data object, our customer in this case, and push them into properties on the corresponding elements in our UI, such as the content
                     property on a label or the text property on a TextBox.
                 </p>
-                <img src="images/Fig01-019.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-019.png"/>
                 <p>
                     Next you can see I'm executing a query to go get the orders for that current customer and selecting just the OrderDate so we end up with a
                     list of DateTime objects that we set as the ItemsSource property on our ListBox.
                 </p>
-                <img src="images/Fig01-020.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-020.png"/>
                 <p>
                     We also have a SelectionChanged event handler hooked up to the ListBox, and that's down here. And here you can see we're basically going out
                     and executing a query against the database to go to the Orders collection, get the related child OrderItems, and using a Select criteria
                     that the OrderDate matches the one selected in the ListBox and the CustomerId matches the one that is the current customer based on our
                     CustomerIdLabel.
                 </p>
-                <img src="images/Fig01-021.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-021.png"/>
                 <p>
                     You can see one of the downsides to doing it this way is that things like SelectedItem and Content are declared as objects, so they can
                     contain anything, so you end up having to do a lot of casting as you move things in and out of those control properties. Once we have the
@@ -299,7 +299,7 @@
                     And then for our Save button you can see that we're going out and going and re-retrieving that customer based on the CustomerId. We could
                     have, likewise, held onto that customer after we retrieved it in a form member variable.
                 </p>
-                <img src="images/Fig01-022.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-022.png"/>
                 <p>
                     Once we have the customer, now we have to do some pulling of values from individual properties on the controls in the UI, and putting those
                     into individual properties on the customer object, and then eventually going off and saving. And the comments are here just to emphasize
@@ -315,7 +315,7 @@
                     news is it's fully functional, but we have to do all this pushing and pulling of values in our UI, and you'll see that we can be a lot more
                     efficient by data binding. So in the next demo, we'll see how this can get better by using data binding instead.
                 </p>
-                <img src="images/Fig01-023.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-023.png"/>
             </div>
             <div class="panel-body">
                 <h3>Demo: Data Binding Basics</h3>
@@ -334,7 +334,7 @@
                     target. On the source object we're expecting there to be a LastName property and that source object has to be set as the DataContext for
                     this TextBox.
                 </p>
-                <img src="images/Fig01-024.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-024.png"/>
                 <p>
                     Next, for our ListBox, we can drop down here and we can do a binding like this. Ultimately we need to get a collection into our ItemSource
                     property and we can just use binding here and that basically says, I'm expecting the DataContext for this ListBox to be a collection of
@@ -344,44 +344,44 @@
                     and that we're not looking for any particular property on that DataContext, we're expecting it to be whole objects that we're pushing in as
                     a collection here.
                 </p>
-                <img src="images/Fig01-025.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-025.png"/>
                 <p>
                     Then we could drop down to the DataGrid and do the same thing. Now this implies that this DataGrid's DataContext has to be set to whatever
                     collection it expects to render out, which in our case happens to be OrderItems. Now if you're experienced with data binding this may look a
                     little weird, because this implies that we have a different DataContext for the DataGrid, for the ListBox, and for the customer-oriented
                     controls up above, which is not something you'd normally do and we'll evolve past that quickly here in the demos.
                 </p>
-                <img src="images/Fig01-026.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-026.png"/>
                 <p>
                     So now let's drop into the code-behind and what we could do is go in here after we've retrieved our first customer, we could switch things
                     here to set the overall DataContext for the window itself to that customer object. That means it's going to be set at the root level on the
                     window and it's going to flow down the visual tree to all the elements within the window and that will be their available DataContext unless
                     it is set to something different at an element level.
                 </p>
-                <img src="images/Fig01-027.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-027.png"/>
                 <p>
                     For our OrderList, we could replace setting the ItemsSource directly with setting a DataContext for that list because the ItemsSource is
                     being set through the binding now that we added in the XAML.
                 </p>
-                <img src="images/Fig01-028.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-028.png"/>
                 <p>
                     And then down here in our OrderSelected handler we could do the same where we replace setting the ItemsSource on the DataGrid with setting a
                     DataContext that flows into it, and then the binding on the ItemsSource property in the XAML will pick it up and render it.
                 </p>
-                <img src="images/Fig01-029.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-029.png"/>
                 <p>
                     The other thing we probably want to do is get rid of the ugly columns that we didn't intend to render in the first place, so I'm going to
                     drop down here to the DataGrid and say, AutoGenerateColumns "False" and add in some column definitions that include just those columns that
                     we want to do.
                 </p>
-                <img src="images/Fig01-030.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-030.png"/>
                 <p>
                     Now the other thing to point out here in the XAML is the way DataContext work in list bound controls. So we've got the DataGrid as a whole
                     is being set to whatever the current DataContext is on that element, which we just programmatically set in the code-behind to be an
                     OrderItems collection. However, notice these bindings are assuming their DataContext has properties like Id, Instructions, ProductId, and so
                     on.
                 </p>
-                <img src="images/Fig01-031.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-031.png"/>
                 <p>
                     That's because when a list-oriented control like a DataGrid, ListBox or ComboBox, renders out its items, it sets the DataContext for the
                     item being rendered to be the individual item. So in the case of a DataGrid, it's rendering out a whole row with these columns in it, it
@@ -391,7 +391,7 @@
                 <p>
                     The other thing to point out in review here is that when you see binding Id here, this is 100% equivalent to writing it this way.
                 </p>
-                <img src="images/Fig01-032.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-032.png"/>
                 <p>
                     When you say BindingId, you're really implicitly setting the path through a parameterized constructor on the binding object. So Binding
                     Instructions here really mean set the path equal to Instructions, and we'll get to other properties that the binding has in later modules.
@@ -400,11 +400,11 @@
                     So with that code in place, I can go ahead and run, and we can see our data has populated like before and our selections happen and now we
                     don't have the extra columns that we didn't want in the first place.
                 </p>
-                <img src="images/Fig01-033.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-033.png"/>
                 <p>
                     So if we drop into the code-behind here we can clean up those commented lines of code.
                 </p>
-                <img src="images/Fig01-034.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-034.png"/>
                 <p>
                     The other thing to point out here is that in the OnSave method we don't have to do all this work to pull individual values from controls and
                     put them into properties on an object because the object we set as the DataContext is being tracked, in our case, by Entity Framework and it
@@ -412,21 +412,21 @@
                     Framework is raising property Change Notifications and it knows about those. So we can simply go off and save changes here and not have to
                     do any pushing and pulling anymore.
                 </p>
-                <img src="images/Fig01-035.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-035.png"/>
                 <p>
                     So I can go ahead and run, I can modify Pucket's name, Save, shut down, and restart, and we can see those changes were persisted. Now for
                     just one editable field here, it doesn't really pay huge dividends to the data binding, but where it starts to become really apparent is
                     when you have a big data entry form with lots of fields. So let's go up here and add a few more rows to our grid and we'll add a few more
                     data entry forms for other properties on a customer
                 </p>
-                <img src="images/Fig01-036.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-036.png"/>
                 <p>
                     So now we're binding to the customer LastName, FirstName, Phone, and Email in individual TextBoxes and we don't have to make any
                     modifications to the code-behind now because the code-behind is just pushing a whole customer object into the DataContext and it will flow
                     down to all of these bindings. So we could run, we could modify First Name, Last Name, Customer Phone, Save our changes, shut down, and
                     restart, and all those changes have been persisted.
                 </p>
-                <img src="images/Fig01-037.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-037.png"/>
                 <p>
                     So now you just get to focus on the markup and deciding how do you want to render something and what is the property on the DataContext
                     that's going to give you that data.
@@ -439,7 +439,7 @@
                     for individual controls. So here we're setting the DataContext of the window as a whole to be a customer, but then we have to set a separate
                     DataContext on the ListBox and a separate DataContext on the DataGrid itself.
                 </p>
-                <img src="images/Fig01-038.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-038.png"/>
                 <p>
                     Generally when you're doing data binding you're going to try to aggregate all of the objects needed to support a given screen onto some
                     single object you can set as a DataContext, and that kind of leads to the MVVM pattern, the Model-View-ViewModel pattern. Now I'm not really
@@ -450,7 +450,7 @@
                     screen, order dates that we need for another part of the screen, and OrderItems that we need for another part of the screen, all just
                     exposed as properties on that ViewModel.
                 </p>
-                <img src="images/Fig01-039.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-039.png"/>
                 <p>
                     Now when you really do MVVM you're generally going to encapsulate down on your ViewModel the interaction logic and also the data loading and
                     saving kind of logic inside of the ViewModel and get that out of the code-behind so it's more testable, but at a minimum here, to support a
@@ -462,28 +462,28 @@
                     So if we go modify the code a little bit more, we've got this instance of the ViewModel available to us now. Once we get our first customer
                     we'll set that as the customer property on the ViewModel and we'll get rid of this DataContext setting
                 </p>
-                <img src="images/Fig01-040.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-040.png"/>
                 <p>
                     And then once we have our OrderDates we'll set those as the OrderDates property on the ViewModel and down below in our order selected we can
                     set the OrderItems property on the ViewModel to that set of OrderItems for the current order.
                 </p>
-                <img src="images/Fig01-041.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-041.png"/>
                 <p>
                     Now all we need to do is set the DataContext as a whole to an instance of that ViewModel. Now that DataContext will be set at a window level
                     and it'll flow down to all of the child controls.
                 </p>
-                <img src="images/Fig01-042.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-042.png"/>
                 <p>
                     That implies that we need to change some of the bindings over here in our XAML. So first off, each of these bindings for customer I could
                     prefix with Customer. and it would go to that ViewModel.Customer to get the object and then get to the LastName property on there, and then
                     I'd have to say Customer.FirstName down here, and so on.
                 </p>
-                <img src="images/Fig01-043.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-043.png"/>
                 <p>
                     Another way I could do the same thing is, because all these controls are grouped inside of this grid, I could just go to the grid and set
                     the DataContext to the grid using a binding to the Customer property on our ViewModel
                 </p>
-                <img src="images/Fig01-044.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-044.png"/>
                 <p>
                     So it basically grabs that object reference, sets it as DataContext, and everything under this grid now will just see the customer, not the
                     ViewModel.
@@ -491,15 +491,15 @@
                 <p>
                     Then I could go down to my ListBox and change the binding to point to the OrderDates property on the ViewModel:
                 </p>
-                <img src="images/Fig01-045.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-045.png"/>
                 <p>
                     And go down to the DataGrid and change that one to point to the OrderItems.
                 </p>
-                <img src="images/Fig01-046.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-046.png"/>
                 <p>
                     Now if we go ahead and run, you can see we've got the same kind of experience up at the top as we had before
                 </p>
-                <img src="images/Fig01-047.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-047.png"/>
                 <p>
                     But notice when I'm making selections in the OrderDate list we've got a problem, it's not actually doing anything down below. You can see
                     that we are still setting the OrderItems property here when an order selection happens. So what's the issue there? Well it kind of leads
@@ -507,21 +507,21 @@
                     property and it doesn't raise any kind of change notification. So even though the value of that property has changed, when our event handler
                     fires, the data binding doesn't know anything about it.
                 </p>
-                <img src="images/Fig01-048.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-048.png"/>
                 <p>
                     Now as a quick workaround and to show you something we'll cover later in the course, we could force it to update. If you've worked with
                     older technologies like Windows Forms, you may have seen methods called Invalidate, and variations on that, that force the form to re-render
                     itself. This is kind of the data binding equivalent of that and you generally don't want to do this, but I just want to expose it as a quick
                     workaround at this point.
                 </p>
-                <img src="images/Fig01-049.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-049.png"/>
                 <p>
                     We can go to the DataGrid itself, we can use a method called GetBindingExpression that we pass a reference to a DependencyProperty exposed
                     on that. So the ItemsSourceProperty that we were setting is actually a DependencyProperty on the DataGrid. And when we say
                     GetBindingExpression it goes to that DependencyProperty and gets the underlying binding that's setting it. So you're effectively getting a
                     reference to this binding object here.
                 </p>
-                <img src="images/Fig01-050.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-050.png"/>
                 <p>
                     Then on that binding object there is a method exposed called UpdateTarget. And remember the terminology of source and target, source is the
                     underlying data source object, which is our ViewModel here, target is the property on the element that's being set. So by saying
@@ -532,7 +532,7 @@
                     So with that in place, we can run, we can make our selections, and down at the bottom you can see the grid is updating even though our
                     layout's not that great now.
                 </p>
-                <img src="images/Fig01-051.png"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig01-051.png"/>
                 <p>
                     So that code will work, but it's not very efficient. We'll see in the next module the better way to do this is to support
                     INotifyPropertyChanged and collection Change Notifications from your data bound objects.

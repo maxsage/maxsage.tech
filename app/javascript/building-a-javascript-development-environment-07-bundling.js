@@ -15,4 +15,4 @@ System.register(['../../main.css', '../../default.css', '../../darcula.css', '..
         }
     }
 });
-//# sourceMappingURL=angular2-getting-started-00-course-contents.js.map
+//# sourceMappingURL=building-a-javascript-development-environment-07-bundling.js.map

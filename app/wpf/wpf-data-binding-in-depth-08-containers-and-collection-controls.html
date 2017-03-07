@@ -78,45 +78,45 @@
                     go.
                 </p>
                 <p>Starting point for this demo is a simple WPF project:</p>
-                <img src="app/wpf/imagesFig07-001.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-001.png" class="image"/>
                 <p>That already has a little bit of code in the code-behind for going out and getting the Products Collection from our ZzaDBContext, similar to
                     previous demos:
                 </p>
-                <img src="app/wpf/imagesFig07-002.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-002.png" class="image"/>
                 <p>And pushing it into a CollectionViewSource that's already up inside the View.</p>
                 <p>The code-behind also has some Helper code that's basically going to generate a Tree View, based on a node in the visual tree. So I've got a
                     Helper method here called GetTreeFromNode:
                 </p>
-                <img src="app/wpf/imagesFig07-003.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-003.png" class="image"/>
                 <p>That's basically going to start at the current node and walk down using a Helper down below called GetVisualTree.</p>
-                <img src="app/wpf/imagesFig07-004.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-004.png" class="image"/>
                 <p>GetVisualTree uses the VisualTreeHelper class in WPF to walk through all the children of the current node, and then recursively, notice the
                     call to GetVisualTree here, recursively walk down to its children. It's basically generating a TreeViewItem, which is a node for a Tree View
                     for each item in the visual tree from the object that you pass in, annotating the node that you started with by square brackets.
                 </p>
                 <p>After it's walked down from the current node to all its children generating a tree, it then starts walking up:</p>
-                <img src="app/wpf/imagesFig07-005.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-005.png" class="image"/>
                 <p>So it has another Helper method down below called GetParent:</p>
-                <img src="app/wpf/imagesFig07-006.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-006.png" class="image"/>
                 <p>That will get the ParentElement of the current node and then it uses that in a loop to walk up the tree and get each one of the parents until
                     you get to the root of the visual tree.
                 </p>
                 <p>The TreeViewItem that comes out of this can be passed this helper called ShowTree:</p>
-                <img src="app/wpf/imagesFig07-007.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-007.png" class="image"/>
                 <p>That's going to basically create a TreeView, put that root node into it, and pop it up in a window. So we're going to use this as a crude
                     visualization of the visual tree and the elements that we're working with.
                 </p>
                 <p>So to get started, let's go over to our UI and I'm just going to drag out a simple TextBox:</p>
-                <img src="app/wpf/imagesFig07-008.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-008.png" class="image"/>
                 <p>seemingly simple control, and we will give it a name of TextBox1. I could then drop into my code-behind and use my Helper methods to
                     visualize the visual tree from that node. So I'm going to go in here and say, ShowTree(GetTreeFromNode(TextBox1)):
                 </p>
-                <img src="app/wpf/imagesFig07-009.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-009.png" class="image"/>
                 <p>If we go ahead and run, we can see the TextBox loads up there and we've got our visual tree here, starting at the root, which is the window,
                     down through the Grid that's its child. There's our TextBox, then notice that the TextBox itself contains a Border, ScrollViewer, Grid,
                     Rectangle, ScrollContentPresenter, TextBoxViews, and blah, blah, blah.
                 </p>
-                <img src="app/wpf/imagesFig07-010.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-010.png" class="image"/>
                 <p>So the point is, any given element within WPF that you declare at design time, can have some complex structure generated at runtime based on
                     that declaration.
                 </p>
@@ -128,15 +128,15 @@
             <div class="panel-body">
                 <h3>Demo: Dynamic Data Control Visual Tree</h3>
                 <p>So instead of that, if I replace my TextBox with a ContentControl:</p>
-                <img src="app/wpf/imagesFig07-011.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-011.png" class="image"/>
                 <p>and we just use a binding that takes in whatever the current DataContext is, which is going to be the collection coming out of this
                     CollectionViewSource.
                 </p>
-                <img src="app/wpf/imagesFig07-012.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-012.png" class="image"/>
                 <p>If we then dump the tree on that ContentControl, and run, now we can see something similar get down to the Grid to the ContentControl, but
                     notice this child element called ContentPresenter:
                 </p>
-                <img src="app/wpf/imagesFig07-013.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-013.png" class="image"/>
                 <p>The DataContext on this, notice we're also dumping what the DataContext is at a given level so that we can see where that switches in
                     data-bound scenarios.
                 </p>
@@ -147,117 +147,117 @@
                 <p>So how can we set the template of a ContentControl? Well we could use a number of different ways, but I'm just going to set an explicit
                     template setting the ContentTemplate property equal to an instance of a DataTemplate containing a TextBlock:
                 </p>
-                <img src="app/wpf/imagesFig07-014.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-014.png" class="image"/>
                 <p>That TextBlock is bound to the Name property of the product that's being rendered. And because of the way ListViews work, that was covered in
                     a previous module, even this binding is pointing to a whole collection, ContentControl is going to render out the current item in that
                     collection.
                 </p>
                 <p>So let's go ahead and run with that, and now we can see in the window behind there, Plain Cheese is showing up:</p>
-                <img src="app/wpf/imagesFig07-015.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-015.png" class="image"/>
                 <p>That's because that's the current product name. If we drill down in the tree now, we can see we get down to the ContentPresenter level:</p>
-                <img src="app/wpf/imagesFig07-016.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-016.png" class="image"/>
                 <p>and notice now it does have the DataContext is that ListCollectionView, but then immediately underneath that it renders an instance of our
                     TextBlock and that DataContext flows down to it.
                 </p>
-                <img src="app/wpf/imagesFig07-017.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-017.png" class="image"/>
                 <p>But because the control is designed to work with a single object, it will pick the current object out of that collection and bind against the
                     Name property of that current object. So notice the ContentPresenter's role here in a ContentControl, it is the thing that will render out
                     the DataTemplate inside of it.
                 </p>
                 <p>Now what if we go with a little more complicated control, such as a ListBox bound to the entire collection?</p>
-                <img src="app/wpf/imagesFig07-018.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-018.png" class="image"/>
                 <p>And in this case, we've got DisplayMemberPath set to Name. If we add that and dump that in a tree instead:</p>
-                <img src="app/wpf/imagesFig07-019.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-019.png" class="image"/>
                 <p>and go ahead and run, now we can see the dump here behind.</p>
                 <p>You can see the ListBox is populated. You can start drilling down. Here's our ListBox:</p>
-                <img src="app/wpf/imagesFig07-020.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-020.png" class="image"/>
                 <p>It's got some structure with Border, ScrollViewer, Grid, etc., eventually a ScrollContentPresenter, and then notice ItemsPresenter.</p>
-                <img src="app/wpf/imagesFig07-021.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-021.png" class="image"/>
                 <p>So for a ContentControl it's a ContentPresenter, that renders out the dynamic item. In an ItemsControl it's an ItemsPresenter that renders
                     out the dynamic items (plural).
                 </p>
                 <p>But then notice we get down to a level called the VirtualizingStackPanel:</p>
-                <img src="app/wpf/imagesFig07-022.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-022.png" class="image"/>
                 <p>Which is the default presenter for a ListBox, and we can't drill down any deeper because the individual items are being rendered out
                     dynamically in a way that the VisualTreeHelper can't get to.
                 </p>
                 <p>So how can we get to those to visualize their structure? Well, if we go to our ListBox and add an ItemTemplate to it and get rid of our
                     DisplayMemberPath:
                 </p>
-                <img src="app/wpf/imagesFig07-023.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-023.png" class="image"/>
                 <p>this ItemTemplate just contains a TextBlock bound to the Name property of the product again, similar to what the DisplayMemberPath was doing,
                     but here we can now hook up a Loaded event that we can then tap into the object that's raising that event, which will be the TextBlock down
                     inside of the ListBox, then we can walk the visual tree from there.
                 </p>
                 <p>So let's go hook up this Loaded event. So I'll jump into the code-behind and add the Loaded event here:</p>
-                <img src="app/wpf/imagesFig07-024.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-024.png" class="image"/>
                 <p>We only want this to fire once, not once for each item, so I've got a little guard condition here to make sure it only executes once.</p>
                 <p>And then we're going to do the ShowTree call for that sender object that's raising the event:</p>
-                <img src="app/wpf/imagesFig07-025.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-025.png" class="image"/>
                 <p>which will be the individual TextBlock inside of the ListBox.</p>
                 <p>I'll comment out the other ShowTree:</p>
-                <img src="app/wpf/imagesFig07-026.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-026.png" class="image"/>
                 <p>so we don't get two of them popping up, and let's run with that. Now we can expand down and we can see we get down to the
                     VirtualizingStackPanel level, but we're actually walking up to that level so we're able to walk through it, and notice there's a
                     ListBoxItem, and also notice the DataContext switch at this point.
                 </p>
-                <img src="app/wpf/imagesFig07-027.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-027.png" class="image"/>
                 <p>So the true container of an item in the ListBox is a ListBoxItem. If it's a ComboBox, it's a ComboBoxItem; if it's a TabControl, it's a
                     TabItem. So each control has its own item container that it will render out, and that's really the point where it switches from the overall
                     collection to an individual object in that collection as far as the DataContext.
                 </p>
                 <p>That flows down the visual tree from there, and inside of that is a ContentPresenter:</p>
-                <img src="app/wpf/imagesFig07-028.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-028.png" class="image"/>
                 <p>because the ListBoxItem is effectively a ContentControl. Inside of the ContentPresenter, that's where our DataTemplate renders.</p>
                 <p>So you can see, now we're able to walk up the visual tree, basically, from that TextBlock in the event handler, all the way up and see the
                     internals of what's going on inside this VirtualizingStackPanel, and it emphasizes that's the point where the DataContext switches.
                 </p>
                 <p>Now let's take an even more dynamic and complicated data-bound container, a DataGrid:</p>
-                <img src="app/wpf/imagesFig07-029.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-029.png" class="image"/>
                 <p>A DataGrid is going to render out rows for each object in the collection. Those rows have composite structure of their own. And similar to
                     what I showed with the ListBox, if I just tried to drill down from the DataGrid, I wouldn't be able to get past the Row level, the
                     ItemsPresenter level.
                 </p>
                 <p>So I'm going to play a similar trick here, that I'm going to use a TemplatedColumn:</p>
-                <img src="app/wpf/imagesFig07-030.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-030.png" class="image"/>
                 <p>which we'll get into more details on later in the module, and provide a DataTemplate containing a TextBlock bound to the Description field
                     with a Loaded event hooked up on it.
                 </p>
-                <img src="app/wpf/imagesFig07-031.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-031.png" class="image"/>
                 <p>I can hook that Loaded event and do my tree walk from there, similar to what I just showed with the ListBox.</p>
                 <p>So let's drop into the code-behind, add that event handler, we'll do our ShowTree on the object that's raising the Loaded event, which will
                     be our TextBlock inside of a cell within the DataGrid, and we've got our guard condition to make sure we only do it once.
                 </p>
-                <img src="app/wpf/imagesFig07-032.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-032.png" class="image"/>
                 <p>Let's go ahead and run, and now we can see a DataGrid showing up there:</p>
-                <img src="app/wpf/imagesFig07-033.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-033.png" class="image"/>
                 <p>We can drill our way down. Notice the ItemsPresenter in this case is a DataGridRowsPresenter:</p>
-                <img src="app/wpf/imagesFig07-034.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-034.png" class="image"/>
                 <p>and this is the level where we wouldn't be able to drill down any farther if we hadn't hooked the event down inside of a DataTemplate, but
                     we're really drilling up to that point, so you can see that renders out DataGridRows as the containers.
                 </p>
-                <img src="app/wpf/imagesFig07-035.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-035.png" class="image"/>
                 <p>Those have some structure to them. Eventually you get to a DataGridCellsPresenter, which contains an ItemsPresenter itself.</p>
-                <img src="app/wpf/imagesFig07-036.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-036.png" class="image"/>
                 <p>So you've actually got ItemsControl behavior at a Row level:</p>
-                <img src="app/wpf/imagesFig07-037.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-037.png" class="image"/>
                 <p>but then within a Row, you've got ItemsControl rendering of the individual cells within the Row.</p>
                 <p>Notice in terms of DataContext switching, the Context switch happens at a Row level:</p>
-                <img src="app/wpf/imagesFig07-038.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-038.png" class="image"/>
                 <p>The entire Row's DataContext is the Product, and from there down.</p>
                 <p>Inside of the Cells, we've got a DataGridCellsPanel, eventually a DataGridCell is the container for a single cell. There's our
                     ContentPresenter again, the thing that's going to render out our DataContext for that cell.
                 </p>
-                <img src="app/wpf/imagesFig07-039.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-039.png" class="image"/>
                 <p>The other thing to note here, that we'll talk about more in the DataGrid section of this module, notice there's no Column objects anywhere
                     here. Columns don't really exist in terms of the object model of a DataGrid at runtime. They're explicitly part of the way you declare the
                     DataGrid at design time, but the rendering actually happens at a Row level and then walking across the cells of a row, not in a
                     column-oriented fashion.
                 </p>
                 <p>And this really emphasizes the pivotal role of the ItemsPresenter here and here:</p>
-                <img src="app/wpf/imagesFig07-040.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-040.png" class="image"/>
                 <p>And the ContentPresenter here:</p>
-                <img src="app/wpf/imagesFig07-041.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-041.png" class="image"/>
                 <p>for dynamically rendering out the data-driven content of a data-bound control.</p>
             </div>
             <div class="panel-body">
@@ -266,70 +266,70 @@
                     tree inspection. You don't necessarily have to write these tree dumpers in your code yourself. The first is one called Mole for Visual
                     Studio:
                 </p>
-                <img src="app/wpf/imagesFig07-042.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-042.png" class="image"/>
                 <p>and this is a debugging visualizer that plugs into either Visual Studio 2013 or 2012 or prior. The other is a tool called WPF Inspector:</p>
-                <img src="app/wpf/imagesFig07-043.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-043.png" class="image"/>
                 <p>which you can find out on CodePlex.</p>
                 <p>And there's a new XAML -Inspector coming that will work with other XAML technologies in a similar way. I've got both of these available here,
                     so let me start up the app that I put together in the previous demo, and we're hitting a breakpoint for a DataGridCell_Loaded that's being
                     triggered from a template down inside of the DataGrid.
                 </p>
-                <img src="app/wpf/imagesFig07-044.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-044.png" class="image"/>
                 <p>Now when you use Mole, it's a debugger visualizer, which means you can walk up to an object in your environment, go to this little magnifying
                     glass drop it down, and you can see Mole 2012.
                 </p>
-                <img src="app/wpf/imagesFig07-045.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-045.png" class="image"/>
                 <p>I click on that, and it brings up the MoloScope:</p>
-                <img src="app/wpf/imagesFig07-046.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-046.png" class="image"/>
                 <p>So Mole gives you, over here on the left you can see, it's broken down the visual tree similar to what I did in my demo:</p>
-                <img src="app/wpf/imagesFig07-047.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-047.png" class="image"/>
                 <p>So you've got this Visual Tree TreeView that you can drill through and see all the same kind of stuff rendered out a little nicer than what I
                     was doing.
                 </p>
                 <p> Also, anything you select in here over on the right, you're able to see all of the properties of that object, inspect them, and even edit
                     some of them:
                 </p>
-                <img src="app/wpf/imagesFig07-048.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-048.png" class="image"/>
                 <p>So if you want to tweak with styling and things like that, you can do that in here and see what it's going to look like.</p>
                 <p>And if you select a given item up above, you can go down here on the bottom left, click to refresh, it's going to show you what the XAML
                     would look like for that single thing
                 </p>
-                <img src="app/wpf/imagesFig07-049.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-049.png" class="image"/>
                 <p>and you can go into Snapshot and it will render out just that single item.</p>
-                <img src="app/wpf/imagesFig07-050.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-050.png" class="image"/>
                 <p>So here we can see we're seeing just a Description cell that would be within the DataGrid. So in terms of being able to walk up to any
                     element in a running application and start inspecting and tweaking it, Mole is very nice for that.
                 </p>
                 <p>The other tool that's very handy here is WPF Inspector. So if I go start up WPF Inspector, and you do have to run this as an administrator,
                     that's an important trick, because it has to have the process rights to be able to go and inspect another process:
                 </p>
-                <img src="app/wpf/imagesFig07-051.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-051.png" class="image"/>
                 <p>So notice it shows MainWindow here, that's my running MainWindow. I can attach to that, and it brings up this window that's kind of laid out
                     similar to what Mole had:
                 </p>
-                <img src="app/wpf/imagesFig07-052.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-052.png" class="image"/>
                 <p>You can see we can start drilling down in the visual tree.</p>
-                <img src="app/wpf/imagesFig07-053.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-053.png" class="image"/>
                 <p>Now in this case I'm drilling down from the top down and we can see I can drill into something like my ListBox and this will let me drill
                     down through that ItemsPresenter and VirtualizingStackPanel, and now I can see the ListBoxItems rendered out.
                 </p>
-                <img src="app/wpf/imagesFig07-054.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-054.png" class="image"/>
                 <p>So I don't have to hook those lower-level events with WPF Inspector to drill all the way down the visual tree. This, you can see if you hover
                     over an item, gives you a rendering of what that item looks like in the overall context
                 </p>
-                <img src="app/wpf/imagesFig07-055.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-055.png" class="image"/>
                 <p>and the other thing that's going on here, it's hard to see with the small screen here, but notice as I make selections in WPF Inspector, it's
                     actually putting a red box around them in the running UI with some measurements.
                 </p>
-                <img src="app/wpf/imagesFig07-056.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-056.png" class="image"/>
                 <p>Over on the right, similar to Mole, it has the property values so you can inspect those for the currently selected item:</p>
-                <img src="app/wpf/imagesFig07-057.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-057.png" class="image"/>
                 <p>and you can do other things with it inspecting the DataContext that's there:</p>
-                <img src="app/wpf/imagesFig07-058.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-058.png" class="image"/>
                 <p>even tweaking the values to see what it would look like in the UI. So we could go tweak the name of an item here:</p>
-                <img src="app/wpf/imagesFig07-059.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-059.png" class="image"/>
                 <p>and tab out of there, minimize this, and we can see it actually dynamically changed it in the running UI.</p>
-                <img src="app/wpf/imagesFig07-060.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-060.png" class="image"/>
                 <p>So very handy tool to be aware of for digging into your visual tree, seeing what's there, understanding what's there, and playing with values
                     in it.
                 </p>
@@ -388,54 +388,54 @@
                     comprehensively since they're such a pivotal data-bound control.
                 </p>
                 <p>Starting point for this demo is a simple WPF application project with a MainWindow in it:</p>
-                <img src="app/wpf/imagesFig07-061.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-061.png" class="image"/>
                 <p>and I added a MainWindowViewModel. In the MainWindowViewModel constructor, we're doing some data retrieval:</p>
-                <img src="app/wpf/imagesFig07-062.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-062.png" class="image"/>
                 <p>As usual, we're using our ZzaDBContext to go out to a Zza database, we're getting some products and pushing them into an
                     ObservableCollection.
                 </p>
                 <p>That collection is exposed as a property called Products on our ViewModel that we can data bind to:</p>
-                <img src="app/wpf/imagesFig07-063.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-063.png" class="image"/>
                 <p>We're also modifying the Image property of each product to point to a collection of Images that's in our project under the Images
                     subfolder.
                 </p>
-                <img src="app/wpf/imagesFig07-064.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-064.png" class="image"/>
                 <p>And we're setting two other properties on initialization here, the SelectedProductId and SelectedProduct, which are both exposed as
                     properties on our ViewModel here.
                 </p>
                 <p>So this just gives us a good DataContext to data bind against for our ComboBoxes and ListBoxes. We also have a RelayCommand in the project,
                     which we've seen in previous demos:
                 </p>
-                <img src="app/wpf/imagesFig07-065.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-065.png" class="image"/>
                 <p>just an ICommand object we can use to hook up buttons to point to handling in our ViewModel, which we'll get to.</p>
                 <p>So if I drop into my MainWindow and add a basic ComboBox here, the basic structure is that it is an ItemsControl</p>
-                <img src="app/wpf/imagesFig07-066.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-066.png" class="image"/>
                 <p>so the most important property that you're going to want to set in data binding is the ItemsSource property.</p>
                 <p>Here we're pointing to a Products path on whatever our DataContext is, and you can see up above our DataContext is already wired up so that
                     our MainWindowViewModel is our DataContext:
                 </p>
-                <img src="app/wpf/imagesFig07-067.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-067.png" class="image"/>
                 <p>So this will cause it to be constructed, the constructor fires and loads the products, and then data binding fires and reads those products
                     into our ComboBox.
                 </p>
                 <p>If that's all we put on our ComboBox and try to run, as we've seen before, that's not quite enough, because it's just going to ToString each
                     of the Product objects and that's not really what we want:
                 </p>
-                <img src="app/wpf/imagesFig07-068.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-068.png" class="image"/>
                 <p>So at a bare minimum, when using a ComboBox, you're going to want to set the DisplayMemberPath property and I'll set that to Name.</p>
-                <img src="app/wpf/imagesFig07-069.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-069.png" class="image"/>
                 <p>That basically says, go to the Name property on each of those products, get that out as a string, and then it's going to render a TextBlock,
                     basically, inside of the ComboBox list for each one of those.
                 </p>
                 <p>So running with that, now we get something a little more like what we expect.</p>
-                <img src="app/wpf/imagesFig07-070.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-070.png" class="image"/>
                 <p>Now we see the names of each of the products in our ComboBox. Notice that it started with nothing selected, and that's where some of the
                     other data-bound properties can come in. Another one, if you're using DisplayMemberPath, that you'll often use, is SelectedValuePath.
                 </p>
                 <p>SelectedValuePath lets you point to another property on each one of your data-bound objects that contains some sort of identifier typically.
                     So in our case, we can use the Id property.
                 </p>
-                <img src="app/wpf/imagesFig07-071.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-071.png" class="image"/>
                 <p>Hand-in-hand with the SelectedValuePath is the SelectedValue property, and this is one that you can programmatically inspect based on
                     events.
                 </p>
@@ -443,40 +443,40 @@
                     but in a data-bound scenario you might push this value through data binding into some property, especially in a ViewModel type scenario.
                 </p>
                 <p>So we could set up a binding on this and point it to our SelectedProductId property on our ViewModel, like so.</p>
-                <img src="app/wpf/imagesFig07-072.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-072.png" class="image"/>
                 <p>Now, if we go ahead and run, notice that the ComboBox is not empty initially:</p>
-                <img src="app/wpf/imagesFig07-073.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-073.png" class="image"/>
                 <p>and that's because of our initialization code back here in the ViewModel. Remember we loaded up the products, but we also initialized the
                     SelectedProductId property to the first item in those products.
                 </p>
-                <img src="app/wpf/imagesFig07-074.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-074.png" class="image"/>
                 <p>Another one you could do as an alternative to SelectedValue, you generally won't do both of these, is the SelectedItem property:</p>
-                <img src="app/wpf/imagesFig07-075.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-075.png" class="image"/>
                 <p>SelectedItem gets the whole data-bound object, which will be a Product object in this case, and pushes it through a binding to a property in
                     our ViewModel in this case.
                 </p>
                 <p>That, likewise, was being initialized in the constructor to the first item in the list:</p>
-                <img src="app/wpf/imagesFig07-076.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-076.png" class="image"/>
                 <p>So we should see that selected now when it starts up. And we could go back here into our SelectedProduct setter, set a breakpoint, and see
                     whenever it's set, our set block is being called, so we have an opportunity to invoke some logic there based on the product that's being
                     selected.
                 </p>
-                <img src="app/wpf/imagesFig07-077.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-077.png" class="image"/>
                 <p>If we want to have more structure to the elements within our ComboBox, we could use a DataTemplate:</p>
-                <img src="app/wpf/imagesFig07-078.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-078.png" class="image"/>
                 <p>in this case, an ImplicitDatatemplate, but of course, an explicit one would work as well. This DataTemplate is mapped to the Product Type and
                     it uses the Image property to render out an Image and a TextBlock to render out the Name. With that in place, it would do nothing if we
                     don't get rid of the DisplayMemberPath property:
                 </p>
-                <img src="app/wpf/imagesFig07-079.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-079.png" class="image"/>
                 <p>because those two are incompatible.</p>
                 <p>When you say DisplayMemberPath, you're saying you just want to render out text based on that property, so we can get rid of both
                     DisplayMemberPath and SelectedValuePath:
                 </p>
-                <img src="app/wpf/imagesFig07-080.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-080.png" class="image"/>
                 <p>which is not being used anymore, and go ahead and run this.</p>
                 <p>And now we can see that the individual items in our ComboBox have the structure that we determined in our DataTemplate:</p>
-                <img src="app/wpf/imagesFig07-081.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-081.png" class="image"/>
                 <p>and obviously we'd want to do some sizing on the ComboBox itself so we could show a whole item when selected. So those are the primary things
                     you're going to use on a ComboBox.
                 </p>
@@ -485,56 +485,56 @@
                     more structure on the rendering, use DataTemplates.
                 </p>
                 <p>All those same concepts apply to a ListBox. I could go in here and add a ListBox bound to Products here.</p>
-                <img src="app/wpf/imagesFig07-082.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-082.png" class="image"/>
                 <p>DisplayMemberPath would, again, apply, as would SelectedItem, SelectedValue, SelectedValuePath, and so on.</p>
                 <p>I'm going to go ahead and run here with both the ComboBox and ListBox bound to Products to emphasize something about synchronization.</p>
                 <p>So right now, notice I can make a selection in the ListBox and it has no impact on the ComboBox, and vice-versa.</p>
-                <img src="app/wpf/imagesFig07-083.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-083.png" class="image"/>
                 <p>When you have two data-bound controls pointing to the same collection by default, there is a CollectionViewSource associated with them, but
                     they are not synchronized with that current item in the CollectionViewSource.
                 </p>
                 <p>If you have two things like that and you want them to stay in synch, this is where the IsSynchronizedWithCurrentItem property comes in. Go
                     ahead and set that to True on both of these items:
                 </p>
-                <img src="app/wpf/imagesFig07-084.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-084.png" class="image"/>
                 <p>and run again, and now we can see if I select Holy Smokes up above, it's highlighted in the list below, Italian Stallion down below, it's
                     selected up above.
                 </p>
-                <img src="app/wpf/imagesFig07-085.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-085.png" class="image"/>
                 <p>Now another thing you might sometimes want to do is have some other UI that is driving the selection in a ComboBox, ListBox or DataGrid. So
                     here I'm going to add a simple little Search UI:
                 </p>
-                <img src="app/wpf/imagesFig07-086.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-086.png" class="image"/>
                 <p>a TextBox and a button that we can trigger. The TextBox is going to be bound to a property on our ViewModel called SearchInput:</p>
-                <img src="app/wpf/imagesFig07-087.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-087.png" class="image"/>
                 <p>and the button is bound to a command that we're going to add.</p>
-                <img src="app/wpf/imagesFig07-088.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-088.png" class="image"/>
                 <p>So first let me drop back to the ViewModel and add those two properties. So here's our SearchInput as a string input:</p>
-                <img src="app/wpf/imagesFig07-089.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-089.png" class="image"/>
                 <p>and here's our SetProductCommand as a RelayCommand.</p>
-                <img src="app/wpf/imagesFig07-090.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-090.png" class="image"/>
                 <p>Now we need to initialize that ProductCommand, so in the constructor up here, we can initialize it and point it to a method called
                     OnSetProduct:
                 </p>
-                <img src="app/wpf/imagesFig07-091.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-091.png" class="image"/>
                 <p>and I can declare that method down below here.</p>
-                <img src="app/wpf/imagesFig07-092.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-092.png" class="image"/>
                 <p>And you can see when that gets called through the command, I'm going to go out and use the SearchInput text, which was pushed through thanks
                     to two-way data binding, when I click on the button, changes focus, that causes the current value in the TextBox to be pushed down into that
                     SearchInput and that makes it available to do a Search here against our Products based on the Name property, and then we will push that into
                     the SelectedProduct property.
                 </p>
                 <p>That's going to call the setter</p>
-                <img src="app/wpf/imagesFig07-093.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-093.png" class="image"/>
                 <p>which raises a PropertyChanged event, and because our SelectedItem is bound to that SelectedProduct:</p>
-                <img src="app/wpf/imagesFig07-094.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-094.png" class="image"/>
                 <p>that's going to cause the ComboBox to change. Because the ComboBox changes and IsSynchronized is set on both of these, it will also cause the
                     ListBox to change. So let's go ahead and run with that, and we can see down below there's a product called Taj Mahal. If I just put in Taj
                     and Search:
                 </p>
-                <img src="app/wpf/imagesFig07-095.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-095.png" class="image"/>
                 <p>You can see it's selected up above and selected down below. Put in Smokes, Search, Holy Smokes selected in both controls.</p>
-                <img src="app/wpf/imagesFig07-096.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-096.png" class="image"/>
                 <p>So that just further emphasizes the way you can bind SelectedItem, for example, or SelectedValue, change the thing it's bound to in the
                     code-behind, and that will drive what's selected in the UI, a very common thing to do in Model-View-ViewModel data binding scenarios.
                 </p>
@@ -566,58 +566,58 @@
                 <p>In this demo, I want to get you familiar with TabControls and how they can be used with data binding. Starting point for this is a WPF
                     project with a MainWindow and a MainWindowViewModel:
                 </p>
-                <img src="app/wpf/imagesFig07-097.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-097.png" class="image"/>
                 <p>and then a ProductView, which is a UserControl in its own associated ViewModel.</p>
                 <p>The ViewModel for the ProductViewModel is just loading up products into a Products property on the ViewModel:</p>
-                <img src="app/wpf/imagesFig07-098.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-098.png" class="image"/>
                 <p>Which can be rendered out in a list-oriented control. In addition, it has a ProductType string</p>
-                <img src="app/wpf/imagesFig07-099.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-099.png" class="image"/>
                 <p>That can be used to label what kind of products this view is rendering.</p>
                 <p>The view itself is just going to use a ListBox to render out those products:</p>
-                <img src="app/wpf/imagesFig07-100.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-100.png" class="image"/>
                 <p>and notice that no DataContext is set inside the UserControl because it's going to be set dynamically through data binding.</p>
-                <img src="app/wpf/imagesFig07-101.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-101.png" class="image"/>
                 <p>The individual products are being rendered out using a DataTemplate:</p>
-                <img src="app/wpf/imagesFig07-102.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-102.png" class="image"/>
                 <p>specifically an ImplicitDataTemplate for the DataType Product.</p>
                 <p>The MainWindowViewModel, at this point, just has a property called ChildViewModels, which is a collection of those ProductViewModels.</p>
-                <img src="app/wpf/imagesFig07-103.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-103.png" class="image"/>
                 <p>So the scenario here is that we want to render out individual tabs in a TabControl for different categories of products or ProductTypes. So
                     using data binding, we're going to create a collection of ChildViewModels here, one for each ProductType, and have data binding render out
                     the appropriate View and ViewModel in a tab for each one of those.
                 </p>
                 <p>To do that, we'll need a TabControl. So let's drop into the MainWindow and add a TabControl</p>
-                <img src="app/wpf/imagesFig07-104.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-104.png" class="image"/>
                 <p> bound to that ChildViewModel's property on its ViewModel, which is already wired up as the DataContext. Next, we need to actually populate
                     that ChildViewModels collection with something, so I'm going to drop into the constructor of the ViewModel here and populate it with an
                     ObservableCollection.
                 </p>
-                <img src="app/wpf/imagesFig07-105.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-105.png" class="image"/>
                 <p>We're putting one instance of the ProductViewModel in for each of the three ProductTypes that are in our Products collection, pizza, salads,
                     and drinks. ProductViewModel takes that Type that's passed in and uses it to set the ProductType property:
                 </p>
-                <img src="app/wpf/imagesFig07-106.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-106.png" class="image"/>
                 <p>and then notice it's filtering the products that it loads into that ViewModel, based on that Type.</p>
-                <img src="app/wpf/imagesFig07-107.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-107.png" class="image"/>
                 <p>So now we have a TabControl, which is an ItemsControl itself, bound to a collection of items:</p>
-                <img src="app/wpf/imagesFig07-108.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-108.png" class="image"/>
                 <p>but it needs to know how to render those items out, and it's going to do that with DataTemplates.</p>
                 <p>So we're going to go up here to our Resources section and add in a DataTemplate:</p>
-                <img src="app/wpf/imagesFig07-109.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-109.png" class="image"/>
                 <p>an ImplicitDataTemplate, mapped to the ProductViewModel Type, which is going to be the individual items that show up in this ChildViewModels
                     collection.
                 </p>
                 <p>And similar to a demo in the DataTemplates module, the actual rendering for a ProductViewModel will be its corresponding view, and its
                     DataContext will be set to that instance of the ViewModel through the magic of how DataTemplates work.
                 </p>
-                <img src="app/wpf/imagesFig07-110.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-110.png" class="image"/>
                 <p>Now if we run at this point, we're going to see this strange-looking view:</p>
                 <p>where we actually have tabs here, you can see I can click on them and the appearance is changing, but what's actually happening is that view
                     is being rendered in the tab itself, the tab header, and we don't have a scrolling container, so we can't see it, but it's actually
                     rendering them again as the content of the tab, not exactly what we wanted.
                 </p>
                 <p>The reason for this is, a TabControl is an ItemsControl</p>
-                <img src="app/wpf/imagesFig07-111.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-111.png" class="image"/>
                 <p>but it's really a composite ItemsControl, it's going to render a TabItem for each of the items in its data-bound source, but a TabItem itself
                     has two parts to it, it has a header and it has content. The header is a ContentControl and the Content is a ContentControl, and the
                     DataContext for the TabItem as a whole is the individual thing that's being rendered, in this case a ProductViewModel.
@@ -626,7 +626,7 @@
                     binds to that. So what we need to do here is control this a little more explicitly.
                 </p>
                 <p>What I'll do is I'll drop into my Resources and add another DataTemplate.</p>
-                <img src="app/wpf/imagesFig07-112.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-112.png" class="image"/>
                 <p>This one's going to have a key to it so we can point to it explicitly and we'll call this the TabHeaderTemplate. Here you can see we're just
                     going to bind to ProductType because the overall DataContext for the TabItem is still going to be the ViewModel and that's the property
                     exposed from it.
@@ -634,14 +634,14 @@
                 <p>Now we need to go down here to our TabControl and actually pull that template in by name. So we'll set the ItemTemplate property through a
                     StaticResource, pointing to that TabHeaderTemplate.
                 </p>
-                <img src="app/wpf/imagesFig07-113.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-113.png" class="image"/>
                 <p>Now, notice if we wanted to do the other one explicitly, we could do that, and what we would use is the ContentTemplate property:</p>
-                <img src="app/wpf/imagesFig07-114.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-114.png" class="image"/>
                 <p>and point it to whatever template we want, but since we're using an ImplicitDataTemplate here we don't have to do that one.</p>
                 <p>That one can match up implicitly, but if you have an explicit one hooked up, it will ignore the implicit ones. So with that fix in place, now
                     we've got what we want.
                 </p>
-                <img src="app/wpf/imagesFig07-115.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-115.png" class="image"/>
                 <p>We've got the TabHeaders are being set based on the ProductType property of our ViewModel, the Tab content is being set to an instance of the
                     ViewModel, which gets married up through the DataTemplate to its view, and rendered out.
                 </p>
@@ -693,18 +693,18 @@
                     things you're going to use most commonly in data binding scenarios.
                 </p>
                 <p>Our starting point here is a simple WPF project with a MainWindow:</p>
-                <img src="app/wpf/imagesFig07-116.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-116.png" class="image"/>
                 <p>and the only thing that's really been added here is a little bit of data access code that's going out at runtime and getting a Customers
                     collection populated:
                 </p>
-                <img src="app/wpf/imagesFig07-117.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-117.png" class="image"/>
                 <p>that's exposed from the code-behind as a DependencyProperty that has an ObservableCollection.</p>
                 <p>Notice it's also drilling down and getting the related Orders for those Customers:</p>
-                <img src="app/wpf/imagesFig07-118.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-118.png" class="image"/>
                 <p>which we'll use later in the demo, and it's also populating a States property:</p>
-                <img src="app/wpf/imagesFig07-119.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-119.png" class="image"/>
                 <p>which is a collection of the state abbreviations, and that's all that's in the code-behind here.</p>
-                <img src="app/wpf/imagesFig07-120.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-120.png" class="image"/>
                 <p>Now especially when it comes to putting together a DataGrid, I find using the Data Sources Window to generate the columns for me is very
                     handy.
                 </p>
@@ -713,61 +713,61 @@
                     lot of work.
                 </p>
                 <p>Using the Data Sources Window, as I showed in a previous module, and go add a data source:</p>
-                <img src="app/wpf/imagesFig07-121.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-121.png" class="image"/>
                 <p>point to the object type that you want, get it into the tree here:</p>
-                <img src="app/wpf/imagesFig07-122.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-122.png" class="image"/>
                 <p>and then just drag-and-drop to generate the DataGrid and all of its columns.</p>
-                <img src="app/wpf/imagesFig07-123.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-123.png" class="image"/>
                 <p>Now in this case I don't actually want all of those columns, and I want them in a different order. So afterwards, I'm going to drop into the
                     XAML and move some things around and delete a few columns.
                 </p>
-                <img src="app/wpf/imagesFig07-124.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-124.png" class="image"/>
                 <p>I'm just going to do that all quickly here with cut and paste, and we get it down to Id, FirstName, LastName, Phone, and Email, and lastly, a
                     State column.
                 </p>
                 <p>I'm going to make one other modification up here at the root level, I'm going to set the DataContext of the MainWindow to itself. So we saw
                     this in earlier demos using a RelativeSource binding to Self:
                 </p>
-                <img src="app/wpf/imagesFig07-125.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-125.png" class="image"/>
                 <p>meaning that the DataContext is the window itself, so the bindings within the view can point to properties in the code-behind of the window,
                     something you can do when you're not doing the MVVM pattern.
                 </p>
                 <p>Next, I'm going to take the CollectionViewSource that was generated through the drag/drop and make a modification to it:</p>
-                <img src="app/wpf/imagesFig07-126.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-126.png" class="image"/>
                 <p>Setting the Source property equal to the Customers property that's being exposed from the code-behind.</p>
                 <p>With that in place, I can go ahead and run:</p>
-                <img src="app/wpf/imagesFig07-127.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-127.png" class="image"/>
                 <p>and we've got our basic data-bound DataGrid scenario. Keep in mind, a DataGrid is editable, by default, so I can go in here and start editing
                     things. There's properties you can set to make it read-only.
                 </p>
                 <p>Also, at the bottom, a DataGrid always has a new entry row, by default:</p>
-                <img src="app/wpf/imagesFig07-128.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-128.png" class="image"/>
                 <p>and again, you can set a property to get rid of that if you don't expect people to add new items from the Grid. The basic properties in play
                     here are, of course, ItemsSourc:
                 </p>
-                <img src="app/wpf/imagesFig07-129.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-129.png" class="image"/>
                 <p>because it is an ItemsControl; AutoGenerateColumns False:</p>
-                <img src="app/wpf/imagesFig07-130.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-130.png" class="image"/>
                 <p>because we're explicitly declaring them, if you forget and leave that True, you'll get duplicate columns; and then you declare a column for
                     each column that you want in your DataGrid.
                 </p>
                 <p>Now the important thing, as I pointed out in a previous demo, is that these columns:</p>
-                <img src="app/wpf/imagesFig07-131.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-131.png" class="image"/>
                 <p>Don't actually exist at runtime. They're a declaration used to generate cells within a row that represent a column, but the Column objects
                     here are just objects, they're not actually part of the visual tree.
                 </p>
                 <p>So that might raise the question of how can they have bindings on them then? Well, the Binding property here:</p>
-                <img src="app/wpf/imagesFig07-132.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-132.png" class="image"/>
                 <p>is really creating a Binding object, which is held in this Binding property. It's then used to set the binding on whatever element will be
                     generated within a cell, within a row representing that column. It's not actually evaluated at a column level when the DataGrid is being
                     built, only down at a cell level.
                 </p>
                 <p>Now these Width properties:</p>
-                <img src="app/wpf/imagesFig07-133.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-133.png" class="image"/>
                 <p>are ones you can set size to Header, by default, but you can see it supports *, Auto, and explicit sizing as well.</p>
                 <p>Now when you do your drag-and-drop, it's going to assume everything is just plain text, but you might want a more complicated rendering.</p>
                 <p>There's other built-in column types such as a DataGridComboBoxColumn:</p>
-                <img src="app/wpf/imagesFig07-134.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-134.png" class="image"/>
                 <p>DataGridCheckBoxColumns, and so on. Now this DataGridComboBoxColumn may seen tempting, but it's actually a little hard to work with at times
                     because you need to set the ItemsSource to the collection of things that's going to show up in the ComboBox, such as our list of states.
                 </p>
@@ -776,7 +776,7 @@
                     binding.
                 </p>
                 <p>Well, you might be tempted to try what I did here and use a RelativeSource binding:</p>
-                <img src="app/wpf/imagesFig07-135.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-135.png" class="image"/>
                 <p>walking up the visual tree to the parent DataGrid, because after all, this is a ComboBoxColumn inside of a Columns collection on the
                     DataGrid, it should be able to walk that tree, right?
                 </p>
@@ -784,32 +784,32 @@
                     level that are part of the visual tree, but the ComboBoxColumn itself is not.
                 </p>
                 <p>So this RelativeSource binding basically won't work out. It does expose other properties, such as SelectedItemBinding</p>
-                <img src="app/wpf/imagesFig07-136.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-136.png" class="image"/>
                 <p>which corresponds to the SelectedItem property for the ComboBox that will be rendered out. As long as you can get a valid binding in there,
                     that'll work fine, as well as SelectedValueBinding, and so on.
                 </p>
                 <p>But if we run right now, you can see that our State column looks kind of empty initially:</p>
-                <img src="app/wpf/imagesFig07-137.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-137.png" class="image"/>
                 <p>If we click on it and go into edit mode, then it does actually render like a ComboBox, but the ComboBox is empty.</p>
-                <img src="app/wpf/imagesFig07-138.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-138.png" class="image"/>
                 <p>What do want to do when your binding is not doing exactly what you expect it to do? Go look at your output window. Down here in the output
                     window, we can see a System.Windows.Data Error:
                 </p>
-                <img src="app/wpf/imagesFig07-139.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-139.png" class="image"/>
                 <p>and it says, Cannot find source for binding 'RelativeSource FindAncestor', and it's looking for a DataGrid.</p>
                 <p>The hard part is, there's nothing in this error message that's really going to tip you off if you haven't seen this video or learned about it
                     somewhere else. The problem is that the DataGrid column is not part of the visual tree, so it's not able to walk up and find that DataGrid
                     because it's just not there at the point where this binding is being evaluated.
                 </p>
                 <p>So, what we can do instead is use a TemplatedColumn:</p>
-                <img src="app/wpf/imagesFig07-140.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-140.png" class="image"/>
                 <p>TemplatedColumn is a very important concept in DataGrids because it gives you full control over exactly what the visual that will be rendered
                     inside of a cell is.
                 </p>
                 <p>At the TemplatedColumn level, you can still set the Header that will be shown at the top of the Grid and the Width of the column, but
                     everything else will be driven by what you put in the CellTemplate:
                 </p>
-                <img src="app/wpf/imagesFig07-141.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-141.png" class="image"/>
                 <p>I should mention there's also a CellEditingTemplate property on the column if you want a different visual rendering for edit mode versus
                     non-edit mode.
                 </p>
@@ -817,7 +817,7 @@
                     can put whatever visual structuring in you want.
                 </p>
                 <p>So, here we use an actual ComboBox:</p>
-                <img src="app/wpf/imagesFig07-142.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-142.png" class="image"/>
                 <p>with all of its normal ComboBox properties, and in this case, we can use a RelativeSourceBinding, and that's because this ComboBox doesn't
                     come into being until the DataTemplate is rendered within a cell, that cell is in a row, the row is in the DataGrid, so the RelativeSource
                     is actually able to walk up the visual tree and get to whatever it's pointing to.
@@ -825,32 +825,32 @@
                 <p>So in this case, I'll point it to the Window level, to the DataContext property, which will be the Window itself, to the States property
                     that's exposed on that.
                 </p>
-                <img src="app/wpf/imagesFig07-143.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-143.png" class="image"/>
                 <p>So it's able to use that to get the list of states to render in the ComboBox and then we do the SelectedItem Binding:</p>
-                <img src="app/wpf/imagesFig07-144.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-144.png" class="image"/>
                 <p>against the current DataContext, which is a Customer object.</p>
                 <p>So we grab the State property off that Customer object to drive what's selected. With that in place, we can run, resize our window, and we
                     can see off to the right our ComboBoxes are there:
                 </p>
-                <img src="app/wpf/imagesFig07-145.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-145.png" class="image"/>
                 <p>rendering as ComboBoxes interactive all the time, even before you click into the row and get it in edit mode.</p>
                 <p>And we can see that they show the list of items and are data-bound to that.</p>
-                <img src="app/wpf/imagesFig07-146.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-146.png" class="image"/>
                 <p>When we set those, they're setting the SelectedItem, which is bound to the state of the Customer and it actually sets that on the Customer.
                 </p>
                 <p>Another last capability to highlight here in DataGrids, is the ability to provide a RowDetailTemplate:</p>
-                <img src="app/wpf/imagesFig07-147.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-147.png" class="image"/>
                 <p>So I'm going to pop in here another property on the DataGrid, RowDetailsTemplate, which is just a DataTemplate that will be rendered out as a
                     child panel on each row when it's selected by default.
                 </p>
                 <p>It's driven by a property at the DataGrid level called RowDetailsVisibilityMode:</p>
-                <img src="app/wpf/imagesFig07-148.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-148.png" class="image"/>
                 <p>You can set this to collapsed and then programmatically toggle it, or you can use this VisibleWhenSelected.</p>
                 <p>And what you put inside of that DataTemplate is totally up to you. The DataContext for the DataTemplate is going to be the RowDataContext,
                     which means a Customer in our current case.
                 </p>
                 <p>So, because we populated the child Orders for a Customer in the query in the code-behind:</p>
-                <img src="app/wpf/imagesFig07-149.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-149.png" class="image"/>
                 <p>it means that we can bind to that as a property hanging off of the current DataContext for a given row, which will be the customer.</p>
                 <p>In this case, I'm just going to cheat and say, AutoGenerateColumns True, but in a real scenario you'd want to explicitly declare just the
                     columns that you want. But this could be a little data entry form, some sort of rendering of the properties of an individual object hanging
@@ -858,7 +858,7 @@
                 </p>
                 <p>So let's go ahead and run with that. Let's also resize our Gird, do a Reset Layout, All, so it fills the window here, and go ahead and run:
                 </p>
-                <img src="app/wpf/imagesFig07-150.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-150.png" class="image"/>
                 <p>Now we can see the first row is selected, so we see this child DataGrid containing the orders, and as we select each row we see a child
                     DataGrid with the orders for that item.
                 </p>
@@ -899,19 +899,19 @@
                 <p>Starting point here is the end of our last demo working with DataGrids. I'm going to take my DataGrid and pull it down from the top a little
                     bit so that I have room to add some buttons:
                 </p>
-                <img src="app/wpf/imagesFig07-151.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-151.png" class="image"/>
                 <p>I'm going to drop into the UI here and add a button, its content is set to Sort:</p>
-                <img src="app/wpf/imagesFig07-152.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-152.png" class="image"/>
                 <p>and we're going to hook up an OnSort method in the code-behind. Our OnSort handler here, you can see, is going to reach out and find that
                     customersViewSource that's up in the XAML.
                 </p>
-                <img src="app/wpf/imagesFig07-153.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-153.png" class="image"/>
                 <p>This is the one that was generated through drag-and-drop and slightly modified in the last demo, but it's pointing to the Customers
                     collection exposed from the Window code-behind, which is our DataContext:
                 </p>
-                <img src="app/wpf/imagesFig07-154.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-154.png" class="image"/>
                 <p>So once we have a reference to a CollectionViewSource:</p>
-                <img src="app/wpf/imagesFig07-155.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-155.png" class="image"/>
                 <p>it exposes a number of methods and properties we can use to modify the collection it exposes for data binding purposes, first of which is a
                     SortDescriptions property.
                 </p>
@@ -919,11 +919,11 @@
                     property to sort on and what direction to sort.
                 </p>
                 <p>So just simply by adding that and hooking that up to a button, we can go ahead and run, and we can see I will click on the Sort property:</p>
-                <img src="app/wpf/imagesFig07-156.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-156.png" class="image"/>
                 <p>and now things are sorted by state:</p>
-                <img src="app/wpf/imagesFig07-157.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-157.png" class="image"/>
                 <p>Now there is a slightly different way to go about this using CollectionViews, instead of the CollectionViewSource explicitly:</p>
-                <img src="app/wpf/imagesFig07-158.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-158.png" class="image"/>
                 <p>So I could comment out the line of code that went directly to the SortDescriptions property of the CollectionViewSource, and instead use the
                     .View property on the CollectionViewSource to get a reference to the ICollectionView interface.
                 </p>
@@ -932,7 +932,7 @@
                     CollectionView is really the thing that knows how to do the sorting, and it really exposes the same API.
                 </p>
                 <p>It has a SortDescriptions collection:</p>
-                <img src="app/wpf/imagesFig07-159.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-159.png" class="image"/>
                 <p>that you can add new SortDescriptions into, and do the exact same thing that we were doing directly on the SortDescriptions here. By doing it
                     through ICollectionView, you're not coupled to whether you're actually using a CollectionViewSource or not.
                 </p>
@@ -942,40 +942,40 @@
                 <p>Now another thing I might want to do is filter my data based on some criteria. So I'm going to drop down here and add another button, which
                     will show up at the top, called Filter:
                 </p>
-                <img src="app/wpf/imagesFig07-160.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-160.png" class="image"/>
                 <p>and it's going to target a method we'll add in the code-behind called OnFilter. I'll drop in the code-behind and add that method:</p>
-                <img src="app/wpf/imagesFig07-161.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-161.png" class="image"/>
                 <p>and you can see what the API looks like here is, again, we reach out and get a reference to our CollectionViewSource. That
                     CollectionViewSource has an event on it called Filter:
                 </p>
-                <img src="app/wpf/imagesFig07-162.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-162.png" class="image"/>
                 <p>and when you hook up a subscriber to that event it's going to trigger it to reevaluate its collection, fire that event once for each
                     object:
                 </p>
-                <img src="app/wpf/imagesFig07-163.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-163.png" class="image"/>
                 <p>and let your event handler decide whether to include that object or not.</p>
                 <p>So you can see the event handler takes in a FilterEventArgs. Inside of that EventArgs is an item, which is the data-bound object it's
                     evaluating, and you're expected to return a Boolean through the Accepted property of the EventArg. So here I'm just inspecting, is the State
                     equal to Alaska? If so, I set Accepted to true and it will be presented, otherwise, I set it to false.
                 </p>
                 <p>So I can go ahead and run this, expand so we can see our states a little better, hit the filter, and now we see only Alaska.</p>
-                <img src="app/wpf/imagesFig07-164.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-164.png" class="image"/>
                 <p>Now, of course, the way this is wired up right now, we would be re-subscribing each time I click on the button, so you'd want to structure
                     that a little bit differently and do it one time as the view initializes. I just wanted to keep it all local here for demo purposes.
                 </p>
                 <p> Now, again, if you go through the CollectionView, there's a little bit different way to get it hooked up here</p>
-                <img src="app/wpf/imagesFig07-165.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-165.png" class="image"/>
                 <p>So we could get to our CollectionViewSource and get to its underlying ICollectionView.</p>
                 <p>And then, instead of the event-based model, which I've always kind of hated events where you're expected to set properties on the EventArgs
                     to make things happen by the caller. It kind of violates the fire-and-forget notion of events, so I'm not a big fan of this event-based way
                     of doing it.
                 </p>
-                <img src="app/wpf/imagesFig07-166.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-166.png" class="image"/>
                 <p>The ICollectionView way is a little bit more explicit. What you set is a Filter property on the view.</p>
                 <p>The Filter property is set to a delegate type that's called Predicate. Predicate takes in an object:</p>
-                <img src="app/wpf/imagesFig07-167.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-167.png" class="image"/>
                 <p>and returns a Boolean.</p>
-                <img src="app/wpf/imagesFig07-168.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-168.png" class="image"/>
                 <p>And basically, the Filter Predicate will be evaluated once for each object in the collection any time you set the Filter property or you
                     change the underlying collection. So this is just a little bit more explicit that you pass in an item and you return a Boolean to say yes or
                     no whether you should include it.
@@ -984,23 +984,23 @@
                 <p>So with that hooked up, I can run, and we'll see the exact same behavior, just for a different state, click on Filter, and now we just have
                     the two Arizona customers.
                 </p>
-                <img src="app/wpf/imagesFig07-169.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-169.png" class="image"/>
                 <p>Lastly, through the CollectionViewSource you can do grouping. So I'll add another button in my UI here to Group objects:</p>
-                <img src="app/wpf/imagesFig07-170.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-170.png" class="image"/>
                 <p>and I'll drop into the code-behind and add a handler for that OnGroup method.</p>
-                <img src="app/wpf/imagesFig07-171.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-171.png" class="image"/>
                 <p>Similar thing, I need to get a reference to my CollectionViewSource and it exposes a GroupDescriptions property. Now this one I'm not going
                     to show, but there is a way to go down through the ICollectionView and it has a GroupDescriptions property as well.
                 </p>
                 <p>Here we just add a new PropertyGroupDescription, tell it what property it's based on, and it's going to start grouping based on that
                     property. If we go ahead and run with that, click on Group, now we can see the groupings of states over on the right.
                 </p>
-                <img src="app/wpf/imagesFig07-172.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-172.png" class="image"/>
                 <p>Now just having them grouped like that may not be enough visual indication, so the DataGrid and ListView controls in WPF support styling
                     based on that group. So I can go back to my XAML here, go up to my DataGrid, and add a property called GroupStyle to the DataGrid, setting
                     it to a GroupStyle instance:
                 </p>
-                <img src="app/wpf/imagesFig07-173.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-173.png" class="image"/>
                 <p>and the GroupStyle can have various things in it, but one of the things it has is a HeaderTemplate. That's just a DataTemplate that you can
                     put whatever you want in it.
                 </p>
@@ -1008,7 +1008,7 @@
                     set based on the Group that it's rendering.
                 </p>
                 <p>So the binding is generally going to be Name here, but with that in place we can go ahead and run again:</p>
-                <img src="app/wpf/imagesFig07-174.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-174.png" class="image"/>
                 <p>click on Group, and now we see it puts these bands in here in between the groups and renders out our GroupStyleTemplate.</p>
                 <p>Obviously, you could put some better visual structure to that to make it prettier, but that's how you deal with sorting, filtering, and
                     grouping using the CollectionViewSource.
@@ -1019,54 +1019,54 @@
                 <p>The last I want to show here with respect to CollectionViewSources is how you can use it to drive a Master-Details presentation of related
                     collections and objects. My starting point here is a basic WPF project.
                 </p>
-                <img src="app/wpf/imagesFig07-175.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-175.png" class="image"/>
                 <p>The only thing going on ahead of time is some data access code in the code-behind of the window populating a Customers property that we're
                     going to be data binding to
                 </p>
-                <img src="app/wpf/imagesFig07-176.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-176.png" class="image"/>
                 <p>When I populate Customers, notice I'm also drilling down and getting the related Orders, the related OrderItems for the Orders, and the
                     related Product for the OrderItem using Entity Framework.
                 </p>
-                <img src="app/wpf/imagesFig07-177.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-177.png" class="image"/>
                 <p>I can go into the designer and the Data Sources Window, and I've already added Data Sources for our Entity objects we're going to be working
                     with here.
                 </p>
-                <img src="app/wpf/imagesFig07-178.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-178.png" class="image"/>
                 <p>As we've seen in a previous module, I can start at the root level with Customer, drag-and-drop, and generate a grid.</p>
-                <img src="app/wpf/imagesFig07-179.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-179.png" class="image"/>
                 <p>I'm going to resize that grid to fit towards the top here. Now, for the related Orders and OrderItems, it might be tempting to drag out from
                     this level:
                 </p>
-                <img src="app/wpf/imagesFig07-180.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-180.png" class="image"/>
                 <p>but if you do you're generating a DataGrid that's bound to an independent collection of orders or OrderItems.</p>
                 <p>What you want to do is drill down to the property on a Customer that is the Orders collection related to that customer.</p>
-                <img src="app/wpf/imagesFig07-181.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-181.png" class="image"/>
                 <p>Do your drag-and-drop from there, and the designer will do the right thing, which we'll show the code for in a moment, to generate a
                     different CollectionViewSource, but to tie that CollectionViewSource to the parent CollectionViewSource:
                 </p>
-                <img src="app/wpf/imagesFig07-182.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-182.png" class="image"/>
                 <p>Likewise, I can drill down another level to OrderItems:</p>
-                <img src="app/wpf/imagesFig07-183.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-183.png" class="image"/>
                 <p>drag that out, and have that related to the parent Orders collection. And then we could go one level down to the related Product, switch that
                     to use the Details view:
                 </p>
-                <img src="app/wpf/imagesFig07-184.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-184.png" class="image"/>
                 <p>and generate a little data form for the current product:</p>
-                <img src="app/wpf/imagesFig07-185.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-185.png" class="image"/>
                 <p>and I won't worry about the fact that it's being clipped off there.</p>
                 <p>With that code in place, it also generated the Loaded event handler and all I've got to do is go set the Source property for the root
                     customerViewSource to my Customers collection that I populated on construction.
                 </p>
-                <img src="app/wpf/imagesFig07-186.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-186.png" class="image"/>
                 <p>So with that in place, I can run, and notice that we have the, not very well laid out, but we have customers up above. Whatever customer I
                     select, we're seeing the orders for that customer in the next grid down. Whatever order I select, I'm seeing the order details, and whatever
                     order detail I select, I'm seeing the related product.
                 </p>
-                <img src="app/wpf/imagesFig07-187.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-187.png" class="image"/>
                 <p>So a typical chained Master-Details kind of setup, all in seconds with drag-and-drop. Now let's look at the XAML that it generated, because
                     that's where all the action is. And the magic key really has to do with these CollectionViewSources.
                 </p>
-                <img src="app/wpf/imagesFig07-188.png" class="image"/>
+                <img src="app/wpf/images/wpfdatabindingindepth/Fig07-188.png" class="image"/>
                 <p>The first one was generated from the drag-and-drop of the CustomerEntityType, and we've talked through that before, that it sets it up, says
                     it going to be dealing with Customer, and that's the one that we're populating from the code-behind at runtime.
                 </p>
