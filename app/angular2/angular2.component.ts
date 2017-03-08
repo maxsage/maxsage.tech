@@ -136,3 +136,79 @@ export class Angular2GettingStarted14Angular2SetupRevisitedComponent {
 export class Angular2GettingStarted15FinalWordsComponent {
     public pageTitle: string = "Angular 2 Getting Started - Final Words";
 }
+
+
+
+
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-00-course-contents.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook00CourseContentsComponent {
+    public pageTitle: string = "Angular 2 First Look - Course Contents";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-01-angular-2-in-action.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook01Angular2InActionComponent {
+    public pageTitle: string = "Angular 2 First Look - Angular 2 In Action";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-02-angular-2-architecture-whats-new-and-whats-different.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent {
+    public pageTitle: string = "Angular 2 First Look - Angular 2 Architecture, What's New and What's Different";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-03-angular-2-essentials-modules-components-templates-and-metadata.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent {
+    public pageTitle: string = "Angular 2 First Look - Angular 2 Essentials: Modules, Components, Templates, and Metadata";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-04-displaying-data-data-binding-directives-and-pipes.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent {
+    public pageTitle: string = "Angular 2 First Look - Displaying Data: Data Binding, Directives and Pipes";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-05-services-dependency-injection-and-component-lifecycle-hooks.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent {
+    public pageTitle: string = "Angular 2 First Look - Services, Dependency Injection, and Component Lifecycle Hooks";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-06-data-with-http.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook06DataWithHttpComponent {
+    public pageTitle: string = "Angular 2 First Look - Data with Http";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-07-routing.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook07RoutingComponent {
+    public pageTitle: string = "Angular 2 First Look - Routing";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-first-look-08-angular-modules.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2FirstLook08AngularModulesComponent {
+    public pageTitle: string = "Angular 2 First Look - Angular Modules";
+}

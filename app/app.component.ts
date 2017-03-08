@@ -43,7 +43,14 @@ import {
     Angular2GettingStarted12NavigationAndRoutingAdditionalTechniquesComponent,
     Angular2GettingStarted13AngularModulesComponent,
     Angular2GettingStarted14Angular2SetupRevisitedComponent,
-    Angular2GettingStarted15FinalWordsComponent,
+    Angular2GettingStarted15FinalWordsComponent, Angular2FirstLook00CourseContentsComponent,
+    Angular2FirstLook01Angular2InActionComponent,
+    Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent,
+    Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent,
+    Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent,
+    Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent,
+    Angular2FirstLook06DataWithHttpComponent, Angular2FirstLook07RoutingComponent,
+    Angular2FirstLook08AngularModulesComponent,
 } from './angular2/angular2.component';
 
 import { TypeScriptComponent
@@ -162,6 +169,19 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/angular2-getting-started-13-angular-modules', name: 'Angular2GettingStarted13AngularModules', component: Angular2GettingStarted13AngularModulesComponent},
     { path: '/angular2-getting-started-14-angular2-setup-revisited', name: 'Angular2GettingStarted14Angular2SetupRevisited', component: Angular2GettingStarted14Angular2SetupRevisitedComponent},
     { path: '/angular2-getting-started-15-final-words', name: 'Angular2GettingStarted15FinalWords', component: Angular2GettingStarted15FinalWordsComponent},
+
+    { path: '/angular2-first-look-00-course-contents', name: 'Angular2FirstLook00CourseContents', component: Angular2FirstLook00CourseContentsComponent},
+    { path: '/angular2-first-look-01-angular-2-in-action', name: 'Angular2FirstLook01Angular2InAction', component: Angular2FirstLook01Angular2InActionComponent},
+    { path: '/angular2-first-look-02-angular-2-architecture-whats-new-and-whats-different', name: 'Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferent', component: Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent },
+    { path: '/angular2-first-look-03-angular-2-essentials-modules-components-templates-and-metadata', name: 'Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadata', component: Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent },
+    { path: '/angular2-first-look-04-displaying-data-data-binding-directives-and-pipes', name: 'Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipes', component: Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent},
+    { path: '/angular2-first-look-05-services-dependency-injection-and-component-lifecycle-hooks.html', name: 'Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooks', component: Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent},
+    { path: '/angular2-first-look-06-data-with-http.html', name: 'Angular2FirstLook06DataWithHttp', component: Angular2FirstLook06DataWithHttpComponent},
+    { path: '/angular2-first-look-07-routing.html', name: 'Angular2FirstLook07Routing', component: Angular2FirstLook07RoutingComponent},
+    { path: '/angular2-first-look-08-angular-modules.html', name: 'Angular2FirstLook08AngularModules', component: Angular2FirstLook08AngularModulesComponent},
+
+
+
 
     { path: '/javascript', name: 'JavaScript', component: JavaScriptComponent },
     { path: '/building-a-javascript-development-environment00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },

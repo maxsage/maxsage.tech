@@ -1,17 +1,17 @@
-Displaying Data: Data Binding, Directives, and Pipes
+<h2>Displaying Data: Data Binding, Directives, and Pipes</h2>
 
-Displaying Data
+<h3>Displaying Data</h3>
 
-One of the most appreciated features of Angular 1 is data binding. We'll all glad to hear that these concepts
+<p>One of the most appreciated features of Angular 1 is data binding. We'll all glad to hear that these concepts
 are still present in Angular 2, albeit in a new syntax. We've already seen a few examples of data binding and
 built in directives, so in this chapter we'll learn more about how to take advantage of these features. We'll
 learn how to use one and two way data binding to help coordinate communication between a component and its
 template. When Angular renders templates, it transforms a DOM according to instructions from directives. We'll
-discuss the built in directives in Angular 2 and show how to format data in templates using pipes.
+discuss the built in directives in Angular 2 and show how to format data in templates using pipes.</p>
 
-Data Binding
+<h3>Data Binding</h3>
 
-Let's explore some data binding. We'll use data binding to help coordinate communication between a component and
+<p>Let's explore some data binding. We'll use data binding to help coordinate communication between a component and
 its template, and that means that we can send property values from the component up into the template to display
 them, and then also we can take the values that a user types into the template and send them back down to a
 component. Let's look at that interaction just a little bit more. So in the DOM, that's where our template
@@ -42,11 +42,11 @@ remember when in Angular 1 you need to call $apply when you use a jQuery plugin?
 anymore in Angular 2. We have much easier widget integration. In fact, there is no more $apply and there are no
 more repeated digest cycles, no more error messages related to it, and then all those watches we had, no more
 watchers either, which also means there's no more dealing with the performance issues related to the digest
-cycle and watcher limits. And this unidirectional data flow is the basis for the data binding in Angular 2.
+cycle and watcher limits. And this unidirectional data flow is the basis for the data binding in Angular 2.</p>
 
-Interpolation
+<h3>Interpolation</h3>
 
-When you just need to take a value, bind it to the template and display it, interpolation is a great way to go.
+<p>When you just need to take a value, bind it to the template and display it, interpolation is a great way to go.
 Interpolation is one way in to the template. So let's say we've got a template here and we want to display the
 vehicle name right here in the h3, we can do that. We're going to evaluate the expression in those double curly
 braces. So we have an object called vehicle and it's got a property called name. So we must have that vehicle
@@ -89,11 +89,11 @@ by doing this we can actually print it out on the screen. So this will show us t
 character. If you want to format it, there's another neat little trick we can do. So we can do pre, like that,
 and let's copy that and put it inside the pre and now it'll actually format the JSON out for us. Obviously we
 don't want to do this and leave it in for production, but for quick debugging that's pretty darn easy. So here
-we can see interpolation inside of our application.
+we can see interpolation inside of our application.</p>
 
-Property Binding
+<h3>Property Binding</h3>
 
-In chapter 2 we talked about how we used to need things like ngHref and ngSource and a bunch of other built in
+<p>In chapter 2 we talked about how we used to need things like ngHref and ngSource and a bunch of other built in
 directives in Angular 1 to do property binding. In Angular 2 we don't need any of those, we just need to take
 the property for the HTML element and we put the square brackets around it, and that way we can bind to it. It's
 key to remember, we're setting the properties of the DOM elements, not attributes. Attributes initialize DOM
@@ -126,11 +126,11 @@ we do that is binding to the attr. and then the name of that attribute. This als
 span for our table. And we could dots for nested properties, so in a class we could just say class.isStopped and
 then if the value for isStopped is true, then the class isStopped will get added to it. So first we've got our
 attribute bindings and then we've got our dotting, but we can also do this with styles too, so we can set the
-color to red or blue based upon the value of isStopped.
+color to red or blue based upon the value of isStopped.</p>
 
-Adding Property Binding
+<h3>Adding Property Binding</h3>
 
-Well let's take a look at a demo using property binding. We'll flip back over to our application here in Plunker
+<p>Well let's take a look at a demo using property binding. We'll flip back over to our application here in Plunker
 where we left it off and first thing let's get rid of this pre tag on line 6 because we don't actually want that
 to show up later. But we do want to do a couple other things. One of the properties we can bind to is class,
 let's say that we wanted to change different attributes about this div. Well let's do that here. Let's go ahead
@@ -177,11 +177,11 @@ tools and we'll grab the selection tool, we'll go down to the button itself. I'm
 going to click the escape so I can see all the elements and then I'm going to drag this back over, get a little
 more room, and we'll slide up to it, right here, and notice we're seeing aria-label Select a character, and
 that's the value that we bound from our component. So here's just a few ways that we can use property binding,
-along with interpolation, inside of our application.
+along with interpolation, inside of our application.</p>
 
-Event Binding
+<h3>Event Binding</h3>
 
-Event bindings are how we communicate from the template to the component. For example, we could wrap with
+<p>Event bindings are how we communicate from the template to the component. For example, we could wrap with
 parenthesis the name and event inside of the template and then set that equal to a statement, for example, a
 click handler. This is one way communication again and this time it's from the view target to the data source.
 So the target might be click or on mouse move, and we wrap that with the parenthesis and we set it to a
@@ -206,11 +206,11 @@ can bind to the onChanged and then handle that. The cool thing about this is we 
 HTML element exposes or any one that we create through a custom component like we did here with onChanged. This
 gets rid of a whole bunch of Angular 1 built in directives that we used to have, like ngClick, ngBlur, ngFocus,
 we had a whole bunch of them we used to have to use. Now we don't have to do that, we can just take an event and
-put the parenthesis around it.
+put the parenthesis around it.</p>
 
-Adding Event Binding
+<h3>Adding Event Binding</h3>
 
-Well let's flip over to our demo for event binding. We've got this Select button down here, but clicking it is
+<p>Well let's flip over to our demo for event binding. We've got this Select button down here, but clicking it is
 not doing a whole lot because we don't have any events bound to it. Well let's change that. Let's go ahead and
 type in the click binding here. We use the parenthesis as we learn because that's how we do event binding, and
 we're going to set that equal to a function that we have inside of our component. Let's go check that out. In
@@ -254,11 +254,11 @@ target happens to be this input, and then we'll use the value property. So now w
 up, go ahead and grab it from the character.name, it's Boba Fett, and then when I change it to John it's
 actually sending it back down through the input which also happens to show up right above us here where it says
 John details, just like that. No problem whatsoever. Now don't worry if that's a little bit verbose, what's on
-lines 11 and 12, but next we're going to learn how we can make this a little bit simpler.
+lines 11 and 12, but next we're going to learn how we can make this a little bit simpler.</p>
 
-Two-way Binding
+<h3>Two-way Binding</h3>
 
-Handling two way data binding the way we just did, by setting the value property binding and then the input for
+<p>Handling two way data binding the way we just did, by setting the value property binding and then the input for
 the event binding, is kind of crazy and if not crazy, well, it's just verbose, right? Well there's another way
 we can do it. We can actually use this football in a box where we have the square brackets and then inside of it
 the parenthesis right there. And that syntax allows us to send a value from the component to the template and
@@ -275,11 +275,11 @@ because we're using ngModel and that's part of the formsModule of Angular, we ca
 that pulls in that formsModule to our application. This is important. It's one of the ways that Angular keeps
 its size down, if we're not actually using these features, we're not going to import them into our application.
 So we just add it to our import list of our ngModule. And we can add other modules too, and we'll do that later
-in the course.
+in the course.</p>
 
-Adding Two-way Binding
+<h3>Adding Two-way Binding</h3>
 
-Well let's flip back over to our demo and we'll add two way data binding to it. Well right here on lines 11 and
+<p>Well let's flip back over to our demo and we'll add two way data binding to it. Well right here on lines 11 and
 12 we have the value property binding and then the input event binding. Instead of just changing that right
 away, let's go ahead and copy that section, we'll make a whole another div and we'll use it for color. So copy
 and paste all that. And the only things we're going to change is change the name over here on the right to color
@@ -297,11 +297,11 @@ the value and the input are and we'll put in our own football in a box for the n
 to bind to the character's name, just like that. So we can either keep line 11 or keep lines 12 and 13, and I
 don't know about you, but I prefer line 11. And now we have two way data binding so we can come back over here
 and test it out. We might want to change the name to something like Rey Skywalker, hopefully, or we change the
-color down here to something like purple, and everything works.
+color down here to something like purple, and everything works.</p>
 
-Built-in Directives
+<h3>Built-in Directives</h3>
 
-In Angular 1 there were a whole bunch of directives that we had to learn. In Angular 2 there's just a couple
+<p>In Angular 1 there were a whole bunch of directives that we had to learn. In Angular 2 there's just a couple
 that we need to use, one of which we already used with ngModel. For example, the ngModle just wraps up the logic
 for handling the binding the value to the template and then sending those changes back to the component's
 property. So in Angular 2 we have these directives and they're going to help us basically take care of some of
@@ -356,11 +356,11 @@ imported by browserModule. So we were already importing the browserModule, that'
 we put it into our import statement in our ngModule. So by default here, when we use the browserModule, it's
 going to pull in the common module and we get access to all the ngIf and ngRepeat and ngStyle and we're good to
 go. If we wanted to, we can also explicitly import the common module, that's okay too. But Angular already sees
-that we have it.
+that we have it.</p>
 
-Adding Attribute and Structural Directives
+<h3>Adding Attribute and Structural Directives</h3>
 
-Now that we've learned how to use built-in directives, let's go add them into our demo. Our template already has
+<p>Now that we've learned how to use built-in directives, let's go add them into our demo. Our template already has
 a class up top, on line 6 we've got class.selected we're binding to isSelected. And we can see if we click the
 button, it's actually selecting the Boba Fett color in the icon over here with the shadow. Well we just learned
 we could use ngClass to do the same thing. Let's look at the syntax side by side. With ngClass we could actually
@@ -395,11 +395,11 @@ from the template. If you go into the dev tools you will not see that HTML in th
 again, all that stuff will appear. Same thing with the ul and li, it's changing the structure, it's adding
 multiple li's, that's what the star stands for. At the top we don't do that ngClass or even for ngModel because
 we're not changing the structure, we're just changing styles, classes or even content on the page. And that's
-how we use built-in directives.
+how we use built-in directives.</p>
 
-Pipes
+<h3>Pipes</h3>
 
-Another feature that we can use in our templates is a pipe, and a pipe allows us to take data and format it on
+<p>Another feature that we can use in our templates is a pipe, and a pipe allows us to take data and format it on
 the screen, maybe for dates or numbers or other values. This is important because sometimes the data that we get
 doesn't come in the value format that we want it in. Now we had something similar in Angular 1, they were called
 filters, these things are called pipes in Angular 2 because they flow through a pipe, and because we use the
@@ -429,11 +429,11 @@ info. So here we're just replacing our own values and arguments, creating our ow
 expressions to create our own InitCapsPipe. Don't forget to implement the PipeTransform interface, because if
 you do that it'll guard you in your code to make sure that you spelled and used the proper implementation of the
 transform function and its arguments and its return value. And all these pipes are great for formatting values
-on the screen.
+on the screen.</p>
 
-Exploring Template Syntax in Storyline Tracker
+<h3>Exploring Template Syntax in Storyline Tracker</h3>
 
-Now let's flip back over to our storyline tracker demo and see how we put all these concepts together in that
+<p>Now let's flip back over to our storyline tracker demo and see how we put all these concepts together in that
 application. And here we can click on the View Sample for number 0 here, Storyline Tracker, and when it opens
 up, here's the application. Now let's click over on Vehicles, we're going to examine the vehicles list and then
 each button here. Each one of these guys, 30 for Millennium Falcon or the X-wing Fighter, those are separate
@@ -495,15 +495,15 @@ here on line 18. And don't worry, we're going to learn more about how ngModules 
 hierarchical structure like this storyline tracker application later on in the course. And as we've seen
 throughout this course, we learned about each individual features, such as event binding or property binding or
 pipes or templates or metadata, and then we go look at them in the storyline tracker at the end of the chapter
-so we can see how they fit into the big picture in an application.
+so we can see how they fit into the big picture in an application.</p>
 
-Summary
+<h3>Summary</h3>
 
-This chapter was all about our template syntax. Once we have a component we have to have something to render. We
+<p>This chapter was all about our template syntax. Once we have a component we have to have something to render. We
 learned about data binding - one way, two way. We learned about unidirectional data flow and how the data only
 goes from one direction or the other, for example from a component up into a property value on the template or
 from the template back down to the component via an event. We learned about attribute directives, things like
 ngClass and ngStyle. And then the structural directives, like the ngFor, the things with the star in front of
 them, they're the ones that actually change the DOM. And finally we learned about how we can use pipes to
-transform values. And this gives you a good first look at the template syntax in Angular 2.
+transform values. And this gives you a good first look at the template syntax in Angular 2.</p>
 

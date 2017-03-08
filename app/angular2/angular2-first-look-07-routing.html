@@ -1,8 +1,8 @@
-Routing
+<h2>Routing</h2>
 
-Introducing Routing
+<h3>Introducing Routing</h3>
 
-The storyline tracker has a dashboard, vehicles, characters, and a series of detail views. We need a way to get
+<p>The storyline tracker has a dashboard, vehicles, characters, and a series of detail views. We need a way to get
 from one view to another. Routing is that vehicle. This module is going to show how to configure routing, which
 is going to enable us to navigate between our vehicle and character components. So we'll define our routes and
 we're going to use a concept called routing modules to hold those routes. Sometimes we need to be able to pass
@@ -10,11 +10,11 @@ parameters from one place to the other, we'll learn how we can do that through r
 stop certain routes from happening, those things are called guards inside of Angular. We can inspect the route
 at a key moment in time, right before it's about to transition, to either get some data to inject inside of its
 destination or to check a certain value, maybe if you're authorized or not, and then prevent the route or let it
-continue onward. We'll learn about all these concepts and much more in this chapter on routing.
+continue onward. We'll learn about all these concepts and much more in this chapter on routing.</p>
 
-Routing Essentials
+<h3>Routing Essentials</h3>
 
-Angular allows us to navigate between viewing component pairs with a router. Routing is how we allow the users
+<p>Angular allows us to navigate between viewing component pairs with a router. Routing is how we allow the users
 to navigate from one point to another. Let's take a look at how routing compares from Angular 1 to Angular 2. In
 Angular 1 we used a routeProvider object, which had a when function. In Angular 2 it's a little bit simplified,
 we just have a Routes object, and we'll use that to define our configuration for our paths, when I see this URL,
@@ -36,11 +36,11 @@ that we set up with paths that lead to components. And where does our route go? 
 declare a router-outlet somewhere on our page. Those routes we defined in step 3 are going to have to go
 somewhere. They're going to show up in the router-outlet, and if we want to create like a menu somewhere for the
 application, a great idea for that would be to use the routerLink bindings. By following these five steps, we
-can get routing going pretty quickly.
+can get routing going pretty quickly.</p>
 
-Essential Routing Code
+<h3>Essential Routing Code</h3>
 
-Let's begin by taking a look at the code that we're going to need to get routing moving in our application.
+<p>Let's begin by taking a look at the code that we're going to need to get routing moving in our application.
 First we'll define a file called app-routing.module. Now that's going to match the app.module file. Effectively
 these are the routes for our root of our application and in here we're going to pull in the RouterModule from
 the angular/router ES6 module, that's going to give us access to all the routing things that we're going to want
@@ -81,11 +81,11 @@ parameters and those link parameters are an array which contain the different pa
 route. In this case, the route that I'm going to is going to be called /vehicle and that gets matched against
 the path. When somebody clicks on one of these hyperlinks here, it's going to activate the router link and then
 it'll go and look for the router-outlet and that's going to define where I put my components. Now that we've
-learned how to do routing, let's go take a look at it in our sample applications.
+learned how to do routing, let's go take a look at it in our sample applications.</p>
 
-Adding the Routing Module to an App
+<h3>Adding the Routing Module to an App</h3>
 
-Let's take a look at our sample applications, we'll slide on down to number 25, Router. This is going to show us
+<p>Let's take a look at our sample applications, we'll slide on down to number 25, Router. This is going to show us
 how routing application works. We're going to build this in just a moment. So here in our app we've got a list
 of characters and a list of vehicles. If I click on vehicles I can see them and characters and I can also click
 on an individual character and go look at details. All the different components are already in my application.
@@ -156,11 +156,11 @@ created a simple array of routable components that we're exporting. Back inside 
 AppRoutingModule and the routable components on line 11. We no longer needed the declarations to be imported for
 those components, instead we just imported the routable components and used it on line 21. We defined the import
 for the AppRoutingModule on line 17 and our app module is good to go. If you're typing along with me, go ahead
-and take this moment to catch up and then we'll move on to how we get them into the templates.
+and take this moment to catch up and then we'll move on to how we get them into the templates.</p>
 
-Adding Routing to Templates
+<h3>Adding Routing to Templates</h3>
 
-Now that we've added the routing code to our app, let's have a place for it to show up inside of our templates.
+<p>Now that we've added the routing code to our app, let's have a place for it to show up inside of our templates.
 Go ahead and open up the app.component.html and in this section right here we're going to add a router-outlet,
 just like this, and that'll be where our templates are shown when we route to them. Well how do we route to
 them? Let's add some navigation for that. We'll create a nav tag and inside of there a ul, and then we'll create
@@ -177,11 +177,11 @@ path and Vehicles for the title. And then once we do that, we should be good. We
 preview and if everything worked out okay we should see our data shows up and both of our menu items. If I click
 on vehicles, we go to the vehicles, if I click on characters we go to characters. If you were coding along with
 me and it worked out, awesome. And if it didn't, you feel free to go back and try again or if you'd like you can
-go off and click on the Router number 25 example in our main demo app, it's the conclusion of what we just did.
+go off and click on the Router number 25 example in our main demo app, it's the conclusion of what we just did.</p>
 
-Sending and Receiving Route Parameters
+<h3>Sending and Receiving Route Parameters</h3>
 
-Now that we know the routing fundamentals, let's take a look at how we can define parameters. Inside of our
+<p>Now that we know the routing fundamentals, let's take a look at how we can define parameters. Inside of our
 routing module we already set up one parameter for the character ID. This is how we define a parameter, we use
 colon and then the value. Now once we set up that parameter, it's going to be interpreted by the router to say,
 okay if I see character/ then a value, it's going to mean go to this path and it'll go to that particular
@@ -209,11 +209,11 @@ string, so now I'm using the do to say, alright take that id, do a parseInt on i
 id. Now I've got it locally in my class and I can subscribe to any of the changes. So whenever these values
 change, if the id parameter does change, I'll be able to get it and it will go get the correct session for it.
 So we just learned how we can grab parameters using the snapshot technique or getting a string with them by
-using observables. Let's go take a look at our demo apps to see how that works.
+using observables. Let's go take a look at our demo apps to see how that works.</p>
 
-Subscribing to Route Parameters
+<h3>Subscribing to Route Parameters</h3>
 
-Let's go back to our demo application and click on the Router Completed example, and we'll take a look at where
+<p>Let's go back to our demo application and click on the Router Completed example, and we'll take a look at where
 we have parameters in our application. When we click on vehicles we can see we've got the Millennium Falcon and
 then we click on that and we see the details for that Falcon. If we go back to vehicles, we click on X-Wing
 Fighter, we can see those details. Well let's look inside the vehicles folder and here on the vehicle component
@@ -224,11 +224,11 @@ to make it turn into a number, and then we're going to subscribe and when we get
 through this pipeline, that stream, we're going to subscribe to it and then run getVehicle. And down on line 35
 it'll call the getVehicle, passing in the id to the service and it'll come back out the other end and we set our
 vehicle locally. And the parameter name on line 28, id, has to match what we have in our routing module, right
-here on line 15, vehicles/:id. And that's how we set up routing parameters in our application.
+here on line 15, vehicles/:id. And that's how we set up routing parameters in our application.</p>
 
-Basics of Route Resolvers
+<h3>Basics of Route Resolvers</h3>
 
-Earlier we talked about a third way to pass data to a route, that third technique is using a resolver. Resolvers
+<p>Earlier we talked about a third way to pass data to a route, that third technique is using a resolver. Resolvers
 are a way to get data prior to navigating to the route. Let's take a look at how we define one of these
 resolvers. These are key for the scenarios where you want to get data before you actually go to the particular
 component. In this case my resolver is just a service and it's going to implement the resolve interface, which
@@ -248,11 +248,11 @@ one of these if we want to. We could have a VehicleResolver and maybe another re
 enough. And then the way you get that resolver data back inside of your component is to then take that activated
 route and then look at that data value. So we're going to subscribe to that and then we can grab the vehicle
 that we decided we wanted to pass in, that vehicle property is the one we defined in the route configuration and
-it's of type vehicle. Let's go take a look at our application and see where we can use resolver.
+it's of type vehicle. Let's go take a look at our application and see where we can use resolver.</p>
 
-Route Resolver in the Storyline Tracker
+<h3>Route Resolver in the Storyline Tracker</h3>
 
-The storyline tracker has several different routes in it. One of them is a vehicle-routing.module, and here we
+<p>The storyline tracker has several different routes in it. One of them is a vehicle-routing.module, and here we
 can see a path for parameter for id is going to go to a VehicleComponent and on line 23 through 25 we can see a
 resolver for the vehicle. This means that when they go to that id for the vehicle, we're going to go down to
 this vehicle.component and it's going to receive that value. So if we look inside of here for the ngOnInit,
@@ -269,11 +269,11 @@ technique here with the ActivatedRoute where we go ahead and use an observable a
 the parameter value, we'd have to then go get the data as shown here on line 81. So when we use parameters, we
 have to go get the data after we get to the destination. With a resolver, we're waiting before we actually
 traverse to the destination. So it really depends what your user experience needs to be. If you want to get the
-data before you go on the route use a resolver, if you want to use it after, use a parameter.
+data before you go on the route use a resolver, if you want to use it after, use a parameter.</p>
 
-Route Guards
+<h3>Route Guards</h3>
 
-When a user goes to our vehicles page or our characters page, maybe we want to check first to see if they've
+<p>When a user goes to our vehicles page or our characters page, maybe we want to check first to see if they've
 been logged into the system. For that we might want to block or at least inspect that route or guard it. That's
 where routing guards come into play. They allow us to make decisions at certain key points in that routing
 lifecycle and then we can either continue, we can abort that action or do something different. When we're at
@@ -305,11 +305,11 @@ person isn't logged in, we're going to route them to the login page and then ret
 cancel the current route and introduce a new one. This allows us to really change the way the application
 behaves. Once we define the guard, we have to apply it. Here we've got a dashboard route and we're applying the
 CanActivate with the AuthGuard. Notice that it's an array that's because we could apply more than one guard if
-we wanted to. Now that we've learned about using routing guards, let's go check out an example in our demos.
+we wanted to. Now that we've learned about using routing guards, let's go check out an example in our demos.</p>
 
-Applying Route Guards
+<h3>Applying Route Guards</h3>
 
-We'll go on down to number 26, Route Guards, and we'll click on View Sample. Here we're going to have two routes
+<p>We'll go on down to number 26, Route Guards, and we'll click on View Sample. Here we're going to have two routes
 for vehicles and for characters once again, but now we've got a login as well, so we can authenticate. Notice
 the default route is characters and it's showing the login page. That's because we have a guard in place saying
 hey you're not authorized so we're redirecting the login. However, vehicles is allowing us free reign to come
@@ -336,11 +336,11 @@ trying to go to characters so we try to log in, I can't go to vehicles either, I
 happening. Once I log in though it goes right to the vehicles page and I can go back and forth between the two
 different places until I log back out again. Now how did this guard get applied? The guard is called
 CanActivateAuthGuard, it's really just a service, right. Well our AppModule down here happens to have a
-providers list and one of those happens to be our guard. So make sure that you provide your guards as well.
+providers list and one of those happens to be our guard. So make sure that you provide your guards as well.</p>
 
-Child Routes
+<h3>Child Routes</h3>
 
-We just saw how we can guard different routes and got a sneak peek at child routes. Child routes are a great way
+<p>We just saw how we can guard different routes and got a sneak peek at child routes. Child routes are a great way
 to create hierarchical sets of routes. We took at look at some routing we had with characters and child routes.
 We defiend the URLs for those parent routes and then for the child. They get put together to create the end
 route. So above here that first path is characters and the second one would be character/72 if that happened to
@@ -378,11 +378,11 @@ child route we have an id on line 19 and then a CanDeactivateGuard on line 21. P
 same kind of guard on the vehicles too. Let's go over to vehicles, we'll try the Millennium Flacon and we'll
 change this from space to land and then we'll click on characters and the same kind of question comes up. As you
 can see, guards can be extremely helpful for implementing different kinds of logic. I recommend that you tinker
-with the guards for this application to get a feel for how they can work in different scenarios.
+with the guards for this application to get a feel for how they can work in different scenarios.</p>
 
-What's Next with Routing
+<h3>What's Next with Routing</h3>
 
-This chapter we learned quite a bit about routes. We started with the basics and then we showed how we can
+<p>This chapter we learned quite a bit about routes. We started with the basics and then we showed how we can
 define different kinds of routes, then we defined the routing module, which encapsulates all that information
 about our routes. We learned how to define route parameters and pass information along to the target component,
 and then extract that using snapshots or using an observable. And remember, the pros of the snapshot are it's
@@ -396,5 +396,5 @@ them. And to make it easier to apply guards we actually set up child routes, whi
 of the routes. In the next module we'll continue exploring routes, but in the context of modules, ngModules.
 When we combine these two features together we can do things like eager loading and lazy loading of modules, and
 we can even apply guards so we can only load the content of a lazy loaded module when we want it. We'll learn
-how to do that and much more with ngModules in the next section.
+how to do that and much more with ngModules in the next section.</p>
 
