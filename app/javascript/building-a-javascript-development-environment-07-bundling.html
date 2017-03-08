@@ -1,0 +1,364 @@
+<h1>Bundling</h1>
+<p><strong>FULL DETAIL STARTED HERE I THINK</strong></p>
+<p>These days when you write JavaScript it likely needs to be bundled up before usage. Why? If you are a JavaScript Developer its important to understand that
+    npm packages use the commonjs pattern. Node can handle this just fine but browsers don't understand it. So you need to bundle npm packages into a format
+    that the browser can consume.
+</p>
+<p>But bundler's aren't just for apps that run in the browser. You may use a bundler to package any JavaScript into a single file or strategically into separate
+    files for different portions of your app.
+</p>
+<p>Imagine you've created an app with five different pages. A powerful bundler can intelligently create separate bundles of JavaScript for each page. That way
+    the user only has to download the relevant JavaScript for the first page on initial load. This saves bandwidth and speeds page loads.
+</p>
+<p>Finally remember that bundlers aren't just for the web. You may want to use bundlers if your coding in Node as well since Nodes <code
+        class="hljs">require</code> is slow. By bundling your code for Node you can compile away the <code class="hljs">require</code> calls which can often
+    improve performance.
+</p>
+<h2>Module formats</h2>
+<p>There are several module formats to consider including:</p>
+<ul>
+    <li>IIFE - Immediately Invoked Function Expressions</li>
+    <li>AMD - Asynchronous Module Definition</li>
+    <li>CJS - Common JS</li>
+    <li>UMD - Universal Module Definition</li>
+    <li>ES6 Modules</li>
+</ul>
+<p>Let's look at examples of each of these approaches:</p>
+<h3>Global Variables</h3>
+<pre><code class="javascript">myGlobal;</code></pre>
+<p>We have known for years that global variables should be avoided because it makes code harder to read and maintain. When we write these people pick on us in
+    code reviews - and rightly so.
+</p>
+<h3>IIFE</h3>
+<pre>
+<code class="javascript">(function() {
+  // my code here
+})();</code></pre>
+<p>So we came up with interesting techniques like Immediately Invoked Function Expressions - also called IIFEs. This is a way to encapsulate our JavaScript.</p>
+<h3>AMD</h3>
+<pre><code class="javascript">define(['jq'], function (jq) {});</code></pre>
+<p>We also use tools like RequireJS which utilizes the Asynchronous Module Definition pattern to encapsulate our code - also know as AMD.</p>
+<p>All the above approaches should now be considered a thing of the past because better more standardized approaches exist. So what are those formats?</p>
+<h3>Common JS</h3>
+<p>If you are working in Node you can continue to use Common JS:</p>
+<pre><code class="javascript">var jquery = require('jquery')</code></pre>
+<h3>ES6 Modules</h3>
+<p>If you are working in ES6 or newer versions of JavaScript you can finally enjoy the power of ES6 modules. Yes we finally have a standards based way of
+    encapsulating our modules:
+</p>
+<pre><code class="javascript">import jQuery from 'jquery'</code></pre>
+<h3>Why Use ES6 Modules?</h3>
+<p>ES6 modules are also known as ES 2015 modules since ES 2015 was the official name of the 2015 release which released this feature. Now we discussed in a
+    previous module all future JavaScript versions will be named after the year of their release.
+</p>
+<p>So why should we choose ES6 modules? Well first they are standardized. This means, in the future, when the platforms you run on have full support for ES6 and
+    modules you wont have to transpile your code. It also means anyone joining your team is more likely to feel comfortable with your code.
+</p>
+<p>ES6 modules are also a win because you cant declare them dynamically. Now this sounds like a drawback because it reduces power but this reduced power was a
+    deliberate design decision because it makes our code statically analyzable. That's a fancy way of saying that our code can be read and analyzed in a
+    predictable way because the behaviour of our imports can't be changed at runtime. <a
+            href="https://medium.com/@kentcdodds/misunderstanding-es6-modules-upgrading-babel-tears-and-a-solution-ad2d5ab93ce0#.ghjpkiipp">Misunderstanding ES6
+        Modules, Upgrading Babel, Tears, and a Solution</a></p>
+<p>When code can be analyzed in this way we get benefits that I alluded to earlier when discussing editors. We get improved auto completion support since your
+    editor can determine clearly what functions are in scope from each imported module. This power leads to other wins such as the ability to quickly alert you
+    to invalid imports, to functions that don't exist and so on.
+</p>
+<p>Effectively choosing ES6 modules mean that your code fails fast. You find out about your mistakes more quickly and often in a clearer manner.</p>
+<p>ES6 imports also enable tree shaking (also known as dead code elimination). This is a feature coming soon in Webpack 2 and also available in other bundlers
+    such as rollup. In short, this feature reduces the size of your final production code by eliminating unused code. For tree shaking to work we need
+    statically analyzable code which is exactly what we get with ES6 modules.
+</p>
+<p>ES6 Modules are also easier to read than the more redundant alternatives such as AMD and UMD. You can further clean up your code using named imports. Named
+    imports allow you to easily declare variables that reference pieces of the file that you are importing and default exports which specify clearly how others
+    can consume your module.
+</p>
+<p>Bottom line - although there are many ways to handle modules in JavaScript. If you are writing new code today ES6 modules are the clear, logical and
+    attractive way to get things done. So ES6 modules are the format that we will use to modulize our code through the rest of the tutorial.
+</p>
+<h2>Choosing a Bundler</h2>
+<p>Then there are several bundlers to consider such as:</p>
+<ul>
+    <li>Require.js</li>
+    <li>Webpack</li>
+    <li>Browserify</li>
+    <li>Roll up</li>
+    <li>JSPM</li>
+</ul><img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/webpack.jpg"/>
+<p>In this tutorial we will implement ES6 modules and bundle them via Webpack. Webpack handles more than just Javascript. It is even smart enough to
+    intelligently bundle and generate your CSS, images, fonts and even HTML. This means you can do things like inline images via base 64 encoding when there
+    small enough to justify saving an http request. You can hot reload your CSS changes in memory via the built-in web server.
+</p>
+<p>Webpack offers strategic bundle splitting. This saves your users downloading all of your JavaScript upfront. Instead you can generate separate bundles for
+    different sections of your app so they are downloaded on demand.
+</p>
+<p>Webpack also offers a built-in web server that supports hot module reloading which means depending on the library or framework you are using you may be able
+    to hit save and immediately see the changes without having to do a full refresh. This helps speed development because you don't loose client side state.
+    This is especially useful on complicated user interfaces and multi-step forms because you don't have to re-fill the form every time to test your changes.
+    The code is hot reloaded in place and your existing input values and so on are maintained.
+</p>
+<p>Finally Webpack 2 is nearly here and will offer tree shaking as one of it's key new features.</p>
+<h2>Setting up Webpack</h2>
+<p>Now that we have chosen Webpack for the path forward in this course let's set it up to bundle our code. Webpack does so much that it is hard to describe in a
+    sentence but basically Webpack will bundle all our assets up into a single file that runs in our target environment. For our demo app our target environment
+    is the web but as you will see later we can also use Webpack to generate multiple bundles instead of just one.
+</p>
+<p>Webpack is configured via <code class="hljs">webpackconfig.js</code> which by convention is placed at the root of the project. We will call the file <code
+        class="hljs">webpack.config.dev.js</code> but later in the course we will create a production build which will give a clear picture of how to use all
+    this tooling to create a lightweight bundled and minified app for production but since this config file is for dev we will add some development specific
+    configurations here. Since we have Babel configured to transpile our code we can write our webpack config using ES6 features.
+</p>
+<pre>
+<code class="javascript">import path from 'path';
+
+export default {
+  debug: true,
+  devtool: 'inline-source-map',
+  noInfo: false,
+  entry: [
+    path.resolve(__dirname, 'src/index')
+  ],
+  target: 'web',
+  output: {
+    path: path.resolve(__dirname, 'src'),
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  plugins: [],
+  module: {
+    loaders: [
+      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
+      {test: /\.css$/, loaders: ['style','css']}
+    ]
+  }
+}
+</code></pre>
+<p>Webpack is configured via a single object that we define in webpack config. The Webpack docs go into great detail on the wide variety of options that you can
+    configure but I'm showing a very simple setup for this course. Let's walk through each setting briefly so we can see what it's doing. As you can see Webpack
+    is configured by exporting a single object. As you can see <code class="hljs">debug</code> is set to true - this enables some debugging information to be
+    produced as we run our build. The <code class="hljs">devtool</code> is set to <code class="hljs">inline-source-map</code>. There are a number of dev tools
+    to consider. The basic trade off here is compilation speed vs source map quality. Higher quality source map settings take longer to generate.
+</p>
+<p>Im setting <code class="hljs">noInfo</code> to false. I know this name is unfortunate but setting it to false will mean that Webpack will display a list of
+    all the files it is bundling. I typically turn off this data during real development since it adds a lot of noise to the command line but we will have it on
+    at first just so we can see what is going on.
+</p>
+<p>Now we need to define the <code class="hljs">entry</code> point of our application. You can pass an array of entry points and this is a good way to inject
+    middleware for hot reloading but I am going to ignore hot reloading just to keep things simple here and just define our applications entry point as <code
+            class="hljs">src/index</code> and I use the magic global <code class="hljs">__dirname</code> which is part of node so I can make sure we get a full
+    path here and I am using the <code class="hljs">path</code> package that comes with node to get this done. And you can see I use the same approach anywhere
+    that I'm resolving paths within this file.
+</p>
+<p>We set the <code class="hljs">target</code> to <code class="hljs">web</code> for this demo but we could, of course, set this to node if we were using webpack
+    to build an app running in node and that would change the way Webpack bundles our code so that node could work with it instead of the browser. There are
+    other notable targets that you could include here like electron which is useful for building desktop style apps with JavaScript.
+</p>
+<p>Now we need to define the <code class="hljs">output</code> so here we tell Webpack where it should create our dev bundle. Now this is confusing because, as
+    you will see, with our development configuration Webpack wont actually generate any physical files. It will just create a bundle in memory and serve it to
+    the browser but we need to define a path and name so it can simulate the physical file's existence. We will use nodes <code class="hljs">__dirname</code>
+    variable to get the current directory and specify that our app will ultimately run from the src folder but again note that this wont actually write any
+    files. We will setup a build process that generate files for production later in this course. We set the <code class="hljs">filename</code> to <code
+            class="hljs">bundle.js</code>.
+</p>
+<p>We can optionally define some <code class="hljs">plugins</code> to enhance Webpack's powers. Examples include hot reloading, catching errors, linting styles
+    and much more. We will add a plugin here later in the course but for now we dont need one so we can leave this array empty.
+</p>
+<p>Ok, one last property. We need to tell Webpack the file types that we want it to handle. Webpack calls this concept loaders. Loaders teach Webpack how to
+    handle different file types. As you can see we want to handle JavaScript. The great thing about Webpack is that is can handle a lot more than JavaScript. As
+    you can see with the second loader. I have taught Webpack to handle CSS as well.
+</p>
+<p>I could add other loaders to handle SASS, images, Less and More. So why teach Webpack to handle more than JavaScript? Well adding a loader here means I can
+    import those file types at the top of my JavaScript files and Webpack will intelligently bundle the files together for me. It's also worth noting there are
+    various alternative syntaxes that work here so other examples you see may look a little bit different.
+</p>
+<p>Now I'm just scratching the surface with what you can do with Webpack. I show a more complex approach in my <a
+        href="'https://app.pluralsight.com/library/courses/react-redux-react-router-es6/table-of-contents">Building Application with React and Redus in ES6</a>
+    course or there is an excellent <a href="https://app.pluralsight.com/library/courses/webpack-fundamentals/table-of-contents">Webpack Fundamentals</a> course
+    here on Pluralsight if you want to dive deeper.
+</p>
+<p>Now if you've never seen Webpack before that probably felt intimidating but Ive come to really appreciate how terse Webpack's setup is. We just declared many
+    decisions in under thirty lines of code. Webpack is designed to cover our use case really well which means we don't have to write much code to get a lot of
+    power from our build process.
+</p>
+<p>Ok we have setup Webpack to bundle our app's JavaScript but we need to update our development web server to run Webpack and serve up our bundled
+    JavaScript.
+</p>
+<h2>Demo: Configure Webpack with Express</h2>
+<p>We have configured Webpack but to actually put it to use we need to also setup our development server to serve out Webpack bundle so let's configure express
+    to make that happen.
+</p>
+<p>To do so we will go over into the <code class="hljs">buildScripts</code> folder and open <code class="hljs">srcServer.js</code> since this is where we
+    configure express. First I will add two imports to the file. We will import webpack and the <code class="hljs">webpack.config.dev</code> that we just
+    created:
+</p>
+<pre>
+<code class="javascript">import webpack from 'webpack';
+import config from '../webpack.config.dev';
+</code></pre>
+<p>Then below where we have created an instance of express:</p>
+<pre><code class="javascript">const app = express();</code></pre>
+<p>Let's call webpack and pass it the config that we referenced up above so we have a reference to the Webpack compiler:</p>
+<pre><code class="javascript">const compiler = webpack(config);</code></pre>
+<p>We can put that to use by calling <code class="hljs">app.use</code> which is a way for us to tell express other things we would like to use. We are going to
+    tell express to use our Webpack dev middleware and we will pass it the compiler we defined earlier on line 9.
+</p>
+<pre>
+<code>app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+</code></pre>
+<p>Inside the call to <code class="hljs">app.use</code> we will define two options. The first one will tell it not to display any special info. We will also
+    configure our public path so here we are just referencing a variable that we defined when we setup our Webpack config. That's all it takes for us to
+    integrate Webpack with express. Of course this isn't very useful yet since our demo app doesn't contain any JavaScript yet. Our application does nothing
+    except say Hello World! so in the next clip let's fix that by creating an application entry point to test all this out.
+</p>
+<h2>Demo: Create App Entry Point</h2>
+<p>We've wired up Webpack to bundle our JavaScript and we've setup express as our dev server to serve our app but we haven't actually written any JavaScript
+    yet. So now let's create our JavaScript file and see Webpack in action.
+</p>
+<p>When we setup webpack.config we set our entry point to index.js:</p>
+<pre>
+<code>entry: [
+  path.resolve(__dirname, 'src/index')
+]
+</code></pre>
+<p>So let's create <code class="hljs">index.js</code> in the root of our <code class="hljs">src</code> directory. Now in an upcoming module we'll build an app
+    to show how the entire development environment works but for now let's do something simple just to show how Webpack is able to bundle two JavaScript files
+    into a single bundle.
+</p>
+<pre>
+<code>import numeral from 'numeral';
+
+const courseValue = numeral(1000).format('0,0.00');
+console.log(`I would pay ${courseValue} for this awesome course!`(l
+</code></pre>
+<p>Here you can see that I'm using the numeral package that was installed at the beginning of the course with all our other dependencies that are listed in
+    package.json. This is a handy library for formatting numbers. So I set a constant called <code class="hljs">courseValue</code> with a value of one thousand
+    and then I formatted it giving it the format string <code class="hljs">'$0,0.00'</code>. I am just going to use <code class="hljs">console.log</code> to
+    output a message. Also, take note, I am using the ES6 tipplet string feature so make sure you are using back ticks around the string. This tells JavaScript
+    to parse any variable placeholders that it finds inside.
+</p>
+<p>So now we've actually written some JavaScript for Webpack to bundle but of course we need to reference the final bundle in our HTML file so let's open that
+    up and we'll add the appropriate script tag just before the ending <code class="hljs">&lt;body&gt;</code> tag:
+</p>
+<pre><code>&lt;script src="bundle.js"&gt;&lt;/script&gt;</code></pre>
+<p>And remember when we configured Webpack (<code class="hljs">webpack.config.dev.js</code>) we told it to place <code class="hljs">bundle.js</code> in the root
+    of our <code class="hljs">src</code> directory. Again, it's not going to actually write a physical file for development but it will simulate it's existence
+    in this directory and that's why we can just reference <code class="hljs">bundle.js</code> in our <code class="hljs">index.html</code> file.
+</p>
+<p>Alright, let's fire up the app and see if we've made magic happen:</p>
+<pre><code>npm -start</code></pre>
+<p>We still see our Hello World message but if we hit inspect now we can see we are writing to the console like we expected to. And if we go to the Network tab
+    and refresh we can see that bundle.js is getting sent down like we would expect it to. So numeraljs (the library which we used to format this number) should
+    be here inside of our bundle. I am going to scroll down to line 63 in the bundle here's the code that we wrote:
+</p>
+<pre>
+<code class="javascript">var courseValue = (0, _numeral2.default)(1000).format('$0,0.00');
+console.log('I would pay ' + courseValue + ' for this awesome course!');
+</code></pre>
+<p>You can see that the template string that we used has been transpiled down to ES5 and if we scroll down a little bit further to line 70 you can find the
+    <code class="hljs">numeral.js</code> package so we know that all of our JavaScript is getting bundled into a single file by WebPack.
+</p>
+<p>Now remember how we also taught Webpack how to handle CSS by defining a CSS loader in our Webpack config. Let's put that to use as well. Let's handle a
+    stylesheet with Webpack in the next clip.
+</p>
+<h2>Demo: Handling CSS with Webpack</h2>
+<p>In a previous clip we taught Webpack how to handle css by defining a CSS loader in our Webpack config. So now let's put it to use. Let's create a simple
+    stylesheet in the <code class="hljs">src</code> folder. I will just paste in two simple styles to prove this is working:
+</p>
+<pre>
+<code class="css">body {
+  font-family: Sans-Serif;
+}
+
+table th {
+  padding: 5px
+}</code></pre>
+<p>Now since we taught Webpack how to handle css now all we have to do to put this to use is add a single line in our application's entry point which is <code
+        class="hljs">index.js</code>. All I have to add to the top this file is:
+</p>
+<pre><code class="hljs">import './index.css';</code></pre>
+<p>Just like I import a JavaScript file I can import a css file. Look's pretty weird but trust me it works.</p>
+<p>So if we restart our app:</p>
+<pre><code>npm start</code></pre>
+<p>Now we can see that the "Hello World!" message has a different font applied because our css stylesheet is now being applied.</p>
+<p>So might be wondering how did that work? Well behind the scenes Webpack parsed our stylesheet and then it used JavaScript to inject the stylesheet onto the
+    page.
+</p>
+<p>Let's come over to the network tab and reload</p>
+<p>If we pull up bundle.js. Let's see if we can find our stylesheet right in here. Search for the word padding. There it is on line 102 you can see that our
+    stylesheet was bundled into our JavaScript and then is being injected into the page.
+</p>
+<p>Now we could use a similar approach to handle SASS, Less, images and more. Of course, for production, you will likely want to generate a traditional separate
+    file and I will show how to do that in the production build module at the end of this course.
+</p>
+<p>Now as I scroll through the code you might notice it doesn't look like our source code. That's because this is the transpiled and bundled code that Babel and
+    Webpack produced. So you might be wondering how we can debug our transpiled and bundled JavaScript code. Well the answer is sourcemaps so let's explore
+    sourcemaps in the next clip.
+</p>
+<h2>Sourcemaps</h2>
+<p>Now that we are bundling our code there is another important tool that we need - Sourcemaps. Once we start bundling, minifying and transpiling our code we
+    create a new problem. Our code becomes an impossible to read mess when it's running in the browser. So you might be wondering - how do I debug? Hey that's
+    commendable that you are concerned. Thankfully this is solveable problem. The solution is to generate a Sourcemap. Sourcemaps map the bundled, transpiled
+    and minified code back to the original source.
+</p>
+<p>This means that when we open our browsers developer tools and try to inspect our code we'll see the original ES6 source code that we used. It's like magic.
+    Now the sourcemaps can be generated automatically as part of our build process. You might be wondering how minifying the code actually saves any bandwidth
+    if we have to generate a big map back to the original source. That's a good question. The beauty of sourcemaps is that they are only downloaded if you open
+    the developer tools. So this way you users wont even download the sourcemaps but they will be available for you in case an issue arises in either your
+    development environment or in production.
+</p>
+<p>So effectively sourcemaps give you all the benefits of being able to read your original code without any additional cost to regular users.</p>
+<h2>Demo: Debugging via Sourcemaps</h2>
+<p>Alright, now that we have set the stage let's configure our build to automatically generate sourcemaps as part of the buildProcess. When we setup Webpack for
+    development we told Webpack to generate a sourcemap by specifying the <code class="hljs">devtool</code> setting in <code
+            class="hljs">webpack.config.dev.js</code> as shown here:
+</p>
+<pre><code class="javascript">devtool: 'inline-source-map',</code></pre>
+<p>There are many potential settings to consider by I am using inline source map for this course. I encourage you to experiment with the different settings to
+    find one that's best for you. As you can see from this table:
+</p>
+<p>The basic trade off is between sourcemap quality and speed. Higher quality sourcemaps take a little bit longer to create so you will notice a little more
+    delay on larger apps.
+</p>
+<p>Let's jumpback to our source code. My preferred approach for setting breakpoints is to type the word <code class="hljs">Debugger</code> on the line where I
+    would like the breakpoint to hit.So let's set debugger right here in <code class="hljs">index.js:</code></p>
+<pre>
+<code class="javascript">import './index.css';
+
+import numeral from 'numeral';
+
+const courseValue = number(1000).format('$0,0.00');
+debugger;
+console.log(`I would pay $(courseValue) for this awesome course!`);
+</code></pre>
+<p>I'll hit save and now let's jump back over to the browser and reload. When we do, we can see our breakpoint hit.</p>
+<p>As you can see the browser sees the debugger statement and it breaks on a line where I typed debugger and since we are using Sourcemaps the original code
+    that we wrote is displayed in the console even though the actual code that is running in the browser looks like the code that I showed you earlier that was
+    to read.
+</p>
+<p>This is really handy because in a later module we'll set up a production build that minifies our code for production and still, because of our sourcemap,
+    we'll be able to easily read the code just like you see here:
+</p>
+<p>because we'll be seeing our original source code.</p>
+<p>And again, if you want to see the source code that is running in the browser you can click on <code class="hljs">bundle.js</code> to see the transpiled and
+    bundled code that is actually being parsed by the browser.
+</p>
+<p>Alright let's wrap up this module. It's time for another summary.</p>
+<h2>Summary</h2>
+<p>In this module we began by considering our options for bundling our code into reusable and encapsulated modules.</p>
+<p>We briefly looked at IIFE, AMD, UMD and CommonJS but we saw that ES6 is the future because its standardized and statically analyzable which enables rich
+    features such as Autocompletion support, Deterministic refactoring and reduced bundle sizes via tree shaking assuming that you select a bundler that
+    supports it.
+</p>
+<p>Then we moved on to discussing bundlers. I chose Webpack for this course because it's very popular, extremely powerful and highly configurable but
+    Browserify, Rollup and JSPM are all excellent alternatives to consider.
+</p>
+<p>Then we implemented ES6 modules and bundled our code via Webpack. We closed out this module by discussing and generating our sourceMaps. Sourcemaps are
+    awesome because they allow us to see our original source code in the browser when we open the developer tools. This way we can set breakpoints and debug in
+    the browser even after our code has been transpiled, bundled and minified and since they are only requested by the browser when dev tools are open they
+    don't slow down the customer's experience in any way.
+</p>
+<p>In the next module let's protect ourselves from mistakes, and enforce consistency in our codebase. It's time to setup an automatic linting process so we are
+    notified when we make typos and errors as soon as possible.
+</p>

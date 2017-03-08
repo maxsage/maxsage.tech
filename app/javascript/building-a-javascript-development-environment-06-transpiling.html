@@ -1,0 +1,94 @@
+    <h1>Choosing a Transpiler</h1>
+    <p>Modern JavaScript is great but you don't have to write your application using JavaScript. You can choose from a
+      long list of Transpilers - there are literally over one hundred languages that compile down to JavaScript.</p>
+    <p>The standout options from this list are:</p>
+    <ul>
+      <li>Babel</li>
+      <li>TypeScript</li>
+      <li>Elm</li>
+    </ul>
+    <h2>Babel</h2>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/babel.png"/>
+    <p>Babel's selling point is that it allows you to use all the new features of JavaScript (even those that are
+      still experimental) in a standards based way. Babel transpiles the latest version of JavaScript down to ES5 so
+      you can use all these new features but run them everywhere ES5 is supported. Some of the advantages of Babel
+      are:</p>
+    <ul>
+      <li>Write standardized JS</li>
+      <li>Leverage full JS Ecosystem</li>
+      <li>Use experimental features earlier</li>
+      <li>No type defs, annotation required</li>
+      <li>ES6 imports are statically analyzable</li>
+    </ul>
+    <h2>TypeScript</h2>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/typescript.png"/>
+    <p>TypeScript is a superset of JavaScript so just as ES6 added features to JavaScript TypeScript adds additional
+      functionality to JavaScript. Most notably, type annotations which add type safety. This type safety means you
+      can enjoy rich auto completion support and safer refactoring by leaning on explicit type signatures. Some of the
+      advantages of TypeScript are:</p>
+    <ul>
+      <li>Enhanced Autocomplete</li>
+      <li>Enhanced readability</li>
+      <li>Safer refactoring</li>
+      <li>Additional non-standard features</li>
+    </ul>
+    <p>I have found that both type safety and auto completion are quite good when working in a modern editor like
+      WebStorm. Remember because ES6 imports are statically analyzable the editor can deterministically index your
+      entire codebase and thus provide reliable intellisense support on import and the functions inside.</p>
+    <h2>Configuring Babel</h2>
+    <p>Babel offers two methods for configuration: a dedicated <code class="hljs">.babelrc</code> file placed in the
+      project's root or placing the
+      configuration within the <code class="hljs">package.json</code> file. The differences between the two methods are:
+    </p>
+    <table>
+      <tr>
+        <td align="right">
+          <p>.babelrc</p>
+          <ul style="list-style: none">
+            <li>Not npm specific</li>
+            <li>Easier to read since isolated</li>
+          </ul>
+        </td>
+        <td></td>
+        <td align="left">
+          <p>package.json</p>
+          <ul style="list-style: none">
+            <li>One less file in your project</li>
+            <li>Place the configuration in a section called babel</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+    <p>For this course I am going to transpile our build scripts as well so we can enjoy modern JavaScript when writing
+      our build tooling.</p>
+    <p>Lets set up our project to transpile our code the moment we hit save. Since we have decided to use the latest
+      version of JavaScript in this project we need to ensure it transpiles down to ES5 to ensure it runs in
+      environments
+      that don't yet fully support the latest versions of JavaScript.</p>
+    <p>Create a new file in the root of the project called <code class="hljs">.babelrc</code>. If we look in
+      <code class="hljs">package.json</code>
+      we can see a number of babel related packages.</p>
+    <p>To configure babel doesn't actually take much code. All we need to do is declare one preset that specifies we
+      are using the latest standardized JavaScript features (ES 2016 at this time):</p>
+    <pre>
+<code class="json">{
+  "presets": [
+    "latest"
+  ]
+}</code></pre>
+    <p>Let's confirm this works by using <code class="hljs">babel-node</code> to transpile one of our build scripts. All
+      of our code is currently
+      written in ES5 but let's load up <code class="hljs">startMessage.js</code> and change one item to ES6. Currently
+      we are using the common js
+      pattern which is used for node but we can now use the module syntax instead: </p>
+    <pre><code class="javascript">import chalk from 'chalk';</code></pre>
+    <p>If we call <code class="hljs">npm run</code> now the build will fail because we are calling some code that node
+      doesn't
+      understand (the <code class="hljs">import</code> keyword). To fix this we can call <code
+        class="hljs">babel-node</code> in our <code class="hljs">prestart</code>
+      script instead of calling <code class="hljs">node</code> directly.</p>
+    <p>So now we know babel is successfully transpiling our build script. We can also modify the <code
+      class="hljs">open:src</code>
+      script to run <code class="hljs">babel-node</code> as well. We can then edit <code
+        class="hljs">srcServer.js</code> to use the <code class="hljs">import</code> style syntax for
+      JavaScript modules and the <code class="hljs">const</code> keyword which was introduced in ES6 as well.</p>

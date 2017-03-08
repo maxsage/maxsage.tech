@@ -1,0 +1,105 @@
+    <h1>Automation</h1>
+    <p>The automation tool we will use in this course is NPM Scripts. NPM scripts are declared directly in your
+      <code class="hljs">package.json</code> file in the <code>scripts</code> section.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/npmscripts.png"/>
+    <h2>Creating a startup script using npm scripts</h2>
+    <p>In a previous module we created <code class="hljs">srcServer.js</code> which configures express to serve up our
+      <code class="hljs">index.html</code>. Now let's create an npm script that will start our development environment.
+      By
+      convention this script should be called start. That way by convention we can just type <code class="hljs">npm
+        start</code>
+      and it will run our command. We will just put the exact command that we have been typing manually under our
+      scripts section:</p>
+    <pre>
+<code class="json">"scripts": {
+    "start": { "node buildScripts/srcServer.js"
+},
+</code></pre>
+    <p>Now we can just open up our command line and issue the command:</p>
+    <pre><code>npm start</code></pre>
+    <p>It is also worth noting
+      that you do not need to specify the <code class="hljs">run</code> keyword when using <code class="hljs">npm
+        start</code> or
+      <code class="hljs">npm test</code>. Both of those are so commonly used that <code class="hljs">npm</code> doesn't
+      require you to type the
+      <code class="hljs">run</code> keyword for either of those scripts.</p>
+    <h2>Displaying a friendly message when starting development environment</h2>
+    <p>It would be nice if we received a friendly message when starting up our development environment. To do that
+      let's create a file in buildScripts called <code class="hljs">startMessage.js</code>:</p>
+    <pre>
+<code class="hljs javascript">var chalk = require('chalk');
+console.log(chalk.green('Starting app in dev mode...'));
+</code></pre>
+    <p>You can see we are referencing chalk which let's us specify the colour of the output that you display to the
+      console.</p>
+    <p>You can take advantage of a handy convention to ensure that our <code class="hljs">startMessage.js</code> file
+      runs before the web server
+      starts up. If we create a script in our <code class="hljs">package.json</code> called <code
+        class="hljs">prestart</code> then by convention it will run before
+      our start script.</p>
+    <pre>
+<code class="json">"prestart": "node buildScripts/startMessage.js",
+</code></pre>
+    <p>npm scripts support convention based pre and post hooks so any scripts you prefix with the word pre will run
+      before the script with the same name and any script you prefix with the word post will run after the script with
+      the same name.</p>
+    <h2>Running node security check from npm scripts</h2>
+    <p>Add a script called <code class="hljs">security-check</code> to the scripts section that will run the node
+      security
+      platform security check:</p>
+    <pre><code class="json">"security-check": "nsp-check"</code></pre>
+    <p>So this is more typing than simply typing <code class="hljs">nsp check</code> so what are the advantages of this
+      method? </p>
+    <p>Firstly it is more descriptive to type <code class="hljs">npm run security-check</code> than it is to type <code
+      class="hljs">nsp check</code>. Secondly, and most
+      importantly, remember how previously we had to install nsp globally so we could run it from a command line. With
+      npm
+      scripts it is not required to install tools globally in order to run them.</p>
+    <p>When you run <code class="hljs">npm install</code> to install all the packages that are listed in
+      <code class="hljs">package.json</code> they get added
+      to a <code class="hljs">.bin</code> folder which is automatically in path when called from npm scripts. This means
+      there is no requirement
+      to install these packages globally.</p>
+    <p>Adding <code class="hljs">security-check</code> to the npm scripts in <code class="hljs">package.json</code>
+      means you can run the security check as
+      part of the application startup process if required.</p>
+    <h2>Adding localtunnel to the npm scripts</h2>
+    <p>Add another npm script called <code class="hljs">share</code> to the scripts section of package.json file:</p>
+    <pre><code>"share": "lt --port 3000"</code></pre>
+    <h2>Running scripts in parallel</h2>
+    <p>The <code class="hljs">pre</code> and <code class="hljs">post</code> hooks are handy for running things before or
+      after scripts but you will likely find that you
+      also want to run multiple things at the same time. To do that we use a package called <code class="hljs">npm run
+        all</code>. This is a handy
+      way to run multiple items at the same time in a cross platform way - so in other words it will run on Unix,
+      Windows and Linux.</p>
+    <p>Let's say that we want to run the security check each time we start the app. To do this we can change our start
+      script to instead call <code class="hljs">npm run all</code> specifying that we want to run some tasks in parallel
+      (the
+      security check and start the web server). We create another script called <code class="hljs">open:src</code> to
+      start the
+      webserver and call that from our <code class="hljs">start</code> script.</p>
+    <pre>
+<code class="json">"start": "npm-run-all --parallel security-check open:src",
+"open:src": "node buildScripts/srcServer.js"
+</code></pre>
+    <p>Now if we run <code class="hljs">npm start</code> the web server will be started and our security check will be
+      performed. We
+      also see the message:</p>
+    <pre><code>"Starting app in dev mode..." </code></pre>
+    <p>from the pre script that calls <code class="hljs">startMessage.js</code></p>
+    <p>You will also notice some other messages appearing. If these messages bother you it is possible to run
+      <code class="hljs">npm start -s</code> which stands for silent. This will suppress most of the other messages and
+      leave you
+      with just the messages that you have explicitly requested.</p>
+    <p>I would like to create another task that starts up the web server and shares my work via localtunnel without
+      having to start two terminal sessions. To do this let's rename the <code class="hljs">share</code> task to
+      <code class="hljs">localtunnel</code>. Next we will create a new script called <code class="hljs">share</code>
+      below that will handle the
+      entire sharing process.</p>
+    <pre><code>"share": "npm-run-all --parallel open:src localtunnel</code></pre>
+    <p>We can test this out by opening up the terminal and running <code class="hljs">npm share</code>. You can see the
+      web server
+      starts and localtunnel starts in parallel.</p>
+
+

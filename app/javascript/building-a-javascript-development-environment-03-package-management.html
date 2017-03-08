@@ -1,0 +1,67 @@
+<h1>Package Managers</h1>
+<h2>What is a Package Manager?</h2>
+<p>A package manager keeps track of what software is installed on your computer, and allows you to easily install new software, upgrade software to newer
+    versions, or remove software that you previously installed. As the name suggests, package managers deal with packages: collections of files that are bundled
+    together and can be installed and removed as a group.
+</p>
+<p>Packages contain metadata, such as the software's name, description of its purpose, version number, vendor, checksum, and a list of dependencies necessary
+    for the software to run properly. Upon installation, metadata is stored in a local package database. Package managers typically maintain a database of
+    software dependencies and version information to prevent software mismatches and missing prerequisites. They work closely with software repositories, binary
+    repository managers, and app stores.
+</p>
+<p>These days virtually every popular language has it's own package manager - yet JavaScript soldiered on for years without any compelling package management
+    story.
+</p>
+<p>Thankfully these days we have a variety of JavaScript package manager's to choose from including:</p>
+<ul>
+    <li>Bower</li>
+    <li>npm</li>
+    <li>JSPM</li>
+    <li>Jam</li>
+    <li>volo</li>
+</ul>
+<h3>npm</h3><img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/npm.png" height="149" width="338"/>
+<p>npm has matured by fixing friction points for front end developers. Node has grown enormously in popularity and bundlers have continued to become more
+    powerful. Today npm is the most popular JavaScript package manager. We will use npm for the remainder of this course.
+</p>
+<h2>Installing Node and npm</h2>
+<p>We are going to install Node and npm. We will also create a <code class="hljs">package.json</code> file that is going to store the references to all the
+    packages that we are going to use for our development environment.
+</p>
+<h3>Installing Node</h3><img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png" height="176" width="287"/>
+<p>Browse to <a href="https://nodejs.org/en/">https://nodejs.org/en/</a> and download Node. npm will be installed along with Node.</p>
+<h3>Adding package.json</h3>
+<p>Node's package manifest is <code class="hljs">package.json</code>. <code class="hljs">package.json</code> stores the list of npm packages that we are using,
+    as well as the npm scripts which we will end up setting up later. The top of a <code class="hljs">package.json</code> file defines the following items:
+</p>
+<ul>
+    <li>name - the name of the project</li>
+    <li>version - the version of the project</li>
+    <li>description - a description of the project</li>
+    <li>scripts - scripts (which we will add later) to help automate our processes</li>
+    <li>author - the author(s) of the project</li>
+    <li>license - the license model for this project</li>
+    <li>dependencies - a list of production dependencies</li>
+    <li>devDependencies - a list of development dependencies (npm packages with version numbers)</li>
+</ul>
+<p>Now that we have a <code class="hljs">package.json</code> file let's install the npm packages. Open a terminal session and type:</p>
+<pre><code>npm install</code></pre>
+<p>This will take a minute or two to download all the packages specified in the <code class="hljs">package.json</code> file and place them in a folder called
+    <code class="hljs">node_modules</code> in your project directory.
+</p>
+<h2>Package Security</h2>
+<p>It's worth remembering that packages can be published to npm by anyone. That might make you a bit paranoid. However there are people working on this problem
+    - retire.js and The Node Security Platform are two ways that you can check your project's dependencies for know vulnerabilities.
+</p>
+<p>Node Security Platform is my preference at this time. It offers a simple command line interface that you can use to automate checking for security
+    vulnerabilities. All you need to do is call <code class="hljs">nsp check</code> as part of your build.
+</p>
+<p>Later in the course we are going to run <code class="hljs">nsp check</code> when we run <code class="hljs">npm start</code>. Admittedly this will slow the
+    start time slightly but it has the advantage of notifying you quickly when a security issue exists.
+</p>
+<p>To install The Node Security Project globally issue the following command from a terminal session:</p>
+<pre><code>npm install -g nsp</code></pre>
+<p>Once the installation is complete you can run a security check for your current project by issuing the following command from a terminal session in your
+    project directory:
+</p>
+<pre><code>nsp check</code></pre>

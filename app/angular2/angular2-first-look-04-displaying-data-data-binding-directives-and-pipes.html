@@ -1,0 +1,509 @@
+<h2>Displaying Data: Data Binding, Directives, and Pipes</h2>
+
+<h3>Displaying Data</h3>
+
+<p>One of the most appreciated features of Angular 1 is data binding. We'll all glad to hear that these concepts
+are still present in Angular 2, albeit in a new syntax. We've already seen a few examples of data binding and
+built in directives, so in this chapter we'll learn more about how to take advantage of these features. We'll
+learn how to use one and two way data binding to help coordinate communication between a component and its
+template. When Angular renders templates, it transforms a DOM according to instructions from directives. We'll
+discuss the built in directives in Angular 2 and show how to format data in templates using pipes.</p>
+
+<h3>Data Binding</h3>
+
+<p>Let's explore some data binding. We'll use data binding to help coordinate communication between a component and
+its template, and that means that we can send property values from the component up into the template to display
+them, and then also we can take the values that a user types into the template and send them back down to a
+component. Let's look at that interaction just a little bit more. So in the DOM, that's where our template
+lives, and then we also have a component, that's where our code is. First we may use interpolation to send data
+from the component up to the DOM, that's those double curly braces. So we put an expression in there and then it
+renders in the template. We can also bind to properties, and really interpolation is just a short hand syntax
+which gets turned into a one way binding to a property. There we might say, okay we have the style.color and
+we're going to set that to an expression to set it to red. Both of these are one way communication from the
+component up to the template. Now let's say a user wants to click a button or do some other action inside of the
+template and communicate back to the component and we can take some action on it. That's where we use an event
+binding. So we'll bind to an event and there we use parenthesis around the name of that event and then we call a
+statement that lives in the component. So notice property bindings use square brackets and event bindings use
+the parenthesis. It's important to see that all the communication is in a single direction. We're either going
+from the component to the template or we're going from the template back to the component as a unidirectional
+data flow. But what if we need two way binding? Well there's a short hand syntax that we can use to do that.
+It's actually a combination of the property and the event bindings. There's a special built in directive that
+Angular 2 gives us called ngModel, which is very familiar to you if you've done Angular 1, it's the same name
+just operates a little differently. And it takes a value from the component, displays it in the template, and
+also accepts any input values that are in that binding to go back to the component. And to do that we use the
+square brackets and then inside of that the parenthesis wrapped around ngModel. Remember that thing in Angular 1
+called the digest cycle? Well that was the basis of doing data binding for Angular 1. In Angular 2, the change
+detection is based upon unidirectional data flow. Unicycle root beer floats, what's that? Well unidirectional
+data flow means the data flows in a single direction, for example from a template to a component or from a
+component to a template. This makes it easier for the framework and for developers to know the state of the data
+at any one time. In contrast, Angular 1 went up and down the chain, for example, up the scope to the root scope
+and then back down. The largest beneficiary of this is improved performance. So what does it do for us? Do you
+remember when in Angular 1 you need to call $apply when you use a jQuery plugin? Well that's not going to happen
+anymore in Angular 2. We have much easier widget integration. In fact, there is no more $apply and there are no
+more repeated digest cycles, no more error messages related to it, and then all those watches we had, no more
+watchers either, which also means there's no more dealing with the performance issues related to the digest
+cycle and watcher limits. And this unidirectional data flow is the basis for the data binding in Angular 2.</p>
+
+<h3>Interpolation</h3>
+
+<p>When you just need to take a value, bind it to the template and display it, interpolation is a great way to go.
+Interpolation is one way in to the template. So let's say we've got a template here and we want to display the
+vehicle name right here in the h3, we can do that. We're going to evaluate the expression in those double curly
+braces. So we have an object called vehicle and it's got a property called name. So we must have that vehicle
+object with the property name in our component. All we have to do is wrap an expression inside of the double
+curly braces. We can also use this for an image source or an href. Let's take a look at some examples and how we
+use interpolation in an app. We'll flip over to our demo and we'll slide on down to number 16, Data Binding and
+Directives. We're going to be using the sample throughout this module. First we'll take a look at what we get
+out of the gate. It's basically bare bones in an application with not much there. We're going to fill this in
+throughout this module here. And if you want to see what you're going to get, you can switch over to the
+solution. Here we can see Boba Fett and we've got some data binding and some colors, like we can type in red and
+that turns red down there, or if you hover over it, it turns back to a different color. Well let's take a look
+at the starter and we'll flip over to the character.component inside the app folder. This character.component
+here is actually showing us that we've got a character in it called Boba Fett. So we slide on down to line 29,
+we can see there's a character called Boba Fett. Well nothing's actually showing up on this page because this is
+a starter, so if we go over to the character.component.html, which is the templateUrl for it from line 14, then
+we can come up to the top and we can type in the details. Maybe we want to put Boba Fett's name here. So we know
+we have a character object, so we can type that in right there, and then we can take that character and use the
+character's name after that. So now we should be able to see Boba Fett details over on the right hand side.
+Pretty cool. Well what if we had an object that was missing a property or a missing object? Let's say we had an
+object here called vehicle and there is no object called that in this particular model, and then we try to put
+name like that there. So we could say here is vehicle.name, like that. What's going to happen? In this case
+there is no vehicle name, and in fact it's kind of broken everything on the right hand side. It's going to tell
+us if we look at the developer tools that we have an undefined property name. Well why is that? Well we have no
+vehicle. But there's a cool little thing we can do if we're not sure we have an object or not and we don't want
+to break everything, like we could wrap this with an ngIf and other things we're going to learn, but let's use
+this cool operator called the Elvis operator. We put that right there after the vehicle and we're saying, hey if
+there's no vehicle just ignore everything after this. In that case we're still seeing here is and then the bang,
+but we're not going to break the rest of the page. So that's just a neat little tip that you can use when you're
+using dotting to do this interpolation. Okay let's get rid of that though because we don't want that here. Now
+that we've learned how to do that and we put the character.name in, let's get the character link and the
+character image URL and actually show them up. So down here in line 14, we'll go ahead and put in the
+character.link and then we'll go ahead and put the source in as the imageUrl. Now we have to spell them right of
+course, and there we go. So once we do this we should be able to see the href and the source. Now we can see the
+images right here, that's great, but what about the link? When I hover over it, you can see in the bottom left
+hand corner it says angular.io, that happens to be the link. And we can right click on that and say open in a
+new tab and it should open that up to angular.io. Great. If you ever run into trouble too, with interpolation
+there's a really neat trick you can do. Let's go back up to the top, let's say we didn't know what all those
+properties were on character. Well we can go look or we can kind of cheat. We can use this pipe called JSON and
+by doing this we can actually print it out on the screen. So this will show us the entire JSON object for
+character. If you want to format it, there's another neat little trick we can do. So we can do pre, like that,
+and let's copy that and put it inside the pre and now it'll actually format the JSON out for us. Obviously we
+don't want to do this and leave it in for production, but for quick debugging that's pretty darn easy. So here
+we can see interpolation inside of our application.</p>
+
+<h3>Property Binding</h3>
+
+<p>In chapter 2 we talked about how we used to need things like ngHref and ngSource and a bunch of other built in
+directives in Angular 1 to do property binding. In Angular 2 we don't need any of those, we just need to take
+the property for the HTML element and we put the square brackets around it, and that way we can bind to it. It's
+key to remember, we're setting the properties of the DOM elements, not attributes. Attributes initialize DOM
+properties and then they're done. So how do we set up data binding communication? Well we're going to start with
+a template, right, our HTML, and then we're going to have a component, that's going to be our TypeScript or
+JavaScript. Now we're going to use that metadata to communicate between the two so the component knows where
+that template is, but we want to take a property and bind it up into the template, maybe take a character's name
+like we just did with interpolation. And we want to do event bindings we can go back down to the component.
+Right now we're going to concentrate on the property binding side. It's really important to remember that we're
+setting properties of the DOM elements, not attributes. We'll see some examples of where this is important when
+we get to aria. Alright, how do we do one way binding? Well we looked at interpolation before, which actually is
+just a short hand for doing property binding, for example the text content property. But we can take any
+property and that'll be our target inside the HTML, and we put the square brackets around it and then we set it
+to an expression, that expression will be evaluated and then the value will go from the component into the
+template. Now that is valid HTML, but let's say you really wanted to use with the square brackets, you can do
+bind-target and set it to an expression and get the same results. That's just long hand. This is always one way
+unidirectional from the component up to the template. And then once we get to the template, we set it to the
+binding target. So let's see some code. Just like interpolation, we're doing one way in to the template with
+property binding, and here's three different examples. First we're going to set a property to an expression and
+that's going to bind to the element a component or a directive. So the top one here is an element. We've got an
+image element and it's got a source property. We want to set that to something like the vehicle.imageUrl. The
+next example is of a component. We might have a vehicle-detail component and it might expose a property, like an
+input property, and that might be vehicle, so we could bind to that and pass in a selected or currentVehicle.
+Finally we have a directive. We'll look more at ngClass a little later, that comes with Angular 2. It's a
+directive that they've built for us, which we can bind to and then it'll set the class. If the isSelected value
+is true, then selected will be the class that gets added. Here are some more examples. Now anytime you're going
+to be using an attribute you need to use attr. Things like aria-label do not have a corresponding property
+value, there is no HTML element property called aria-label. So instead we have to bind to the attribute, the way
+we do that is binding to the attr. and then the name of that attribute. This also applies to things like call
+span for our table. And we could dots for nested properties, so in a class we could just say class.isStopped and
+then if the value for isStopped is true, then the class isStopped will get added to it. So first we've got our
+attribute bindings and then we've got our dotting, but we can also do this with styles too, so we can set the
+color to red or blue based upon the value of isStopped.</p>
+
+<h3>Adding Property Binding</h3>
+
+<p>Well let's take a look at a demo using property binding. We'll flip back over to our application here in Plunker
+where we left it off and first thing let's get rid of this pre tag on line 6 because we don't actually want that
+to show up later. But we do want to do a couple other things. One of the properties we can bind to is class,
+let's say that we wanted to change different attributes about this div. Well let's do that here. Let's go ahead
+and say there's a class.selected. Well if there's a class named selected, we can actually set that using
+property binding by wrapping this inside of the square brackets and then setting it to a value. Now we have a
+value, which is a property inside of our component called isSelected. Let's go check that out over here in the
+TypeScript file. Right here on line 20, isSelected is set to false. Well let's set that to true and now when the
+component re-renders on the right hand side we should see that there's actually a border around this div right
+here with the name and then the icon in it. If we go look at the CSS, we can see there's a selected class right
+there that's just got a border. If you want to change that just to get an idea, we could actually put in a
+background color and we'll put red for the moment, and that should re-render the side over here with a really
+attractive red. Okay let's get rid of that red, right? So back over here in the HTML, we can now see we've got
+class selected isSelected. Awesome. Well let's hit that back to false, back in our component on line 20 because
+we're going to do that through another technique a little bit later. Where else could we use this property
+binding? Well that's a good question. Inside of our template we have been using href and source with
+interpolation, but let's say we didn't want to do that. We could actually use property binding right here on the
+source just by wrapping that with the square brackets. And in fact, this is the preferred technique. Now why
+might you want to do something like this with the interpolation? Maybe your href in this case happens to be a
+full href that goes to a link, maybe it's got just part of it, like maybe it's got the end of that href. So what
+you could do is put in something like http:// and then maybe Google.com or something like that. And you could
+actually tack it onto the character.link. So if I did something like this, like gg.com, now if I hover over
+this, when I see the link in the bottom left hand corner, we'll see the two parts got concatenated together. Now
+obviously this isn't what we want in this particular case, but it's showing you how you can use interpolation to
+kind of combine things together, or you can use the property binding like we did with the source. We'll leave
+one of each just to show an example. Now we mentioned that we're going to have the selected class, well we're
+going to need a button to make this thing get selected. So let's create a div inside of our application and
+we'll close the preview so we don't see it refresh every few moments. Inside of that div let's create a button
+and we're going to put a bunch of styles inside of that button and we're also going to put the word Select in
+it. So let's type a few of these styles in to give it a little bit of class. First we're going to have a class
+here and we're going to tell it it's a dashboard button. We're also going to use an mdl-button and
+mdl-js-button. We're also going to make it raise, we're going to use the mdl-button-raised, and then we're also
+going to give it a ripple effect and an accent. Now if you don't have those classes in there you can always flip
+over to the solution and copy those in. Next we want to put an aria-label here. So if we're going to use an
+aria-label, remember we only can bind to properties, so if I say aria-label, that's not actually a property,
+that's actually an attribute in HTML. So if I do this and then I bind it to a property called selectLabel over
+my component, which I should have in my character right here on 21 and I want to say select a character, well
+that's not going to work, it's actually going to produce an error if I run a preview on this. Let's go take a
+look by running the preview. Now if I do this and I show the developer tools, we should be seeing an error, and
+there's a template parse error, if we click down it says I can't bind to this aria-label thing because it's not
+a known property of button. Well it isn't, we know that, because it's an attribute. So the way you can access
+that so you can use aria is we can do attr, say I'm using an attribute and it's called aria-label and therefore
+it's going to bind the select label to it. Now if you want to check this out, we can go back into the developer
+tools and we'll grab the selection tool, we'll go down to the button itself. I'm going to go over here and I'm
+going to click the escape so I can see all the elements and then I'm going to drag this back over, get a little
+more room, and we'll slide up to it, right here, and notice we're seeing aria-label Select a character, and
+that's the value that we bound from our component. So here's just a few ways that we can use property binding,
+along with interpolation, inside of our application.</p>
+
+<h3>Event Binding</h3>
+
+<p>Event bindings are how we communicate from the template to the component. For example, we could wrap with
+parenthesis the name and event inside of the template and then set that equal to a statement, for example, a
+click handler. This is one way communication again and this time it's from the view target to the data source.
+So the target might be click or on mouse move, and we wrap that with the parenthesis and we set it to a
+statement, like on click handler. So let's see an example of how we do this with a button because we have a
+button in our demo and we're going to need to do this. So I'll wrap the click event inside a parenthesis and
+we'll set it to the statement Save, so we're assuming we have a save function inside of our component, which we
+do, or we will at least, and the button has a click event, so we're going to wrap that with parenthesis. So
+that's binding it to the statement called Save, which is going to be in our component. We can do the same kind
+of thing if we have a custom component. In the previous chapter we created a custom component and we had an
+event emitter, which then put an output property on that custom component. So for example, here that could be a
+changed event that we expose, and therefore we could listen to that and then handle it with vehicleChanged. And
+the syntax for this is to set the event target equal to a statement. In this case the element event is going to
+be click and the component's event, the custom one, is going to be changed. Now sometimes we might have some
+kind of message or information that goes along with the event, and for that we can access $event, it's a special
+word that we can use and it might contain a message about that event. So in this case as we type with input,
+that's an event on the HTML element, whenever something changes on an input, we can check the $event, in this
+case their target is the input, and then its value property to see what's happening. So the message is $event.
+So we can use that to grab different information on it. I mentioned custom events like using an event emitter.
+In this case we define an output property on a custom component and we're calling it onChanged, and then when we
+emit that with the changed function inside of our inner component, it's going to fire that off and then somebody
+can bind to the onChanged and then handle that. The cool thing about this is we can bind to any event that the
+HTML element exposes or any one that we create through a custom component like we did here with onChanged. This
+gets rid of a whole bunch of Angular 1 built in directives that we used to have, like ngClick, ngBlur, ngFocus,
+we had a whole bunch of them we used to have to use. Now we don't have to do that, we can just take an event and
+put the parenthesis around it.</p>
+
+<h3>Adding Event Binding</h3>
+
+<p>Well let's flip over to our demo for event binding. We've got this Select button down here, but clicking it is
+not doing a whole lot because we don't have any events bound to it. Well let's change that. Let's go ahead and
+type in the click binding here. We use the parenthesis as we learn because that's how we do event binding, and
+we're going to set that equal to a function that we have inside of our component. Let's go check that out. In
+the component we've gotten line 32 select and we're going to pass in the name, it's going to set it, it's going
+to put a console message out and then it's going to toggle the isSelected flag, which we've already bound
+somewhere else. Now the isSelected flag is going to toggle the class around the div. So cool. So all we have to
+do is type in here, alright select, and what are we passing in? We're passing in the character's name. So once
+we type that in, when we click on that button, it should pass the character's name in, it's going to log it out
+to the console and it should also put a box around this area because it's going to toggle that class select up
+here on line 6 inside the template. Let's try it out. Click it, we see it got highlighted, and we can unselect
+it as well. Pretty cool. Let's try out some other event bindings, up here on the image let's say that we wanted
+to, as we mouse enter, to change the color of this image. We'll just move down to another line and take a look
+at it. So if we want to change the color we know there's a style property, but what about style.background? That
+could work for us. Now for now we're just going to hard code a value inside of here and to do that I'm going to
+put in single quotes because we want to make sure we're actually getting the value and not binding to a property
+name. And we'll put in EE0. So now the image background of that icon should be whatever EE0 is, which is
+yellowish. So that could be a nice default one. Well let's go ahead and do a mouse enter, and if we do that
+we'll have mouseenter here, and then we'll change something in that. So when we mouse enter we could call a
+function or we could simply say, okay set a color property to a different value. So we'll say set this color
+property that we have, which is in our component and we'll go take a look at and we'll tell it to set that equal
+to EE0, like that. And instead of having a background defaulted up here, let's get rid of that and set that to
+be a property called color. So now when it first comes up it should be whatever color is, let's go check that
+out in the component, it's up here and it's actually set to blank, so it's got nothing. And then when we mouse
+enter onto the image it's going to change the color to yellow. So we do that, you can see it turned to yellow.
+Great. Well what if we wanted to do something on mouse leave? We could do that as well. So here, let's go back t
+o the mouse and we'll type in leave right there, and now let's change the color to a bluish color. So on
+mouseleave it should change it to this blue. And again, we're not actually changing the image right here, we're
+changing the color which happens to be bound to the images style background. So when we enter it's yellow, when
+we leave it's blue. Alright so we've done event binding with clicks and mouseenter, mouseleave. What about for
+data, like when we type in words here? Maybe I want to type in the word John and I want it to actually change
+the name that's up there. Well let's put some code in that's going to take care of that. We'll slide this over a
+little bit, we'll go back up to our input because that's what we need to be on, and we'll move it down a line.
+Now inside of the input, let's go ahead and use the value property. We know that the value property is existing
+on the input and we can bind to that. So here we could bind to the character's name, like this. So if bind to
+the character's name it should show up as Boba right here, or Boba Fett, but when I change this to John, it's
+not changing anything. That's because this is unidirectional data flow. I'm taking the data, and it's flowing in
+one direction, from the component up to the template, but not back down. So what we could do is say alright is
+there any event on this input that we could use? Well there's actually an input event in HTML and we could do it
+here, say alright set the character's name, when we have input, to something like the event object, and the
+target happens to be this input, and then we'll use the value property. So now we're saying when the value comes
+up, go ahead and grab it from the character.name, it's Boba Fett, and then when I change it to John it's
+actually sending it back down through the input which also happens to show up right above us here where it says
+John details, just like that. No problem whatsoever. Now don't worry if that's a little bit verbose, what's on
+lines 11 and 12, but next we're going to learn how we can make this a little bit simpler.</p>
+
+<h3>Two-way Binding</h3>
+
+<p>Handling two way data binding the way we just did, by setting the value property binding and then the input for
+the event binding, is kind of crazy and if not crazy, well, it's just verbose, right? Well there's another way
+we can do it. We can actually use this football in a box where we have the square brackets and then inside of it
+the parenthesis right there. And that syntax allows us to send a value from the component to the template and
+then back up. It's basically a short hand for what we just did. Here's how it works. We use an ngModel
+directive, which comes with the formsModule for Angular and we wrap that with the football in a box and we bind
+it to an expression. Now an alternative syntax if we don't want to use the football in a box is the
+bindon-ngModel, but I prefer the shorter syntax with the football in a box. Here's an example. We get value in
+and then a value back out. We create an input and instead of doing that crazy thing with the value and then the
+input where we do the property in the event binding, now we use the football in a box and just bind to a
+property. Not so bad. So that is a built-in directive that we can use with the formsModule, we just have to
+import that. How do you get that? Glad you asked. So to import the formsModule we go back to our rootApp module
+and right there inside the @ngModule decorator we have these imports and we had browserModule already, but now
+because we're using ngModel and that's part of the formsModule of Angular, we can import that functionality. So
+that pulls in that formsModule to our application. This is important. It's one of the ways that Angular keeps
+its size down, if we're not actually using these features, we're not going to import them into our application.
+So we just add it to our import list of our ngModule. And we can add other modules too, and we'll do that later
+in the course.</p>
+
+<h3>Adding Two-way Binding</h3>
+
+<p>Well let's flip back over to our demo and we'll add two way data binding to it. Well right here on lines 11 and
+12 we have the value property binding and then the input event binding. Instead of just changing that right
+away, let's go ahead and copy that section, we'll make a whole another div and we'll use it for color. So copy
+and paste all that. And the only things we're going to change is change the name over here on the right to color
+and we're going to get rid of that value in input right there. So now we should have an input over on the right
+hand side for the color. Great. Now what I want to do is I want to type in something like green and I want it to
+change the color of this guy down here. Right now we've got the mouseenter and leave to do that, but maybe I
+want to reflect a color up there as well. So if we want to do this, we can take advantage of what we just
+learned and we can do the football in the box, there's our football and there's our box, and we're going to use
+that ngModel directive that we learned about and we're going to bind it to a color property, just like that. Now
+we already have a color property and if by default it's nothing, so nothing's showing up, well watch what
+happens if I mouse over. As soon as I do that I get the EE0, when I mouse off I get the other color that we had.
+Now I can come up here and I can type in the word green, and notice it turns to green as well. And again, if I
+mouse over off that works. Well now using that same technique that we just learned, we can come up here where
+the value and the input are and we'll put in our own football in a box for the ngModel and now we can use that
+to bind to the character's name, just like that. So we can either keep line 11 or keep lines 12 and 13, and I
+don't know about you, but I prefer line 11. And now we have two way data binding so we can come back over here
+and test it out. We might want to change the name to something like Rey Skywalker, hopefully, or we change the
+color down here to something like purple, and everything works.</p>
+
+<h3>Built-in Directives</h3>
+
+<p>In Angular 1 there were a whole bunch of directives that we had to learn. In Angular 2 there's just a couple
+that we need to use, one of which we already used with ngModel. For example, the ngModle just wraps up the logic
+for handling the binding the value to the template and then sending those changes back to the component's
+property. So in Angular 2 we have these directives and they're going to help us basically take care of some of
+the logic inside the template. Let's take a look at a few that you might be familiar with if you know Angular 1.
+In Angular 1 we had these things like ngClass and ngStyle, and we can see the syntax on the left hand side. We
+actually have something very similar in Angular 2, and these are pretty similar syntax. So we can see here that
+if we go to ngClass in Angular 2 we're using camel case to identify it, we wrap it with our box with the square
+brackets and then we use a very similar syntax that we had before where we set the active class if isActive is
+true and then the color class is myColor is true. Well what if you just want to do a style? Well we can have two
+alternatives here we can choose. We used to have just ngStyle and we can still do it with ngStyle with camel
+case with our square brackets and then bind it to maybe an object literal where we have the style of color and
+we set it to colorPreference, which is a model binding. Or we could just say style.color and bind that one
+property to colorPreference. Now which way do you go? If you only have one property I would use style.color, but
+if you have more than one, you may find it easier to set them with ngStyle or ngClass. Well here's an example
+with ngStyle. We might have a div and we can use ngStyle here and bind it to a function. And that function could
+return back an object literal with the style properties. That's just an alternative to the style.style-name. So
+if you have perhaps three different styles that you're setting, ngStyle would be easier than doing style.color,
+style.background, style.width, for example. So we can do this for setting multiple styles. What about classes.
+We can use that ngClass to do that. And again, we can set the binding equal to the return value of function. And
+that's, again, just an alternative to doing class.class-name in a binding. This is great for setting multiple
+classes. If we have one class we could just do class.class-name. We did that earlier with the selected class,
+but if you're going to set multiple ones, ngClass is the way to go. So ngStyle and ngClass are really easy to
+use. Well what about any other directives we might want to use? In Angular 1 we had things like ng-repeat,
+ng-if, and ng-switch. Well these familiar concepts are going to translate over to Angular 2. Ng-repeat is a way
+to loop through things and we've been seeing how we can use ngFor. So ngFor with the start is a structural
+directive that changes the structure of our DOM and puts in multiple items, very handy for the ul's and li's.
+ngIf is another structural directive, which optionally shows and inserts elements into the DOM. Now this is
+either going to put them in the DOM or remove them from the DOM. It's not just going to show and hide it. And
+then ngSwitch is a way of optionally doing multiple levels of conditions. So we had that before in Angular 1, we
+still have that in Angular 2 as well. All three of these are structural directives. Let's look at how ngIf
+works. We've seen it before, but let's break it down. First it's going to conditionally remove the element from
+the DOM or add it back to the DOM. So when the current vehicle is true or false, you will then see the div
+appear with the You selected currentVehicle.name. This is very handy if you only want to show a message or some
+kind of content based upon a condition. And again, this is a structural directive, identified by the asterisk.
+If you did just want to hide or show something, you could do style.visibility to hide something. So the ngIf is
+going to evaluate the truthy or falseyness of that expression that we have. We've also seen how we can repeat a
+template using ngFor. This is also a structural directive because we're not just going to get one li when we're
+done, well only if we had one character would we, but if we had multiple characters we'd have multiple li's. So
+it's going to show an element and number of times. In this case we're going to iterate over the characters and
+the let is going to declare a local variable for us and that variable happens to be character. So then we can
+say character.name. Let's explore the local variable for just a moment. Maybe we want to do something a little
+bit more with it. Now that let declares a local variable, we did it with the character earlier, but we can also
+do let i = index. In this case i is going to be a local variable for the template and the index is a keyword
+that's going to automatically set that to the index value. So now the i there before the character.name is going
+to print off like an index value for showing the characters. We just talked about a bunch of ways we can use
+these built-in directives. But to actually use them, we have to pull this functionality into our application,
+right? We did it for the formsModule with ngModel. To use ngModel we had to import forms. So what do we have to
+import for ngFor and ngIf and ngClass to be available? Well the answer there is nothing more than we've already
+done. Why is because all those are in the common module. These are common things, things we're going to use in
+pretty much every Angular app that we use. So when we're building these apps, the common module is automatically
+imported by browserModule. So we were already importing the browserModule, that's the ES6 module of it, and then
+we put it into our import statement in our ngModule. So by default here, when we use the browserModule, it's
+going to pull in the common module and we get access to all the ngIf and ngRepeat and ngStyle and we're good to
+go. If we wanted to, we can also explicitly import the common module, that's okay too. But Angular already sees
+that we have it.</p>
+
+<h3>Adding Attribute and Structural Directives</h3>
+
+<p>Now that we've learned how to use built-in directives, let's go add them into our demo. Our template already has
+a class up top, on line 6 we've got class.selected we're binding to isSelected. And we can see if we click the
+button, it's actually selecting the Boba Fett color in the icon over here with the shadow. Well we just learned
+we could use ngClass to do the same thing. Let's look at the syntax side by side. With ngClass we could actually
+set more than one class, we could do selected here inside of an object literal and then use isSelected as the
+property, kind of matching what we have at the top. The difference here is that if we had a second property like
+foo, we could set that to something else if we wanted to. So that could be a foo class that we've got set. So
+let's remove the initial one, we'll leave the ngClass in place, and let's see if our functionality still works.
+Over here on the right we click Select and we still have the selection, we're good to go. Well let's take a look
+at some other features that we can do too. We learned about ngIf and ngFor, at the bottom of the screen when we
+select something, what if we had a div down here and inside of that div we only want to display content if the
+guy has been selected or not. So we'll create a div and we'll set a class equal to row for our styling, and then
+inside of there, let's use an ngIf. Now the ngIf we could set it to something like isSelected again. So if they
+select it we can display something like okay Your character has these vehicles, and we'll go ahead and display
+these vehicles after this. So right now, once we select it, we should see that text at the bottom of the screen.
+If we don't see it, click Select, now we should see it down at the bottom. Perfect. Now we can put the
+character's name in here too, make it a little bit better just to show what character was selected, so we could
+say character.name, so that would render that. And then inside of here we could create a ul and then li and for
+each li we'll display the vehicle's name. So to do that we're going to take advantage of ngFor, like this. Now
+the syntax here is we have to loop through something, so we're going to go right to left here. The thing we're
+going to loop through is a list of vehicles. Now let's go back to our component just to see if we've got that.
+Back in component over here we should have a list of vehicles right there, and we've got three of them. Now
+let's go back into our template. Once we have our vehicles we need something to loop through them with, an
+iterator if you will, and we'll say let vehicle of vehicles, like that, and then inside of here we're going to
+vehicle.name because that's the property on that guy. And yes I like to type vehicle the wrong way all the time,
+the vehcile. So once you spell that right, you've got it in here, we've got our vehicle which we're going to
+loop through, and it's only going to display once I click Select. I've hit Select, there's my character and
+there are my vehicles for that character. And if I change Boba Fett up top here, it should change the name to
+let's say Poe and then it's going to reflect in all the different places on the screen. And as a reminder,
+remember we've got the star down here for the ngIf and ngFor because those are structural directives, they're
+actually adding and changing stuff in the template. If this isSelected is set to false, everything gets removed
+from the template. If you go into the dev tools you will not see that HTML in the page, but once it's true
+again, all that stuff will appear. Same thing with the ul and li, it's changing the structure, it's adding
+multiple li's, that's what the star stands for. At the top we don't do that ngClass or even for ngModel because
+we're not changing the structure, we're just changing styles, classes or even content on the page. And that's
+how we use built-in directives.</p>
+
+<h3>Pipes</h3>
+
+<p>Another feature that we can use in our templates is a pipe, and a pipe allows us to take data and format it on
+the screen, maybe for dates or numbers or other values. This is important because sometimes the data that we get
+doesn't come in the value format that we want it in. Now we had something similar in Angular 1, they were called
+filters, these things are called pipes in Angular 2 because they flow through a pipe, and because we use the
+pipe character. So the syntax works something like this. When we use pipes with like a string, there are two
+built-in ones called uppercase and lowercase. And it allows us to either uppercase the character.name in this
+case or lowercase them. All you have to do is put the pipe symbol and then the name of the pipe right after it.
+What if you have a date? Well we've got a date pipe, which actually takes some parameters. Now these parameters
+allow us to pass in a date first and then the format of that date. And there's some standard formats with names
+like medium, and there's also others where you can actually pass in the format, like year and month and day.
+There's an extensive syntax for this you can check out in the docs. When we use the date pipe, just like there's
+the pipe, then date and then the format, we actually output the date in that format. We also have numeric pipes
+and these allow us to format for numbers and currency and percentages. The percentage the number allows us to
+pass in digitInfo, and for those what we do is we pass in first the number for the minimum number of digits you
+want to display, and then after a dot or a decimal, we pass in both the minimum fractional and the maximum
+fractional digits we want to use. So with this number pipe here, if we had a number that had 10 digits after the
+decimal, only 3 of them would display. Pipes are just for formatting of data, we can also use them for more
+powerful things too. There's a built-in pipe called the async pipe and this allows us to format data and stream
+it using RxJS and observables, or with a promise. We'll learn more about this async pipe when we get to the
+chapter about getting data and displaying it on the screen. But wait there's more, we can also build custom
+pipes. Let's say you wanted to create an initCaps pipe where only the first letter of each word is initially
+capitalized. You could actually do any custom pipe that you want, taking a value in and then outputting another
+value. So here with the custom pipe we actually use another decorator called the pipe decorator, so we pull that
+out of the ES6 module for Angular Core, we pass in a value to transform and the transform function when we
+implement that interface of PipeTransform, and then we also have optional arguments that you can push in, think
+about how the numeric one worked. The numeric one, the value would be the number and the args would be the digit
+info. So here we're just replacing our own values and arguments, creating our own pipe and using regular
+expressions to create our own InitCapsPipe. Don't forget to implement the PipeTransform interface, because if
+you do that it'll guard you in your code to make sure that you spelled and used the proper implementation of the
+transform function and its arguments and its return value. And all these pipes are great for formatting values
+on the screen.</p>
+
+<h3>Exploring Template Syntax in Storyline Tracker</h3>
+
+<p>Now let's flip back over to our storyline tracker demo and see how we put all these concepts together in that
+application. And here we can click on the View Sample for number 0 here, Storyline Tracker, and when it opens
+up, here's the application. Now let's click over on Vehicles, we're going to examine the vehicles list and then
+each button here. Each one of these guys, 30 for Millennium Falcon or the X-wing Fighter, those are separate
+components. Well let's examine the tree, it's nice in Plunker you have these tree views, which you can open and
+close the different folders like that. So I'll close them all, just show you where we are, we'll go into the app
+and then vehicles, and then down there we're going to look at the vehicle-list. Now the third one happens to be
+the TypeScript file and we'll make the preview a little smaller. Inside of this file we can see that we're using
+a couple different concepts we've already seen, such as the ViewChild to get that FilterTextComponent, and we've
+got a list of vehicles that we're getting as well in the getVehicles. We'll learn how all this works to get the
+vehicles later. But over here we've got our VehicleListComponent and that's going to be our HTML template and in
+that we can see we've got the title of Vehicles, as it's showing up over here on the right, then we've got an
+href for the routerLink for vehicles, and that's going to be the new button right here, the Add button. Then
+we've got a story-filter-text. This is the filter component right there where we can type in like Falcon or
+maybe wing. And then below there we've got our ngFor that we just learned about. On line 9 we're looping through
+a list of filteredVehicles and then we're going to have each vehicle be displayed with this story-vehicle-button
+component, and we're going to pass in the vehicle using input property binding. So let's go check out the
+vehicle-button right there, and that's going to be inside of shared and under vehicles and under vehicle-button,
+and here's our template. So this template right here, lines 1 through 12 of the vehicle-button, is going to be
+displayed for every single vehicle in the vehicle list. This is why we componentized things, because we wouldn't
+want to repeat all the stuff everywhere, and it makes it easier to reuse it. Let's examine what we've got here.
+Over on the right hand side we see Millennium Falcon with the number 30 next to it and then a button over here,
+a little icon of an arrow. Here we can see that we've got the name, that's the vehicle.id with the dot, and then
+the vehicle.name, and ew're using a pipe called initCaps, that's a custom pipe that we created. And then we've
+got an href here for the routerLink for the going to the vehicles vehicle.id. We'll learn about how routing
+works a little bit later, that's going to bring us to the details page. But for right now, just know that it's a
+button with an icon on it. So right there we've got our names, we've got our buttons, and it all works great.
+What about editing? If we click on this button and go to the Millennium Falcon, we can see we have inputs. Now
+you might expect that we've got an ngModel there, and you'd be right. So let's close the shared folder and go
+into the vehicle folder for our vehicle details, and we'll go look at the template for that. So the template on
+this guy, you can see we've got the vehicle.name and we're using the uppercase pipe, that's the built-in pipe,
+so show Millennium Falcon in uppercase characters. And then you might expect we've got ngModel over here and
+we've got one for the Millennium Falcon and another one for the type, and we're binding that to the
+editVehicle.name and the .type. EditVehicle happens to be in the model, right here associated with it, down
+there is the editVehicle, which is of type Vehicle. And going back to our page, we also have some bindings for
+the buttons, like Save, Cancel, and Delete. The Save button, when we click on it we call the save function, and
+likewise for the Cancel and for the Delete. And we also have not displayed classes, if I'm in AddMode you
+couldn't be canceling it. Let's back out for a minute and show. We're going to cancel those changes, now we're
+going to go back one page. We'll go back to Vehicles and if we click on Add, notice we're on the same page but
+we're not showing the Cancel or Delete buttons because we're using class.not-displayed and we have an AddMode
+flag. Pretty cool. Let's go check out that initCaps pipe because we used that. The uppercase pipe up here is
+built-in, but the initCaps pipe is something that we wrote, that was in the shared vehicle-button, just as a
+reminder, it's up here on vehicle.name. So when we click on the individual button right there, Millennium Falcon
+or X-wing Fighter, only the first letter of each word is capitalized. Well let's go check out how that works.
+First, we're going to go into a shared module. InitCaps is something that we want to share across our entire
+application and multiple pages might have one on them and maybe a single page might have more than one as well.
+So we're going to put in a shared module that I intend to import every time we need to use it somewhere. And the
+shared module has init-caps.pipe, which we've seen the syntax in the slides for this, we use the PipeTransform,
+we pass a value in and then we transform it. And then to tell the application about it to let Angular know what
+this thing is, we called it initCaps right there in the name, that's what we're going to refer to it in the
+template, and then we have this shared.module that the InitCapsPipe is declared in. Let's take a look at that.
+So here's another ngModule we've created. This ngModule is pulling in CommonModule because that's where the
+pipes and things are located. We're also using other things like our FormsModule in there, and we're declaring
+the InitCapsPipe, so we have to declare it to the application so now Angular knows about it, and then the
+shared.module is then imported by our main app root module. Now because we imported these things, that's great
+because we're going to use them, but we want the people who are importing the shared module to be able to use it
+too. So if the appModule, the ngModule at the root of our app, is going to import shared.module, it needs to
+know about the InitCapsPipe if it's going to use it. And to do that, what we do is we export the InitCapsPipe
+here on line 18. And don't worry, we're going to learn more about how ngModules work and how we can create a
+hierarchical structure like this storyline tracker application later on in the course. And as we've seen
+throughout this course, we learned about each individual features, such as event binding or property binding or
+pipes or templates or metadata, and then we go look at them in the storyline tracker at the end of the chapter
+so we can see how they fit into the big picture in an application.</p>
+
+<h3>Summary</h3>
+
+<p>This chapter was all about our template syntax. Once we have a component we have to have something to render. We
+learned about data binding - one way, two way. We learned about unidirectional data flow and how the data only
+goes from one direction or the other, for example from a component up into a property value on the template or
+from the template back down to the component via an event. We learned about attribute directives, things like
+ngClass and ngStyle. And then the structural directives, like the ngFor, the things with the star in front of
+them, they're the ones that actually change the DOM. And finally we learned about how we can use pipes to
+transform values. And this gives you a good first look at the template syntax in Angular 2.</p>
+

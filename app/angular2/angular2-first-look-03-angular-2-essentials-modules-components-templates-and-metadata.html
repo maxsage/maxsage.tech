@@ -1,0 +1,412 @@
+
+<h2>Angular 2 Essentials: Modules, Components, Templates, and Metadata</h2>
+
+<h3>Angular 2 Essentials</h3>
+
+<p>Every framework has a short list of critical players, players that the framework cannot exist without. In
+Angular those are components, modules, and templates. In this module we're going to introduce the essential
+aspects of Angular 2 applications. We're going to see how ngModules or Angular modules help organize an app.
+We'll also see how a component contains the application logic, the template represents the interaction with the
+user, and a series of component and template combinations are organized in modules. We assemble our application
+for modules, which exports something of value, such as a component. When we import and expert, we're using ES
+Modules for ECMAScript. We organize our application using Angular Modules, also known as ngModules. And a
+component contains the application logic that controls a region of the user interface through a template, which
+tells Angular how to render the component on the screen. Then we use metadata to tell Angular 2 about the
+objects we build, such as where to find a component's template, what directives a component will use, and what
+services and inputs are required by the component. We'll learn how to use these players in an Angular 2
+application using good separation patterns to create reusable components and modules.</p>
+
+<h3>ES Modules</h3>
+
+<p>We'll begin by talking about ES Modules or ECMAScript modules. ES Modules are often referred to simply just as
+modules, you hear about them all the time in the JavaScript world. So what do they do? Well we use those to
+assemble our application. We can think of these as separate files that we use to contain different things, like
+services or components or shared values. Each file is a module and it exports the things that we want to use in
+other files, and those other files can import things from other files. So we import and export from different
+files or modules. Here's an example. We might have a vehicle service in a TypeScript file and maybe it's
+exporting an interface like a Vehicle or a class, like a VehicleService. That export keyword is what we're going
+to use to help show that this is the asset we're going to export from this module. And then when we want to use
+that somewhere else, maybe in a vehicle.component TypeScript file, we can import that ES Module by using the
+import statement. So here we can say okay import a component from an angular/core, which is part of Angular, or
+we can import the Vehicle and that VehicleService we just saw from that VehicleService file, and when we do
+this, we're actually using a form of destructuring. And that's what those little curly braces mean, we're saying
+go grab, reach inside of that VehicleService file, that module, and pull out the Vehicle and the VehicleService,
+and by using these modules we create a dependency chain that we can walk throughout our application to see which
+files are depending upon others. And that's ES Modules in a nutshell.</p>
+
+<h3>Angular Modules</h3>
+
+<p>One other reason I like to refer to ES Modules in the formal ES Modules is because there's another thing called
+Angular Modules. Now it's a good thing and a bad thing that it's named very similar. These are very specific to
+Angular and they do something that ES Modules don't do for us, they actually help us organize our application
+into cohesive blocks of related functionality and it's really going to become important to use these when we
+want to do things like lazy loading, which we'll learn later in this course. So how do they work? These Angular
+Modules, also known as NgModules, you can think of them like a container. Now in that container we might have
+multiple components, in our bigger application that we're showing throughout the course, we might have
+characters and vehicles in our stories, and maybe inside that same module we also have a service to go get the
+data for those things. So a module can contain components and services and directives and pipes, a lot of things
+we're going to learn about in this course, and usually we're going to put like minded things inside the same
+module. So we might have a module for all of our character stuff and maybe another module for our vehicles and
+maybe we have a module for an admin area. We'll talk about how we can split our app as it grows into multiple
+modules later. But you can think of these as raviolis, each module is like a ravioli, it contains certain
+things, maybe some meat, maybe some cheese, maybe some spinach too. And like raviolis, everything that we need
+for our feature area is inside that module. This makes it easy to identify, test, and extract for reuse when
+needed. So how do you know a module when you see it? An Angular module that is? Well an Angular Module is going
+to be a class that's decorated with this @NgModule decorator. Simple. The NgModule decorator takes a metadata
+object that tells Angular how to compile and run the module code. Let's review the roles that NgModules can do.
+First they can import other Angular Modules. They also help identify components, pipes, and directives that we
+use inside the module. And you can think of an NgModule as a feature area, so we can use that to define the
+feature and then export those features so other modules can use them. And these Angular Modules can also provide
+services to the Angular's injector. And we can also have these Angular Modules eagerly or lazily loaded. We're
+going to talk more about providers, injectors, and lazy loading later on in this course. For now we just need to
+have a glimpse of what an Angular Module does because we're going to be seeing it quite a bit. Where might you
+say? Right here. We're always going to have one module in our application at least, and that's going to be the
+Root Angular Module. So let's identify what these different parts are. This NgModule is going to identify the
+module's own components, its directives, its pipes and it's going to make some of them public so external
+components can use them too. So right here we can see that we've got importing modules that we depend upon,
+things like FormsModule or the BrowserModule because we want to run it in a browser. We can also declare those
+things that we're going to use inside of our module, like our VehiclesComponent, and here we're saying okay our
+VehiclesComponent might need a VehicleService so other things in this module can use it too, so there it is in
+the providers. And the root module has a special setup for bootstrap, this says where am I starting? We saw in
+there briefly, earlier in the course, where we bootstrapped the component in our AppModule. So every application
+starts with a root module and then we just identify the things that we're going to use. And of course, we define
+the root NgModule, and we're going to call it @module by convention, right here. And it's just a class. Now it's
+really, really important to remember that every application is going to begin with one Angular Module. And as an
+app grows, it can have many NgModules. Our app is small now, but let's start with just this one and we'll
+revisit Angular Modules later when it's time to expand the application.</p>
+
+<h3>Components</h3>
+
+<p>Now that we've taken a look at Angular Modules, we have to look at the pieces that go on the screen or our
+components. So a component contains part of the application logic that controls the region of the user interface
+that we call a view. Effectively when we want to put something on the screen, we want to put some HTML up there
+and have some logic that goes behind it. Those two things together make up our components. Let's get a better
+feel for how we write these components by looking at the anatomy of one. First we'll start off by importing from
+different ES Modules. So we're going to import the component out of the angular/core ES Module. Why are we doing
+that? Because we're going to use that inside of our code for that decorator, that's that metadata that's going
+to describe our component. We might also import other things like a vehicle from one of our services, our own ES
+Modules. Now that @Component decorator is decorating something, right? But where it is? It's right here. It's
+just a class and we define it and we name it what we want. By convention we always put the suffix of component
+on it so we can identify it, and that @Component identifies that this class right here is a component for
+Angular. And notice that we also set up a selector and a template URL, the template URL points to where the HTML
+in our template is for this component. And the selector is how we identify it in the HTML when we use it. And
+they way we assemble our application is we use multiple components to do this. We'll start off with one Root App
+Component, that defines the area where our application will live. And then maybe we have something like a header
+component that goes in there or a navigation for a menu or a footer. And then on the right hand side maybe we
+want some content. This is pretty common. All of these could be different components that when composed together
+live inside the App Component. So we can nest these. But we need a starting component too, right? So once you
+uncover all of these we have to get back to what's the starting point, and that's going to be our App Component.
+But how do we start it? Well that's where bootstrapping comes in. And by convention we create a main.ts file and
+we're going to bootstrap it with this one component to kick things off. It's our entry point, our starting
+place. Everybody needs a place to start, right? And this file is very, very small. We define the platform we
+want to run on, in this case we'll do the browser, and we'll import that ES Module from Angular, and then we
+import our NgModule, that's that first thing we created, remember that root module, this AppModule that's going
+to hold the application, and we put these two things together and we bootstrap the module and off we go. So how
+does all this compare from Angular 1 to Angular 2? Well the syntax is obviously different, but the concepts
+aren't so different. In Angular 1 we might have had a controller and a template, our logic and our HTML. And a
+router might have matched that controller to the template. We could also have done this by telling the template,
+hey this is your controller and it's called this. In Angular 2 we also have something, it's not called
+controller, it's called a component, and it identifies its own template. Remember that template URL setting that
+we had inside the AppComponent decorator. So we still have those same two things, they're just associated a
+little bit differently. Let's take a look at how all this fits together. Let's say we've got a scenario where we
+want to put a character component together to show a character on the screen. So first we might create
+character.component.ts for our logic and maybe that logic includes identifying the character component, which we
+aptly name, and then also setting a property like name to Han Solo. Now notice we have a templateUrl that points
+to a character.component.html. Well where's that? It's right here. That character.component.html is what is
+going to be rendered on the screen. In this case we're going to render the name using these curly braces, a very
+familiar syntax to Angular 1 developers and to developers with other technologies too like jQuery even. Finally,
+if we want to put this on the screen how do we do that? We just defined the component, but how do we get it to
+show up somewhere? Well there maybe we've it in our index.html, we could say story-character, like this with an
+element tag. Now that story-character has to refer to something, and that's going to be the story component we
+created or the character component up top. This is where the component is going to be placed. So let's take a
+look at this and how they kind of link together. That story-character element points to the selector that we
+identified in the component's ts file, the TypeScript file. And then the templateUrl points to the HTML file.
+Now that we've broken this down, let's go ahead and take a look at a demo of how we put components together.</p>
+
+<h3>Defining a Component</h3>
+
+<p>Let's launch our demonstration application again right here at this URL, angular2-first-look.azurewebsites.net,
+and let's slide on down to the simple component demo down here at number 13, Angular 2 Components, and we'll
+launch this. And up we've got a little component and it's going to show My name is Han Solo. Well how does this
+all work? Let's walk how it actually gets instructed on the page. First let's look at the index.html. Here we
+can see that the index.html has on it a my-character element right here on line 11. Well that my-character, what
+is it? It's not really an element that HTML knows about, it's something that we defined and we can see it's
+right over here, it's this character.component with the HTML template and then our TypeScript file. But how does
+this page know about it? Well we're loading Angular, but more importantly here, we're actually telling it to
+import this main file. And this main file is going to launch main.ts. This is our bootstrapping right here.
+Again, we're telling it we're going to launch inside the browser and our default root module is going to be
+AppModule, that's our NgModule that we defined. So where is that? That's our app.module.ts, again using naming
+conventions to help us find the files. Here we can see that we've got this NgModule that we import from the ES
+Module for Angular Core, and then we use that to create the decorator on line 6. The decorator is from line 6 to
+10, and we're passing in the parameters for what are you importing? I'm going to import the BrowserModule so I
+can use things for the browser. And then I'm going to declare the components on my page, things like
+CharacterComponent. We'll take a look at that in a moment and then, of course, we only have one component so
+we're going to bootstrap that single component that we've got, this CharacterComponent. And then in the
+CharacterComponent, we've got the class on line 8, which defines the property Han Solo. So that's what's showing
+up on the page and then our template is pointing at the templateUrl here of character.component.html. We say hey
+My name is name, and that name matches the property right here for Han Solo. Well let's say we break this a
+little bit. Let's open up the developer tools so we can see some errors as they happen, and we'll resize it. Go
+ahead and follow along if you'd like. I'm going to clear out the errors that might be there right now, and turn
+off the phone mode, and we'll shrink up the different windows to make it easier to see. Now right now
+everything's working perfectly. What if I went inside of my index.html and instead of referring to my-character,
+make that go away, we've got our my-character here and let's call it my-character-foo and we'll make them match.
+Now notice on the right we're getting and error message and what's that error message saying? Well the error
+message is probably going to tell us, I don't know what my-character is, it didn't match any elements in this
+case. Let's go ahead and clear this out again and we'll rerun it by clicking on this refresh live preview, just
+to make sure we're looking at the right error message. Scroll up to the top and it's telling you - I can't find
+anything called my-character. Well this is a little odd right? We're referring to my-character-foo, which is
+effectively getting ignored, and then over here we've defined another element with a selector of my-character.
+Well let's say we go ahead and name that my-character-foo now, what happens? It actually found it and now it's
+launching it. So that selector right here on line 5, so it's matching what's in the index.html, and don't worry
+about actually fixing this code because when you re-launch it back from the demo, it's going to launch in the
+initial state. So we can do whatever we want here and just message around. And I'm going to clear out the
+console errors again. Now let's go ahead and say that inside of our component we've got Han Solo, but we don't
+want to say name, we want to do first name and last name. So what we could do is go inside of our template right
+here, and instead of doing this we can do firstname like that, my name is firstname, then we could do lastname.
+Now notice, nothing's actually going to show up on the right hand side. There's no errors because it just can't
+find those properties. So now we can come over here and inside of our object instead of doing name we could just
+do, although that's going to be firstname and we'll make that first name Han, and we'll do lastname, and what's
+the last name going to be? Solo. And now it should show up because we've matched those properties. So we're
+seeing some initial states of doing interpolation onto our component using firstname and lastname. Now we
+stressed something else a little bit earlier too and that was the importance of importing and exporting ES
+Modules. Notice our CharactersComponent is being exported, what happens if we don't export that? Let's find out.
+I love breaking code, don't you? Okay, we just broke the application. That's because now we've got a
+CharacterComponent that is no longer exposed outside of this ES Module. Down here we see an error, right at the
+bottom on the bottom right, it's saying we've got an uncaught in promise error, it looks kind of scary. There's
+an unexpected value undefined declared by the module AppModule. We keep clicking through there and we see a lot
+of information about this here. What's actually happening is there's somebody who's just unknown. What's
+happening, if we go over to the AppModule itself, remember, is in here, and I'll click off on the preview, we
+can see that we were importing CharacterComponent from character.component. Well, you can only import an ES
+Module if it's actually exported, and remember we just unexported it over here. So once we put the export back
+in place and then we show the live preview, the application should run again. So the rule of thumb is anytime
+you're going to import or export something, make sure that you actually have the export on that class because
+otherwise you will not be able to import it somewhere else. Feel free to play around with these samples as you
+go along throughout the course so you can get a good understanding of how these components work.</p>
+
+<h3>Templates</h3>
+
+<p>Components contain logic, but we still need something to render the page, that's where templates come in. HTML
+is great for rending pages. Sometimes we just need to give it a little bit of help to know what data to render
+in a list or maybe how to handle a click event. Together our HTML with data binding expressions and directives
+tell Angular how to render the component. Let's take a look. We've already seen some templates, but let's
+examine them a little closer. Here we can see an ngFor directive. This ngFor is looping through a list of
+characters and then it's going to display the character's name. We can using dotting to go into objects like
+this, character.name, and then perhaps when we select one of those names, we can set up some logic so we show
+the selected character down below. For example, if a selector character property exists on the model, then we
+could go ahead and show this my-character component. That's something we created. So here we're looking at
+looping through different things with a directive, ngFor, using interpolation to display it, and then also doing
+nested components. Our HTML is our templates and we use these things as needed, including template binding
+syntax. And remember we talked about how we connect the component to the template, we have that component and we
+have to associated with the template. We do that through either the template property or our templateUrl
+property. The template property allows us to inline a template and here we're using back ticks, again, that's
+not a quote, that's back tick, inside of the template property there. Those back ticks let us do multiline
+template strings so we can actually put a little bit of HTML there. These are awfully useful for putting in
+short little templates, so that becomes the template string. Now most often we're going to use a linked template
+and that's going to be using the templateUrl property. So we do that through setting templateUrl, we associate
+it to a file, which by convention we do vehicles.component.html to associate the vehicles.component.ts. So
+components have templates right, and they can use other components too. So here's a high level overview of how
+that could work. First we have our root component, that might be that app component we talked about where
+everything else lives inside of it, like our footer, our header, our navigation. Inside of there we might have
+other components, like Child Component A with its own template. Maybe we also have another component too, maybe
+this is like the footer and the header. And then each of those components might have their own child components
+as well with their own templates. We're effectively creating a component tree out of our application using these
+templates. Now let's take a closer look at how we can use these templates.</p>
+
+<h3>Nested Components</h3>
+
+<p>Let's go explore some templates inside of nested components in example number 14. We'll click on that sample and
+when it launches up we can see we've got various different components. Now before we only had one component, now
+we've got a couple. Here we've got our app.module, which is now declaring two components, Character and
+CharacterList right here on lines 12 and 13. Now the CharacterList, when we select one of these guys, shows that
+we select Luke Skywalker here. Or we can show that we selected Rey. We're bootstrapping CharacterList, which
+means we're going to show that first, so here we've got the list of components and we're going to show different
+characters, those are our models. And we also have a selected character right here. But let's take a look at the
+template. Notice that this character-list-components template has a my-character inside of it. So first we're
+looping through those characters and when we click on one of them, we're using an event binding to call the
+selected character, that sets a property called selectedCharacter, and that's going to pass it in here through
+an input property to my-character component. Well this my-character on line 7 is actually pointing down to the
+template here for my-character component. We can see that as a selector name, my-character. And then that
+renders out, we selected character so and so, right here in the h3. Now we can actually repeat this if we wanted
+to, so these components are reusable. We could effectively have a couple of these guys. Let's go ahead and put
+four of them on the page, it should rerender over here and we select, we can see that we really selected Luke
+Skywalker. So as you can see, we can build up a component tree using these templates and nesting our components
+and then using input parameters to pass values in. We'll learn more about inputs soon.</p>
+
+<h3>Metadata</h3>
+
+<p>There really are three parts that make a component work, there's the component code, then there's also the
+component template, but there's also the third part, the metadata, the lesser talked about part. It's always
+there, but we don't pay that much attention to it. The metadata is what goes inside those decorators. We're
+going to use the metadata to tell things to Angular about how to find the component's template, so that's one
+thing we use it for like the template URL. So we might have a template and then we've got a component, and then
+that metadata is that glue that kind of links those two things together, and it gives Angular information about
+that component, so it can operate better. We're going to declare our components, our directives, and our pipes,
+which we'll learn more about later, in an Angular Module or an NgModule. So let's talk about where that metadata
+goes. Once again we have metadata for our NgModule and that's the imports declarations in bootstrap for this
+root AppModule. First we're going to do BrowserModule as an import and BrowserModule includes the CommonModule.
+These are two modules that come with Angular. These are NgModules that they expose and give to us and the
+CommonModule includes things like that ngFor that we looked at earlier. And they're making it easy for us by
+saying okay if you're in the browser, you might want to use those so we're going to give you the CommonModule
+when you ask for the BrowserModule, so we don't have to list both of them, we're just getting them both for free
+by saying give me the BrowserModule. So things like ngFor and ngClass and ngIf are going to be in that
+CommonModule when we get them. But we do have to tell Angular about the things that we create. What about this
+CharacterComponent and CharacterList? We need to declare those and they go inside the metadata for ngModule. So
+we use the metadata to declare to Angular, I'm using CharacterComponent and CharacterListComponent, and then the
+ngModule knows about them and it tells Angular.</p>
+
+<h3>Examining the Component Decorator</h3>
+
+<p>Let's take a deeper look at the metadata for our component now. We first looked at the metadata for the
+ngModule, but in a component such as this CharacterComponent here, we have a decorator, @Component, right at the
+top, and this decorates our CharactersComponent, so the at sign is going to be indicating that it's a decorator
+and it's going to provide metadata that describes the component right here. And the component definition, it's
+just a class and it's going to be something that controls an area on the screen, a patch of real estate if you
+will, and we call that the view. Now there's other things in here too like templates and styles. The templateUrl
+tells it where to find that HTML in our template syntax and the style URL is plural because it can be an array
+of different CSS files or SASS or something else you might want to use. And those will all be associated with
+this component. Now we could also provide a service to this particular component as well. In this case we're
+saying this service called characterService will be registered with this components injector, we can actually
+have an injector for each component, but we're only going to go this once because we don't have providers all
+over the place for the same service. We'll learn more about providers and how to set them up in your application
+in a good design later on in the course, but a general rule of thumb is we want to prefer registering our
+providers in Angular Modules, the NgModules, as opposed to registering them in components. So what else is in
+here? Well we can also see that we can inject a service into another object through constructor injection. So as
+long as the characterService has been provided somewhere in our application that this component can get to it,
+and that could be right here, up above in the providers, or it could be in a provider of one of the modules, the
+ngModules that we have, then we can get to it. Now we also have output and input parameters in here. Here's an
+output parameter that we can use and that's going to be an output decorator decorating this changed member, and
+that could use an event and then we could emit that event down here. Or we can also use input decorators to
+define a member, like this storyId, to pass values into the component. Of course, any class could have
+properties too, things like Characters or the selectedCharacter. And by default they're public with TypeScript,
+so those are the things that can be accessed in the template. And of course we can have actions too, just
+functions that we can expose and bind to the template to handle events like maybe clicking or selecting onto a
+character. And as we saw here, some of the metadata is decorating the class itself and then other metadata, like
+the output and input, are decorating a member.</p>
+
+<h3>Input and Output Decorators</h3>
+
+<p>We just saw that we had input and output decorators that we can use inside of our component. Now they're going
+to allow us to identify properties that we can have things flow in or flow out of a component to communicate
+between a parent and child component. The way we set this up is we've got a component here and we might identify
+an output property, like changed, and maybe we fire off an event using something like an EventEmitter, and then
+we can emit that output using this.changed, our member, .emit, and then we can pass information like the
+selectedCharacter. So this way you might imagine this character's component could tell some parent component,
+hey this event fired, the changed event, and here's the information about it. It changed this selectedCharacter.
+So how might this interact with a parent component? A parent component might be defined like this down below
+where it's got this story-characters, maybe that's the guy up top, and we're passing in storyId as an input and
+right now we're just passing in the number 7, but it could be a bound property as well, and it's using that
+property and then there's a changed event that it's binding to. So the changed event is binding to some function
+and that function will grab the value out of this $event. So we might have a parent component there and it's got
+its own template and that template refers to a child component. So we use a property binding to get into that
+child component in the template and then we use an event binding to get back out. Make sense? Well that's okay,
+we're going to take a look at a demo now using our samples of component input and output to show how this flow
+works.</p>
+
+<h3>Component Communication with Input and Output</h3>
+
+<p>We'll scroll down in our demo to the input and output component sample number 15 and we'll open that guy up. And
+I'm going to reduce the font here a little bit, just shrink the size using this little minus sign so we can see
+the entire list, and the reason for that is that I want to show you when we click on an item here, Luke
+Skywalker, we can see the selector down below, or BB8 or Commander Snoke. I can put that back up. If we look
+inside of our characters.component, we can see that we've got a selectedCharacter, now we want to pass that in
+to our other component, our character.component, singular, so here in our template we've got that list and then
+we've got story-character, this is what's going to happen, we're going to take a character input, we're using
+binding, we have to do the square brackets around it to tell it we're doing a binding, and we're going to pass
+in the selectedCharacter. so the selectedCharacter right here, that's going to be the property inside of our
+characters.component TypeScript, right there on line 16. So line 16 maps over and it gets set when somebody
+clicks on something up top. Okay let's repeat that because it's important, inside this list we loop through the
+characters and then on this div when we click on any of those elements, we call selectedCharacter, that's the
+character from the loop. So now we call select, which is in this component, and there's our function down on
+line 25. We select the character and we set that up as a property and then we fire off a changed.emit, so if
+somebody's listening we can tell it, hey we had a changed event and we'll pass the character to them. There's
+the output. And then the selectedCharacter on line 26, if we go back to our template, is then bound to the
+story-character component through an input property called Character. Okay so that Character property is not on
+this component, it's on the CharacterComponent inside of here. Notice we have to decorate that with input. So
+what happens if we remove input here? Let's run this again by hitting the triangle, everything works, we'll
+select somebody like Chewbacca, scroll down there he is, but what happens if we don't have this input down here?
+Now it's going to rerender the page and the application should load right? Okay, so we've got the guy over here
+and he's not loading. Let's look at the error messages again. We'll remove everything from the console and we'll
+rerun. Now let's see what kind of errors Angular gives us to give us an idea what's going on. It says there's a
+template parsing error, which is a pretty good hint that you're doing something in the template that it doesn't
+like, right? So over here we happen to know that it's because we removed the input, but it's because this guy
+over here is referring to a property that really doesn't exist inside the other component. Well let's look and
+see what it tells us more. Here in the template errors, if we click on this, it says I cannot bind to the
+character since it isn't a known property of story-character. That's pretty darn good actually, isn't it? It's
+saying there's a story-character here and you're talking about a character property that doesn't exist. Not too
+bad. Alright so now we can go back over here and we can stick in that CharacterComponent's input and that's our
+decorator, it's a property decorator in this case, and don't forget the parenthesis, it won't work without them.
+If you do this, the application is not going to load because these decorators are actually functions. Now it's
+easy to remember them up here for component because you have to pass something in, with input you could pass
+things in, but we don't have to. But we still need to make sure we call it like any function. So play around
+with this example, that's what they're here for after all, and try to do some different things with input and
+outputs.</p>
+
+<h3>Parent to Child Communication with ViewChild</h3>
+
+<p>We just showed how we can pass input properties into a component and then also how we can get things out of a
+component through an output. But what if we need to access another member from a parent to a child, for example,
+the parent needs to call the child's function. Let's say that we've got a character list component, that's our
+parent, and we need to access maybe a child component, like a FilterComponent, to filter some data. Maybe we
+want to call the filters.clear function and that's over here on the left. To do that we need a little bit of
+help and that's where the viewChild decorator comes in. that viewChild decorator is going to let us call the
+child component's function. So this grabs the child right here and says, okay we've got a reference to it and
+now you can call filter.clear right there. Let's take a look at this with input and output parameters and also
+the viewChild inside of our storyline tracker demo application. We flip back over to our app and here we can
+launch the sample. It'll take a moment to load because there's quite a bit in there, and then inside the
+application let's go down into the vehicles and in the vehicles we'll look at the vehicle-list. So in here we've
+got our CSS, our HTML, and our TypeScript. Now before we look at the code, let's go look at our vehicles and
+inside the vehicles we've got a filter. That's what we're going to look at. So when I click on that I could type
+in something like falcon and I only get the falcon right here. Or I could change that and type in something like
+destroyer and I get the destroyers. Great. Well let's say I typed in falcon and then after I reset the data,
+what I want to have happen is new data is coming in, I want to reset the filter too. So I'll say yes to clear
+the data out and it should clear the filter too when the data comes in, otherwise I might have a wrong filter on
+here and it might be filtering the data that came back. Well let's close this window there and instead look at
+just the vehicle-list.component. Inside the HTML, the middle file, we can see here that we've got
+story-filter-text on line 6. We're not passing anything into the filter, but we are listening for when it
+changes, so whenever that filter changes, it's going to fire an event and we're going to do something about it.
+Well if we want to find out where that filter is, we go back into our TypeScript file and we can see here
+there's a ViewChild on line 20 of that FilterTextComponent, but then up top we're importing the
+FilterTextComponent from a shared filter-text folder, that's that ES6 module. So let's go look at the shared
+filter-text folder and here we can see we've got a component file and inside of it we've got an output, it's
+going to tell us when it's changed, it'll emit that on line 26, and then it's also got a clear function, that's
+on line 19. We might want to call that. So we're going to reach in through the ViewChild to get to that clear
+function and we'll use the output property so we can use the changed event and bind to it. Let's show how's that
+done back in the vehicle-list.component. The HTML just lists it here, that's going to be on the page, and
+because that's there somebody's got to declare it, right? Well that might be declared somewhere else inside of
+our application in one of our NgModules. And then the vehicle-list.component can use him, so here we're grabbing
+it by getting the ViewChild and saying there's our filterComponent, and then down on line 35 we're clearing out
+the filterComponent whenever we get new data. So what happens if we don't have this ViewChild up here? Well if
+we do that and we run the application, the application will try to load, and we'll make a little room to show
+more what's going on, and now when the application loads up it's not going to be able to clear out the data. So
+if you go over to vehicles and then we go ahead and try to use that filter, we'll type something in here, like
+fal, notice that we don't have what we really want. If we look over at the error messages, it's saying it cannot
+read the property clear of undefined. Well we know what that is because we just commented out the ViewChild. But
+it's trying to access something that it can't get to. So now we can go back and put them in and everything will
+work again. So that's why the ViewChild is important, it's a way to reach in and then call a function inside of
+a child component if we want to and then we can listen for that changed event. So here it was our filters, and
+we'll clear this out for a moment, on line 27 we're getting a list of the filteredVehicles. Great, and then
+we've got this filterChanged event, well what's that guy doing? This is for our code we're getting vehicles and
+we're also just setting up our subscriptions to listen to when our data changes, but where is that change coming
+in? Well if you go back to our component here inside of vehicles, vehicle-list, and then the HTML, we can see
+that we have a changed event, which we're listening to and we're going to call filterChanged, and that's where
+that other function comes into place, filterChanged right there on line 26. So our function here inside the
+vehicleComponent, that's our parent, has something that we're binding to inside of that filterTextComponent, so
+we listen to that other event and then we fire our own event here and run our own custom code. And that other
+guy, the filterTextComponent is going to give us the filter text string so we can go ahead and do what we want
+to do. And feel free to play around with the ViewChild or the input and the outputs again in the storyline
+tracker, or maybe add your own component.</p>
+
+<h3>Summary</h3>
+
+<p>We walked through several examples of how we set up components, talked to their templates and defined the
+metadata in this module. And we also looked at the storyline tracker, which puts it all together for us. Now
+remember, when we create modules in Angular 2, they're not like Angular 1, we're using ones that are defined as
+ES6 modules and they basically just encapsulate everything that's in that file for us so then we can export
+those and use them other places, for example we might export a component, which is going to control part of a
+page for us. And component is going to be the most often used piece of Angular that we create to define certain
+sections of the screen. And each of those will have some kind of a template, which is basically HTML plus a
+little bit of extra, that's going to help Angular render that page, and then we'll use the metadata to help
+Angular know more information about that component. This module was entirely about components and all the things
+that go with them and we took a little glimpse ahead at some things we'll be using, like interpolation and some
+data binding, and in the next chapter we'll learn more about those topics.</p>
+

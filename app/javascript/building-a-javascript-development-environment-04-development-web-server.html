@@ -1,0 +1,34 @@
+<h1>Development Web Servers</h1>
+<h2>Express</h2><img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/express.png"/>
+<p>Express is lightweight but still feature rich. It is highly configurable and can be used for more than just static files. It can be used as a dev and
+    production server. If your building API's in Node then this is a big win which makes using Express as your development server an easy choice.
+</p>
+
+<a href="http://expressjs.com/">http://expressjs.com/</a>
+<h2>Browsersync</h2><img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/browsersync.png" height="100" width="158"/>
+<p>Browsersync makes your browser testing workflow faster by synchronising URLs, interactions and code changes across multiple devices.</p>
+<p>Browsersync automatically sets up a dedicated IP address on you network so that you or anyone that can hit the IP on your LAN can see your app. The second
+    feature allows you to hit that IP on multiple devices and all the devices will remain in sync. This is great for cross-device testing. You can think of
+    Browsersync as a powerful and free development web server or as a way to augment your existing web server with additional features.
+</p><a href="https://www.browsersync.io/">https://www.browsersync.io/</a>
+<h2>Setting up Express as a development web server</h2>
+<p>Let's use Express as our development web server because it's powerful, configurable and extremely popular.</p>
+<p>We already installed express when we ran <code class="hljs">npm install</code> earlier because express is one of the many packages listed in our <code
+        class="hljs">package.json</code> file so now we just need to configure express.
+</p>
+<p>I like to keep all my build related tools in a single folder called <code class="hljs">buildScripts</code> which I keep in the root of the project. In this
+    folder create a file called <code class="hljs">srcServer.js</code>.This file will configure a web server that will serve up the files in our src directory.
+</p>
+<p>Once this file has been created you can issue the following command from a terminal session:</p>
+<pre><code class="hljs">node buildScripts/srcServer.js</code></pre>
+<h2>Sharing Work-in-progress</h2>
+<h3>localtunnel</h3><img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/localtunnel.png" height="225" width="225"/>
+<p>You can use localtunnel to expose your localhost via a public Url. It punches a hole in your firewall so that your local machine can operate as a web server.
+    To get started issue the following command in a terminal session:
+</p>
+<pre><code>npm install localtunnel -g</code></pre>
+<p>Start your web application.</p>
+<pre><code>npm start</code></pre>
+<p>Use the command line interface to request a tunnel to your local server:</p>
+<pre><code>lt --port 3000</code></pre>
+<p>Running Browsersync and localtunnel together can be a compelling combination.</p>

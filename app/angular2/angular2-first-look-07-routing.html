@@ -1,0 +1,400 @@
+<h2>Routing</h2>
+
+<h3>Introducing Routing</h3>
+
+<p>The storyline tracker has a dashboard, vehicles, characters, and a series of detail views. We need a way to get
+from one view to another. Routing is that vehicle. This module is going to show how to configure routing, which
+is going to enable us to navigate between our vehicle and character components. So we'll define our routes and
+we're going to use a concept called routing modules to hold those routes. Sometimes we need to be able to pass
+parameters from one place to the other, we'll learn how we can do that through routing. And sometimes we want to
+stop certain routes from happening, those things are called guards inside of Angular. We can inspect the route
+at a key moment in time, right before it's about to transition, to either get some data to inject inside of its
+destination or to check a certain value, maybe if you're authorized or not, and then prevent the route or let it
+continue onward. We'll learn about all these concepts and much more in this chapter on routing.</p>
+
+<h3>Routing Essentials</h3>
+
+<p>Angular allows us to navigate between viewing component pairs with a router. Routing is how we allow the users
+to navigate from one point to another. Let's take a look at how routing compares from Angular 1 to Angular 2. In
+Angular 1 we used a routeProvider object, which had a when function. In Angular 2 it's a little bit simplified,
+we just have a Routes object, and we'll use that to define our configuration for our paths, when I see this URL,
+go here. In Angular 1 we had an ng-view element, which is where we would place the destination of the route, so
+when that thing that we're going to show, the view in the component, shows up in the screen, the ng-view's be
+the placeholder for it. Angular 2, it's now called a router-outlet. Where we used to use ng-href in Angular 1 to
+define the link to go to a route, in Angular 2 we have a routerLink directive and we use that with the property
+binding, with the square brackets. If we want to access routing parameters, in Angular 1 we use routeParams and
+in Angular 2 we use the ActivatedRoute object. And of course we had a router object in Angular 1 and we still
+have a Router object in Angular 2. So as you can see, some of the names have changed, but the basic concepts of
+routing are still here and there's actually a few new features too, and we'll learn about those as this chapter
+progresses. But first, let's talk about the things we need to get started. In our index.html, we want to make
+sure that we've got a base href of slash, that base element is really important for routing to work. And there's
+five basic steps to routing. The first step is going to be the import the RouterModule, just like we had in
+HttpModule and a FormsModule, we have a RouterModule. And we'll pull that into our project and then when we want
+to do things with routing, to get that routes object, for example, we're going to go ahead and import from the
+ES6 module angular/router. Of course to have routes we need to define that. That's going to be our configuration
+that we set up with paths that lead to components. And where does our route go? For that we're going to need to
+declare a router-outlet somewhere on our page. Those routes we defined in step 3 are going to have to go
+somewhere. They're going to show up in the router-outlet, and if we want to create like a menu somewhere for the
+application, a great idea for that would be to use the routerLink bindings. By following these five steps, we
+can get routing going pretty quickly.</p>
+
+<h3>Essential Routing Code</h3>
+
+<p>Let's begin by taking a look at the code that we're going to need to get routing moving in our application.
+First we'll define a file called app-routing.module. Now that's going to match the app.module file. Effectively
+these are the routes for our root of our application and in here we're going to pull in the RouterModule from
+the angular/router ES6 module, that's going to give us access to all the routing things that we're going to want
+to use. The first of which is the routes object itself. And we'll use that to declare our routes. And how do we
+do that? In the same file here, the app-routing.module, we're going to define that list of routes with a path
+and then where does that path lead. So we define the path, the first one in this case happens to be blank,
+that's the default path, and we're going to tell it to redirect to characters path. So if we go to blank or we
+go to characters, we're going to end up at the character-list.component. We can also use a colon to identify
+parameters and the key here is notice that all these paths end up leading to a component, that's our
+destination. Then we'll define our own module and I'm going to call it app-routing.module because it's for our
+app root, and we're going to import in that RouterModule and we're going to use this function called forRoot and
+we're going to pass to it the routes that we just configured. So we're using the module that comes out of
+Angular and basically injecting those routes into it. And we're wrapping it up into our own class called
+AppRoutingModule. This makes it easier for us to use the routing in our own module, such as our AppModule. Be
+sure that you only use this forRoot function in the root module's routes though, that's why it's called forRoot.
+In our case our root module is the AppModule. Well let's look at the stuff we just did. We have our list of
+routes, these are our paths, and we configure them all up, now they're inside of this routes variable. Then we
+use the route to make an NgModule. We pass those routes in to the RouterModule.forRoot and we're really paying
+attention to this AppRoutingModule we create. Now as a convenience I like to actually export the component list
+that I'm going to use and I'm going to have to declare it in my main module, it just makes it easier so I have
+less of those ES6 import statements in all my files. Now after I'm done with this file I'm going to be exporting
+two things, the AppRoutingModule and my routable components and then something else, as you might have guessed,
+is going to import those. That's going to be our app root module. So we're going to define this routing module
+and then import it in the that app root module. We could also do it into a feature module and we'll learn more
+about that in the next chapter. But for now, we're going to have one module still, the app root. So how does
+that look? In our app.module.ts I have my standard stuff as always and I also have this import statement up top
+that's going to import in my AppRoutingModule that I just created and my routable components, then I'm going to
+pass the AppRoutingModule as a parameter to the imports array. This gives my app module, my application if you
+will, access to the routing features that Angular provides and the routes that I have configured. And notice
+that I have routable components in here in the declarations. Remember we have to declare any component we use,
+this was just a nice easy way to pass them along to give to the app module. If I didn't export those in the
+previous file, I'd have to reimport them and then list them in the declarations one by one. So this was just a
+convenience feature. Once we have the code set up we want to work on how we put routing in our templates. First
+we might want some kind of a menu, so let's say in app.component.html we've got this navigation section and we
+can set up these routerLink directives. We'll use data binding with them and one will go to characters and one
+will go to vehicles. That routerLink is going to help us navigate to the path and then we'll pas to it the link
+parameters and those link parameters are an array which contain the different parameters for the different
+route. In this case, the route that I'm going to is going to be called /vehicle and that gets matched against
+the path. When somebody clicks on one of these hyperlinks here, it's going to activate the router link and then
+it'll go and look for the router-outlet and that's going to define where I put my components. Now that we've
+learned how to do routing, let's go take a look at it in our sample applications.</p>
+
+<h3>Adding the Routing Module to an App</h3>
+
+<p>Let's take a look at our sample applications, we'll slide on down to number 25, Router. This is going to show us
+how routing application works. We're going to build this in just a moment. So here in our app we've got a list
+of characters and a list of vehicles. If I click on vehicles I can see them and characters and I can also click
+on an individual character and go look at details. All the different components are already in my application.
+Now let's close those two samples and we'll click on the Needs Router, number 24. We'll open that sample up.
+This one doesn't have any routing in it yet, but it has the same components, as we can see here. Let's close
+down the preview so we can type for a little while, and let's go add a new file. We mentioned that we have to
+add in this new file earlier called app-routing.module. So I'll add that alongside the app module. Now let's
+click inside of here, we'll start by importing NgModule because we're going to create our own NgModule for the
+routing and that comes out of Angular Core, just like we've done before. And we'll pull in the routing features.
+So I'll import Routes and RouterModule. That's going to give us access to those different features. Now let's go
+ahead and create a constant called routes and we'll define it of type Routes object and that's going to be an
+array. This is where we're going to put our own custom routes. Each one of these is going to take an object,
+we're going to give it a path. Now let's think about it like this, the path is when you see blank, what do you
+want? Well I want to make sure their path matching everything because in a blank it could be, anything could
+start with a blank, right? So we're going to do full. So it's going to have to match that exactly and then
+redirectTo in this case a new route. I really don't want to name a route that's called blank, so instead I'm
+just going to make the blank route, basically the slash for my application, go somewhere else. I'm going to make
+it go to a route called characters. Perfect. So the next one that would make sense to create is the path for
+characters, otherwise we're not going to be redirecting anywhere, are we? And when it gets there, we're going to
+say go ahead and find a component called CharacterListComponent. Now I just told it to go to a place that I
+haven't imported yet. So now I have to go import that CharacterListComponent. So I'll import that guy and I have
+to know where to get it from. Well in our application it's in the characters folder and it's right here. So
+let's go ahead and type that in, we'll do ./ to do a relative path, it's under
+characters/character-list.component. Make sure we got the name matched up and we are good to go. Now we have a
+few more paths we want. We also want to go to vehicles, so we'll copy and paste this one here and we'll say
+alright make the path vehicles, and this time we'll call it VehicleListComponent, and then up here we'll copy
+and paste and we'll go get the VehicleListComponent out of that folder. Now our vehicles also has a parameter
+for vehicle, which is a vehicle detail page right here, so we could get that one in there as well if you'd like
+to. We'll go ahead and add it for now. We'll copy the vehicles again and this time we want to say when you go to
+vehicles/id, don't go to VehicleListComponent, but go to the VehicleComponent. So yet again we're going to go
+create another import up top and this time it's going to get the VehicleComponent. Perfect. Now that we have our
+routes, let's create our NgModule. So we're going to export a class and it's going to be called
+AppRoutingModule. Why did I pick that name? Well I picked that name because it is the name of the file, but also
+because I have an app module right here. So this is the app module's AppRoutingModule. And I'm going to decorate
+that class with my NgModule, like this. And inside of there, one of the properties is imports and the other one
+is exports. Now we want to import the RouterModule, that gives us the features for the routing that Angular
+provides and we want to tell it go ahead and use the routes that we just defined right here. And we also want to
+export to expose the routing features to whoever imports it. In this case the guy who's going to import this
+AppRoutingModule is right over here, we want him to be able to access the RouterModule. So we have our exported
+class and next, so I don't have to copy these three import statements here and then also declare them in the app
+module, instead I'm going to create an export of a constant here called routableComponents, this is just a
+convention that I like to use. We could, by all means, just copy and paste those, and then I'm going to say okay
+put the CharacterListComponent here, the VehicleListComponent, and then the VehicleComponent. Great. We now have
+an AppRoutingModule. Now let's go over to our app module, we're going to need to import that file, so let's come
+down to the bottom of this import list and we need to pull in the things that we just exported from the other
+file. Well those are going to be the AppRoutingModule, that was the one we defined, and then the
+routablecomponents, and we have to tell it where to get those from, and that's going to be a relative path, it's
+going to be our app-routing.module. Once we have those, we need to import this AppRoutingModule into the
+NgModule down here. So I'm going to put that last in my list. If you'd like we can separate these out, make them
+a little bit more readable. It makes it longer, but a little bit more readable. And then where does this
+routableComponents go? Well those are just other components that we could use in our application. Now right now
+we've already imported CharacterList, VehicleList and VehicleComponent, I'm going to delete those and do this
+instead. Yes I could have left them there, but look what I can do up top now. I no longer need to import that
+line, this line or that line. Those three components up top were part of the routing, so I don't need to import
+them in two different files. It just kind of cleans up my code a little bit. Okay, now my app module is pulling
+in the AppRoutingModule, it's declaring the routable components, so all those components are there, and then
+it's going into my AppRoutingModule and defining these different routes, all that gets set up with what we just
+did. Let's take this opportunity to look over our code. We did a lot of stuff here, we're importing NgModule
+from Angular Core and Routes and RouterModule, well they actually come from angular/router, so we should type
+that in here at the end of line 2. That was a typo I had. And now let's make sure we've got the CharacterList,
+VehicleList and VehicleComponent in the right files. I have a tendency, as you've noticed, to type in vehcile,
+so that's actually vehicle right here. The important part is to make sure it matches up with whatever you put
+your paths. So those three components are going to be used for the destinations of the route. And then we have
+our four routes, the default route, which will go to characters, and then vehicles and vehicles/id. And we have
+the CharacterList, VehicleList, and VehicleComponent, those three different paths. Next up, we create our
+AppRoutingModule class and we import in the router module and its routes and we export the router and then we
+created a simple array of routable components that we're exporting. Back inside of app module, we import the
+AppRoutingModule and the routable components on line 11. We no longer needed the declarations to be imported for
+those components, instead we just imported the routable components and used it on line 21. We defined the import
+for the AppRoutingModule on line 17 and our app module is good to go. If you're typing along with me, go ahead
+and take this moment to catch up and then we'll move on to how we get them into the templates.</p>
+
+<h3>Adding Routing to Templates</h3>
+
+<p>Now that we've added the routing code to our app, let's have a place for it to show up inside of our templates.
+Go ahead and open up the app.component.html and in this section right here we're going to add a router-outlet,
+just like this, and that'll be where our templates are shown when we route to them. Well how do we route to
+them? Let's add some navigation for that. We'll create a nav tag and inside of there a ul, and then we'll create
+one li first with an a and then inside of the anchor tag we will create a routerLink directive right there, and
+we're going to do data binding on this, so we learned earlier that we use that with these square brackets, then
+a double quote here and inside of the double quote is going to be an array and inside of that array the first
+element is going to be the path we want to match it to. So this will be characters. So make sure you've got all
+your quotes in the right places, we've got a quote around the value, which is an array, and that array has a
+string of /characters, and that's got to match what we have back in our routing module for characters, for the
+redirectTo and the path from line 10. We're also going to need one for our vehicles in a moment. But first
+inside the a they have to have something to click on, so we'll make the menu item say characters. We'll then
+copy and paste it because that never gets us in trouble, right? And then we'll type in vehicles for the second
+path and Vehicles for the title. And then once we do that, we should be good. We can now just click on the
+preview and if everything worked out okay we should see our data shows up and both of our menu items. If I click
+on vehicles, we go to the vehicles, if I click on characters we go to characters. If you were coding along with
+me and it worked out, awesome. And if it didn't, you feel free to go back and try again or if you'd like you can
+go off and click on the Router number 25 example in our main demo app, it's the conclusion of what we just did.</p>
+
+<h3>Sending and Receiving Route Parameters</h3>
+
+<p>Now that we know the routing fundamentals, let's take a look at how we can define parameters. Inside of our
+routing module we already set up one parameter for the character ID. This is how we define a parameter, we use
+colon and then the value. Now once we set up that parameter, it's going to be interpreted by the router to say,
+okay if I see character/ then a value, it's going to mean go to this path and it'll go to that particular
+character component. But how do we pull the data back out once we get there? Well there's a couple of ways that
+we can get data to another component. One is by using the snapshot. This is the easiest as long as the parameter
+values aren't going to change. It's one line of code and it makes it easy to pull that value out in the
+destination component. Another option is to use an observable. This will get new parameter values whenever the
+component is reused, for example, let's say you had a character detail component and on there you wanted to
+navigate to another character detail component, well then you're actually activating the same component again.
+So you'd want a way to make sure that you can get that new value, the observable will be able to stream in the
+new values for you. It's a little bit more code, but it's a little more flexible. So snapshot is great if you're
+not going to go like detail to detail, because the parameters aren't going to change, the next you come into the
+detail component you'll probably go back out to a list, select it, and then come back in. But if you're going to
+go from detail to detail, the observable is really key. And there's also a third way, it's called using
+resolver. This is a way we can pass data to a route before the component is actually loaded. Let's explore these
+three. In the destination component, let's say it's a SessionComponent where we want to pull out the id that was
+pulled in as a parameter. We first inject the activated route. This is an object we can inject that's set up by
+pulling in that router module. We don't have to provide this particular one because this service comes with the
+router module. Once we have that, we can use that route object to go into the snapshot property and look for the
+parameter named id. As I said, this is the easiest way to get them. As long as that id isn't going to change
+while you're on the component, you're good. If the id is going to change, because we're going to go from a
+detail component to another detail, we could use observables, or if you just want to be safe. Here we go to the
+route.params because that's an observable, so we'll map the response. Now that parameter comes across as a
+string, so now I'm using the do to say, alright take that id, do a parseInt on it and put it into a number, this
+id. Now I've got it locally in my class and I can subscribe to any of the changes. So whenever these values
+change, if the id parameter does change, I'll be able to get it and it will go get the correct session for it.
+So we just learned how we can grab parameters using the snapshot technique or getting a string with them by
+using observables. Let's go take a look at our demo apps to see how that works.</p>
+
+<h3>Subscribing to Route Parameters</h3>
+
+<p>Let's go back to our demo application and click on the Router Completed example, and we'll take a look at where
+we have parameters in our application. When we click on vehicles we can see we've got the Millennium Falcon and
+then we click on that and we see the details for that Falcon. If we go back to vehicles, we click on X-Wing
+Fighter, we can see those details. Well let's look inside the vehicles folder and here on the vehicle component
+we're receiving a parameter. Notice on line 17 we're injecting the activated route, that activated route is how
+we're going to access the parameters. Notice line 26 inside of the ngOnInit is going to say alright look at that
+route, look at its parameters, and then we're going to map those parameter's id, and this is just a shortcut way
+to make it turn into a number, and then we're going to subscribe and when we get this value, when this comes
+through this pipeline, that stream, we're going to subscribe to it and then run getVehicle. And down on line 35
+it'll call the getVehicle, passing in the id to the service and it'll come back out the other end and we set our
+vehicle locally. And the parameter name on line 28, id, has to match what we have in our routing module, right
+here on line 15, vehicles/:id. And that's how we set up routing parameters in our application.</p>
+
+<h3>Basics of Route Resolvers</h3>
+
+<p>Earlier we talked about a third way to pass data to a route, that third technique is using a resolver. Resolvers
+are a way to get data prior to navigating to the route. Let's take a look at how we define one of these
+resolvers. These are key for the scenarios where you want to get data before you actually go to the particular
+component. In this case my resolver is just a service and it's going to implement the resolve interface, which
+comes from the angular/router ES module. That interface says we must implement the resolve function and one of
+the parameters there is the route, which is the activated route snapshot. That will allow us to grab information
+about the parameters before actually going to the destination. And we can use that to call an existing service,
+like the Vehicle service to go get the vehicle and when it comes back, if it has a vehicle we can return it, if
+not we can create a new instance of it. We probably want to have some kind of error handling here as well
+because what if things go wrong? In that case, we'll head back to the vehicles list, or we could put an error
+message up for the user, it's really up to us. But here's our chance to inspect things in the midst of a routing
+action. Once we have this service, we can go ahead and implement it and apply it to the route. So inside of our
+route we add a resolve down here as a property of that route, so we had path and component, we take the resolve
+and now we specify the data values we want. They'll be an object called vehicle that we resolve to. So we define
+this inter route configuration and remember, if we're going to create a service called VehicleResolver, we still
+have to provide it somewhere, because that's how the dependency injection finds it. And we can define more than
+one of these if we want to. We could have a VehicleResolver and maybe another resolver too. Most often one is
+enough. And then the way you get that resolver data back inside of your component is to then take that activated
+route and then look at that data value. So we're going to subscribe to that and then we can grab the vehicle
+that we decided we wanted to pass in, that vehicle property is the one we defined in the route configuration and
+it's of type vehicle. Let's go take a look at our application and see where we can use resolver.</p>
+
+<h3>Route Resolver in the Storyline Tracker</h3>
+
+<p>The storyline tracker has several different routes in it. One of them is a vehicle-routing.module, and here we
+can see a path for parameter for id is going to go to a VehicleComponent and on line 23 through 25 we can see a
+resolver for the vehicle. This means that when they go to that id for the vehicle, we're going to go down to
+this vehicle.component and it's going to receive that value. So if we look inside of here for the ngOnInit,
+which is on line 67, we can scroll on down beyond the comments, which is explaining the resolver here, and we
+can see that we're getting the route and then it's data property and we're subscribing to it, and in there we're
+getting that data object with the vehicle. And then once we get that, we can then perform any local logic we
+need to do, like setting the local vehicle variable or grabbing the vehicle's id. Up above we can see some other
+ways we could have grabbed the values. If I wanted to pass a parameter we could have done so. For example, we
+could have used the snapshot, right here on line 73. That would have allowed us to pass the parameter, the
+difference between passing the parameter and the resolver is the parameter would have gotten to this page, it
+would have shown the page, and then we'd have to go get the data, so then the spinner that we could show up on
+the page would show up on the destination page while waiting for the data. The same thing with using the second
+technique here with the ActivatedRoute where we go ahead and use an observable and we subscribe to that to get
+the parameter value, we'd have to then go get the data as shown here on line 81. So when we use parameters, we
+have to go get the data after we get to the destination. With a resolver, we're waiting before we actually
+traverse to the destination. So it really depends what your user experience needs to be. If you want to get the
+data before you go on the route use a resolver, if you want to use it after, use a parameter.</p>
+
+<h3>Route Guards</h3>
+
+<p>When a user goes to our vehicles page or our characters page, maybe we want to check first to see if they've
+been logged into the system. For that we might want to block or at least inspect that route or guard it. That's
+where routing guards come into play. They allow us to make decisions at certain key points in that routing
+lifecycle and then we can either continue, we can abort that action or do something different. When we're at
+that moment where a user can navigate anywhere in an app at any time, that's not always the right thing that we
+want to do. Maybe the user isn't authorized, maybe they can't navigate to the target component because of that.
+Maybe the user must log in first. Maybe we need to fetch some data before we display it, like with using
+resolver. That's one type of guard, but there's other types too. For example, maybe we want to save some pending
+changes before we leave a component or at least ask the user if it's okay. Let's explore some of those different
+types of router guards. We've already learned about the resolve, we'll use that to pass some data into a target
+component. Another kind of a guard is a CanActivate guard. This one is one we can use to say do we want to go to
+that particular component. For example, we want to go to /characters, well before we do that maybe we want to
+make sure that they've been authenticated first. So we can use the CanActivate guard to check to see if
+authentication has occurred. If it has, let them continue. If not, we block them and maybe show an error message
+or reroute them to a login page. Like CanActivate, we also have a CanActivateChild. This is for child routes,
+which we'll talk about very soon. And maybe we're on a particular component, but we don't want the person to
+leave until that they've answered a question. For example, they might be editing a character, and maybe in the
+middle of editing that character, they try to leave. Well if the state is dirty, we can implement a CanDeactive
+guard to check that state and then ask the user, do you want to save these changes, cancel them, or what do you
+want to do? And then there's the CanLoad guard. This one's similar to the CanActivate where we get an
+opportunity to inspect some information, to check to see, for example, are you authenticated before you go to
+the destination, but unlike the CanActivate, the CanLoad will not even go get the contents, the HTML and the
+JavaScript, for that module that you're going to until it's been satisfied. This is really ideal for things when
+you do lazy loading, which we'll look at more in the next chapter. For now, we'll concentrate more on the other
+guards. Let's take a look at how we implement a CanActivate guard. Often we'll use this for an auth guard for
+authentication. Have you been authenticated yet? We'll implement the interface for CanActivate, which means all
+the function called CanActivate with the ActivatedRouteSnapshot and a RouterStateSnapshot, and then we'll either
+return true or false to let them either proceed with the route or to get out. Notice in this logic here, if the
+person isn't logged in, we're going to route them to the login page and then return false. So we're going to
+cancel the current route and introduce a new one. This allows us to really change the way the application
+behaves. Once we define the guard, we have to apply it. Here we've got a dashboard route and we're applying the
+CanActivate with the AuthGuard. Notice that it's an array that's because we could apply more than one guard if
+we wanted to. Now that we've learned about using routing guards, let's go check out an example in our demos.</p>
+
+<h3>Applying Route Guards</h3>
+
+<p>We'll go on down to number 26, Route Guards, and we'll click on View Sample. Here we're going to have two routes
+for vehicles and for characters once again, but now we've got a login as well, so we can authenticate. Notice
+the default route is characters and it's showing the login page. That's because we have a guard in place saying
+hey you're not authorized so we're redirecting the login. However, vehicles is allowing us free reign to come
+in, it's not guarded. And then of course we can go straight to login. The behavior we want is if you click on
+characters it should take you to login, but remember you wanted to go to characters, so after we login, which
+we're just delaying and doing a quick fake login, here we're going to then go back to the characters route.
+Let's take a look at how this guard is implemented on the characters and let's also apply it to vehicles. Now
+our routing is inside of the app-routing.module, we'll open that up, and notice that we have a route for
+characters and for vehicles. On the characters we're using CanActivate and CanActivateChild and we're putting
+the same AuthGuard on both of them. The guard for CanActivate on line 22 is making sure that if you go through
+characters, the main page, that it's going to guard it. The CanActivateChild is guarding the child pages. So if
+we try to do a deep link to one of those, it would guard one of them. But we're not guarding the vehicles at
+all. So one way we can handle the vehicles is just to put the guard on it. Let's go ahead and copy CanActivate
+right there on line 22 and let's put it inside of the vehicles, just like that. Now nobody can get to the
+vehicles directly. However, they can still get the vehicle's id. So we could put that guard here as well. Here's
+a case for why we might want to use child routes as well. Notice in the characters we have the characters route
+as the path of characters and then we set up two children. The first one goes to the blank path, which is
+CharacterList and the second one to an id for the CharacterComponent. By breaking this out into child routes, we
+can now take advantage of the CanActivateChild to guard all of the children. Because we didn't do that with the
+vehicles, we have to go ahead and make sure we're guarding the CanActivate for both specific routes. So if we
+had multiple child routes, this is really helpful in implementing the guards. We could just do a
+CanActivateChild. Well let's test this out real quick. If we press run, now when the app loads, again it's
+trying to go to characters so we try to log in, I can't go to vehicles either, I'm clicking on that, it's not
+happening. Once I log in though it goes right to the vehicles page and I can go back and forth between the two
+different places until I log back out again. Now how did this guard get applied? The guard is called
+CanActivateAuthGuard, it's really just a service, right. Well our AppModule down here happens to have a
+providers list and one of those happens to be our guard. So make sure that you provide your guards as well.</p>
+
+<h3>Child Routes</h3>
+
+<p>We just saw how we can guard different routes and got a sneak peek at child routes. Child routes are a great way
+to create hierarchical sets of routes. We took at look at some routing we had with characters and child routes.
+We defiend the URLs for those parent routes and then for the child. They get put together to create the end
+route. So above here that first path is characters and the second one would be character/72 if that happened to
+be the id. Let's step back and take a look at how this could look in an application. We might have a root route
+for our app and that might redirect to the dashboard route. So we could have one route for dashboard. We might
+have another one for vehicles and a third for characters. Well in what we just defined for those routes we could
+have characters/ and /id for 21 maybe, for a different character id for a list and a detail page. Those could be
+child routes for characters. And then vehicles could do the same thing. We saw this in the previous example and
+it was a very subtle, but important reminder in that last demo. Do you notice where we provided that guard that
+we showed? We did that in the module providers, that was our CanActivateAuthGuard. We did it in the root
+injector and the reason for this is if we're going to have a guard, it cannot be provided at a component level
+or a level lower than where it's going to be used. These guards are being used by the routing before they
+actually get to the component. So they had to be put into a provider of something a little bit higher level.
+Most often these guards will make sense in the root injector. Don't worry though, if we put it in the wrong
+place and Angular can't find our provider, it will give us that message of cannot find provider for
+CanActivateAuthGuard and that's a good hint that maybe you don't have it in the providers at all or it's not in
+the right level. In that case, just push it up to the root injector. Let's take a look at all the things we've
+learned about routing in the storyline tracker. The storyline tracker has a dashboard, characters, and vehicles.
+It's also got an admin area, but if we click on there, it's got that guard in there. This is where we've got the
+CanAuthGuard, which is on the CanActivate of the admin, which kind of makes sense in a real app, right. You
+don't want to get to an admin page unless you have permissions. Maybe you want to not let anybody get into
+anything until they have permission as well. So you can really manipulate how you want these guards to work. And
+then once I log in, I can then say okay you're good, go back to the admin page and do great things, and then you
+can go anywhere you want in the app. There's different kinds of guards too. We mentioned that we can have a
+CanDeactivate, so let's go inside of BB8 and let's change BB8 from the light side to the dark side. And before I
+press Save, let's just go back to the dashboard. When I try that it's saying, wait a minute - do you want to
+cancel your changes? Why do you think it asks us if we want to cancel the changes? Exactly, because there's a
+CanDeactivate guard on this route. Well let's hit Cancel and it's going to stay right here. If I hit the
+dashboard again and I go to OK, it's going to cancel the changes on me and go back to the dashboard. Now if I go
+back to the characters and BB8, he's still on the light side. Let's take a look at how this is implemented. Now
+where might this me in the code? Let's think about this. We have a characters route, so let's go check out the
+characters themselves, there's actually a routing module in there and we're going to learn more about how you
+can create nested routing modules in the next chapter, but for now we can see down here that on the characters
+child route we have an id on line 19 and then a CanDeactivateGuard on line 21. Perfect. I'll bet you there's the
+same kind of guard on the vehicles too. Let's go over to vehicles, we'll try the Millennium Flacon and we'll
+change this from space to land and then we'll click on characters and the same kind of question comes up. As you
+can see, guards can be extremely helpful for implementing different kinds of logic. I recommend that you tinker
+with the guards for this application to get a feel for how they can work in different scenarios.</p>
+
+<h3>What's Next with Routing</h3>
+
+<p>This chapter we learned quite a bit about routes. We started with the basics and then we showed how we can
+define different kinds of routes, then we defined the routing module, which encapsulates all that information
+about our routes. We learned how to define route parameters and pass information along to the target component,
+and then extract that using snapshots or using an observable. And remember, the pros of the snapshot are it's
+easier, but with the observable you're always guaranteed to get the updated parameter information. And then from
+there we learned how we can use resolvers to make sure we get data before we actually go to the destination of
+the route. That was one kind of guard. Can you name any others? Yeah, there was the CanActivate, which we used
+to make sure we could go to a particular route. Often you see that with authentication scenarios. And then we
+saw a CanDeactivateGuard, which prevented the user from leaving the screen until they met certain criteria, like
+making sure they didn't leave the screen in a dirty state, and they either saved their changes or cancelled
+them. And to make it easier to apply guards we actually set up child routes, which helped us create a hierarchy
+of the routes. In the next module we'll continue exploring routes, but in the context of modules, ngModules.
+When we combine these two features together we can do things like eager loading and lazy loading of modules, and
+we can even apply guards so we can only load the content of a lazy loaded module when we want it. We'll learn
+how to do that and much more with ngModules in the next section.</p>
+
