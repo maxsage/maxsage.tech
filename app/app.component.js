@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router', './home/welcome.component', './angular2/angular2.component', './jquery/jquery.component', './bootstrap/bootstrap3.component', './visualstudio/visualstudio.component', './visualstudiocode/visualstudiocode.component', './emmet/emmet.component', './csharp/csharp.component', './javascript/javascript.component', './typescript/typescript.component', './wpf/wpf.component', './odata/odata.component', './dgen/dgen.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router', './home/welcome.component', './wpf/wpf.component', './angular2/angular2.component', './typescript/typescript.component', './javascript/javascript.component', './jquery/jquery.component', './bootstrap/bootstrap3.component', './visualstudio/visualstudio.component', './visualstudiocode/visualstudiocode.component', './emmet/emmet.component', './csharp/csharp.component', './odata/odata.component', './dgen/dgen.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, welcome_component_1, angular2_component_1, jquery_component_1, bootstrap3_component_1, visualstudio_component_1, visualstudiocode_component_1, emmet_component_1, csharp_component_1, javascript_component_1, typescript_component_1, wpf_component_1, odata_component_1, dgen_component_1;
+    var core_1, http_1, router_1, welcome_component_1, wpf_component_1, angular2_component_1, typescript_component_1, javascript_component_1, jquery_component_1, bootstrap3_component_1, visualstudio_component_1, visualstudiocode_component_1, emmet_component_1, csharp_component_1, odata_component_1, dgen_component_1;
     var AppComponent;
     return {
         setters:[
@@ -27,8 +27,17 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
             function (welcome_component_1_1) {
                 welcome_component_1 = welcome_component_1_1;
             },
+            function (wpf_component_1_1) {
+                wpf_component_1 = wpf_component_1_1;
+            },
             function (angular2_component_1_1) {
                 angular2_component_1 = angular2_component_1_1;
+            },
+            function (typescript_component_1_1) {
+                typescript_component_1 = typescript_component_1_1;
+            },
+            function (javascript_component_1_1) {
+                javascript_component_1 = javascript_component_1_1;
             },
             function (jquery_component_1_1) {
                 jquery_component_1 = jquery_component_1_1;
@@ -48,15 +57,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
             function (csharp_component_1_1) {
                 csharp_component_1 = csharp_component_1_1;
             },
-            function (javascript_component_1_1) {
-                javascript_component_1 = javascript_component_1_1;
-            },
-            function (typescript_component_1_1) {
-                typescript_component_1 = typescript_component_1_1;
-            },
-            function (wpf_component_1_1) {
-                wpf_component_1 = wpf_component_1_1;
-            },
             function (odata_component_1_1) {
                 odata_component_1 = odata_component_1_1;
             },
@@ -71,7 +71,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-app',
-                        template: "\n            <div class='navbar navbar-inverse'>\n                <div class='container'>\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span class=\"sr-only\">Toggle navigation</span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </button>\n                        <a [routerLink]=\"['Welcome']\" class=\"navbar-brand\">maxsage.tech</a>\n                    </div>\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class='nav navbar-nav'>\n                            <li><a [routerLink]=\"['WPF']\">WPF</a></li>\n                            <li><a [routerLink]=\"['Angular2']\">Angular 2</a></li>\n                            <li><a [routerLink]=\"['JQuery']\">JQuery</a></li>\n                            <li><a [routerLink]=\"['Bootstrap3']\">Bootstrap 3</a></li>\n                            <li><a [routerLink]=\"['VisualStudio']\">Visual Studio</a></li>\n                            <li><a [routerLink]=\"['VisualStudioCode']\">Visual Studio Code</a></li>\n                            <li><a [routerLink]=\"['Emmet']\">Emmet</a></li>\n                            <li><a [routerLink]=\"['CSharp']\">C#</a></li>\n                            <li><a [routerLink]=\"['JavaScript']\">JavaScript</a></li>\n                            <li><a [routerLink]=\"['TypeScript']\">TypeScript</a></li>\n                            <li><a [routerLink]=\"['OData']\">OData</a></li>\n                            <li><a [routerLink]=\"['DGen']\">DGen</a></li>\n\n                        </ul>\n                    </div>\n                </div>\n            </div>\n            <div class='container body-content'>\n                <router-outlet></router-outlet>\n                <hr />\n                <footer>\n                    <p>&copy; 2016 - maxsage.tech</p>\n                </footer>\n            </div>\n    ",
+                        template: "\n            <div class='navbar navbar-inverse'>\n                <div class='container'>\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span class=\"sr-only\">Toggle navigation</span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </button>\n                        <a [routerLink]=\"['Welcome']\" class=\"navbar-brand\">maxsage.tech</a>\n                    </div>\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class='nav navbar-nav'>\n                            <li><a [routerLink]=\"['WPF']\">WPF</a></li>\n                            <li><a [routerLink]=\"['Angular2']\">Angular 2</a></li>\n                            <li><a [routerLink]=\"['TypeScript']\">TypeScript</a></li>\n                            <li><a [routerLink]=\"['JavaScript']\">JavaScript</a></li>\n                            <li><a [routerLink]=\"['JQuery']\">JQuery</a></li>\n                            <li><a [routerLink]=\"['Bootstrap3']\">Bootstrap 3</a></li>\n                            <li><a [routerLink]=\"['VisualStudio']\">Visual Studio</a></li>\n                            <li><a [routerLink]=\"['VisualStudioCode']\">Visual Studio Code</a></li>\n                            <li><a [routerLink]=\"['Emmet']\">Emmet</a></li>\n                            <li><a [routerLink]=\"['CSharp']\">C#</a></li>\n                            <li><a [routerLink]=\"['OData']\">OData</a></li>\n                            <li><a [routerLink]=\"['DGen']\">DGen</a></li>\n\n                        </ul>\n                    </div>\n                </div>\n            </div>\n            <div class='container body-content'>\n                <router-outlet></router-outlet>\n                <hr />\n                <footer>\n                    <p>&copy; 2016 - maxsage.tech</p>\n                </footer>\n            </div>\n    ",
                         directives: [router_1.ROUTER_DIRECTIVES],
                         providers: [http_1.HTTP_PROVIDERS,
                             router_1.ROUTER_PROVIDERS]
@@ -79,6 +79,23 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                     router_1.RouteConfig([
                         { path: '/welcome', name: 'Welcome', component: welcome_component_1.WelcomeComponent, useAsDefault: true },
                         { path: '/wpf', name: 'WPF', component: wpf_component_1.WPFComponent },
+                        { path: '/wpf-data-binding-in-depth-00-course-contents', name: 'WPFDataBindingInDepth00CourseContents', component: wpf_component_1.WPFDataBindingInDepth00CourseContentsComponent },
+                        { path: '/wpf-data-binding-in-depth-01-course-overview', name: 'WPFDataBindingInDepth01CourseOverview', component: wpf_component_1.WPFDataBindingInDepth01CourseOverviewComponent },
+                        { path: '/wpf-data-binding-in-depth-02-data-binding-overview', name: 'WPFDataBindingInDepth02DataBindingOverview', component: wpf_component_1.WPFDataBindingInDepth02DataBindingOverviewComponent },
+                        { path: '/wpf-data-binding-in-depth-03-data-sources', name: 'WPFDataBindingInDepth03DataSources', component: wpf_component_1.WPFDataBindingInDepth03DataSourcesComponent },
+                        { path: '/wpf-data-binding-in-depth-04-binding-core-concepts', name: 'WPFDataBindingInDepth04BindingCoreConcepts', component: wpf_component_1.WPFDataBindingInDepth04BindingCoreConceptsComponent },
+                        { path: '/wpf-data-binding-in-depth-05-unleashing-the-full-power-of-bindings', name: 'WPFDataBindingInDepth05UnleashingTheFullPowerOfBindings', component: wpf_component_1.WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent },
+                        { path: '/wpf-data-binding-in-depth-06-deep-dive-into-datatemplates', name: 'WPFDataBindingInDepth06DeepDiveIntoDataTemplates', component: wpf_component_1.WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent },
+                        { path: '/wpf-data-binding-in-depth-07-design-time-data-binding', name: 'WPFDataBindingInDepth07DesignTimeDataBinding', component: wpf_component_1.WPFDataBindingInDepth07DesignTimeDataBindingComponent },
+                        { path: '/wpf-data-binding-in-depth-08-containers-and-collection-controls', name: 'WPFDataBindingInDepth08ContainersAndCollectionControls', component: wpf_component_1.WPFDataBindingInDepth08ContainersAndCollectionControlsComponent },
+                        { path: '/wpf-data-binding-in-depth-09-data-input-validation', name: 'WPFDataBindingInDepth09DataInputValidation', component: wpf_component_1.WPFDataBindingInDepth09DataInputValidationComponent },
+                        { path: '/wpf-mvvm-in-depth-00-course-contents', name: 'WPFMVVMInDepth00CourseContents', component: wpf_component_1.WPFMVVMInDepth00CourseContentsComponent },
+                        { path: '/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals', name: 'WPFMVVMInDepth01MVVMPatternFundamentals', component: wpf_component_1.WPFMVVMInDepth01MVVMPatternFundamentalsComponent },
+                        { path: '/wpf-mvvm-in-depth-02-first-taste-of-mvvm', name: 'WPFMVVMInDepth02FirstTasteOfMVVM', component: wpf_component_1.WPFMVVMInDepth02FirstTasteOfMVVMComponent },
+                        { path: '/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm', name: 'WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVM', component: wpf_component_1.WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent },
+                        { path: '/wpf-mvvm-in-depth-04-view-viewmodel-communication-in-wpf', name: 'WPFMVVMInDepth04ViewViewModelCommunicationInWPF', component: wpf_component_1.WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent },
+                        { path: '/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation', name: 'WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigation', component: wpf_component_1.WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent },
+                        { path: '/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection', name: 'WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjection', component: wpf_component_1.WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent },
                         { path: '/angular2', name: 'Angular2', component: angular2_component_1.Angular2Component },
                         { path: '/angular2-getting-started-00-course-contents', name: 'Angular2GettingStarted00CourseContents', component: angular2_component_1.Angular2GettingStarted00CourseContentsComponent },
                         { path: '/angular2-getting-started-01-course-overview', name: 'Angular2GettingStarted01CourseOverview', component: angular2_component_1.Angular2GettingStarted01CourseOverviewComponent },
@@ -96,13 +113,36 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                         { path: '/angular2-getting-started-13-angular-modules', name: 'Angular2GettingStarted13AngularModules', component: angular2_component_1.Angular2GettingStarted13AngularModulesComponent },
                         { path: '/angular2-getting-started-14-angular2-setup-revisited', name: 'Angular2GettingStarted14Angular2SetupRevisited', component: angular2_component_1.Angular2GettingStarted14Angular2SetupRevisitedComponent },
                         { path: '/angular2-getting-started-15-final-words', name: 'Angular2GettingStarted15FinalWords', component: angular2_component_1.Angular2GettingStarted15FinalWordsComponent },
+                        { path: '/angular2-first-look-00-course-contents', name: 'Angular2FirstLook00CourseContents', component: angular2_component_1.Angular2FirstLook00CourseContentsComponent },
+                        { path: '/angular2-first-look-01-angular-2-in-action', name: 'Angular2FirstLook01Angular2InAction', component: angular2_component_1.Angular2FirstLook01Angular2InActionComponent },
+                        { path: '/angular2-first-look-02-angular-2-architecture-whats-new-and-whats-different', name: 'Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferent', component: angular2_component_1.Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent },
+                        { path: '/angular2-first-look-03-angular-2-essentials-modules-components-templates-and-metadata', name: 'Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadata', component: angular2_component_1.Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent },
+                        { path: '/angular2-first-look-04-displaying-data-data-binding-directives-and-pipes', name: 'Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipes', component: angular2_component_1.Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent },
+                        { path: '/angular2-first-look-05-services-dependency-injection-and-component-lifecycle-hooks.html', name: 'Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooks', component: angular2_component_1.Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent },
+                        { path: '/angular2-first-look-06-data-with-http.html', name: 'Angular2FirstLook06DataWithHttp', component: angular2_component_1.Angular2FirstLook06DataWithHttpComponent },
+                        { path: '/angular2-first-look-07-routing.html', name: 'Angular2FirstLook07Routing', component: angular2_component_1.Angular2FirstLook07RoutingComponent },
+                        { path: '/angular2-first-look-08-angular-modules.html', name: 'Angular2FirstLook08AngularModules', component: angular2_component_1.Angular2FirstLook08AngularModulesComponent },
+                        { path: '/javascript', name: 'JavaScript', component: javascript_component_1.JavaScriptComponent },
+                        { path: '/building-a-javascript-development-environment00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },
+                        { path: '/building-a-javascript-development-environment01-you-need-a-starter-kit', name: 'BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKit', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKitComponent },
+                        { path: '/building-a-javascript-development-environment02-editors-and-configuration', name: 'BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfiguration', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfigurationComponent },
+                        { path: '/building-a-javascript-development-environment03-package-management', name: 'BuildingAJavaScriptDevelopmentEnvironment03PackageManagement', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment03PackageManagementComponent },
+                        { path: '/building-a-javascript-development-environment04-development-web-server', name: 'BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServer', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServerComponent },
+                        { path: '/building-a-javascript-development-environment05-automation', name: 'BuildingAJavaScriptDevelopmentEnvironment05Automation', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment05AutomationComponent },
+                        { path: '/building-a-javascript-development-environment06-transpiling', name: 'BuildingAJavaScriptDevelopmentEnvironment06Transpiling', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent },
+                        { path: '/building-a-javascript-development-environment07-bundling', name: 'BuildingAJavaScriptDevelopmentEnvironment07Bundling', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent },
+                        { path: '/building-a-javascript-development-environment08-linting', name: 'BuildingAJavaScriptDevelopmentEnvironment08Linting', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment08LintingComponent },
+                        { path: '/building-a-javascript-development-environment09-testing-and-continuous-integration', name: 'BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegration', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegrationComponent },
+                        { path: '/building-a-javascript-development-environment10-http-calls', name: 'BuildingAJavaScriptDevelopmentEnvironment10HTTPCalls', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment10HTTPCallsComponent },
+                        { path: '/building-a-javascript-development-environment11-project-structure', name: 'BuildingAJavaScriptDevelopmentEnvironment11ProjectStructure', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment11ProjectStructureComponent },
+                        { path: '/building-a-javascript-development-environment12-production-build', name: 'BuildingAJavaScriptDevelopmentEnvironment12ProductionBuild', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment12ProductionBuildComponent },
+                        { path: '/building-a-javascript-development-environment13-production-deploy', name: 'BuildingAJavaScriptDevelopmentEnvironment12ProductionDeploy', component: javascript_component_1.BuildingAJavaScriptDevelopmentEnvironment13ProductionDeployComponent },
                         { path: '/jquery', name: 'JQuery', component: jquery_component_1.JQueryComponent },
                         { path: '/bootstrap', name: 'Bootstrap3', component: bootstrap3_component_1.Bootstrap3Component },
                         { path: '/visualstudio', name: 'VisualStudio', component: visualstudio_component_1.VisualStudioComponent },
                         { path: '/visualstudiocode', name: 'VisualStudioCode', component: visualstudiocode_component_1.VisualStudioCodeComponent },
                         { path: '/emmet', name: 'Emmet', component: emmet_component_1.EmmetComponent },
                         { path: '/csharp', name: 'CSharp', component: csharp_component_1.CSharpComponent },
-                        { path: '/javascript', name: 'JavaScript', component: javascript_component_1.JavaScriptComponent },
                         { path: '/typescript', name: 'TypeScript', component: typescript_component_1.TypeScriptComponent },
                         { path: '/odata', name: 'OData', component: odata_component_1.ODataComponent },
                         { path: '/dgen', name: 'DGen', component: dgen_component_1.DGenComponent },

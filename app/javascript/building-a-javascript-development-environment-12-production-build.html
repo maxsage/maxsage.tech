@@ -1,0 +1,656 @@
+
+    <h1>Production Build</h1>
+    <h2>Intro</h2>
+    <p>Of course our application isn't very useful until we actually prepare it for production. So in this module
+      let's create an automated production build. We'll cover a variety of considerations including minificationto
+      to speed page loads with Sourcemaps generated to support debugging in production - hey, let's be honest you and
+      I both know this happens. We'll setup dynamic HTML handling for production specific concerns and Cache busting to
+      make sure that users receive the latest version of our code upon deployment. We'll setup bundle splitting so that
+      users don't have to download the entire application when just part of it changes. And finally we'll setup error
+      logging so that we know when bugs sneak their way into production. Now this sounds like a lot of work but as
+      you'll see this moves fast. Alright let's dig in.</p>
+    <h2>Minification and Sourcemaps</h2>
+    <p>Let's begin by discussing minification. Minification is about speeding page loads and saving bandwidth. So how
+      does minification work? Well a JavaScript minifier uses a number of tricks:</p>
+    <ul>
+      <li>It will shorten variable and function names.</li>
+      <li>Remove comments</li>
+      <li>Remove whitespace, newlines, and more.</li>
+    </ul>
+    <p>The code still functions the same but the resulting file size is much smaller which helps speed page loads.
+      Minification basically removes all the things that only humans care about and leaves all the things that computers
+      need. And some of the newer bundlers like rollup and webpack 2 go even further by elimanating unused code by a
+      process that's commonly called tree shaking. We're using webpack 1 for this course but this feature will soon help
+      reduce the size of bundles by excluding any unused code from our final bundles. And through the beauty of
+      sourcemaps we can still debug our minified code. As you'll see in a moment in the demo we'll continue to see
+      our original source code in the browser as we debug. For more info on sourcemaps refer to the bundling module
+      earlier in this course.</p>
+    <h2>Demo: Production Webpack Configuration with Minification</h2>
+    <p>Now let's put webpack to work to bundle and minify our app code for production. To begin configuring our app
+      code for production let's make a copy of our development webpack config and we'll call it web.config.prod.js and
+      now let's tweak some settings for production. First we'll change the dev tool setting. Remember that this setting
+      specifies how sourcemaps should be generated. We explored sourcemaps earlier in the bundling module. Let's
+      change the devtool setting to sourcemap since that's whats recommended for production. It's a little bit slower
+      to build but it provides the highest quality source map experience. This will assure that we can still see our
+      original source code in the browser even though it's been minified, transpiled and bundled. That's the beauty of
+      source maps. And we're going to write our production build to a folder called dist so let's change the output
+      path. When building the app for production we'll write physical files to a folder called dist. This is a popular
+      convention and it stands for distribution. </p>
+    <p>Next, let's setup minification. We want to minify our code for production so let's add our first plugin to
+      the array of plugins. We're going to use a plugin called UglifyJs and I like to put a comment above each
+      of my plugin references. So you can see webpack.optimize.UglifyJsPlugin. And now that we're calling some specific
+      webpack features we need to add the import at the top.</p>
+    <p>And before we minify let's use another handy webpack plugin that will eliminate any duplicate packages when
+      generating the bundle. This bundle is called the DedupePlugin. So this will look through all the files that
+      we're bundling and make sure that no duplicates are bundled.</p>
+    <p>Now we'll enhance the webpack config with additional features throughout this module but this is a good start.
+      Let's now shift our focus to writing a script that will run our production webpack config build. So we'll go
+      over to buildScripts and create a new file called build.js. And here's all it takes to run our webpack build for
+      production:</p>
+    <pre>
+<code class="javascript">
+/*eslint-disable no-console */
+import webpack from 'webpack';
+
+</code>
+    </pre>
+    <p>We're importing webpack, our production config that we just defined and chalk so that we can color our output.
+      And then we're calling webpack and passing it that webpack config. We're handling any errors that might occur
+      otherwise we return 0 which signifies success. So this is pretty simple but in the real world you'll likely
+      want to add a little more to this. So let's enhance this script a little bit.</p>
+    <p>First, above the call to webpack, declare that we are running node in production mode: </p>
+    <pre><code class="javascript">process.env.NODE_ENV = 'production';</code></pre>
+    <p>Although it's not neccessary for our setup I'm adding this line here because this is important if you create a
+      dev specific configuration for babel in your .babelrc file. See Babel, and potentially other libraries you may
+      use,
+      look for this environment variable to determine how they are built. And before we get started running the
+      production build I like to output to the console just so we can see the production build has started:</p>
+    <pre>
+<code class="javascript">
+console.log(chalk.blue('Generating minified bundle for production. This will take a moment..'));
+</code></pre>
+    <p>Since we're doing minification, as you'll see, the production does take quite a few seconds to run so it's
+      nice to get some notification that it is doing the job.</p>
+    <p>I like to display some stats to the command line:</p>
+    <pre>
+<code class="javascript">
+const jsonStats = stats.toJson();
+</code>
+    </pre>
+    <p>Now this looks like a lot of code and it isn't required but this assures that warnings, errors and stats
+      are displayed to the console and at the bottom we display a success message if everything worked. </p>
+    <p>So this is for displaying any errors that occur:</p>
+    <pre>
+<code class="javascript">
+if (jsonStats.hasErrors) {
+  return jsonStats.errors.map(error => console.log(chalk.red(error)));
+}
+</code>
+    </pre>
+    <p>This is for displaying warnings that occur:</p>
+    <pre>
+<code class="javascript">
+if (jsonStats.hasWarnings) {
+  console.log(chalk.yellow('Webpack generated the following warnings: '));
+  jsonStats.warnings.map(warning => console.log(chalk.yellow(warning)));
+}
+</code>
+    </pre>
+    <p>I display the stats right here:</p>
+    <pre><code class="javascript">console.log(`Webpack stats: ${stats}`);</code></pre>
+    <p>Finally we just output a message so that we know that our production build has succeeded:</p>
+    <pre>
+<code class="javascript">
+// if we got this far, the build succeeded.
+console.log(chalk.green('Your app has been built for production and written to /dist!'));
+</code>
+    </pre>
+    <p>Great, so there's quite a bit of code here but it's really conceptually simple. This just runs our production
+      webpack config. I've added some extra goodness here just to improve our experience. Let's save our changes and
+      in the next clip let's try this out by setting up an automated production build.</p>
+    <h2>Demo: Configure Local/dist Server</h2>
+    <p>This isn't required but I like to run the final production version of the app on my local machine just so I
+      can make sure everything looks good. This can be really helpful when you need to debug an issue with the
+      production build. So let's a create a file called distServer.js in the buildScripts folder. We already have
+      a srcServer that serves our src folder, now we'll have a dist server that serves our dist folder. So let's just
+      copy the content of our srcServer.js and paste it over into distServer.js because we're only going to make
+      a few minor changes here. First let's remove any webpack calls here because we're no longer going to be
+      interacting with webpack for our dist server. We're going to be serving up just the static built files. So we'll
+      remove the two webpack related imports at the top:</p>
+    <pre>
+<code class="javascript">
+import webpack from 'webpack';
+import config from '../webpack.config.dev';
+</code>
+    </pre>
+    <p>We'll also remove the call to the compiler:</p>
+    <pre><code class="javascript">const compiler = webpack(config);</code></pre>
+    <p>And the calls to configure webpack-dev-middleware:</p>
+    <pre>
+<code class="javascript">
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+</code>
+    </pre>
+    <p>So our file gets simpler. And then the other thing that we need to add is to now add support to express for
+      serving static files:</p>
+    <pre><code class="javascript">app.use(express.static('dist'));</code></pre>
+    <p>So we'll add one line saying app.use and we'll tell it to serve static files in the dist directory. And for
+      production we'll be serving index.html from the dist folder rather than the src folder. One final tweak that I
+      like to make for our dist server is enabling GZip compression. Your production web server should be using GZip and
+      if it's not pause this video and go turn it on! Now anyway I like to enable GZip so I can see the final GZip file
+      sizes when I'm serving the app locally. This gives me a clear understanding of the file sizes that will be sent
+      over the wire to the user. To do this let's import compression:</p>
+    <pre><code class="javascript">import compression from 'compression';</code></pre>
+    <p>And then, above our call to express.static we'll add a line in to use compression:</p>
+    <pre><code class="javascript">app.use(compression());</code></pre>
+    <p>Make sure you add parenthesis so it's invoked. And with those two lines of code we've now enabled GZip
+      compression in express. And that's all we need to do to configure our dist server for serving up our production
+      app locally. Again this is not for use in a real production scenario. I'm only creating this so I can serve the
+      app on my local machine just to confirm that the production build works locally. Then it's a separate decision
+      to move all these files up to serve them on some host, perhaps a cloud provider. And, also, yes, I'm leaving in
+      the hardcoded data for users. Again, just pretend that this is hitting real data in production. And speaking of
+      API calls we also need to decide what API we'd like to use when we're checking out our production build locally.
+      So let's work on that next. </p>
+    <h2>Demo: Toggle Mock API</h2>
+    <p>I prefer to hit the real api when we're testing out the production build locally. So let's open up
+      baseUrl.js which is in the api folder:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Remember this file contains logic that points the api to either our mock api or the real api that's getting
+      served by express. To do so it currently checks whether the app is running on localhost. Let's rework this logic
+      so it instead looks for the querystring parameter use mockapi. So I'm going to replace the exising function
+      with a one liner:</p>
+    <pre>
+<code class="javascript">
+export default function getBaseUrl() {
+  return getQueryStringParameterByName('useMockApi') ? 'http://localhost:3001/' : '/';
+}
+</code>
+    </pre>
+    <p>And this one liner will say getQueryStringParameterByName and it's going to look for a query string parameter
+      of useMockApi and if that exists in the query string then it's going to point to our mock api otherwise it
+      will point to the real api that's being hosted by express. Now this getQueryStringParameterByName doesn't exist
+      so let's paste that in:</p>
+    <pre>
+<code class="javascript">
+function getQueryStringParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$");
+  var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2] return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+</code>
+    </pre>
+    <p>Yes, sadly this big chunk of code is necessary for getting a parameter from the Url. Honestly I just grabbed
+      this function off of StackOverflow so cross your fingers let's hope it works. Of course there's other ways to
+      do this with libraries but I wanted to use just plain JavaScript here. There are easier ways to get this done for
+      instance with jQuery but this function will do the trick. Now with this change we should be able to easily swap
+      between the real and the mock api during development by just adding useMockApi to the query string. So let's open
+      up the terminal and make sure that this tweak worked:</p>
+    <pre><code class="hljs">npm start -s</code></pre>
+    <p>And our a pp starts up successfully. As we can see, it's not using the mock data it's using the hardcoded data
+      that's coming from our express based service - so this is our production api. We can confirm that by coming over
+      to srcServer.js and seeing our hardcoded data here. Again it's not an actual production api but pretend this is
+      our production api - we're just hosting it locally here.</p>
+    <p>So I should be able to come up here add a querystring saying:</p>
+    <pre><code class="hljs">localhost:3000?useMockApi=true</code></pre>
+    <p>And when I do, now we end up seeing our mock data instead. So now we have an easy way to switch between our
+      mock api and our production api. I find this can be really handy, not just for working with our production build,
+      but also for development on a day to day basis. Being able to switch between the production api and the mock api
+      gives us flexibility that we need throughout the day.</p>
+    <p>And now we're almost ready to run our production build but we can't quite yet because we haven't written the
+      necessary npm scripts to automate it. So let's set that up in the next clip.</p>
+    <h2>Demo: Production Build npm Scripts</h2>
+    <p>In order to automate the production build process let's add some npm scripts to tie all this goodness together.
+      I'm going to use four small npm scripts to orchestrate the production build. Let's add them here at the
+      bottom of the list:</p>
+    <pre>
+<code class="json">
+"clean-dist": "rimraf ./dist && mkdir dist",
+"prebuild": "npm-run-all clean-dist test lint",
+"build": "babel-node buildScripts/build.js",
+"postbuild": "babel-node buildScripts/distServer.js"
+</code>
+    </pre>
+    <p>Ok let's talk through how this works. The command that will run to build our app for production is
+      <code class="hljs">npm run build</code>. This will run the build script that we setup earlier and by convention
+      <code class="hljs">prebuild</code> will run before that will clean our dist folder which we can see deletes the
+      dist folder and then recreates it. This way any previous files that were there are wiped away before we write to
+      that folder. We also want to run our tests and lint our code. Once all that's done the build occurrs and then
+      after the build is completed the <code class="hljs">postbuild</code> step will run and that is where we will
+      start our dist server. So after our build is completed we will start it up and serve it up locally. And now
+      that we have our script setup we're all set to give this a shot. Let's try running our production build and
+      see if anything bursts into flames. Let's say:</p>
+    <pre><code class="hljs">npm run build -s</code></pre>
+    <p>We can see our tests pass, our linting runs, we get our notification and our final confirmation in green
+      but BOOM flames indeed. We get a 404 because if we go back over to our dist folder there is no index.html
+      inside and if you think about it that makes sense. Webpack is currently configured to write our JavaScript
+      files and handle our css but we never setup anything to handle writing out index.html to the dist folder. But the
+      good news is we can see that our minified JavaScript is being written as we asked. If we click on the bundle
+      that's not very readable at all but that's a good thing in this case because the sourcemap makes it all
+      readable in the browser. And although you don't see any css files here remember css is being bundled into
+      our JavaScript and thus being generated via JavaScript. If you prefer to generate a separate css file I'll show
+      how to do that a little later in the module. Let's take a look at the detailed output on the command line.
+      Webpack shows all the files that were bundled including their size. This output is handy because we can see
+      precisely what files are being bundled and we can see the size of your final bundle. It's also common to see
+      some warnings down here but this isn't code that we wrote, it's code from the libraries that we're using so
+      we'll go ahead and ignore these warnings. Now, clearly, we need to decide how to handle our HTML for the
+      production build. There are multiple ways to handle this so let's explore this topic next.</p>
+    <h2>Dynamic HTML Generation</h2>
+    <p>When you bundle your code you obviously need to reference it and if you're doing web development then of
+      course you'll end up referencing your bundle in an HTML file. But what if your want to run some slightly
+      different HTML in production than development. So why would you want to manipulate HTML for production. Well
+      there are many potential reasons. If your bundler is generating a physical file for you wouldn't it be nice
+      to automatically reference the bundle in your HTML file. And as you'll see in a moment we'd like to
+      generate dynamic bundled names so that we can set four expires headers in production in order to save HTTP
+      requests. When bundle names are dynamic we need a way to reference the dynamic bundle name in our HTML. And
+      what if we want to inject some scripts or resources only for production. We'll see an example of this in a
+      moment when we see error logging. Finally, maybe we just like to save a little bandwidth by minifying our
+      HTML. The point is there are a variety of reasons to manipulate HTML for production. Now when you're
+      generating a bundle a common question is how to setup your index.html file to reference the bundle. This
+      example shows the simplest approach - a hard coded reference to bundle.js:</p>
+    <pre>
+<code class="html">
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;You mom&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src="bundle.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code>
+    </pre>
+    <p>This has been working great for us so far but there are other more powerful approaches to consider for
+      handling all the issues that we just discussed. I see three specific options for handling your HTML:</p>
+    <p>If you have a simple setup you might just want to hard code in a reference to bundle.js as we've done so
+      far in the course. This is the simplest approach. However maybe you want to dynamically add some other
+      code to the page for production. That's when you want to dynamically generate your HTML file. One obvious way
+      to do so is via Node. You can write a Node script that copies your HTML file and uses regular expressions to
+      manipulate sections or replace place holders. Or if you choose webpack as your bundler there's a powerful
+      approach that I prefer to use called html-webpack-plugin. This plugin simplifies the creation of your applications
+      HTML file. It can create the traditional HTML boilerplate for you or you can declare a template which is my
+      preferred approach. This plugin is especially useful if your doing cache busting in webpack by generating a
+      different filename each time your assets change. We'll set that up in a moment.</p>
+    <h2>Demo: Dynamic HTML Generation</h2>
+    <p>Alright let's get back to the code and dynamically generate our HTML using the HTML webpack plugin. As you
+      just saw in the previous demo our webpack build isn't handling our HTML so we can't actually load the production
+      build in the browser yet - let's fix that. The simplest way to handle this is to simply copy index.html from the
+      src folder to the dist folder using a command call or node. We could even use node to tweak the HTML in
+      various ways for production but doing all that manually will just hold us back because we're going to use some
+      other powerful webpack features in the coming clips and the features we're going to use will be a lot easier
+      to pull off if we setup webpack to handle our HTML. To do that we're going to use html-webpack-plugin. This
+      plugin will dynamically generate our index.html in all environments. So to begin let's update our production
+      webpack config to use html-webpack-plugin. First let's add the import to the top for HtmlWebpackPlugin:</p>
+    <pre><code class="hljs">import HtmlWebPackPlugin from 'html-webpack-plugin';</code></pre>
+    <p>And then let's add a reference to our plugins array - don't forget the comma after defining it. So this
+      will create an HTML file that includes a reference to our bundled JavaScript. We're going to declare that
+      the index.html that's in our source directory is our template and then I'm setting inject to true which
+      tells webpack to inject any necessary script tags for me. This means that we can remove the script tag from
+      our index.html. So let's go ahead and do that now. We don't need this anymore because the webpack plugin is
+      going to dynamically add in any necessary script tags for us. You'll see why dynamically generating our
+      script reference is important in a later clip as we setup bundle splitting and cache busting. And since we're
+      dynamically generating our index.html now we need to update our development webpack config to use the
+      HtmlWebpackPlugin as well. So let's copy the work that we did in our production config over to our dev config.
+      I'll need the reference to the plugin and I'll also need to call the plugin here in the array. Make sure to
+      remove the unnecessary trailing comma and save both of our webpack configs. And now that we have
+      webpack configured to handle our HTML in both our production and development builds we're ready to run our
+      app in production mode. Let's open up the terminal and give it a go:</p>
+    <pre><code class="hljs">npm run build -s</code></pre>
+    <p>And I like to put the -s just to engage silent mode so that we don't get all the noise to the terminal. And
+      see our tests run, linting pass and great our app loads in production mode. If we open the network tab we
+      should be able to see the results. Let's go to network and hit relosd and we can see that our minified and
+      GZipped bundle is only 4.6k - now that's tiny. Note that the actual bundle size is 12k as we can see over
+      here in the output. So GZip compression is helping us out. As we can see here GZip is enabled so our work to
+      enable GZip in express is operating as expected. And again we've enabled GZip on express so that the size that
+      we see here is an accurate representation of the typical production web server configuration. Since your
+      production web server should have GZip enabled. Oh and just remember these delete links wont actually work when
+      we're pointed at our real api since we never wired up the real api to handle delete calls. Now let's jump back
+      over to our webpack config and make another tweak. We can enhance the configuration of HtmlWebpackPlugin to
+      save us some more bandwidth. Since we're dynamically generating our HTML we can configure HtmlWebpackPlugin
+      to minify our HTML so let's add some configuration to further tweak it's output:</p>
+    <pre>
+<code class="javascript">
+minify: {
+  removeComments: true,
+  collapseWhitespace: true,
+  removeRedundantAttributes: true,
+  useShortDoctype: true,
+  removeEmptyAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  keepClosingSlash: true,
+  minifyJS: true,
+  minifyCSS: true,
+  minifyURLs: true,
+},
+</code>
+    </pre>
+    <p>There's a long list of settings here but I've enabled them all. We're going to:</p>
+    <ul>
+      <li>Remove Comments</li>
+      <li>Collapse Whitespace</li>
+      <li>Remove any redundant attributes</li>
+      <li>Remove empty attributes</li>
+      <li>And more...</li>
+    </ul>
+    <p>So let's save our changes and see how this works. We should now be able run the build and see our HTML
+      minified. If we view page source we can now see that our HTML has been minified and we can also see that the
+      reference to the bundle is getting injected by the HtmlWebpackPlugin as we'd expect. Very nice! I love how
+      easy and declaritive webpack makes this. So excellent, we have a simple functional automated build but there's
+      still room for improvement. What if we were building a large app? In that case we'd likely want to split our
+      bundle to help speed page loads and save bandwidth. Let's handle that next. </p>
+    <h2>Bundle Splitting</h2>
+    <p>As you build larger apps you may find it useful to split your JavaScript into multiple bundles instead of
+      creating a single JavaScript file. This is commonly called bundle splitting or code splitting. So why bundle
+      splitting? Well what if we build a large app or an app with many pages that are routed client side. If we
+      split our bundle into separate files for each client side page we can speed the initial page load by only
+      requiring the user to download the JavaScript necessary to render that page. And if we push updates to our
+      application source code it would be nice if users were'nt forced to download all vendor libraries weve
+      chosen to use in our app. For example, if we build an application with Angular or React or use utility
+      libraries like LoDash it would be nice if those items were bundled in a separate file that's cached separately.
+      This way when we update the app our users will only have to download the updated app code. So bundle
+      splitting saves bandwidth and also assures that our users have a higher performance experience. We shouldn't
+      expect our users to download a large bundle on initial page load or to re-download a huge bundle every time a
+      small portion of the apps source code changes.</p>
+    <h2>Demo: Bundle Splitting</h2>
+    <p>Of course, the way that you split bundles will depend on the bundler that you select. But since we're using
+      webpack let's configure it to do bundle splitting as part of our production build. So far, we've setup
+      webpack to bundle all of our JavaScript into a single bundle. This works great on smaller apps but as your
+      application grows it's helpful to split the bundle so the user only downloads the JavaScript they need for the
+      current section of the app that they've loaded. Sometimes people split the bundle per page. Imagine we built
+      a single page application with three pages. We could split our bundle per page. But another approach to
+      consider on smaller apps is to split third party libraries into a separate bundle from our application code.
+      The reasoning here is if the application code changes our users won't have to download all of the third
+      party libraries that we're using again. Their browsers will continue to use the cached version.</p>
+    <p>Now webpack supports defining multiple entry points. We've only defined one here but you can see that an
+      array infers that we can add multiple. Now instead of defining an array I'm going to define an object
+      because we are going to define keys for each one of the entry points that we define. For this one I'm going
+      to call it main because this will be our main javascript bundle:</p>
+    <pre>
+<code class="javascript">
+entry: {
+  main: path.resolve(__dirname, 'src/index')
+}
+</code>
+    </pre>
+    <p>But we also want to define a secondary entry point, and I'm going to call it vendor because it will
+      contain all of our vendor code. We haven't created our vendor file yet so let's go over to our src directory
+      and create a new file called vendor.js. And here I'm going to paste in a whopping one line of code. Ok, that
+      looks like more than one line but line 17 is the only actual code. I'm disabling eslint's warning for
+      no unused variables since there's no usage of this variable here. And then I've just added a comment at the
+      top so that people are clear about why we've created this vendor.js file. Of course the only library that we're
+      using for our silly demo app is the what working group fetch polyfill but you get the idea. In a real
+      application you'd likely reference:</p>
+    <ul>
+      <li>JQuery</li>
+      <li>Angular</li>
+      <li>React</li>
+      <li>Bootstrap</li>
+      <li>And so on...</li>
+    </ul>
+    <p>Any third party tools that you use could be listed in this file. And everything that we define here will be
+      bundled up separately by web pack into a file called vendor.js. Of course if you wanted separate bundles for
+      different pages of your app you could declare those using the same pattern. Just add one entry point to your
+      production webpack config per page. So let's close vendor and go back to our production webpack config
+      because we're not quite done configuring code splitting. To actually perform code splitting we have to referencea
+      another builtin webpack optimization that's called commons chunk plugin. So let's add it to the list of
+      plugins down here:</p>
+    <pre>
+<code class="javascript">
+plugins: [
+  // Use CommonsChunkPlugin to create a separate bundle
+  // of vendor libraries so that they're cached separately
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor'
+  }),
+</code>
+    </pre>
+    <p>Here, we're telling webpack to generate a separate chunk using the code that's referenced in our vendor
+      entry point. So note that this name corresponds with the key that we defined in the entry point up here:</p>
+    <p>Make sure that these two are in sync or this will just end up generating an empty file. Now here's how
+      this works. The Commons Chunk Plugin moves modules that occur in multiple entry chunks to a new chunk and
+      to clarify I'm now using the terminology that webpack uses. They call these chunks. I tend to call these
+      bundles and talk about splitting bundles. Webpack typically talks about splitting chunks. But chunks and
+      bundles are synonymous in my mind. So in this case the Commons Chunk Plugin will intelligently look at the
+      items that we imported in vendor.js and it will leave them out of the separate bundle main.js. So since
+      we reference the fetch polyfill in vendor.js this plugin will assure that the fetch polyfill is placed in
+      our vendor.js file and omitted from main.js. And to clarify without this plugin splitting would'nt actually
+      help because our vendor libraries would still be in our main bundle as well causing people to download our
+      vendor libraries twice. Anb there's one final detail. Now that we're generating multiple bundles we can
+      no longer hard code the name of the file that we're outputting here. Instead we need to declare a place holder
+      by using square brackets. And we'll call this placeholder name:</p>
+    <pre><code class="javascript">filename: '[name].js'</code> </pre>
+    <p>So this tells webpack to use the name that we defined in the entry point. So it will now generate a
+      main.js and a vendor.js and since we're using HtmlWebpackPlugin it will automatically write references
+      to both these files in our html file. Nice, that's all it takes so let's save webpack config and give it a
+      shot. </p>
+    <pre><code class="javascript">npm run build -s</code></pre>
+    <p>We can see the app starts up just fine. And if we view the output in the terminal and scroll up you now
+      see that we generated two separate chunks: main.js and vendor.js. Remember before that main.js was 12k but now
+      vendor.js is holding 7.3k so we can see that the size has been split between the two. We've also generated
+      mapping files for both main.js and vendor.js. And of course if we come over here and view page source. We
+      can see that vendor.js is referenced as well as main.js in our code just as we'd expect. And if we
+      inspect here and look at the network tab we should see them both getting requested and we can see that
+      there size after being GZipped is 2.9k and 2.6k. So this is a handy way to speed page loads and save
+      bandwidth by avoiding requiring your users to download all of your JavaScript when only some of it has
+      changed. But there's more that we can do. In the next clip let's explore cache busting. </p>
+
+    <h2>Cache Busting</h2>
+    <p>To save bandwidth and avoid unnecessary http requests. You can consider configuring your production web
+      server so your JavaScript bundle doesn't expire for up to a year. If you go this route you need to enable
+      Cache busting. Why bust cache? Well first you can save http requests because as long as you know you can
+      bust cache you can set headers that tell your users browsers not to request your assets for up to a year.
+      This means that after someone downloads your JavaScript file they wont make another http request for that
+      file for up to one year. So this both speeds page loads and saves bandwidth. Also when it's time to
+      deploy an update to your app you can assure that the user immediately receives the new bundle by generating
+      a new filename for that bundle. You can force a request for the latest version. So here's our two step
+      plan for busting cache. First we need to hash the bundle filename. This way the filename will only change
+      if the bundle actually changes. This assures that if we rebuild the app and there are no changes to the
+      JavaScript bundle it will continue to have the same filename. Second, since the filename is now generated
+      dynamically we need to make sure that the filename reference in the corresponding html file is set
+      accordingly. So we'll generate our html dynamically and inject the proper filename as part of the build
+      process. To make all this happen we'll continue to use the HtmlWebPackPlugin.</p>
+    <h2>Demo: Cache Busting</h2>
+    <p>Time for more command line fun. Let's use HtmlWebPackPlugin along with a new tool called WebpackMD5Hash
+      to setup cache busting.</p>
+    <p>To save bandwidth and avoid needless http requests it can be helpful to configure your web server to send
+      far future expiration headers. This way your customers browsers won't request your assets again for up
+      to a year. I won't get into how to configure your web server to accomplish setting far future headers but
+      the basic idea is to configure your web server to send headers that specify that your applications
+      JavaScript files should'nt expire until some date in the distant futur e. But the problem is when you do this
+      how do you update your app later. The answer is you have to bust cache by deploying your application with
+      a reference to a new filename. Webpack can make cache busting straightforward by generating a deterministic
+      cache for each bundle and appending it to the filename. This way the filename only changes when the code
+      actually changes. To accomplish this we'll use WebPackMD5Hash. This package hashes files and creates a
+      deterministic filename so that our filename will only change when our code changes. To make this happen we'll
+      make three small changes in our production webpack config. First let's add the neccessary import at the top
+      of webpack.config.prod.js:</p>
+    <pre><code class="javascript">import WebpackMD5Hash from 'webpack-md5-hash</code></pre>
+    <p>Second we'll add the related plugin down in the array of plugins:</p>
+    <pre>
+<code class="javascript">
+// Hash the files using MD5 so that their names change when the content changes.
+new WebpackMd5Hash(),
+</code>
+    </pre>
+    <p>And finally we can put it to use by updating our filename format to use the hash that WebpackMd5Hash
+      generates. I'm going to do that by referencing a variable that it generates called chunkhash:</p>
+    <pre>
+<code class="javascript">
+target: 'web',
+output: {
+  path: path.resolve(__dirname, 'dist'),
+  publicPath: '/',
+  filename: '[name].[chunkhash].js'
+},
+</code>
+    </pre>
+    <p>So this format says name each bundle with a prefix that we defined up in the entry point, then add a dot,
+      then add a hash and finally add a .js on the end. And with this setup now our filename's will change only when
+      we change the code. So let's run the production build and see this in action. Now we can see that our filename's
+      have hashes placed in the middle of them:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>And since we're using HtmlWebPackConfig if we open index.html we can see that the references were
+      dynamically written for us:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>So there's the vendor reference and there's the main reference. This is a huge benefit of choosing a
+      comprehensive tool like webpack. All of these concerns are handled in a cohesive manner with just a little
+      declarative code. Remember we just added three lines of code to make this happen. And if you rerun the build
+      you'll see that the filename's stay the same but if you change a line of code and rebuild the associated
+      bundle's name will change because it will hash to a new value. Slick. Now earlier I mentioned that our
+      CSS is getting bundled in our JavaScript file so you may prefer to deploy a separate traditional CSS file
+      with the same cache busting setup in production. So let's make taht happen in the next clip.</p>
+    <h2>Demo: Extract and Minify CSS</h2>
+    <p>Right now, Webpack is embedding all CSS into the JavaScript bundle. That's why we don't see a CSS file
+      generated in the dist folder. Our CSS is dynamically generated using JavaScript. Now I prefer to generate
+      a traditional separate CSS file for production so that I can utilitise the same cach busting techniques that
+      we just saw. I've also noticed a flash of un-styled content when embedding CSS via JavaScript so I believe it's
+      worth taking a moment to configure webpack to generate a CSS file for the production build. To extract our CSS
+      let's use the extract text plugin. Setting it up requires just three lines of code. First we'll go to the top
+      and add the import:</p>
+    <pre><code class="javascript">import ExtractTextPlugin from 'extract-text-webpack-plugin'</code></pre>
+    <p>Second, let's call the plugin down here in the array of plugins:</p>
+    <pre>
+<code class="javascript">
+// Generate an external css file with a hash in the filename
+new ExtractTextPlugin('[name].[contenthash].css'),
+</code></pre>
+    <p>And we're using the same syntax here as we did for naming our bundle. This way cache busting is enabled for
+      our css as well. We'll only get a new filename when the css has actually changed. </p>
+    <p>And finally we have to update our css loader down here at the bottom so it will actually call the extract
+      text plugin. So I'll replace the current loader with this:</p>
+    <pre><code class="javascript">{ test: /\.css$/, loader: ExtractTextPlugin.extract('css?sourceMap')}</code></pre>
+    <p>It's important to note that we don't need the style loader anymore and our CSS will be minified to save
+      bandwidth so adding the query string sourceMap here on the end declares that webpack should generate a CSS
+      sourcemap. And if we open the terminal and run the build let's make sure it still works:</p>
+    <pre><code class="hljs">npm run build -s</code></pre>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Great, we can see our styles are still applied and if we look over here in our dist folder:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>We can see our CSS files are created along with a map. And if we look in index.html we can see that the
+      reason that our styles are working is because html webpack plugin is also automatically adding in the CSS link
+      that's necessary up here at the top. Not bad for three lines of code. So if we look at the dist folder we now
+      have seven files:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>An html file, a bundle of our app's JavaScript, a bundle of our vendor libraries and source maps for our
+      CSS and our JavaScript. Our entire app is handled by these seven files. And I'd say this app is ready to
+      deploy. But wait, before we do. How do we know if we made a mistake? So in the next clip let's setup
+      error logging so we're aware when JavaScript errors occur in our users browsers. </p>
+    <h2>Error Logging</h2>
+    <p>What happens today when your app throws a JavaScript error? Are you aware when JavaScript errors occur in
+      production. There's a long list of services available to help in this area: Sentry, TrackJS, New Relic and
+      Raygun are a few worth considering. Some services like TrackJS are specific to JavaScript while others like
+      New Relic provide broader performance related information. Personally I use TrackJS on a few production apps
+      and have been quite happy. So how do you choose among all these options? Well when you're evaluating error
+      logging services here are some key concerns to consider. Does it provide good error metadata? For example,
+      does it tell me what browser the error occurred in? Does it capture stack traces? Does it capture previous
+      actions that the user was performing so that I can reproduce the issue? Does it offer a custom api so I can
+      augment error logging with my own contextual data? Does it offer notifications so I can receive emails when
+      errors occur? And can I integrate with other popular platforms like Slack so we're notified there instead?
+      Can I filter our the noise by aggregating errors together, filtering the list and setting rules for when
+      I should be notified using specific thresholds? And finally how much does it cost? Most offer a free trial
+      but ultimately you'll end up paying by the month. When you consider all these concerns it's easy to
+      understand why people are increasingly paying for services rather than trying to handle this alone and I don't
+      recommend tyring to solve this yourself. Doing JavaScript error logging well is a much harder problem than you
+      think because errors are very hard to reproduce and fix without the rich metadata and filtering that
+      these tools provide. </p>
+    <h2>Demo: Error Logging</h2>
+    <p>Alright, let's setup error tracking via my preferred error tracking service TrackJS. There are many ways
+      to handle error logging in JavaScript but I prefer to use TrackJS because it's easy to setup. Offers
+      configurable notifications and boasts an excellent web based interface. That said there are many strong
+      players in this market. So much like our conversation on testing the important part here is to just
+      pick one. So let's setup TrackJS to log our errors. To get started with TrackJS you need to sign up on their
+      web site. And after you sign up there's just two lines of code that you need to inject in your production
+      app. The TrackJS docs suggest adding our tracking code in the head of the page to assure that it's loaded
+      before any other JavaScript. This assures that it's loaded before any JavaScript errors occur. So
+      let's paste this into the head of our index.html:</p>
+    <p>And that's all it takes to get rolling. Let's start the build and try this out:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>And the TrackJS docs show how to throw our first error. We can just call TrackJS and tell it to track
+      something. So let's open up the console and paste this statement in:</p>
+    <pre><code class="hljs">trackjs.track('ahoy trackjs!');</code> </pre>
+    <p>And if we did our job right this error should show up in TrackJS. And there it is:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>We can see all the metadata about the error including the browser, time, url and even the telemetry of any
+      previous activities that the users performed like clicking on a button or making an ajax call. This sort
+      of information is really helpful for debugging issues. But there's an important tweak to make. Right now
+      TrackJS will run in development as well which would just add noise to our error log. So in the next clip I'll
+      show how to use conditionals in your html so you can dynamically inject portions of html for different
+      environments.</p>
+    <h2>Demo: HTML Templates via EmbeddedJS</h2>
+    <p>We now have TrackJS logging errors but it would be nice if it only ran in production since logging
+      errors in our development environment isn't useful and would just add noise to our error logging reports.
+      I want to use this opportunity to show you a way to add conditional logic to your html so that this code:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Is only added to index.html in production. So instead let's use the templating engine support that's built
+      in to HtmlWebpackPlugin to add conditionals to our template. HtmlWebpackPlugin supports a number of templating
+      languages out of the box including Jade, EJS, Underscore, Handlebars and HTML Loader. And if you don't
+      specify a loader then it defaults to EmbeddedJS or EJS for short. So let's just use EJS since it's the default
+      and it's easy to use. You can read about the EJS syntax at EmbeddedJS.com and there's a handy repl on this
+      page so you can play around with the syntax and learn from rapid feedback that will display in this box. But for
+      our purposes we just need to declare a simple conditional. We want to inject the TrackJS code but only during
+      our production build. Let's do that with a little bit of EJS. First let's store the TrackJS token that we
+      were just assigned on the web site in our webpack config. We need to add it right here below the call to
+      inject:</p>
+    <pre>
+<code class="javascript">
+// Properties you define here are available in index.html
+// using htmlWebpackPlugin.options.varName
+trackJSToken: 'obsfucated token'
+</code>
+    </pre>
+    <p>Any properties that you define here within the HtmlWebpackPlugin will be available within our index.html
+      file. You'll see how to call this as we shift our focus over to index.html. And the token that your defining
+      here is the token that you should have received right here when you setup TrackJS. And now let's shift our
+      focus over to index.html. In here we're going to use EJS to declare that this section should only be
+      rendered when we have a TrackJS token defined in webpack config. So let's say:</p>
+    <pre>
+<code class="javascript">
+<% if (htmlWebpackPlugin.options.trackJSToken) { %>
+  &lt;! BEGIN TRACKJS --&gt;
+  &lt;! END TRACKJS --&gt;
+  &lt;% } %&gt;
+</code>
+    </pre>
+    <p>And now we can reference this variable instead of the actual token right here.</p>
+    <p> Of course to reference it as a variable we need to wrap it in the angle bracket percent syntax:</p>
+    <pre>
+<code>
+&lt;script type="text/javascript"&gt;window.trackJs = { token: &lt;%= htmlWebpackPlugin.options.trackJSToken%&gt;' };
+  &lt;/script&gt;
+</code>
+    </pre>
+    <p>And be sure to wrap this in single quotes. So now if a TrackJS token is defined within our webpack config this
+      section of code will be rendered into our index.html otherwise it won't exist. And since we've only defined
+      our TrackJS token within our production config. This section of code will only render for production. So this
+      way our errors are only tracked for production. Now of course once you've added this code your html file
+      arguably isn't an html file anymore. It's now an EJS file. So you can consider changing the file extension to
+      .ejs but I prefer to keep the extension html so that editors will properly apply code coloring to the file
+      contents. Let's go ahead and add a useful comment up here to the top of our html file:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>It just explains what's going on. Rather than changing the extension to EJS I figured this comment is
+      sufficient and yeah it's a big comment but who cares this will be stripped out by the build process anyway. Ok,
+      and with that setup we should be able to:</p>
+    <pre><code class="hljs">npm run build -s</code> </pre>
+    <p>And make sure that this is getting injected as we expected. And if we look in the browser and View page source
+      we can see now that our call to TrackJS is here and the token is getting injected into our page as expected.
+      And with this I think it's safe to say that we're at a point that we can confidently talk about shipping.</p>
+    <p>Let's wrap up this module with a short summary.</p>
+    <h2>Summary</h2>
+    <p>In this final module we wrapped our development environment by creating a robust automated production build.
+      We configured webpack for production and enabled minification, we generated sourcemaps so we can still debug
+      the app when we're in production and we used HtmlWebpackPlugin to minify our html and dynamically insert the
+      necessary script references into index.html. We setup cache busting using HtmlWebpackPlugins so that we
+      can save bandwidth and still assure that users get the latest JavaScript when it changes. We enabled bundle
+      splitting so users don't have to download the entire application when only part of the code changes. And we
+      setup error logging so we know when bugs are thrown in production and we have rich metadata to help us
+      reproduce any errors that occur. Finally we saw how to use EmbeddedJS for conditionally rendering portions
+      of our html for production. We used EJS to ensure that our error logging only runs in production. And all
+      of this goodness prepares us for the final module. We're headed for production. In the next module we'll setup
+      an automated deployment process and we'll also discuss methods for keeping your applications updated with your
+      latest starter kit changes over time.</p>

@@ -1,0 +1,637 @@
+    <h1>Testing and Continous Integration</h1>
+    <h2>Intro</h2>
+    <p>It's a shame how uncommon automated testing and continuous integration are in JavaScript and I believe
+      it's because people don't see a clear picture of how to get quickly started. Since JavaScript has no built in
+      opinions on handling testing you need to spend a lot of time browsing the web and investigating strategies before
+      you can get rolling.</p>
+    <p>In this module I would like to outline the landscape to help you understand the key decisions that you need to
+      make because if you'r new to automated testing just picking your tools and deciding how to use them is a major
+      hurdle. So we'll begin by reviewing six key decisions that you'll need to make including:</p>
+    <ul>
+      <li>Testing frameworks</li>
+      <li>Assertion libraries</li>
+      <li>Helper libraries</li>
+      <li>and more...</li>
+    </ul>
+    <p>Once we've clarified our testing stack we'll jump back into the editor and setup our test environment and write
+      our first example tests. We'll close out this module by discussing continuous integration services so that we are
+      notified immediately anytime someone breaks the build. We'll setup two different continuous integration
+      servers.</p>
+    <p>This is a big topic with a lot of ground to cover so let's get rolling.</p>
+    <h2>Test Decisions Overview</h2>
+    <p>Comprehensively covering JavaScript testing would require multiple courses so in this module I am going to
+      focus on the style of testing that is most commonly configured in JavaScript development environments today which
+      is unit testing. Unit testing focuses on testing a single function or module in an automated fashion. Unit tests
+      often assert that a certain function returns an expected value when passed certain parameters. Unit tests mock
+      out external dependencies like apis, database calls and file system interactions so the results are fast and
+      deterministic. There are other types of useful automated testing styles for JavaScript that I wont have time to
+      cover in this module.</p>
+    <p>Two other styles that are worth looking into that we wont cover in this module are integration testing which
+      focuses on testing the interactions between multiple modules and automated UI testing which tests the application
+      by automating clicks and keystrokes in the actual UI and asserting that it interacts in expected ways. Tools like
+      Selenium which automate browser interactions are popular in this space. </p>
+    <p>There are various other testing approaches as well but in this module I'll focus on automated unit testing.</p>
+    <p>There are no less than six important decisions that you need to consider when setting up automated testing in
+      JavaScript:</p>
+    <ol>
+      <li>You have to choose a framework</li>
+      <li>Assertion Library</li>
+      <li>Helper Libraries</li>
+      <li>What environment do you want to run your tests in</li>
+      <li>Where to place your test files.</li>
+      <li>When to run your tests.</li>
+    </ol>
+    <p>In the next six clips let's run through each of these decisions.</p>
+    <h2>Decision 1: Testing Framework</h2>
+    <p>The first decision we need to make is what testing framework to use. There are a wide variety of testing
+      frameworks available. Let's consider the top 6</p>
+    <h3>Mocha</h3>
+    <p>Mocha is the most popular because it is highly configurable and has a large ecosystem of support.</p>
+    <h3>Jasmine</h3>
+    <p>Jasmine is nearly as popular as Mocha and quite similar but Jasmine includes an assertion library built in. I
+      find Mocha to be more configurable that Jasmine so I personally prefer Mocah over Jasmine.</p>
+    <h3>Tape</h3>
+    <p>Tape is the leanest and simplest of the bunch. It's simplicity and minimal configuration are it's key strengths.
+      QUnit is the oldest on this list and was actually created for testing JQuery by JQuery creator John Resig. Today
+      other frameworks like Mocha and Jasmine are much more popular.</p>
+    <h3>AVA</h3>
+    <p>AVA is a new framework that offers some interesting features. AVA runs your tests in parallel and it only
+      re-runs impacted tests - both of which help speed results.</p>
+    <h3>Jest</h3>
+    <p>Finally, Jest is from Facebook and has recently become quite popular for React developers but since it's really
+      just a nice wrapper over Jasmine it's actually quite useful for anyone. Jest has code coverage, JSDOM and popular
+      conventions for finding your test files all built in. It's also recently gotten much better so if your looked at
+      Jest before and were turned off - it's time to look again. Of course it's easy to feel overwhelmed with all these
+      options but I like to think of choosing a testing framework like choosing a gym. Sure, some gyms are nicer than
+      others, but you can greatly improve your health at any gym. So the important part is picking a gym - any gym so
+      that you can start exercising. In the same way the right answer here is to quickly review this list and pick one.
+      There really isn't a loser here so don't worry too much that you've picked the wrong framework. Just like gyms
+      it's
+      easy to switch to a different one later. In fact switching frameworks often involves merely trivial syntax
+      changes.
+      The only clear wrong choice is to be this guy:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png" a>
+    <p>Coding and praying. Don't laugh because we all do it. I've spoken to countless developers on this topic and
+      I believe that decision overload is largely what's holding people back. So don't be this guy. Pick one of the
+      six frameworks above and get moving.</p>
+    <p>For this course I'm going to use Mocha because it's popular, mature, flexible and boasts a large eco system of
+      support.</p>
+    <h2>Decision 2: Assertion Libraries</h2>
+    <p>Many test frameworks such as Jasmine and Jest come with assertions built in but some such as Mocha don't come
+      with an assertion library so we have to pick our own. </p>
+    <p>So what's an assertion. An assertion is a way to declare what you expect. For example here:</p>
+    <pre><code class="javascript">expect(2+2).to.equal(4)</code></pre>
+    <p>I am asserting that 2+2 should equal 4. This is an assertion because I am telling my test what I expect to
+      happen. If the statement is false then the test fails. There are many potential ways to declare assertions in
+      test.
+      Some frameworks might look like the above example. Other frameworks might use a keyword like assert instead of
+      expect:</p>
+    <pre><code class="javascript">assert(2+2).equals(4)</code> </pre>
+    <p>Don't let the minor differences confuse you. Most of the choice between assertion libraries come down to minor
+      syntactic differences.</p>
+    <p>The most popular assertion library is chai but there are other assertion libraries out there to consider like
+      Should.js and expect. Most frameworks include their own assertions built in but since Mocha doesn't we need to
+      choose one. Again the core differences between these are relatively minor syntax differences so dont spend too
+      much time worrying about this. In this course we'll use Chai for assertions because it's popular and offers an
+      array of assertion styles to choose from. </p>
+    <h2>Decision 3: Helper Libraries</h2>
+    <p>There's another question to answer before we start writing tests - should we use a starter library and if so -
+      which one?</p>
+    <h3>JSDOM</h3>
+    <p>JSDOM is one interesting library to consider. JSDOM is an implementation of the browsers DOM that you can run in
+      Node.js. So with JSDOM we can run tests that rely on the DOM without opening an actual browser. This keeps your
+      testing configuration for automated tests simpler and often means that tests run faster because their not reliant
+      about running in the browser. So JSDOM is useful when you want to write tests that involve HTML and interactions
+      in the browser using Node. We'll write a test using JSDOM later in this module.</p>
+    <h3>Cheerio</h3>
+    <p>Cheerio is another interesting library worth mentioning. You can think of Cheerio as jQuery for the server. This
+      is really handy if your using JSDOM because you can write tests that assert that certain HTML is where you expect
+      it. And the great news is - if you understand jQuery you already know how to work with Cheerio because it uses
+      jQuery selectors for querying the DOM. Imagine you wrote a test that expects a specific DOM element to exist on
+      the page. With Cheerio you can query JSDOM's virtual DOM using jQuery selectors. If you already know jQuery this
+      can save some typing compared to writing traditional DOM queries.</p>
+    <h2>Decision 4: Where to Run Tests</h2>
+    <p>Feeling overwhelmed with options yet? Hopefully not because we are in JavaScript land. So we also need to
+      decide where to run our tests. There are three popular approaches to running JavaScript based tests. The most
+      obvious option is running our tests in the browser. Karma and Testem are popular test runners for testing in an
+      actual browser. However opening an actual browser requires more configuration and is slower than the alternatives
+      so I prefer to avoid this approach.</p>
+    <p>Instead we an utilize a headless browser like phantomJS to run our tests. So whats a headless browser? A headless
+      browser is a browser that doesn't have a visible user interface. PhantomJS is full real browser running the V8
+      JavaScript engine behind the scenes but you can't see PhantomJS because it has no visible interface. This is
+      useful because often writing automated tests you don't need to see the actual interface. You just need something
+      fast that simulates a real browser. I've used this approach successfully in the past as well.</p>
+    <p>The third option is to utilize an in memory DOM. As we just discussed JSDOM is a library that simulates an
+      actual browser by creating a DOM in memory that we can interact with. You can think of JSDOM as a lighter weight
+      alternative to PhantomJS because JSDOM doesn't have a full browser behind the scenes. It's just focused on
+      simulating a DOM in memory. The advantage of this approach is it's fast and quick to setup. That said both
+      PhantomJS and JSDOM are great options to consider. We're going to write our tests using JSDOM in node in an
+      upcoming clip.</p>
+    <h2>Decision 5: Where Do Test Files Belong?</h2>
+    <p>Decision 5 is where should I put all my tests. There are two popular schools of thought on organizing your test
+      files. Let's overview the merits of each approach. One popular approach is to centralize all your tests in a
+      folder
+      called test or something similar. So all your tests are completely separate from your source code. Mocah pushes
+      you in this direction because it defaults to looking for tests in the root of your project in a folder called
+      test.
+      Now the primary benefit that I hear people claim about this approach is that it avoids adding noise to your source
+      code directory. But I find this mindset misguided. Tests aren't noise, they're complimentary to the files their
+      testing, there important. To me, if they're worth writing, they're worth seeing regularly in my source instead of
+      tucked away in a separate folder.</p>
+    <p>Another common reason that I hear is that I don't want my test files deployed to production. As you'll see in the
+      production build module at the end of this course this concern is unmerited. We'll only deploy the final bundled
+      HTML, JavaScript and CSS for the app to the actual production server. Ultimately I think much of the reason people
+      are using a separate test folder is simply inertia. It's popular to create a separate test folder or project in
+      many
+      server side technologies for other reasons but the separation just doesn't make sense on JavaScript apps so I
+      prefer to place my tests alongside the file under test. Here's why. I find it makes importing easier because the
+      paths are trivial to work with. Since the test and the file under test are in the same path, imports are clean.
+      It's
+      always dot, slash, file under test. This sure beats managing a lot of dot, dot slashes to reference some source
+      code folder that's in a totally different spot. Second, it provides clear visibility to our tests, they're not
+      buried in a separate folder, they're right there in our source, so it's quite easy to notice a file that lacks a
+      corresponding test file. Again, to me, test file visibility is asset not a liability. Third, placing them together
+      makes it easy to open them both at the same time. If you open a file to write code, you should probably be writing
+      some tests at the same time so co-locating files that your work on at the same time just makes sense. Co-location
+      also avoids having to maintain two separate directory structures. When you separate tests from your source you
+      often end up having to create new folders with the same name in two different places. I'm not a fan of repeating
+      myself or saying the same thing twice. Ok bad pun,, moving on. Finally it's more convenient when we refactor and
+      move files as well. When tests are centralized, moving the file under test requires updating the path in the
+      corresponding test file. When tests are placed alongside the file under test it's easy to simply drag files to
+      their
+      new location without making a path change. The relative paths remain the same.</p>
+    <p>This is a minor side note but I was also curious about the naming conventions people are using for naming
+      JavaScript files.</p>
+    <p>As you can see naming test files with a suffix of .spec and .test are very popular conventions.</p>
+    <h2>Decision 6: When Should Tests Run?</h2>
+    <p>Ok one final decision to make regarding testing. When should our tests run? Well if we're talking about unit
+      tests the answer is simple. Unit tests should run everytime that you hit save. This rapid feedback loop ensures
+      that your notified immediately of any regressions and running tests each time you hit save facilitates test driven
+      development since you can quickly see your tests go from red to green by hitting Ctrl+S. If you run your tests
+      manually it creates unnecessary friction. When the test suite is run manually it's easy to forget to run the test
+      suite after making a change. So make it automatic and reduce friction.</p>
+    <p>Finally running tests on save increases the visibility of the tests that do exist. It helps to keep testing in
+      the forefront of your mind. So I believe this is an easy decision. Your unit tests should run automatically when
+      you hit save. I know what your'e thinking - I can't run my test suite every time I save. That would be way too
+      slow. Well, I should emphasize, I'm talking about unit tests here. Unit tests should run extremely fast.
+      Integration
+      tests are also useful and admittedly slower so you'll want to run those separately. But your unit tests should
+      be fast because they should'nt hit external resources. Now let me backup for a moment and clarify the differences
+      between unit tests and integration tests. Unit testing is about testing a single small unit of code in isolation.
+      Integration testing is about testing the integration of multiple items. So unit testing often involves testing a
+      single function all by itself while integration testing often means firing up a browser and clicking on the real
+      UI using an automation tool like Selenium and often making actual calls to a Web API though you can of course
+      write integration tests using just Node and JSDOM for instance. And since unit tests seek to test a small portion
+      of code in isolation they run extremely quickly. Quick enough that you should be able to run all your unit tests
+      every time that you hit save. In contrast integration tests are slower because they often require real external
+      resources like browsers, web apis and databases that take much longer to spin up and respond than native function
+      calls. Now since unit tests run fast they should be run every time you hit save. If you're unit tests don't run
+      fast enough to re-run every time that you hit save that is often a sign that they're not really unit tests. But
+      since integration tests typically interact with slow external resources they're often run on demand or in QA. In
+      summary the answer to when your tests should run comes down to whether your'e writing unit tests or integration
+      tests. We're going to run unit tests in this module so we'll run our tests every time that we hit save.</p>
+
+    <p>Ok, so we've walked through the six big decisions you need to make for JavaScript testing. Now let's summarize
+      the decisions I've settled on for this course. I am going to use:</p>
+    <ul>
+      <li>Testing Framework - Mocha</li>
+      <li>Assertion Library - Chai</li>
+      <li>Helper Library - JSDOM</li>
+      <li>Where to run tests - Node</li>
+      <li>Where to place tests - Alongside source files</li>
+      <li>When to run tests - Upon save</li>
+    </ul>
+    <h2>Demo: Testing Setup</h2>
+    <p>As you just saw one of the hardest parts of JavaScript testing is just choosing an approach but now that we have
+      a planned path let's set things up. We'll begin by creating a file that will configure our tests. We'll put it
+      under <code class="hljs">buildScripts</code> and call it <code class="hljs">testSetup.js</code> and I'll paste in
+      the two lines of code with some comments:</p>
+    <pre>
+      <code class="javascript">
+        // This file isn't transpiled, so must use CommonJS and ES5
+
+        // Register babel to transpile before our tests run.
+        require('babel-register')();
+
+        // Disable webpack features that Mocha doesn't understand.
+        require.extensions['.css'] = function () {};
+      </code>
+    </pre>
+    <p>So this file does two things. First we are requiring <code class="hljs">babel-register</code> so this will tell
+      Mocha that first babel should transpile our tests before Mocha runs those tests and then second we're going to
+      disable any webpack specific features that Mocha doesn't understand. In this case the css extension because
+      remember in our <code class="hljs">index.js</code> we are requiring <code class="hljs">index.css</code>. This is a
+      feature that webpack understands but Mocha does not. So we're just telling Mocha that if it's sees this just
+      treat it like an empty function. Now there are other things we could do here like setup a JSDOM environment but
+      instead of doing that here I will show how to handle it in an example test. Now that we have our initial test
+      setup script configured let's jump over to <code class="hljs">package.json</code> and a script that will run
+      our tests via Mocha:</p>
+    <pre><code
+      class="json">"test": mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\""</code></pre>
+    <p>First we specify the reporter we want to use, the reporter setting determines how the test output should
+      display. I prefer to use the progress reporter because it's clean and simple but Mocha offers a variety of
+      interesting reporters to choose from. However I recommend sticking with progress for our setup because many of
+      the other reporters write so much information to the terminal that it can make it hard to see the linting issues
+      reported in that same terminal.</p>
+    <p>Next we tell Mocha to run the test setup script that we just setup and then after it's finished running that
+      it should run any tests that it finds within our source directory and any subdirectories. And we define test files
+      as any file that ends in <code class="hljs">.test.js</code>. And now that we've set this up we can open up the
+      terminal and type <code class="hljs">npm test</code> to run Mocha.</p>
+    <code class="hljs">Error: cannot resolve path (or pattern) 'src/**/*.test.js'</code>
+    <p>When we do we see it fail. This is Mocha's way of saying that it cant find any test files. That's not surprising
+      because we haven't written any tests yet. So let's create one test. We'll assume that we're writing tests for our
+      index file so I'll create a file in the same path that's called <code class="hljs">index.test.js</code> so we're
+      following the convention of naming tests after the file under test but with <code class="hljs">.test.js</code> on
+      the end. Some prefer <code class="hljs">.spec.js</code> but what ever you like is fine.</p>
+    <p>Now, Mocha doesn't come with an assertion library so we're going to use Chai and more specifically we'll use the
+      expect style that comes with Chai so I will use a named import so that we have a reference to expect.</p>
+    <pre><code class="javascript">import {expect} from 'chai';</code> </pre>
+    <p>Now we can describe our first test. </p>
+    <pre>
+<code class="javascript">describe('Our first test', () => {
+
+  });
+</code>
+    </pre>
+    <p>We will provide it a function. You can, of course, use the function keyword if you prefer. I am just using an
+      arrow function here for brevity. Inside let's add our first test:</p>
+    <pre>
+<code class="javascript">describe('Our first test', () => {
+  it('should pass', () => {
+      expect(true).to.equal(true);
+    })
+  });
+</code>
+    </pre>
+    <p>So now we have our first test so if we come back down here and run <code class="hljs">npm test</code> again we
+      should see it pass:</p>
+    <pre>
+<code class="hljs">[-------------------------------------]
+
+  1 passing (111ms)
+</code>
+    </pre>
+    <p>This is the output of the progress reporter. We should also see that if I set this to false that our test fails.
+      Sure enough it does, we get a useful error message that shows the line that it failed:</p>
+    <pre>
+  <code class="hljs">
+  1) Our first test should pass:
+
+    AssertionError: expected true to equal false
+    + expected - actual
+
+    -true
+    +false
+
+    at Context.&lt;anonymous&gt; (src/index.test.js:5:21)
+  </code>
+    </pre>
+    <p>We thought we'd get true but we got false instead. So I will undo my change there. So we now have our test
+      passing. In the next clip let's create a test for something in the DOM using JSDOM.</p>
+    <h2>Demo: DOM Testing</h2>
+    <p>Let's add a second test that put's JSDOM to use. To do that let's first import JSDOM and we'll also need to
+      import <code class="hljs">fs</code> which comes along with node. It stands for filesystem and let's us interact
+      with the filesystem using node. So let's describe this one as <code class="hljs">index.html</code> because that
+      is going to be the file that we are going to want to test in this case.
+    <pre>
+<code class="javascript">import {expect} 'chai';
+import jsdom from 'jsdom';
+import fs from 'fs';
+
+describe('index.html', () => {
+
+});
+</code>
+    </pre>
+    <p>And inside we're going to say that it should say hello:</p>
+    <pre>
+<code class="javascript">
+it('should say hello', () => {
+
+});
+</code>
+    </pre>
+    <p>Remember that we have a "Hello World" sitting inside of here so we're just going to write a test that confirms
+      that markup is there. So first let's get a reference to our <code class="hljs">index.html</code> file and hold
+      it in memory. To do that I am going to say:</p>
+    <pre>
+<code class="javascript">
+const index = fs.readFileSync('./src/index.html', "utf-8");
+</code>
+    </pre>
+    <p>The above code references our index.html file and specifies it is in utf-8 format. So now we have the contents
+      of our index.html file held in memory within a constant called index. So we're ready to now use JSDOM. So let's
+      say:</p>
+    <pre>
+<code>
+jsdom.env(index, function(err, window) {
+  const h1 = window.document.getElementsByTagName('h1')[0];
+  expect(h1.innerHTML).to.equal("Hello World!");
+  window.close();
+});
+</code>
+    </pre>
+    <p><code class="hljs">jsdom.env()</code> is our way of defining the JSDOM environment. We will pass it our
+      index.html file because this constant represents the contents of index.html. If you want JavaScript to run as part
+      of your JSDOM environment you can pass an array of JavaScript files as the second parameter but note that if any
+      of those files utilize fetch you need to use isomorphic fetch instead because fetch is a browser feature so it
+      wont be available by default in the node environment. We don't need any JavaScript for this particular test so
+      I'll just omit the second parameter.</p>
+    <p>The second parameter for this is a callback function which is run after JSDOM is completed pulling index.html
+      into memory making a virtual DOM in memory. And it takes two parameters: an error and a window argument. The
+      window here represents the window in the browser. Just like you could say window when your'e in the browser now
+      you can do so right here in node because we have a virtual DOM in memory. So we're going to write a test that
+      confirms this text is there. To do so we want to get a reference to that <code class="hljs">h1</code> so let's
+      define a constant called <code class="hljs">h1</code> and then say
+      <code class="hljs">window.document.getElementsByTagName('h1')[0];</code> and the tagname that we are looking
+      for is <code class="hljs">h1</code>. Now this returns an array like object so I am just going to say give me the
+      first <code class="hljs">h1</code> on the page because we know that our <code class="hljs">h1</code> is the first
+      one on the page.</p>
+    <p>So we now have a reference to the <code class="hljs">h1</code> on the page we are ready to write our assertion.
+      So we will say we expect the <code class="hljs">innerHtml</code> of <code class="hljs">h1</code> to equal it's
+      value which is "Hello World!". Finally we'll go ahead and close the window just to free up memory that was taken
+      when we created our in memory DOM.</p>
+    <p>So we'll hit save and then we should be ready to come down here and enter <code class="hljs">npm test</code> or
+      if you want to save some typing <code class="hljs">npm t</code> does the same thing.</p>
+    <pre>
+<code class="hljs">
+2 passing (203ms)
+</code>
+    </pre>
+    <p>And you can see that we have two tests passing. Now just to prove that this is working let's go ahead and change
+      the exclamation point to a question mark:</p>
+    <pre><code>expect(h1.innerHTML).to.equal("Hello World?");</code></pre>
+    <p>If we hit save then re-run our test we should see it fail but we don't. Interesting, and you're probably
+      surprised like I am that that's still passing but there is a good reason for this. When we call JSDOM there is an
+      asynchronous call that occurs here. We have to setup our test to be asynchronous. To do that, when we call it
+      our function that we define here takes a parameter, and we'll call this done:</p>
+    <pre>
+<code class="javascript">
+describe('index.html', () => {
+    it('should say hello', (done) => {
+    const index = fs.readFileSync('./src/index.html', "utf-8");
+    jsdom.env(index, function(err, window) {
+      const h1 = window.document.getElementsByTagName('h1')[0];
+      expect(h1.innerHTML).to.equal("Hello World!");
+      done();
+      window.close();
+    });
+  });
+});
+</code></pre>
+    <p>What we need to do is tell Mocha that our test is done and then it will run the expect and report our results
+      after it sees done here. If we do this then re-run our tests we should see it fail:</p>
+    <pre><code class="hljs"> 1 passing (208ms)
+ 1 failing
+
+ 1) index.html should say hello:
+
+   Uncaught AssertionError: expected 'Hello World!' to equal 'Hello World?'
+   + expected - actual
+
+   -Hello World!
+   +Hello World?
+
+   at Object.done (src/index.text.js:16:31)
+   at node_modules/jsdom/lib/jsdom.js:320:18
+ </code></pre>
+    <p>And indeed now we do, and the world makes sense again. You can see it was expecting it to be an exclamation
+      point but what it received was a question mark. So just remember when your doing an asynchronous test, one that
+      involves having a callback you need to add the done parameter so Mocha now knows it's now safe to evaluate
+      whether your expect is now true or false.</p>
+    <p>We can now change the test back to an exclamation point and re-run and we can see it's passing. Of course I'm
+      just scratching the surface here but now we have a pattern for testing real DOM interactions without having
+      to fire up a browser. </p>
+    <p>Now that we have a couple of tests written it would be nice if our tests ran every time that we hit save. So
+      let's set that up in the next clip. </p>
+    <h2>Demo: Watching Tests</h2>
+    <p>Another detail is missing in our tests. We shouldn't have to run our tests manually. So let's run them every
+      time that we hit save. To to that we'll add a script to <code class="hljs">package.json</code> called
+      <code class="hljs">test:watch</code>:</p>
+    <pre><code class="json">"test:watch" "npm run test -- --watch"</code></pre>
+    <p>And you should see this looks almost identical to <code class="json">lint:watch</code>. We're using the same
+      pattern of telling the test script to run but we're passing another parameter to it with this
+      <code class="hljs">-- --watch</code> syntax. So it's just as though I had taken this
+      <code class="hljs">--watch</code> flag and added it in <code class="hljs">test</code> script above.</p>
+    <p>Now of course we also want to run this as part of our <code class="hljs">start</code> script:</p>
+    <pre><code class="json">"start" "npm-run-all --parallel security-check open:src lint:watch test:watch",</code></pre>
+    <p>So now let's run the app and see how it works.</p>
+    <pre><code class="hljs">npm start -s</code></pre>
+    <p>And we can see the app starts up just fine. Of course there's much more to testing than this. You could setup
+      mocking, code coverage, reporting and more. Now that we have testing setup it would be nice if we could fail the
+      build if someone commits broken tests so in the next clip let's begin by exploring continuous integration.</p>
+    <h2>Why Continuous Integration?</h2>
+    <p>While we're talking about assuring quality with testing there's another important practice to consider -
+      continuous integration. When your team commits code it's handy to confirm immediately that the commit works as
+      expected when on another machine. That's what a continuous integration server is for or CI server for short. So
+      let's wrap up this module by setting up a continuous integration server to ensure that we're notified when
+      someone breaks the build. </p>
+    <p>Im sure youve heard that annoying guy Jimmy say this to you multiple times:</p>
+    <p>"Weird it works on my machine"</p>
+    <p>Well thanks Jimmy that was super helpful. Wouldn't it be nice to find out right away when someone has broken the
+      build or you made a bad commit that has broken the build and ruined someone else's day. That's what a continuous
+      integration server is for. </p>
+    <p>Now the question that you might be asking is how do we end up in a situation where it works on our machine but
+      it breaks on the CI server. Well the CI server catches a number of potential mistakes.</p>
+    <ul>
+      <li>Have you ever forgotten to commit a new dependency</li>
+      <li>Have you ever installed an npm package but forgotten to save the package reference to package.json</li>
+      <li>Maybe you added a new step to the build process but perhaps it doesn't run cross platform</li>
+      <li>Perhaps the version of node that you are running locally is different than the one your using in production.
+        So the app might work just fine when running on your machine but fail on the Continuous Integration Server
+      </li>
+      <li>Maybe someone just completed a merge but made a mistake somewhere along the way that broke the build.</li>
+      <li>Finally, perhaps someone on your team committed a change without running the test suite. In this case I
+        typically recommend covering their whole desk in aluminum foil.
+      </li>
+    </ul>
+    <p>The good news is that with a CI Server you don't have to worry. It will catch the culprit and notify the
+      developer of his or her transgression. These are just a few great reasons to run a CI Server. The point is a
+      CI Server catches mistakes quickly.</p>
+    <h2>What Does Continuous Integration Do?</h2>
+    <p>So what does a CI Server do to provide all these benefits? Well first it builds your application automatically
+      the moment that you commit. This ensures that your application builds on another machine. Sure beats the all too
+      common alternative where hours or days later someone get's latest and complains that someone broke the build. A
+      CI Server makes it clear who broke the build by checking every commit.</p>
+    <p>It also runs your test suite. Of course, you should be running your tests before committing but a CI Server
+      ensures it always happens. And it ensures that the tests pass on multiple machines. If your tests don't pass then
+      your commit has issues so it's important to have a separate server run your tests to make sure they pass on more
+      than just your machine.</p>
+    <p>A CI Server can run tasks like code coverage and reject a commit if code coverage is below a specified
+      threshold. And finally, although it's not required, you can even consider automating deployment using a CI Server.
+      With this scenario, if all these aforementioned checks pass, your application is automatically deployed to
+      production.</p>
+    <h2>Choosing a CI Server</h2>
+    <p>There are multiple continuous integration servers to consider that work great for JavaScript apps.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Travis CI is a Linux based continuous integration server. </p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Appveyor is a Windows based continuous integration server.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Jenkins is another popular and highly configurable option.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Circle CI is another interesting option to consider.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Semaphore is another interesting option to consider.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Snap CI is another interesting option to consider.</p>
+    <p>Performance, features and configurability of course differ between these options. Travis and Jenkins are the
+      most popular and thus have the largest ecosystem of support but Travis is a hosted solution while Jenkins is a
+      good choice if you prefer to host your CI Server on your own. Appveyor is notable because of it's Windows
+      support.</p>
+    <p>In this course we'll setup two continuous integration servers: TravisCI and Appveyor. Why two? Because
+      TravisCI runs on Linus and Appveyor runs on Windows. This means we can be assured that our build process runs on
+      MAC, Linux and Windows. On my current team, developers run both MAC and Windows so using both TravisCI and
+      Appveyor helps assure that our build runs on both platforms.</p>
+    <h2>Demo: Travis CI</h2>
+    <p>Let's get back in the code and setup continuous integration using both TravisCI and Appveyor. TravisCI is a
+      popular continuous integration server. It offers handy integration with GitHub which makes it quick and easy to
+      add to your project. Assuming that you're using GitHub for your source control it's quite straightforward to
+      integrate TravisCI as your continuous integration server on your JavaScript app.</p>
+    <p>Now, as you can see, I've been using GitHub for this demo. I showed you how to install Git and setup a
+      repository in the intro module of this course. Now you can sign in to TravisCI using your GitHub account. When you
+      do you should see an empty list of repositories:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Obviously you can see I have some existing repositories. You can click this plus sign to add a new repository.
+      When you do you will see a list of all you repositories and I have to scroll down a bit because I have a lot of
+      them. The one that I want to turn on is <code class="hljs">js-dev-env-demo</code>. To turn it on I just click the
+      X and that enables Travis CI. I can click the gear icon to change some settings but we don't need to change
+      anything in here. We do want it to run on Build pushes and for Build pull requests. The defaults are just fine.
+    </p>
+    <p>And now that we have set this up on the website we can finish configuring Travis by going back into the editor
+      and creating a configuration file for Travis. Travis is configured via a .travis.yml file. Inside we're going
+      to declare just two things:</p>
+    <pre>
+<code class="yml">
+language: node_js
+node_js:
+  - "6"
+</code>
+    </pre>
+    <p>We going to declare that the language we are working with is node.js and then we can add a list of versions. I
+      am just going to check version 6 but I could have added other lines here to have it check version 5, version 4 and
+      so on. And that's all it takes to configure Travis for our continuous integration server when we're working with
+      GitHub.</p>
+    <p>Now, before we commit our changes to fire off our first continuous integration, let's open up
+      <code class="hljs">index.html</code> because I'm going to change line 7 to have a question mark instead of an
+      exclamation point. This should break our JSDOM based test. In this way we can see what it looks like when a
+      build fails on our CI Server.</p>
+    <p>And now we ready to commit our changes which should fire off our first continuous integration build on TravisCI.
+      Now there's Git integration built in to VSCode and many popular editors but I'm going to use Git via the command
+      line because it will work the same for everyone. If I do a <code class="hljs">git status</code> right now I can
+      see
+      that I have all my changes for this module that are listed.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>I'm just going to add all of these as staged changes:</p>
+    <pre><code class="hljs">git add .</code></pre>
+    <p>The dot after add means "add all changed files". </p>
+    <p>The minute that I do you can see that they are now listed as staged changes here in my editor. So now they are
+      ready to commit so I will say:</p>
+    <pre><code class="hljs">git commit -m "module 9 work in progress"</code></pre>
+    <p>Hit enter and when I do this commits. Now this just committed locally. If we actually want to push our
+      changes up to GitHub we need to issue:</p>
+    <pre><code class="hljs">git push</code></pre>
+    <p>We can now see that it wrote and pushed my changes up to gihub.com:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>We can prove that that's true by coming back over to github.com and refreshing the page and seeing that there is
+      now a new commit:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Now the other thing that's interesting is we should be able to come over to Travis CI and see it working. We
+      can see that it is running so it was watching for a commit. If I click on this we can see the details of the
+      status in progress.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>We can see that it's installed the latest version of Node 6 and is displaying the version. Once this is
+      complete we'll be able to see the results - so I'll just pause for a moment until this is done. Ok it finished and
+      the build failed. And this is a great example of why a CI Server is useful. It installed node, ran our tests, and
+      we can see that it failed. Remember I deliberately changed <code class="hljs">index.html</code> to make the
+      CI build fail. And if I run <code class="hljs">npm t</code> to run our test we should see it fail in the editor
+      as well. So if I open <code class="hljs">index.html</code> up and change the question mark back to an exclamation
+      point, hit save and now if I run <code class="hljs">npm t</code> in the browser it succeeds. It should also
+      succeed in TravisCI once I commit my change.</p>
+    <p>So now if I issue a <code class="hljs">git add .</code> command and then issue a
+      <code class="hljs">git status</code> command. The one file that I just added has been staged:</p>
+    <pre>
+<code class="hljs">
+| => git status
+On branch master
+Your branch master is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;.." to unstage)
+
+      modified srd/index.html
+</code>
+    </pre>
+    <p>So I can now issue the command:</p>
+    <pre><code class="hljs">git commit -m "Fix broken test"</code></pre>
+    <p>And now I can issue the command:</p>
+    <pre><code class="hljs">git push</code></pre>
+    <p>This will push my change up to the server. So now if we browse back to travis-ci.org that Travis CI has kicked
+      off again. So we'll see whether I have fixed my test.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Great now we can see it came back green. It installed node, it ran my tests so everything looks good. Now we
+      know that our application runs not just on my machine but on a separate integration server. This gives us more
+      confidence that the application is ready for production.</p>
+    <p>So now we know that our app builds and our tests pass within a Linux environment but what if your working in a
+      Windows environment. For that let's check out an alternative CI server called Appveyor</p>
+    <h2>Demo: Appveyor</h2>
+    <p>We just saw how to setup continuous integration on a Linux server using Travis CI. Now it's time for Windows so
+      we're going to use Appveyor as an alternative to Travis CI that runs one Windows. Now, as you can see, here on
+      Appveyor.com you can click to sign up for free and once you do you can sign in using your existing GitHub account.
+      You will need to authorized it by clicking Authorize application.</p>
+    <p>Once logged in you can view your projects. I am going to click new project. As you can see Appveyor supports
+      a number of different online repositories but we're going to look at GitHub.</p>
+    <p>Now I can see a list of all my GitHub repos:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>We'll come down here, and select <code class="hljs">js-dev-env-demo</code> from the list and I'm just going to
+      click add. So now we're redirected to a page where you can view the build history, deployments and settings. Let's
+      click on settings. Here you can change a long list of settings but here, again, the defaults are just fine for
+      our purposes. And just like Travis CI we need to jump back into the editor to finish configuring Appveyor.</p>
+    <p>Now appveyor is configured with a file called <code class="hljs">appveyor.yml</code> and it should again
+      reside out in the root of your project.</p>
+    <p>The recommended Appveyor configuration is a little more involved so I'll just paste the following code in
+      and we can talk through it:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>As you can see we are telling Appveyor that we should be using nodejs version 6. We could add other versions
+      below with another dash if desired. And the rest of this boilerplate is recommended by Appveyor so we can
+      declare that we want to install our npm packages and also run our tests. So we are telling it the specific npm
+      tasks it should run.</p>
+    <p>And this output is just here because it useful to see the node and npm version that are being run when we
+      are trying to debug. And with this file saved we should be able to open the terminal and say:</p>
+    <pre><code class="hljs">git add .</code></pre>
+    <p>to add this file to staging. Then if we say:</p>
+    <pre><code class="hljs">git status</code></pre>
+    <p>We should see that this is now staged for us:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>So let's commit this file:</p>
+    <pre><code class="hljs">git commit -m "Add appveyor CI"</code></pre>
+    <p>Now that's committed locally let's push that up to GitHub:</p>
+    <pre><code class="hljs">git push</code></pre>
+    <p>When we do let's go back to the AppVeyor web site and click on latest build. </p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Great and it looked like our build succeeded. If we scroll back to the top we can see the green bar. Just like
+      Travis CI if our build had failed we would have received an email notifying us that we had broken the build.
+      And just like Travis CI we can see that it installed node, installed our dependencies and ran our tests
+      successfully. So we can now feel confident that our development environment runs properly on both Linux and
+      Windows.
+      Alright that's it for this module. Let's summarize what we just learned.</p>
+    <h2>Summary</h2>
+    <p>We just saw the long list of decisions you have to make to handle testing in JavaScript. You have to choose a
+      testing framework but remember this is like choosing a gym. What's important is that you just pick one and start
+      exercising. Then we quickly reviewed assertion libraries. Some frameworks like Jasmine come with assertions built
+      in. Others, like Mocha, don't include an assertion library so we used Chai. And you may want to use some helper
+      libraries to get things done like JSDOM which provides an in memory DOM and Cheerio which provides a jQuery like
+      interface for querying the DOM. We discussed options for where to run your tests including the actual browser, a
+      headless browser, or doing in memory testing. I showed the in memory approach using JSDOM. We also reviewed the
+      merits of placing your tests alongside the file under test because it speeds navigation, increases visibility and
+      avoids having to recreate and maintain a separate file structure for your tests. And remember that unit tests
+      should be run every time you hit save. If it's too slow for that then it's likely an integration test which is
+      also
+      useful but should be handled separately. And we wrapped up this module by reviewing a few popular options for
+      continuous integration. We set up both Travis CI and Appveyor so we know that our app builds on both Linux and
+      Windows. Great so now we have testing and continuous integration configured so we know we're ready to build a
+      quality JavaScript application. Our development environment is working great but some critical pieces are still
+      missing. How do we make HTTP requests. And how do we generate Mock data for rapid development when we don't have
+      a completed production API. Nearly every JavaScript application needs to handle these issues so let's explore this
+      topic in the next module.</p>
+
+

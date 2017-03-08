@@ -1,0 +1,485 @@
+    <h1>HTTP Calls</h1>
+    <h2>Intro</h2>
+    <p>As we saw in the first module JavaScript is eating the world and when it comes to protocols HTTP is eating the
+      world too. Virtually every JavaScript application that we build today makes HTTP calls. So, in this module, let's
+      explore the libraries for making HTTP calls via JavaScript. These libraries are essential for making Ajax calls in
+      modern applications. Then we'll shift our focus to mocking HTTP calls. We'll discuss why mocking is useful so we
+      can code without hitting actual API's, rapidly try different response shapes, code offline, and much more. And
+      we'll wrap up by considering various approaches for doing mocking HTTP calls. We'll implement a compelling mock
+      API that generates realistic fake data and simulates a database using a simple generated file full of JSON. This
+      module is about making our development environment interact with the real world and these days the world talks
+      HTTP so let's dive in.</p>
+    <h2>HTTP Call Approaches</h2>
+    <p>There are at least half a dozen popular ways to handle HTTP calls in JavaScript. The library options depend on
+      where your running your app. Node provides a built-in package called http. It's a low level library that provides
+      basic functionality for making HTTP requests. Now request is a popular higher level library that makes it simpler
+      to make these calls in node. It provides a streamlined API that many prefer.</p>
+    <p>Now if you're writing JavaScript for the browser you have a different set of options. You can of course use
+      plain old XMLHttpRequest also know as XHR for short. This is the native and original way to get things done. It's
+      hard to believe but the birth of XMLHttpRequest was over 17 years ago in 1999 and it's been broadly supported in
+      browsers for well over a decade. Plain HTTP XMLHttpRequest looks like this:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>You have to manually check the ready state, use a verbose api to set the request header, and attach to the
+      onreadystatechange and error events to get the job done. As you can see it's a lot of plumbing and it looks pretty
+      old and creaky these days so most people prefer alternatives that offer a cleaner api.</p>
+    <p>So for a long while people have often reached for jQuery to get this job done. jQuery's $.ajax object has been
+      the workhorse for the web for years and if your'e already using jQuery in your project it remains a pretty logical
+      way to handle http calls because it helps you avoid pulling in extra dependencies.</p>
+    <p>These days some more full featured frameworks like angular include their own http service so you don't have
+      to make this decision at all.</p>
+    <p>But assuming your framework doesn't automatically handle http another increasingly popular option is Fetch which
+      is a standard proposed by the Web Hypertext Application Technology Working Group. Yes that's a mouthful, that's
+      why people typically call them the What Working Group for short. Now Fetch offers a streamlined API that
+      elegantly handles HTTP calls. However, some browsers lack native support so you'll want to use a polyfill with
+      this option. You can find polyfills for both the regular version of fetch and the isomorphic version of fetch
+      which we're going to talk about in a moment. But it's also worth noting that Fetch is currently a streamlined api
+      so it doesn't offer all the features of raw XMLHttpRequest or the other libraries that abstract XMLHttpRequest
+      away that we'll talk about in a moment. So, for instance, you can't cancel a fetch at this time but this
+      limitation
+      is being actively worked. So although Fetch support is currently being added to popular browsers its feature set
+      is
+      expected to grow over time. Here's an example of using Fetch:</p>
+    <!--Fetch example-->
+    <p>As you can see, you create a request object, then pass that to Fetch. And since Fetch uses promises to handle
+      results you provide a success and error handler to the then function. Full featured libraries like Axios and
+      SuperAgent that we'll talk about in a moment are great but the new native Fetch api is likely to provide all the
+      power that you'll need.</p>
+    <p>So finally, some packages work on both the client and the server. isomorphic-fetch is an npm package that
+      provides a fetch like api that runs on the server via node and in the browser. That's why it's called isomorphic
+      Fetch. More recently the term Universal JavaScript has become popular to describe JavaScript that runs on both the
+      client and the server.</p>
+    <p>You can also choose to use XHR which is a package available on npm. XHR provides a subset of the request library
+      that we talked about under the Node column but the subset of features that it supports run on both node and the
+      browser.</p>
+    <p>Now if your'e looking for full featured options. SuperAgent and Axios are popular libraries that run on both
+      node.js and the browser. Both are elegant and popular but I personally prefer Axios because it offers a clean
+      promise based api. Here's an example of a call using Axios. This code is simple, easy to read and nicely
+      declarative. I enjoy the promise based api. </p>
+    <!--some axios code-->
+    <p>James K Nelson describes Axios as the XMLHttpRequest library which takes all the good parts from Angular's
+      $http and throws out everything else. But SuperAgent is quite popular as well. It even has it's own plug in
+      ecosystem.</p>
+    <p>Now that's a lot of options so let's sum this up. If you're working only on node you'll probably want to use
+      request unless you have a good reason to avoid taking on another dependency. If you're in the browser then Fetch
+      with a polyfill is the most future-proof approach since you wont need a polyfill once all browsers finish adding
+      support. However, this also assumes that you can live with the limitations of Fetch. Finally if your building an
+      app that needs to render on both the client and the server then any of the libraries on the far right are a great
+      choice. Choosing between them largely comes down to whether you prioritize file size or features. SuperAgent and
+      Axios weigh a bit more but also offer more features. And now that you hopefully have a good feel for what library
+      is
+      the best fit for your needs, in the next clip let's discuss why it's important to centralize api calls.</p>
+    <h2>Centralizing HTTP Requests</h2>
+    <p>Here's an important key I often see people overlook when making api calls. Make sure they're handled in a single
+      spot. So why is this important? Because it centralizes key concerns. First it gives you one place to configure all
+      your calls. This way you can declare important configuration like base url's, preferred response type, and
+      whether to pass credentials in a single spot. You can make sure all GET, PUT, POST and DELETE calls are handled
+      consistently. When asynchronous calls are in progress it is important that the user is aware. This is often
+      accomplished via a moving pre-loader icon, commonly called a spinner. By centralizing all your calls you can keep
+      track of how many asynchronous calls are in progress. This ensures the pre-loader continues to display until all
+      async calls are complete. Centralization also gives you a single place to handle all errors. This ensures that any
+      time an error occurs your application can handle it in a standardized way. Perhaps you want to display an error
+      dialogue or log the error via a separate http request. By centralizing your api calls a single method can assure
+      that this occurs for all calls. Finally, centralizing your api calls gives you a single seam for mocking your api.
+      Centralizing your calls means you can point to a mock api instead of a real one by changing a single line of code
+      that points to a different base url. We'll discuss this more in an upcoming clip.</p>
+    <h2>Demo: Fetch</h2>
+    <p>Ok, enough talk, let's make some decisions. For this course, we're just building a web app so let's setup
+      Fetch along with the associated polyfill from Github so that we can assure that our code can runs cross browser.
+      And while we're doing so let's centralize our api calls for all the reasons that I outlined in the previous
+      slide.</p>
+    <p>As I mentioned in the slides I prefer to centralize my api calls. Centralization assures that I handle all api
+      calls in a consistent way. It creates a clear seam for mocking and it makes displaying a pre-loader while
+      asynchronous calls are in progress trivial. But we have a problem, our app doesn't currently have an api. So let's
+      use express to create a single api call. For simplicity let's just serve the api using the same express instance
+      that's serving our app during development. So let's open srcServer.js and add a new route. Let's create a
+      simple endpoint that returns user data. As you can see, when we hit /users it should return a hard coded array
+      of a few records. Of course, in a real app, this would hit a database and perhaps be served by a different
+      machine on a different web server but I'm just going to hard code some data here instead of setting up a real
+      database or a separate api. And now that we have this change we should be able to jump over to the browser
+      and confirm this works. So let's say</p>
+    <pre><code class="hljs">npm start</code></pre>
+    <p>And if I put in /users we can see the JSON getting returned from express as we expected. Now let's update our
+      app to call the api using Fetch and display the results on the page. Again, I like to keep all my api calls
+      centralized so let's create a folder called api under the src folder. And inside let's create a file called
+      userApi.js</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>And we can see at the top I'm importing whatwg-fetch so this polyfill will assure that this code runs in
+      browsers that don't yet have fetch support natively. And, as you can see, I'm only exporting one public function:
+      getUsers(). All the other functions below are private. The actual call that's using Fetch occurs here:</p>
+    <pre>
+<code class="javascript">
+function get(url) {
+  return fetch(url).then(onSuccess, onError);
+}
+</code>
+    </pre>
+    <p>in the get() function but with this small amount of boilerplate setup adding other get requests will require
+      very little code because we only need to provide the url. Fetch along with promise resolution and error handling
+      are abstracted away behind this private get function. Right now, I'm only supporting GET but you might want to
+      add functions for handling PUT, POST and DELETE requests as well. We'll add support for a DELETE request in a
+      following clip. You can think of this file a bit like the repository pattern but in JavaScript. On the server
+      the repository pattern is often used to abstract away data access using a course grained api and that's basically
+      what we're doing here to except instead of abstracting away a database, we're abstracting away our web api from
+      our application. And the beauty of centralizing our calls here is we have one place to consistently handle all of
+      our Ajax calls. If one fails we have centralized error handling and if we want to show a pre-loader we have one
+      spot to keep track of any calls in progress. And, as you'll see in a moment, if our base url changes in
+      different environments we have a single place to configure. Ok, now we have our api setup to use Fetch, let's
+      call it. To do so let's jump over to <code class="hljs">index.html</code>. Let's create a table inside
+      <code class="hljs">index.html</code>. I'm going to remove the h1 that says "Hello World" and instead paste in
+      a simple structure for a table. You can see that we have headers for id, firs name, last name and email because
+      this
+      is the data structure that we're expecting to receive from our api call. And the table body tag deliberately has
+      an id of users because I'm going to reference this in some JavaScript that we write next. </p>
+    <p>Now let's jump over the index.js and write some code to populate this table with the results from our api call.
+      First, let's add a reference to the api call that we need which is getUsers() and then let's remove all the code
+      and replace it with the following because our application is now just going to display user data. Here's some
+      code to populate a table of users using our api call. We can see that on line 6 I make the call to getUsers
+      and I use the then function on the promise to handle the result that we receive from our api call. I then loop
+      through the list of users returned and return a string of html which I then place within the inner html of
+      that users table body which we created in index.html. So this code will end up populating our HTML table. Of
+      course in a real application I'd likely do this using React or Angular but I want to use plain vanilla
+      JavaScript here to avoid adding the complexity of a framework since that's not the focus of this course. And
+      now when I hit save we can see that our test fails. And our test fails, because remember, we wrote a rather
+      silly test that was making sure that our "Hello World!" message was within the h1. So let's go ahead and change
+      index.test.js to say 'should have h1 that says Users' and change the expect to say users.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>And the moment we hit save we can see our tests passing again. And yes this is a silly test but I want to leave
+      it here so that we have a working example of how to interact with JSDOM. So now if we go over to the browser and
+      load our application we can see that our data is coming back and if we inspect and go to the network tab. I'll
+      just reload, so now we can see that request going through</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>This is the request to users on our api. We get a 200 ok and the response is the JSON that we're returning from
+      express. So now we know that our call is going through using Fetch as we expected.</p>
+    <p>Now you might be wondering about sending a polyfill to everyone. Let's discuss that next. </p>
+    <h2>Selective Polyfilling</h2>
+    <p>Now you might be wondering if Fetch is already supported natively in some browsers why are we sending our
+      polyfill down to all browsers. Well, in short, we did so because it was easy and also quite common. The idea
+      is that you can remove the polyfill altogether later when all the browsers that you care about have added support
+      for fetch. But if you want to send a polyfill only to browsers that need it there's a handy service called
+      Polyfill.io which does just that. It offers a wide array of polyfills. Here's an example of using Polyfill.io
+      to polyfill only the Fetch feature. So if we put this at the top of index.html Polyfill.io will read the User
+      Agent and use that information to determine if the browser requires a polyfill for the feature or features listed.
+      Since I'm using Chrome it'll send back an empty response since my browser doesn't need it. Pretty slick. </p>
+    <p>Now what if we need a wide variety of data to build our app and the services we need to call dont exist yet.
+      That's just one of the reasons you might want a robust mock API so in the next clip let's discuss approaches for
+      mocking apis and why it's so useful.</p>
+    <h2>Why Mock HTTP?</h2>
+    <p>We've now setup our development environment to handle making HTTP requests but it's often helpfull to mock HTTP.
+      Why? Well maybe you want to unit test your code so that your tests run quickly and reliably or maybe the existing
+      web services in your QA environment are slow or expensive to call. Mocking HTTP means that you can receive
+      consistently instantaneous responses. Or maybe the existing server is unreliable. With a mock api you can keep
+      working even when the services are down. Maybe you haven't event created any web services yet. If you haven't
+      decided how to design your web services. Mocking allows you to prototype different potential response shapes and
+      see how they work with your app. Perhaps a separate team is creating the services for your app. By mocking the
+      service calls you can start coding immediately and switch to hitting real web services when they're ready. You
+      just
+      need to agree on the api's proposed design and mock it accordingly. Finally, maybe you need to work on a plane, on
+      the road or in other places where connectivity is poor. Mocking allows you to continue working while your'e
+      offline. </p>
+    <h2>How to Mock HTTP</h2>
+    <p>So does that sell you on the benefits of mocking HTTP? Assuming so, here's a few ways to get it done. If you're
+      writing unit tests then Nock is a handy way to mock HTTP calls in your tests. You tell Nock the specific url
+      that you want to Mock and what it should return. Nock will hijack any HTTP request to the Url that you
+      specified and return what you specified instead. This way your tests become deterministic and no longer make
+      actual HTTP calls. But if you're wanting to do day to day development against a Mock api you'll want
+      something more. If you've already centralized all your api calls within your application then you can use this
+      centralization to your advantage by pointing to a static file of JSON encoded data rather than making the
+      actual HTTP call. Or you can, of course, create a web server that mocks out a real api. Thankfully there are
+      libraries that make this easy, such as, api-mock and JSON server. With JSON server you create a fake database
+      using static JSON. Then when you start up your JSON server it creates a webservice that works with your static
+      JSON behind the scenes. So when you delete, add or edit records it actually updates the file. So this provides
+      a full simulation of a real working api but against local mock data that's just sitting in a static file. This is
+      really useful because the app feels fully responsive and you don't have to go through the work of standing up
+      a local database and webserver by hand. What if you want to use dynamic data instead of the same hard coded
+      data? Well that's way JSON Schema faker comes in handy. JSON Schema faker generates fake data for you. You
+      specify the data type you like such as a string, number, or boolean and it will generate random data which you can
+      write to a file. And you can specify various settings that determine how it generates the data such as ranges
+      for numbers or useful generators that create realistic names and emails. Finally you can just go all out and
+      wire up a fake api yourself using your development web server of choice such as Browsersync or express. Of course
+      this is the most work but it also provides you with the most power. So, how do you decide between these options?
+    </p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Well, in short, as you move to the right, you have to spend more time up front configuring but in return you
+      enjoy a more realistic experience and more power to customize. See, with static JSON your app will load the same
+      data every time. And if you try to manipulate that data in any way it wont be reflected upon reload. Now JSON
+      Server actually saves the changes that you make to the data so it increases the realism of your mock api. Now,
+      you can make your mock api more dynamic by using JSON Schema Faker. JSON Schema Faker can create different
+      fake data every time you start the app. This can be really helpful for catching edge cases in your design
+      such as pagination, overflow, sorting and formatting. And finally, setting up a full mock api from scratch
+      using something like express and a real-time database filled with mock data of course gives you all the power
+      to customize as desired. But if you don't already have a service layer and a database your'e on the hook to do
+      all that hard work up front before you can enjoy a rapid front end development experience. In summary if there's
+      already a solid service layer available then I suggest putting it to use. But if a separate team is building the
+      service layer and you haven't built it yet I suggest trying a mock api so that you can move quickly without
+      being reliant on a real api backend. The lessons you learn with your mock api can often help guide your api
+      design.</p>
+    <p>So now that we've talked about different decisions in the next clip let's talk about our plan for mocking
+      HTTP in our starter kit.</p>
+    <h2>Our Plan for Mocking</h2>
+    <p>For this course, let's use a three step process to create a mock api. We'll put a few handy open source projects
+      to use.</p>
+    <ol>
+      <li>Declare our schema using JSON Schema Faker. This will allow us to declare exactly what our fake api
+        should look like. We'll declare the objects and properties that it will expose including the data types.
+      </li>
+      <li>Generate Random Data: JSON Schema Faker supports generating random data using a few open source libraries:
+        <ul>
+          <li>faker.js</li>
+          <li>chance.js</li>
+          <li>randexp.js</li>
+        </ul>
+        Faker and chance are very similar. Both of these libraries offer a wide variety of functions for generating
+        random data including realistic names, address, phone numbers, emails and much more. randexp.js focuses on
+        creating random data based on regular expressions. Now JSON Schema Faker allows us to use faker, chance and
+        randexp within our Schema definitions so we'll declare exactly how each property in our mock api should be
+        generated. This will ultimately produce a big chunk of JSON and the nice thing is that big chunk of JSON will
+        contain different data every time that we run JSON Schema Faker and that's where I final piece comes in.
+      </li>
+      <li>JSON Server creates a realistic api using a static JSON file behind the scenes so we'll point JSON
+        Server at the mock dataset that we dynamically generate. Now the beauty of JSON Server is it actually supports
+        creates, reads, updates and deletes. So it saves changes to the JSON file that's been created by JSON schema
+        faker. This way the api feels just like a real api but without having to make an actual over the net HTTP call
+        or needing to stand up a real database. This means that, to get started on development, we just need to agree
+        on the calls that we want to make and the data shape that those calls should return. Then the UI team can move
+        ahead without having to wait on a service team to create those associated services. Everyone can code to an
+        interface and get back together later. Now that we've talked about the high level plan let's explore the
+        technologies that we're going to use in a little more detail in the next clip.
+      </li>
+    </ol>
+    <h2>Mocking Libraries</h2>
+    <p>JSON Schema is a standard for describing a JSON data format. Of course, since JavaScript is the Wild West
+      this is just one of many so-called standards for describing JSON structures. There's also JSON content rules,
+      JSON-LD, RAML and api related technologies like GraphQL, Falcor and Odata that specify their own standards for
+      JSON structures but in this course we going to use the JSON schema standard that's being outlined here at
+      json-schema.org.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>This is the standard that we'll be following to declare the shape of our mock data. And here's why. JSON
+      Schema Faker is a handy tool that uses the JSON Schema standard. It enhances it by using some open source
+      libraries for generating mock data. As I mentioned the three libraries that we'll be using are:</p>
+    <ul>
+      <li>faker.js</li>
+      <li>chance.js</li>
+      <li>randexp.js</li>
+    </ul>
+    <p>All three of these libraries come bundled with JSON Schema Faker. For more intformation on Faker.js check
+      out the Github repo and also the Github.io site for more documentation:</p>
+    <a href="github.com/Marak/faker.js/wiki">gihub</a>
+    <a href="marak.github.io/faker.js/index.html">github.io</a>
+    <p>But I also recommend using Fakers interactive example. This is a great way to see all of the data that Faker
+      can generate and each time that you click on the labels on this form you'll notice that it generates different
+      data. </p>
+    <p>Chance.js also has a nice dedicated web site with a long list of detailed examples as well:</p>
+    <a href="http://chancejs.com/">Chance.js</a>
+    <p>There's a lot of crossover between Faker and Chance.js but again they both come bundled with JSON Schema Faker
+      so it's your choice which one you want to use for a given call. But that said, it's worth carefully reading the
+      JSON Schema Faker docs on GitHub. They provide a long list of examples for how to call Faker and Chance within
+      your schema definition.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>As you can see here their using Faker to generate an email address. The trickiest part is understanding how
+      to convert the document and function calls for Chance and Faker into the JSON that you see here. Thankfully there
+      are many examples within the JSON Schema Faker docs. Just be sure to carefully read the docs on faking values if
+      you get tripped up on how to call faker, chance or regexp from within your JSON schema definition. This is the
+      bit that confused me the most, but the examples helped me work it out. Also be sure to check out the JSON
+      Schema Faker REPL online. This way you can easily try different schemas and instantly see what JSON they
+      produce. I found this to be a great way to rapidly learn how to structure my schema. And here's the JSON server
+      repository. As you can see from the number of stars, it's hugely popular. The sales pitch is simple. Get a full
+      fake REST API with zero coding in less than 30 seconds (seriously). Now the biggest caveat of using this tool
+      is that it has strong opinions on what a fake rest api should look like. If your'e a fan of hypermedia this
+      wont do it. And if you have an existing api that has dramatically different assumptions than this makes then
+      this wont be very helpful. But if you haven't built you service yet or if your service follows the same
+      popular conventions as this library then json-server can help you stand up a mock api shockingly quickly. Your
+      about to see how fast all these tools can be glued together into something seriously useful. I know there are
+      a lot of moving pieces here but I think you'll be surprised how easily this all composes together.</p>
+    <h2>Demo: Creating a Mock API Data Schema</h2>
+    <p>Alright, it's time to mock some HTTP. Here's the plan. Let's use JSON Schema Faker to declare our Fake data
+      schema. It comes bundled with three handy libraries that we'll use to generate our random data: faker, chance
+      and regexp. We'll use JSON Server to serve it up and simulate a real api. Let's dive in. As we just discussed in
+      the slides we're going to use a combination of useful open source products to create a mock api. To begin let's
+      define a schema that describes what our mock data should look like. Let's create a file called mock data schema
+      within our buildScripts folder. And I'll just paste in the schema then talk through the structure. If you
+      don't want to type this you can grab the snippet from <a href="bit.ly/ps-mock-data-schema">this</a> url.</p>
+    <p>Now, as you can see, I'm exporting a chunk of JSON and this JSON describes the shape of our mock data. I
+      begin by declaring at the top level that our data structure is an object and that object has a set of
+      properties. First property is users and that users property has a type of array. I'm specifying that I want
+      that array to contain between 3 and 5 items and then below I define the shape of the items that should sit
+      inside the users array. I'm saying that inside the users array I should find an object and then again I define
+      the properties for that object. As you can see, there are 4 properties I am defining:</p>
+    <ul>
+      <li>id</li>
+      <li>firstName</li>
+      <li>lastName</li>
+      <li>email</li>
+    </ul>
+    <p>The id should be a number, I am saying it should be unique because I am trying to mimic a unique key in a
+      database and I want that minimum value to be 1, I don't want any negative numbers. Then I have a firstName with
+      a type of string, and this is where things get interesting, I start using the faker library and I'm asking for
+      a fake firstName, I do the same thing with lastName and then I also do the same thing on email to say that I
+      would like a fake email address returned. Finally, down here at the bottom, I say that all 4 properties that we
+      have defined above are required. That means that they will always be populated. If I forget and I leave one
+      of these out of the array then it will occasionally leave one of these out so that we can simulate an api that
+      doesn't always send a property if it's not populated. And I also specify that my one top level property which
+      is users is also required. So in this case our schema will always return all of our properties since I've
+      required them all. Pay close attention to these required properties. This really confused me at first when I
+      was wondering why some of my properties were occasionally not showing up. And that's it with only 34 lines of
+      JSON we've declared detailed rules about how our mock data should be generated. And now that we've declared
+      how it should look let's use it to generate mock data in the next clip. </p>
+    <h2>Demo: Generating Mock Data</h2>
+    <p>We just wrote the schema that declares the shape of our mock data. Now we can use JSON Schema Faker to
+      generate some mocke data using this schema. To do that let's create another file in buildScripts and we'll
+      call it generateMockData.js. This file will use JSON Schema Faker to generate a mock data set and write it
+      to a file. And as you can see I'm pulling in json-schema-faker, I'm referencing the mock data schema that
+      we just created and then I'm using fs which comes with node and chalk to be able to colour our output.</p>
+    <p>I begin by calling JSON.stringify on the results of JSON Schema Faker. As you can see I pass the Schema
+      that we just defined to JSCON Schema Faker. So effectively JSON Schema Faker is going to look at that Schema,
+      generate a lot of randomized data based on our schema and then I'm going to convert that into a JSON string
+      using JSON.stringify. So now we have a string of JSON stored on line 14. Then I'm going to use nodes built in
+      fs to be able to write our database file, which I'm going to place in the api folder and we'll call it db.json.
+      If any error occurs then I'll log it to the console in red using chalk and if it succeeds then I'll output
+      "Mock data generated." in green.</p>
+    <p>And now that this is setup let's write an npm script that makes all of this easy to call. So we can jump
+      over to package.json and inside let's create a new script called "generate-mock-data". I use babel-node
+      to call my generateMockData file that we just created, and of course I need to use babel-node because I wrote
+      it in ES6 just to make sure that node can parse it.</p>
+    <p>When we run this script it should write a random dataset that matches the schema we defined to our api folder.
+      So let's save our changes and see if this works.</p>
+    <pre><code class="hljs">npm run generate-mock-data</code></pre>
+    <p>We got our green message so that's a good sign. And now we can see that db.json was written to the api folder
+      and if we open it up we can see that random data was generated that honours the shape that we just defined.
+      We can see that we're getting randomized id's and realistic first, lastNames and email addresses. We can also
+      see that there was an array of users generated as we requested. Great so we now have a simple repeatable way
+      of generating random data that suits our specific needs. In the next clip let's put this to use on a mock api.</p>
+    <h2>Demo: Serving Mock Data via JSON Server</h2>
+    <p>Now that we have the mock data we need let's startup JSON Server and tell it to use our mock data. Now the
+      great thing about JSON server is it will parse our JSON file and make a mock api for each top level object that it
+      finds. So let's create a new npm script to start our mock api server:</p>
+    <pre><code class="json">"start-mockapi": "json-server --watch src/api/db.json --port 3001"</code> </pre>
+    <p>As you can see, I'm telling it to use the db.json file that we generated and to serve the api on port 3001.
+      Again, pick a different port if 3001 isn't available on your machine but I'm deliberately choosing a different
+      port than port 3000 which we're using to host our app. So let's open the command line and try it out:</p>
+    <pre><code class="hljs">npm run start-mockapi</code> </pre>
+    <p>When we do we can see the list of resources that JSON Server is exposing, in this case, it found our top level
+      object - users, but if we'd added more top level objects it would create an endpoint for each one. Slick. Now
+      let's take this url and go back to the browser, open up a new tab and paste it in and there we go. Awesome we
+      can see an array of users is getting returned as expected. So this is the mock data that's sitting in db.json
+      but now it's getting served up over HTTP on a mock api.</p>
+    <p>Now, I prefer for my mock data to change every time that I open the app. This way we're constantly viewing
+      different potential edge cases in the system. Randomized data helps simulate the real world and it catches
+      issues in development such as:</p>
+    <ol>
+      <li>Emtpy lists</li>
+      <li>Long lists</li>
+      <li>Long values</li>
+      <li>Testing</li>
+      <li>Filtering</li>
+      <li>Sorting</li>
+    </ol>
+    <p>So let's generate new mock data every time that we start the app. To do that let's go back to package.json
+      and we'll create a script that should run before we start the mockapi, so I'll place it right before
+      start-mockapi, we'll call it prestart-mockapi, and remember by convention because this starts with the word
+      pre but otherwise has a matching name it will run before start-mockapi. And what we're telling it to do is
+      generate mock data before it runs start-mockapi. Finally, let's update the start script to start the mock api
+      each time we start the app.</p>
+    <p>Simple enough. So now every time that I start the app it will generate new mock data and startup the mock api
+      that serves the data. And the interesting thing about JSON Server is if we manipulate the data by making calls
+      to edit or delete records it will actually manipulate the data files behind this scenes. This means you can
+      even use this for integration tests or reload the page and see your changes reflected. It does a great job of
+      mimicking an api with an actual database behind the scenes. Of course to see this in action we need to update the
+      application to hit the new mock api instead of that express api call that we created earlier in this module. So
+      let's assume that the express server that we setup here:</p>
+    <p>And that the mock api that we setup is what we want to use during development. So what we need is for the
+      application to intelligently point to the proper base url in each environment. To do that let's create a file
+      called baseUrl.js in the api folder.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png" />
+    <p>This file will look at the hostname to determine if the application is running in development. If it is it
+      will point at our mock api which is hosted on port 3001 and if it's in production it will point at that
+      production api that we setup that is served from express. Great so let's put this new file to use in our
+      userApi file. I'm going to add an import for getBaseUrl here at the top and then I will store that in a
+      constant right here:</p>
+    <br/>
+    <p>And of course we need to use this information in the api call below. So I will say baseUrl + url. This way
+      it will change based on the environment. Assuming this worked we should be able to start our app again and
+      see that it's pointed at our mock api because we're in development. Now that it's up if we come over to the
+      browser we can see that our user data is displaying. And a quick note, since we're starting express and the
+      mock api at the same time the app may fail on the first load if it tries to call the mock api before it is up.
+      If so, just hit F5 to refresh:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>We can see that it is different data than we were seeing before so we know that we're hitting our mock api.
+      We could also confirm this by coming over here to db.json and seeing that the first record is Kole Kessler and
+      that is what we're seeing right here. So we know we're getting the data from db.json served up into our app. We
+      can also see this if we reload that we're making a call to port 3001. So our application is hosted on port 3000
+      and our mock api is on 3001 and it's returning that mock data that we just generated. Of course you'll have
+      different mock data than me because every time we run the application now it's going to realistic looking mock
+      data. Now do you notice that delete link? Well it doesn't work because we haven't wired it up yet but this is
+      where things get really interesting. JSON Server supports manipulating data as well so if we submit a request
+      to add or delete records it will write to the db.json file so our changes are persisted on reload. So the
+      changes will remain in db.json until we restart the app. So let's wire up these delete links in the next clip.</p>
+    <h2>Demo: Manipulating Data via JSON Server</h2>
+    <p>To prove that we can save changes to the mock data I could just generate an HTTP request to the mock api that
+      tries to delete some data. I could install a handy tool like Advanced Rest Client which is a Chrome app but let's
+      go ahead and enhance the interface that you see here to support deleting a user when I click the delete link.
+      First, let's go back to the code and create the necessary api call. So we'll open userapi and we'll export
+      a new publc function: delete user. As you can see it looks at users and then passes the id that it receives. And
+      you can see that it is delegating to a separate function called del which I haven't created yet. Let's go
+      ahead and do that. And we'll place it down here below the private get function. Now this might seem rather
+      redundant but this is the same pattern that we followed when we were setting up get abn getusers. This
+      private del function gives us a centralized spot to handle all our delete calls. So if we add other deletion
+      functions related to users, each public function call is nice and short. And I had to call this del because
+      delete is a keyword in JavaScript. Now that we've setup the functions that we need within our api let's shift our
+      focus over to the ui. We'll go to index.js and add some code to make these delete links work.</p>
+    <p>After we make our call to getUsers we're currently populating the table but let's do a little more work
+      in here. We'll go ahead and paste this in:</p>
+    <pre>
+<code class="javascript">
+const deleteLinks = global.getElementById......
+</code></pre>
+    <p>What we now want to do is get a reference to all of the delete links on the page and to do that we're going
+      to look for anything with a class name of deleteUser. As you can see, all the delete links have a class of
+      deleteUser. So now I will have an array like structure that I can iterate through. So I'll use
+      <code classs="hljs">Array.from</code> to be able to iterate through the list of delete links and then attach
+      a click handler to each one. I'll prevent defaults so the click doesn't actually produce any change to the url.
+      I'll call deleteUser and then I will remove the row that we just clicked from the dom. And again, this would all
+      be potentially cleaner in React, Angular and other popular frameworks but I just want to use plain vanilla
+      JavaScript here to avoid adding confusion. And one final touch since I'm calling delete user right here, we need
+      to add it as an import from our user api. And with that the UI should now support us deleting a user from our
+      mocked database. So let's give it a shot. DONT MISS THE CIRLY BRACE</p>
+    <p>And now when I click delete we can see that it works. We can watch the network down here and see the call go
+      through to delete the different users. If I click on one of these and look at the headers we can see we get a
+      204 no content, we can see that the delete is going through as our request method as expected. And here's the
+      cool part. If I hit refresh now only one record is here because when I hit delete on those two it really did
+      write to db.json. If we come back over here we can see now that our db.json only has one record when before it
+      had three. We can also see that JSON Server is continuing to log all the different calls that are being made
+      to our mock api. This is really handy when your debugging calls along the way. The great thing is this data
+      will persist until we restart the app and new random data is generated. And a quick note, you may have to hit
+      ctrl c multiple times to kill the running process since now we running multiple processes on the same command
+      line.</p>
+    <p>You'll notice the JSON Server throws an error when you kill it this way but there's no impact so you can
+      ignore it. If you prefer you can kill the terminal and open a new instance. So, Wow, we just covered alot of
+      moving parts but the result sure is handy. Now let's close out this module with a short summary.</p>
+    <h2>Summary</h2>
+    <p>In this short module we began by reviewing how to choose a HTTP library. We saw that HTTP is the low-level
+      option in node but you'll probably want to use request with node due to it's streamlined api. In the browser
+      you can choose the old standards like:</p>
+    <ul>
+      <li>XMLHttpRequest</li>
+      <li>jQuery</li>
+      <li>Fetch</li>
+    </ul>
+    <p>But Fetch is probably what you should reach for since it's the new standard that streamlines the clunkiness
+      of old XMLHttpRequest. Just remember to pull in the Fetch polyfill so it will work properly cross browser. Or
+      if your looking for a full featured library especially one that works in node or the browser Isomorphic Fetch is
+      the most future friendly approach since it utilizes the browser's built-in Fetch support if available. However
+      you can also consider using the XHR library on npm, SuperAgent or Axios. All of these are excellent options
+      regardless of whether you need to run on both node and the browser. And we closed out this module by exploring
+      HTTP call mocking. If your'e testing the way to get that done is Nock and if your'e need to mock an api for
+      development the simplest way to get that done is likely just some hard coded JSON. If you have a small app that's
+      perhaps all that you'll need. But if you want to simulate interactivity then a custom web server approach
+      involving JSON Schema Faker, and JSON Server likely makes more sense. We saw that JSON schema faker is quite
+      powerful and includes enough built-in intelligence to create realistic fake data for a wide variety of
+      scenarios and of course if you want to go fully custom you can configure your development web server of choice
+      to simulate a real api. This is certainly the most work but also offers the most complete flexibility. Now that
+      we have HTTP requests taken care of we have a powerful foundation for building real applications. So in the next
+      module let's put all this to use. We'll discuss key principles for project structure, we'll learn why demo apps
+      are so important, and we'll build a quick demo app that helps convey best practices. And in the final module we'll
+      wrap up the course by creating an automated production build.</p>
+
+

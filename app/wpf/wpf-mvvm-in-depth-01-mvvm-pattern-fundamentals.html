@@ -1,0 +1,180 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>MVVM Pattern Fundamentals</h2>
+            </div>
+            <div class="panel-body">
+                <h3>Welcome</h3>
+                <p>
+                    Every good WPF developer wants to write great applications that delight their users. You may be able to achieve that on a first release
+                    without putting a lot of consideration into the structure of your application.
+                </p>
+                <p>
+                    The MVVM pattern guides you to organize and structure your code to write maintainable, testable and extensible applications.
+                </p>
+                <h3>Separation of Concerns</h3>
+                <p>
+                    MVVM is mostly about trying to achieve good separation of concerns. To explain separation of concerns I like to use an analogy of something
+                    we all have to do: get dressed to go out in public. If you take your laundry and put it away as it comes out of the clothes drier – all
+                    twisted and tangled with intermingled articles of clothing – that can really expedite the process of putting away your clothes at that
+                    moment in time.
+                </p>
+                <p>
+                    However, you will pay an ongoing penalty each day when you need to get dressed because you will have to dig around to find a matching and
+                    complete outfit from the tangled mess of clothing.
+                </p>
+                <p>
+                    If, on the other hand, you invest a little bit of time upfront to put in the structure in place to organize your clothes: buy a chest of
+                    drawers, put in some shelves, put clothes away neatly each time the laundry is finished then the daily activity of getting dressed becomes a
+                    breeze.
+                </p>
+                <p>
+                    Developers face a very similar choice with the way we write code.
+                </p>
+                <h3>Separation of Concerns in MVVM</h3>
+                <p>
+                    Code like the example below doesn’t look too bad at first glance:
+                </p>
+                <img src="app/wpf/images/wpfmvvmindepth/Fig01-01.png"/>
+                <p>
+                    If you look closely at what the code is doing you can see code that is touching UI elements, interwoven with code that is doing data access,
+                    interwoven with business logic code. Now put this into the context of a full application and you can start to appreciate how complex
+                    maintaining and extending an application written in this way can be.
+                </p>
+                <p>
+                    MVVM provides a structure to promote good separation of concerns. Think of it as a set of shelves and drawers that are predefined and well
+                    labelled. Each time you go to write code of a certain nature you have a specific place you should be putting it. There is a shelf for:
+                </p>
+                <ul>
+                    <li>UI Element Access - that is your View definitions.</li>
+                    <li>View Interaction Logic – that is you're ViewModels.</li>
+                    <li>Model Entities – that is your Data Model Objects</li>
+                </ul>
+                <p>Any true Business Logic should probably be in a separate layer or behind a service boundary.</p>
+                <h3>MVVM Goals and Benefits</h3>
+                <p>The three main benefits of using the MVVM pattern beyond achieving separation of concerns are:</p>
+                <ul>
+                    <li>Maintainability</li>
+                    <li>Testability</li>
+                    <li>Extensibility</li>
+                </ul>
+                <h3>Related UI Separation Patterns</h3>
+                <p>
+                    MVVM is an evolution of other separation of concern patterns. In the early 70’s when mainframes were heavily used the Model View Controller
+                    pattern was first defined. This pattern was about rendering a screen of information to the user, collecting some input from them and
+                    rendering the next screen of information to them. As a result of that Request/Response nature it is still a good fit for the modern web and
+                    so is used by platforms such as ASP.Net MVC, Ruby on Rails and Angular.
+                </p>
+                <p>
+                    One of the key distinctions between MVVM and MVC is that there is typically a decoupled lifetime between the Controller and the View. The
+                    Controller produces a View but may not stick around after that until a new request comes in from the user.
+                </p>
+                <p>
+                    In the mid 2000’s – Rich/Smart applications were getting a lot of attention. As a result, people started trying to use separation patterns
+                    there. However, because the client Views were more state-full and stuck around in memory as did their supporting interaction logic, the MVC
+                    pattern was not the perfect fit. What evolved was a nuance on the MVC pattern which was called the Model View Presenter. The distinction of
+                    a Presenter versus a Controller was mostly that the lifetime of the Presenter and the View were coupled and they generally had a more
+                    ongoing conversation as the user interacted with the View.
+                </p>
+                <p>
+                    Finally, that led to the newer MVVM pattern which was first defined in the early days of WPF by the Expression team at Microsoft. The main
+                    difference here is that we are still dealing with rich desktop client applications and Views that stick around for longer interaction with
+                    the user. The WPF platform offers really rich data-binding so MVVM is really a nuance on MVP where the explicit calls between the View and
+                    its counterpart are replaced by Two-Way Databinding flowing data and communications between the View and the ViewModel.
+                </p>
+                <h3>MVVM across Platforms</h3>
+                <p>
+                    Since most WPF developers will not be coding exclusively from WPF you should be aware that MVVM can be used on most modern client
+                    applications today such as:
+                </p>
+                <ul>
+                    <li>WPF</li>
+                    <li>Silverlight</li>
+                    <li>Window 8/WinRT</li>
+                    <li>HTML 5 (Knockout/Angular)</li>
+                    <li>Xamarin/Mobile Apps</li>
+                    <li>Windows 10</li>
+                </ul>
+                <h3>MVVM Responsibilities</h3>
+                <p>
+                    Each part of the MVVM pattern has a distinct responsibility. MVVM is really a layered architecture for the client side. The Presentation
+                    layer is composed of the Views, the Logic Layer are the ViewModels and the Persistence Layer is the combination of the Model Objects and the
+                    Client Services that produce and persists them either via data access in a two-tier application or via service calls in an n-tier
+                    application.
+                </p>
+                <h3>Model Responsibilities</h3>
+                <p>
+                    The Model is really the client side data model that supports the Views in the application. It is composed of objects with properties and
+                    backing member variables that hold the discreet pieces of data in memory.
+                </p>
+                <p>
+                    Some of those properties may reference other Model objects forming the object graph that is the model object as a whole. The Model objects
+                    may also expose computed objects (properties whose value is computer based on the value of other properties in the model (e.g. FullName) or
+                    information from the client execution context (e.g. Time).
+                </p>
+                <p>
+                    Because you will often be binding to Model properties the Model objects should raise Property Change Notifications. For WPF data-binding
+                    this means implementing the INotifyPropertyChanged interface and firing the PropertyChanged event.
+                </p>
+                <p>
+                    In addition, you will often embed Validation information on the model objects so it can work with the WPF data-binding validation features
+                    through Interfaces such as INotifyDataErrorInfo and IDataErrorInfo.
+                </p>
+                <h3>View Responsibilities</h3>
+                <p>
+                    The Views responsibility is to define the structure of what the user sees on the screen. That structure can be composed of static and
+                    dynamic parts. Static being the XAML hierarchy that defines the controls and layout of controls that the View is composed of and dynamic
+                    being any animations or state changes that are defined as part of the View.
+                </p>
+                <p>
+                    There is an overarching goal in MVVM to have “no code behind” in the View. However, you do sometimes need to put a bit of code in the code
+                    behind - at least the constructor and call to InitializeComponent() that triggers XAML parsing when the View is constructed but also things
+                    such as any code that references a UI element as that is inherently View code (things like animations expressed in code are one example).
+                </p>
+                <h3>ViewModel Responsibilities</h3>
+                <p>
+                    The ViewModel is the focal point of coding up an MVVM application. The primary responsibility of a ViewModel is provide data to the View so
+                    the View can put it on the screen and, if appropriate, let the user interact with and change that data.
+                </p>
+                <p>
+                    In addition, the ViewModel encapsulates the interaction logic for a View. That doesn’t mean that all of the logic of the application should
+                    go into the ViewModel. That would just create a new place where separation of concerns is being violated. The following should be present in
+                    the ViewModel:
+                </p>
+                <ul>
+                    <li>Calls to business/data layer/service</li>
+                    <li>Navigation logic</li>
+                    <li>State transformation logic</li>
+                </ul>
+                <p>In terms of the data that the ViewModel provides to the View there are really three types of data to consider:</p>
+                <ul>
+                    <li>Model objects directly through ViewModel properties</li>
+                    <li>Wrapped Model objects – not direct Model object references</li>
+                    <li>Client application state (e.g. User logged in)</li>
+                </ul>
+                <h3>Client Services Responsibilities</h3>
+                <p>
+                    There is one more layer that is not officially part of the MVVM pattern but is often used with MVVM to further separate concerns and avoid
+                    duplicate code – the Client services layer.
+                </p>
+                <p>Client services encapsulate any shared logic that spans more than one ViewModel.</p>
+                <h3>Equation of MVVM</h3>
+                <p>Another key concept to lock in your brain is what is sometimes called the Fundamental equation of MVVM:</p>
+                <p>View.DataContext = ViewModel</p>
+                <p>The View’s DataContext property needs to be set to a reference of the ViewModel instance for that View.</p>
+                <h3>Who’s on First</h3>
+                <p>
+                    Who constructs who? View-First and ViewModel-First refer to which object is constructed first and does it construct the other as part of its
+                    own construction or initialization process. Different approaches will typically be used in different parts of an application.
+                </p>
+                <h3>Summary</h3>
+                <p>
+                    MVVM helps you build better structured apps. Each part of the MVVM pattern has specific responsibilities that guide you to put code in the
+                    right place. Finally, to get MVVM up and running you must satisfy the fundamental equation of MVVM:
+                </p>
+                <p>View.DataContext = ViewModel</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,310 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>Hooking up Views and ViewModels in MVVM</h2>
+            </div>
+            <div class="panel-body">
+                <h2>Overview</h2>
+                <p>
+                    In this module we will cover different ways that Views can be hooked up to ViewModels. We will also cover how databinding is used to expose
+                    data from your Data Models to your Views. We will start with View-First Construction Patterns where the View is constructed first and then
+                    takes care of constructing and hooking up its own ViewModel.
+                </p>
+                <p>Next we will cover Data Binding to make it clear how MVVM relies on data binding and uses it to flow data between the View and the
+                    ViewModel.
+                </p>
+                <p>
+                    Finally, we will cover ViewModel-First approach where Data Templates are used to create the View based on an instance of a ViewModel being
+                    placed into a data binding context.
+                </p>
+                <h2>View-First Construction</h2>
+                <p>
+                    View-First Construction can be performed declaratively in the XAML. XAML parsing kicks in just as your View is being constructed initiated
+                    by the call to InitializeComponent() that is in your Views Constructor.
+                </p>
+                <p>
+                    Another way you can perform View-First construction is in the Views code behind then setting the DataContext there with the instance.
+                    Typically, this is performed in the constructor. Code behind construction has the advantage of being able to handle ViewModel construction
+                    that takes parameters and allows for Dependency Injection.
+                </p>
+                <h2>Demo: View-First MVVM Hook-up</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-XAMLHookup-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-XAMLHookup-End</p>
+                <p>
+                    In this demo we will create a View and a ViewModel and hook them up statically through the XAML. The starting point for this demo is that we
+                    have a data layer (Zza.Data) covered previously. Also covered previously is the repository layer.
+                </p>
+                <p>
+                    We will put the View and the ViewModel in a Customers folder. The View is just a UserControl called CustomerListView and the ViewModel is
+                    just a class called CustomerListViewModel. After these have been created we can navigate to MainWindow.xaml and show the designer. From the
+                    toolbox drag and drop CustomerListView then right-click and select reset all from the Layout menu to remove the padding and margins. This
+                    drag and drop operation basically creates an instance of the UserControl in the View and adds the appropriate namespace.
+                </p>
+                <p>
+                    Make the ViewModel class public and add a property (using the prop Visual Studio code snippet). Make the type of the property an
+                    ObservableCollection of type Customer (don’t forget to add the relevant using statements):
+                </p>
+                <pre><code class="cs hljs">public ObservableCollection&lt;Customer&gt; Customers { get; set; }</code></pre>
+                <p>
+                    Next we will populate the Collection. Add an instance of our repository to the ViewModel and a constructor to populate our Customer
+                    collection. Calling the repositories GetCustomersAsync method in the constructor will produce a task not the result. We can’t use async and
+                    await keywords in a constructor in .NET so we will have to force the method to execute synchronously using the .Result property. We also
+                    need to wrap the result to get an ObservableCollection:
+                </p>
+                <pre><code class="cs hljs">Customers = new ObservableCollection&lt;Customer&gt;(_repo.GetCustomersAsync().Result);</code></pre>
+                <p>Add code to the ViewModel to prevent the execution of the above code when in the designer using the GetIsInDesignMode() method.</p>
+                <p>In the CustomerListView.xaml View add a namespace for the ViewModel. Set the DataContext to an instance of the ViewModel:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-01.png"/>
+                    <figcaption>Fig 03-01</figcaption>
+                </figure>
+                <p>Add a DataGrid to display the data:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-02.png"/>
+                    <figcaption>Fig 03-02</figcaption>
+                </figure>
+                <p>Now if you run the application the DataGrid should be populated with data:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-03.png"/>
+                    <figcaption>Fig 03-03</figcaption>
+                </figure>
+                <p>We can also hook-up the View and ViewModel from the code behind with code like this:</p>
+                <pre><code class="cs hljs">this.DataContext = new CustomerListViewModel();</code></pre>
+                <p>It generally doesn’t matter whether you set the DataContext before or after the call to InitializeComponent().</p>
+                <h2>View-First with ViewModelLocators</h2>
+                <p>
+                    The next form of View-First construction is a meta-pattern called ViewModelLocator. This is sort of a pseudo pattern or common approach that
+                    is layered on top of the MVVM pattern.
+                </p>
+                <p>
+                    When doing MVVM every View has to be hooked up to its ViewModel. The ViewModelLocator is a way of centralising the code that takes care of
+                    that - decoupling the View more so it does not have to explicitly know about its ViewModel type and how to construct it.
+                </p>
+                <p>
+                    There are a number of different approaches to using ViewModelLocators. The one covered here is most similar to the one that is part of the
+                    Prism framework. The ViewModelLocator provides a standard, consistent, declarative and more loosely coupled way of doing View-First
+                    construction in that it automates the process of getting our ViewModel hooked up to our View.
+                </p>
+                <p>The ViewModelLocator follows the following high level process:</p>
+                <ul>
+                    <li>The ViewModelLocator has to figure out what type is being constructed</li>
+                    <li>As long as you have a convention for naming Views and ViewModels the ViewModelLocator can infer what the ViewModel Type is associated
+                        with that View
+                    </li>
+                    <li>Once it knows the ViewModel Type needed it can construct that ViewModel – possibly using a dependency injection container
+                    </li>
+                    <li>Finally, it sets the Views DataContext property to the ViewModel</li>
+                </ul>
+                <h2>Demo: MVVM Hook-up with ViewModelLocator</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-ViewModelLocator-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-ViewModelLocator-End</p>
+                <p>In this demo we will look at using a ViewModelLocator to wire up our View and ViewModel in a View-First way.</p>
+                <p>Firstly, make sure you remove the DataContext hook-up XAML and code in the code behind.</p>
+                <p>Define a ViewModelLocator class called ViewModelLocator. Make it public and static.</p>
+                <p>
+                    Use the propa code snippet to stub out a new Attached Property called AutoWireViewModel, make its type Boolean and make it contained within
+                    the ViewModelLocator class with a default of false.
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-04.png"/>
+                    <figcaption>Fig03-04</figcaption>
+                </figure>
+                <p>
+                    You now have a basic Attached Property definition. Next we will turn this into a simple Behaviour by wiring up a change event handler for
+                    the property. Add a handler in the PropertyMetadata called AutoWireViewModelChanged
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-05.png"/>
+                    <figcaption>Fig03-05</figcaption>
+                </figure>
+                <p>Stub this method out:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-06.png"/>
+                    <figcaption>Fig03-06</figcaption>
+                </figure>
+                <p>
+                    In the new method we want to automate the process of figuring what ViewModel to create and wiring it up to the View. Firstly, add a guard
+                    condition that does nothing if we are in DesignMode. Next we need to get the ViewType name using the following code:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-07.png"/>
+                    <figcaption>Fig03-07</figcaption>
+                </figure>
+                <p>
+                    The d argument is the element on which this Attached Property is being set. We are expecting that this Attached Property will only be used
+                    on the root element of a View. So by getting the type of that element we know what the View type is. Then we can get the type name from the
+                    FullName property of the Type object. Next from the viewType we can infer a ViewModel type (as long as we are following a standard
+                    convention). We append “Model” onto the ViewType name and we have type name of the ViewModel:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-08.png"/>
+                    <figcaption>Fig03-08</figcaption>
+                </figure>
+                <p>We use the Activator.CreateInstance method to create an instance of the ViewModel type.</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-09.png"/>
+                    <figcaption>Fig03-09</figcaption>
+                </figure>
+                <p>Finally, we set the DataContext of the View to the newly created ViewModel:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-10.png"/>
+                    <figcaption>Fig03-10</figcaption>
+                </figure>
+                <p>Now that our simple ViewModelLocator is complete we can use it to wire up our View and ViewModel.</p>
+                <p>In the View add a namespace so that we can get to the ViewModelLocator type.</p>
+                <p>Next on our root element which is the ViewType I add the AutoWireViewModel property:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-11.png"/>
+                    <figcaption>Fig03-11</figcaption>
+                </figure>
+                <p>By doing that our ViewModelLocator will kick in as that property is being set and will take care of the wiring for us.</p>
+                <p>
+                    You do the exact same thing in any View that you want to hook up to a ViewModel. To emphasize this let’s add another View
+                    (CustomerDetailView) and associated ViewModel (CustomerDetailViewModel) in the Customers folder.
+                </p>
+                <p>Add the local namespace and AutoWireViewModel property (set to true) in the new Views XAML as we did before.</p>
+                <p>In the MainWindow drag the CustomerDetailView from the toolbox to the design surface (make some room for it first).</p>
+                <p>Run the application.</p>
+                <p>The advantages of using a ViewModelLocator are:</p>
+                <ul>
+                    <li>A standard declaration in every View</li>
+                    <li>The View is not coupled to its particular ViewModel Type</li>
+                    <li>You can potentially use DI in a ViewModelLocator</li>
+                </ul>
+                <h2>Data Binding Support for MVVM</h2>
+                <p>
+                    Data binding is the key feature that differentiates MVVM from other UI separation patterns. For data binding to work you need to have a
+                    View. You also need another object that the bindings will point to. In MVVM the main thing the elements in your View bind to are properties
+                    in your ViewModel. The order that the View and ViewModel are constructed depend on the situation in the application.
+                </p>
+                <p>
+                    Because of the way a DataContext works in XAML the DataContext set at the root element also becomes the DataContext for every child element
+                    (unless it explicitly sets the DataContext property to something else or it is being rendered out as part of an Items control which sets the
+                    DataContext to the item).
+                </p>
+                <h2>Demo: Data Binding for MVVM Data Flows</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataBinding-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataBinding-End</p>
+                <p>
+                    In this demo we will review how data binding works and show how it supports the ViewModel and Model Types. Open the CustomerListView.
+                    Replace the previous DataGrid (which by default has AutoGenerateColumns set to true) with one that specifies more explicit column
+                    definitions:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-12.png"/>
+                    <figcaption>Fig03-12</figcaption>
+                </figure>
+                <p>
+                    The DataGrid is still bound to the Customers collection exposed by our ViewModel but we have individual column definitions which have their
+                    own Bindings.
+                </p>
+                <h2>ViewModel-First Construction with DataTemplates</h2>
+                <p>
+                    ViewModel-First leverages the capabilities of implicit Data Templates in WPF. Implicit data templates can automatically select an
+                    appropriate template from the current Resource Dictionary for an element that is using data binding. They do this based on the type of the
+                    data object that is being rendered by the data binding.
+                </p>
+                <p>
+                    You first have some element that is binding to a Data Object. When the property that is being bound on the control drives the rendered
+                    content on that control (such as ContentControl Content property or an ItemsControl ItemSource property) the control will look at the object
+                    produced by the binding. If it’s a UI element the control will just render the element as content based on its layout scheme for children.
+                </p>
+                <p>
+                    If the object produced by the binding is not a UI element (such as a ViewModel instance) the Control will go and look at the current
+                    Resource Dictionary that is in scope for the element and see if it can locate a Data Template that is mapped to the type of the object that
+                    is being produced by the binding. If it finds a match it creates an instance of the root element found in that data template which
+                    implicitly causes the construction of any Child elements. Then it renders that element as the Child content after having set the DataContext
+                    property of the root element to the Data Object instance that kicked of the whole process. Which in this example means the DataContext of
+                    the Child View is set to its ViewModel.
+                </p>
+                <h2>Demo: Explicit and Implicit DataTemplates</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-End</p>
+                <p>Now let’s look at how you do ViewModel-First leveraging data templates (specifically implicit data templates).</p>
+                <p>
+                    The first step is to use Data Templates in a basic Data Binding scenario. Split the DataGrid into two rows of equal height. Put a ListBox in
+                    the second row with a Binding to the Customers collection (the same one the DataGrid is bound to).
+                </p>
+                <p>
+                    If you run now each Customer has a display of Zza.Data.Customer because the object is not a UI element so the Framework is just calling the
+                    object’s ToString() method. We can fix this with implicit templates by defining a data template. Add a Resources section to the root
+                    containing a DataTemplate called CustomerTemplate:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-13.png"/>
+                    <figcaption>Fig03-13</figcaption>
+                </figure>
+                <p>To use the template, go back to the ListBox and specify an ItemTemplate:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-14.png"/>
+                    <figcaption>Fig03-14</figcaption>
+                </figure>
+                <p>Now when we run we see the presentation setup in the template:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-15.png"/>
+                    <figcaption>Fig03-15</figcaption>
+                </figure>
+                <p>
+                    To make this an implicit template we remove the ItemTemplate from the ListBox, go back to the Template definition and instead of a key we
+                    would give it a DataType:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-16.png"/>
+                    <figcaption>Fig03-16</figcaption>
+                </figure>
+                <p>Don’t forget to add a namespace reference for Zza.Data:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-17.png"/>
+                    <figcaption>Fig03-17</figcaption>
+                </figure>
+                <h2>Demo: Implicit DataTemplates for ViewModel-First MVVM Hook-up</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-End</p>
+                <p>Now we want to use DataTemplates to wire up our View and ViewModel.</p>
+                <p>Firstly, add a MainWindowViewModel.</p>
+                <p>
+                    Add a CurrentViewModel property to this class. For demo purposes statically wire this up to an instance of the CustomerListViewModel. So we
+                    are exposing that child ViewModel now as something that can be data bound to from elements within the MainWindow.
+                </p>
+                <p>
+                    The next step is to wire this up as the ViewModel for the MainWindow. We could use a ViewModelLocator for this step but for this demo we
+                    will wire it statically in the XAML:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-18.png"/>
+                    <figcaption>Fig03-18</figcaption>
+                </figure>
+                <p>Next add a DataTemplate to the XAML Window.Resources to specify a Layout.</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-19.png"/>
+                    <figcaption>Fig03-19</figcaption>
+                </figure>
+                <p>
+                    The above DataTemplate basically says if you encounter a DataType of CustomerListViewModel (which is what CurrentViewModel is set to in the
+                    MainWindowViewModel) use the CustomerListView as a Layout template.
+                </p>
+                <p>Make sure to specify the x:Type mark-up extension otherwise the DataTemplate will just silently fail.</p>
+                <h2>No One’s on First</h2>
+                <p>The last scenario to consider is a case where the View doesn’t construct the ViewModel or vice a versa.</p>
+                <p>
+                    Sometimes a separate chunk of code that simply constructs an instance of each and then sets the DataContext of the View to the ViewModel. An
+                    example of this would be a Client Service that manages pop up dialogs to be presented to the user. When a given popup is requested by a
+                    Command (say a tools/options dialog) the code in the client service could do the construction of each, wire them together and place them
+                    into a popup window and show it.
+                </p>
+                <p>Most of the time you will be doing ViewModel-First or View-First but you don’t always have to take that approach.</p>
+                <h2>Summary</h2>
+                <p>We showed a number of ways to hook-up Views and ViewModels:</p>
+                <ul>
+                    <li>View-First Construction via XAML</li>
+                    <li>View-First Construction via code behind</li>
+                    <li>Using a ViewModelLocator</li>
+                </ul>
+                <p>Data binding forms the communication pathways between the View and ViewModel</p>
+                <p>DataTemplates allow dynamic selection and hook-up of ViewModels for View.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="bundle.js"></script>

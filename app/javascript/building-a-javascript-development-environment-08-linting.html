@@ -1,0 +1,474 @@
+    <h1>Linting</h1>
+    <h2>Intro</h2>
+    <p>You shouldn't have to keep track of your teams entire list of coding standards in your head. As much as possible
+      we should automate the task away and we should be notified immediately when we make a typo. JavaScript linters can
+      deliver on both of these concerns. JavaScript linters are so powerful they can catch many errors at compile time.
+      It's wonderful finding out that you made a mistake the moment you hit save instead of waiting till runtime to hunt
+      some cryptic issue down.</p>
+    <p>So in the module we will start by asking why do we need a linter at all? Then we will quickly consider the
+      linting
+      tools available. We will spend the rest of the module discussing the most popular linter ESLint. We will discuss
+      the
+      long list of configuration approaches to consider and we will setup linting to run all our rules every time we hit
+      save.</p>
+    <p>Simple enough - let's get rolling.</p>
+
+    <h2>Why Lint?</h2>
+    <p>So why do you need a linter. I see two core reasons. First, a linter programmatically enforces consistency.
+      Once you've chosen JavaScript coding standards as a team a linter can help enforce those programmatically and
+      provide rapid feedback so issues are caught during development instead of potentially slipping by during code
+      reviews.</p>
+    <table>
+      <tr>
+        <td align="right">
+          <h3>Enforce Consistency</h3>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <h3>Avoid Mistakes</h3>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">Curly brace position</td>
+        <td>&nbsp;</td>
+        <td>Extra parenthesis</td>
+
+      </tr>
+      <tr>
+        <td align="right">confirm/alert</td>
+        <td>&nbsp;</td>
+        <td>Overwriting function</td>
+      </tr>
+      <tr>
+        <td align="right">Trailing commas</td>
+        <td>&nbsp;</td>
+        <td>Assignment in conditional</td>
+      </tr>
+      <tr>
+        <td align="right">Globals</td>
+        <td>&nbsp;</td>
+        <td>Missing default case in switch</td>
+      </tr>
+      <tr>
+        <td align="right">eval</td>
+        <td>&nbsp;</td>
+        <td>debugger/console.log</td>
+      </tr>
+    </table>
+    <p>Examples include enforcing the position of curly braces or warning about the use of built-in features that
+      your team has decided to avoid like confirm and alert. Many teams prefer to use nicely styled dialogue boxes
+      instead of the native implementation of these features. Linting helps programmatically restrict their usage.</p>
+    <p>Leaving in a trailing comma or forgetting to add a trailing comma if your team prefers trailing commas as a
+      a standard, or declaring a global variable or disallowing the use of eval since it is potentially dangerous and
+      often misused. All of these are examples of enforcing consistency through a linter</p>
+    <p>Second a linter helps avoid mistakes. Just consider the long list of potential mistakes you can make writing
+      JavaScript today. Such as adding an extra parenthesis when wrapping a statement or overriding a function when
+      you don't realise that the function with the same name already exists. How about performing an assignment in a
+      conditional when you almost certainly meant to perform a comparison instead - it's really easy to leave out that
+      extra equals sign. Or forgetting to define a default case in a switch statement which can lead to hard to debug
+      fall through issues. How about leaving debugging related junk in your code like <code class="hljs">debugger</code>
+      or <code class="hljs">console.log</code>. It's easy to accidentally leave these in and have them slip into
+      production. With a linter you will know immediately when you do and you can even fail the build on your continuous
+      integration server when a developer overlooks warnings and commits any of these issues.</p>
+    <p>This list just scratches the surface. So assuming your sold on using a linter the next question is which linter
+      linter should you use. Let's explore that in the next clip.</p>
+
+
+    <h2>Linters</h2>
+    <p>Ok now that you're hopefully sold on the benefits it's time to pick a linter.</p>
+    <h3>JSLint</h3>
+    <p>JSLint was the original, created by Douglas Crockford many years ago. It's extremely opinionated and while
+      some consider that a feature the public has largely moved on to more powerful and configurable alternatives
+      today.</p>
+    <h3>JSHing</h3>
+    <p>One such alternative is JSHint. JSHint is an improvement on JSLint which offers more configurability but in
+      recent years the most popular linter by far has become ESLint.</p>
+    <h3>ESLint</h3>
+    <p>ESLint has become so powerful and configurable that I am not aware of any good reason to choose JSLint or JSHint
+      anymore. ESLint has become the defacto standard. So bottom line, this choice is really quite easy, my suggestion
+      is
+      to just use ESLint. Now actually I cant quite say just use ESLint because if you choose to use a language that
+      compiles to JavaScript you might have to use an alternative Linter. For example, at the time of this writing, none
+      of
+      these linters support linting TypeScript although ESLint is expected to add support in the near future. If your
+      working in TypeScript then for now you will need to choose TSLint instead. Now that we have chosen ESLint let's
+      explore our different options for configuring it in the coming clips.</p>
+
+    <h2>ESLint Configuration Decisions Overview</h2>
+    <p>Much like the rest of life in JavaScript land ESLint is filled with decisions. Let's explore some of the key
+      decisions we will make configuring it. Choosing ESLint was the easy part, the hard part is the next set of
+      decisions we need to make. We need to:</p>
+    <ol>
+      <li>We need to choose a config format?</li>
+      <li>We need to decide which built-in rules that we would like to enable?</li>
+      <li>We need to decide whether to use warnings or errors?</li>
+      <li>We need to consider extending ESLint's power by adding plugins for the framework or your choice.</li>
+      <li>Finally if all this sounds overwhelming you can just punt on the whole thing and use a preset instead</li>
+    </ol>
+    <p>Let's discuss each of these decisions so you are clear how to configure ESLint best for your needs.</p>
+    <h2>Decision 1: Configuration File Format</h2>
+    <p>Let's begin with decision 1. Where should you put your configuration. The number of different ways to configure
+      ESLint is just plain silly. There are five different filenames that it currently supports for configuration or you
+      can add your configuration to package.json. So how do you decide? Well the most common universal approach is to
+      create a dedicated .eslintrc file using one of the filename and formats mentioned on the previous slide but
+      assuming you are already using npm you can also configure ESLint in package.json. The advantage of configuring
+      via a separate file is that it is universal. It is not tied to npm but using package.json avoids using yet another
+      file in your application.</p>
+    <p>To configure ESLint via package.json add a section called eslintConfig. The contents of this section will be
+      the same as the .eslintrc approach and we will walk through the contents of the eslintrc in a moment. </p>
+    <h2>Decision 2: Which Rules?</h2>
+    <p>After choosing a configuration method decision 2 is: which rules should we enable? ESLint catches dozens of
+      potential errors out of the box such as:</p>
+    <ul>
+      <li>comma-dangle: require or disallow trailing commas</li>
+      <li>no-dupe-args: disallow duplicate arguments in function definitions</li>
+      <li>no-extra-semi: disallow unnecessary semicolons</li>
+    </ul>
+    <p>I suggest gathering as a team and deciding once and for all which of these rules are worth enabling. Yes it
+      will be a painful meeting but once you get it done and it is in your starter kit, it's settled an you can
+      enjoy the benefits.</p>
+    <h2>Decision 3: Warnings or Errors?</h2>
+    <p>Now that you've decided which rules you want to enable you have yet another decision to make. Which of your
+      rules should merely produce warnings and which rules are a big enough deal to justify throwing errors instead.
+      Let's consider the implications of Warnings versus Errors.</p>
+    <table>
+      <tr>
+        <td align="right">
+          <h3>Warning</h3>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <h3>Error</h3>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">Can continue development</td>
+        <td>&nbsp;</td>
+        <td>Breaks the build</td>
+
+      </tr>
+      <tr>
+        <td align="right">Can be ignored</td>
+        <td>&nbsp;</td>
+        <td>Cannot be ignored</td>
+      </tr>
+      <tr>
+        <td align="right">Team must agree: Fix warnings</td>
+        <td>&nbsp;</td>
+        <td>Team is forced to comply</td>
+      </tr>
+    </table>
+    <p>With a warning it doesn't break the build so you can continue with development without fixing the issue. In
+      contrast errors actually break the build which can be helpful when the linter finds a more critical issue that
+      should catch your attention immediately and keep you from moving forward. But since warnings don't stop
+      development
+      they can ultimately be ignored. This is handy in the moment when your focused on implementing a feature and don't
+      want to stop your flow to fix a minor issue but it also means that warnings can potentially be committed because
+      they may not break the build. Errors, in contrast, are a clear wall to moving forward - they can't be ignored.
+      Due to these trade offs I have seen some shops only use warnings because they favour moving as fast as possible
+      and
+      I have seen other shops use only errors because they favour stopping any work that isn't good enough to commit at
+      that moment.</p>
+    <p>Now I suggest using both. Warnings are good for minor stylistic issues and errors are useful for items that are
+      likely to produce bugs. The bottom line is it's important that your development team agrees that warnings are not
+      acceptable. If you commit code that produces warnings then quickly your linting output will get so noisy that it's
+      useless and it will mask other helpful output like test results that also display on the same command line.</p>
+    <p>If you choose errors then you don't have to worry about people ignoring linting issues. They will be forced to
+      comply because the application wont build. In summary I recommend choosing carefully based on context. You'll
+      likely decide that only some rules warrant throwing an error versus a warning.</p>
+    <h2>Decision 4: Plugins?</h2>
+    <p>Now that you have implemented ESLint's built in rules you have another decision to make. Should you enhance
+      ESLint with some plugins for your library or framework of choice and if so which ones? For instance I primarily
+      work in React and in my React courses you can see how I use eslint-plugin-react to perform a number of additional
+      checks that are specific to React and similar plugins are available for other popular frameworks like angular as
+      well as for node.js. There is a handy list of ESLint configs, plugins, parsers and more at this url:</p>
+    <a href="github.com/dustinspecker/awesome-eslint">github.com/dustinspecker/awesome-eslint</a>
+    <p>As you'll see there are plugins for many popular frameworks and libraries available. These plugins are useful
+      because they help enforce a consistent style in the way that your team works with the framework of your
+      choice.</p>
+    <h2>Decision 5: Preset</h2>
+    <p>Did those first four decisions feel pretty overwhelming. If so then this option allows you to avoid the
+      decisions that I just talked about. Instead you can just decide to use somebody else's preset. There are multiple
+      popular ways to handle declaring your ESLint rules. The most obvious option is to start from scratch as we just
+      discussed. This way you can take the full list of rules, work through it one by one and build up your own list of
+      settings that's perfect for the way your own team want's to do development. </p>
+    <p>However, if everything we just talked about sounds like too much work, there is certainly some good ways around
+      it. ESLint comes with a preset that implements a logical set of defaults that can save you a lot of time. It
+      decides what is an error or warning for you and enables the rules that it thinks make the most sense for most
+      people. I prefer to use ESLint's standard rules as a good shortcut to get started then I tend to tweak a few of
+      the
+      settings based on our team's feedback. This is a nice compromise because it avoids the work of starting from
+      scratch but it still offers complete power in tweaking the settings as your team sees fit. You can even go a step
+      farther and use an existing set of rules like airbnb, xo or standard js. Assuming that you don't mind decisions
+      that they have made this is a great way to avoid spending a lot of time arguing about all the decisions that I
+      have
+      just discussed. It is also worth noting that standard JS isn't actually a standard! In fact, ironically, many of
+      the
+      rules that it enforces like disallowing semicolons and only allowing single quotes for strings are actually quite
+      unpopular in the JavaScript community.</p>
+    <p>All of these options use ESLint but they enforce strong opinions so you don't have to make any decisions
+      configuring rules. In fact, with standard JS, you can't change any rules at all. Assuming that you are willing to
+      accept the strong opinions in these presets you have a very low friction way to get started. Now that we have
+      talked about configuration of ESLint we also need to discuss a couple of issues that are likely to trip you
+      up.</p>
+    <h2>Watching Files with ESLint</h2>
+    <p>Now that we've decided we are using ESLint there are a few different ways to actually run it. Of course the
+      simplest way to run ESLint is via the command line, however, there is one obvious limitation with this approach.
+      ESLint doesn't currently include a watch setting built in so if you want to automatically run ESLint each time
+      that you hit save running ESLint by itself wont work. Here are two ways to get around ESLint's lack of file
+      watching capability.</p>
+    <table>
+      <tr>
+        <td align="right">
+          <h3>eslint-loader</h3>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <h3>eslint-watch</h3>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">Re-lints all files upon save.</td>
+        <td>&nbsp;</td>
+        <td>ESLint wrapper that adds file watch</td>
+
+      </tr>
+      <tr>
+        <td align="right"></td>
+        <td>&nbsp;</td>
+        <td>Not tied to webpack</td>
+      </tr>
+      <tr>
+        <td align="right"></td>
+        <td>&nbsp;</td>
+        <td>Better warning/error formatting</td>
+      </tr>
+      <tr>
+        <td align="right"></td>
+        <td>&nbsp;</td>
+        <td>Displays clean message</td>
+      </tr>
+      <tr>
+        <td align="right"></td>
+        <td>&nbsp;</td>
+        <td>Easily lint tests and build scripts too</td>
+      </tr>
+    </table>
+    <p>First, since we are using Webpack one option is to use eslint-loader so webpack will run ESLint each time we
+      run our build. The advantage of this approach is all files being bundled by webpack are re-linted every time that
+      you hit save so you see an ongoing summary of any linting issues. However, I recommend going a different route
+      and using an npm package called eslint-watch.</p>
+    <p>This npm package is simply a wrapper around eslint that adds file watching capability. So this stands alone
+      and isn't tied to webpack in anyway. So you can use this approach to linting regardless of the bundler that you
+      choose. eslint-watch also adds some other nice tweaks like better looking warnings and error messaging and it
+      displays a message when linting comes back clean unlike eslint-loader which is completely silent when there are
+      not linting issues. Finally, the biggest win with this approach is that you can easily lint all your files even if
+      they are not being bundled as part of your app. So this means, you can lint your tests, webpack.config, and any
+      build scripts as well. I really like this so that I can ensure that all the code in my project is held to the same
+      standard and has a consistent style.</p>
+    <h2>Linting Experimental Features</h2>
+    <p>Another issue you may run into is ESLint doesn't support many experimental JavaScript features at this time.
+      Now ESLint supports all of ES6 and ES7 natively and is expected to continue adding support for standardized
+      features as JavaScript progresses. It also supports object spread even though that is currently an experimental
+      feature. What if you want to use other experimental JavaScript features? Well then you will likely want to
+      use babel-esLint instead because it also lints stage 0-4 features.</p>
+    <p>You can view links to the different
+      experimental JavaScript features under the plugins page on Babels web site. As you can see JavaScript features
+      progress through different stages. They are initially just ideas which are stage 0. Stage 1 is a formal proposal.
+      Stage 2 is a draft spec. Stage 3 is a completed spec with initial browser implementations. So as you can see
+      risk goes down as the stages progress. Bottom line, if you want to use these experimental features you'll want
+      to use babel-eslint. For this course I am going to use only standardized JavaScript features so we will use
+      plain ESLint and run it via eslint-watch. Of course if you choose to use experimental features you will need
+      to configure Babel with the appropriate plugins to transpile your code as well.</p>
+    <h2>Why Lint Via an Automated Build?</h2>
+    <p>Now as we've been talking through this process you might be wondering why we should be bothering to lint via an
+      automated build process because many editors offer ESLint integration built in so they just monitor your code and
+      output results inline right there within the editor. However I prefer to integrate ESLint with my build process
+      for multiple reasons:</p>
+    <ol>
+      <li>Outputting all feedback on my code to the command line gives me one single place to check for all the
+        feedback related to my code quality. This means I have one place to check, not just for linting issues, but also
+        any compile time errors or any testing errors.
+      </li>
+      <li>This is especially helpful on teams where developers use
+        different editors. We all have the same development workflow because we all utilize the same starter kit and
+        a command line. Pair programming is also easier when everyone has the same development process.
+      </li>
+      <li> Most importantly
+        ESLint should be part of your build process so that the build is broken on your continuous integration server
+        when someone commits any code that commits a linting error. This helps protect your application from slowly
+        getting sloppy. Even if a developer ignores ESLint locally the build can be rejected automatically by your
+        continuous integration server.
+      </li>
+      ,
+    </ol>
+    <h2>Demo: ESLint Set Up</h2>
+    <p>Alright let's jump back into the editor and configure ESLint so that we get rapid feedback as we code. We just
+      went over a long list of decisions so here's the plan: </p>
+    <ul>
+      <li>We are going to use ESLint's built in rules so we don't have to waste time.</li>
+      <li>We will use eslint-watch to add watch capability so that our files are linted and reported to the command
+        line the moment that we hit save.
+      </li>
+    </ul>
+    <p>To help us quickly catch mistakes, maintain consistency and enforce best practices we are going to use ESLint to
+      lint our code. Every time that we hit save it will run. To configure ESLint we can either place a .estlintrc file
+      in the root of our project or we can configure it in our package.json. I prefer the separate file so lets create
+      a .eslintrc.json.</p>
+    <p>As a quick note in my previous course on React and Redux in ES6 I used .eslintrc file without an
+      extension but recently ESLint has declared a filename without an extension to be deprecated so I have added the
+      .json extension that you see here.</p>
+    <p>To get the rules that we are going to use I recommend coming over to GitHub Gist at this shortened url:</p>
+    <a href="http://bit.ly/jsdeveslint">bit.ly/jsdeveslint</a>
+    <pre>
+ <code class="json">{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+
+  }
+}
+</code>
+    </pre>
+    <p>
+      So lets walk through our eslintrc.json file. First you can see that I am declaring this as the root eslint file.
+      By default ESLint will look for configuration files in all parent folders up to the root directory. So just in
+      case you have a eslint file in some parent directory I am adding this for safety. This tells eslint that this is
+      the project root so it shouldn't look in any parent folders for other configuration files. So this will help
+      assure that you don't get odd behaviour, this will be the only eslint file applying to our project. As you can
+      see we are using ESLint's recommended rules. This enables many warnings and errors based on ESLints
+      recommendation. As we saw in the slides we could of course use alternatives like airbnb's rules as a baseline
+      if preferred.</p>
+    <p>We can also augment the recommended settings with plugins that provide enhanced linting. In our
+      case I am going to add plugins for enhanced linting of ES6 imports. This assures that if we create an invalid
+      import statement we'll find out about it the moment we hit save.</p>
+    <p>Now the parser option section defines the version of JavaScript that we are using. We're using ES7 also known
+      as ES2016 since that is the latest standard at the time of this recording. I am declaring that we are using
+      standard JavaScript modules.</p>
+    <p>The environment section declares some different environments that ESLint should be aware of. These environments
+      tell ESLint to expect certain global variables. As you can see we are expecting to work with the browser, node,
+      and to run our tests with mocha. Now if you view the full list of environments on ESLint you can see that many
+      other frameworks are listed including:</p>
+    <ul>
+      <li>QUnit</li>
+      <li>Jasmine</li>
+      <li>Jest</li>
+      <li>A variety of other environments</li>
+    </ul>
+    <p>Finally we can define any rules that we want to override down at the bottom of the file. Let's add a single rule
+      just so you can see how to override ESLint's standard rules:</p>
+    <pre>
+<code class="json">
+"rules": {
+  "no-console": 1
+}
+</code>
+    </pre>
+    <p>I am going to set no-console to a warning. 1 means warning, 2 means error and 0 means off. So if you feel
+      strongly about a rule you can set it to 2 and break the build but since writing to the console can be useful
+      during development I prefer to set this to a warning so it doesn't break the build. </p>
+    <p>Alright, now we have ESLint configured let's set it up to run via an npm script in our package.json file.</p>
+    <p>Now we could simply run eslint directly in an npm script but eslint lacks watch functionality so we will use a
+      handy npm package called eslint-watch. eslint-watch adds file watching functionality to eslint and also offers
+      enhanced command line output. So let's create an npm script that calls eslint-watch:</p>
+    <pre><code class="json">"lint": "esw webpack.config.* src buildScripts",</code></pre>
+    <p>We will call it <code class="hljs">lint</code> and we'll call <code class="hljs">eslint-watch</code> and we want
+      it to watch <code class="hljs">webpack.config.*</code> since soon we will be adding a production version of our
+      <code class="hljs">webpack.config</code>, we want it to watch everything in <code class="hljs">src</code> and
+      also everything within our <code class="hljs">buildScripts</code> folder. So this should effectively lint all of
+      our JavaScript.</p>
+    <p>So to clarify <code class="hljs">esw</code> is the executable for
+      <code class="hljs">eslint-watch</code> and we're just passing <code class="hljs">eslint-watch</code> the list of
+      files we would like it to watch.</p>
+    <p>Here is an important point that can trip you up. If your editor has linting built in be sure to disable it.
+      Otherwise your editors built in linting may override the rules that we are going to define.</p>
+    <p>Now we should be ready to run this on the command line:</p>
+    <pre><code>npm run lint</code></pre>
+    <p>We can see that we do get some errors back from <code class="hljs">srcServer.js</code> and
+      <code class="hljs">startMessage.js</code>. Since we configured ESLint to throw a warning for the
+      <code clas="hljs">no-console</code> rule rather than an error which is the default in the ESLint recommended
+      rules. You can see that it currently just displaying black text but if we come back to
+      <code class="hljs">package.json</code> and add <code class="hljs">--color</code> on the end of the lint command
+      this will tell lint to display our issues with colors.</p>
+    <img src="asdf"/>
+    <p>Now we get nice yellow warnings here and some color here on our counts on the right. Now this first linting
+      error is from srcServer.js and it is complaining about the line where we are writing to the console:</p>
+    <pre><code class="javascript">console.log(err);</code></pre>
+    <p>One way that I can handle this is just to add a comment to the top of this file that disables this rule in this
+      file since I am ok with writing to the console in any buildScript files. I just want to make sure that I am not
+      writing to the console in my actual application. So we can see that this fixed one of the linting issues.</p>
+    <p>Now we can go to <code class="hljs">startMessage.js</code> and we can see that we are writing to the console:</p>
+    <pre><code class="javascript">console.log(chalk.green('Starting app in dev mode...'));</code></pre>
+    <p>The other way to disable this is to put in a comment at the end of the line:</p>
+    <pre><code class="javascript">// eslint-disable-line no-console</code></pre>
+    <p>This tells ESLint to disable the rule specified (<code class="hljs">no-console</code> in this example). So
+      this can be useful when there are rare exceptions to the rule that we've defined.</p>
+    <p>So now if we run <code class="hljf">npm run lint</code> again we should see that linting comes back clean:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>And it does, it reports back clean with this nice green arrow. This is another I like about
+      <code class="hljs">eslint-watch</code> is that we get confirmation that it is clean. I like this little extra
+      piece of output. </p>
+    <p>Linting is now running as expected but it is only running once and then stopping so let's set it up to watch
+      our files in the next clip.</p>
+    <h2>Demo: Watching Files</h2>
+    <p>Let's create another handy script. Oddly <code class="hljs">eslint-watch</code> doesn't watch our files by
+      default. Instead you have to pass it a command line flag to enable watch. So let's create a separate npm script
+      that will watch our files. We'll call it <code class="hljs">lint:watch</code></p>
+    <pre><code class="json">"lint:watch": npm run lint -- --watch",</code></pre>
+    <p>So we're passing the watch flag along to our existing lint script. So this is saying run the
+      <code class="hljs">npm lint</code> script but pass the watch flag to <code class="hljs">eslint-watch</code>. So
+      let's hit save and see if it works:</p>
+    <pre><code class="hljs">npm run lint:watch</code></pre>
+    <p>So now if I come over to srcServer.js and take out the disable comment we can see ESLint re-runs immediately and
+      throws a warning about me using the console statement in the file</p>
+    <p>So now we have linting watching our files and now that linting is setup we will know when we make many common
+      mistakes in our code. The linting errors will display immediately in our console when we hit save. Now there is
+      one final piece that is missing here. We'd like ESLint to run each time that we start our app so we just need to
+      add our <code class="hljs">lint:watch</code> task to our start script in <code class="hljs">package.json</code>
+    </p>
+    <pre><code class="json">"start": "npm-run-all --parallel security-check open:src lint:watch",</code></pre>
+    <p>And it will run in parallel since we are already using <code class="hljs">npm-run-all</code> and telling it
+      to run any of the scripts that we list on the right in parallel.</p>
+    <p>Now if I type:</p>
+    <pre><code class="hljs">npm start -s</code> </pre>
+    <p>We should see that linting is part of our start now. We get our message, we get our security check and there
+      our linting is running as well.</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>So now when we type <code class="hljs">npm start</code> it displays the start message, runs webpack, starts our
+      development web server, opens the app in our default browser, lints our files and reruns webpack and eslint
+      anytime
+      that we hit save. That's a lot of power in so little code. Let's wrap up this module with a quick summary.</p>
+    <h2>Summary</h2>
+    <p>In this module we saw two core reasons to lint.</p>
+    <ul>
+      <li>Enforce consistency</li>
+      <li>Avoid mistakes</li>
+    </ul>
+    <p>Linting helps enforce consistency so that our code is easier to read and it helps us avoid many common
+      mistakes related to typos, globals and accidental assignments. We saw that there are multiple linters but we
+      chose ESLint because it is currently the most popular, configurable and extensive linter available. </p>
+    <p>We reviewed a variety of configuration choices including: </p>
+    <ul>
+      <li>Config format</li>
+      <li>Which rules?</li>
+      <li>Warnings vs errors?</li>
+      <li>Which plugins?</li>
+      <li>Use preset instead?</li>
+    </ul>
+    <p>We wrapped up by our enhancing our development environment to use ESLint's recommended rules and run
+      ESLint every time we hit save using <code class="hljs">eslint-watch</code>. </p>
+    <p>Our development environment is really coming together now but we haven't covered a critical aspect yet. What
+      about testing and continuous integration. Let's explore these topics in the next module.</p>

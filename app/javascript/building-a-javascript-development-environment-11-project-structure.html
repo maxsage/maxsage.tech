@@ -1,0 +1,127 @@
+    <h1>Project Structure</h1>
+    <h2>Intro</h2>
+    <p>It's been a long road but we're well on our way to enjoying a seriously robust, comprehensive and luxurious
+      JavaScript development experience. But we still have two major pieces left to consider in these final two modules.
+      In this module let's discuss how to put all this to use by discussing project structure. In this short module I
+      want to begin by explaining why I believe your teams starter kit should include a demo application. Then
+      we'll move on to discuss three specific project structure tips to keep in mind as your building not just demo
+      app but any future JavaScript app. Alright let's begin with my sales pitch on why your team needs a demo app.</p>
+    <h2>Why a Demo App?</h2>
+    <p>I believe a demo app should be considered a critical piece of your teams starter kit. Why? Because many people
+      work best by example so a working example really helps. Let's just review some decisions which are clearly
+      conveyed via an example app. A demo app conveys expectations around suggest directory structure and file
+      organization. It helps encourage consistency by codifying patterns for how developers should work with the
+      libraries and frameworks that you've selected. It shows example tests that are passing so developers have a point
+      of reference for various testing scenarios, naming conventions, file placement and mocking strategies. It
+      provides a realistic example of a mocking api working in your domain. This gives developers a big head start
+      since referencing examples is often quicker than pulling up docs for disparate packages. It provides a
+      working automated deployment so there's already a clear recipe for use for future apps. It gives you a single
+      place to codify your decisions the demo app should reflect your coding standards. It's a place to update as you
+      learn new techniques and patterns that your want to share with the team. Finally and perhaps most importantly it
+      offers an interactive example of the starter kit working in a realistic scenario. This helps new team members
+      understand what life is like working in the selected stack. Ok so assuming your on board with creating a demo
+      app for your teams starter kit let's consider a few tips for structuring JavaScript projects in the next
+      clips.</p>
+    <h2>Tip 1: JS Belongs in a .js File</h2>
+    <p>Before we build the demo app let's take a moment to consider project structure. I have three important tips I
+      want to share to help you avoid some of the pitfalls that I often see in JavaScript code bases. My first tip is
+      simple</p>
+    <ol>
+      <li>JavaScript belongs in a .js file.</li>
+    </ol>
+    <p>But when doing web development some of you are tempted to simply slap JavaScript code in a script tag. Of
+      course you'd never do that right? It's understandable. It's so easy just to slap a script tag onto the HTML
+      page and start coding. But let's pause for a moment and consider why this should be avoided. There's a long
+      list of downsides. When I do something like this:</p>
+    <pre>
+<code>&lt;script&gt;
+  // slap code here
+&lt;/script&gt;
+</code>
+    </pre>
+    <p>The answer is I'm losing a ton of power to do my job better. I'm losing the ability to leverage all of the
+      goodness that I just setup. See if I do this how do I write automated tests for this, how do I lint this code,
+      how do I reuse this. Oh and if you just mumbled copy and paste - wrong answer! Now what if I want to use ES6,
+      TypeScript or some alternative language that transpiles to JavaScript. What if I want to be explicit about
+      my codes dependencies by using ES6's import keyword. The answer to all of these questions is - you can't. By
+      putting your code inline within HTML your'e losing all of this power. And these are just a few of the
+      fundamental issues with this approach. So my advice comes down to a simple maxim. JavaScript belongs in a .js
+      file. Writing JavaScript inline within an HTML file should be avoided. And please for the sake of everyone's
+      sanitydon't use some server side language to generate your JavaScript. This example from StackOverflow makes me
+      want to cry tears of mourning for the maintenance programmer:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Let's just think about the developer experience here. All of the code is the same color, there is no auto
+      completion support. Your editor can't highlight any typos so you won't find out about your mistakes until
+      runtime. And you don't get to enjoy any of the goodness that we've worked so hard to setup in this course. Yet
+      I see this pattern all too often when server side developers who are new to JavaScript need to perform some
+      custom logic based on data that's in the database. So let me clarify a better way to get that done. If you need
+      your code to respond differently for different users, instead inject JSON from the server into your application. I
+      call this the object configuration pattern. Now I'm far from the only person suggesting this pattern. As you can
+      see StackOverflow is using it here:</p>
+    <img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+    <p>Since StackOverflow is using C# behind the scenes you can imagine that there's a C# class that contains all of
+      this data, likely pulled from their database. And they use a JSON serializer in C# likely JSON .net to generate
+      this JSON. Their static JavaScript code looks at this JSON and this is what customizes my StackOverflow
+      experience.
+      Bottom line: avoid dynamically generating JavaScript code. Instead, dynamically generate some data that your
+      JavaScript code can use. And this really shouldn't come as any surprise. We don't generate custom C#, Java, Ruby
+      or
+      Python and so on just to dynamically provide custom behaviour for each user. Instead we pull data from the
+      database
+      and we use that data to determine what logic should run. JavaScript is no different. The solution is to use data
+      from the server to fork your codes logic as necessary.</p>
+    <h2>Tip 2: Consider Organizing by Feature</h2>
+    <p>Time for my second tip. On larger more complex projects consider organizing by feature instead of by file type.
+      There are two popular ways to organize your code.</p>
+    <p>By file type</p>
+    <pre>
+<code class="hljs">
+/components
+/data
+/models
+/views
+</code>
+    </pre>
+    <p>or by feature:</p>
+    <pre>
+<code class="hljs">
+/authors
+/courses
+</code>
+    </pre>
+    <p>When you organize by file type all files that serve the same purpose are placed together. This is a popular
+      approach when working with MVC frameworks which commonly expect you to use Model, View and Controller folders
+      to organize your application. However the downside of this approach is you end up having to bounce around the
+      file system to open and work with related files. So I recommend organizing by feature on larger projects. The
+      larger the project the more organizing by feature pays off because you can go directly to the feature that
+      you are working with and all the related files are sitting inside.</p>
+    <h2>Tip 3: Extract Logic to POJOs</h2>
+    <p>My third tip is to strive to extract as much logic as possible into plain old JavaScript. Some would call this
+      POJO's. When I say POJO I mean Plain Old JavaScript Objects. Java and C# developers would recognize this term
+      since Java developers also use the term POJO to describe Java classes that have plain logic inside and no
+      framework specific concerns. .Net developers use the term POCO to describe the same thing, though in that case it
+      stands for Plain Old CLR Object. The point is these files should contain plain logic that isn't tied to any
+      framework. When structuring your application strive to place as much logic as possible in plain JavaScript. For
+      instance if your working in React much of your logic should exist outside of React components. This makes your
+      logic easy to test, easy to reuse and helps minimize your ties to the framework you've selected. This minimizes
+      the impact of switching to a different framework down the road. Because, hey, we're in JavaScript, let's face the
+      facts - we'll probably be doing that.</p>
+    <p>To see an example of this philosophy check out the demo app in the React slingshot starter kit on GitHub. You'll
+      see that key logic such as date formatting and core calculations are handled in plain JavaScript in a folder
+      called utils. Although this project uses React these are plain JavaScript functions that are'nt tied to React in
+      anyway.</p>
+    <h2>Summary</h2>
+    <p>Let's wrap up. It's really helpful to include a working example app in your starter kit. This gives everyone
+      clarity on recommended approaches for directory structure, file naming, framework usage, testing, api calls,
+      deployment and more. It provides an interactive example of what it's like to work on your team. Then we moved
+      on to a few ground rules for structuring your project. Put y.our JavaScript in a JavaScript file. This
+      principle is foundational. If you place JavaScript inline within HTML you lose all the benefits we've worked so
+      hard to setup throughout the course. </p>
+    <p>Consider organizing your demo app by feature instead of file type. Especially if your team typically builds
+      large and complex JavaScript applications.</p>
+    <p>And third, extract your logic into Plain Old Javascript Objects. Avoid embedding to much logic in framework
+      specific files. Extract your logic to pure functions that are easily testable. I recommend building your demo
+      app using your preferred JavaScript frameworks and libraries and be sure to select a domain that's related to
+      your business. Keep these tips in mind as you structure your demo app. Alright, there's one very important piece
+      left. We need to prepare our app for production. So in the next module let's create an automated production build
+      including minification, bundling, bundle splitting and more.</p>

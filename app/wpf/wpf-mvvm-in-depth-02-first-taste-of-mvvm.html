@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>First Taste of MVVM</h2>
+            </div>
+            <div class="panel-body">
+                <h2>Introduction</h2>
+                <p>This module covers three iterations of the same demo application illustrating the following approaches:</p>
+                <ul>
+                    <li>No MVVM or data binding</li>
+                    <li>Data binding only, no MVVM</li>
+                    <li>MVVM</li>
+                </ul>
+                <h2>Async in MVVM</h2>
+                <p>
+                    More and more applications have to deal with concept of Async and parallelism to provide a good user experience. In .Net we now have task
+                    based async and async/await are the norm in .NET. For MVVM the ViewModel is often the initiator of calls that can take a long time in the
+                    scheme of computation. These are the types of calls that should be made async to keep the UI responsive.
+                </p>
+                <p>For more info on async and await checkout Pause and Play with Await and the TPL Async course by Ian Griffiths from Pluralsight.</p>
+                <h2>Demo: Simple View with No MVVM or Data Binding</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-NoDataBinding</p>
+                <p>
+                    The first demo is a very simple application that does not use MVVM or data binding. The solution consists of a WPF application
+                    (ZzaDashboard). There is a database with tables for Customers, Products, and Orders etc. There is a Data Layer (Zza.Data) which is
+                    pre-populated using Entity Framework DbContext and a set of Model objects including Customers, Products, and Orders etc.
+                </p>
+                <p>
+                    In addition to the raw data access in Zza.Data there are two repositories one for Customers and the other for Orders. All the methods for
+                    data access in these repositories are task based async methods. They are also Interface based classes to allow for easier unit testing.
+                </p>
+                <h2>Demo: Simple View with Data Binding</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-DataBindingNoMVVM</p>
+                <p>
+                    The next variant provides the same functionality but implements data-binding to clean up the code a bit. Now the individual input controls
+                    are using Two-way databinding where they bind to their DataContext and expose that DataContext to expose a LastName, FirstName and Phone
+                    property. The Save button is just using a click handler to get to an OnSave() method in the code-behind.
+                </p>
+                <p>
+                    The code-behind is somewhat cleaner than the previous example. In the OnLoaded method we still call GetCustomerAsync from the repository
+                    layer but then we can just push that to the DataContext:
+                </p>
+                <pre><code class="cs hljs">DataContext = _customer;</code></pre>
+                <p>
+                    The individual bindings in the View then have two-way data-binding against the properties exposed on the Model object. Two-way databinding
+                    means any changes made by the user get written directly into that object. So, when it is time to Save we don’t have to gather any values
+                    from the input controls (as we did in the previous example) because the data has already been transferred into that bound model object.
+                </p>
+                <h2>Demo: Simple View Transformed to MVVM</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-SimpleMVVM</p>
+                <p>Now we want to move relevant code out of the code-behind of the View. We need to break up our View into a View and ViewModel.</p>
+                <p>
+                    Firstly, in MainWindow.xaml we are still placing an instance of our View (CustomerEditView) into the container. We have removed the Customer
+                    Id property as the data manipulation will be at the ViewModel level.
+                </p>
+                <p>
+                    In CustomerEditView.xaml the Loaded event has been removed. In terms of MVVM we are newing up an instance of our CustomerEditViewModel in
+                    the XAML parsing process. The individual data bindings reference Customer.FirstName etc. We are expecting our ViewModel to expose a single
+                    object called Customer.
+                </p>
+                <p>The Save button no longer performs click handling into the code behind. Instead it uses a Command object. So the Command property is bound to
+                    another property exposed by our ViewModel called SaveCommand. We expect that to be an ICommand object. It will be invoked whenever the
+                    button is clicked. It can also be used to enable and disable the button.
+                </p>
+                <p>At the top of the CustomerEditView.xaml file we define a Behaviour. It uses a behaviour from the Blend SDK called CallMethodAction which is
+                    able to call a method on some object. In this scenario, we want to handle the Loaded event and despatch it as a method call invocation
+                    against a method named LoadCustomer which is on our ViewModel. The binding specified in the TargetObject:
+                </p>
+                <pre><code class="cs hljs">“{Binding}”</code></pre>
+                <p>Gives you a reference to the whole DataContext object or ViewModel.</p>
+                <figure>
+
+                    <img src="app/wpf/images/wpfmvvmindepth//Fig02-01.png"/>
+                    <figcaption>Fig 02-01</figcaption>
+                </figure>
+                <p>
+                    The ViewModel’s main job is to expose data. We are implementing the INotifyPropertyChanged event because we are not going to set that
+                    Customer until our LoadCustomer method (this is being called from the Loaded event) gets invoked. By that point construction is already
+                    done, the XAML parsing is done, all the Bindings have been evaluated so we need to be able to signal to the View that it should refresh its
+                    data binding. That happens by firing the PropertyChanged event which is part of the INotifyPropertyChanged interface.
+                </p>
+                <p>Next we can see our SaveCommand property that we exposed publicly and bound to:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-02.png"/>
+                    <figcaption>Fig 02-02</figcaption>
+                </figure>
+                <p>That gets hooked up in the Constructor which points it to the actual handling method itself (OnSave).</p>
+                <p>Note that both the OnSave() and LoadCustomer() methods use task based async with the async/await keywords.</p>
+                <h2>Summary</h2>
+                <p>
+                    Data binding really lays the groundwork for MVVM. MVVM moves the data management interaction logic into the ViewModel. View-First
+                    construction (where the ViewModel is constructed in the XAML through the mark-up) works out fine when you have static child Views inside a
+                    container.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="bundle.js"></script>

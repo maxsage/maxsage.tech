@@ -1,0 +1,2472 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2>Course Contents</h2>
+            </div>
+            <div class="panel-body">
+                <h1>MVVM Pattern Fundamentals</h1>
+                <h2>Welcome</h2>
+                <p>
+                    Every good WPF developer wants to write great applications that delight their users. You may be able to achieve that on a first release
+                    without putting a lot of consideration into the structure of your application. The MVVM pattern guides you to organize and structure your
+                    code to write maintainable, testable and extensible applications.
+                </p>
+                <h2>Separation of Concerns</h2>
+                <p>
+                    MVVM is mostly about trying to achieve good separation of concerns. To explain separation of concerns I like to use an analogy of something
+                    we all have to do: get dressed to go out in public. If you take your laundry and put it away as it comes out of the clothes drier – all
+                    twisted and tangled with intermingled articles of clothing – that can really expedite the process of putting away your clothes at that
+                    moment in time.
+                </p>
+                <p>
+                    However, you will pay an ongoing penalty each day when you need to get dressed because you will have to dig around to find a matching and
+                    complete outfit from the tangled mess of clothing.
+                </p>
+                <p>
+                    If, on the other hand, you invest a little bit of time upfront to put in the structure in place to organize your clothes: buy a chest of
+                    drawers, put in some shelves, put clothes away neatly each time the laundry is finished then the daily activity of getting dressed becomes a
+                    breeze.
+                </p>
+                <p>Developers face a very similar choice with the way we write code.</p>
+                <h2>Separation of Concerns in MVVM</h2>
+                <p>Code like the example below doesn’t look too bad at first glance:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig01-01.png">
+                    <figcaption>Fig 01-01</figcaption>
+                </figure>
+                <p>
+                    If you look closely at what the code is doing you can see code that is touching UI elements, interwoven with code that is doing data access,
+                    interwoven with business logic code. Now put this into the context of a full application and you can start to appreciate how complex
+                    maintaining and extending an application written in this way can be.
+                </p>
+                <p>
+                    MVVM provides a structure to promote good separation of concerns. Think of it as a set of shelves and drawers that are predefined and well
+                    labelled. Each time you go to write code of a certain nature you have a specific place you should be putting it. There is a shelf for:
+                </p>
+                <ul>
+                    <li>UI Element Access - that is your View definitions.</li>
+                    <li>View Interaction Logic – that is you're ViewModels.</li>
+                    <li>Model Entities – that is your Data Model Objects</li>
+                </ul>
+                <p>Any true Business Logic should probably be in a separate layer or behind a service boundary.</p>
+                <h2>MVVM Goals and Benefits</h2>
+                <p>The three main benefits of using the MVVM pattern beyond achieving separation of concerns are:</p>
+                <ul>
+                    <li>Maintainability</li>
+                    <li>Testability</li>
+                    <li>Extensibility</li>
+                </ul>
+                <h2>Related UI Separation Patterns</h2>
+                <p>
+                    MVVM is an evolution of other separation of concern patterns. In the early 70’s when mainframes were heavily used the Model View Controller
+                    pattern was first defined. This pattern was about rendering a screen of information to the user, collecting some input from them and
+                    rendering the next screen of information to them. As a result of that Request/Response nature it is still a good fit for the modern web and
+                    so is used by platforms such as ASP.Net MVC, Ruby on Rails and Angular.
+                </p>
+                <p>
+                    One of the key distinctions between MVVM and MVC is that there is typically a decoupled lifetime between the Controller and the View. The
+                    Controller produces a View but may not stick around after that until a new request comes in from the user.
+                </p>
+                <p>
+                    In the mid 2000’s – Rich/Smart applications were getting a lot of attention. As a result, people started trying to use separation patterns
+                    there. However, because the client Views were more state-full and stuck around in memory as did their supporting interaction logic, the MVC
+                    pattern was not the perfect fit. What evolved was a nuance on the MVC pattern which was called the Model View Presenter. The distinction of
+                    a Presenter versus a Controller was mostly that the lifetime of the Presenter and the View were coupled and they generally had a more
+                    ongoing conversation as the user interacted with the View.
+                </p>
+                <p>
+                    Finally, that led to the newer MVVM pattern which was first defined in the early days of WPF by the Expression team at Microsoft. The main
+                    difference here is that we are still dealing with rich desktop client applications and Views that stick around for longer interaction with
+                    the user. The WPF platform offers really rich data-binding so MVVM is really a nuance on MVP where the explicit calls between the View and
+                    its counterpart are replaced by Two-Way Databinding flowing data and communications between the View and the ViewModel.
+                </p>
+                <h2>MVVM across Platforms</h2>
+                <p>
+                    Since most WPF developers will not be coding exclusively from WPF you should be aware that MVVM can be used on most modern client
+                    applications today such as:
+                </p>
+                <ul>
+                    <li>WPF</li>
+                    <li>Silverlight</li>
+                    <li>Window 8/WinRT</li>
+                    <li>HTML 5 (Knockout/Angular)</li>
+                    <li>Xamarin/Mobile Apps</li>
+                    <li>Windows 10</li>
+                </ul>
+                <h2>MVVM Responsibilities</h2>
+                <p>
+                    Each part of the MVVM pattern has a distinct responsibility. MVVM is really a layered architecture for the client side. The Presentation
+                    layer is composed of the Views, the Logic Layer are the ViewModels and the Persistence Layer is the combination of the Model Objects and the
+                    Client Services that produce and persists them either via data access in a two-tier application or via service calls in an n-tier
+                    application.
+                </p>
+                <h3>Model Responsibilities</h3>
+                <p>
+                    The Model is really the client side data model that supports the Views in the application. It is composed of objects with properties and
+                    backing member variables that hold the discreet pieces of data in memory.
+                </p>
+                <p>
+                    Some of those properties may reference other Model objects forming the object graph that is the model object as a whole. The Model objects
+                    may also expose computed objects (properties whose value is computer based on the value of other properties in the model (e.g. FullName) or
+                    information from the client execution context (e.g. Time).
+                </p>
+                <p>
+                    Because you will often be binding to Model properties the Model objects should raise Property Change Notifications. For WPF data-binding
+                    this means implementing the INotifyPropertyChanged interface and firing the PropertyChanged event.
+                </p>
+                <p>
+                    In addition, you will often embed Validation information on the model objects so it can work with the WPF data-binding validation features
+                    through Interfaces such as INotifyDataErrorInfo and IDataErrorInfo.
+                </p>
+                <h3>View Responsibilities</h3>
+                <p>
+                    The Views responsibility is to define the structure of what the user sees on the screen. That structure can be composed of static and
+                    dynamic parts. Static being the XAML hierarchy that defines the controls and layout of controls that the View is composed of and dynamic
+                    being any animations or state changes that are defined as part of the View.
+                </p>
+                <p>
+                    There is an overarching goal in MVVM to have “no code behind” in the View. However, you do sometimes need to put a bit of code in the code
+                    behind - at least the constructor and call to InitializeComponent() that triggers XAML parsing when the View is constructed but also things
+                    such as any code that references a UI element as that is inherently View code (things like animations expressed in code are one example).
+                </p>
+                <h3>ViewModel Responsibilities</h3>
+                <p>
+                    The ViewModel is the focal point of coding up an MVVM application. The primary responsibility of a ViewModel is provide data to the View so
+                    the View can put it on the screen and, if appropriate, let the user interact with and change that data.
+                </p>
+                <p>
+                    In addition, the ViewModel encapsulates the interaction logic for a View. That doesn’t mean that all of the logic of the application should
+                    go into the ViewModel. That would just create a new place where separation of concerns is being violated. The following should be present in
+                    the ViewModel:
+                </p>
+                <ul>
+                    <li>Calls to business/data layer/service</li>
+                    <li>Navigation logic</li>
+                    <li>State transformation logic</li>
+                </ul>
+                <p>In terms of the data that the ViewModel provides to the View there are really three types of data to consider:</p>
+                <ul>
+                    <li>Model objects directly through ViewModel properties</li>
+                    <li>Wrapped Model objects – not direct Model object references</li>
+                    <li>Client application state (e.g. User logged in)</li>
+                </ul>
+                <h3>Client Services Responsibilities</h3>
+                <p>
+                    There is one more layer that is not officially part of the MVVM pattern but is often used with MVVM to further separate concerns and avoid
+                    duplicate code – the Client services layer.
+                </p>
+                <p>Client services encapsulate any shared logic that spans more than one ViewModel.</p>
+                <h3>Equation of MVVM</h3>
+                <p>Another key concept to lock in your brain is what is sometimes called the Fundamental equation of MVVM:</p>
+                <pre>
+        <code class="cs hljs">View.DataContext = ViewModel;</code></pre>
+                <p>The View’s DataContext property needs to be set to a reference of the ViewModel instance for that View.</p>
+                <h3>Who’s on First</h3>
+                <p>
+                    Who constructs who? View-First and ViewModel-First refer to which object is constructed first and does it construct the other as part of its
+                    own construction or initialization process. Different approaches will typically be used in different parts of an application.
+                </p>
+                <h2>Summary</h2>
+                <p>
+                    MVVM helps you build better structured apps. Each part of the MVVM pattern has specific responsibilities that guide you to put code in the
+                    right place. Finally, to get MVVM up and running you must satisfy the fundamental equation of MVVM:
+                </p>
+                <pre><code class="cs hljs">View.DataContext = ViewModel;</code></pre>
+                <hr>
+                <h1>First Taste of MVVM</h1>
+                <h2>Introduction</h2>
+                <p>This module covers three iterations of the same demo application illustrating the following approaches:</p>
+                <ul>
+                    <li>No MVVM or data binding</li>
+                    <li>Data binding only, no MVVM</li>
+                    <li>MVVM</li>
+                </ul>
+                <h2>Async in MVVM</h2>
+                <p>
+                    More and more applications have to deal with concept of Async and parallelism to provide a good user experience. In .Net we now have task
+                    based async and async/await are the norm in .NET. For MVVM the ViewModel is often the initiator of calls that can take a long time in the
+                    scheme of computation. These are the types of calls that should be made async to keep the UI responsive.
+                </p>
+                <p>For more info on async and await checkout Pause and Play with Await and the TPL Async course by Ian Griffiths from Pluralsight.</p>
+                <h2>Demo: Simple View with No MVVM or Data Binding</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-NoDataBinding</p>
+                <p>
+                    The first demo is a very simple application that does not use MVVM or data binding. The solution consists of a WPF application
+                    (ZzaDashboard). There is a database with tables for Customers, Products, and Orders etc. There is a Data Layer (Zza.Data) which is
+                    pre-populated using Entity Framework DbContext and a set of Model objects including Customers, Products, and Orders etc.
+                </p>
+                <p>
+                    In addition to the raw data access in Zza.Data there are two repositories one for Customers and the other for Orders. All the methods for
+                    data access in these repositories are task based async methods. They are also Interface based classes to allow for easier unit testing.
+                </p>
+                <h2>Demo: Simple View with Data Binding</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-DataBindingNoMVVM</p>
+                <p>
+                    The next variant provides the same functionality but implements data-binding to clean up the code a bit. Now the individual input controls
+                    are using Two-way databinding where they bind to their DataContext and expose that DataContext to expose a LastName, FirstName and Phone
+                    property. The Save button is just using a click handler to get to an OnSave() method in the code-behind.
+                </p>
+                <p>
+                    The code-behind is somewhat cleaner than the previous example. In the OnLoaded method we still call GetCustomerAsync from the repository
+                    layer but then we can just push that to the DataContext:
+                </p>
+                <pre><code class="cs hljs">DataContext = _customer;</code></pre>
+                <p>
+                    The individual bindings in the View then have two-way data-binding against the properties exposed on the Model object. Two-way databinding
+                    means any changes made by the user get written directly into that object. So, when it is time to Save we don’t have to gather any values
+                    from the input controls (as we did in the previous example) because the data has already been transferred into that bound model object.
+                </p>
+                <h2>Demo: Simple View Transformed to MVVM</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-SimpleMVVM</p>
+                <p>Now we want to move relevant code out of the code-behind of the View. We need to break up our View into a View and ViewModel.</p>
+                <p>
+                    Firstly, in MainWindow.xaml we are still placing an instance of our View (CustomerEditView) into the container. We have removed the Customer
+                    Id property as the data manipulation will be at the ViewModel level.
+                </p>
+                <p>
+                    In CustomerEditView.xaml the Loaded event has been removed. In terms of MVVM we are newing up an instance of our CustomerEditViewModel in
+                    the XAML parsing process. The individual data bindings reference Customer.FirstName etc. We are expecting our ViewModel to expose a single
+                    object called Customer.
+                </p>
+                <p>The Save button no longer performs click handling into the code behind. Instead it uses a Command object. So the Command property is bound to
+                    another property exposed by our ViewModel called SaveCommand. We expect that to be an ICommand object. It will be invoked whenever the
+                    button is clicked. It can also be used to enable and disable the button.
+                </p>
+                <p>At the top of the CustomerEditView.xaml file we define a Behaviour. It uses a behaviour from the Blend SDK called CallMethodAction which is
+                    able to call a method on some object. In this scenario, we want to handle the Loaded event and despatch it as a method call invocation
+                    against a method named LoadCustomer which is on our ViewModel. The binding specified in the TargetObject:
+                </p>
+                <pre><code class="cs hljs">“{Binding}”</code></pre>
+                <p>Gives you a reference to the whole DataContext object or ViewModel.</p>
+                <figure>
+
+                    <img src="images/wpfmvvmindepth//Fig02-01.png"/>
+                    <figcaption>Fig 02-01</figcaption>
+                </figure>
+                <p>
+                    The ViewModel’s main job is to expose data. We are implementing the INotifyPropertyChanged event because we are not going to set that
+                    Customer until our LoadCustomer method (this is being called from the Loaded event) gets invoked. By that point construction is already
+                    done, the XAML parsing is done, all the Bindings have been evaluated so we need to be able to signal to the View that it should refresh its
+                    data binding. That happens by firing the PropertyChanged event which is part of the INotifyPropertyChanged interface.
+                </p>
+                <p>Next we can see our SaveCommand property that we exposed publicly and bound to:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig02-02.png"/>
+                    <figcaption>Fig 02-02</figcaption>
+                </figure>
+                <p>That gets hooked up in the Constructor which points it to the actual handling method itself (OnSave).</p>
+                <p>Note that both the OnSave() and LoadCustomer() methods use task based async with the async/await keywords.</p>
+                <h2>Summary</h2>
+                <p>
+                    Data binding really lays the groundwork for MVVM. MVVM moves the data management interaction logic into the ViewModel. View-First
+                    construction (where the ViewModel is constructed in the XAML through the mark-up) works out fine when you have static child Views inside a
+                    container.
+                </p>
+                <hr>
+                <h1>Hooking up Views and ViewModels in MVVM</h1>
+                <h2>Overview</h2>
+                <p>
+                    In this module we will cover different ways that Views can be hooked up to ViewModels. We will also cover how databinding is used to expose
+                    data from your Data Models to your Views. We will start with View-First Construction Patterns where the View is constructed first and then
+                    takes care of constructing and hooking up its own ViewModel.
+                </p>
+                <p>Next we will cover Data Binding to make it clear how MVVM relies on data binding and uses it to flow data between the View and the
+                    ViewModel.
+                </p>
+                <p>
+                    Finally, we will cover ViewModel-First approach where Data Templates are used to create the View based on an instance of a ViewModel being
+                    placed into a data binding context.
+                </p>
+                <h2>View-First Construction</h2>
+                <p>
+                    View-First Construction can be performed declaratively in the XAML. XAML parsing kicks in just as your View is being constructed initiated
+                    by the call to InitializeComponent() that is in your Views Constructor.
+                </p>
+                <p>
+                    Another way you can perform View-First construction is in the Views code behind then setting the DataContext there with the instance.
+                    Typically, this is performed in the constructor. Code behind construction has the advantage of being able to handle ViewModel construction
+                    that takes parameters and allows for Dependency Injection.
+                </p>
+                <h2>Demo: View-First MVVM Hook-up</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-XAMLHookup-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-XAMLHookup-End</p>
+                <p>
+                    In this demo we will create a View and a ViewModel and hook them up statically through the XAML. The starting point for this demo is that we
+                    have a data layer (Zza.Data) covered previously. Also covered previously is the repository layer.
+                </p>
+                <p>
+                    We will put the View and the ViewModel in a Customers folder. The View is just a UserControl called CustomerListView and the ViewModel is
+                    just a class called CustomerListViewModel. After these have been created we can navigate to MainWindow.xaml and show the designer. From the
+                    toolbox drag and drop CustomerListView then right-click and select reset all from the Layout menu to remove the padding and margins. This
+                    drag and drop operation basically creates an instance of the UserControl in the View and adds the appropriate namespace.
+                </p>
+                <p>
+                    Make the ViewModel class public and add a property (using the prop Visual Studio code snippet). Make the type of the property an
+                    ObservableCollection of type Customer (don’t forget to add the relevant using statements):
+                </p>
+                <pre><code class="cs hljs">public ObservableCollection&lt;Customer&gt; Customers { get; set; }</code></pre>
+                <p>
+                    Next we will populate the Collection. Add an instance of our repository to the ViewModel and a constructor to populate our Customer
+                    collection. Calling the repositories GetCustomersAsync method in the constructor will produce a task not the result. We can’t use async and
+                    await keywords in a constructor in .NET so we will have to force the method to execute synchronously using the .Result property. We also
+                    need to wrap the result to get an ObservableCollection:
+                </p>
+                <pre><code class="cs hljs">Customers = new ObservableCollection<Customer>(_repo.GetCustomersAsync().Result);</code></pre>
+                <p>Add code to the ViewModel to prevent the execution of the above code when in the designer using the GetIsInDesignMode() method.</p>
+                <p>In the CustomerListView.xaml View add a namespace for the ViewModel. Set the DataContext to an instance of the ViewModel:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-01.png"/>
+                    <figcaption>Fig 03-01</figcaption>
+                </figure>
+                <p>Add a DataGrid to display the data:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-02.png"/>
+                    <figcaption>Fig 03-02</figcaption>
+                </figure>
+                <p>Now if you run the application the DataGrid should be populated with data:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-03.png"/>
+                    <figcaption>Fig 03-03</figcaption>
+                </figure>
+                <p>We can also hook-up the View and ViewModel from the code behind with code like this:</p>
+                <pre><code class="cs hljs">this.DataContext = new CustomerListViewModel();</code></pre>
+                <p>It generally doesn’t matter whether you set the DataContext before or after the call to InitializeComponent().</p>
+                <h2>View-First with ViewModelLocators</h2>
+                <p>
+                    The next form of View-First construction is a meta-pattern called ViewModelLocator. This is sort of a pseudo pattern or common approach that
+                    is layered on top of the MVVM pattern.
+                </p>
+                <p>
+                    When doing MVVM every View has to be hooked up to its ViewModel. The ViewModelLocator is a way of centralising the code that takes care of
+                    that - decoupling the View more so it does not have to explicitly know about its ViewModel type and how to construct it.
+                </p>
+                <p>
+                    There are a number of different approaches to using ViewModelLocators. The one covered here is most similar to the one that is part of the
+                    Prism framework. The ViewModelLocator provides a standard, consistent, declarative and more loosely coupled way of doing View-First
+                    construction in that it automates the process of getting our ViewModel hooked up to our View.
+                </p>
+                <p>The ViewModelLocator follows the following high level process:</p>
+                <ul>
+                    <li>The ViewModelLocator has to figure out what type is being constructed</li>
+                    <li>As long as you have a convention for naming Views and ViewModels the ViewModelLocator can infer what the ViewModel Type is associated
+                        with that View
+                    </li>
+                    <li>Once it knows the ViewModel Type needed it can construct that ViewModel – possibly using a dependency injection container
+                    </li>
+                    <li>Finally, it sets the Views DataContext property to the ViewModel</li>
+                </ul>
+                <h2>Demo: MVVM Hook-up with ViewModelLocator</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-ViewModelLocator-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-ViewModelLocator-End</p>
+                <p>In this demo we will look at using a ViewModelLocator to wire up our View and ViewModel in a View-First way.</p>
+                <p>Firstly, make sure you remove the DataContext hook-up XAML and code in the code behind.</p>
+                <p>Define a ViewModelLocator class called ViewModelLocator. Make it public and static.</p>
+                <p>
+                    Use the propa code snippet to stub out a new Attached Property called AutoWireViewModel, make its type Boolean and make it contained within
+                    the ViewModelLocator class with a default of false.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-04.png"/>
+                    <figcaption>Fig03-04</figcaption>
+                </figure>
+                <p>
+                    You now have a basic Attached Property definition. Next we will turn this into a simple Behaviour by wiring up a change event handler for
+                    the property. Add a handler in the PropertyMetadata called AutoWireViewModelChanged
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-05.png"/>
+                    <figcaption>Fig03-05</figcaption>
+                </figure>
+                <p>Stub this method out:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-06.png"/>
+                    <figcaption>Fig03-06</figcaption>
+                </figure>
+                <p>
+                    In the new method we want to automate the process of figuring what ViewModel to create and wiring it up to the View. Firstly, add a guard
+                    condition that does nothing if we are in DesignMode. Next we need to get the ViewType name using the following code:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-07.png"/>
+                    <figcaption>Fig03-07</figcaption>
+                </figure>
+                <p>
+                    The d argument is the element on which this Attached Property is being set. We are expecting that this Attached Property will only be used
+                    on the root element of a View. So by getting the type of that element we know what the View type is. Then we can get the type name from the
+                    FullName property of the Type object. Next from the viewType we can infer a ViewModel type (as long as we are following a standard
+                    convention). We append “Model” onto the ViewType name and we have type name of the ViewModel:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-08.png"/>
+                    <figcaption>Fig03-08</figcaption>
+                </figure>
+                <p>We use the Activator.CreateInstance method to create an instance of the ViewModel type.</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-09.png"/>
+                    <figcaption>Fig03-09</figcaption>
+                </figure>
+                <p>Finally, we set the DataContext of the View to the newly created ViewModel:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-10.png"/>
+                    <figcaption>Fig03-10</figcaption>
+                </figure>
+                <p>Now that our simple ViewModelLocator is complete we can use it to wire up our View and ViewModel.</p>
+                <p>In the View add a namespace so that we can get to the ViewModelLocator type.</p>
+                <p>Next on our root element which is the ViewType I add the AutoWireViewModel property:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-11.png"/>
+                    <figcaption>Fig03-11</figcaption>
+                </figure>
+                <p>By doing that our ViewModelLocator will kick in as that property is being set and will take care of the wiring for us.</p>
+                <p>
+                    You do the exact same thing in any View that you want to hook up to a ViewModel. To emphasize this let’s add another View
+                    (CustomerDetailView) and associated ViewModel (CustomerDetailViewModel) in the Customers folder.
+                </p>
+                <p>Add the local namespace and AutoWireViewModel property (set to true) in the new Views XAML as we did before.</p>
+                <p>In the MainWindow drag the CustomerDetailView from the toolbox to the design surface (make some room for it first).</p>
+                <p>Run the application.</p>
+                <p>The advantages of using a ViewModelLocator are:</p>
+                <ul>
+                    <li>A standard declaration in every View</li>
+                    <li>The View is not coupled to its particular ViewModel Type</li>
+                    <li>You can potentially use DI in a ViewModelLocator</li>
+                </ul>
+                <h2>Data Binding Support for MVVM</h2>
+                <p>
+                    Data binding is the key feature that differentiates MVVM from other UI separation patterns. For data binding to work you need to have a
+                    View. You also need another object that the bindings will point to. In MVVM the main thing the elements in your View bind to are properties
+                    in your ViewModel. The order that the View and ViewModel are constructed depend on the situation in the application.
+                </p>
+                <p>
+                    Because of the way a DataContext works in XAML the DataContext set at the root element also becomes the DataContext for every child element
+                    (unless it explicitly sets the DataContext property to something else or it is being rendered out as part of an Items control which sets the
+                    DataContext to the item).
+                </p>
+                <h2>Demo: Data Binding for MVVM Data Flows</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataBinding-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataBinding-End</p>
+                <p>
+                    In this demo we will review how data binding works and show how it supports the ViewModel and Model Types. Open the CustomerListView.
+                    Replace the previous DataGrid (which by default has AutoGenerateColumns set to true) with one that specifies more explicit column
+                    definitions:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-12.png"/>
+                    <figcaption>Fig03-12</figcaption>
+                </figure>
+                <p>
+                    The DataGrid is still bound to the Customers collection exposed by our ViewModel but we have individual column definitions which have their
+                    own Bindings.
+                </p>
+                <h2>ViewModel-First Construction with DataTemplates</h2>
+                <p>
+                    ViewModel-First leverages the capabilities of implicit Data Templates in WPF. Implicit data templates can automatically select an
+                    appropriate template from the current Resource Dictionary for an element that is using data binding. They do this based on the type of the
+                    data object that is being rendered by the data binding.
+                </p>
+                <p>
+                    You first have some element that is binding to a Data Object. When the property that is being bound on the control drives the rendered
+                    content on that control (such as ContentControl Content property or an ItemsControl ItemSource property) the control will look at the object
+                    produced by the binding. If it’s a UI element the control will just render the element as content based on its layout scheme for children.
+                </p>
+                <p>
+                    If the object produced by the binding is not a UI element (such as a ViewModel instance) the Control will go and look at the current
+                    Resource Dictionary that is in scope for the element and see if it can locate a Data Template that is mapped to the type of the object that
+                    is being produced by the binding. If it finds a match it creates an instance of the root element found in that data template which
+                    implicitly causes the construction of any Child elements. Then it renders that element as the Child content after having set the DataContext
+                    property of the root element to the Data Object instance that kicked of the whole process. Which in this example means the DataContext of
+                    the Child View is set to its ViewModel.
+                </p>
+                <h2>Demo: Explicit and Implicit DataTemplates</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-End</p>
+                <p>Now let’s look at how you do ViewModel-First leveraging data templates (specifically implicit data templates).</p>
+                <p>
+                    The first step is to use Data Templates in a basic Data Binding scenario. Split the DataGrid into two rows of equal height. Put a ListBox in
+                    the second row with a Binding to the Customers collection (the same one the DataGrid is bound to).
+                </p>
+                <p>
+                    If you run now each Customer has a display of Zza.Data.Customer because the object is not a UI element so the Framework is just calling the
+                    object’s ToString() method. We can fix this with implicit templates by defining a data template. Add a Resources section to the root
+                    containing a DataTemplate called CustomerTemplate:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-13.png"/>
+                    <figcaption>Fig03-13</figcaption>
+                </figure>
+                <p>To use the template, go back to the ListBox and specify an ItemTemplate:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-14.png"/>
+                    <figcaption>Fig03-14</figcaption>
+                </figure>
+                <p>Now when we run we see the presentation setup in the template:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-15.png"/>
+                    <figcaption>Fig03-15</figcaption>
+                </figure>
+                <p>
+                    To make this an implicit template we remove the ItemTemplate from the ListBox, go back to the Template definition and instead of a key we
+                    would give it a DataType:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-16.png"/>
+                    <figcaption>Fig03-16</figcaption>
+                </figure>
+                <p>Don’t forget to add a namespace reference for Zza.Data:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-17.png"/>
+                    <figcaption>Fig03-17</figcaption>
+                </figure>
+                <h2>Demo: Implicit DataTemplates for ViewModel-First MVVM Hook-up</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-End</p>
+                <p>Now we want to use DataTemplates to wire up our View and ViewModel.</p>
+                <p>Firstly, add a MainWindowViewModel.</p>
+                <p>
+                    Add a CurrentViewModel property to this class. For demo purposes statically wire this up to an instance of the CustomerListViewModel. So we
+                    are exposing that child ViewModel now as something that can be data bound to from elements within the MainWindow.
+                </p>
+                <p>
+                    The next step is to wire this up as the ViewModel for the MainWindow. We could use a ViewModelLocator for this step but for this demo we
+                    will wire it statically in the XAML:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-18.png"/>
+                    <figcaption>Fig03-18</figcaption>
+                </figure>
+                <p>Next add a DataTemplate to the XAML Window.Resources to specify a Layout.</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig03-19.png"/>
+                    <figcaption>Fig03-19</figcaption>
+                </figure>
+                <p>
+                    The above DataTemplate basically says if you encounter a DataType of CustomerListViewModel (which is what CurrentViewModel is set to in the
+                    MainWindowViewModel) use the CustomerListView as a Layout template.
+                </p>
+                <p>Make sure to specify the x:Type mark-up extension otherwise the DataTemplate will just silently fail.</p>
+                <h2>No One’s on First</h2>
+                <p>The last scenario to consider is a case where the View doesn’t construct the ViewModel or vice a versa.</p>
+                <p>
+                    Sometimes a separate chunk of code that simply constructs an instance of each and then sets the DataContext of the View to the ViewModel. An
+                    example of this would be a Client Service that manages pop up dialogs to be presented to the user. When a given popup is requested by a
+                    Command (say a tools/options dialog) the code in the client service could do the construction of each, wire them together and place them
+                    into a popup window and show it.
+                </p>
+                <p>Most of the time you will be doing ViewModel-First or View-First but you don’t always have to take that approach.</p>
+                <h2>Summary</h2>
+                <p>We showed a number of ways to hook-up Views and ViewModels:</p>
+                <ul>
+                    <li>View-First Construction via XAML</li>
+                    <li>View-First Construction via code behind</li>
+                    <li>Using a ViewModelLocator</li>
+                </ul>
+                <p>Data binding forms the communication pathways between the View and ViewModel</p>
+                <p>DataTemplates allow dynamic selection and hook-up of ViewModels for View.</p>
+
+
+                <hr>
+                <h1>View/ViewModel Communication in WPF</h1>
+                <h2>Introduction</h2>
+                <p>
+                    In this module, we will cover View/ViewModel communication in WPF. We will look at how to cleanly call logic that is implemented in the
+                    ViewModel when something happens in the View as well as letting the View know when something happens behind the scenes in your ViewModel,
+                    Model Objects or Client Services.
+                </p>
+                <p>
+                    In the second module you saw a quick example of using a Command to invoke some logic in the ViewModel. In this module we will look at how
+                    things get hooked up, and what happens under the covers during that hook-up. In addition, we will see how to use Command Enabling and
+                    Keyboard Shortcuts.
+                </p>
+                <p>
+                    Next we will look at Attached Properties and Behaviors covering what the relationship between them is, what their general capabilities are
+                    and how to use them in the context of MVVM as another means of setting up communication paths between the View elements and View Model logic
+                    or vice a versa.
+                </p>
+                <p>
+                    We will finish the module with a review of how Property Change Notifications work with Data Binding in WPF and show how they can be used as
+                    a signalling mechanism from the ViewModel to make things happen in the View at the appropriate time.
+                </p>
+                <h2>Commands for View to ViewModel Communication</h2>
+                <p>
+                    The Command pattern has been a well-documented and frequently used design pattern for a couple of decades’ now and is especially prevalent
+                    in UI frameworks. In that pattern there are two main actors:
+                </p>
+                <ul>
+                    <li>Invoker – whatever piece of code wants to cause some imperative logic to be executed. Typically, the Invoker is a UI element that the
+                        user interacts with in the context of the UI framework. It could also just be another chunk of logic code somewhere in the application.
+                    </li>
+                    <li>Receiver – the logic that is intended for execution when the Invoker fires. In the context of MVVM the Receiver is typically a method in
+                        your ViewModel or in a Client Service that needs to be called.
+                    </li>
+                </ul>
+                <p>
+                    In between the Invoker and Receiver, you have an abstraction layer that makes it so the Invoker and Receiver do not have to explicitly know
+                    about each other. This is typically represented as an Interface abstraction exposed to the Invoker. In XAML frameworks like WPF ICommand is
+                    a built-in Interface of the platform and while WPF does have some built-in implementations of concrete Commands called routed commands they
+                    are not designed with the delegating capability needed to be used cleanly with MVVM. What you will typically use in MVVM is a Command Type
+                    that uses .NET delegates to be able to point to the handling method that resides in your ViewModel. Depending on whether you write your own
+                    or use a popular MVVM framework these are usually called DelegateCommand or RelayCommand.
+                </p>
+                <p>
+                    The key thing about Commands is that they support a decoupled way of calling from the View to the ViewModel. As a side benefit the
+                    implementation in XAML also supports driving whether the associated Control is enabled or disabled through the same decoupled interface.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-01.png"/>
+                    <figcaption>Fig 04-01</figcaption>
+                </figure>
+                <h2>Demo: Commands for View to ViewModel Communication</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-Commands-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-Commands-End</p>
+                <p>
+                    In this demo we are going to deep dive into Commands and demonstrate how to use them to communicate from the View down to the ViewModel in a
+                    loosely coupled way.
+                </p>
+                <p>
+                    The starting point for this demo is the ending point of the demo from the last module where we had our CustomerListView hooked up with a
+                    DataGrid and a ListBox presenting Customer data from a ViewModel.
+                </p>
+                <p>
+                    In the CustomerListView add a Button to delete a Customer. Working with Commands on Buttons is very easy because they have a Command
+                    Property to hook-up to an ICommand. This means we can expose a property on our ViewModel that is an ICommand and bind to it from the Buttons
+                    Command Property:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-02.png"/>
+                    <figcaption>Fig 04-02</figcaption>
+                </figure>
+                <p>As the XAML for the Button gets parsed several things will happen:</p>
+                <p>Call ICommand Property get{} block to get a reference to the Command object.</p>
+                <p>Call CanExecute() on ICommand to determine the initial enabled or disabled state of the Command enabling or disabling the Button
+                    accordingly.
+                </p>
+                <p>
+                    Subscribe to CanExecuteChanged on the ICommand. This will allow us to be notified in the future if the enabled or disabled state of the
+                    Command changes.
+                </p>
+                <p>Next add a Delete Command to the CustomerListViewModel. Add a public property of type ICommand:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-03.png"/>
+                    <figcaption>Fig 04-03</figcaption>
+                </figure>
+                <p>It has a private setter because the Property should only be set one time inside the ViewModel upon construction.</p>
+                <p>
+                    We need a concrete type that implements ICommand to put into that property. The one we will use in the demo is already in the project in the
+                    download code and is called RelayCommand:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-04.png"/>
+                    <figcaption>Fig 04-04</figcaption>
+                </figure>
+                <p>
+                    This is a simple delegating implementation of ICommand where we have two delegates – one for the Execute method and one for the CanExecute
+                    method. Those can be passed through on construction and you can see there are two overloaded constructors – one for only an Execute method
+                    and one for an Execute method and a CanExecute method.
+                </p>
+                <p>The implementation of ICommand is fairly straightforward:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-05.png"/>
+                    <figcaption>Fig 04-05</figcaption>
+                </figure>
+                <p>
+                    When either of the methods are invoked it just checks to see if there is a method for that delegate and invokes it. And in the case of the
+                    CanExecute method if there is no delegate for that it will return true meaning that it’s always enabled.
+                </p>
+                <p>
+                    Back in CustomerListViewModel change the DeleteCommand to be of type RelayCommand instead of ICommand. Now we need to create an instance and
+                    put it into that property; we will do this in the constructor.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-06.png"/>
+                    <figcaption>Fig 04-06</figcaption>
+                </figure>
+                <p>
+                    We could just use the constructor that only takes an Execute method (which we will call OnDelete) and the Command would then always be
+                    enabled. However, because we are going to hook-up enable/disable logic shortly we will also supply a CanExecute method called CanDelete.
+                </p>
+                <p>Now we can stub the methods out:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-07.png"/>
+                    <figcaption>Fig 04-07</figcaption>
+                </figure>
+                <p>For the moment we will just return true from CanDelete.</p>
+                <p>
+                    The ViewModel will need some context of what Customer is it supposed to be deleting from the Collection. A Command can take an argument, the
+                    signature of the CanExecute and Execute methods on ICommand have a single argument of type object. We could pass down an argument using the
+                    Command parameter property of the Button. However, we will take a different approach which is more in tune with the way MVVM works.
+                </p>
+                <p>
+                    We are going to expose another property (called SelectedCustomer) from our ViewModel that our View can bind to. That way the ViewModel will
+                    always know what the current context is in terms of selection:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-08.png"/>
+                    <figcaption>Fig 04-08</figcaption>
+                </figure>
+                <p>In the CustomerListView set up the new property so that it is populated when selections are made in the DataGrid:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-09.png"/>
+                    <figcaption>Fig 04-09</figcaption>
+                </figure>
+                <p>In the ViewModel fill out the OnDelete method and add code to remove the SelectedCustomer from the Customer Collection.</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-10.png"/>
+                    <figcaption>Fig 04-10</figcaption>
+                </figure>
+                <p>
+                    Now if you run the application, select a Customer and click Delete it is removed from both the DataGrid and ListBox since both controls are
+                    both bound to the same collection – which is an Observable Collection so it will raise collection changed events. One problem with our
+                    current implementation is that the Delete button is always enabled (even if no Customer is selected). We will address that now.
+                </p>
+                <p>
+                    We need to make it so the CanDelete logic is driven by whether a Customer is selected or not. Since we already have that context through our
+                    SelectedCustomer property we should be able to check that property for null and return true or false accordingly:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-11.png"/>
+                    <figcaption>Fig 04-11</figcaption>
+                </figure>
+                <p>
+                    However, if we run the application now and select a customer the button remains disabled. This is because CanExecute is called when the
+                    binding is first evaluated as the XAML is being parsed and it subscribes to the CanExecuteChanged event. However, this won’t be checked
+                    again unless you call the CanExecuteChanged event.
+                </p>
+                <p>In the ViewModel inside the SelectedCustomer set block call the RaiseCanExecuteChanged method:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-12.png"/>
+                    <figcaption>Fig 04-12</figcaption>
+                </figure>
+                <p>
+                    Now if you run the application again the button will be initially disabled, then when a selection is made the button becomes enabled, if you
+                    click delete the button becomes disabled.
+                </p>
+                <p>Lastly we will hook-up a keyboard shortcut input gesture to delete a customer. In the View add InputBindings as a collection on the Root
+                    element.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-13.png"/>
+                    <figcaption>Fig 04-13</figcaption>
+                </figure>
+                <p>
+                    The primary type of InputBinding you will use will probably be a KeyBinding which is a keyboard shortcut. Above we have set the Key to D and
+                    the Modifier to the Control key. The Command just points to the same Command property that we did with the Button making it an alternate
+                    invoker of that command.
+                </p>
+                <h2>Attached Properties and Behaviors</h2>
+                <p>
+                    Now let’s talk about Attached Properties and Behaviors and how they form a communication path between Views and ViewModels for scenario’s
+                    where Commands and Property Change Notifications are not sufficient. Attached Properties are a special kind of Dependency Property and are a
+                    fundamental part of all XAML platforms. They can be defined in any class and then applied to any object that derives from Dependency Object
+                    (which all UI elements do). Attached Properties are used for a lot of things in XAML including:
+                </p>
+                <ul>
+                    <li>Grid Layout</li>
+                    <li>Tool Tip Behaviors</li>
+                    <li>Text Formatting</li>
+                </ul>
+                <p>
+                    They also form the basis for Custom Behaviors because when an Attached Property is set on some element you can wire up a change handler that
+                    can make programmatic calls against the exposed API of the control it’s being attached to doing things like subscribing to events or setting
+                    properties on the control.
+                </p>
+                <p>
+                    As a result, you can create what is called a Behavior with just a custom Attached Property but the more common way is to leverage the Blend
+                    SDK to create them. Even when you use the Blend SDK Blend Behaviors get attached to UI elements through Attached Properties which are
+                    defined in the SDK. Behaviors can expose their own Dependency Properties and thus form a communication bridge between Views and ViewModels
+                    because the Behavior can subscribe to events on the element it’s attached to or monitor property changes on it and can despatch calls into
+                    the ViewModel as a result either through Commands by setting a data-bound property on the Behavior that points to the ViewModel or by
+                    directly invoking a method on the ViewModel.
+                </p>
+                <p>
+                    In the other direction the Behavior can be bound to a Property exposed by the ViewModel that is either an interface with events on it or
+                    just a data property that raises property or collection change events. Code in the Behavior can use that as a trigger to go do something on
+                    the element on which the Behavior is attached or some other element or elements in the UI.
+                </p>
+                <h2>Demo: Custom Attached Behavior</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-Behaviors-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-Behaviors-End</p>
+                <p>
+                    In this demo we will look at the basis of Behaviors with Attached Properties and how they can be used communicate between View and
+                    ViewModel. The thing we are going to try and achieve is to make it so the ViewModel can handle the Loaded event and defer loading of the
+                    data until the loaded event of the View has fired. To do that we are going to start off by creating an Attached Property in a separate class
+                    called MvvmBehaviors. Next use the propa Visual Code snippet that is built into Visual Studio to create an Attached Property called
+                    LoadedMethodName. Make it of type string:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-14.png"/>
+                    <figcaption>Fig 04-14</figcaption>
+                </figure>
+                <p>
+                    Next we need to wire up a change handler in order to make the Attached Property a Behavior so in the property metadata add the method
+                    OnLoadedMethodNameChanged:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-15.png"/>
+                    <figcaption>Fig 04-15</figcaption>
+                </figure>
+                <p>
+                    Stub the method out. Now in the new method we expect this Attached Property to be set on our View so we want to handle the Views Loaded
+                    event inside the change handler. Once we handle the Change event we want to invoke a method on the ViewModel. We know that the ViewModel
+                    should be the DataContext of that View. So we can get that ViewModel and use reflection to invoke a method with the specified method name on
+                    it:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-16.png"/>
+                    <figcaption>Fig 04-16</figcaption>
+                </figure>
+                <p>
+                    This code takes the d argument that comes into the change handler which will be the object on which the Attached Property was set and tries
+                    to cast that to Framework Element. As long as that succeeds we know the Framework Element has a Loaded event and it also has a DataContext.
+                    We subscribe to the Loaded event and when that Loaded event fires we get the DataContext. As long as that isn’t null we use reflection to
+                    get a reference to the Method of the name that is being set for LoadedMethodName. Once we have that reference we can just invoke it through
+                    reflection.
+                </p>
+                <p>Now in the CustomerListView add a namespace for wherever we put the Behavior definition:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-17.png"/>
+                    <figcaption>Fig 04-17</figcaption>
+                </figure>
+                <p>Then in the root element of the View use the Attached Property (LoadedMethodName) and specify the Method name that you expect to find in your
+                    ViewModel:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-18.png"/>
+                    <figcaption>Fig 04-18</figcaption>
+                </figure>
+                <p>
+                    Now we need to add a LoadCustomers method into our ViewModel. In previous demos we were initializing the Customers Collection in the
+                    constructor of our ViewModel. We had to force that asynchronous method to execute synchronously because you cannot use async and await in a
+                    constructor. Now that we are going to add a method that will fire later after construction when the Loaded event of the View fires we can
+                    move that initialization logic out to that Loaded handler and do it properly async. So cut the code out of the constructor, add a
+                    LoadCustomers method and past the code in. Remove the Result property that forced the GetCustomerAsync method to run synchronous, put an
+                    await in front of the GetCustomerAsync method call and make the LoadCustomers method async:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-19.png"/>
+                    <figcaption>Fig 04-19</figcaption>
+                </figure>
+                <p>
+                    If you set a breakpoint in the method and run the application, you will see the LoadCustomers method is being called when the Loaded event
+                    of the View is firing. However, there is a problem: Customers aren’t populating:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-20.png"/>
+                    <figcaption>Fig 04-20</figcaption>
+                </figure>
+                <p>This is related to Property Change Events which we will fix in a later module.</p>
+                <h2>Demo: Using Blend Behaviors</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-Behaviors-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-Behaviors-End</p>
+                <p>
+                    In the last demo we created a Behavior through Attached Properties. Now let’s look at how you can achieve the same thing quickly using the
+                    built-in Behaviors of the Blend SDK. To do that we switch to Blend and open the same solution. Go to the Projects tab, expand Customers,
+                    find the CustomerListView and open it.
+                </p>
+                <p>
+                    Now click on the Assets tab, Behaviors, and after selecting the UserControl in the Object and Timeline double click the CallMethodAction to
+                    add it as a child. Several steps are completed automatically for you at this point – Blend has:
+                </p>
+                <ul>
+                    <li>Added references to two libraries that are part of the Blend SDK</li>
+                    <li>Added a XAML XML namespace to facilitate access to those libraries</li>
+                    <li>Added the CallMethodAction with several lines of XAML to my UserControl</li>
+                </ul>
+                <p>
+                    Now, back in Visual Studio, we will finish filling out the properties of that Behavior. In the References list in Solution Explorer you will
+                    see that it has added the following references:
+                </p>
+                <ul>
+                    <li>Microsoft.Expression.Interactions</li>
+                    <li>System.Windows.Interactivity</li>
+                </ul>
+                <p>
+                    These are from the Blend SDK. In the CustomerListView you can see it added corresponding XML namespaces so we can access the stuff that is
+                    in those libraries from our XAML.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-21.png"/>
+                    <figcaption>Fig 04-21</figcaption>
+                </figure>
+                <p>Scrolling down you see that Blend has added some more XAML:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-22.png"/>
+                    <figcaption>Fig 04-22</figcaption>
+                </figure>
+                <p>
+                    It added an Attached Property that is a Triggers collection, it added a Trigger with the MouseLeftButtonDown which we need to change to the
+                    Loaded event. It also added a CallMethodAction. The CallMethodAction needs to know what it is going to call so we need to set the
+                    TargetObject property and MethodName property:
+                </p>
+                <p>
+                    We set the TargetObject to binding (just setting it to Binding in curly braces means the entire DataContext object – our ViewModel in this
+                    example). Then we set the MethodName property which we set to the LoadCustomers method (achieving the same thing as our Attached Property
+                    did):
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-23.png"/>
+                    <figcaption>Fig 04-23</figcaption>
+                </figure>
+                <p>
+                    Now remove the Attached Behavior from the root and run the application. We still have the bug where the Customers aren’t showing but we will
+                    fix that after we talk about Property Change Notifications.
+                </p>
+                <h2>Property Change Notifications</h2>
+                <p>
+                    Property Change Notifications are essential to data-binding because they notify the binding when the underlying data has changed so that the
+                    binding can refresh and keep the data on screen in sync with the underlying data model.
+                </p>
+                <p>They can also be used to signal the View or a Behavior in the View to make some change not directly related to data-binding such as:</p>
+                <ul>
+                    <li>Changing the visibility of some element</li>
+                    <li>Kicking off an animation</li>
+                    <li>Causing a visual state change</li>
+                </ul>
+                <p>
+                    There are two options for raising Property Change Notifications that a binding will automatically monitor. First is to make the Property a
+                    Dependency Property which has its own internal change notification mechanism that bindings are natively aware of. Second is to implement the
+                    INotifyPropertyChanged (INPC) Interface which requires declaration of a Property Changed event and firing that event in the set block of
+                    each Property on the object.
+                </p>
+                <p>
+                    For your ViewModel and Model objects in MVVM INotifyPropertyChanged is more appropriate because Dependency Property declarations are verbose
+                    and require your object to inherit from Dependency Object both of which make it a heavyweight approach to achieve the goal of change
+                    notifications in Model and ViewModel objects.
+                </p>
+                <h2>Demo: Leveraging INotifyPropertyChanged</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-PropertyChanged-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-PropertyChanged-End</p>
+                <p>
+                    In the last demo we hooked up some Behaviors to populate our Customers OnLoaded instead of in the constructor. However, we introduced a bug
+                    where the Customers were being retrieved but weren’t showing up on screen. Usually that means that data binding is not being notified when
+                    something happens after the initial XAML parsing is done - such as the Loaded event. To fix this issue all we need to do is make it so our
+                    ViewModel implements INotifyPropertyChanged. So modify CustomerListView so that it implements INotifyPropertyChanged:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-24.png"/>
+                    <figcaption>Fig 04-24</figcaption>
+                </figure>
+                <p>
+                    Stub the method out using the Visual Studio Ctrl +. enter shortcut. This will add the PropertyChanged event to the bottom of our class. Next
+                    we use a delegate trick where we assign an empty anonymous method in as a subscriber. That means that subscriber is always in the list and
+                    you never have to worry about property change being null:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-25.png"/>
+                    <figcaption>Fig 04-25</figcaption>
+                </figure>
+                <p>
+                    Now we need to go to the properties of our ViewModel and fire that event when they change. Since you are now going to be raising an event
+                    when they change you need to make sure the value actually changed:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-26.png"/>
+                    <figcaption>Fig 04-26</figcaption>
+                </figure>
+                <p>
+                    We compare the value being set to the current value of the underlying member variable as long as it is different than we set our member
+                    variable and raise the PropertyChanged event signalling that it is for this particular property.
+                </p>
+                <p>
+                    For completeness, you can do the same thing for the SelectedCustomer. This isn't really necessary because the SelectedCustomer is always set
+                    by the View but you should really have all the publicly exposed properties on your INotifyPropertyChanged object follow the pattern.
+                </p>
+                <p>
+                    Now that we raise PropertyChanged when Customers are set after the fact in the Loaded event our Customers populate asynchronously in the
+                    Loaded event handler showing the data once the Customers property has been set because the binding was notified about the event.
+                </p>
+                <p>
+                    Another place where you might need to do this is in your Model objects. Let's say we have another button on our screen that ends up changing
+                    a customer object behind the scenes:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-27.png"/>
+                    <figcaption>Fig 04-27</figcaption>
+                </figure>
+                <p>For speed (but anti-MVVM) we will hook-up a change event in the code-behind:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-28.png"/>
+                    <figcaption>Fig 04-28</figcaption>
+                </figure>
+                <p>
+                    We are really just doing this to illustrate how there are potentially different code paths in your application that end up modifying the
+                    objects that you are binding to and when that happens those objects also need to raise change events or the screen wont update.
+                </p>
+                <p>
+                    In the code above we are taking the selected item in the DataGrid, getting a reference to it and programmatically setting the FirstName to
+                    "Changed in background".
+                </p>
+                <p>
+                    If you now run the application and click the Change Customer button the name doesn't change on screen even though we know in the background
+                    the FirstName property has been changed. We can fix this by going to our Customer Model object definition and ensure that it also implements
+                    INotifyPropertyChanged, stub the method out, and use the delegate trick again:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-29.png"/>
+                    <figcaption>Fig 04-29</figcaption>
+                </figure>
+                <p>
+                    Now in the FirstName property modify the set block to add the PropertyChanged event. This pattern should really be applied to all the
+                    properties in the Model but as this is just a demo we will limit our changes to the FirstName property.
+                </p>
+                <p>Now if you run the application, select a customer, and click the Change Customer button you will see the screen updates properly.</p>
+                <h2>Demo: Custom Blend Behavior with INotifyPropertyChanged Trigger</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-CustomBehavior-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\4WPFMVVMInDepth\MVVMCommsDemo-CustomBehavior-End</p>
+                <p>
+                    In this demo we will show the combination of Property Changed Notifications as a communication method from ViewModel to View and a Custom
+                    Behavior using the Blend SDK. The scenario we are going to address is one where we want to send alerts to the screen when stuff happens in
+                    the background. To do that we are going to need a Custom Behavior that show the alerts as they arrive in a Content Control. To create a
+                    Custom Behavior using the Blend SDK you have to reference the Blend SDK (which we did in a previous demo).
+                </p>
+                <p>
+                    Add a new class called ShowNotificationMessageBehavior. Make the class public and inherit from Behavior of T where T is a ContentControl.
+                    Next, using the propp code snippet, expose a property on the Behavior called Message of type string which can be set on the ViewModel
+                    through data binding (which means it will need to be a Dependency Property).
+                </p>
+                <p>
+                    Now we want to add a change handler called OnMessageChanged so that we can monitor changes on this property and make the appropriate changes
+                    in the View when it happens.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-30.png"/>
+                    <figcaption>Fig 04-30</figcaption>
+                </figure>
+                <p>
+                    We take the incoming d object which will be the class on which this Dependency Property is defined – which is our Behavior and cast it to
+                    that. That lets us get to a property on our base class called AssociatedObject which will be a strongly typed reference to the
+                    ContentControl that you use this Behavior on.
+                </p>
+                <p>
+                    Using that we can set the content to the value of the Message that was and we can change its visibility to visible making it pop open in the
+                    UI. We also want to make our notification click dismissible so we are going to add another handler - an override of the base class
+                    OnAttached() method. In the OnAttached method we can subscribe to events on the element to which we attached this Behavior. In this case
+                    MouseLeftButton down as a click dismiss.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-31.png"/>
+                    <figcaption>Fig 04-31</figcaption>
+                </figure>
+                <p>
+                    Now we need a Content Control to put this on. In the MainWindow View replace the current ContentControl with a two row Grid and a new
+                    ContentControl in the top row above our existing ContentControl in the bottom row:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-32.png"/>
+                    <figcaption>Fig 04-32</figcaption>
+                </figure>
+                <p>
+                    On that ContentControl you can see we add the InteractionBehaviors Collection (similar to the Triggers Attached Property we saw in a
+                    previous demo). We put our Behavior inside of that and we combine the Message property of our Behavior to something we expect our ViewModel
+                    to expose. We need to add some namespaces to the top of the file to bring in the i prefix (we can steal those from the previous View that
+                    already has a Behavior in it):
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-33.png"/>
+                    <figcaption>Fig 04-33</figcaption>
+                </figure>
+                <p>
+                    Now we need to implement the NotificationMessage in the MainWindowViewModel class. Make the class inherit from INotifyPropertyChanged and
+                    add the NotificationMessage Property to the ViewModel:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-34.png"/>
+                    <figcaption>Fig 04-34</figcaption>
+                </figure>
+                <p>
+                    Now we need to add code that will actually push some values into that NotificationMessage Property. For this we will use a simple Timer. Add
+                    a Timer that ticks every 5 seconds to the MainWindowViewModel’s constructor:
+                </
+                >
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-35.png"/>
+                    <figcaption>Fig 04-35</figcaption>
+                </figure>
+                <p>
+                    Run the application and if you watch the top of the MainWindow you will see the message appear:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig04-36.png"/>
+                    <figcaption>Fig 04-36</figcaption>
+                </figure>
+                <p>
+                    If you left click on the message text you can dismiss it. So our Custom Behavior is acting as a nice little bridge between our View and
+                    ViewModel for our ViewModel to be able to push information up to the View and make modifications in the View but notice it required no code
+                    behind to do this just a nice declarative modification to a ContentControl using our Behavior.
+                </p>
+                <h2>Summary</h2>
+                <p>
+                    As you saw in the module you have a variety of ways in which you can handle communication between your Views and ViewModels in MVVM that
+                    still allow them to remain loosely coupled from one another. You saw that Commands are a primary form of communication from View to
+                    ViewModel and should typically be used when a user action in the View (such as clicking on something, or some kind of input gesture) is
+                    really an imperative request from the User for the app to do something for them.
+                </p>
+                <p>
+                    Behaviors are another way to setup a communication path. Where the Behavior might fire a Command for some Control that does not directly
+                    support Commands, set a property or call a method on the ViewModel.
+                </p>
+                <p><strong>PropertyChanged</strong> notifications keep your Views in sync.</p>
+
+                <hr>
+                <h1>Applied MVVM Part 1 – Hierarchies and Navigation</h1>
+                <h2>Overview</h2>
+                <p>
+                    We will now start building out a few more fully functional use cases from start to finish. In doing so we will hit on a number of other
+                    design considerations and things you will need to know how to tackle when using the MVVM pattern. We will start with a few concepts first
+                    including:
+                </p>
+                <ul>
+                    <li>Naming and Location of Components</li>
+                    <li>Hierarchical MVVM/Navigation</li>
+                    <li>MVVM App Building</li>
+                </ul>
+                <h2>Naming MVVM Components</h2>
+                <p>
+                    When it comes to naming components in software there are no correct names, only good or bad ones depending on who you talk to. What really
+                    matters is having a pattern and using it consistently.
+                </p>
+                <p>Most often your View will be implemented as a UserControl that will be hosted or contained within some UI container or parent View.</p>
+                <p>Some guidance when naming Views:</p>
+                <p>
+                    Views should generally be named with a suffix of View with their name indicating what they contain or something about the action or use case
+                    that they support.
+                </p>
+                <p>
+                    You might also have cases where you are constructing objects such as a Window, Dialog or Page and you want to name the View with those as a
+                    suffix to indicate what kind of construct they are. This is absolutely fine.
+                </p>
+                <p>
+                    One recommendation is that you should avoid naming something with a View suffix if it does not have a corresponding ViewModel. That way you
+                    don’t have to dig into the internals of a View to figure out if it is part of a View/ViewModel pair.
+                </p>
+                <p>Some guidance when naming ViewModels:</p>
+                <p>
+                    If you are following the above guidance on View naming, then simply apply Model to the end of the View name to create the ViewModel name
+                    (e.g. CustomerEditView/CustomerEditViewModel).
+                </p>
+                <p>If you have a View that’s name doesn't end in View, then append ViewModel to the end of the View name (e.g. MainWindow/MainWindowViewModel)
+                </p>
+                <p>
+                    Model objects are usually just objects with properties to contain the data of the Model. These kind of objects are often called entities but
+                    don’t let that term confuse you and make you think that they are necessarily associated with the Entity Framework in any way. Entity is just
+                    a general term for a lightweight object that contains data and properties.
+                </p>
+                <p>
+                    Name Model objects for the domain object that they represent. So your Model objects should have noun based names like Customer, Order,
+                    Patient, Prescription etc.
+                </p>
+                <p>
+                    Classes that are wrappers (e.g. OrderHistory composed of ProductName, OrderDate and Quantity which are all from different Models) allow you
+                    to easily bind to from a Grid. Some people append ViewModel to the end of Wrapped Models but that should be avoided. Use some kind of entity
+                    name for the object and keep it so ViewModel's always have a View they are associated with. To keep things clean and easy to understand
+                    Wrapped Models should be kept in a different location to where the Models are defined – often side by side with the Views and ViewModels
+                    they are servicing.
+                </p>
+                <h2>Locating MVVM Components</h2>
+                <p>
+                    When it comes to creating your MVVM components in your Solution structure there are no hard and fast rules here either. The two most common
+                    approaches are to locate your View and ViewModel components either in folders by type or folders by feature. When using folder by type you
+                    have subfolders by each type of construct one for Views and one for ViewModels. When using folder by feature you have Views and ViewModels
+                    grouped into folders named for a feature area (e.g. Customers) or set of related use cases and the Views and ViewModels live side by side in
+                    that common folder and namespace.
+                </p>
+                <p>
+                    The problem with the folder by type approach for Views and ViewModels is that in a large complex app you could easily end up with dozens of
+                    files in those single folders making it hard to locate the type you are looking for. On the other hand, using folder by feature there are
+                    rarely more than half a dozen Views supporting any single feature area. This makes it a lot easier to find a particular View or ViewModel
+                    type.
+                </p>
+                <p>
+                    For your Model types and Client Services those types are often used across multiple features so using a folder by type for those typically
+                    makes sense. In fact, in the majority of real applications out there the Model types were often in a separate library altogether because
+                    they were objects produced either through data access calls to a database or service calls to a web service and putting them in a separate
+                    class library makes it easier to share them with other parts of your architecture.
+                </p>
+                <h2>MVVM Hierarchies and Navigation</h2>
+                <p>
+                    One of the last concepts to discuss briefly before we dive into the code is hierarchical MVVM and Navigation. When building an MVVM app you
+                    typically decompose complex screens of information into a set of Parent and Child Views where the Child Views are contained within the
+                    Parent Views in Panels or ContainerControls and they form a hierarchy of Views themselves. When you do that not every piece of content that
+                    you separate into its own XAML file necessarily needs to be its own View. If the chunk of content just provides the structure to render
+                    something to the screen and does not support any input or manipulation by the user for that content it may not warrant defining a separate
+                    ViewModel for it. However, if there is justification for having a ViewModel for a Child View then one way to structure things is to form a
+                    ViewModel hierarchy that mimics the View hierarchy and use ViewModel-First construction with Data Templates as the way to setup that
+                    hierarchy. We will implement this in the demos coming up shortly. Finally, if you have a hierarchy of Views and ViewModels the Parent
+                    ViewModel can become a hub for communications so that each Child ViewModel can remain decoupled from the other Child ViewModels and from
+                    their Parent as much as possible.
+                </p>
+                <h2>Demo Use Case Review</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-End</p>
+                <p>
+                    Now it's time to dive into a series of demos that will span the rest of this module and carry on into the next. For those demos we are going
+                    to start with a set of end user use cases that form the requirements for what will be building out. Those use cases include:
+                </p>
+                <ul>
+                    <li>The ability to List Customers so that we can take certain actions on a given Customer:</li>
+                    <ul>
+                        <li>Placing Orders for a Customer</li>
+                        <li>Adding/Editing Customers</li>
+                    </ul>
+                    <li>Monitor Order Preparation:</li>
+                    <ul>
+                        <li>Queued</li>
+                        <li>Prepared</li>
+                        <li>Out for delivery</li>
+                    </ul>
+                </ul>
+                <h2>Demo: Building Out an MVVM Hierarchy</h2>
+                <p>
+                    In this demo we are going to start building up our set of use cases from scratch starting from an essentially empty WPF application project.
+                    We have already added the Zza.Data project which contains the DbContext that we are using for data access and the Model object definitions
+                    for our Data Model. This is referenced already from our WPF project. We also have our Services Layer with our CustomerRepository and
+                    OrderRepository that we have seen in previous demos. We also have our RelayCommand.cs class that we are using for our ICommand
+                    implementation to delegate calls into our ViewModels when Commands fire. Finally add or modify the connection string in the App.config file
+                    that points to our Zza Database.
+                </p>
+                <p>Firstly, we will define a set of Views and define the switching or navigation that can happen to navigate throughout the application as an
+                    end user. To achieve this, we will create a series of feature folders.
+                </p>
+                <ul>
+                    <li>Customers</li>
+                    <li>Orders</li>
+                    <li>OrderPrep</li>
+                </ul>
+                <p>Now we will add a View and ViewModel to each one of those feature folders where the Views are UserControls and the ViewModels are classes:
+                </p>
+                <ul>
+                    <li>CustomerListView</li>
+                    <li>CustomerListViewModel</li>
+                    <li>OrderPrepView</li>
+                    <li>OrderPrepViewModel</li>
+                    <li>OrderView</li>
+                    <li>OrderViewModel</li>
+                </ul>
+                <p>Next we will add a textbox to each View to differentiate between them before adding any actual functionality:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-01.png"/>
+                    <figcaption>Fig 05-01</figcaption>
+                </figure>
+                <p>
+                    Now we need somewhere to host these Views. A good place for that (since this is a simple app) is in the MainWindow View. We need a
+                    ContainerControl that we can place our Views in and switch them in a navigation fashion. The perfect control for that is ContentControl.
+                    What we will end up doing here is using its Content property and binding to a ViewModel reference. Similar to what we saw when we were
+                    covering data templates in the third module here we are going to expose a CurrentViewModel property from this View's ViewModel (which
+                    doesn't exist yet). By setting the CurrentViewModel property to an instance of a ViewModel and having a data template for it we can drive
+                    the rendering of the View and its ViewModel.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-02.png"/>
+                    <figcaption>Fig 05-02</figcaption>
+                </figure>
+                <p>
+                    Now we need to add data templates that match up to our Views and ViewModels. To define the data templates for each View we will need to
+                    bring in their corresponding child namespaces:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-03.png"/>
+                    <figcaption>Fig 05-03</figcaption>
+                </figure>
+                <p>
+                    So we have a child namespace per sub folder and one for the root folder. Now we can define the DataTemplates in a ResourceDictionary for
+                    this window. We will setup one DataTemplate per ViewModel mapping to its ViewType:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-04.png"/>
+                    <figcaption>Fig 05-04</figcaption>
+                </figure>
+                <p>
+                    Note how each DataTemplate maps a DataType (the ViewModel Type) to a corresponding View and the use of this DataTemplate will create this
+                    View, set its DataContext to its ViewModel. So now anytime CurrentViewModel is set to instance of a CustomerListViewModel it will render out
+                    a CustomerListView with the ViewModel hooked up.
+                </p>
+                <p>
+                    So we just need a ViewModel that has a CurrentViewModel property and some logic and Commanding to switch the current reference of ViewModel
+                    inside that property.
+                </p>
+                <p>Create a class called MainWindowViewModel. In MainWindow view we can use static hook-up in the XAML:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-05.png"/>
+                    <figcaption>Fig 05-05</figcaption>
+                </figure>
+                <p>The above XAML just creates an instance of the ViewModel from XAML and use it to set the DataContext of that Window.</p>
+                <p>
+                    Now let's start fleshing out our MainWindowViewModel. The first property we know our ViewModel needs is a property called CurrentViewModel
+                    which we will set to a type of object for now:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-06.png"/>
+                    <figcaption>Fig 05-06</figcaption>
+                </figure>
+                <p>
+                    To drive the navigation, the MainWindowViewModel is going to act as a Parent in a hierarchy of ViewModels where the Child ViewModels will be
+                    managed by the parent ViewModel. We will declare an instance of each of the Child ViewModel types that we are going to be placing into that
+                    CurrentViewModel property:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-07.png"/>
+                    <figcaption>Fig 05-07</figcaption>
+                </figure>
+                <p>
+                    We can see that just like the MainWindow ContentControl will act as a Container for the rendered Views our MainWindowViewModel can act as a
+                    Container or Parent to the contained ViewModels. The next thing to consider is that we will be setting the CurrentViewModel property over
+                    and over again as navigation occurs. Anytime that you are going to be setting a property that you are bound to after the initial XAML
+                    parsing has happened you would need to support INotifyPropertyChanged. We could just implement INPC directly on MainWindowViewModel and then
+                    later we would find we would need to do it on CustomerListViewModel, OrderViewModel and so on. The thing to recognise is that you pretty
+                    much always need INPC support on your ViewModels. We also need to make sure that whatever type you make the CurrentViewModel property we are
+                    able to put an instance of each of the child ViewModels into that property. Obviously using the object base class for all types of objects
+                    in .Net will work but it is better to be a bit more specific.
+                </p>
+                <p>
+                    So the combination of facts that each ViewModel will need to implement INPC and that we need some common base type for those ViewModels
+                    leads us to creating something that encapsulates the INPC pattern, makes it so our ViewModels don’t have to be repetitive in declaring INPC
+                    and makes it so our property definitions can be a little bit more trim as well.
+                </p>
+                <p>In our next demo we will create a base class to encapsulate that INPC implementation then have our ViewModels inherit from it.</p>
+                <h2>Demo: Encapsulating INotifyPropertyChanged</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-End</p>
+                <p>
+                    So we need to create a base class to encapsulate the implementation of INPC for our ViewModels. To do that we are going to add a new class
+                    to the project called BindableBase. The main idea behind BindableBase is to encapsulate the INotifyPropertyChanged implementation and
+                    provide helper methods to the derived class so they can easily trigger the appropriate notifications. Firstly, this class needs to implement
+                    INPC and then it needs to expose a way for the derived classes to trigger that PropertyChanged event at the appropriate time as well as
+                    encapsulating the check to make sure that the value of any property that is being set is actually changing.
+                </p>
+                <p>
+                    To do that we will define two methods on this class. One called SetProperty and one called OnPropertyChanged. The SetProperty method is
+                    intended to be set from the set block of each property and encapsulates the check to see if the value actually changed and if so it sets the
+                    member variable and triggers the PropertyChanged event.
+                </p>
+                <p>
+                    The other method, OnPropertyChanged, is meant for places where maybe changing one property means you need to trigger an update on two
+                    properties such as a computed property.
+                </p>
+                <p>
+                    Now the above class is in place let’s see what it can do for us in our ViewModels. So back in our MainWindowViewModel we can change the way
+                    we define our properties, we can’t do just auto implemented properties because we need to have a set block to trigger the change but we want
+                    that to be as compact as possible.
+                </p>
+                <p>
+                    We can use BindableBase as our property type and the property name is still CurrentViewModel. Make sure you set MainWindowViewModel to
+                    inherit from BindableBase:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-08.png"/>
+                    <figcaption>Fig 05-08</figcaption>
+                </figure>
+                <p>
+                    The standard use of SetProperty is that you pass in the backing variable by ref into the SetProperty method on the base class. You will also
+                    pass in the value that is currently being set for that property.
+                </p>
+                <p>
+                    In the BindableBase implementation of SetProperty you can see how those members are coming in. The by ref member variable comes in in the
+                    first argument, the value comes in second and the third one gets set with a nice feature of C# which is the CallerMemberName attribute. That
+                    attribute makes it so it can automatically pick off the name of the thing that called in here – which in our case, since the SetProperty it
+                    being called from the property is the property name itself – CurrentViewModel.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-09.png"/>
+                    <figcaption>Fig 05-09</figcaption>
+                </figure>
+                <p>
+                    You can see it allows you to have a nice compact property definition with the get and set blocks but still do all the things that you need
+                    to do for INPC like checking the value actually changed and firing the event. As a nice consequence it allows us to set the type of this
+                    property to be BindableBase assuming that each of our ViewModels will inherit from that. So now let’s add BindableBase to each of our
+                    ViewModels.
+                </p>
+                <h2>Demo: View Switching Navigation</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-End</p>
+                <p>
+                    So in this demo we will start doing some actual View switching using our CurrentViewModel property. We just need some way to drive the
+                    setting of this property and we are going to make it so the end user can command going to the CustomerList or to the OrderPreparation View.
+                    To get to the OrderView we are going to need to know what Customer that order is being placed for so that one is going to be driven in a
+                    slightly different way.
+                </p>
+                <p>
+                    So we need to setup some top level navigation to the CustomerListViewModel and the OrderPrepViewModel and the logic for that switching
+                    should belong inside of this ViewModel. We will declare a method called OnNav that takes a string destination and then we will setup a
+                    simple switch case to set the CurrentViewModel property to the appropriate child ViewModel when a certain identifier comes in:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-10.png"/>
+                    <figcaption>Fig 05-10</figcaption>
+                </figure>
+                <p>
+                    We need some way to call that when the user interacts with the View. We know from previous modules a good way to set that up is with
+                    Commands. So let’s declare a Command that we can invoke the method with:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-11.png"/>
+                    <figcaption>Fig 05-11</figcaption>
+                </figure>
+                <p>
+                    Now we just need to construct that so we will add a Constructor to the class and set that Command pointing to the OnNav method:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-12.png"/>
+                    <figcaption>Fig 05-12</figcaption>
+                </figure>
+                <p>
+                    Now we just need to be able to trigger that Command from our View so keeping it simple we will use some Buttons. Add two rows to the Grid in
+                    the MainWindow.xaml View:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-13.png"/>
+                    <figcaption>Fig 05-13</figcaption>
+                </figure>
+                <p>
+                    We add some Buttons to the top row, in the second row of the Grid we have our ContentControl as before. The Button on the left is used for
+                    navigating to Customers whilst the Button on the right is used for navigating to Orders. You can see we are just pointing those at the
+                    NavCommand property exposed by our ViewModel and using the CommandParameter to pass in the string to drive which navigation should take
+                    place. With all that in place we should be able to go ahead and run the application. We can see the two Buttons and clicking on them takes
+                    you to the relevant View:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-14.png"/>
+                    <figcaption>Fig 05-14</figcaption>
+                </figure>
+                <p>
+                    So we are getting top level navigation driven by the User, triggering Commands into the ViewModel, and the ViewModel encapsulates the
+                    navigation logic. We are leveraging implicit DataTemplates to marry up the Views and ViewModels simply by setting a child ViewModel
+                    property.
+                </p>
+                <h2>Demo: Data Loading into a ViewModel</h2>
+                <p>Now that we have our basic top-level navigation working it is time to start fleshing out the CustomerListView. Replace the TextBox with a
+                    DataGrid:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-15.png"/>
+                    <figcaption>Fig 05-15</figcaption>
+                </figure>
+                <p>
+                    We have added a DataGrid that is binding to Customers which means our ViewModel must now expose a Customers Collection. We have got a set of
+                    two columns defined. The first one is bound to the FullName property of the Customer and will take up most of the row. The second one is a
+                    templated column that contains a Button to place an order for a given Customer. That Button is going to pass the Customer by grabbing just
+                    the current DataContext for the cell.
+                </p>
+                <p>
+                    The Command itself will exist on our ViewModel. So to get to our ViewModel from inside of the row where the DataContext is not the ViewModel
+                    we have to break out of the local DataContext using a RelativeSource binding. That let’s walk up the Visual Tree until we get to the
+                    DataGrid at which point we are in the part of the XAML where our ViewModel is the current DataContext. Then we can set the path to the
+                    DataContext of the DataGrid then dot down into PlaceOrderCommand which we will add to our ViewModel.
+                </p>
+                <p>In the CustomerListViewModel we will start by adding the Customers Collection:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-16.png"/>
+                    <figcaption>Fig 05-16</figcaption>
+                </figure>
+                <p>
+                    Now we need to be able to load Customers into that collection. For that we will need the repository. The ViewModel can new up an instance of
+                    the repository as an initial crude attempt. In the next module we will cover dependency injection and how we can use that to pass the
+                    repository in. For now, let’s just hard code it in:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-17.png"/>
+                    <figcaption>Fig 05-17</figcaption>
+                </figure>
+                <p>
+                    So we new up an instance of the Customers repository and hold it in a member variable of the interface type. Now we need to trigger where we
+                    are going to load the Customers into the collection and because that is going to be an asynchronous load using the Loaded event of the View
+                    is actually a good way to go. We just have to wire it up with the behavior as we did in the previous module. First let’s define the target
+                    method that we want to invoke when the Loaded event fires:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-18.png"/>
+                    <figcaption>Fig 05-18</figcaption>
+                </figure>
+                <p>
+                    Here we can see that we are going to go out to our CustomerRepository and call GetCustomersAsync, await on the async method. When it returns
+                    the value we are going to pass it into the constructor of ObservableCollection and populate our Customers property. Now we just need to call
+                    that when the event fires.
+                </p>
+                <p>
+                    The quickest way to get that hooked up is in Blend. Make sure the UserControl root element is selected in Objects and Timeline, go up to the
+                    Assets tab, Behaviors and then double click CallMethodAction. That adds it as a child of the root element.
+                </p>
+                <p>
+                    If you open the CustomerListView you will see that Blend has added two namespaces of the Blend SDK, it added the Triggers collection to the
+                    Root element, and it added an EventTrigger which we want to change to the Loaded event and a CallMethodAction underneath that. We want to
+                    set the TargetObject to just Binding to get to a reference of our ViewModel and the MethodName to LoadCustomers:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-19.png"/>
+                    <figcaption>Fig 05-19</figcaption>
+                </figure>
+                <p>With that we should be able to run, click on the Customers Button and the Customers should be loaded asynchronously:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-20.png"/>
+                    <figcaption>Fig 05-20</figcaption>
+                </figure>
+                <p>
+                    Now we just have to get the Place Order Button wired up with a Command in the ViewModel. In the ViewModel define a Command property called
+                    PlaceOrderCommand:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-21.png"/>
+                    <figcaption>Fig 05-21</figcaption>
+                </figure>
+                <p>In the constructor for the ViewModel initialize the Command property and point it to a handling method:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-22.png"/>
+                    <figcaption>Fig 05-22</figcaption>
+                </figure>
+                <p>Now add the handling method:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-23.png"/>
+                    <figcaption>Fig 05-23</figcaption>
+                </figure>
+                <p>Next up we need to tackle navigating to an OrderView with that Customers context.</p>
+                <h2>Demo: Navigation with Parameters</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-End</p>
+                <p>
+                    At this point we are all wired up to do top level navigation between the CustomerList and the OrderPrep area of the application. Now we need
+                    to cause navigation from the Child ViewModel but that navigation is going to replace this ViewModels View as the Current View in the top
+                    level navigation container. This means that the child ViewModel needs to be able to communicate up to its parent ViewModel which is the
+                    MainWindowViewModel because that is where the navigation is being managed. There is a number of ways you can go about doing this but one
+                    simple and straightforward way is to allow Child ViewModels to raise events that their Parent ViewModel can handle. Much like a human child
+                    tries to get its parent to do something with events – sometimes polite and controlled, sometimes disastrous.
+                </p>
+                <p>
+                    Basically we need to raise an event to our parent. To do that we can simply declare an event that is raised by this ViewModel. So we will
+                    have an event that can pass a GUID (the CustomerId) that we want to start placing an Order for:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-24.png"/>
+                    <figcaption>Fig 05-24</figcaption>
+                </figure>
+                <p>
+                    Once we have the event defined we can raise it from inside of our PlaceOrder command handler passing the Customer Id of the Customer the
+                    Command was raised for. In the MainWindowViewModel (the parent ViewModel) in the constructor subscribe to the PlaceOrderRequested event and
+                    have some handling method that we will place here in the parent:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-25.png"/>
+                    <figcaption>Fig 05-25</figcaption>
+                </figure>
+                <p>To implement the method, we will drop down to the bottom of the class and declare a method with the appropriate signature:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-26.png"/>
+                    <figcaption>Fig 05-26</figcaption>
+                </figure>
+                <p>
+                    Now before we go and set the CurrentViewModel to cause the navigation to occur to the OrderViewModel we need to pass some context. What we
+                    can do is expose a property on the ViewModel that the parent can set as the context that drives the way it is going to behave when it is
+                    presented. We take the Guid that was passed to us and just push it down to the child ViewModel:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-27.png"/>
+                    <figcaption>Fig 05-27</figcaption>
+                </figure>
+                <p>In the OrderViewModel add an appropriate property:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-28.png"/>
+                    <figcaption>Fig 05-28</figcaption>
+                </figure>
+                <p>In the OrderView add the following XAML:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-29.png"/>
+                    <figcaption>Fig 05-29</figcaption>
+                </figure>
+                <p>
+                    We have added a Horizontal StackPanel with two TextBlocks to present that we are placing an order for a given Customer Id. With that in
+                    place we can go ahead and run the application, go to Customers, select a Customer, click Place Order and you will be taken to the Order page
+                    showing the Customer Id:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-30.png"/>
+                    <figcaption>Fig 05-30</figcaption>
+                </figure>
+                <h2>Demo: Add/Edit Navigation</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-End</p>
+                <p>
+                    So to finish up the navigation topics in this module we just need to add a new View and ViewModel to handle adding and editing. Since the
+                    two will combine the same data entry fields we can combine them into a single View and ViewModel that has a mode to it that switches between
+                    Add mode and Edit mode.
+                </p>
+                <p>
+                    The first step is to define a new AddEditCustomerView and AddEditCustomerViewModel. Now we just need to put in place some way to navigate to
+                    this View in Add mode or Edit mode. That will involve putting some Command buttons onto our CustomerListView:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-31.png"/>
+                    <figcaption>Fig 05-31</figcaption>
+                </figure>
+                <p>
+                    Our root Grid now has two rows, the top one will Autosize based on its content. We have added some content to that first row that is a
+                    Button that invokes an AddCustomerCommand in our ViewModel. For our Edit we want to use the context of a given row within the Grid that is a
+                    single Customer. We will just add another templated column similar to the PlaceOrderCommand:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-32.png"/>
+                    <figcaption>Fig 05-32</figcaption>
+                </figure>
+                <p>
+                    We use a RelativeSource Binding to get up to the DataGrid, uses the DataContext property of the DataGrid to get to the ViewModel, then dots
+                    down to the EditCustomerCommand that we will be adding shortly.
+                </p>
+                <p>
+                    Let’s add the EditCustomerCommand and AddCustomerCommand to the CustomerListViewModel. The pattern should be getting familiar now. First we
+                    define the property on our ViewModel that exposes that Command:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-33.png"/>
+                    <figcaption>Fig 05-33</figcaption>
+                </figure>
+                <p>
+                    The AddCustomerCommand takes no arguments, the EditCustomerCommand takes the Customer object for the row the Button was clicked in. Next we
+                    go to the constructor for our ViewModel and construct the command object, pointing it to a handling object:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-34.png"/>
+                    <figcaption>Fig 05-34</figcaption>
+                </figure>
+                <p>Now stub out the handling methods:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-35.png"/>
+                    <figcaption>Fig 05-35</figcaption>
+                </figure>
+                <p>
+                    Now, just like PlaceOrder, we need to cause navigation to occur from down inside the child ViewModel so the pattern we established is to
+                    raise an event to our Parent ViewModel. We will need two more events for that:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-36.png"/>
+                    <figcaption>Fig 05-36</figcaption>
+                </figure>
+                <p>Each event will pass a Customer and now we just need to fire those from the Command handlers:</p>
+                <p>
+                    For AddCustomer we will just fire the event and pass in a new Customer object setting its Id to a new Guid. For EditCustomer we will just
+                    fire the event passing in the Customer that was passed to us through the Command:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-37.png"/>
+                    <figcaption>Fig 05-37</figcaption>
+                </figure>
+                <p>
+                    So now we just need to go up to the Parent ViewModel level and do the event handling and navigation. So first we will need an instance of
+                    the new child ViewModel that we are going to navigate to:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-38.png"/>
+                    <figcaption>Fig 05-38</figcaption>
+                </figure>
+                <p>We can then subscribe to its events in the constructor of the ViewModel (as we did for PlaceOrder):</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-39.png"/>
+                    <figcaption>Fig 05-39</figcaption>
+                </figure>
+                <p>Now we just need to implement the handling methods:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-40.png"/>
+                    <figcaption>Fig 05-40</figcaption>
+                </figure>
+                <p>
+                    Each takes in a Customer. What we expect to do here is set a flag on the AddEditViewModel to tell it whether it is in EditMode or not and
+                    then we need some way to pass that Customer context down into the ViewModel. We are doing that with an imperative call to a method. Finally,
+                    we set the CurrentViewModel property so that it becomes the current View in the root container.
+                </p>
+                <p>
+                    Now for all of that to work we need to implement the property, the method, and make it so that AddEditViewModel is a BindableBase object
+                    because that is the type of CurrentViewModel.
+                </p>
+                <p>So in AddEditCustomerViewModel add the following code:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-41.png"/>
+                    <figcaption>Fig 05-41</figcaption>
+                </figure>
+                <p>
+                    Firstly, we add the BindableBase base class, define our EditMode as a boolean property, define a SetCustomer method that takes in a Customer
+                    and hold onto that Customer for the span of the editing context. Now if we were going to just bind to this Customer directly and let the
+                    editing happen directly against it we could have just set a property. As we will see in the next module you may not always want to directly
+                    edit your Model objects you may need to wrap them in some scenarios. In that case we can pass this Customer down in here and produce a
+                    wrapped object. We will cover this in the next module.
+                </p>
+                <p>For now, we need to put something in the View so we can identify when it is on screen:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-42.png"/>
+                    <figcaption>Fig 05-42</figcaption>
+                </figure>
+                <p>We then want to go to the MainWindow View and add another DataTemplate:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig05-43.png"/>
+                    <figcaption>Fig 05-43</figcaption>
+                </figure>
+                <p>
+                    This maps the AddEditCustomerViewModel to the AddEditCustomerView so it can be rendered out. With all that in place we can run the
+                    application, go to Customers, click on the Edit Button for a selected Customer and see that we end up in the Add/Edit Customer View. Now
+                    this might seem like a lot of ceremony: having to define a Command that gets despatched down into this ViewModel, the ViewModel raises an
+                    event to the Parent ViewModel, the Parent ViewModel handles that event and causes the navigation. The point of all of this is to keep each
+                    of these parts loosely coupled from the other ones. We have all the navigation logic centralized in the MainWindowViewModel, it just handles
+                    its part of the interaction which is to manage the Customer List and events surrounding it.
+                </p>
+                <p>Now there are certainly other ways to go about this:</p>
+                <ul>
+                    <li>You could have a client service that manages navigation</li>
+                    <li>You could use a framework like Prism and do region navigation</li>
+                </ul>
+                <p>However, this approach is simple and straightforward and it only takes moments to stub each navigation out.</p>
+                <p>
+                    In the next module we will finish fleshing out the AddEditCustomerView and in the process of doing so we will touch on a number of other
+                    concepts including:
+                </p>
+                <ul>
+                    <li>Wrapping model objects</li>
+                    <li>Using the Visual Studio Designer to scaffold out data entry views</li>
+                    <li>Doing validation on your editable objects</li>
+                    <li>Doing dependency injection for your ViewModels</li>
+                </ul>
+                <h2>Summary</h2>
+                <p>We saw a number of things:</p>
+                <ul>
+                    <li>Naming and location of components is important for maintainability</li>
+                    <li>Hierarchical MVVM mirrors the way we normally compose complex screens</li>
+                    <li>Building out an MVVM app is a progressive sequence of defining Views, ViewModels, navigation and communications to satisfy the
+                        requirements
+                    </li>
+                </ul>
+
+                <hr>
+                <h1>Applied MVVM Part 2 – Validation and Dependency Injection</h1>
+                <h2>Overview</h2>
+                <p>
+                    In this final module we continue to build out use cases surrounding Customers in our Pizza Order Management Application. This will include
+                    fleshing out some data entry for adding and editing Customers by leveraging the Scaffolding of data-centric Views that is available in
+                    Visual Studio. We also look at validation in the context of MVVM.
+                </p>
+                <p>
+                    When ViewModels take dependencies on client services you will want to make sure those dependencies are loosely coupled. We will cover
+                    dependency injection.
+                </p>
+                <p>Finally, we will cover some of the toolkits and frameworks that can assist when writing applications that adhere to the MVVM pattern.</p>
+                <h2>Visual Studio Designer and Data Sources</h2>
+                <p>
+                    Now we will implement add and edit Customer use cases. We will use the Visual Studio Data Sources and Designer Windows. These Visual Studio
+                    features make it very easy to:
+                </p>
+                <ul>
+                    <li>Quickly scaffold data bound forms</li>
+                </ul>
+                <p>The downside is that the auto generated code does not adhere to the MVVM pattern:</p>
+                <ul>
+                    <li>
+                        The generated code makes the assumption that you will be hooking things up in the XAML's code behind file.
+                    </li>
+                </ul>
+                <p>The upside is:</p>
+                <ul>
+                    <li>It is fairly straightforward to morph the code into something more MVVM friendly.</li>
+                </ul>
+                <h2>Demo: Scaffolding an Edit View in Visual Studio</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\6WPFMVVMInDepth\ZzaDesktop-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\6WPFMVVMInDepth\ZzaDesktop-End</p>
+                <p>
+                    Previously we created the AddEditCustomerView.xaml and the navigation to it from the CustomerListView.xaml. We will now continue to flesh
+                    out the AddEditCustomerView.xaml and put the data entry form together by leveraging the Data Sources window in Visual Studio which allows
+                    you to drag and drop into the designer to scaffold out your data views.
+                </p>
+                <p>In Visual Studio switch to the Designer tab and select View>Other Windows>Data Sources:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-01.png"/>
+                    <figcaption>Fig06-01</figcaption>
+                </figure>
+                <p>
+                    Click Add New Datasource either with the hyperlink or the icon at the top left of the Data Sources window. From the next dialog select the
+                    Object Data Source Type. Drill down to the Customers model object definition under Zza.Data> Zza.Data >Customers. From the Datasources
+                    window click on the Dropdown list next to the Customer Datasource you just generated.
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-02.png"/>
+                    <figcaption>Fig06-02</figcaption>
+                </figure>
+                <p>This drop allows you to select the output generated:</p>
+                <ul>
+                    <li>ListView</li>
+                    <li>Details – in effect a data entry form</li>
+                    <li>Select the Details option and expand the result. Now trim the fields down by selecting None from the drop down next to each field you
+                        don’t require:
+                    </li>
+                </ul>
+                <p>
+                    Once you have done this, drag out the Customer object onto the Designer at which point Visual Studio will auto generate XAML for the
+                    remaining fields (Email, FirstName, LastName and Phone):
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-03.png"/>
+                    <figcaption>Fig06-03</figcaption>
+                </figure>
+                <p>
+                    Remove the Loaded event handler and the associated method in the Code Behind. Also, remove the CollectionViewSource that was auto generated
+                    in UserControl.Resources. Modify the DataContext of the Grid so it Binds to a Customer property that we will expose from our ViewModel:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-05.png"/>
+                    <figcaption>Fig06-05</figcaption>
+                </figure>
+                <p>
+                    When Visual Studio autogenerates the code it will put the properties in alphabetical order by Property Name. Re-arrange the property order
+                    in the XAML to the following order (don’t forget to change the Grid numbers):
+                </p>
+                <ul>
+                    <li>First Name</li>
+                    <li>Last Name</li>
+                    <li>Email</li>
+                    <li>Phone</li>
+                </ul>
+                <p>Now when you run the application and Add or Edit a Customer you will see a data entry form.</p>
+                <h2>Demo: Wrapping Model Objects</h2>
+                <p>
+                    So, now we have to expose a Customer as a property to satisfy the binding for our input fields. We won't expose the Customer Model object
+                    directly. You can't guarantee that your model objects will be in the right shape to handle data-binding from your View and ViewModel. For
+                    example, at a minimum you need an object that implements INotifyPropertyChanged fully (we can now do this by inheriting from BindableBase).
+                    You might not have the option of changing the base class for your model objects.
+                </p>
+                <p>
+                    One way round this dilemma is to create a Wrapped Model Object or a ViewModel Helper. Add a new class to the Customers folder called
+                    SimpleEditableCustomer.cs that inherits from BindableBase and add the Id, FirstName, LastName, Email and Phone properties ensuring they
+                    adhere to the pattern specified in BindableBase for setting the property:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-06.png"/>
+                    <figcaption>Fig06-06</figcaption>
+                </figure>
+                <p>Back in AddEditCustomerViewModel we can now add a property of type SimpleEditableCustomer:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-07.png"/>
+                    <figcaption>Fig06-07</figcaption>
+                </figure>
+                <p>We must populate this property when the Customer object is being passed in from the Parent ViewModel.</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-08.png"/>
+                    <figcaption>Fig06-08</figcaption>
+                </figure>
+                <p>The two methods shown below achieve the following:</p>
+                <ul>
+                    <li>We take the customer and hold onto it so that when we save we do so to the right Customer</li>
+                    <li>Create a new SimpleEditableCustomer object</li>
+                    <li>Use the CopyCustomer helper method to copy the relevant values to the Customer.</li>
+                </ul>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-09.png"/>
+                    <figcaption>Fig06-09</figcaption>
+                </figure>
+                <p>
+                    Not all the properties are set unless we are in EditMode (as you will see later this is to avoid triggering validation). We do need to at
+                    least set the Id so that we have an Id for the Customer when we start editing. That Id, if you remember, was being set in
+                    CustomerListViewModel when it was first firing the event that says it is time to add a new Customer.
+                </p>
+                <p>Now if you run the application, click on Customers, click on Edit for a Customer and you will see the data for our Customer in our data entry
+                    form:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-10.png"/>
+                    <figcaption>Fig06-10</figcaption>
+                </figure>
+                <p>If we navigate to add Customer we will be presented with a blank data entry from to start adding to:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-11.png"/>
+                    <figcaption>Fig06-11</figcaption>
+                </figure>
+                <h2>Demo: Command Handling and Converters</h2>
+                <p>Now we need to wire up the actual command handling to Add or Save an edited Customer as well as cancelling.</p>
+                <p>
+                    Modify the Grid so that it has two rows – one for the data entry fields, the other for the command buttons. The second row will host another
+                    Grid which contains three buttons:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-12.png"/>
+                    <figcaption>Fig06-12</figcaption>
+                </figure>
+                <p>
+                    Only one of the buttons applies depending on which mode you are in (Edit/Add). So we need to hide or show one of these Buttons. One thing
+                    that may immediately occur to you is why don’t we just have one Button and dynamically populate what the Button says from the ViewModel
+                    based on our edit mode. While this may seem like a perfectly viable thing to do it brings up an important concept about MVVM and the
+                    appropriate roles. If you remember from module 1 we said it was the Views job to dictate what the User sees on the screen and the ViewModel
+                    just provides the interaction logic and the data manipulation to support that. If your ViewModel is trying to push text to drive the content
+                    of a Button that violates those principles. What if, down the line, you bring a designer into the mix and he decides to use icons instead of
+                    text – should you then be pushing Icons to the View from the ViewModel? No that’s pure presentation which is the Views job. So to protect
+                    against that we will go ahead and put the two Buttons in there and we will drive their visibility from a property exposed on our ViewModel.
+                </p>
+                <p>
+                    Then you may say - we can just expose a property of type Visibility (note Visibility) from our ViewModel and we can set the Visibility with
+                    a Binding like this:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-13.png"/>
+                    <figcaption>Fig06-13</figcaption>
+                </figure>
+                <p>
+                    Once again, if you look at it from a separation of concerns perspective, Visibility is a pure presentation aspect which is a responsibility
+                    of the View. You really shouldn’t be exposing Visibility properties from your ViewModel either.
+                </p>
+                <p>
+                    So what's a poor MVVM developer to do? You can easily expose flags or booleans from your ViewModel that are decoupled from how that flag
+                    drives the presentation. So we still want to bind the Visibility property but we want it to be driven by boolean flag.
+                </p>
+                <p>
+                    There is a built in boolean to visibility converter that we could use but unfortunately that one doesn't let you negate what that flag means
+                    and it also is hard coded to always use collapsed as the false state. As a result, we will create a CustomConverter to deal with these kinds
+                    of situations.
+                </p>
+                <p>
+                    We will drive the visibility of the buttons from a property exposed on the ViewModel. We will use a flag or Boolean that is decoupled from
+                    how the flag drives the presentation by implementing a Custom Converter.
+                </p>
+                <p>
+                    Add a new Folder called Converters and a class called NegatableBooleanToVisibilityConverter.cs. The class should inherit from
+                    IValueConverter. The class exposes two additional properties that can be set when you create an instance of this class from your XAML
+                    resource dictionary – one to set whether or not the Boolean flag is negated and the other to drive what the FalseVisibility is. Usually this
+                    will be set to either Collapsed or Hidden – we will default to Collapsed:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-14.png"/>
+                    <figcaption>Fig06-14</figcaption>
+                </figure>
+                <p>
+                    In the Convert method there is a chunk of logic that combines the boolean flag that comes in from the binding and the negate flag to say
+                    whether we should be Visible or whatever the Visibility of our false Visibility property is.
+                </p>
+                <p>Next in the AddEditCustomerView add a XAML namespace for the Converters child namespace:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-15.png"/>
+                    <figcaption>Fig06-15</figcaption>
+                </figure>
+                <p>Define two instances of the VisibilityConverter (one where we set negate to true and one where we don’t):</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-16.png"/>
+                    <figcaption>Fig06-16</figcaption>
+                </figure>
+                <p>
+                    Now set the Visibility of the Buttons using our existing EditMode flag on our ViewModel and the appropriate instance of our
+                    VisibilityConverter (VisConverter or NegVisConverter).
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-17.png"/>
+                    <figcaption>Fig06-17</figcaption>
+                </figure>
+                <p>
+                    When in Edit mode the Save Button should be Visible. With the Add Button we negate the meaning of that Edit Mode in order to hide the Add
+                    Button when we are in EditMode.
+                </p>
+                <p>Now let's hook up Command Handling for our SaveCommand and our CancelCommand. In the ViewModel</p>
+                <p>Declare the Commands as properties you can bind to:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-18.png"/>
+                    <figcaption>Fig06-18</figcaption>
+                </figure>
+                <p>Construct our Commands in the ViewModel's Constructor pointing to the handling methods.</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-19.png"/>
+                    <figcaption>Fig06-19</figcaption>
+                </figure>
+                <p>In the case of the SaveCommand we will be implementing validation so we had a CanSave handler.</p>
+                <p>Stub out the OnCancel(), OnSave and CanSave() methods:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-20.png"/>
+                    <figcaption>Fig06-20</figcaption>
+                </figure>
+                <p>
+                    Similar to the CustomerListView we need to be able to signal our Parent ViewModel when we are done adding, editing or if we cancel. We do
+                    this by adding an Event called Done which we can raise from the ViewModel and the Parent can handle to drive navigation:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-21.png"/>
+                    <figcaption>Fig06-21</figcaption>
+                </figure>
+                <p>In the handling methods, for the moment, just call Done() in each method:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-22.png"/>
+                    <figcaption>Fig06-22</figcaption>
+                </figure>
+                <p>Now in the Parent ViewModel (MainWindowViewModel in this case) add an event handler for the Done event:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-23.png"/>
+                    <figcaption>Fig06-23</figcaption>
+                </figure>
+                <p>
+                    Now add the handler method (NavToCustomerList()) that sets the current ViewModel back to the desired ViewModel when we are finished editing
+                    (_customerListViewModel in this case):
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-24.png"/>
+                    <figcaption>Fig06-24</figcaption>
+                </figure>
+                <p>
+                    No if we run the application, click Customers, edit a selected Customer, make a change, click Save and the changes do not show up! This is
+                    because we have not yet wired up any save handling. This will be covered in a later module.
+                </p>
+                <h2>Validation in MVVM</h2>
+                <p>As soon as you start accepting data input from end users you need to consider validation.</p>
+
+                <ul>
+                    <li>Data entry forms can still leverage WPF data binding validation features.</li>
+                    <li>Validation logic belongs in the Model or the ViewModel, not the View.</li>
+                    <li>You can still use all of the ways of expressing validation that are supported by WPF databinding including:
+                    </li>
+                    <ul>
+                        <li>Exceptions</li>
+                        <li>IDataErrorInfo</li>
+                        <li>INotifyDataErrorInfo</li>
+                        <li>Validation Rules</li>
+                    </ul>
+                </ul>
+                <p>
+                    In general, the recommendation is to use INotifyDataErrorInfo. This was introduced to WPF in .Net 4.5 and it supports querying the object
+                    for errors associated with properties. It fixes a couple of deficiencies that exist in all the other options:
+                </p>
+                <ul>
+                    <li>It allows asynchronous validation</li>
+                    <li>It allows properties to have more than one error associated with them</li>
+                </ul>
+                <h2>Demo: Adding Validation to an Input View</h2>
+                <p>
+                    Now we want to add validation support to our data entry form. Validation can be useful in a number of places in your application (Views,
+                    ViewModels, Helper Objects). This makes it a good candidate for a common base class that we can inherit from in those scenarios. We want the
+                    base class to support INotifyDataErrorInfo and we want it to integrate nicely so that the validation gets triggered when properties change.
+                    Since we already have a base class for Property change handling (BindableBase) it’s a natural step to derive from that class.
+                </p>
+                <p>Create a new class called ValidateableBindableBase which inherits from BindableBase and implements INotifyDataErrorInfo:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-25.png"/>
+                    <figcaption>Fig06-25</figcaption>
+                </figure>
+                <p>
+                    After we stub the INotifyDataErrorInfo interface out you can see we have a GetErrors method that gets queried with the propertyName and is
+                    expected to return a collection of errors for that property. We need to raise the ErrorsChanged event whenever new errors are added for a
+                    property so that the binding can re-query and call this again. Then we have to have a boolean flag (HasErrors) that indicates whether there
+                    are any errors on the class. It has to stay in sync with the state of the errors for all the properties on the object.
+                </p>
+                <p>
+                    We can support this interface pretty simply by having a Dictionary as our underlying data store that has a key of string which is the
+                    property name and a list of string per property which are the errors associated with that property:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-26.png"/>
+                    <figcaption>Fig06-26</figcaption>
+                </figure>
+                <p>Now we just need to integrate the use of that Dictionary with the members down below:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-27.png"/>
+                    <figcaption>Fig06-27</figcaption>
+                </figure>
+                <p>
+                    We look into the Dictionary when we are queried for a property. If there are any errors in there return them as a list of strings. If not
+                    return null. We drive the HasErrors flag by checking if there is anything in the Dictionary or not.
+                </p>
+                <p>Next we need to add a trigger to say when does this thing evaluate errors:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-28.png"/>
+                    <figcaption>Fig06-28</figcaption>
+                </figure>
+                <p>
+                    Since we are inhereting from BindableBase we can override the SetProperty method. We will still want to call the base so that the
+                    INotifyPropertyChange handling occurrs but then we can call a method (which we are about to implement) to trigger the validation because a
+                    property has been set.
+                </p>
+                <p>
+                    No we could wire into this ValidateProperty method any number of approaches to validation but the most promonent approach nowadays is to use
+                    Data Annotations:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-29.png"/>
+                    <figcaption>Fig06-29</figcaption>
+                </figure>
+                <p>
+                    Data Annotations contain the concept of a data validation context. You can point at a given object, say what member or property on that
+                    object is being validated and then call a method (TryValidateProperty) to evaluate that object. When this method is called it will go to
+                    that propety on that object and see if there is any Data Annotation attributes for validation. If so it will execute them and get their
+                    results and return them in the results collection.
+                </p>
+                <p>
+                    If there are any results we set those results as the errors for that property name. If there are not any errors then we can remove that
+                    property from our Dictionary because there are no longer any errors associated with that property.
+                </p>
+                <p>Next we raise the ErrorsChanged event so that the binding can go and requery for errors.</p>
+                <p>Back in our AddEditCustomerView we can look at the bindings that were generated from our earlier drag and drop operations:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-30.png"/>
+                    <figcaption>Fig06-30</figcaption>
+                </figure>
+                <p>
+                    We can see they already have Validation and Mode flags on them already. We will replace those flags with the minimum we need to support
+                    NotifyDataErrorInfo:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-31.png"/>
+                    <figcaption>Fig06-31</figcaption>
+                </figure>
+                <p>
+                    On each one of the bindings we have added ValidatesOnNotifyDataErrors=True. That causes that binding to look when it first hooks up to its
+                    data bound object, see if it implements INotifyDataErrorInfo and if so start querying it whenever it gets PropertyChanged notifications for
+                    that property.
+                </p>
+                <p>If there are errors returned, then it will set certain Attached Properties on the associated Control such as:</p>
+                <ul>
+                    <li>Validation has errors</li>
+                    <li>Validation errors collection</li>
+                    <li>Raising Validation events</li>
+                </ul>
+                <p>Now we need to add some Data Annotation attributes to SimpleEditableCustomer we will make the FirstName and LastName required:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-32.png"/>
+                    <figcaption>Fig06-32</figcaption>
+                </figure>
+                <p>Then we will use the built in Email and Phone annotations:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-33.png"/>
+                    <figcaption>Fig06-33</figcaption>
+                </figure>
+                <p>Now we just need to make the base class ValidatableBindableBase instead of BindableBase:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-34.png"/>
+                    <figcaption>Fig06-34</figcaption>
+                </figure>
+                <p>Now if we run the application, edit a Customer, try to Edit by clearing the FirstName field and we will see it gets red boxed:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-35.png"/>
+                    <figcaption>Fig06-35</figcaption>
+                </figure>
+                <p>Unfortunately, WPF doesn’t have much in the way of validation indications so we will add two enhancements:</p>
+                <ul>
+                    <li>The Save Button should disable when a validation error occurs</li>
+                    <li>We will add a ToolTip on the Control that will display the validation error</li>
+                </ul>
+                <p>To support disabling the SaveCommand we need to go to the AddEditCustomerViewModel and modify the SetCustomer method:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-36.png"/>
+                    <figcaption>Fig06-36</figcaption>
+                </figure>
+                <p>
+                    Now when the Customer is set we subscribe to the ErrorsChanged event and trigger the RaiseCanExecuteChanged. We will also put a check in to
+                    unsubscribe an existing Customer to avoid memory leaks.
+                </p>
+                <p>Next we change our CanSave method to check the HasErrors flag of the Customer object:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-37.png"/>
+                    <figcaption>Fig06-37</figcaption>
+                </figure>
+                <p>
+                    Now run the application and edit a Customer. When you remove the FirstName text you will see the field is red boxed again and the Save
+                    Button is disabled.
+                </p>
+                <p>Adding a ToolTip for the validation error is as simple as defining a style for it to the AddEditCustomerView:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-38.png"/>
+                    <figcaption>Fig06-38</figcaption>
+                </figure>
+                <p>
+                    In the style we will implicitly target the TextBox within this scope, we will setup a Style Trigger that watches the Attached Property
+                    Validation.HasError. When that is set to true then we will set the ToolTip property of the TextBox. The Value Binding is a little complex
+                    but you can see that it is basically going to the Validation.Errors Attached Property which is a Collection for this Control, moves to the
+                    CurrentItem and gets the ErrorContent which is the string. It then uses that value to set the ToolTip.
+                </p>
+                <p>Now if we run the application and cause a validation error we will see a ToolTip when we hover over the invalid field:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-39.png"/>
+                    <figcaption>Fig06-39</figcaption>
+                </figure>
+                <p>
+                    Check out the WPF Data Binding in Depth Pluralsight course by Brian Noyes for examples of adding Icons to indicate validation errors and
+                    other techniques.
+                </p>
+                <p>Now we need to wire up the Save handling. For that we need to discuss Dependency Injection.</p>
+                <h2>Dependency Injection</h2>
+                <p>
+                    Now let’s talk a little bit about Dependency Injection. We have already seen that data binding decouples Views and ViewModels from each
+                    other and allows them to communicate without knowing explicitly what is on the other end of the communication pipeline. Now we need
+                    something similar to decouple or ViewModels from our Client Services. So far in the demos you have seen that we have hard coded the
+                    construction of a Client Service or Customers repository and newing it up explicitly within the ViewModel and holding onto a reference to
+                    it. That isn’t a bad thing if you are not worried about Unit Testing and if that is the only ViewModel that is going to use that Client
+                    Service. As soon as you want to start having some shared state in your Client Services that multiple ViewModels see and as soon as you want
+                    to write Unit Tests against your ViewModel logic that uses that Client Service you will have problems with how we have been structuring
+                    things. The solution is to use Dependency Injection and Interfaces on our Services. Those will provide the decoupling we need and you will
+                    see that we can easily wire things together using that.
+                </p>
+                <p>
+                    When you start talking Dependency Injection the subject of containers usually comes up pretty quickly. You can do manual Dependency
+                    Injection but that only gets you so far. Typically, you are going to want to use a container to help you out here.
+                </p>
+                <p>
+                    Inversion of Control (IoC) and Dependency Injection (DI) are two design patterns that are closely related. A “Container” is a chunk of
+                    infrastructure code that does both of those patterns for you. The IoC pattern is about delegating responsibility for construction and the
+                    Dependency Injection pattern is about providing dependencies to an object that has already been constructed.
+                </p>
+                <p>They can both be treated as a two phase approach to constructing. When you use a container the container takes several responsibilities:</p>
+                <ul>
+                    <li>It constructs an object when asked. Instead of newing up objects yourself you will go to the container and ask it to produce an object
+                        for you.
+                    </li>
+                    <li>As part of the process the container will determine what that object depends on. Depending on the container used it can do that based on
+                        parameterized constructors, properties or methods.
+                    </li>
+                    <li>To provide those dependencies the container will then construct those dependencies and will inject them into the object being
+                        constructed
+                    </li>
+                    <li>The dependencies being constructed may have dependencies of their own and so on. So the process is recursively repeated until an entire
+                        object graph is built up from the object you asked for down through all its dependencies.
+                    </li>
+                </ul>
+                <p>
+                    A container can also handle different instancing patterns and produce singleton objects where it constructs them on the first try and then
+                    just hands out a reference to them each other time some object takes a dependency on them.
+                </p>
+                <p>There are many Containers to choose from:</p>
+                <ul>
+                    <li>Unity</li>
+                    <li>AutoFac</li>
+                    <li>Ninject</li>
+                    <li>StructureMap</li>
+                </ul>
+                <p>
+                    Let’s take a look at how we can use Dependency Injection to break the coupling that we have between the ViewModels and the Client Services
+                    at this point in our code.
+                </p>
+                <h2>Demo: Adding Dependency Injection for Client Services</h2>
+                <p>
+                    So in this demo we want to wire up the Save handling from our Add/Edit form and see how we can use Dependency Injection related to that. The
+                    initial straightforward way to do the Save handling would be to drop into the AddEditCustomerViewModel and new up an instance of our
+                    CustomersRepository.:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-40.png"/>
+                    <figcaption>Fig06-40</figcaption>
+                </figure>
+                <p>
+                    Then drop down to the OnSave handling method and call UpdateCustomer or AddCustomer methods of that repository. There are a couple of issues
+                    with this approach:
+                </p>
+                <ul>
+                    <li>Testability – this is a hard coded, not exposed, dependency that the AddEditCustomerViewModel now has. Any method that touches this
+                        object is going to be really hard to Unit Test because it is going to actually try and go out to the database. We don’t want that in a
+                        Unit Test environment. We want to be able to substitute a mock object.
+                    </li>
+                    <li>Another problem is that this ViewModel is newing up its own instance of the CustomersRepository and if you remember over in the
+                        CustomerListViewModel it is newing up a different instance of the CustomersRepository. So the objects that get read in by those two can
+                        be completely separate objects that really represent the same rows under the covers. When you are doing that kind of thing you really
+                        want a Singleton model for that repository so that you are exposing shared state to the multiple ViewModels that are going to use it.
+                        That is where Dependency Injection comes in.
+                    </li>
+                </ul>
+                <p>The first thing we want to do is change the code in our ViewModel to take in a reference to an ICustomersRepository:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-41.png"/>
+                    <figcaption>Fig06-41</figcaption>
+                </figure>
+                <p>
+                    Now you can see this type is not coupled to the concrete type at all just the interface and provides a path for passing in a mock object in
+                    a Unit Test environment. We can go and make a similar change to our CustomerListViewModel and now likewise our CustomerListViewModel just
+                    takes in the interface reference and is no longer coupled to the concrete type.
+                </p>
+                <p>
+                    For the above code to work we would need to move up to the parent ViewModel and pass that in. So we go to the MainWindowViewModel and new up
+                    the instance of the CustomersRepository here:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-42.png"/>
+                    <figcaption>Fig06-42</figcaption>
+                </figure>
+                <p>Then change the construction of those child ViewModels to pass it in through the constructor:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-43.png"/>
+                    <figcaption>Fig06-43</figcaption>
+                </figure>
+                <p>
+                    So this fixes the problem for our child ViewModels in that they get passed in the appropriate thing at runtime but can have an alternate
+                    thing passed in when in a Unit Test environment and they are only coupled to the interface now.
+                </p>
+                <p>
+                    However, now our parent type has been somewhat corrupted because it now depends on a concrete type that it doesn’t even use directly itself.
+                    How do we fix that? That leads us to using a Container to do the resolution of all dependencies. We are going to use the Unity container.
+                </p>
+                <p>Firstly, get Unity from NuGet:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-44.png"/>
+                    <figcaption>Fig06-44</figcaption>
+                </figure>
+                <p>
+                    Now when using a container, you generally have a singleton model for the container itself so we will wire up a simple helper for the
+                    singleton pattern here that we will call ContainerHelper. The ContainerHelper class exposes a singleton instance of an IUnityContainer
+                    container through a static property. It can also be the place where you do your centralized registration of any types that you want the
+                    container to be responsible for creating:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-45.png"/>
+                    <figcaption>Fig06-45</figcaption>
+                </figure>
+                <p>
+                    In the API of Unity what we do here is basically say whenever someone asks for an ICustomersRepository give them the CustomersRepository as
+                    the concrete type. The ContainerControlledLifetimeManager indicates to Unity to make the type a singleton. So when someone tries to get an
+                    ICustomersRepository from the Container it will new up a CustomersRepository and satisfy any dependencies it has. Any subsequent time it
+                    will just return the reference to the singleton.
+                </p>
+                <p>To use this, we go back to MainWindowViewModel and add a namespace for the Unity namespace:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-46.png"/>
+                    <figcaption>Fig06-46</figcaption>
+                </figure>
+                <p>Next we will change the way the child ViewModels are created so that they use the Container:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-47.png"/>
+                    <figcaption>Fig06-47</figcaption>
+                </figure>
+                <p>
+                    We use a Resolve method in Unity specifying the type that we want to create. When it goes to construct that object it will satisfy its
+                    dependencies based on its parameterized constructor. So it will be able to construct and inject a singleton instance of
+                    ICustomersRepository. Now this parent ViewModel doesn’t even have to know about this dependency so we can delete the line:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-48.png"/>
+                    <figcaption>Fig06-48</figcaption>
+                </figure>
+                <p>
+                    Now finally we can wire up the Save handling in our AddEditCustomerViewModel. So now when we call Save we will first copy the contents of
+                    our editing Customer back into the original object that we held a reference to with another helper method called UpdateCustomer that pushes
+                    and pulls the relevant properties:
+                </p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-49.png"/>
+                    <figcaption>Fig06-49</figcaption>
+                </figure>
+                <p>
+                    You could use a tool like AutoMapper for doing this kind of thing. Then depending on our mode we either call UpdateCustomerAsync or
+                    AddCustomerAsync on our repository. Finally, we signal that we are done. In a production environment we would add error handling in case
+                    those methods threw exceptions.
+                </p>
+                <p>
+                    Now if we run the application, select a customer and click Edit, change their name and click Save. You will see the change has been made
+                    successfully. If you stop and restart the application, you will see the change persists.
+                </p>
+                <p>Now we have Dependency Injection and Validation wrapped up we will cover one more use case scenario – searching and filtering the Customer
+                    list.
+                </p>
+                <h2>Demo: Searching and Filtering Data</h2>
+                <p>
+                    The one last use case that we will look at is searching the Customers list and filtering the list based on your search. Go to the
+                    CustomerListView and take the Grid that we had at the top which contains the AddCustomer button and I will add a
+                </p>
+                <ul>
+                    <li>A StackPanel that contains</li>
+                    <ul>
+                        <li>A Search Label</li>
+                        <li>A TextBox to accept search criteria</li>
+                        <li>An X Button to clear out the search criteria</li>
+                    </ul>
+                </ul>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-50.png"/>
+                    <figcaption>Fig06-50</figcaption>
+                </figure>
+                <p>That means our ViewModel needs to support two new things:</p>
+                <ul>
+                    <li>A property called SearchInput that we want to be set every time a keystroke happens so we use the UpdateSourceTrigger on the binding and
+                        set that to PropertyChanged
+                    </li>
+                    <li>We also need a ClearSearchCommand to clear out the search term</li>
+                </ul>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-51.png"/>
+                    <figcaption>Fig06-51</figcaption>
+                </figure>
+                <p>
+                    In our CustomerListViewModel we define that SearchInput property so when the property gets set we need to trigger filtering of the Customers
+                    that are being presented. That means we are going to need another Customer collection. One that contains all Customers and then the exposed
+                    one that is data bound to that contains just the Customers that are to be presented at the current time. Once we have that and the
+                    FilterCustomers gets called we are going to check and see if there is anything as a search term and if there is we will apply a Where clause
+                    to check to see if the FullName property of the Customer contains our search term. We will use the results of that LINQ query to populate
+                    our Customers property with the filtered list triggering a property change and therefore the screen will update.
+                </p>
+                <p>So we just need to add the _allCustomers collection and we need to populate that when we load our Customers:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-52.png"/>
+                    <figcaption>Fig06-52</figcaption>
+                </figure>
+                <p>
+                    We declare the list of _allCustomers, we can await and hold onto that and then we can do our initial population of the Customers property
+                    with _allCustomers. Then we just need to support the ClearSearchCommand using the standard three steps for Command handling:
+                </p>
+                <p>Expose a property for the Command:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-53.png"/>
+                    <figcaption>Fig06-53</figcaption>
+                </figure>
+                <p>Construct the Command and point it to its handling method:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-54.png"/>
+                    <figcaption>Fig06-54</figcaption>
+                </figure>
+                <p>And define that handling method in this case nulling out the SearchInput:</p>
+                <figure>
+                    <img src="images/wpfmvvmindepth/Fig06-55.png"/>
+                    <figcaption>Fig06-55</figcaption>
+                </figure>
+                <p>
+                    Now if we run the application, go to the Customers view, put in a search term and you can see the list tailoring to your search criteria.
+                    Clicking the clear Button will take you back to the full list of Customers.
+                </p>
+                <h2>MVVM Toolkits</h2>
+                <p>
+                    So before we wrap up this module and course let’s talk about some toolkits and frameworks that are out there that you can leverage so that
+                    you don’t have to write a bunch of repetitive code to implement the MVVM pattern yourself.
+                </p>
+                <h3>Prism</h3>
+                <p>
+                    This was first developed by Microsoft Patterns and Practices. Currently this is an open source project of which Brian Noyes is one of the
+                    authors.
+                </p>
+                <h3>MVVM Light</h3>
+                <p>MVVM Light is developed by Laurent Bugnion and there is a Pluralsight course on MVVM Light.</p>
+                <h3>Caliburn Micro</h3>
+                <p>Another a small open source framework that helps you implement the MVVM pattern and also supports a number of things out of the box.</p>
+                <h3>Prism</h3>
+                <p>
+                    Now we will go back to Prism and look at it in more depth. Prism has a number of things out of the box. It has a BindableBase class similar
+                    to the one we implemented earlier in the course.
+                </p>
+                <p>
+                    It has a flexible ViewModelLocator that has conventions to it but also lets you override those conventions and declaratively hook up your
+                    Views and ViewModels in a loosely coupled way.
+                </p>
+                <p>
+                    Modularity – the ability to break up your code into totally loosely coupled class libraries and parts and bring them together at runtime
+                    into a cohesive whole for the end user while the code remains decoupled.
+                </p>
+                <p>
+                    Prism also supports the notion of UI Composition and Regions. The ability to plug Views into Containers without the View that is doing the
+                    plugging needing to have an explicit reference to the UI Container itself.
+                </p>
+                <p>
+                    Prism has navigation features that layer on top of regions that give you things like forward and back navigation and the navigation stack
+                    and allowing your ViewModels to participate in the navigation process directly.
+                </p>
+                <p>
+                    Prism has Commands. So they have a Delegate Command that is very similar to the RelayCommand that we have been using throughout the course
+                    except it’s got some extra robustness to protect you from memory leaks if you're Views and ViewModels have different lifetimes. There is
+                    also a separate Command implementation called CompositeCommand that lets you do Commanding in a more loosely coupled way across components.
+                </p>
+                <p>
+                    Finally, Prism has support for Pub/Sub Events. These are loosely coupled events where the publisher and subscriber can have different
+                    lifetimes and do not have to have specific references to each other to communicate through events.
+                </p>
+                <p>Brian Lagunas, one of the co-authors of the Prism framework has written a number of Pluralsight courses on the subject.</p>
+                <h2>Summary</h2>
+                <p>
+                    We have completed our journey through MVVM as a pattern. In this module we saw the Visual Studio Data Designer can quickly scaffold out your
+                    data-centric Views but you can still wire them up easily in an MVVM fashion.
+                </p>
+                <p>
+                    You saw the validation logic belongs on the Model or ViewModel properties but the good news is that in MVVM we are always binding to those
+                    properties so it is very easy to setup the infrastructure for validation and reuse that across your ViewModel and Model objects.
+                </p>
+                <p>
+                    We looked at Dependency Injection and saw that it makes it so that your ViewModels are only coupled to your Client Services via the
+                    Interfaces that they implement and that you can use a Container to Dependency Inject those references at runtime for you.
+                </p>
+                <p>Finally, we talked about MVVM frameworks and Toolkits out there and you should look into these and use one to help you implement MVVM.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="bundle.js"></script>

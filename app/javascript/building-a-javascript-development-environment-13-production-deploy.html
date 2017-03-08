@@ -1,0 +1,318 @@
+<h1>Production Deploy</h1>
+<h2>Intro</h2>
+<p>Congratulations on making it to the final module. We're finally ready to discuss the last missing piece:
+  production deployment. We'll begin this final module by discussing the merits of separating the user interface
+  from your applications api into completely separate projects. We'll briefly discuss the wide variety of
+  cloud hosting providers. Then we'll create an automated deployment for both the UI and the API using popular
+  cloud service providers. We'll wrap up the course by discussing approaches for keeping existing projects
+  updated as your starter kit is enhanced over time. And I'll quickly provide some tips for further inspiration
+  as you start designing your own development environment. And I'll close out the course with a short challenge.
+  Alright, let's dig in and wrap this up. </p>
+<h2>Separating the UI from the API</h2>
+<p>Throughout the course we've hosted our production api in the same project as our front end. This was useful
+  for keeping our demo app simple but I don't necessarily recommend doing this in a real app. Instead, I prefer
+  to keep the front end and the api in completely separate projects. Here's why:</p>
+<ol>
+  <li>First, a static front end is easy to deploy. You just need to upload the static files that we wrote to
+    the dist folder to a public web server. And since your only uploading the UI you don't have to worry about
+    regressing your service layer in anyway - they're completely separate.
+  </li>
+  <li>Second, it separates concerns. It provides you the ability to have separate teams building the front and
+    the back end in parallel without stepping on each others toes. The UI team can code against the mock api that
+    we setup and when the real api is ready they can point there instead. Assuming that you have separate people
+    focus on the UI and the API your application becomes easier to understand because a given developer can
+    focus on one of these two concerns in isolation. This clear separation also means that you can scale the
+    backend separately. This is especially useful when you create an api that's going to be consumed by
+    multiple applications since the traffic for the api may dramatically differ from the UI's traffic.
+  </li>
+  <li>A static UI is also cheap to host. When your front end is just static html, javascript and CSS you can
+    select virtually any host in the world because all you need is a host that can server static files. In fact
+    a static front end can be served from a Content Delivery Network also known as a CDN for short. Content
+    Delivery Networks handle caching and scalability for you.
+  </li>
+  <li>A CDN is especially useful for high traffic sites and applications that are used around the world.
+    Since CDN's intelligently serve assets from the closest physical server to speed downloads.
+  </li>
+  <li>Finally hosting separately of course means that your free to use whatever technology that you like for
+    the backend.Our API is currently built using JavaScript but if your team prefers to build API's in a
+    different language like C#, Java, Ruby and so on. Keeping the UI and API separate gives you that option.
+  </li>
+</ol>
+<p>And now that I have set the stage for separating the UI and the API let's talk about automated deployments.</p>
+<h2>Cloud Hosting</h2>
+<p>Of course, the first question when considering an automated deployment is - where should we host the app?
+  Virtually any cloud host can serve a JavaScript app these days with minimal configuration. Popular services
+  include:</p>
+<ul>
+  <li>Amazon Web Services</li>
+  <li>Microsoft Azure</li>
+  <li>Heroku</li>
+  <li>Firebase</li>
+  <li>Google Cloud Platform</li>
+  <li>Netlify</li>
+  <li>Github pages</li>
+  <li>Surge</li>
+</ul>
+<p>Most of these services offer the power to do far more than just host a JavaScript app. Although Netlify,
+  Github pages and Surge are unique options on this list because they're focused solely on serving static files.
+  The process for automated deployment will differ by hosting provider. For this module I'm going to host the
+  API and User Interface separately. For the API I'll use Heroku because it's popular, powerful and has an
+  elegant automated deployment process. For the user interface I'll use Surge because it's simple to setup
+  and unlike many of these other options it's focused solely on hosting static files which is what our
+  automated build for the UI generates. </p>
+<h2>Demo: Automated API Deploy via Heroku</h2>
+<p>Alright, back to the editor. Let's setup an automated deployment of our API to Heroku. We're going to create
+  a completely separate project for handling this to show how we can host and manage our UI and API separately. As
+  I just discussed there are many benefits to completely separating your UI and API projects. In our example app,
+  we created an API end point hosted via express. So we need to select a node friendly host for the API. Let's
+  host our API on Heroku. Heroku offers a really slick setup for automated deployments that integrates with
+  github and it offers a free option that's perfect for showcasing an automated deployment. Heroku's docs already
+  do an excellent job of walking you through setting up an account and creating a new NodeJS project. If you go to
+  their docs here on heroku.com and click on NodeJS and then click on Getting Started on Heroku with Node.js.
+  So if you want to follow along with me please pause this video and go through the introduction and setup
+  steps on the Node.js getting started page then come back here to continue. Ok for the rest of this clip I'm
+  going to assume that you signed up for Heroku and walked through the introduction and setup steps for Node.js.
+  On step three of their setup process which is called prepare the app Heroku provides a link to a sample app
+  which you can clone. However instead of using this I created a separate starter kit for you that will work
+  well with Heroku. This repository contains a slightly modified version of Heroku's starter kit that includes
+  our api so this should help you get started quickly. If you want to use this repository to follow along just
+  click Fork up here to fork the repository. This will make sure that you have a completely separate copy that
+  you can work with to make sure that you have the proper rights to work with it in Heroku. Now I already have
+  this repository pulled down on my local machine so let's jump back to VSCode and walk through it.</p>
+<p>As usual be sure to run <code class="hljs">npm install</code> after forking the api repo. There are only
+  five files in this repository so let's review each.</p>
+<p>First package.json contains only two dependencies: express and cors. We'll use cors to enable cross origin
+  calls since we'll be calling our Heroku based api from a different domain. Make sure that repository field
+  down here points to your repository if you create your own:</p>
+<img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+<p>And there's only one npm script necessary that starts the app.</p>
+<pre><code class="hljs">"start": "node index.js"</code> </pre>
+<p>index.js should look quite familiar to you. It's a slightly modified version of the dist server that we
+  created in the previous module. To keep things simple I'm using the CommonJS style up here on line 1 to
+  require express since that's the syntax that node understands:</p>
+<pre><code class="javascript">var express = require('express');</code></pre>
+<p>I'm also referencing the cors package which we're enabling down here to make ensure that we can call
+  the Heroku based api from our UI which will be hosted on a different Url. To clarify this is
+  necessary because Cross Origin Resource Sharing must be enabled to make Ajax calls to a different domain.
+  We could of course transpile and bundle our code in this project but I'm keeping this project as simple
+  as possible so that you can see how to work with Heroku. </p>
+<p>If you diff this file with the diff server that we setup in the previous module you'll also notice that
+  we're calling open to open a browser there. However this just starts up express and displays a message to
+  the console. So to try this out you'll need to open the Url in your browser manually. I also left out
+  GZip compression. Again just to try and keep this as simple as possible. Ok this leaves us with two new
+  files that help us configure our app for Heroku. The first is app.json which describes our app to Heroku.
+  There are many potential properties that we can define here but we're going to keep our app.json simple.
+  We'll just define the name, a description, the repository where our project can be found and then a few
+  keywords. </p>
+<p>The other new file here is Procfile. The Procfile declares the command that Heroku should run.
+  That's why there's just one line here. We're telling Heroku to run node on our index.js file. And this is all
+  that Heroku needs to host our Node and express based API. Now, of course, Im deliberately leaving out all
+  the complexities of testing, transpiling, linting, bundling and more in this project so that you can
+  clearly see what it takes to create an automated deployment to Heroku. But of course you can feel free to
+  start adding those in once your comfortable with hosting on Heroku. So now we should be ready to complete
+  an automated deploy to Heroku. I've already signed up for Heroku and installed the Heroku CLI. So now
+  let's open up the terminal and type</p>
+<pre><code class="hljs">heroku login</code></pre>
+<p>At this point you'll be prompted for your email and your Heroku password. And after entering your
+  credentials you should see your email listed in blue which shows that you are logged in successfully. And note
+  that you may receives some warnings about file permissions so consider tightening file permissions for
+  security if you like. Now it's time to configure our app to work with Heroku so we can type:</p>
+<pre><code class="hljs">heroku create</code></pre>
+<p>This will prepare Heroku to receive our app. This command returns a Url and if we load it we can see a
+  welcome message. Heroku generates a random name for your app or you can pass a parameter to specify your
+  own name.</p>
+<p>Now that we've created our app we need to configure a git remote that points to our Heroku application.
+  So let's go back to the command line and we'll say:</p>
+<pre><code class="hljs">heroku git:remote -a mysterious-dawn-16770</code></pre>
+<p>We'll pass it the name of the app that we were assigned right up here. And now that we've set the git
+  remote we should be ready to publish the app. We can say:</p>
+<pre><code class="hljs">git push heroku master </code></pre>
+<p>We can see the deployment output as it builds the source and pushes our app up to Heroku it displays
+  the random url where our app is hosted so you'll have a different url than me if you're following along. And
+  of course for a real app you'll want to specify a domain name that you've registered. But for now we should
+  be able to take this url and go over to the browser and when I load it up:</p>
+<img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+<p>There we go. We can see our Hello World. And if I go to /users I can see the Json coming back for our
+  users so we have our api now hosted in production. And anytime that we make changes to our API we'll just
+  commit our changes and then run:</p>
+<pre><code>git push heroku master</code></pre>
+<p>To be able to push our changes up to Heroku. Heroku will take the code from Github and deploy it to our
+  Url. Slick. And now that we have our API running in production via Heroku let's jump over to our UI project
+  and update it so that it will hit our Heroku hosted API.</p>
+<p>To do that let's open up baseUrl.js. Note tha right now we are either using the mock api which is hosted
+  at 3001 or we were assuming that we were hosting express locally for production. Now instead we have a new
+  Url to use for production. So I'll just paste in the Heroku Url that I was assigned in the previous step:</p>
+<pre>
+<code class="javascript">
+return getQueryStringParameterByName('useMockApi') ? 'http://localhost:3001/' :
+  'https://mysterious-dawn-16770.herokuapp.com/';
+</code>
+    </pre>
+<p>And make sure that you include the trailing slash on the end. And now we can also open up distServer.js and
+  we can remove this section:</p>
+<img src="app/javascript/images/buildingajavascriptdevelopmentenvironment/node.png"/>
+<p>Because we're going to be hitting Heroku instead of local when we do our production build. This way our
+  production build is more realistic. We know that our production api will be hosted on Heroku and we're
+  going to host our UI on a separate service here in a moment. But now when we do a production build of our
+  UI it will hit our production API hosted on Heroku. In the next clip let's setup an automated deployment
+  for the user interface so that we can see all this work together.</p>
+
+<h2>Demo: Automated UI Deploy via Surge</h2>
+<p>Ok, now it's time to code our automated UI deployment. Here's our goal for the process that we're going to
+  setup for the front end. It's a three step process to get code into production. First we run:</p>
+<pre><code class="hljs">npm start</code></pre>
+<p>to do our development. Once we're done coding we type:</p>
+<pre><code class="hljs">npm run build</code></pre>
+<p>to build the application in production mode. This opens the application's production build on our local machine
+  so we can verify that everything looks good. If we're happy then it's time to deploy to production so we can
+  type:</p>
+<pre><code class="hljs">npm run deploy</code></pre>
+<p>This will automatically push the final built application up to our production host. Of course we already
+  setup steps one and two in the previous modules so now it's time to focus on this final step. Alright it's time
+  for our final coding session in this course but this one is critical - it takes our front end public. To do
+  so we'll host our static front end on sure. Let's make it happen.</p>
+<p>I'm a big fan of surge because it's a low friction front end and for all the reasons I mentioned earlier
+  I strive to build static front ends. Getting started with Surge couldn't be easier. Typically you'd install it
+  globally using npm. But we don't need to because we already installed it at the beginning of the course since
+  it's listed in our package.json right down here. And we also don't need to install it globally since we're going
+  to run it via an npm script. Remember node's bin folder is added to the path automatically for npm scripts. So
+  to setup surge I'm going to add one whopping line of code here in package.json:</p>
+<pre><code class="json">"deploy": "surge ./dist"</code></pre>
+<p>Yes, it's seriously that easy. And that's why I love Surge. Now first of course we need to call:</p>
+<pre><code class="json">npm run build -s</code></pre>
+<p>So that we have something to push out to production. And when our app starts up in production mode we can
+  see the data coming back as expected. If we come in and inspect the network we should see, when we refresh, that
+  we're making a call to Heroku as expected. And with this setup we can now hit Ctrl+C and type:</p>
+<pre><code class="hljs">npm run deploy</code></pre>
+<p>We can see surge get's called. It assigns a random domain and when we hit enter it says success. And now
+  we know our app is up in production at this random url. So if I open a new tab and load it - there you go.
+  We can see our app loading in production and using the Heroku api for the data. Success. Of course the delete link
+  wont work since we never added that functionality to our api but if you want a challenge you could certainly
+  add a database behind the scenes to support adds and deletes. If we open the browser tools and go to the network
+  tab we can see that Surge serves our assets using GZip by default. And of course you'll likely want to setup
+  a custom domain and Surge will let you use your own domain for free. Or if you just want to request a subdomain
+  you can specify it via a command line flag. There are quite a few nice tweaks that you can make but you get the
+  idea. We should strive to build static front end's and if you do Surge is awesome. Of course, your starter kit
+  is likely to change over time so in the next clip let's talk about how to keep existing projects updated as our
+  starter kit changes.</p>
+<h2>Starter Kit Update Approaches</h2>
+<p>Now once youv'e created your teams starter kit how do you keep existing projects updated over time as you
+  enhance your development environment down the road. Let's review a few approaches. Let me first run through
+  a common scenario to help clarify the problem that we're discussing. Imagine that your team watches this
+  course and creates a development environment that works great. In the first quarter you launch your first project
+  using your new starter kit. Then, in the second quarter, you launch another project successfully using the same
+  starter kit. In quarter three, you learn some lessons, upgrade some libraries and tweak your starter kit with
+  various enhancements and bug fixes. The question is, how do you easily get these enhancements into the products
+  that you launched earlier this year. Of course, one way is to simply manually update these previous projects
+  by hand. And that works but we're developers so let's talk about some more automated approaches.</p>
+<p>Here are three more automated ways to handle updates to starter kits over time: Yeoman, Github and npm. In the
+  next few clips let's discuss each of these options in more detail.</p>
+<h2>Option 1: Yeoman</h2>
+<p>Yeoman is a handy scaffolding tool for starting new projects so once your happy with your development
+  environment you can create a Yeoman generator. This makes it easy for people to create new projects by typing
+  yo and then the name of your generator. Yeoman hosts a long list of generators that will give you a head start on
+  some of what we've covered in this course. Few will cover all of the features that we just implemented but it's
+  another great place to check for inspiration or as a good starting point for your framework or library.</p>
+<p>Assuming that you've created a Yeoman generator for your development environment it's a three step process
+  to update an existing project later. First, be sure that you've committed all your code to your source control
+  system, then re-run the generator on your existing project. Yeoman will prompt you for each file that's being
+  overwritten. Then you can diff the files and manually resolve any conflicts that occur. Of course there's much
+  more to learn about Yeoman so if you want to know more check out the Yeoman fundamentals course by Steve
+  Michelotti.</p>
+<h2>Option 2: Github</h2>
+<p>Another approach for updating projects is to use Github. With this process you begin by hosting your project
+  , of course, on Github and then you fork the starter kit when you start any new projects. This way you can
+  pull changes from master as the starter kit is enhanced over time. </p>
+<h2>Option 3: npm</h2>
+<p>Another approach is to wrap your starter kit in an npm package. With this approach you abstract away the
+  configuration and build scripts behind and npm package and then you update the npm package to receive the
+  latest changes. This approach has the advantage of abstracting complexity away and it's also the simplest
+  to update since you don't need to resolve conflicts like the other two approaches. However, this advantage
+  also has an obvious downside. Your restricted from tweaking anything inside the npm package for a given project.
+  So this approach is great if you want to programmatically enforce that all projects use the exact same config
+  but some may find this approach overly restrictive. Let's talk about this approach in a little more detail
+  because it's becoming increasingly popular.</p>
+<p>Depending on the complexity of your starter kit updating an existing project manually isn't much work so you
+  might consider this hybrid approach. Let's walk through the files that are in our demo's starter kit. The
+  most significant piece is in buildScripts. This is the easiest thing to centralize. You can move all of
+  buildScripts to an npm package. The other big piece is package.json. There are two sources of complexity here:
+  the scripts and the dependencies. For the scripts you can streamline your npm scripts to just call
+  buildScripts instead. Since you can put all your build scripts in an npm package this means that your scripts
+  and package.json are nothing but a list of function calls to your separate scripts. This effectively
+  centralizes your build scripts allowing for bug fixes and tweaks in the future. Webpack's config is just a
+  chunk of JSON so it need not be stored in a webpack config file. Instead you can move it into a build scripts
+  npm package as well so that it's centralized. The ESLint configuration can be centralized by creating your
+  own preset. This way each project can define it's own .eslintrc but use the preset that's stored in npm
+  as the baseline. So this covers most of the moving parts in our starter kit. So what's left?
+</p>
+<p>Well the approaches I outlined on the previous slide centralized all the items on the left using npm.
+  That's a significant win since it's the vast majority of the starter kit's code. So what files would we still
+  have to update manually? </p>
+<ul>
+  <li>.editorconfig which is unlikely to change much over time</li>
+  <li>.babelrc which contains very little code</li>
+  <li>CI config (.travis.yml Appveyor.yml) which is also unlikely to change over time.</li>
+  <li>Package references in package.json. These are easy to update with existing npm tooling so again not
+    necessarily that big of a deal</li>
+</ul>
+<p>I'm a fan of this hybrid approach. It provides most of the benefits of centralization without the cost of
+  creating and maintaining a Yeoman generator. And it gives us a lot of flexibility as well since we can decide
+  what's worth centralizing and what isn't. So that's three different ways to keep your projects updated over
+  time. Let's close out the course by discussing some sources for inspiration as you move forward on creating your
+  own starter kit. </p>
+<h2>Inspiration</h2>
+<p>In this course, you saw a massive list of choices and I shared my recommendations but there are litterally
+  dozens of other ways to build a JavaScript development environment. So let me share some sources for further
+  inspiration.</p>
+<p>If you work in React check out Andrew Farmer's excellent list of React boilerplates and starter kits.
+  Andrew has catalogued over a hundred starter kits into a curated filterable list. My starter kit: React Slingshot
+  is just one of many in this list and I walk through how to build it in module 2 of my React and Redux in ES6
+  course. If you work in Angular check out the awesome AngularJS list. AngularJS developers often call their starter
+  kits seed projects so check out the full list at this address.</p>
+<p>Of course there are many more popular JavaScript frameworks and libraries out there so if your looking for
+  inspiration just type the name of your favourite JavaScript framework into Google along with one of these
+  terms:</p>
+<ul>
+  <li>Devedlopment environment</li>
+  <li>Boilerplate</li>
+  <li>Starter kit</li>
+  <li>Starter project</li>
+  <li>Seed</li>
+</ul>
+<p>The point is I've just shown you one way of getting this done. So start searching. Let's wrap up the course
+  now with my final challenge.</p>
+<h2>Challenge</h2>
+<p>I like to end my courses with a relevant challenge and this one is no different. My challenge to you is easy.
+  Just send a meeting invitation to your team. Why? Because the first step in this process is to start a
+  conversation. In this meeting you need to answer some questions.</p>
+<ul>
+  <li>Would you benefit from a starter kit? If you expect to start any new projects using he same technology
+    stack in the near future then it's worth discussing creating a starter kit.</li>
+  <li>What pain points do we have in JavaScript today? Are we struggling with testing, broken builds, time
+    consuming manual or faulty deployments, inconsistent coding styles. We just discussed a long list of options
+    for solving all of these pain points.</li>
+  <li>Would we benefit from a demo application? Are people that join our team clear about how we operate. Do they
+    understand our opinions on directory structures, file naming, api calls and more. A demo app clearly
+    conveys many of these decisions. These questions should help provide your team with a clear vision on how to
+    move forward.</li>
+</ul>
+<p>So, hey, this is a pretty easy challenge. Just send an email and get the meeting scheduled.</p>
+<h2>Summary</h2>
+<p>And that's a wrap. In this final module we started by discussing why the UI and the API can be useful
+  including the ability to deploy the UI and the API alone, separation of concerns (which allows separate teams
+  to manage each of these), the ability to select cheap hosts that handle static assets and the flexibility to
+  select whatever API technology that you like.</p>
+<p>We reviewed a list of potential cloud hosting providers but ultimately created an automated deployment using
+  Heroku to host the API and Surge to host the UI. We discussed approaches for keeping your projects updated
+  with bug fixes and enhancements as your starter kit improves over time including:</p>
+<ul>
+  <li>Yeoman</li>
+  <li>Github</li>
+  <li>npm</li>
+</ul>
+<p>And I quickly mentioned a few resources for inspiration including some terms that you can use to help you
+  search for starter kits that are specific to your technology stack. And I wrapped up with my very simple
+  challenge. Set up a meeting with your team to discuss the path forward. And that's a wrap. Please share
+  your links to your starter kit in the course discussion. I'm excited to see what you create. Thank's so much
+  for watching.</p>
+
