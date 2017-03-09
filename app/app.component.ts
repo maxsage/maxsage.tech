@@ -50,7 +50,14 @@ import {
     Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent,
     Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent,
     Angular2FirstLook06DataWithHttpComponent, Angular2FirstLook07RoutingComponent,
-    Angular2FirstLook08AngularModulesComponent,
+    Angular2FirstLook08AngularModulesComponent, Angular2ReactiveForms00CourseContentsComponent,
+    Angular2ReactiveForms01CourseOverviewComponent, Angular2ReactiveForms02IntroductionComponent,
+    Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent,
+    Angular2ReactiveForms04BuildingAReactiveFormComponent, Angular2ReactiveForms05ValidationComponent,
+    Angular2ReactiveForms06ReactingToChangesComponent,
+    Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent,
+    Angular2ReactiveForms08ReactiveFormInContextComponent,
+    Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent, Angular2ReactiveForms10FinalWordsComponent,
 } from './angular2/angular2.component';
 
 import { TypeScriptComponent
@@ -180,8 +187,17 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/angular2-first-look-07-routing.html', name: 'Angular2FirstLook07Routing', component: Angular2FirstLook07RoutingComponent},
     { path: '/angular2-first-look-08-angular-modules.html', name: 'Angular2FirstLook08AngularModules', component: Angular2FirstLook08AngularModulesComponent},
 
-
-
+    { path: '/angular2-reactive-forms-00-course-contents', name: 'Angular2ReactiveForms00CourseContents', component: Angular2ReactiveForms00CourseContentsComponent},
+    { path: '/angular2-reactive-forms-01-course-overview', name: 'Angular2ReactiveForms01CourseOverview', component: Angular2ReactiveForms01CourseOverviewComponent},
+    { path: '/angular2-reactive-forms-02-introduction', name: 'Angular2ReactiveForms02Introduction', component: Angular2ReactiveForms02IntroductionComponent},
+    { path: '/angular2-reactive-forms-03-course-contents', name: 'Angular2ReactiveForms03TemplateDrivenVsReactiveForms', component: Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent},
+    { path: '/angular2-reactive-forms-04-course-contents', name: 'Angular2ReactiveForms04BuildingAReactiveForm', component: Angular2ReactiveForms04BuildingAReactiveFormComponent},
+    { path: '/angular2-reactive-forms-05-validation', name: 'Angular2ReactiveForms05Validation', component: Angular2ReactiveForms05ValidationComponent},
+    { path: '/angular2-reactive-forms-06-reacting-to-changes', name: 'Angular2ReactiveForms06ReactingToChanges', component: Angular2ReactiveForms06ReactingToChangesComponent},
+    { path: '/angular2-reactive-forms-07-dynamically-duplicate-input-elements', name: 'Angular2ReactiveForms07DynamicallyDuplicateInputElements', component: Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent},
+    { path: '/angular2-reactive-forms-08-reactive-form-in-context', name: 'Angular2ReactiveForms08ReactiveFormInContext', component: Angular2ReactiveForms08ReactiveFormInContextComponent},
+    { path: '/angular2-reactive-forms-09-create-read-update-and-delete-crud-using-http', name: 'Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttp', component: Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent}
+    { path: '/angular2-reactive-forms-10-final-words', name: 'Angular2ReactiveForms10FinalWords', component: Angular2ReactiveForms10FinalWordsComponent},
 
     { path: '/javascript', name: 'JavaScript', component: JavaScriptComponent },
     { path: '/building-a-javascript-development-environment00-course-contents', name: 'BuildingAJavaScriptDevelopmentEnvironment00CourseContents', component: BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent },

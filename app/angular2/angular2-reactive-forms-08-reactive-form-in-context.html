@@ -1,0 +1,246 @@
+<h2>Reactive Form in Context</h2>
+
+<h3>Introduction</h3>
+
+<p>Now's the time to shift gears a bit, and see how a Reactive form fits into a larger scale application. Welcome back
+    to Angular 2: Reactive Forms, from Pluralsight. My name is Deborah Kurata, and in this module we look at how an edit
+    form works within the context of a more full-featured Angular application. Rarely is a form the entirety of an
+    application, rather it is a piece of a larger puzzle. In addition to understanding the basics of building a Reactive
+    form, to fit the form piece into the context of a larger application, we need to consider how the user will navigate
+    to the form, how to set up validation for reuse, and how to populate data into, and save data from the form. In this
+    module, we concentrate on additional concepts and requirements when building a Reactive form within the context of a
+    full-featured application. We start with an overview of the sample application we'll use in these next two modules.
+    Then we focus on the code for routing to the form, reading the route parameter passed to the form so we know which
+    item the user selected to edit, setting up a deactivate routing guard to remind the user to save before navigating
+    away, and refactoring custom validation into a separate class for reusability. We'll look at retrieving and saving
+    data from the form in the next module. Let's get started.</p>
+
+<h3>Sample Application</h3>
+
+<p>In the next two modules, we'll examine the code for a Reactive form in the context of a more full-featured
+    application, called APM for Acme Product Management. It manages a list of products that Acme sells. The completed
+    code for this sample application is available in my GitHub repository, here. If you want to follow along with your
+    own copy of this code, clone the repo, or download it as a zip file and unzip it, then in the APM folder, use npm
+    install to install the required packages. I've opened the APM folder in VS Code. Let's start by running the sample
+    application using npm start. This is Acme Product Management. I walk through building the basic features of this
+    sample application in the Angular 2: Getting Started course here on Pluralsight. If you've taken that course, this
+    application will look familiar. I've added a Reactive form to this sample application so we can see an edit form in
+    context. We are looking at the Welcome page. Click Product List to review the list of products. Notice the product
+    rating stars. Using stars instead of a number makes it easier for the user to visualize the rating. We can use the
+    Filter by box to filter the list of products, or clear the filter to view all products. Notice that each row has an
+    Edit button. Click the product name to view the product details. Click the Edit button to display the product edit
+    form. Notice that the form populates with the existing product data, yay. From here the user can edit any of this
+    data, validation messages appear as needed. If we remove the product name, we see a validation message. If we put in
+    a star rating out of the valid range, we see a validation message. Because of our validation errors the Save button
+    is currently disabled. When we fix the errors, the errors disappear, and the Save button is enabled. Notice this Add
+    Tag button. It allows us to dynamically duplicate the tag input element, and add search tags for this product. This
+    is similar to the multiple addresses we implemented in the demo form. Click Save to save our product, and we see the
+    changed item in the product list. To add a new product, click the Add Product menu option. The form is then
+    displayed initialized for us to enter a new product. We can then fill out the form, and click Save. Our new product
+    appears in the list. Our current form does not have fields for availability date and price, so those are empty here.
+    Notice that if we refresh, these changes are gone. We are using an in-memory Web API server, so our changes are only
+    retained in memory. We'll talk more about that in the next module. Though not a large application, Acme Product
+    Management does provide enough features to see how all of the moving parts work together. Let's look at the
+    architecture of this application.</p>
+
+<h3>Sample Application: Architecture</h3>
+
+<p>When building an Angular application, we break the features and user interface pieces into components. For the APM
+    sample application, we have a main application component called App component, and a component for each primary page
+    of the application. The Welcome page has a Welcome component. The solid line here represents route navigation, the
+    user can navigate from the menu, defined in the App component, to the Welcome page, defined in the Welcome
+    component. The Product List page has a Product List component. To provide the filtering feature, the application has
+    a product filter pipe. The Detail page has its own component, and we can route to the Detail page from the Product
+    List page. Both the Product List and Product Detail components use a nested component to display the star rating
+    implemented in the Star component. Because this course is on Reactive forms, we'll focus on the Edit page defined in
+    the Product Edit component. We can navigate to the Edit page from the Add Product menu option, defined in the App
+    component, or from the Edit button on the Product List or Product Detail pages. This sample application includes a
+    product data service, which gets the data for our components. In the next module, we'll see how to implement,
+    create, read, update, and delete in this data service, and use it in the Product Edit component. Once we have our
+    components and other pieces of our application defined, we organize them into Angular modules. For the APM sample
+    application, we divided the application pieces into three Angular modules, AppModule for the basic application and
+    startup pieces, ProductModule for the product feature pieces, and SharedModule for pieces sharable across our
+    feature modules. AppModule is the root application module and contains the root and startup components of the
+    application. Our App and Welcome components go here. We import the BrowserModule, HttpModule, and RouterModule, and
+    pull in the ProductModule. ProductModule is a feature module that contains all of the pieces for the product
+    features. Our product feature pages, pipes, and services go here. Our product feature uses Reactive forms and
+    routing, so we import the associated modules here, and pull in the SharedModule. SharedModule, as its name suggests,
+    is a module that can be shared between all of the feature modules. We only have one feature module, but could easily
+    add more to implement customers or invoices, for example. Our StarComponent goes here so it can be reused by any
+    feature, and we export CommonModule and FormsModule, so they can also be used by any feature. Note that even though
+    our ProductEditComponent uses Reactive forms, and therefore requires the ReactiveFormsModule, we are still using
+    ngModel in the ProductListComponent for the filter by box, so the ProductListComponent needs the FormsModule. We
+    have the FormsModule in the SharedModule so that any other component can use ngModel as well. If we plan to use
+    Reactive forms throughout our application, we could move the ReactiveFormsModule to the SharedModule, and export it,
+    so it can be used by any feature. Note that we do not need to declare any of our simple classes within an Angular
+    module, so our validation classes are not depicted here. In this course module, we'll focus on the
+    ProductEditComponent and ProductEditGuard. In the next course module, we'll focus on the ProductService and how the
+    ProductEditComponent uses that service. Let's take a look at the code.</p>
+
+<h3>Sample Application: Code</h3>
+
+<p>Here is the code for the Acme Product Management application. The majority of this code was built step by step in the
+    Angular 2: Getting Started course. Our focus here is on the product-edit form. If you want more information about
+    any of the other files here, check out the Getting Started course. I've added three files in the product folder,
+    product-edit.component.html for the template, product-edit.component.ts for the component class, and the
+    product-data class. We'll look at the product-data class in the next course module. Let's start with the
+    product-edit.component. When working with Reactive forms, one of the key tasks for the component class is to define
+    the form model, we do that here in the ngOnInit. When the component is initialized we build the root FormGroup. The
+    form element and the HTML binds to this root FormGroup, using the FormGroup directive. The productName has no
+    default value, is required, has a minLength of 3, and a maxLength of 50, but wait, doesn't the productName need to
+    default to the current name of the product? The problem is that we don't yet have that data here in the ngOnInit
+    method. We'll need to go off to the server to get it, so we can't get the default values until the data is retrieved
+    from the server and returned in an HTTP response. So at this point, there is no default value. We'll see how to set
+    the default values from the HTTP response in the next module. The productCode has no default value at this point
+    either, and is required. The starRating also has no default and uses a custom validator. This is the same range
+    validator we created earlier in this course. Because it is a validator that we may want to reuse, I've moved it to
+    its own file in the shared folder. We'll look at that a little later in this module. Lastly is the product
+    description, which also has no default value set at this point, and it has no validation rules. And here is the
+    FormArray for the search tag. Recall that the search tags are dynamically duplicated on the form when the user
+    clicks the Add Tag button. It is initialized to an empty array. The code to work with this FormArray is similar to
+    the code we wrote in the demo form to manage the address block FormArray. Next, let's look at the
+    ProductFeatureModule. In Angular, every component needs to belong to an Angular module, and it makes sense that our
+    new ProductEditComponent would belong to the ProductFeatureModule. We import the ProductEditComponent with an import
+    statement here, then add it to the declarations array here. I've added a few other things here as well. As we know
+    from earlier in this course, to use Reactive forms we need to import the ReactiveFormsModule. We add it to the
+    imports array here. I've also added the InMemoryWebApiModule, we'll talk more about that in the next course module.
+    And here is the route configuration for the product features, including the route to our ProductEditComponent. Let's
+    take a closer look at how to navigate to our ProductEditComponent, and display our edit form.</p>
+
+<h3>Routing to a Form</h3>
+
+<p>Anytime we add a feature to our application, such as a product edit form, we need to define some way for the user to
+    navigate to that feature. In Angular we define our application navigation with routing. Setting up routing requires
+    three steps, configuring the routes, activating the routes based on a user action, and lastly identifying where to
+    place the activated components template. The first step is to configure the routes with a list of route definitions,
+    each definition specifies a route object. The path property defines the URL path segment for the route. When this
+    route is activated, this URL path segment is appended to the URL of our application. In most cases, we also specify
+    a component, which is the component associated with the route. It is this component's template that is displayed
+    when the route is activated. This first route simply maps a specific URL path segment to a specific component. The
+    id in the second and third routes represents a route parameter. The Product Edit page displays a form for editing
+    one product, so it needs to know which product to display. The ProductEditComponent reads the ID from the path
+    segment, and displays the defined product in the form. There may be times that we want to limit access to a route.
+    We want routes only accessible to specific users, such as an administrator, for example, or we want the user to
+    confirm a navigation operation, such as asking whether to save before navigating away from an edit page. For that we
+    use routing guards. We build the guards using the same techniques as building an Angular service, then we attach the
+    desired guards to the routes in the route configuration. In this example, the product detail route has a canActivate
+    guard, which checks specific criteria before allowing navigation to a particular route. The productEdit route has a
+    canDeactivate guard, which checks specific criteria before allowing navigation away from a particular route. Let's
+    see this in the context of the APM application. The route configuration is defined in an Angular module. Our product
+    routes are in our ProductFeatureModule. Here is the route to the ProductEditComponent. We specify productEdit as the
+    path URL fragment. Because we need to know which product to display for editing, we use the colon to identify a
+    placeholder variable for the ID of the product to edit. We'll pass that ID on the URL to the ProductEditComponent
+    when this route is activated. We want to guard against the user leaving the form when there are unsaved changes, so
+    we define a canDeactivate guard. We'll look at the code for this guard later in this module. Next, we need to define
+    the UI elements to activate this route. We want to display the product form for edit from the Product List page, and
+    from the Product Detail page. We also display the product edit form when the Add Product menu option is selected to
+    add a new product. We tie routes to actions using the routerLink directive. We use property binding to bind the
+    routerLink directive to an array. The first element in the array is the route to activate. The second element is the
+    data to pass to that route. Here we pass 0 to the productEdit route, what does this 0 mean? The implementation rules
+    for the APM application define an ID of 0 to mean a request for a new product. It has no special meaning, other than
+    that which we give it. Because of this implementation rule, anytime the productEdit URL path segment includes a 0
+    ID, the code will infer that the user wants to add a new product. Let's take a look. The menu for this application
+    is defined with an inline template in the AppComponent, so it is here that we see the Add Product menu option. It
+    uses the routerLink directive to activate the route. This syntax is a shortcut for what we saw in the slide. Since
+    we are always passing a 0 here, we just add it as part of the URL segment, instead of passing it separately in a
+    second element of the array. What about the Edit button? In the product-list.component the Edit button is down here.
+    It uses the routerLink directive to activate the route. Here we pass the ID of the product so that the productEdit
+    component knows which product to edit. The code for the Product Detail button is similar. Now we've configured the
+    routes and tied the routerLink directive to appropriate UI elements so the user can activate the productEdit route.
+    When a route is activated, the associated components view is displayed, but displayed where? How do we specify where
+    we want the routed component to display its view? We use the router-outlet directive. The routed component's view
+    then appears in this location. Let's take a look. Here in our AppComponent we use the router-outlet directive to
+    specify where the routed template should appear, so each page is displayed here under the menu, including our
+    Product Edit page. Let's view it in the browser. When we click Add Product from the menu, the URL changes to
+    productEdit with 0 as the product ID. The edit form is then displayed and set up for entry of a new product. When we
+    click to edit a product, the URL changes to include productEdit and the ID of the selected product. The edit form
+    now displays the data for that selected product. For the product edit form to display the data for the correct
+    product, it needs to read that product ID parameter from the route URL. Let's look at how to do that next.</p>
+
+<h3>Reading a Route Parameter</h3>
+
+<p>Here again is the route configuration for the productEdit route. To display the appropriate product in the product
+    edit form, the ProductEditComponent needs to read the passed in parameter from the route URL. To get the parameter
+    from the URL, we use the ActivatedRoute service provided by the router. We want an instance of this service, so we
+    define it as a dependency in our constructor. We use the instance of the ActivatedRoute to get the desired
+    parameter. There are two ways to get the parameter from the ActivatedRoute, using a snapshot or using an observable.
+    Use the snapshot if you only need to get the initial value of the parameter, the code is then a one liner as shown
+    here. If you expect the parameter to change without leaving the page, use an observable instead. The observable
+    provides notification when the URL parameter changes. For example, the user could click Add Product while on the
+    Product Edit form, so the URL could change to 0 without leaving the page. Because of this we want to use the
+    observable approach in the productEdit component. Let's take a look. In the product-edit.component, we need to read
+    the product ID from the route, so we know which product to edit, or if the user is requesting to create a new
+    product. For this task the code needs the ActivatedRoute from the router. We import it here, and inject its service
+    using the constructor here. We set up the route parameter observable in the OnInit lifecycle hook, here is where the
+    code subscribes to the route parameters. Every time the parameter changes this code get notified, the ID is pulled
+    from the provided parameter array, and the code calls getProduct to get the product data for this ID. We'll look at
+    getting the data in the next module. To ensure the subscription is appropriately cleaned up, this code uses the
+    ngOnDestroy to unsubscribe, but to unsubscribe from an observable we need to have the subscription, so we define a
+    private property sub that retains the reference to this subscription so we can unsubscribe from it. Let's see this
+    in the browser. Let's edit the hammer. Notice the URL change, then the Product Edit page appears. If I click on Add
+    Product, the Product Edit page input elements are initialized and ready for entry of a new product. This works
+    because we are watching for changes to the URL parameters. Now watch what happens if I change something and try to
+    leave the page, I get a message asking if I want to navigate away and lose my changes. This could be a very helpful
+    feature for a user that just created a new product and then distractedly navigated away. Let's see how we set up
+    this route guard.</p>
+
+<h3>Setting a canDeactivate Guard</h3>
+
+<p>Building a guard follows the common pattern used throughout Angular, create a class, add a decorator, import what we
+    need. Here we define a ProductEditGuard class, since we are implementing this guard as a service we use the
+    Injectable decorator, and we import what we need. This class implements canDeactivate. Notice this syntax, it
+    includes a generic parameter that specifies the associated component. This code implements the canDeactivate method,
+    passing in the specified component. For simple cases, this method can return a Boolean value, true to deactivate the
+    route, and false to cancel the route deactivation. For more complex cases, this could return an observable or a
+    promise. Let's take a look. The guards used in this sample application are very specific to products, so they are in
+    the products folder, in the product-guard.service.ts file. We have two guards in here. The ProductDetailGuard
+    ensures that the user cannot navigate to the ProductDetailRoute unless the URL contains a valid product ID. The
+    ProductEditGuard checks the form's dirty state. If the form is dirty, it asks the user to confirm the navigation.
+    The canDeactivate method passes in the component. Code in the method can then access the component properties. In
+    this example, the code uses the productForm property, which is the reference to the form model. It then checks the
+    dirty property to determine if the user has made any changes to the form. If so, the code notifies the user, and
+    requests a confirmation before navigating away from the Product Edit page, or navigating to a different product.
+    Before we can use a guard, we need to register the service provider in an Angular module. We import the guard using
+    an import statement here, then register the provider for the guard here. The last step is to tie the guard to the
+    appropriate route. The guards are specified as part of the route configuration. Here we specify canDeactivate and
+    provide an array of guards, we only have one so we specify that here. Let's see this in the browser. We'll navigate
+    to the Edit page, make a change, and select to Add a Product. We see the message provided by the canDeactivate route
+    guard. Note that the canDeactivate only works when navigating within the Angular application, it does not check the
+    guard if the user navigates to an entirely different site, or closes the browser. Looking again at this form, it
+    uses a range validator similar to the one we built in the demo form earlier in this course. Let's see how that
+    validator was changed in the context of the APM application.</p>
+
+<h3>Refactoring to a Custom Validation Class</h3>
+
+<p>Earlier in this course, we defined a range validator in our demo form component using code similar to this. This
+    range validator required parameters for the minimum and maximum values for the range. This meant that we had to wrap
+    the validator function in a factory function, as shown here. In the demo form application, we put this function
+    within the form's component code file, making the validator more difficult to discover and reuse by other forms in
+    the application. We could instead define this validator in its own file. Let's take a look. Since the range
+    validator can be shared with any form that needs it, including a template-driven form, I added it to the shared
+    folder. Under the shared folder is number.validator.ts. This file is set up to hold any number validator, assuming
+    over time we may have more than just this range validator. Within this file we import what we need, then we define a
+    class that we export. This makes it easy to reuse any number validators, defined here, in any of our components. We
+    mark the method as static so that any code can use it without creating an instance of this class. The remainder of
+    this code is as we saw it in the demo form component we built earlier in this course. To use this validator in a
+    form component such as the product-edit.component, we import the validator using an import statement, then use it
+    like any other validator when building the form model here. Let's try it out in the browser, we'll again edit the
+    hammer. Here on the form we enter 0 and see a validation message, we enter 5 and the validation message disappears,
+    enter 6 and the validation message reappears. Bottom line, it's easy to take a local validator function or factory
+    function that returns a validator function and move it into a separate class. The validator is then easier to
+    discover because it is in the shared folder, and easier to reuse because we can simply import it. Let's move on to
+    the fun bits, retrieving and saving data, but first a quick checklist.</p>
+
+<h3>Checklists and Summary</h3>
+
+<p>When building a form in the context of a more full-featured application, we need to add a route configuration to
+    route to the form, add user interface elements to activate the route, such as an Edit button, read the route
+    parameter passed to the form to edit the appropriate item, optionally set up a canDeactivate guard to remind the
+    user to save before navigating away, and optionally refactor any locally-defined validator functions to a custom
+    validator class for reuse within the application. In this module, we saw how a Reactive form is often just a piece
+    of the puzzle of a larger application. We examined how to route to the form, and how to read the route parameters in
+    the component class to identify the appropriate item to edit. We saw how to set up a canDeactivate guard to provide
+    a notification message if the user navigates away from the form with unsaved changes. And we discovered how to
+    refactor a local validator function into a custom validator class for reusability. Next up, let's see how to get
+    data into our form and save the user's changes.</p>
+

@@ -1,0 +1,192 @@
+<h2>Dynamically Duplicate Input Elements</h2>
+
+<h3>Introduction</h3>
+
+<p>A user often wants to order multiple items on an order form, or enter multiple email, or postal addresses on a
+    profile form, or specify multiple expenses on an expense form. Welcome back to Angular 2: Reactive Forms, from
+    Pluralsight. My name is Deborah Kurata, and in this module we learn how to dynamically duplicate input elements on a
+    form. Sometimes a single entry is not enough, the user may need to enter multiple values, such as multiple email
+    addresses, or in this example, multiple address blocks. Hmm, how do we duplicate these input elements using a
+    Reactive forms approach? In this module, we outline the steps involved with dynamically duplicating input elements.
+    Then we walk through how to perform each step. Along the way we learn about FormArrays and how to use them. The
+    result is a form that duplicates form elements for multiple user entries. Let's get started.</p>
+
+<h3>Steps</h3>
+
+<p>Let's outline the steps here, and then work through each step. To dynamically duplicate input elements, we first
+    define the input element, or set of input elements that we want to duplicate. If we allow multiple email addresses,
+    then duplicating one input element may be enough, but if we provide for multiple address blocks, there will be a set
+    of input elements to duplicate, one for each part of the address. To keep it simple, we'll want to duplicate just
+    one thing, if there is one input element, we'll duplicate its FormControl. If there are multiple input elements,
+    we'll put their FormControls in a nested FormGroup, so we can use that group as the one thing to duplicate. Then we
+    refactor the FormBuilder code to create the FormControl, or a nested FormGroup instance within a method of the
+    component class. Next, we create a FormArray to retain those multiple copies. We have not yet talked about
+    FormArrays, we'll cover them in detail in this module. In the HTML, we loop through the FormArray and display the
+    appropriate input elements for each FormControl or FormGroup in the FormArray. All of these steps are preparation
+    for this final step, to actually duplicate the input elements. That's our process, let's jump right in to the first
+    step.</p>
+
+<h3>Define the Input Element(s) to Duplicate</h3>
+
+<p>The first step on our path to dynamically duplicating form elements is to define which element or elements we wish to
+    duplicate. On a form such as this, the Marketing Department may want to collect multiple email addresses, if so we
+    could duplicate this single email input element, but in our case, the Marketing Department requests multiple postal
+    addresses so the user could requests catalogs at their home, work, and vacation home, because who wouldn't want
+    that? To accomplish this requirement we'll duplicate this entire address block. Note that our user interface uses
+    the US address block format, feel free to change it as appropriate for your use. Let's set up our demo accordingly.
+    Since the last time we saw the demo application, I've uncommented the address block input elements we commented out
+    earlier in this course. I've removed the template-driven form syntax, such as the ngModel directives, and I replaced
+    the name attributes with the formControlName directives. I also changed the ngIf here to use the customerForm's get
+    method to find the value of the send catalog checkbox. Be sure to specify value here. If the value is true, the
+    address block is displayed. In the component class, we add FormControls for each address block input element to our
+    form model using the FormBuilder. We'll start with the address type radio button, we'll call it addressType, and set
+    its default value to home. Then we'll add the street address 1. Feel free to add validation if desired, we won't
+    here just to keep things simple for this demo. Next is street address 2, then city, state, and zip code. Be sure the
+    names here exactly match the names used in the formControlName directives in the HTML, they are case sensitive. Now
+    let's view it in the browser. By default Send me your catalog is checked so the address block appears. If you don't
+    see the address block, check the developer tools for any syntax errors. Be sure that you've removed every ngModel
+    directive, changed the name to formControlName, and set the ngIf syntax appropriately. If we uncheck the checkbox,
+    the address block disappears, so it's working. Since we need to duplicate this entire address block, let's define a
+    FormGroup to encapsulate these address block FormControls, we'll do that next.</p>
+
+<h3>Define a FormGroup</h3>
+
+<p>Our requirement for the demo form is to allow the user to enter multiple postal addresses. To meet this requirement
+    we defined the address block as the set of input elements we want to duplicate, and we've added the FormControls for
+    these input elements to our form model using FormBuilder. To make things easier, we'll put the set of FormControls
+    we wish to duplicate into a nested FormGroup. That is our next step. As we've seen before in this course, a
+    FormGroup is simply a set of form building blocks that we can work with as a group. A FormGroup can contain any
+    number of FormControls and nested FormGroups. There are several benefits of defining a FormGroup. We can match the
+    value of the form model to a data model that contains hierarchal data. We can easily check the touched, dirty, and
+    validation state of a group of elements. We can watch for changes to a group of elements and react as needed. We can
+    perform cross-field validation, comparing the values of the elements in the group. And, we can dynamically duplicate
+    the elements in the group. Now let's define a nested FormGroup for the address block, so we can duplicate its
+    elements. We'll start in the component class. Let's modify the FormBuilder to encapsulate the address block
+    FormControls into a FormGroup. We'll call the FormGroup addresses and set its value by calling this.fb.group, we
+    then copy in the address block FormControls, and we're done. The address block is now in its own nested FormGroup.
+    That takes care of the form model, next we update the HTML to put a div element around the associated input
+    elements. Let's collapse the address block input elements to make this a bit easier. We open this new div below the
+    div with the ngIf, and close it after the zip code, then reformat. We add the formGroupName directive to the div and
+    set it to the name of the nested FormGroup. We should be able to run as before, and all is well. If we scroll down,
+    we now see the nested addresses FormGroup in the Value property here. We are ready to move on to the next step, and
+    refactor so we can make multiple instances of our FormGroup.</p>
+
+<h3>Refactor</h3>
+
+<p>We now have a FormGroup that encapsulates the input elements we want to duplicate. Next, we need to refactor the
+    FormBuilder code to create the instance of the FormGroup within a method of the component class. To refactor, we
+    define a function and return the address block's FormGroup from this function. Every time we call this function
+    we'll get another instance of the address block's FormGroup, then in the FormBuilder code we simply call this
+    function, this makes our initial instance of the address block. Let's give this a try. In the component class, we
+    add a method. We can name it anything, such as buildAddress, its return type is a FormGroup. In this method, we
+    return the FormGroup for our address block, we can copy it from here, and paste it here. We call this method anytime
+    we want to create an instance of the FormGroup, then we replace the FormBuilder code with a call to the
+    buildAddresses method. By calling buildAddresses here, we create the first instance of our address block FormGroup,
+    and add it to our form model. When we view the application in the browser, it should work as before, and it does. We
+    are now ready to put our FormGroup into a FormArray.</p>
+
+<h3>Create a FormArray</h3>
+
+<p>In the last step, we refactored our code to create an instance of our address block FormGroup in a method. We can
+    call that method to create multiple instances of that FormGroup, but we need somewhere to hold these multiple
+    instances. That's the purpose of a FormArray. A FormArray is simply a group of FormControls or FormGroups that are
+    conceptualized as an array. Unlike a FormGroup, they are accessed by index instead of by name. A FormArray can
+    contain any number of FormControls or FormGroups, but they are often used for like items, such as multiple instances
+    of the same FormControl or FormGroup. Because each item in a FormArray does not need a unique name, they are great
+    for sets that are dynamic, or of unknown length. It's a perfect choice for storing the instances of our FormGroup.
+    Just like the other Reactive forms building blocks, there are two basic ways to create a FormArray. We can use the
+    new keyword and create a new instance of a FormArray, passing in an array of FormControls and FormGroups. Or we can
+    use the FormBuilder's array method and pass in an array of FormControls and FormGroups. Both ways work. Since we are
+    already using the FormBuilder to define our FormControls and FormGroups, we'll use FormBuilders for our FormArray as
+    well. Let's try it out. We start by adding FormArray to the import statement, so we can use FormArray as a type.
+    Let's look again at the definition of our form model. Notice here that we are creating one instance of our address
+    FormGroup. If we are going to allow the user to enter multiple addresses, we need to define a FormArray here
+    instead, to hold them all. We use the FormBuilder array method, just as we saw in the slide. And for our particular
+    demo form, we want the array to initially contain one instance of our address block FormGroup, so we call the
+    buildAddresses method here to create the first instance of our FormGroup, and assign it as the first element of the
+    array. So now our first address block FormGroup is an element 0 of the FormArray. To make it easier to access this
+    FormArray, let's create a property for it in the component code. To ensure none of the code accidentally modifies
+    this FormArray, let's define it as a getter instead of a normal property. I'll paste the code, and then we can walk
+    through it. This is the standard syntax for a property getter, since it is returning the addresses we call it
+    addresses as well. We define the property as a function, this getter returns a FormArray. We use the
+    customerForm.get method to get the reference to the FormArray and return it. Notice that we use a cast operator here
+    to cast it to the desired type, otherwise the type is an AbstractControl. Before we can try this out, we need to
+    modify the HTML, we need to let it know that our FormGroup is now in a FormArray. We do this by adding another div
+    element around our FormGroup, then we'll reformat for clarity. In this div element we use the formArrayName
+    directive and assign it to our FormArray's name, which is addresses. Looking back at our form model, we no longer
+    have a FormGroup named addresses, rather our FormGroup is in position 0 of the FormArray. So in the HTML, we change
+    the FormGroup name to 0, odd looking I know, this will look better in a few moments, but we want to get the code her
+    runnable so we can try it out. When we check it out in the browser, it still runs. And notice the Value shown below
+    the form, the addresses are now an array as indicated by the square brackets. The array has one array element, our
+    FormGroup. Next up, let's loop through that FormArray to create copies of the input elements in the HTML.</p>
+
+<h3>Loop Through the FormArray</h3>
+
+<p>We now have our FormArray set up and are definitely getting closer to duplicating our input elements. Our next step
+    is to loop through the FormArray in our HTML, that way if we have multiple instances of our FormGroup in the
+    FormArray, we'll display each of them in the HTML. As you may have guessed, looping in the HTML requires use of the
+    ngFor directive. Here, we look through each address block FormGroup within our addresses FormArray. The extra code
+    here is to gain access to the indexer, we use that indexer as the name of the FormGroup within the FormArray. Let's
+    try this out. We want to repeat our entire address block for each FormGroup instance in the FormArray, so we add the
+    ngFor to the FormArray div element, using the syntax shown on the slide. This will repeat all of the form elements
+    here. Now we can change our hardcoded 0 to the variable i, and since this is bound to a variable we need to surround
+    the directive with square brackets. Each FormGroup in the HTML now has a unique name that is the index of the
+    FormGroup in the FormArray. There's one more thing to consider here. Now that we will have multiple copies of these
+    input elements, we need to ensure that each label is associated with the correct input element. To do that, we can
+    use the i variable in the id attribute of the input element. I'll change it for the first street address here. Then
+    we need to change the labels for attribute, however we can't bind to the for attribute directly because it has no
+    associated dom property. Instead we use attribute binding, like this, and we change the id to match the id here. By
+    using the index number in the id and in the label's for attribute, when we have multiple address blocks a screen
+    reader will associate the correct label with the correct copy of the input box. When we view the results in the
+    browser, the form and the Value look the same. That's because even though we are looping we still only have one
+    FormGroup instance in the FormArray. Next, let's add what we need to actually duplicate our input elements.</p>
+
+<h3>Duplicate the Input Elements</h3>
+
+<p>We're almost there. We now have all of the support pieces in place, and we are ready to create more instances of our
+    FormGroup, and duplicate its associated input elements. This step requires that we add a method that creates another
+    instance of the FormGroup or FormControl, and pushes it onto the FormArray. And we need some way for the user to
+    request a copy of the input elements, so we add a button in the HTML. We use event binding to bind the new element
+    to our new method. When the user clicks the button, the method is called, adding another FormGroup instance to the
+    FormArray. Let's give this a try. We'll start by creating the method we need. We call it addAddress, which returns
+    void. Recall that we defined a getter that returned the reference to our FormArray called addresses. In this method
+    we simply push a new instance of the FormGroup onto our addresses FormArray. We call this method anytime we want to
+    create another instance of the FormGroup and add it to our FormArray. Next, we add a button to the HTML. We'll put
+    it inside the ngIf so it does not appear unless the user checked Send me your catalog, but outside of the FormArray
+    so it is not duplicated. This button binds the click event to our new addAddress method. I've added a binding to the
+    disabled property as well, so that the user cannot add another address if any prior address is invalid, but we don't
+    currently have any validation in the address FormControls, feel free to add some as you wish. Let's try this out in
+    the browser. As always we see one address block, we can fill it out, and click Add Another Address, and we
+    dynamically duplicate our address block. We can fill that one in and click the button again. We can continue to add
+    everyone on our shopping list. Notice that if we click in the label of Street Address 1, focus is set to the correct
+    copy of the input box. Our bound input element IDs are working as expected. Clicking on the label does not work for
+    the other controls. Notice it put the focus up here. This is because we have not yet changed them to use the index
+    as part of the ID. And look at our Value property, our FormArray has an entry for each address FormGroup, we can
+    access those elements and their properties as needed. To see how that's done, let's add another binding at the
+    bottom of the form. This displays the street address of the first address FormGroup. We use our addresses property
+    getter and call its get method, passing in the index of the desired FormGroup along with the name of the FormControl
+    within that FormGroup. We add the safe navigation operator in case that element is not found. Going back to the
+    browser, if we type in to the Street 1 input element, we see its value here at the bottom. We have successfully
+    duplicated our address FormGroup as many times as the user requests, yay. Let's finish up this module with a
+    checklist.</p>
+
+<h3>Checklists and Summary</h3>
+
+<p>For this module, what better checklist than our steps. We first define the input element or set of input elements
+    that we want to duplicate. In our example, it was an entire address block. We then define a FormGroup containing the
+    FormControls that we want to duplicate, in our case our address FormControls. Then we refactor the FormBuilder code
+    to create the instance of the FormControl or nested FormGroup within a method. Next, we create a FormArray to retain
+    those multiple instances. In the HTML we loop through the FormArray, and display copies of the input elements for
+    each FormControl or FormGroup in the FormArray. Lastly, we provide a way for the user to specify when to make a copy
+    of the input elements. In our example, we added a button the user could click to add another address block. When the
+    user clicks the button, a method in the component class creates another instance of the FormControl or nested
+    FormGroup, and adds it to the FormArray. The ngFor and the HTML makes a copy of the address block for each FormArray
+    entry, effectively dynamically duplicating the input elements. In this module, we provided a way for the user to
+    dynamically duplicate input elements. We first outlined the set of steps required to achieve this task, and then
+    walked through each step. Along the way we learned about FormArrays and how to leverage them to manage multiple
+    instances of a FormGroup or FormControl. Our demo form now demonstrates building a form the Reactive way, and
+    includes features such as displaying validation messages from the component class, cross-field validation, watching
+    the notifications element and reacting by changing the validation rules, performing custom validation for the rating
+    range, and dynamically duplicating input elements. Next up, let's put away our demo form and look at a Reactive form
+    within a more full-featured application.</p>
+

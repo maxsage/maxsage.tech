@@ -212,3 +212,102 @@ export class Angular2FirstLook07RoutingComponent {
 export class Angular2FirstLook08AngularModulesComponent {
     public pageTitle: string = "Angular 2 First Look - Angular Modules";
 }
+
+
+
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-00-course-contents.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms00CourseContentsComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Course Contents";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-01-course-overview.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms01CourseOverviewComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Course Overview";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-02-introduction.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms02IntroductionComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Introduction";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-03-template-driven-vs-reactive-forms.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Template Driven VS Reactive Forms";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-04-building-a-reactive-form.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms04BuildingAReactiveFormComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Building a Reactive Form";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-05-validation.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms05ValidationComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Validation";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-05-reacting-to-changes.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms05ReactingToChangesComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Reacting to Changes";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-06-reacting-to-changes.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms06ReactingToChangesComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Reacting to Changes";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-07-dynamically-duplicate-input-elements.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Dynamically Duplicate Input Elements";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-08-reactive-form-in-context.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms08ReactiveFormInContextComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Reactive Form in Context";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-09-create-read-update-and-delete-crud-using-http.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Create, Read, Update, and Delete (CRUD) Using Http";
+}
+
+@Component({
+    templateUrl: 'app/angular2/angular2-reactive-forms-10-final-words.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class Angular2ReactiveForms10FinalWordsComponent {
+    public pageTitle: string = "Angular 2 Reactive Forms - Final Words";
+}
