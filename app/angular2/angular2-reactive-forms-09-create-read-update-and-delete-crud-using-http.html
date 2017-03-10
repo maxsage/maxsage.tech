@@ -1,0 +1,379 @@
+<h2>Create, Read, Update, and Delete (CRUD) Using HTTP</h2>
+
+<h3>Introduction</h3>
+
+<p>The key purpose of a form, in many scenarios, is to collect or edit data. Welcome back to Angular 2: Reactive Forms,
+    from Pluralsight. My name is Deborah Kurata, and in this module, we deal with CRUD, or to say that another way,
+    Create, Read, Update, and Delete operations for retrieving and saving data to a back-end server with HTTP. Many
+    Angular applications obtain data using HTTP. The application issues an HTTP get request to a web service on a web
+    server. At some future point in time, that web service processes the request, retrieves the data, often from a
+    database, and returns that data to the application in an HTTP response. The application then processes that data.
+    Note that I said, at some future point in time. HTTP requests are asynchronous. We send a request, then continue
+    about our processing, handling other user interactions as needed. At some future point in time, the request is
+    processed, and we receive the response. The user then enters or updates information, and selects to save. The
+    application issues a post or a put request to a web service, passing along the entered data. At some future point in
+    time, that web service processes the request, stores the data, and returns an HTTP response. The application then
+    processes that response, which may contain the updated data. Notice that I again said, at some future point in time.
+    Working with HTTP requests and responses requires working asynchronously. In this module, we examine the Data Access
+    Service for our data operations, including creating new data, retrieving the data for displaying the form,
+    processing user updates to existing data, and deleting existing data. Let's get started.</p>
+
+<h3>Data Access Service</h3>
+
+<p>Here again is the architecture of our sample APM application. We defined a component for each view in our
+    application, and a Product Data Service to encapsulate all of the HTTP communication for our products. Why? Why
+    create a separate service? Why not just put the data access logic in the component that needs it? One reason to
+    build a Data Access Service is separation of concerns. Let each component focus only on the logic required to
+    display its template and handle its interactions. And let the Data Access Service focus only on the communication
+    with the HTTP server. By separating concerns, each piece of the application can focus on what it does best. Putting
+    the data access logic in a Data Access Service also provide reusability. The Product List component needs to
+    retrieve product data, the Product Detail component needs to retrieve product data, and the Product Edit component
+    needs to retrieve product data. Instead of repeating that code in each component, the components can share the
+    functionality provided by the Data Access Service. Another benefit of using a Data Access Service, is that is can
+    share the data itself with all of the components. The Data Access component could retrieve the data one time, and
+    share that data with all of the components that need it. The next question then is how? How do we send an HTTP
+    request from a Data Access Service? Here is a Data Access Service called Product Data Service. The back-end web
+    server can be hosting a Node server, ASP.NET Web API, PHP, Rails, or whatever, Angular doesn't care, the Product
+    Data Service communicates with our back-end web server using Angular's built-in Http Service. The Product Data
+    Service issues a request, such as a get request, to the Angular Http Service, which in turn issues the request to
+    the back-end web server. At some future point in time, the back-end web server processes the request, and returns
+    the response. Angular's Http Service forwards that response on to the Product Data Service. To build a Data Access
+    Service, we first need to register the provider for the built-in Angular Http Service. Next we create a class for
+    the Data Access Service, and register the service provider. Then we inject the Angular Http Service using the class
+    constructor, so we can use it in the Data Access Service. We import observables and the observable operators that we
+    need. Observables help us manage asynchronous data, such as data coming from a back-end server. We need them here
+    because working with requests and responses means we're working asynchronously, so Angular's Http Service returns
+    observables. Lastly, we write the code to issue each HTTP request that we need, get, post, put, delete, and so on.
+    Let's dive into a demo and look at the code required for each of these steps.</p>
+
+<h3>Data Access Service: Demo</h3>
+
+<p>In this demo, we'll look at the basic code required to build a Data Access Service. Our first step is to register the
+    built-in Angular Http Service, the question is where? Where should we register this service? We can register a
+    service within a specific component or within an Angular module. Since we want to use the Http Service from our own
+    Data Access Service, not a specific component, we'll register it within an Angular module. When registering a
+    service with an Angular module, the service is registered with the root injector, so it really doesn't matter which
+    Angular module we inject it in. My rule of thumb is to put it where I'd think to find it later. If I had a core
+    module, I'd add it there with my other services. But since there is no core module defined in this particular
+    application, the next best place is probably the app.module. The HttpModule is imported here with an import
+    statement, then added to the imports array here. The HttpModule registers the Http Service, so it is then ready for
+    us to inject and use. The next step is to create the Data Access Service class. Because the service is specifically
+    for product data, this service resides in the products folder, its named product.service.ts. In Angular a service is
+    defined in a class. In this example, we call it ProductService, we optionally decorate a service using the
+    Injectable decorator. As with every Angular service, we need to register it. To keep all of the product code
+    together, we'll register it in the product.module. We import the service with the import statement here, then add it
+    to the providers array here. Once the Data Access Service class is in place, we inject the built-in Angular Http
+    Service so we can use it to communicate with the back-end server. We first import that service here along with
+    several other classes we'll need later, then we inject the service in the constructor here. Now that the product
+    service has itself an injected service, namely this Http Service, the Injectable decorator is now required.
+    Angular's Http Service returns observables, so our next step is to import observable and the observable operators.
+    Here we import Observable from the Reactive extensions, rxjs. We also import the operators we will use, do for
+    debugging, catch and throw for error handling, and map to map the HTTP response to products. We'll see how to use
+    these operators in the upcoming demos. The last step is to write the code to issue each HTTP request. We'll examine
+    the code for each request shortly. But before we can issue an HTTP request to a back-end server, we need to have a
+    back-end server, or at least fake one.</p>
+
+<h3>Faking a Backend Server</h3>
+
+<p>Before we can issue HTTP requests to a back-end server, we need to set up that back-end server. We select a
+    technology such as Node, ASP.NET, PHP, Rails, or whatever, we set up a set of URLs for calling this server, those
+    URLS define the API, or Application Programming Interface, and we build the server-side code to process requests
+    sent to those URLs, and return appropriate responses. Our Data Access component then uses the defined API to issue
+    HTTP requests, and processes the returned responses. But, what if we don't have a back-end server in place? Luckily,
+    we can fake one. There are numerous ways to fake a back-end server. Our Data Access Service could simply return
+    hardcoded data, this is a technique often used in demo applications; however, this technique does not use the
+    Angular Http Service, and does not demonstrate how to issue requests to a back-end server, it won't do for our
+    purposes. Another option is to use a JSON file. By setting the URL for the HTTP call to the location of a JSON file,
+    we can use the Http Service to retrieve the data from the JSON file as if it were a back-end server. This works
+    great if we only want to get data, but we also want to put and post data, so this technique is not sufficient.
+    Angular provides a MockBackend class that we could use to write our own fake back-end server, but that sounds like a
+    chore. An easier option is to use the in-memory Web API simulator called Angular in-memory-web-api. This simulator
+    is not part of Angular core, but is a separate service developed and provided as part of the Angular documentation
+    quick start files. Let's go with this last option. There are a few steps to set it up, let's take a look. To set up
+    the Angular in-memory-web-api, we need to first ensure it is included in our package.json dependencies. We have it
+    here, so it's installed when you run npm install, and we need to have it in our systemjs.config file, it is here.
+    This tells the module loader where to find it. Then we need to add the in-memory-web-api to the imports array of one
+    of our Angular modules. In this example, it is defined in the product.module because we are only using it for our
+    product data. If we had multiple feature modules using it, we may want to move it from here to the core module or
+    the app module. We define an import statement for it and its associated product data class here. We add it to the
+    imports array here. In the imports array we call the forRoot method and pass the name of the ProductData class. The
+    ProductData class provides the data managed by the in-memory-web-api. Let's take a look. This is the ProductData
+    class, it implements InMemoryDbService, which specifies one required method, createDb. In this method we provide the
+    data managed by the service. In our example, we create an array of products. One thing to note here, if you worked
+    through the Acme Product Management application in the Angular 2: Getting Started course, you may notice that this
+    data uses id instead of productId. Using id is required for the in-memory-web-api service to access the data by id,
+    and assign new ids. The in-memory-web-api service then processes each HTTP request against this set of data. It
+    retains all changes to this data in memory. If you stop the application and restart, the data is reinitialized to
+    this array of products. When your real back-end server is set up, you can remove the InMemoryWebApiModule and the
+    associated data class from the Angular module. Then the code in the Product Data Service will issue the HTTP
+    requests to the actual server instead. With that, let's look at how to use the Http Service in our Product Data
+    Service to retrieve data.</p>
+
+<h3>Populating the Form with Data</h3>
+
+<p>When working with forms, why do we need to get data from a back-end server? If it's a login form, or registration
+    form, or other data collection type of form, you may not need to get data, just collect the user's entries and
+    process them, but if it's an edit form, we want the current data so we can display it for edit. What if we already
+    retrieved the data for a list or a selection style page? We may still want to re-get the data for the edit form from
+    the back-end server to ensure we have the most current data before presenting it to the user for update. Whether any
+    particular form in your application requires getting data from a back-end server depends largely on the purpose of
+    the form, and volatility of its data. For the purposes of our example, the product edit form does indeed require
+    current data, so we'll add code to populate the form from data obtained from the back-end server. Here is the code
+    required to issue an HTTP get request using Angular's Http Service. The key bit of this code is the getProduct
+    method. We want to retrieve a single product to edit, so we pass the ID of the desired product into this method.
+    Here we use the backtick to define a template literal. This takes the base URL and appends a slash, followed by the
+    defined id. The resulting URL looks something like this. The code then calls the get method of the Angular Http
+    Service, and passes in the URL. Recall that the Http Service was injected into this service in the constructor here.
+    At some future point in time when the response is returned, we map the data back into a product, and any subscribers
+    are notified. How do we call this method and subscribe to this observable? In the forms component, in our case
+    product-edit, we inject our Product Data Service using the constructor. Here we define a local getProduct method
+    that calls the Product Data Service get method, passing in the id of the desired product to retrieve. We then call
+    subscribe to subscribe to the observable returned by the getProduct method. By subscribing to the observable, this
+    code is notified when the data is returned. When the observable does return the product, this code calls a method to
+    process that product. If the observable returns an error, the error is cast to a type of any, and assigned to an
+    errorMessage string. Let's examine this code in context.</p>
+
+<h3>Populating the Form with Data: Demo</h3>
+
+<p>In this demo, we look at how to retrieve data using HTTP, and use that data to populate the form. We start in the
+    Product Data Service with the getProduct method to issue a get request and process the response. The get method here
+    does a bit more work than the one shown in the slides. Recall from earlier in this course that our sample
+    application's business rules use a product ID of 0 to indicate that the user wishes to add a new product, so if the
+    ID is 0 the code assumes there is no product to retrieve, and instead returns a new initialized product. The
+    initializedProduct method looks like this. Since the getProduct method returns an observable of IProduct, not a
+    product directly, we create a new Observable, call next to return initializedProduct, and call complete to mark the
+    subscription as complete. Observable.of provides a shortcut syntax for this set of code that you can use instead. As
+    with many of these types of coding decisions, some may object to having a getProduct method return an
+    initializedProduct. If so, you can delete this extra code here. The calling code would then decide whether to call
+    getProduct to get an existing code, or call the initializeProduct method directly to get a newly initialized
+    product. Note that often in real applications the back-end server is set up to return an existing item, or a new
+    initialized item. That way the business rules for initialized item are defined at the server. If that is the case,
+    this additional block of code is not needed. If the product's ID is not 0, the code builds up the appropriate URL
+    using the passed in id. It then calls Angular's Http Service get method, as we saw in the slides. The code uses the
+    map operator to map the responses to a product. We could inline that function here, but instead this code passes in
+    a reusable function. The extractData function calls the JSON method, and returns an object literal containing the
+    JSON data, or an empty object if there is no data. We could add other code here to modify or enhance this data
+    before returning it. For example, we could alphabetize the search tags, or calculate the number of days since the
+    product was released. This example also demonstrates the do operator, which specifies an action to take for each
+    emitted observable. Here we simply log the data. This operator is great for debugging. We'll use do in each of our
+    HTTP requests to see when the request occurs. Since we are using an in-memory Web API, we won't see our HTTP traffic
+    in the Network tab, so logging to the console is a useful substitute. Note that this code is not executed until a
+    caller subscribes. So let's look at that next. The ProductEditComponent needs the product data to display on the
+    form for edit. It wants to use the Product Data Service to get the data, so it imports it here, and injects it using
+    the constructor here. Next we need to decide the appropriate time to get the product data. Recall that the id of the
+    product to edit is provided on the route as a parameter; we must read that value from the route before we can get
+    the appropriate product. The code to read the route parameter is here in the ngOnInit, as discussed previously in
+    this course. After we pull the id from the route, we call the local getProduct method, passing in that id. It is in
+    this getProduct method that we use the Product Data Service. Here we call the Product Data Service getProduct
+    method, passing in the id. We subscribe to the returned observable providing two callback functions. After the
+    Product Data Service receives the response and maps it to a product, the subscribers are notified. If the product is
+    retrieved successfully, the returned product is passed in, and this callback method is executed. This method calls
+    onProductRetrieved to process it, otherwise this method sets the error message properly to display a message to the
+    user. The onProductRetrieved method performs several operations. First, if the form was already in use, it resets
+    it. This ensures that all of the state flags such as dirty, touched, and so on, are cleared before displaying the
+    retrieved product. Then we set the product property to the retrieved product. This property holds our data model.
+    Recall that we are not using data binding on the product, so this does not update the form with data. Next we set
+    the appropriate title on the page based on the add or edit operation. This last bit of code here uses the product
+    properties to set the value for each of the FormControls, the product data then appears on the form. We looked at
+    setValue and patchValue earlier in this course. We use patchValue here and not setValue, so we can set the values
+    for a subset of the FormControls on the form. This is required because our form model includes a FormArray, and we
+    can't set the value of the FormArray with setValue. We then use setControl to reset the FormArray to the set of
+    product tags. This ensures that the correct number of FormControls are created for this product's search tags. Let's
+    check it out in the browser. Select Product List, select to edit the hammer, and the existing data is displayed for
+    edit, including each of the three search tags. Let's edit something so we get a validation error. Now let's click
+    the Add Product menu option. First we see our route guard warning us that we will lose our changes, click OK, and
+    see the form reset, clearing our validation error. Notice also that our tags were reset to display only one
+    initialized search tag. Use the techniques shown here anytime you need to retrieve data for display in a form, so
+    the user can edit that data. Speaking of editing data, let's look at how to save those edits.</p>
+
+<h3>Saving Edits</h3>
+
+<p>An edit form is not really an edit form if we can't save the user's edits. We expect the user to make some changes to
+    the data on the form, and then click the Save button, but what data do we save? That may seem like an odd question,
+    because we of course want to save the user's changes, but when using Reactive forms, we have the data defined in two
+    places. We have the user-entered values as shown in the form itself. As we saw earlier in this course, we can access
+    that data using the value property of the form's root FormGroup, however, we also have the product property, which
+    retains the original values we retrieved for display. Since we are not using ngModel for two-way data binding, these
+    values are not automatically updated with the user's changes. Also notice that we have more fields in the product
+    property than we do on the form, such as id, price, and imageUrl. If we update the back-end server with just the
+    data from the form, we'll lose the values of those extra fields. We need to copy the user's changes over the
+    original product properties. This may sound tedious, but is actually easy if we use the Object.assign method. This
+    method takes in a target and any number of sources. Here our target is a new object, and our two sources are the
+    product property and the form's root FormGroup value. Since later sources' properties overwrite earlier ones with
+    the same key, our p variable now holds the original product properties overwriting any user's edits from the form.
+    This is the data, then, that we'll save. We'll see this in action when we get to the demo shortly, but there's one
+    other topic to cover first. When working with HTTP there are two different verbs we can use to save data, post and
+    put. When do we use which? Post posts data for a resource or a set of resources without specifying an ID. It is used
+    to create a new resource when the server assigns the ID, or update a set of resources. This URL is basically saying,
+    I have some product data, process it. Put replaces data for a specific resource using a provided ID. It is used to
+    create a new resource when the client assigns the ID, or update a resource with the defined ID. This URL is
+    basically saying, I have a product with an ID of 5, replace that product if it exists, otherwise create it. One
+    other important differentiator between post and put is that put is defined to be idempotent. This means that
+    multiple put requests are expected to have no additional effect if called multiple times with the same parameters.
+    Post is not idempotent. Issuing multiple post requests are not expected to have the same effect as one request.
+    Bottom line, we will use post when creating a new product because we want the back-end server to have the
+    responsibility of assigning appropriate IDs. We will use put when updating a product. We will explicitly set the ID
+    of the product to update. Since we are talking now about saving edits to existing data, we'll start with the put.
+    Here is another snippet from the Product Data Service. The key bit of this code is the updateProduct method. We want
+    to update the data for our product, so we pass the updated product into this method. We then set the headers and
+    options. In the headers object the Content-Type specifies that the body is in JSON format. We use this headers
+    object to configure the options object. The RequestOptions allows us to specify request settings, such as the
+    header. Here we use the backtick to define a template literal. This takes the baseUrl and appends a slash, followed
+    by the defined id. The code then calls the put method of the Angular Http Service, and passes in the URL, the
+    updated product, and the defined options object. At some future point in time, when the response is returned, we map
+    the passed in product and any subscribers are notified. Note that if our back-end server was set up to return the
+    updated product, we could use that here instead. Returning the updated product is useful if the server sets
+    additional properties, such as the last update date. How do we call this updateProduct method? The
+    product-edit.component calls the Product Data Service to save any edits. Here we define a local editProduct method
+    that calls the Product Data Service updateProduct method, passing in the updated product. We then call subscribe to
+    subscribe to the observable returned by the updateProduct method. By subscribing to the observable, this code is
+    notified when the put operation completes. If the product is saved successfully, we call onSaveComplete for any
+    final processing. In this example, we don't care about the returned product so we don't reference it here. If the
+    observable returns an error, the error is cast to a type of any and assigned to an error message string. What type
+    of code goes in to the onSaveComplete? That depends on the requirements of the application. Do you want to allow the
+    user to save, but still stay on the same page? If so, then you may not want to do anything else there. Or do you
+    want to navigate back to the list page after the save? Then you could add navigation code there. Let's examine the
+    edit code in context.</p>
+
+<h3>Saving Edits: Demo</h3>
+
+<p>In this demo, we look at how to save user edits using HTTP. Again, we start with a Product Data Service. To minimize
+    duplicate code between the put and the post, I added a saveProduct method. This method takes in the edited product,
+    sets the header in options, as shown in the slide, and then performs the put or post based on the product ID. When
+    editing an existing product, this calls the updateProduct method, passing the product and defined options. The
+    updateProduct method then builds the appropriate URL. It calls the Angular Http Service put method to issue a put
+    request and update the provided product. Notice we are again using the do operator to log our action to the console.
+    The put request is not executed until a caller subscribes, so let's look at that next. When the user clicks the Save
+    button and submits the form, the ngSubmit event handler calls the saveProduct method in the product-edit component.
+    This saveProduct method first checks the form state, there's no point in saving the form data if it was not changed,
+    as defined by the dirty property, or if it was not valid. If it was not dirty, clicking Save simply completes the
+    save operation. If it was invalid, it stays on the Product Edit page. This line should look familiar from the
+    slides. Here is where we create a new product object from the product data model property, overwriting any values
+    from the form. This gives us all of the user's changes, plus any fields that were not included on the form, such as
+    the ID. Then we call the saveProduct method on the Product Data Service, passing in the new product object we just
+    created here. After the Product Data Service receives the response, the subscribers are notified. If the product is
+    saved successfully, this callback is executed. This method calls onSaveComplete to perform any additional
+    processing, otherwise this method sets the error message property to display a message to the user. The
+    onSaveComplete method can perform any operations required after the product is saved. In this example, it navigates
+    to the Product List page. Notice that we call Reset on the form before navigating away, this is because the form is
+    still marked as dirty. If we don't reset the form, our route guard will tell us the form has unsaved changes. Now
+    let's see the edit operation in action in the browser. Here is our edit form, we can update any values. When the
+    form is valid we click Save to save those changes, and the navigation takes us back to the Product List page. We can
+    see our edit here. So that's how we save user changes, but what if the user creates a new product? How do we handle
+    that?</p>
+
+<h3>Creating New Items</h3>
+
+<p>At first glance, creating a new item sounds easy, just put up an empty form, and save the user's entries with the
+    same save method as for and edit, but there is more to it than that. Often we want to start with a properly
+    initialized object, and when we save a new item we want to call post instead of put. We'll look at post in a moment,
+    but why do we need a properly initialized object and not just an empty form? This looks like an empty form. There
+    are several reasons we may want to start with an initialized object instead of just an empty form. We can initialize
+    arrays and other data structures so they are easier to work with. In this example, the tags array is initialized to
+    an empty array, so we can easily push items to it without worrying about the array being undefined. We can set
+    proper defaults, the business rules for this app define that a new product has an id of 0, so we can set that here.
+    We could also set defaults for the releaseDate, or any other fields that make sense. So the next question is where,
+    where should we initialize this product? As we discussed earlier, one good choice is the back-end server. We could
+    put the logic for defining a properly initialized object in the back-end server's code. When it receives the get
+    request for an id of 0, it could return an initialized product. This is a good option to keep all of that logic in
+    the back-end server, however, our in-memory Web API service does not know how to do that, and there may be cases
+    that we don't want our back-end server to handle initializing our objects. In these scenarios we initialize the
+    object in the Data Access Service with code like this. The code to post request is similar to the code to put a
+    request, except that we don't pass an ID. We set up the same headers and options. Instead of passing in an URL that
+    contains the product ID, we just use the baseUrl. We still pass the product and options, we then map the response to
+    a product, and notify the subscribers passing along the newly saved product. This product includes any changes made
+    by the back-end server, such as assigning the unique ID. We call this method similar to how we call the method to
+    edit existing data. Let's look at this code in the context of our sample application.</p>
+
+<h3>Creating New Items: Demo</h3>
+
+<p>In this demo, we look at how to create new items by issuing an HTTP post request. When the user clicks the Save
+    button and submits the form, the ngSubmit event handler calls the saveProduct method in the product-edit.component.
+    That method doesn't care if the product is new and requires a post, or is an update and requires a put, it just
+    ensures that it has the updated data using the Object.assign technique we discussed earlier. Here product is the
+    newly initialized product object, and productForm.value provides the user entered values. It then calls the Product
+    Data Service saveProduct method, passing in the product to save. We looked at the saveProduct method earlier, this
+    code sets up the headers and options, and calls the appropriate routine based on the product id. If we are creating
+    a new product, specified with a product.id of 0, it calls the createProduct method to issue a post request. The code
+    in the createProduct method looks very similar to the code in the slide, however, it first sets the product.id to
+    undefined. This is for the in-memory Web API service we are using to fake our back-end server. For it to assign a
+    unique id to each created item, we must specify an id of undefined, then this method calls Angular's Http Service
+    post method, and posts the product and defined options to the specified URL. When the request is processed and the
+    response is returned, this code maps the response object back to a product object, the subscribers are then
+    notified, and pass this product. Notice that we are again using the do operator to log our action to the console. In
+    our example, the subscriber ignores the returned object because it does not need it. It won't stay on this page,
+    instead it navigates back to the Product List page, just as with the edit operation. Let's try it out in the
+    browser. We click on the Add Product menu option to create a new product. The product edit form is displayed with an
+    initialized product. We can enter any data, and click Save. We are returned to the Product List page with our new
+    product here. Click to Edit the product, and we see the assigned ID and the URL. Next, let's look at a delete.</p>
+
+<h3>Deleting an Existing Item</h3>
+
+<p>In our sample application, a user can delete an existing item using the Delete button at the bottom of the form. We
+    could have instead added a Delete button to the Product List page next to the Edit buttons here. So the ability to
+    delete is not really tied to using a form, it is included in this course for completeness. The biggest question to
+    consider when providing delete functionality is whether to really delete? In most of the applications I've written,
+    the delete option does not really delete data, rather it sets a status field in the data to deleted, that way the
+    data is never gone, it is still available for history, reporting, and that emergency request to undelete an
+    accidental deletion. When marking an item as deleted using a status field in the data, we issue a put or patch
+    request to update the status field similar to how we perform an edit operation, we do not issue an HTTP delete
+    request. In this clip, however, we'll assume that we really, really, really need to delete the data, and we'll see
+    how to issue an HTTP delete request. Here is a snippet from the Product Data Service. The deleteProduct method takes
+    in the id of the product to delete, it does not need the entire product. Notice that it returns an Observable of
+    Response, not an Observable of Product. This method then defines the headers and options similar to the HTTP put and
+    post, and uses the passed in id to build a URL that specifies the item to delete. We then call the Angular Http
+    Service delete method, passing along the URL and defined options. Since we don't expect to get back a product, we
+    don't need a map operator here. The product-edit.component calls the Product Data Service to perform the delete
+    operation. Here we define a local deleteProduct method that calls the injected Product Data Service deleteProduct
+    method, passing in the id of the product to delete. We then subscribe to the observable returned by the
+    deleteProduct method. By subscribing to the observable, this code is notified when the delete operation completes.
+    When the response is returned, we proceed as with the save. Let's look at this in the context of our sample
+    application.</p>
+
+<h3>Deleting an Existing Item: Demo</h3>
+
+<p>In this demo, we look at how to delete existing items. When the user clicks the Delete button on the form, the click
+    event handler calls the deleteProduct method in the product-edit.component. The deleteProduct method here is a bit
+    more complex than that shown in the slide. First we check the product.id. If the user selected to add a product and
+    clicked the Delete button before that new product was saved, we don't need to issue a delete request to the back-end
+    server, we can just not save it. This code simply resets the form, and navigates back to the Product List page. If
+    the product id is not 0, the code displays a dialog asking the user to confirm the delete operation. For a real app,
+    you may want to consider displaying something nicer, but this works for our purposes. If the user confirms the
+    delete operation, we call the Product Data Service deleteProduct method, passing in the id of the product to delete.
+    In the Product Data Service, the deleteProduct method first sets the headers and options similar to the code for the
+    save operations, and builds a URL that includes the id of the product to delete. It then calls Angular's Http
+    Service delete method, passing along the URL and options. Here again is the do operator, so we can track when the
+    delete operation occurs, and some exception handling. Now let's try it out in the browser. Let's start with a
+    scenario whereby the user deletes a newly added item without saving first. Before we begin, let's open the developer
+    tools, and clear the console. Recall that we won't see the HTTP requests in the Network tab since this application
+    uses an in-memory Web API. To see when each request occurs, the code includes the do operator, and logs to the
+    console for each HTTP request. We click Add Product, and notice there was no get request to get the data for
+    display, instead the Product Data Service returned an initialized product. We can enter some data, and then click
+    Delete. If we scroll up in the console, we see no delete request, all we see is the getProducts request used to
+    display this page. Now let's try deleting an existing product. Let's clear the console, and click Edit to edit the
+    hammer. Scrolling up, we can see that we issued a get request to get the current product data for display. Then
+    click the Delete button. Here we see the delete confirmation message, click OK, and the product is deleted. We can
+    see the delete request here. With that, we have a Data Access Service that supports CRUD, create using post, read
+    using get, update using put, and delete using delete. Now let's finish up this module with some checklists we can
+    use when our forms communicate with a back-end server.</p>
+
+<h3>Checklists and Summary</h3>
+
+<p>Before we can use Angular's HTTP Client Service, we need to register it with an Angular injector. This registration
+    is done for us in the HttpModule included in the Angular HTTP package. We pull HttpModule into our application by
+    adding HttpModule to the imports array of one of our application's Angular Modules, then build the Data Access
+    Service to wrap the HTTP requests. Specify the needed imports. Define a dependency for the Angular Http Client
+    Service using a constructor parameter. Create a method for each HTTP request. In each method call the desired HTTP
+    method, such as get, and pass in the URL to the desired server, along with any other required arguments. Use the map
+    operator to transform the raw HTTP response to a JSON object, and add error handling as desired. In any component
+    that needs data from a data service, including any forms, such as our product-edit.component, inject the Data Access
+    Service in the constructor. Then for each Data Access Service method call, such as getProduct, subscribe to the
+    returned observable. Provide a function to execute when the observable emits an item, and add an error function to
+    handle any returned errors. Use similar code for each Data Access Service operation your form needs. This module was
+    all about data access. We examined a sample Data Access Service that uses Angular's Http Service to communicate with
+    a back-end server. We faked that back-end server with an in-memory Web API so the application could demonstrate the
+    appropriate code, yet not require setup of an actual back-end server. We saw how to initialize an object and call
+    the post method to create new items. We examined how to retrieve existing items with the get method. We saved the
+    user's updates with the put method. And, even though we may want to save a status code that marks an item as deleted
+    instead, we walked through the code required to directly delete an item with the delete method. Only one module
+    left.</p>

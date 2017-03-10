@@ -1,8 +1,8 @@
-Services, Dependency Injection, and Component Lifecycle Hooks
+<h2>Services, Dependency Injection, and Component Lifecycle Hooks</h2>
 
-Services, DI, and Lifecycle Hooks
+<h3>Services, DI, and Lifecycle Hooks</h3>
 
-Our demo application, the storyline tracker, retrieves data about the characters and stories and it does this
+<p>Our demo application, the storyline tracker, retrieves data about the characters and stories and it does this
 from several components, so it makes sense that we don't duplicate that kind of code. In this module we'll see
 how to isolate data management in reusable services and use dependency injection with Angular 2 to make the
 services available when and where they're needed. Our storyline tracker also needs to load character data as the
@@ -16,11 +16,11 @@ feature. And we're going to explore how to answer questions such as how do we lo
 starts or how do we run code whenever a change is made to a data binding? The answer to these lies with a
 component lifecycle hook, which is going to allow us to tap into specific moments in the application lifecycle
 to perform logic. All three of these features play an important role in the storyline tracker demo app, so let's
-learn how to use them.
+learn how to use them.</p>
 
-Services
+<h3>Services</h3>
 
-We need a place for shared logic in our applications. Services fulfill that role. A service provides anything
+<p>We need a place for shared logic in our applications. Services fulfill that role. A service provides anything
 our app needs and then we can share that across the entire application. They're the ultimate form of code reuse.
 Let's take a look how things have changed from Angular 1 to Angular 2. In Angular 1 we had factories and we had
 services and providers and constants and values. All of them were ultimately a provider, but we had to pick and
@@ -34,11 +34,11 @@ variety of things, we could use it to get data, like we're doing here, or we cou
 exception handler or message service, any place we need to share data or logic. And you notice there's no
 Angular code inside this class, it's simply just a class. And a service plays an important role inside of any
 application, especially our storyline tracker. Let's take a look how we can use the service to go get some data
-and share it across our application.
+and share it across our application.</p>
 
-Refactoring for Services
+<h3>Refactoring for Services</h3>
 
-It's time to apply what we just learned about services to creating a demo app. So let's go down to our demo in
+<p>It's time to apply what we just learned about services to creating a demo app. So let's go down to our demo in
 line 17 here, Need Services, because it needs some services. We'll open it up and it's got a list of four
 different characters, we select one, we see the selection. Pretty simple. For now, let's go ahead and close out
 the preview and we'll open up the character-list.component TypeScript file. Notice in here on line 12 we're
@@ -114,11 +114,11 @@ up the constructor to inject it, it's going to ask for that CharacterService on 
 look in the injector in this component, it's not going to find it there, and then it's going to go up to the
 app.module and go, hey I found it in my injector, it's going to give it to us, that instance will then be used
 to get the characterService and get the list, set our characters and display on the screen. And that is how we
-create a service.
+create a service.</p>
 
-Dependency Injection
+<h3>Dependency Injection</h3>
 
-Now we've created our first service. We can understand how the storyline tracker could use these services to
+<p>Now we've created our first service. We can understand how the storyline tracker could use these services to
 share the logic for making data calls throughout the app. We've also learned how to tell Angular about the
 service and how to let a component gain access to a service by using constructor parameters. Welcome to
 dependency injection in Angular. Dependency injection is also known as DI for short, it's how we provide an
@@ -181,11 +181,11 @@ one of these services. If we had registered and provided these services in the a
 one of them, the injector can provide it for us. And this means that each of these services in this app root
 injector that are provided throughout the application, we're going to get a singleton of those in this case
 because there's only going to be the same instance being used by all of them. And that my friends are the
-fundamentals of services dependency injection with the Angular injectors.
+fundamentals of services dependency injection with the Angular injectors.</p>
 
-Injectors
+<h3>Injectors</h3>
 
-We just learned how to create and service and provide it the app's root injector and inject into a component or
+<p>We just learned how to create and service and provide it the app's root injector and inject into a component or
 service to use it. Let's learn a little bit more about injectors. We learned about how each component has an
 injector and Angular's application root has one. Well let's talk about this a little bit more because when
 Angular goes and looks for a service, it's actually going to look in the appropriate injectors for it. So it's
@@ -226,11 +226,11 @@ and you really only want to do this once, not twice, because providing a service
 singleton and in this case I'm getting data from other places, I only want one copy of that service. Well the
 storyline tracker retrieves data about characters and stories from several components, so let's see how to
 isolate data management in reusable services that use DI to make the services available when and where they're
-needed.
+needed.</p>
 
-Changing Where the Services are Provided in Storyline Tracker
+<h3>Changing Where the Services are Provided in Storyline Tracker</h3>
 
-Let's go take a look at some providers in action and how we can tinker with the injectors to see how they can
+<p>Let's go take a look at some providers in action and how we can tinker with the injectors to see how they can
 behave differently. We'll do this by looking at the storyline tracker demo inside of our samples. Notice on the
 dashboard we see a list of characters, that component is using a characterService. Well our character-list also
 is using a characterService and it shows the list right here. So how are they both sharing this? Well let's go
@@ -269,11 +269,11 @@ dashboard has its own, remember, but the character component does not have a way
 application will load, giving us the false sense of security here that everything is going to be okay. And we
 can see here we get the characterService created in the console. Clear the messages out, now we click on the
 characterService and when we do that we're getting an error and we're going to get that famous no provider for
-characterService. And this is how providers work.
+characterService. And this is how providers work.</p>
 
-Component Lifecycle Hooks
+<h3>Component Lifecycle Hooks</h3>
 
-It is really helpful in application development to know when things are being created, when they're being
+<p>It is really helpful in application development to know when things are being created, when they're being
 destroyed and other moments in time. In Angular 2 these are referred to as lifecycle hooks. Let's talk a little
 bit about component lifecycle hooks. These are hooks that allow us to tap into a specific moment in time in our
 lifecycle to do things like go get data when the component starts up or destroy any references we want to get
@@ -303,11 +303,11 @@ when the component goes away, it's OnDestroy. And these are the most common life
 component. There are a few others, you can check these out on the Angular io docs. And remember, while you don't
 have to use the interface, it definitely is going to help you out so you don't make any mistakes or any typos.
 Now that we've learned more about the lifecycle hooks, let's go back into our demo app and instead of getting
-our characters and our vehicles inside the constructor, let's use the new component lifecycle hooks to do that.
+our characters and our vehicles inside the constructor, let's use the new component lifecycle hooks to do that.</p>
 
-Implementing Lifecycle Hooks and Their Interfaces
+<h3>Implementing Lifecycle Hooks and Their Interfaces</h3>
 
-Let's take a look at our example number 19, the Component Lifecycle Hooks. We'll click on View Sample and it'll
+<p>Let's take a look at our example number 19, the Component Lifecycle Hooks. We'll click on View Sample and it'll
 open up. And over here as I select on somebody, it's going to change the selection and I can also clear out the
 selection. Let's take a look what's actually happening inside the code though. So if I have this list right here
 of character components, and we'll close out the preview, we can see that we're getting the characterService and
@@ -359,11 +359,11 @@ those interfaces and I like to make sure it helps me so I don't have to worry ab
 Now where do you get those from? They come out of Angular Core, you can see them, I'm importing them up on line
 1. So when we're in a tool like Plunker, we're not getting that IntelliSense and all the help, but when you go
 to a tool like a WebStorm or a VS Code, you're going to get that help because TypeScript is going to help us
-out. And this is how the lifecycle components work and how the editor helps us write better code.
+out. And this is how the lifecycle components work and how the editor helps us write better code.</p>
 
-The Role of Lifecycle Hooks in Storyline Tracker
+<h3>The Role of Lifecycle Hooks in Storyline Tracker</h3>
 
-We just saw how we can use the lifecycle events in the application and log out some messages, seeing when they
+<p>We just saw how we can use the lifecycle events in the application and log out some messages, seeing when they
 exactly happen, but let's see them in a larger app. When we click on the storyline tracker here in Plunker, we
 get this application, and then we're going to click this download button right here, and then we're going to
 download the zip file and then we're going to open it up inside of a folder. So once you've done that, open it
@@ -389,11 +389,11 @@ that there we also have a constructor and the constructor is injecting all these
 implementing different interfaces up top and if we slide on down, we can see there's an ngOnInit, which is going
 to go get the particular vehicle that we need for whatever parameter was passed in. It's a widespread pattern
 with Angular 2 to do because it allows us to capture a moment in time with ngOnInit where we can use this to get
-the data or do something we need for that component.
+the data or do something we need for that component.</p>
 
-Summary
+<h3>Summary</h3>
 
-We just saw a demo how we put together all the services, the DI, and the lifecycle hooks in our storyline
+<p>We just saw a demo how we put together all the services, the DI, and the lifecycle hooks in our storyline
 tracker application. All these features really help us build out a robust application and the services and DI
 especially help us make it more reusable. We learned a lot of things in this chapter, we learned about how to
 separate things with services, so we can get our character data in multiple different places, but we don't have
@@ -402,5 +402,5 @@ thing about dependency injection is that we just have to ask Angular for it. As 
 with the providers, then the injector knows about them and then we can inject them with constructors. And of
 course, if we want to tap in at any moment in time, like when we're creating a component or it's going away, but
 whenever any changes happen we can tap into the components lifecycle where we can perform any logic we need to
-and be guaranteed they're going to run exactly when we need them.
+and be guaranteed they're going to run exactly when we need them.</p>
 

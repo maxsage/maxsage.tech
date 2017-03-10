@@ -1,0 +1,51 @@
+<h2>Final Words</h2>
+
+<h3>Introduction</h3>
+
+<p>You now have the basics you need to build Reactive forms. Welcome back to Angular 2: Reactive Forms, from
+    Pluralsight. My name is Deborah Kurata, and the final words in this course include a recap of our journey, and a few
+    pointers to additional information. Let's jump right in to the short module.</p>
+
+<h3>Recapping Your Journey</h3>
+
+<p>Template-driven or Reactive forms? To help you make that decision, we looked at the similarities and differences
+    between these two choices for building data entry forms with Angular. As we covered in this course, these are some
+    of the key advantages of a template-driven approach, and these are some of the reasons to go with a Reactive forms
+    approach. Depending on your team, its experience, and its background, some of these factors may weigh more heavily
+    than others. Select the appropriate forms approach that works best for you, your team, and your project. As you saw
+    throughout this course, Reactive forms shifts the responsibility from managing our form and its data from the
+    template to the component class. Instead of the template automatically generating the form model to track form and
+    input element state, we build the form model ourselves in our component class using FormBuilder, the template then
+    binds to our form model. Instead of using two-way data binding to automatically keep the class properties and user
+    entries in sync, we can define an immutable data model, and explicitly manage the form data. Since the class
+    properties are in sync with the form data in the template-drive approach, when it comes time to save, we just save
+    the class properties. With Reactive forms, we combine the class properties and the user's changes retained by the
+    form model to specify the data to save. Because we build the form model and manage the data ourselves, we have more,
+    more functionality, more flexibility, and more control of our forms and their associated data, and as we've seen in
+    this course, more code. With Reactive forms we define right and wrong by setting validation rules when building the
+    form model, but we can easily change those rules at run time. In the demo form, we set the phone number as required,
+    only if the user requested notification by text message. So we can handle validation rules that specify right,
+    wrong, or it depends. I see you. By watching the user's changes we can react to modify the display, the validation,
+    or the messages, providing a much more dynamic and personal experience. In the demo form, we walked through how to
+    watch for changes to the email input element. When the value changed, we checked the element state, and displayed
+    validation error messages when appropriate. Moving the validation error messages and their logic to the component
+    class greatly simplified our template HTML. We then tried out the debounceTime reactive transformation, to allow the
+    user to enter an entire value before displaying a validation error message. Sometimes a single entry is not enough,
+    the user may want to enter multiple address blocks or multiple search tags. We examined how to use a FormArray to
+    dynamically duplicate input elements on the form using the Reactive forms approach. We then looked at how to fit the
+    form piece into the context of a more full-featured application. We saw how to navigate to a form, and set up a
+    route guard to remind the user to save before navigating away, and we set up validation for reuse. Lastly, we
+    examined the code for a Data Access Service to create, read, update, and delete form data on a back-end server using
+    HTTP. Along the way, this course provided a set of checklists containing steps and tips. Feel free to revisit and
+    reference these checklists as you start building your own Reactive forms applications.</p>
+
+<h3>Learning More</h3>
+
+<p>If you want more information about Angular components, services, dependency injection, or observables, check out one
+    of these beginner level courses. To learn more about template-drive forms, check out this course. And the Angular
+    documentation covers both template-driven and Reactive forms, it's a great reference.</p>
+
+<h3>Closing</h3>
+
+<p>Congratulations, you now know how to build Angular Reactive forms with full CRUD support, yay. Only one question
+    remains, right or left? Thanks for listening, and I'd love to hear about your experience with Angular forms.</p>

@@ -1,0 +1,124 @@
+<h2>Introduction</h2>
+
+<h3>Introduction</h3>
+
+<p>We can build forms in Angular 2 with a template-driven approach using HTML and data binding, or we can build Reactive
+    forms using a model-driven approach by defining the form model and validation in our component code. Welcome to
+    Angular 2: Reactive Forms, from Pluralsight. My name is Deborah Kurata, and this course provides the concepts you
+    need to build Reactive forms, validate user-entered data, and save that data using HTTP. We've all filled out our
+    share of online forms. Register for an event, fill out a form. Make a dentist appointment, fill out a form. And
+    often our company runs on online forms, forms for tracking our time, forms for booking conference rooms, forms for
+    managing inventory, and so on. In this introductory module, we start with a short overview of forms in Angular. We
+    consider several suggestions for getting the most from this course. We explore the demo form and sample application
+    that we will use in this course, and we look at the topics we'll cover in the remainder of this course. Okay then,
+    let's get started.</p>
+
+<h3>Angular Forms</h3>
+
+<p>When we build a form with Angular, we always create a component class for the form logic, and a template for the
+    form's user interface. If the form updates data, the component class calls a service to retrieve existing data from
+    a database or other data store on a server somewhere, and that data is displayed as default values on the form. We
+    then collect user entries, validating the data as the user types. If needed, we display validation messages back to
+    the user. When the user submits the form, the component class calls a service to pass the validated data back to the
+    database or other data store on the server, and the user's entries or updates are saved. How do we build the
+    template and component class for our forms? Angular provides two techniques for building forms, template-driven and
+    Reactive, previously called model-driven. Both techniques share the same basic concepts, but as its name implies,
+    template-driven forms put the responsibility for the forms squarely in the template, which we define with basic HTML
+    and data binding. Reactive forms shift much of that responsibility to the component class. We still create the
+    template with HTML, but we manage the data and validation in the component code. Let's take a high level look at the
+    strengths of each technique. There are many advantages to building forms using a template-driven approach. The
+    template-driven technique is straightforward and easy to use, and it looks very familiar if you've built forms with
+    Angular 1. Because template-driven forms rely heaving on two-way data binding, we don't have to write any code to
+    copy the data to the input elements, or track the user's entries, it's all handled automatically. Speaking of
+    automatically, Angular also automatically tracks form and input element state. We can use this state information to
+    determine when the form is invalid and disable the Save button, for example. With much more of the logic for our
+    form in our class, Reactive forms provide more flexibility, they handle more complex validation scenarios, such as
+    changing validation based on a user's selection or on the form state. Reactive forms do not use data binding, so the
+    form cannot mutate our data model. The component code controls how to handle any changes to the data; some
+    developers prefer this immutability. Using Reactive forms makes it easier to perform an action on a value change,
+    such as transforming the value to uppercase or performing a partial lookup. We have access to reactive
+    transformations, such as DebounceTime to delay reacting to user input, and DistinctUntilChanged to ignore values
+    that are the same as previously processed values. Reactive forms make it easier to dynamically add input elements to
+    the form, so we could allow the user to enter any number of addresses, for example. And since more of the logic and
+    validation are in the code, not the template, some developers find that the logic is easier to unit test. There is
+    no magic going on under the hood when you work with Reactive forms, everything is direct, there is no template
+    between your code and your data structures. The primary issue with Reactive forms, however, is that they require
+    more code. Depending on your team, its experience, and its background, some of these factors may weigh more heavily
+    than others. It is important to select the appropriate forms approach that works best for you and your team. To help
+    you make that decision, we'll dive deeper into their similarities and differences, and examine the code for both
+    techniques in the next modules. For now, let's look at some tips for getting the most from this course.</p>
+
+<h3>Get the Most from This Course</h3>
+
+<p>First, the prerequisites. To get the most from this course, it is important that you know the basics of Angular 2.
+    This means understanding Angular modules, components, templates, including binding, services, and basic routing. If
+    you don't have the requisite knowledge, consider taking one of the introductory Angular 2 courses here on
+    Pluralsight, such as Angular 2: Getting Started or Angular 2: First Look. You do not need any prior knowledge of
+    Angular forms; we'll cover what you need in this course. Another way to get the most from this course is to join the
+    discussion. Thoughts, comments, or questions as you watch this course? Feel free to use the Discussion tab, you can
+    find the link to the discussion on the Pluralsight page for this course, or follow me on Twitter. It would be great
+    to hear about your experiences with Reactive forms. There is also a blog post specifically for this course at the
+    URL shown here. This post identifies common issues along with their solutions. If you have any problems with the
+    code for the course, check here first, there may already be a solution posted. When building web applications,
+    regardless of the technologies we use, there are lots of steps and places where things can go wrong. That's when a
+    good checklist can come in. I'll present checklists at the end of many of the modules, and we'll use them as a brief
+    review of what was covered in that module. Feel free to jump ahead to the checklist if you have any problems when
+    coding along with the demos, and consider referencing these checklists as you start building your own Angular forms
+    applications. Coding along with the demos is another great way to get the most from this course. Though not
+    required, it is often helpful to try out the presented code as you navigate through the course. To get you started,
+    I've set up a public GitHub repository specifically for this course, it is called Angular2-ReactiveForms, and you
+    can find it at this URL. The starter files for the forms demo are here, you can use these files as a starting point
+    if you want to code along with the demos. If you'd prefer to follow along with the completed demo form code, you can
+    find that here. Toward the end of this course, we'll look at a form in the context of a more full-featured sample
+    application; that sample application is here. If you are new to GitHub, simply click this button to download all of
+    the code as a zip file. So what's in this code? Let's take a look.</p>
+
+<h3>Demo Form and Sample Application</h3>
+
+<p>We start with a simple demo sign up form built using the template-driven approach. We examine the code, then rebuild
+    this form using the Reactive forms approach to understand the key differences between the two techniques. Then we
+    add more features, such as custom validation, cross-field validation, and dynamic addition of multiple addresses.
+    Later in this course, we'll examine a second Reactive form in the context of a more full-featured Angular
+    application. The sample application demonstrates routing to the form, including routing guards, and details the data
+    access service to communicate with a back-end server via HTTP to retrieve and save data. Let's see this sample
+    application in action. Welcome to Acme Product Management. As its name implies, this application manages our
+    company's current list of products. We'll use this application later in this course, when we look at a Reactive form
+    in the context of a more full-featured application. This application may look familiar if you have seen the Angular
+    2: Getting Started course here on Pluralsight. I've incorporated an edit form, and add, edit, and delete operations
+    into the sample application that was built in the Getting Started course. Here at the top is our menu for access to
+    the key features of the application. In a real application, there may be more options here, but we want to focus on
+    building a Reactive form, so I've limited the application to basic functionality. Clicking on the Product List
+    option displays the Product List page. From here we can click the Edit button to edit the product. Clicking on the
+    product name navigates to the Product Detail page; we also have an Edit button here. Clicking the Edit button
+    displays the Reactive form for editing the selected product. Notice that each of the fields are populated with
+    existing values, the user can edit product information, or click Delete to delete the product. If the user makes a
+    mistake and breaks one of the validation rules, the application displays a validation error message, and the Save
+    button is disabled. Let's enter a new product name. If the users tries to navigate away from the page, we have a
+    routing guard to notify them of their unsaved changes. If the user wants more search tags for this product, they can
+    click Add Tag. This dynamically duplicates the input elements, the label and input box in this example, so the user
+    can add any number of search tags. Clicking Save saves the product and returns to the Product List page where we see
+    our updated value. Clicking the Add Product option displays the same form, but initialized for entry of a new
+    product. Notice that the Save is disabled until the form values are valid. Once all of the data is valid, clicking
+    the Save saves the new product and navigates back to the Product List page. Here we see our new product. So that's
+    the basics of a sample application that we'll look at later in this course. Now let's finish up this introductory
+    module with a look at the outline for the remainder of this course.</p>
+
+<h3>Course Outline</h3>
+
+<p>In this course, we start with a more detailed look at the similarities and differences between template- driven and
+    Reactive forms, including an examination of the building blocks that make up the form model. Next, we build a
+    Reactive form, first using the form model building blocks directly, and then using FormBuilder to simplify the code.
+    We add validation rules and error messages to validate the user's entries, including custom validation and
+    cross-field validation. With Reactive forms, we can adjust how a form works reactively based on user entries and
+    selections. For example, based on a user's selection, we can change the form's validation rules. We'll see how to
+    watch for user changes and react to those changes. We'll also examine reactive transformations, such as
+    DebounceTime. Sometimes a single entry is not enough, the user may need to enter multiple email addresses, or
+    multiple address blocks, or multiple search tags. In that case, we can dynamically duplicate input elements. We'll
+    see how to do that with Reactive forms and form arrays. Then we switch gears a bit, and examine a Reactive form in
+    the context of a more full-featured sample application. We'll look at techniques for routing to the form, setting up
+    routing guards, and building reusable custom validation. In many scenarios the key purpose of a form is to collect
+    or edit data that is then stored in a database or other data stores somewhere. To do that we need to deal with CRUD,
+    or create, read, update, and delete operations for retrieving and saving data to a back-end server with HTTP. By the
+    end of this course we'll have a simple, but fully operational Angular application, that includes a Reactive form
+    with full CRUD support. You can use this application as a reference for your own development. Let's get started.</p>
+

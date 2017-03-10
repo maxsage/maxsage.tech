@@ -1,0 +1,254 @@
+<h2>Template-driven vs. Reactive Forms</h2>
+
+<h3>Introduction</h3>
+
+<p>To determine whether Reactive forms is the right choice for your project and your team, it is important to understand
+    your form options. Welcome back to Angular 2: Reactive Forms, from Pluralsight. My name is Deborah Kurata, and in
+    this module we lay the foundation for understanding Reactive forms by looking at the similarities and differences
+    between it and template-driven forms. Coffee or tea? Cash or credit? Paper or plastic? Right or left? We face many
+    choices every day, and when it comes to building forms in Angular, our choice is whether to use a template-driven or
+    Reactive forms approach. In this module, we start with the Angular form building blocks used by both approaches,
+    FormGroup and FormControl. We see what they are, and what they do. Next, we walk through the template syntax for
+    both template-driven and Reactive forms. Then we examine a simple template-driven form. Our focus is not on all the
+    features of Template-driven forms, but rather on understanding enough to compare it clearly with Reactive forms.
+    Lastly, we look at several complex form processing scenarios as a segue to Reactive forms. Let's get started.</p>
+
+<h3>Form Building Blocks</h3>
+
+<p>One of the key uses of forms is for the user to enter data that we save somewhere. Say that we display a form to the
+    user, like this form. We don't want to save data that is incomplete or invalid, so we validate the user's entries as
+    needed. If the entered information is not valid, we indicate that to the user and display an appropriate validation
+    error message. There are many ways to style invalid entries and display the validation message, this is the simple
+    technique we will use. We also want to disable the Save button until the input elements contain valid data. To
+    achieve all of this, we track the state of each input element and the state of the form itself. Angular has a set of
+    predefined form and input element states. These states define whether the user has changed a value in an input
+    element. If the value is unchanged, the state of the input element is pristine. Changed values have a state of
+    dirty. If all input elements on a form are pristine, then the form itself is pristine. If any input element on the
+    form is dirty, then the form state is dirty. A state and an array track validity. The input element state is valid
+    if it passes all defined validation rules. The form itself is valid if all input elements on the form are valid.
+    Validation errors are added to an errors collection. The key of each array element is the name of the validation
+    rule associated with the error. These states define whether the user has visited an input element. A value of
+    touched means the user has set focus into the input element, and then left the input element. Untouched is set if
+    the user has not set focus, then left the input element. A form is touched if any input element has been touched.
+    These visited states are useful to prevent displaying the required validation error message until the user has had a
+    chance to enter something. How do we track all of this state information? Luckily for us, Angular has building
+    blocks that define a form model, which tracks all of this state, plus the value of each input element. These
+    building blocks are used by both template-driven and Reactive forms to track state and values. FormControl tracks
+    the value and state of an individual input element, such as an input box. FormGroup tracks the value and state of a
+    group of form controls. A form itself is managed as a form group, because what is a form but a group of input
+    elements whose state and value we wish to track together. But any group of input elements on a form can comprise a
+    FormGroup, we could group the input elements for a mailing address block, for example. And FormGroups themselves can
+    be nested within other FormGroups. For clarity, I'll often refer to the forms FormGroup as the root FormGroup. These
+    building blocks are actually classes provided when we work with Angular forms. Instances of these classes define the
+    form model. I've mentioned the term form model several times now. What is a form model exactly? A form model is the
+    data structure that represents the HTML form, and it looks like this. The structure of the form model reflects the
+    form and input elements in the template. In most cases, each input element within the HTML form has a corresponding
+    form control in the form model. The form model retains form state, such as dirty or valid. It retains the user's
+    entries and its value property. As the user types into any input element on the form, the value property is changed
+    accordingly. The form model also tracks all of the FormControls and nested FormGroups within the form, along with
+    their state and value. Don't confuse the form model with the data model that we use with data binding. We'll see
+    both the data model and form model when we get to the demo. We use these properties from the form model anytime we
+    need to know the state or value of a FormControl or FormGroup. This form model is the same for both template-driven
+    and Reactive forms, but how it is created is different. When using a template-driven approach we write HTML in our
+    template for the form element, each input element, data binding, validation rules using attributes, and validation
+    error messages. Angular automatically generates the associated form model, we can then use the form model as needed.
+    In our component class, we define properties for the data binding. These properties represent our data model. We
+    also implement methods for form operations, such as getting the data for display on the form, and saving that data
+    on a submit. Two-way data binding is a key part of template-driven forms, as it keeps all of the data on the form in
+    synchronization with properties in the component class. Reactive forms shift the responsibility for creating the
+    form model to the component class. We define the form model by creating the instances of the FormGroup and
+    FormControl building blocks in our component class. We define the validation rules in the class. We can even handle
+    display of validation error messages in the class. We manage the data for the form in the class, no data binding in
+    the HTML. And the class provides methods for form processing, such as handling the submit. We still define the
+    visual parts of the form in the template, so we create the form element and input elements in the template. We then
+    bind these input elements to the form model defined in the component class. So instead of binding the input elements
+    to the data model properties directly, we bind to the form model we build in our component class.</p>
+
+<h3>Form Directives</h3>
+
+<p>Template-driven and Reactive forms use entirely different sets of directives for binding the FormControl and
+    FormGroup building blocks to the form and input elements in the template. When using template-driven forms, we first
+    import the forms module to bring in the appropriate set of directives. This includes ngForm to access the form model
+    Angular generates for us, ngModel for two-way binding, and to access the input element state defined in the
+    generated form model, and ngModelGroup for grouping input elements within the form. When we add a form element to
+    our template, Angular automatically assigns the ngForm directive to that form. Angular creates the form model
+    starting with the root FormGroup instance, and automatically binds it to the form to track the form value and state.
+    We never have to apply the ngForm directive ourselves. If we want to access the form model state information in our
+    template, we export the ngForm directive into a template reference variable like this. Here we use a hash to define
+    a template reference variable called signupForm, and set it equal to ngForm, this variable then references the
+    form's root FormGroup instance. Anytime we want to access the form model, we use this template reference variable.
+    In this example, we check the valid property of the FormGroup instance to disable the Save button if the form is not
+    valid. We'll see this in context in the upcoming demo. If you've done any two-way data binding in Angular, you are
+    already familiar with the ngModel directive. We use this directive on each input element to keep the component class
+    property in sync with the user-entered value. In this example, any change to the firstName input element is
+    automatically reflected in the firstName property of the customer defined in the component class. When we add an
+    ngModel to an input element within a form, Angular automatically creates a FormControl instance, and adds it to the
+    form model using the input element's name as the key, hence the reason we need the name attribute here. Angular uses
+    that name attribute for the FormControl instance key. The FormControl instances tracks the input element's value and
+    state. We can access the FormControl state by exporting the ngModel directive into a template reference variable.
+    Here we use a hash to define a template reference variable named firstNameVar, and set it equal to ngModel. This
+    variable then references the form control instance for this input element. We can use the template reference
+    variable to access the FormControl state. For example, we can use the valid property of the FormControl to determine
+    when to display validation messages. We'll see that in the upcoming demo. To use Reactive forms, we first input the
+    ReactiveFormsModule to bring in its appropriate set of directives. As you can see, this is an entirely different set
+    of directives then for the template-driven approach. Notice how close these directive names map to the FormGroup and
+    FormControl building blocks. With the Reactive forms approach, Angular does not create a form model for us, rather
+    we create it ourselves in our component class. We then use these directives in the template to bind the form and
+    input elements to our defined form model. So for both techniques, building an Angular form requires building a
+    template with the appropriate set of directives. Let's take a closer look.</p>
+
+<h3>Template Syntax for Forms</h3>
+
+<p>If you've built any web-based forms you recognize this, no Angular here, it's just HTML. We have a form element, we
+    have input elements, such as this input box, along with a label for each data entry field we want to display. Each
+    input element has attributes, such as these validation attributes. In this example, the first name is required and
+    has a minimum length of 3 characters. Yeah, I know, this minlength validation is a bit funky. How would P. Diddy
+    enter his name here, for example? But I wanted to show multiple validation rules for this element. We also have a
+    button for the user to submit their entries. When building Angular forms we use this same HTML, and just add the
+    appropriate directives for the template-driven or Reactive approach. Let's look at this form using, first, a
+    template-driven approach, and then Reactive. A template-driven form looks like this. We still have the form element
+    and we're using event binding to bind to a save method when the user submits the form using the Save button, let's
+    skip the div element for a moment. We have the same label from this simple HTML example, and the same input element
+    with a little more stuff attached to it. Template-driven forms leverage the HTML validation attributes for its
+    validation, so those are still here. One of the key features of template-driven forms is how it leverages data
+    binding using ngModel. Here we bind a property from our component class to the value of this input element. Two-way
+    data binding keeps the input element value and the property value in sync. Template-driven forms require the name
+    attribute to properly associate the FormControl with the FormGroup in the generated form model. And here we define a
+    template reference variable to access the FormControl instance. Going back to that div element, we use the defined
+    template reference variable and check the FormControl state properties to determine whether or not to style the
+    input element as an error. Here we are referencing the has-error style class from the Bootstrap style framework. The
+    first part of this and operation is checking the FormControl touched state. If the user has touched the element,
+    meaning the user set focus to and left the field, than touched is true. The second part of this and operation is
+    checking the FormControl valid state. Angular automatically performs the validation as defined by the validation
+    attributes. If the input element's value is not valid, the valid property is not true. If touched is true and the
+    input element value is not valid, then the div element class changes to has-error, and the field and its label turn
+    red. So, why are we checking touched and not valid? Because when the form is displayed empty, we don't want the
+    required validation to show the input elements as an error before the user has a chance to enter something. The span
+    tag displays our validation message. Note that we are only showing one message here. We'll see how to display both
+    our required field message and our min length message when we get to the demo. We again use the form control state
+    properties to determine whether to display the message. Here we check the touched property and the errors
+    collection. If the input element was touched and the errors collection contains any values; we display the error
+    message. How about the Reactive form template? Recall that the form model is built in the component class, so no
+    need for template reference variables. Reactive forms do not use two-way binding, so no ngModel or name attribute.
+    And with Reactive forms, the validation is defined in the class, so no validation attributes here either. We still
+    have the form element, but it now binds the formGroup directive to the form model we create in our component class.
+    We still have a label and input element for each data entry field, but now each input element is bound to the name
+    of a formControl instance in the form model. To display the validation message and set the error style, the template
+    uses the formError property defined in the component class. We'll look at the syntax in detail and build our own
+    Reactive form in the next module, but first let's spend a moment looking at the code for a template-driven form,
+    just enough to have the background information we need to compare it with Reactive forms.</p>
+
+<h3>Template-driven Form: Template</h3>
+
+<p>In this demo, we'll take a quick look at a template-driven form. If you'd like to code along with the course, now is
+    a good time to download the demo project from my GitHub repo here. The first part of this course works with a demo
+    application starting with Demo-Start. Later in the course, we'll add a form to a more full-featured application,
+    APM, but we'll ignore that project for now. To code along, you'll need a recent version of npm to install all of the
+    libraries for the Demo-Start application. I've downloaded the Demo-Start project and moved it to a Demo folder, I
+    then opened the Demo folder in VS Code, but you can use any desired editor. VS Code now has an integrated terminal,
+    we can open that from the View menu, or with the defined hotkey. From here you can type npm install to install the
+    packages for this demo project. I've already done this step, so the node_modules are already in place. I can then
+    type npm start to launch the application. Here is a simple form for a customer to sign up for a mailing list. These
+    three fields are required, but have not yet been entered. Even though the form is current invalid, notice that no
+    validation messages are yet displayed, but because the form state is currently invalid, the Save button is disabled.
+    You may have noticed this extra data down here below the form, I'm displaying some of the values from the form model
+    that Angular automatically generated for us. The Dirty state of the form is currently false, because we have not yet
+    interacted with the form. The Touched state of the form is also false because we have not touched any of the input
+    elements. The Valid state is false because the first three input elements have the required attribute, and we have
+    no value in those fields. The root FormGroup's Value property displays the name of each input element, along with
+    its current value, which is empty at this point. If we set focus to the firstName input element, then leave that
+    element, the element has been touched, and we see the validation error message. The Touched state displayed below
+    the form is now true. If we enter one character, we see the message change to a different validation message, and
+    now that we've typed something, the Dirty state is true. Notice also that the Value is changed to show the entered
+    text. If we finish data entry, the validation message disappears, but the Valid property is still false; all input
+    elements in the root FormGroup must be valid for the form state to be valid. To complete the form, I'll put in the
+    last name and email address. The email validation message appears as soon as we type one character, because one
+    character is not a valid email address. We'll see later how we can make this better, but as soon as the email
+    address is of a correct format, the validation message disappears. When we've entered valid values into each of the
+    required fields, the Save button is enabled. If we check the Send me your catalog checkbox, we see additional fields
+    for entry of a postal address. This forms demonstrates the input box, checkbox, radio button, and select box HTML
+    elements. Notice also that additional items are added to the Value object. Let's uncheck this for now to shorten the
+    form. I'm logging the entire root FormGroup instance to the console when the user clicks on Save, so let's use the
+    browser's developer tools to take a look, then click Save. Here is the root FormGroup, we can drill down. Let's
+    scroll to the public members. The FormGroup's dirty property is true, just as we've seen, as is touched. Controls
+    here is the list of each FormControl associated with this form. The name of each control is the name we defined with
+    the input element name attribute, as is the name used in the value object. So template-driven forms gives us all of
+    this information with very little effort on our part. Now let's look at the code. Here is the template for the Sign
+    Up form. Notice all of these style classes, we are using the Bootstrap styling framework here to make our form look
+    good, but you don't have to. Here is the form element, quite similar to the code we saw earlier in the slides. We
+    use the novalidate attribute to tell the browser not to perform its validation, but rather to let Angular validate
+    the entries. Here we set the templates reference variable to our form model, and when the user submits the form, we
+    pass that form model reference to our component's save method, that way our component code can access the form model
+    state or values. Here is the firstName input element; wow, that's quite a bit of HTML. We use the ngClass directive
+    to set the has-error style class and turn the elements red when the input element was touched or dirty and is not
+    valid. We set the validation attributes on the input element itself, here we have required and minlength. We use
+    ngModel for the two-way data binding, we set the name attribute so the FormControl instance is associated correctly
+    in the form model. We define the template reference variable to use for validation styling and messages. And we
+    define the validation messages for the two different possible validation errors, notice the use of the errors
+    collection here. When Angular detects a validation error, it adds an entry to the errors collection using the name
+    of the validation rule as the key. We can use that name to display the appropriate validation message. Here, we use
+    errors.required to display the message appropriate for the required field validation rule. And we use
+    errors.minlength to display the message appropriate for the minlength validation rule. Notice how this similar code
+    is repeated for each input element on our form. One thing to note about the email validation, as of the time of this
+    recording, Angular forms doesn't yet support the validators for the HTML5 input types, such as email, phone, and
+    date, so code like this will not work. We instead added a simple pattern for a very basic email format validation.
+    Way down at the bottom is the Submit button, notice that we are using the form's template reference variable to
+    access the form model's valid property. We disable the button if the form is not valid, and here, after the form, we
+    are using the form's template reference variable to display the properties we were looking at in the browser. We
+    display the Dirty, Touched, and Valid properties, we also display the Value of the form model, piped into a JSON
+    structure for more readable format. Now let's look at the component.</p>
+
+<h3>Template-driven Form: Component</h3>
+
+<p>Wow, not much here. In the component class we define the code to manage our form. There are two key bits of
+    information here in our class. The customer property manages the instance of the customer data that we are binding
+    to in our template. We can use Go to Definition to view the definition of the customer data model here. We're using
+    a class and not an interface in this case, because we want to create a new instance of this class for the new
+    customer information. The other important bit of code here is the save method. Our template binds to this method,
+    which is executed when the user submits the form. We pass in the form model from the template so we can check the
+    form state and view its values. For example, we could skip saving if the user clicked Save without making any
+    changes by checking the form's dirty property. It is here that we would call a service to save our data to a
+    back-end server. We'll see how to build save functionality later in this course. The bottom line here is that the
+    template-driven forms approach minimizes the component class code we need to write, but it is heavy on the template
+    code; each control takes a full page of HTML. When using template-driven forms, Angular automatically creates the
+    form model, we can then use that to track form and control state, and the ngModel two-way binding takes care of
+    keeping our class properties in sync. But often in a real application, forms are more complex than this. Let's look
+    at some of these scenarios.</p>
+
+<h3>Complex Scenarios</h3>
+
+<p>Our story begins a week ago when our team met with Marketing to understand the requirements for a signup feature. We
+    then developed a first prototype of the form and are presenting it to them today. We show them the form and how well
+    it validates the customer's entries per their specifications, and when we click the Send me your catalog button, it
+    allows the customer to put in a mailing address to receive our catalog. This prompts our first change request. Can
+    we allow multiple addresses, they ask? It seems that our customers often want to receive catalogs at both their home
+    and work, and they also want to ensure their subordinates get catalogs too. Who wouldn't want more catalogs? This
+    generates some additional ideas. Can we watch what the user types into the Street Address and provide suggestions?
+    This would make it easier for the user to send the catalog to multiple people at the same company. Then from the
+    back of the room we get a question, can we see that first name validation again? We show them. I don't like that the
+    customer sees an error when they type in one character, can't we wait until they stop typing to determine if they've
+    entered enough characters? They continue. Many of our customers also like to receive notifications from us via email
+    or text message, can we ask for their preference and add a phone number? Be sure to make the phone number required
+    only if they pick notifications via text message. We take our list of change requests, and head back to our office.
+    Implementing these change requests sounds like we'll end up with a complex set of HTML that will be difficult to
+    build and maintain over time. There has to be another way. As we've just seen, template-driven forms is mostly just
+    HTML, and is easy to use, but as soon as we start handling more complex scenarios, things get harder and messier.
+    Scenarios such as dynamically adding input elements to the form, such as multiple address blocks, adding code to
+    watch what the user types and reacting accordingly, waiting validation until the user stops typing, providing
+    different validation rules for different situations, and what if your team prefers working with immutable data? That
+    means you need to forgo two-way data binding, what then? These scenarios are where the Reactive forms approach
+    really shines, as we'll see through the remainder of this course.</p>
+
+<h3>Summary</h3>
+
+<p>In summary, we can build forms in Angular with the template-driven approach, or with a Reactive approach. In the
+    template-driven approach, the form model defining the root FormGroup, FormControls, and any nested FormGroups is
+    automatically generated. The validation rules are defined in the HTML, and the input element values and data model
+    properties are kept in sync automatically using two-way data binding. With Reactive forms, we manually create the
+    FormGroups and FormControls for the form model in our component class. We add the validation in the class, and we
+    forgo two-way data binding, instead managing the data flow ourselves. In this module, we looked at the Angular form
+    building blocks for building the form model, FormGroup and FormControl. We saw how template-driven and Reactive
+    forms use different directives in their template syntax to work with these building blocks. To clearly compare
+    template-driven to Reactive forms, we examined the code for a template driven form, and we peeked at the data
+    managed by the generated form model. Lastly, we went through a few complex scenarios that may be better suited for a
+    Reactive forms approach. Next up, let's try out Reactive forms.</p>

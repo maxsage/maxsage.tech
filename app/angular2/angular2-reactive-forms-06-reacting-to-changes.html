@@ -1,0 +1,175 @@
+<h2>Reacting to Changes</h2>
+
+<h3>Introduction</h3>
+
+<p>With Reactive forms we can adjust how a form works reactively, based on user entries and selections. Welcome back to
+    Angular 2: Reactive Forms, from Pluralsight. My name is Deborah Kurata, and in this module we explore how to watch
+    for user changes, and react to those changes dynamically controlling the form. What if we could watch every change
+    that the user makes, every character, every keystroke? Yeah that might sound a bit creepy, but in Reactive forms
+    it's a good thing, really. By watching the user's changes we can modify the display, the validation, or the
+    messages, providing a much more dynamic and personal experience. In this module, we learn how to watch for user
+    changes, we look at ways we can react to those changes, and we examine reactive transformations to improve how we
+    watch those changes. Let's get started.</p>
+
+<h3>Watching</h3>
+
+<p>The cool thing about Reactive forms is that we can easily watch for any changes happening to a FormControl or a
+    FormGroup, and react to those changes in real time. Both FormControls and FormGroups have a valueChanges property,
+    that allows us to watch for changes. The valueChanges property emits an event every time the value of a control
+    changes, either in the user interface or programmatically. The valueChanges property is an observable of any. We can
+    think of an observable as a collection of events that arrive asynchronously over time. The generic parameter is any,
+    so the event in the collection can be of any type. We subscribe to the observable to watch the events. Similarly,
+    there's a statusChanges property that emits events on changes to the validation state, but often the statusChanges
+    is less useful because we want finer control. For example, if an input element is invalid, we don't want to display
+    validation messages if the user has not yet touched or modified an input element, so we need more information than
+    just a change in validation state. That's why we'll use valueChanges instead. To watch the events for a single
+    FormControl, we subscribe to its valueChanges observable. Each time the control changes, an event is emitted, the
+    FormControls current value is provided, and the associated code is executed. In this example, we simply log the
+    FormControls value. We can also watch for events from any control within a nested FormGroup. By subscribing to the
+    FormGroups valueChanges observable, each time any of the FormControls or other nested FormGroups within this
+    FormGroup are changed, an event is emitted, the FormGroups value is provided, and the associated code is executed.
+    Note that in this case, the value is the set of key and value pairs for all of the controls and nested FormGroups
+    within this FormGroup. So here, we use the JSON.stringify to display the value. We can also watch for any change
+    over the entire form by subscribing to the valueChanges property for the form's root FormGroup. This allows us to
+    watch for any changes and any control on the form. Let's try this out. We only want to watch FormControls or
+    FormGroups if we plan to do something when we see something. In our case, we want to do something whenever the user
+    changes the Notification radio buttons. Currently, in the HTML, we bind to the click event of both notification
+    radio buttons, and call a method in our component class. When the user clicks the text button, we add a required
+    validation rule to the phone FormControl. When the user clicks the email button, we remove the validation rule from
+    the phone FormControl. Let's implement this same feature by watching for changes instead of relying on event binding
+    in the HTML. We'll begin by watching the send notification FormControl. We want to start watching as soon as the
+    component is initialized, so we'll put the code in the ngOnInit method. Recall how we get the FormControl from the
+    FormGroup? We'll use this.customerForm.get, and the name of the FormControl, which in this case is notification. We
+    access the valueChanges property and call the subscribe on that observable to start watching for changes. We'll get
+    an event every time either radio button changes. When a change occurs we get the value of the notification
+    FormControl, for now we'll just log the value to the console. Note that this code must be after the definition of
+    the root FormGroup, otherwise this reference is null. And this line is a little bit long, so let's break it up.
+    Let's try it out in the browser. First, let's open the developer tools to view the console. Click Text and we see
+    text logged to the console. Click Email, and email is logged to the console. The code is notified every time we
+    change these radio buttons. We can subscribe to valueChanges on a FormControl as we've done here, or on any
+    FormGroup, including the root FormGroup. Now that we know how to watch for changes, how can we react to those
+    changes?</p>
+
+<h3>Reacting: Adjusting Validation Rules</h3>
+
+<p>As the user makes changes to the form, we can react to those changes to provide a more dynamic and customized
+    experience. We can adjust the validation rules. We can handle validation messages in the component class instead of
+    hardcoded in the template. We can adjust the user interface elements, adding or removing content as needed. We can
+    provide automatic suggestions as the user types. The possibilities are limited only by our imaginations, and of
+    course customer requirements. Let's see what we can do. Currently, our HTML binds to click events to notify us when
+    the user clicks a specific radio button. We then have a setNotifications method that adjusts the validation based on
+    the selected option. Wouldn't it be nice if we could get rid of this event binding and just watch for changes using
+    code in the component class? Let's remove the click event handler from the HTML for both radio buttons here. In the
+    component, we already set up a watcher on the notification FormControl that is watching our radio buttons. Instead
+    of logging to the console, in the callback function for this watcher we can call the setNotification method, and
+    pass in the value. That's all we need to do, let's see if our code still works. Click on Text, and the phone number
+    validation kicks in. Click on Email, and the phone number validation turns off. Yep, it works. By using a watcher to
+    change the validation, we no longer rely on the HTML to notify us of changes to the input element. Let's see what
+    else we can do.</p>
+
+<h3>Reacting: Displaying Validation Messages</h3>
+
+<p>We can do more than just change the validation rules. Let's move our validation error messages out of the HTML and
+    into our component class, then use a watcher and react by setting the appropriate message to display. Moving
+    validation error messages to the component class gives us much more flexibility, we can read the message text from a
+    file, or retrieve it from a back-end server. We can tailor the messages to the user or circumstances, and we can
+    greatly reduce the amount of boilerplate code in our HTML. We'll just move the validation messages for one
+    FormControl in this demo, but you can use these techniques to move any of your validation messages to the component
+    class. We could even make the validation code generic, so one set of code would handle display of all of the
+    validation messages for the template. For now, let's just move the validation messages for the email FormControl. We
+    start in the component class, and build a data structure to store the validation error messages. We define the
+    validation rules as key and value pairs, where the key is the validation rule name, and the value is the string
+    message we want to display. We'll hardcode them here, but you can imagine these being populated from an Angular
+    service that retrieves them from a file or back-end server. We then define a property that will contain the
+    validation message to display. So this structure defines the list of all of the available validation messages for a
+    particular FormControl, and this contains the validation message to display to the user, if any. The input element
+    in the HTML will bind to this property, and display the validation message as appropriate. Now let's add a watcher
+    on the email FormControl. We want to start watching right away, so we add the code to the ngOnInit method. I'll
+    paste the code, and we can talk through it. Every time the control is changed, we want to reevaluate the validation
+    messages. Why every time? Because adding or deleting a single character could cause the validation status to change,
+    requiring a change in the validation error message. First, we define a variable for a reference to the email
+    FormControl to minimize repeated code, then we add a watcher for the FormControl. In the watcher's callback function
+    we call a setMessage method and pass in the FormControl. This setMessage method will determine the appropriate
+    validation message to display, if any. We'll add this new method down here. The method takes in a FormControl or
+    FormGroup, so we set the type to AbstractControl. The method does not return anything, so we set the return type to
+    void. In the method body, we first clear any current message. Why do we clear the messages first? Because the most
+    recent change to the input element could cause all of the validation rules to pass, and we don't want any leftover
+    messages showing. Next, we determine whether we should display a validation message. All of the dirty, touched,
+    valid checking moves out of the template and into the component class here. We want to display a validation message
+    if the associated input element was touched or dirty, and the FormControl has validation errors. We use the
+    JavaScript Object.keys method to return an array of the validation error's collection keys. Recall that the errors
+    collection uses the validation rule name as the key. Since our validation message's data structure also uses the
+    validation rule name as the key, we can directly map into our validationMessage's data structure. That way this can
+    handle display of multiple messages, if necessary. In looking at this method, I'm sure you can already see ways to
+    make it more generalized to work with other FormControls, but this will do for our purposes. Now for the best part,
+    in the HTML we can remove all of the dirty, touched, valid checking, and bind instead to the emailMessage property.
+    We start here with the ngClass. If there is a value in the errorMessage property, we set the has-error style, that's
+    it. Same for our span here, and we simply display the contents of the emailMessage using interpolation. Wow, that
+    simplified our HTML. Let's try it out in the browser. We type a character in the Email input element, and we see the
+    pattern error. We delete the character, and we see the required validation error, and if we put in something
+    matching the pattern, the error is gone. It works, yay. But there is an issue with this watching technique. When
+    using the valueChanges watcher, we don't get notified of focus events, that's because when it gets or sets focus,
+    its value doesn't change. This means that we can't use valueChanges to display a message when the input element is
+    touched. Another thing that can be irritating for the user is that we are telling them that they made an input error
+    before we've even given them a chance to enter a valid email address. As soon as I type a single character here,
+    it's telling me that the email address is not valid. Well of course it's not valid, I haven't finished typing it
+    yet. To delay validation, giving the user a chance to enter the data, we can use Reactive transformations. Let's see
+    what that means.</p>
+
+<h3>Reactive Transformations</h3>
+
+<p>Observables provide operators that allow us to transform how we see the emitted events. There are many observable
+    operators that do everything from filtering, to mapping, to throttling, to solving world peace. Well, maybe not that
+    last one. One such operator is debounceTime. DebounceTime ignores all events until a specified time has passed
+    without another event. For example, debounceTime(1000) waits for 1 second with no events before emitting another
+    event. This is very useful for validation, especially if you don't want to show the validation messages until the
+    user has stopped typing. Let's look at this with a marble diagram. A marble diagram shows events as marbles on a
+    timeline, and is useful for visualizing observables. Without debounceTime when the user starts typing we get
+    valueChanges events for every change they make. Since we are setting validation on the valueChanges event, the user
+    sees a validation message as soon as they type the first character, we don't give them a chance to enter a correct
+    value. We continue to display the validation error messages until the user has typed enough to match the pattern. If
+    we use the debounceTime Reactive transformation, we don't receive events until the user has stopped typing the
+    defined amount of time. That gives the user a chance to enter a correct value before we start displaying validation
+    error messages. In this example, the user types ab@c and pauses. When the specified amount of time passes since the
+    last character was typed, we receive the valueChanges event and perform the validation. At this point the value is
+    valid and no validation message is displayed. If the user then types more characters and pauses, when the specified
+    amount of time again passes, we receive the valueChanges event, and again perform the validation. DebounceTime is
+    one of the most commonly used reactive transformation operators when working with validation, but there are many
+    others. ThrottleTime emits a value, then ignores subsequent values for a specified amount of time. This is useful
+    when you receive way too many events, as when tracking mouse movements. DistinctUntilChanged suppresses duplicate
+    consecutive items. This is useful when tracking key events to prevent getting events when only the Ctrl or Shift
+    keys are changed. And there are many more, you can see the list of them here. Now let's see a Reactive
+    transformation in action with a demo. We are back, and looking at the component class. The first step is to import
+    the debounceTime Reactive extension's operator. Next, we call the debounceTime operator on the observable here, and
+    specify the desired wait time. We'll wait 1 second, which is 1000 ms. That's it. Now our email validation should not
+    display until the user has had a chance to enter a value. Let's see it in action in the browser. Recall previously
+    that when we entered a character, we'd see a validation message asking us to enter a properly formatted email
+    address. Now we have a chance to type in a valid email address before the validation kicks in. I'll reset the form,
+    and type without stopping. Notice that no validation messages appear. Let's try it again, but this time I'll pause,
+    and the validation message appears. Such a little change, and such a big difference for our user's satisfaction.
+    Let's finish up this module with some checklists we can use when we do our own watching and reacting.</p>
+
+<h3>Checklists and Summary</h3>
+
+<p>To watch for changes to a FormControl or FormGroup, use the valueChanges observable property, and subscribe to the
+    observable by calling the subscribe method. This provides notifications each time the value of myFormControl
+    changes. To react as the user makes changes to a FormControl or FormGroup, we simply write code in the subscribe
+    function. Code in the subscribe function can change validation rules. In the demo, we watched the send notifications
+    FormControl, and added required validation on the phone number when the user selected to be notified via text. Code
+    in the subscribe function can handle validation messages. We saw how to move the validation messages and control the
+    error message styling from the component class instead of hardcoded in the HTML. Or we can write code in the
+    subscribe function to adjust user interface elements, provide automatic suggestions, and so much more. To use
+    Reactive extensions such as debounceTime, we first use the import statement to add the operator, then we use the
+    operator by chaining it on the observable. We can chain any number of operators here. In the demo, we saw how to use
+    debounceTime to give the user a chance to enter a valid email address before displaying validation messages. In this
+    module, we examined how to watch for changes, and react to perform tasks such as modifying validation rules and
+    managing validation messages. We also saw how to leverage Reactive transformations, such as debounceTime, to
+    transform the events we are watching. At this point, we have successfully moved much of the logic we had in our
+    template for the email input element into our component class. On the left is the original HTML for the one input
+    element using the template-driven technique. It's long and has lots of styling and validation logic. On the right is
+    the HTML as we have it now. It is the same input element using the Reactive forms technique. Notice that we have no
+    complex logic here deciding when to display the has-error style class, no two-way binding, no validation attributes,
+    no hardcoded validation error messages, or complex logic deciding when to display those messages. We simply set the
+    formControlName directive and use the property containing the validation messages to display. Which HTML would you
+    rather build, maintain, and test? Up next, let's look at how to dynamically add input elements to our form.</p>
+

@@ -1,0 +1,251 @@
+<h2>Building a Reactive Form</h2>
+<h3>Introduction</h3>
+
+<p>Building a form using the Reactive approach means more component code and less HTML. Welcome back to Angular 2:
+    Reactive Forms, from Pluralsight. My name is Deborah Kurata, and in this module we walk through building a simple
+    reactive form with a focus on the basics. We'll expand on these basics throughout the remainder of this course.
+    Sometimes a simple form is all we need, then the template-driven forms approach makes sense, it's quick and easy,
+    and gives you a lot of functionality with very little code. Other times we need more. If you need more
+    functionality, more flexibility, or more control of your forms and their associated data, selecting the Reactive
+    forms approach may be the better choice. In this module, we build a Reactive form, we start with the component
+    class. We update the Angular module to pull in the Reactive form directives, then we modify the template using those
+    directives. We look at how to use setValue and patchValue to update form values. Lastly, we see how to simplify our
+    component class with FormBuilder. Let's get started.</p>
+
+<h3>The Component Class</h3>
+
+<p>Recall from the prior module that when we use the template-driven approach, Angular automatically generates the form
+    model by creating the FormGroup and FormControl instances for us, and we use ngModel for two-way binding to keep the
+    user's entries and the data model properties in sync. With the Reactive forms approach, we define the form model by
+    creating the FormGroup and FormControl instances ourselves in our component class. We then bind the template to the
+    form model; this means that our form is not directly modifying our data model. So how do we create the form model?
+    Every form model requires at least one FormGroup, which I call the root FormGroup. This is the FormGroup that
+    represents the entire form. The data structure for our demo form's root FormGroup is shown here. It contains
+    properties to retain state, to set default values, and retain user entries, and a child controls collection that
+    represents the content of the form. A form model often has one FormControl in this controls collection for each
+    input element on the form. Though this is not required, we could have input elements on our form that we don't need
+    to track. For example, we could have a checkbox or a select element that manages part of the UI, but does not need
+    to be tracked by our form model. The controls collection can included nested FormGroups to group sets of controls or
+    other nested FormGroups. We'll look at nested FormGroups later in this course. The controls collection can also
+    include FormArrays to work with groups of FormControls or FormGroups as an array. We'll try out FormArrays later in
+    this course. We start creation of our form model with the root FormGroup. One way to create that root FormGroup is
+    shown here. This code imports the FormGroup from angular/forms, so we can use it as the data type for our form
+    model. We declare the root FormGroup here, this property holds the reference to our form model. Our form collects
+    data from our customers, so we'll call it customerForm. Here we define our data model, we are managing customer data
+    so we call it Customer. In the ngOnInit lifecycle hook method, we assign the customerForm property to a new instance
+    of the FormGroup; this creates the root FormGroup for the form model. We could put this code in the constructor
+    instead, but we selected to use ngOnInit to ensure the component and template are initialized before building the
+    form model. In the FormGroup constructor we pass in an object; this object contains the FormControls and any nested
+    FormGroups that comprise the contents of this root FormGroup. Like this, we first add FormControl to the import
+    statement from angular/forms. In the FormGroup constructor, we add a set of key and value pairs. The key is the
+    FormControl name, and the value is a new instance of a FormControl. We repeat this, one for each input element on
+    the form. We can optionally pass a default value to the FormControl constructor as shown here. In this case, we pass
+    true as the default value for the sendCatalog input element. We can also pass validation rules here in the
+    FormControl constructor. We'll talk about validation in the next module. Let's jump into a demo and see how to
+    change our current template-driven Form into a Reactive form.</p>
+
+<h3>The Component Class: Demo</h3>
+
+<p>In this demo, we build the form model for our demo form. We are back in our demo project just as we left it from the
+    prior module. We are about to switch our demo form from the template-driven approach to the Reactive approach, so if
+    you want to retain the code for the template-driven approach for future reference, now is the time to make a copy of
+    your project folder. Are we ready to tackle the Reactive forms approach? Let's begin with the component class.
+    First, let's delete the code we added specifically to look at the template-driven forms model. We don't need to pass
+    the form into the save method, so let's delete that. Then we no longer need ngForm here, so we can delete that as
+    well. Whenever we build a form using the Reactive approach, we start by importing our building blocks because we
+    know we're going to need them. We import both FormGroup and FormControl from angular/forms. With the Reactive forms
+    approach, we explicitly create instances of these building blocks to define our form model. Let's specify a property
+    from the root FormGroup and call it customerForm, its type is FormGroup. This root FormGroup defines our form model.
+    Our template will bind to this property to associate the HTML form element with this root FormGroup instance. We'll
+    use the same data model as with the template-driven approach. Let's make one more change here to fix up our
+    console.log. Now we'll log our customerForm property using this. Now we need to create and initialize this FormGroup
+    property. We could do it right here on the declaration, or we could add it to the component class constructor, or we
+    could put it in a lifecycle hook. Let's add it to the OnInit lifecycle hook, so that the instance is created when
+    the form is initialized. First we import OnInit from angular/core, then we add the implements keyword to tell
+    TypeScript that we want to implement the OnInit interface. Lastly, we implement the ngOnInit method. In this method
+    we use the conventional syntax to create an instance of the FormGroup class using the new keyword, this.customerForm
+    = new FormGroup. This creates an instance of the FormGroup and assigns it to our CustomerForm property. But we see a
+    syntax error here. If we hover over this error we see that the FormGroup constructor requires that we pass in a set
+    of controls that are associated with this FormGroup, each control is defined with a key and value pair where the key
+    is the control name and the value is an AbstractControl. AbstractControl is the base class for FormControl and
+    FormGroup. This means that our FormGroup can be initialized with FormControls and nested FormGroups. For now, we'll
+    just initialize the FormGroup with a set of FormControls. We're passing in an object so we use curly braces, then we
+    add a FormControl for each input element in the templates form. Let's start with the first name. We'll give it a
+    control name of firstName and create a new FormControl instance using the new keyword. We repeat this syntax for the
+    lastName, and create a new FormControl instance for it. Same for the email address, and the sendCatalog flag. If we
+    want to set a default value in any of the associated input elements, we pass that to the FormControl constructor.
+    Our Marketing Department, of course, wants the Send catalog option checked on by default, so we set that default by
+    simply passing true into the constructor for the sendCatalog FormControl. We've now defined our form's root
+    FormGroup with a FormControl for each of our four input elements. This structure is the form model, and tracks the
+    form value and state. Don't confuse this form model with our data model. The form model defines the set of
+    FormGroups and FormControls that match up with the HTML form and input elements. The data model defines the data
+    passed to and from a back-end server; we are using the same Customer class data model as the template-driven
+    approach. This is a good start, but before we can update the template to bind to our FormGroup and FormControls, we
+    need to pull in the appropriate directives.</p>
+
+<h3>The Angular Module</h3>
+
+<p>We can think of an Angular module as a box. The box contains a related set of components. The templates associated
+    with any component we declare in an Angular module can only access directives declared or imported into that same
+    Angular module. If your Customer-Components template wants to use the Reactive forms directives, the
+    Reactive-FormsModule must be added to the imports array in the same Angular module. If you are not familiar with
+    Angular modules, consider watching the Angular 2: Getting Started course, which covers Angular modules in detail.
+    Let's update our Angular module now. We are looking at the application's root Angular module called AppModule; it is
+    here that we declared our CustomerComponent. The template in the CustomerComponent wants to use the Reactive forms
+    directives, so it is in the same Angular module that we add the Reactive FormsModule to the imports array. Recall
+    that FormsModule was for template-driven forms. Let's just change that to ReactiveFormsModule here and here. We are
+    now set up to use the Reactive Forms directives. The templates associated with any component declared in this
+    Angular module can now access these Reactive forms directives. Let's update our template next.</p>
+
+<h3>The Template</h3>
+
+<p>Now that we've defined the form model with its root FormGroup and its associated FormControls in the component class,
+    we can update the template to bind to that form model. We bind the form to the FormGroup, and each input element to
+    its associated FormControl using the Reactive forms directives. As we saw in the last module, these are the
+    directives provided for Reactive Forms, we'll look at formGroup and formControlName here. We'll look at more of
+    these directives later in this course. We use the formGroup directive to bind the form element in the template to
+    the root FormGroup of our form model. We use square brackets to denote property binding, and assign it to the form
+    model property from our component class. The form then knows not to build its own form model, and to instead use the
+    one defined by the customerForm property. We use the formControlName directive to bind each input element to its
+    associated FormControl. We bind to the name of the FormControl instance as defined in the form model. Here, we bind
+    to the firstName formControl. Notice that there are no square brackets here, we are binding to a simple string name,
+    not to a property. We add the formControlName directive to every input element within the form that we want to
+    track. For styling, display of the validation error messages, and other purposes, the template may want to access
+    the form model properties. For example, we may want to access the firstName FormControl properties to determine if
+    the first name input element was touched or is valid. There are several techniques for accessing the form model
+    properties. One option is to navigate through the form model hierarchy. For example, to access the valid property
+    for the firstName FormControl, we would use customerForm, our form model, .controls to access the collection of
+    controls on the form, .firstName to access the first name FormControl, and .valid to access the desired property of
+    that control. Alternatively, we can take advantage of the FormGroup's get method to reference the FormControl. We
+    would use customerForm, our form model, .get to call the get method, passing in firstName to find the reference to
+    the first name control, and .valid to access the desired property of that control. This syntax is often shorter,
+    especially when working with nested FormGroups. Watch the quotes here because often this syntax is within a quoted
+    string, if the outside quoted string uses double quotes, then this argument should be in single quotes. A third
+    option is to define a separate property in the component class for the input element. We then use this property when
+    creating the FormGroup. In the template, we can then reference the FormControl with this property. This technique is
+    most useful for controls referenced frequently in the template or in the code. Let's try out the FormGroup and
+    FormControl name directives in our template. Let's start with a form element. We associate the form element with the
+    root FormGroup, we do that using the formGroup directive to bind the form element to the FormGroup instance property
+    we defined in the component class. We'll use square brackets to define property binding, and bind to our
+    customerForm property. We can delete the template reference variable here and here, because our template can access
+    the customerForm property directly. Recall that the Save button was also using the signupForm template reference
+    variable. Here, we can replace the template reference variable with our customerForm property, our button is still
+    disabled if our FormGroup is not valid, but now we reference the FormGroup instance we created instead of one that
+    Angular had generated for us. And if we still want to see the values of our FormGroup, we can change these logging
+    lines to use customerForm as well. Next, let's hook up our input elements starting with the first name. We'll remove
+    the ngModel, we no longer need the name attribute, and we'll delete the template reference variable. Instead, we'll
+    use the formControlName directive to bind this input element to the name of the associated FormControl, in this case
+    firstName. We don't need square brackets here because we are binding to a simple string, not a property. We then
+    replace the template reference variable here in the div that sets the validation error style. We can use any one of
+    the three techniques we saw in the slides to reference the desired form model object. I'll use Search/Replace to
+    quickly replace the template reference variables with the customerForm get method. This is looking a bit messy here
+    with lots of logic that may be better in the component class. We'll refactor this code a little later in this
+    course. For now I'll go off and repeat these changes for the last name, email address, and send catalog checkbox. If
+    you are coding along, be sure to delete the ngModel directive, name attribute, and template reference variable from
+    each input element, and add the form ControlName directive, then use Search/Replace to replace each reference to the
+    template reference variable with a customerForm.get method. Note that the directive name and the FormControl string
+    names are case sensitive. Are we ready to move on? We still have all of these other input elements here for the
+    customer's street address, let's comment them out for now so we can get this part of the form working. Now we're
+    ready to try it out in the browser. And here is our first Reactive form. If the form does not display for you, use
+    the developer tools and view the messages in the console. On this form, each of the input elements display
+    correctly, and our default for the Send catalog checkbox is set to true. The address input elements don't display
+    here because we commented them out. Looking at the values below the form, the value of each state here is false. If
+    we give focus to the First Name field, and then leave the field, we see the appropriate validation error message,
+    and we see that Touched now is true. If we type in a character we see the minimum length error message, and Dirty is
+    now true, and if we put in valid values for each field, Valid is true. The Value property displays the key and value
+    pairs for each FormControl registered with the FormGroup. Notice that the keys are the names we defined for each
+    FormControl instance, and the values are our entered inputs, so the form model works the same, it's just that now
+    we're creating it ourselves. But, what if we want to change the value of an input element from our component class?
+    Say we want to set defaults after the form model is initialized. We aren't using two-way binding anymore, so
+    changing the data model won't change the form values. How do we update the input element values on our form from our
+    component class code?</p>
+
+<h3>Using setValue and patchValue</h3>
+
+<p>To update input elements on the form from our component class, we use setValue or patchValue. Use setValue to set the
+    value of every FormControl in the form model. In this example, we have three FormControls and we set the value of
+    each one. If we only want to set a subset of the values, we use patchValue instead, here we only set two of the
+    values. Let's give this a try. To try this out, we'll add a button to our demo form template to provide some test
+    data on the form. We'll use event binding to bind to a populateTestData method. Next, we need to write that method
+    in the component class. I'll paste the code and we can talk through it. In this method, we use setValue to update
+    each of the values in the form model. Let's check it out in the browser. Looking at the form, we see our new Test
+    Data button. Click it, and the form populates with the defined values, but what if we only wanted to populate the
+    name fields? If we go back to the method and remove the email address, for example, then look back at the form in
+    the browser, if we open the developer tools, then click Test Data, we see an error message in the console, Must
+    supply a value for form control with name: email. That's because the setValue requires that we set the value of
+    every FormControl in the form model. What do we do? If you said patchValue, you are correct. Let's change setValue
+    here to patchValue, recheck the form in the browser, click Test Data, and it works. Use setValue when setting all of
+    the FormControls on the form, use patchValue to assign values for a subset of the FormControls. We'll see a more
+    real-world example of these features later in this course. Looking back at the code that created the form model,
+    this code is a bit long, and will be even longer if we add all of the address fields. Wouldn't it be nice if there
+    was an easier way to write this code block? And there is, let's check out the FormBuilder next.</p>
+
+<h3>Simplifying with FormBuilder</h3>
+
+<p>FormBuilder is a class we can use when building Reactive forms to create the form model from a configuration. We can
+    think of it as a factory that creates FormGroups and FormControls for us. The FormBuilder shortens the boilerplate
+    code required to create an instance of the root FormGroup and its associated FormControls and nested FormGroups.
+    This can make the code that creates the form model easier to read and maintain. The FormBuilder is provided as a
+    service, so we access the FormBuilder instance using dependency injection. Since the FormBuilder is provided as a
+    service, we follow the same steps we do for every other Angular server we use. We import FormBuilder with code that
+    looks like this. We inject the FormBuilder instance using the class constructor, like this. Lastly, we use that
+    instance to create our FormGroup, notice that we no longer need to create new instances of FormGroup or FormControl
+    here. We'll look at this syntax more in a moment, first let's try out FormBuilder. Here in the component class we
+    import FormBuilder from angular/forms. Our class currently has no explicit constructor, so we need to add one, then
+    we inject the FormBuilder instance using the constructor parameter. Now we can use that FormBuilder instance to
+    create our FormGroup. Instead of creating a root FormGroup instance using the new keyword, we'll use the FormBuilder
+    instance and call its group method. The group method allows us to define the set of controls and nested FormGroups
+    that are associated with the root FormGroup. Instead of explicitly creating a new FormControl instance, we simply
+    set the default value. We could set the default value to anything, we'll set the defaults to an empty string for all
+    but the sendCatalog FormControl. The group method returns an initialized root FormGroup instance with all of its
+    associated FormControls and nested FormGroups. Now we can delete our original code, and remove FormControl from the
+    import statement, because we no longer use it as a data type. Does this look easier to read without all of the
+    cruft? Let's bring the form up in the browser and see that it still works. Let's take a closer look at the
+    FormBuilder's FormControl syntax. The FormBuilder group method takes in a control configuration object that defines
+    the FormControls associated with the FormGroup. In this example, we define two FormControls, firstName and
+    sendCatalog. Each control configuration object is comprised of a key and value pair, the key is the FormControl
+    name, such as firstName here. The value can be an expression that defines the default value for the FormControl. For
+    example, the last entry has a key of sendCatalog and a default value of true. Alternatively, the value can be an
+    object with two properties, value and disabled. The value property is the default value, as before, and the disabled
+    property is a Boolean, defining whether the input element should be disabled. We'll see that in the upcoming demo.
+    Yet another option allows specifying an array, the first element of the array is the default value expression or the
+    object with the value and disabled state. The next two elements of the array, not shown here, define the validation
+    rules. We'll look at validation in the next module. Now let's try out an alternate syntax. To try out an alternate
+    syntax, let's change the lastName value to be an object with a default value and a disabled state. Let's check that
+    out in the browser. We see that the last name default appears, and the input element is disabled, it works. Notice
+    also that the lastName no longer appears in the Value property for the root FormGroup. This could be a useful
+    feature in a situation that needs this functionality, but we don't need it here, so let's change it back to an empty
+    string default. Looking back at our template, notice that our validation is all still here. We could leave it here,
+    but if we want all of the benefits of Reactive forms, we'll want to move it into our component code as well. We'll
+    do that in the next module. For now, let's finish up this module with some checklists we can use as we build our own
+    Reactive forms.</p>
+
+<h3>Checklists & Summary</h3>
+
+<p>Checklists are a great way to recheck our understanding and our work. When building forms using the Reactive
+    approach, the component class is in charge. In that class we create a property for the root FormGroup. We use this
+    property to bind the form element in the template, then we create the FormGroup instance and pass in each
+    FormControl instance, like this, but we can simplify this code using the FormBuilder. To use the FormBuilder, we
+    import it using an import statement. We inject the FormBuilder instance into the class constructor, and we use that
+    instance like this. The group method returns an initialized root FormGroup instance with all of its associated form
+    controls. Before we can use the Reactive forms directives in our template, we need to pull them into our Angular
+    module. We start by importing the ReactiveFormsModule using the import statement, we then add the
+    ReactiveFormsModule to the imports array property of the ngModule decorator, like this. This makes the Reactive
+    forms directives available to all templates associated with components defined in the declarations array. Note that
+    our demo application has only one feature component, so it is defined in AppModule. In a real application, your form
+    may be declared in a feature module. In that case, the ReactiveFormsModule should be added to the imports array of
+    that feature module. We'll see this when we look at the APM sample application later in this course. We then bind
+    the components template to the form model. In the form element we use the FormGroup directive and property binding
+    to bind to the root FormGroup property we defined in the component class, in this example, that property was called
+    customerForm. In each input element we used the FormControlName directive to bind to the name of the associated
+    FormControl. The name we specify here is the name we set when creating the FormControl, and remember that these
+    strings are case sensitive. After performing each of these steps, we have a Reactive form managed by the form model
+    we define in the component class. In this module, we converted our template-driven form into a basic Reactive form.
+    It began in the component class, where we explicitly created instances of the form building blocks, FormGroup and
+    FormControl. Next we modified the application's Angular module to add the Reactive forms module to the imports
+    array, and pull in the Reactive forms directives. Then we updated the template elements to bind to the FormGroup and
+    FormControls we defined in the component class. We tried out the setValue and patchValue to update the input element
+    values from the component code. Lastly, we saw how to use the FormBuilder to simplify the boilerplate code and
+    create the root FormGroup and its associated FormControls with less cruft. But there's a bit more work to do, let's
+    look at validation next.</p>
+

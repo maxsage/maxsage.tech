@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1;
-    var Angular2Component, Angular2GettingStarted00CourseContentsComponent, Angular2GettingStarted01CourseOverviewComponent, Angular2GettingStarted02IntroductionComponent, Angular2GettingStarted03FirstThingsFirstComponent, Angular2GettingStarted04IntroductionToComponentsComponent, Angular2GettingStarted05TemplatesInterpolationAndDirectivesComponent, Angular2GettingStarted06DataBindingAndPipesComponent, Angular2GettingStarted07MoreOnComponentsComponent, Angular2GettingStarted08BuildingNestedComponentsComponent, Angular2GettingStarted09ServicesAndDependencyInjectionComponent, Angular2GettingStarted10NavigationAndRoutingBasicsComponent, Angular2GettingStarted11RetrievingDataUsingHttpComponent, Angular2GettingStarted12NavigationAndRoutingAdditionalTechniquesComponent, Angular2GettingStarted13AngularModulesComponent, Angular2GettingStarted14Angular2SetupRevisitedComponent, Angular2GettingStarted15FinalWordsComponent;
+    var Angular2Component, Angular2GettingStarted00CourseContentsComponent, Angular2GettingStarted01CourseOverviewComponent, Angular2GettingStarted02IntroductionComponent, Angular2GettingStarted03FirstThingsFirstComponent, Angular2GettingStarted04IntroductionToComponentsComponent, Angular2GettingStarted05TemplatesInterpolationAndDirectivesComponent, Angular2GettingStarted06DataBindingAndPipesComponent, Angular2GettingStarted07MoreOnComponentsComponent, Angular2GettingStarted08BuildingNestedComponentsComponent, Angular2GettingStarted09ServicesAndDependencyInjectionComponent, Angular2GettingStarted10NavigationAndRoutingBasicsComponent, Angular2GettingStarted11RetrievingDataUsingHttpComponent, Angular2GettingStarted12NavigationAndRoutingAdditionalTechniquesComponent, Angular2GettingStarted13AngularModulesComponent, Angular2GettingStarted14Angular2SetupRevisitedComponent, Angular2GettingStarted15FinalWordsComponent, Angular2FirstLook00CourseContentsComponent, Angular2FirstLook01Angular2InActionComponent, Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent, Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent, Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent, Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent, Angular2FirstLook06DataWithHttpComponent, Angular2FirstLook07RoutingComponent, Angular2FirstLook08AngularModulesComponent, Angular2ReactiveForms00CourseContentsComponent, Angular2ReactiveForms01CourseOverviewComponent, Angular2ReactiveForms02IntroductionComponent, Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent, Angular2ReactiveForms04BuildingAReactiveFormComponent, Angular2ReactiveForms05ValidationComponent, Angular2ReactiveForms05ReactingToChangesComponent, Angular2ReactiveForms06ReactingToChangesComponent, Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent, Angular2ReactiveForms08ReactiveFormInContextComponent, Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent, Angular2ReactiveForms10FinalWordsComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -259,6 +259,300 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 return Angular2GettingStarted15FinalWordsComponent;
             }());
             exports_1("Angular2GettingStarted15FinalWordsComponent", Angular2GettingStarted15FinalWordsComponent);
+            Angular2FirstLook00CourseContentsComponent = (function () {
+                function Angular2FirstLook00CourseContentsComponent() {
+                    this.pageTitle = "Angular 2 First Look - Course Contents";
+                }
+                Angular2FirstLook00CourseContentsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-00-course-contents.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook00CourseContentsComponent);
+                return Angular2FirstLook00CourseContentsComponent;
+            }());
+            exports_1("Angular2FirstLook00CourseContentsComponent", Angular2FirstLook00CourseContentsComponent);
+            Angular2FirstLook01Angular2InActionComponent = (function () {
+                function Angular2FirstLook01Angular2InActionComponent() {
+                    this.pageTitle = "Angular 2 First Look - Angular 2 In Action";
+                }
+                Angular2FirstLook01Angular2InActionComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-01-angular-2-in-action.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook01Angular2InActionComponent);
+                return Angular2FirstLook01Angular2InActionComponent;
+            }());
+            exports_1("Angular2FirstLook01Angular2InActionComponent", Angular2FirstLook01Angular2InActionComponent);
+            Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent = (function () {
+                function Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent() {
+                    this.pageTitle = "Angular 2 First Look - Angular 2 Architecture, What's New and What's Different";
+                }
+                Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-02-angular-2-architecture-whats-new-and-whats-different.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent);
+                return Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent;
+            }());
+            exports_1("Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent", Angular2FirstLook02Angular2ArchitectureWhatsNewAndWhatsDifferentComponent);
+            Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent = (function () {
+                function Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent() {
+                    this.pageTitle = "Angular 2 First Look - Angular 2 Essentials: Modules, Components, Templates, and Metadata";
+                }
+                Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-03-angular-2-essentials-modules-components-templates-and-metadata.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent);
+                return Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent;
+            }());
+            exports_1("Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent", Angular2FirstLook03Angular2EssentialsModulesComponentsTemplatesAndMetadataComponent);
+            Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent = (function () {
+                function Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent() {
+                    this.pageTitle = "Angular 2 First Look - Displaying Data: Data Binding, Directives and Pipes";
+                }
+                Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-04-displaying-data-data-binding-directives-and-pipes.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent);
+                return Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent;
+            }());
+            exports_1("Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent", Angular2FirstLook04DisplayingDataDataBindingDirectivesAndPipesComponent);
+            Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent = (function () {
+                function Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent() {
+                    this.pageTitle = "Angular 2 First Look - Services, Dependency Injection, and Component Lifecycle Hooks";
+                }
+                Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-05-services-dependency-injection-and-component-lifecycle-hooks.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent);
+                return Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent;
+            }());
+            exports_1("Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent", Angular2FirstLook05ServicesDependencyInjectionAndComponentLifecycleHooksComponent);
+            Angular2FirstLook06DataWithHttpComponent = (function () {
+                function Angular2FirstLook06DataWithHttpComponent() {
+                    this.pageTitle = "Angular 2 First Look - Data with Http";
+                }
+                Angular2FirstLook06DataWithHttpComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-06-data-with-http.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook06DataWithHttpComponent);
+                return Angular2FirstLook06DataWithHttpComponent;
+            }());
+            exports_1("Angular2FirstLook06DataWithHttpComponent", Angular2FirstLook06DataWithHttpComponent);
+            Angular2FirstLook07RoutingComponent = (function () {
+                function Angular2FirstLook07RoutingComponent() {
+                    this.pageTitle = "Angular 2 First Look - Routing";
+                }
+                Angular2FirstLook07RoutingComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-07-routing.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook07RoutingComponent);
+                return Angular2FirstLook07RoutingComponent;
+            }());
+            exports_1("Angular2FirstLook07RoutingComponent", Angular2FirstLook07RoutingComponent);
+            Angular2FirstLook08AngularModulesComponent = (function () {
+                function Angular2FirstLook08AngularModulesComponent() {
+                    this.pageTitle = "Angular 2 First Look - Angular Modules";
+                }
+                Angular2FirstLook08AngularModulesComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-first-look-08-angular-modules.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2FirstLook08AngularModulesComponent);
+                return Angular2FirstLook08AngularModulesComponent;
+            }());
+            exports_1("Angular2FirstLook08AngularModulesComponent", Angular2FirstLook08AngularModulesComponent);
+            Angular2ReactiveForms00CourseContentsComponent = (function () {
+                function Angular2ReactiveForms00CourseContentsComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Course Contents";
+                }
+                Angular2ReactiveForms00CourseContentsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-00-course-contents.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms00CourseContentsComponent);
+                return Angular2ReactiveForms00CourseContentsComponent;
+            }());
+            exports_1("Angular2ReactiveForms00CourseContentsComponent", Angular2ReactiveForms00CourseContentsComponent);
+            Angular2ReactiveForms01CourseOverviewComponent = (function () {
+                function Angular2ReactiveForms01CourseOverviewComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Course Overview";
+                }
+                Angular2ReactiveForms01CourseOverviewComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-01-course-overview.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms01CourseOverviewComponent);
+                return Angular2ReactiveForms01CourseOverviewComponent;
+            }());
+            exports_1("Angular2ReactiveForms01CourseOverviewComponent", Angular2ReactiveForms01CourseOverviewComponent);
+            Angular2ReactiveForms02IntroductionComponent = (function () {
+                function Angular2ReactiveForms02IntroductionComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Introduction";
+                }
+                Angular2ReactiveForms02IntroductionComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-02-introduction.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms02IntroductionComponent);
+                return Angular2ReactiveForms02IntroductionComponent;
+            }());
+            exports_1("Angular2ReactiveForms02IntroductionComponent", Angular2ReactiveForms02IntroductionComponent);
+            Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent = (function () {
+                function Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Template Driven VS Reactive Forms";
+                }
+                Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-03-template-driven-vs-reactive-forms.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent);
+                return Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent;
+            }());
+            exports_1("Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent", Angular2ReactiveForms03TemplateDrivenVsReactiveFormsComponent);
+            Angular2ReactiveForms04BuildingAReactiveFormComponent = (function () {
+                function Angular2ReactiveForms04BuildingAReactiveFormComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Building a Reactive Form";
+                }
+                Angular2ReactiveForms04BuildingAReactiveFormComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-04-building-a-reactive-form.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms04BuildingAReactiveFormComponent);
+                return Angular2ReactiveForms04BuildingAReactiveFormComponent;
+            }());
+            exports_1("Angular2ReactiveForms04BuildingAReactiveFormComponent", Angular2ReactiveForms04BuildingAReactiveFormComponent);
+            Angular2ReactiveForms05ValidationComponent = (function () {
+                function Angular2ReactiveForms05ValidationComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Validation";
+                }
+                Angular2ReactiveForms05ValidationComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-05-validation.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms05ValidationComponent);
+                return Angular2ReactiveForms05ValidationComponent;
+            }());
+            exports_1("Angular2ReactiveForms05ValidationComponent", Angular2ReactiveForms05ValidationComponent);
+            Angular2ReactiveForms05ReactingToChangesComponent = (function () {
+                function Angular2ReactiveForms05ReactingToChangesComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Reacting to Changes";
+                }
+                Angular2ReactiveForms05ReactingToChangesComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-05-reacting-to-changes.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms05ReactingToChangesComponent);
+                return Angular2ReactiveForms05ReactingToChangesComponent;
+            }());
+            exports_1("Angular2ReactiveForms05ReactingToChangesComponent", Angular2ReactiveForms05ReactingToChangesComponent);
+            Angular2ReactiveForms06ReactingToChangesComponent = (function () {
+                function Angular2ReactiveForms06ReactingToChangesComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Reacting to Changes";
+                }
+                Angular2ReactiveForms06ReactingToChangesComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-06-reacting-to-changes.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms06ReactingToChangesComponent);
+                return Angular2ReactiveForms06ReactingToChangesComponent;
+            }());
+            exports_1("Angular2ReactiveForms06ReactingToChangesComponent", Angular2ReactiveForms06ReactingToChangesComponent);
+            Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent = (function () {
+                function Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Dynamically Duplicate Input Elements";
+                }
+                Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-07-dynamically-duplicate-input-elements.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent);
+                return Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent;
+            }());
+            exports_1("Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent", Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent);
+            Angular2ReactiveForms08ReactiveFormInContextComponent = (function () {
+                function Angular2ReactiveForms08ReactiveFormInContextComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Reactive Form in Context";
+                }
+                Angular2ReactiveForms08ReactiveFormInContextComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-08-reactive-form-in-context.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms08ReactiveFormInContextComponent);
+                return Angular2ReactiveForms08ReactiveFormInContextComponent;
+            }());
+            exports_1("Angular2ReactiveForms08ReactiveFormInContextComponent", Angular2ReactiveForms08ReactiveFormInContextComponent);
+            Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent = (function () {
+                function Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Create, Read, Update, and Delete (CRUD) Using Http";
+                }
+                Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-09-create-read-update-and-delete-crud-using-http.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent);
+                return Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent;
+            }());
+            exports_1("Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent", Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent);
+            Angular2ReactiveForms10FinalWordsComponent = (function () {
+                function Angular2ReactiveForms10FinalWordsComponent() {
+                    this.pageTitle = "Angular 2 Reactive Forms - Final Words";
+                }
+                Angular2ReactiveForms10FinalWordsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/angular2/angular2-reactive-forms-10-final-words.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], Angular2ReactiveForms10FinalWordsComponent);
+                return Angular2ReactiveForms10FinalWordsComponent;
+            }());
+            exports_1("Angular2ReactiveForms10FinalWordsComponent", Angular2ReactiveForms10FinalWordsComponent);
         }
     }
 });

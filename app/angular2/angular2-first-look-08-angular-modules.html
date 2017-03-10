@@ -1,8 +1,8 @@
-Angular Modules
+<h2>Angular Modules</h2>
 
-Types of Feature Modules
+<h3>Types of Feature Modules</h3>
 
-As an application grows it becomes really important to be able to break your application up into different
+<p>As an application grows it becomes really important to be able to break your application up into different
 sections or pieces of functionality. And when that time comes, we create Angular modules. In this chapter we're
 going to learn more about Angular modules. We've already had one, our app module, but we also can have routed
 modules. For example we can eager or we can lazy load our modules. This gives us an advantage so we can decide
@@ -27,11 +27,11 @@ That widget module might be shared throughout the application, but unlike the se
 multiple instances of each widget. For example, if I have two data calendars on the same page I don't want them
 to share the same instance, they should have their own state and their own behavior. Throughout this chapter
 we'll talk about all four types of these feature modules, but first let's start with the routed module, because
-we can eagerly or lazily load them.
+we can eagerly or lazily load them.</p>
 
-Eager Loading
+<h3>Eager Loading</h3>
 
-When we define a module that we're going to route to, the easiest way to get there is to eagerly load them. We
+<p>When we define a module that we're going to route to, the easiest way to get there is to eagerly load them. We
 get all those modules right up front. Eager loading is when we load a feature module right at startup. We're
 getting it eagerly, right with the route module. Ideal candidates in our application would be the characters or
 the vehicles areas, those could become feature modules that we eagerly load. When we eagerly load modules, we're
@@ -58,11 +58,11 @@ feature modules all we have to do to pull them in is go to our root module and j
 One point in case, order does matter here. If you have routes in different modules, they actually get traversed
 in the order they're added. This becomes important if you have a star route. A star route is often looked at as
 a 404 route or a page not found route. You probably want that one to come in last. Now let's go take a look at
-one of our demos and see how eagerly loading modules works for us.
+one of our demos and see how eagerly loading modules works for us.</p>
 
-Eagerly Loading Routed Modules
+<h3>Eagerly Loading Routed Modules</h3>
 
-Let's flip back over to our demo application and go down to number 27, Eagerly Loaded Routes. In here we're
+<p>Let's flip back over to our demo application and go down to number 27, Eagerly Loaded Routes. In here we're
 going to see a routed module, a feature module, for the characters and for the vehicles. Notice the application
 still has routing, characters, and vehicles here. And we still have our AppRoutingModule, but in this
 AppRoutingModule I only have my routes for the default route, which is going to redirect to /characters, and
@@ -86,11 +86,11 @@ we had our star route and that one needs to come last because that matched first
 would be ignored because that would satisfy pretty much anything we pass in to a route. So now we run our
 application, everything is eagerly loaded and we get all the data up front. Everything's just there and ready to
 go. But sometimes we don't want it all to be loaded up front, and we'll talk about that next with lazily loaded
-feature modules.
+feature modules.</p>
 
-Lazy Loading
+<h3>Lazy Loading</h3>
 
-We want to make our applications really snappy for our users, so we'll provide all the data they need up front
+<p>We want to make our applications really snappy for our users, so we'll provide all the data they need up front
 to be eagerly loaded and then content they might need later to be lazy loaded. Lazy loading of modules is on
 demand, we get it just in time, right when we need it. This is going to lower the initial payload and make our
 application feel much faster for the user. Let's picture this scenario, we're got an application where all the
@@ -113,11 +113,11 @@ symbol because if you use a symbol here and define the component, like we did wi
 going to eagerly load them. Because it's a string and we're using a loadChildren it knows, okay this is going to
 be lazy loaded, and we use the hash to define that's the name of the module you want to get from that file. So
 the characters and vehicles are going to lazily load and they're not going to be directly imported. Now let's go
-back to our demos and we'll take a look at the lazily loading modules to see how that works in our application.
+back to our demos and we'll take a look at the lazily loading modules to see how that works in our application.</p>
 
-Lazily Loading Routed Modules
+<h3>Lazily Loading Routed Modules</h3>
 
-We flip back to our demo app, we'll slide on down to demo 28, Lazily Load Routes. Here we'll click on the sample
+<p>We flip back to our demo app, we'll slide on down to demo 28, Lazily Load Routes. Here we'll click on the sample
 and we're going to see the same kind of application, but now we're going to use lazy loading. First we see we
 get our characters right away, now let's click on vehicles. I'll tell you when I'm going to click, 1-2-3-click,
 and notice that we have a slight delay right there. Now we go back to characters, it's instant, go back to
@@ -149,11 +149,11 @@ wait for the vehicles content to come across the wire. That's the pro of lazy lo
 different menu items. We don't have to wait for the other nine if we just load the dashboard of the characters
 first. The downside is the first time that the user clicks on one of these lazy load module links, it might take
 a moment to go get that content. What if we could have the best of both worlds? Wouldn't that be great? Let's
-talk about that next.
+talk about that next.</p>
 
-Defining Preload Strategies
+<h3>Defining Preload Strategies</h3>
 
-We want the user to have an awesome experience by getting the content quickly so we eagerly load. But we really
+<p>We want the user to have an awesome experience by getting the content quickly so we eagerly load. But we really
 don't want them to have to wait for that lazily loaded content when they click on it. What if we could take that
 lazily loaded content and preload it with a different kind of strategy? That's where preload strategies come
 into play. A preload strategy is designed to help the problem where a user clicks on a link that goes and gets a
@@ -176,11 +176,11 @@ loadChildren and it's pointing to a string path, and I know it's going to use th
 the preload to true and then I have to tell the application that I want to use this strategy. So in the
 AppRoutingModule we passed to the forRoot this preloadingStrategy of PreloadSelectedModulesList, which is the
 one we defined up top. Now let's go back to the storyline tracker application, which has a lot of lazy loaded
-content, and we'll see how preloading can really help the user experience.
+content, and we'll see how preloading can really help the user experience.</p>
 
-Preload Strategies in the Storyline Tracker
+<h3>Preload Strategies in the Storyline Tracker</h3>
 
-When we launch the storyline tracker application we can see that we've got dashboard, characters, vehicles,
+<p>When we launch the storyline tracker application we can see that we've got dashboard, characters, vehicles,
 admin and login. These are all different modules, feature modules, and they all happen to also be routed
 featured modules. Let's go take a look at how we've defined them. In the app-routing.module, we can see there's
 an admin, dashboard, characters, and vehicles, all are using loadChildren, all are lazily loaded. Now we also
@@ -216,11 +216,11 @@ we can split our bundles up in case we want to use eager or lazy loaded modules.
 bundling and minification and other standard web practices. A lot of these are built into the tools that Angular
 is starting to provide. If you want to learn more about these, you can check out the documentation or you can
 take a look at the Angular cli, which has this built into it, or check out one of our Angular 2 courses that
-covers deployment.
+covers deployment.</p>
 
-Feature Module Types
+<h3>Feature Module Types</h3>
 
-Our application is made up of various ngModules, Angular modules. These different pieces are features of our
+<p>Our application is made up of various ngModules, Angular modules. These different pieces are features of our
 application. We call these feature modules. Earlier we talked about the four basic types of feature modules,
 there are domain modules. These are the most basic types of modules, they represent a domain of logic where we
 encapsulate a certain feature. These could be our characters are or a menu area with navigation and other pieces
@@ -244,11 +244,11 @@ not want to import the CoreModule into other modules. This is key to maintaining
 final type are for the widgets. We often have these in applications, these are for our components or directives
 or pipes, things that we're going to use across an entire app. I usually call my widget module the SharedModule
 and I will import the SharedModule in every other module that needs to use these widgets. Next let's see how our
-application can be applied using these feature module types.
+application can be applied using these feature module types.</p>
 
-Identifying Feature Modules
+<h3>Identifying Feature Modules</h3>
 
-I find it helpful to be able to apply the feature module types to a real application. This helps us identify the
+<p>I find it helpful to be able to apply the feature module types to a real application. This helps us identify the
 types as our building apps. The dependency chain might look something like this. We're on the left with the
 black lines, those four modules are effectively imported into the AppModule. So that AppModule imports the other
 four because it needs all of those. It has to have our services out of core, our menu, of course, to show the
@@ -286,11 +286,11 @@ make that contain all my services in my app, but another example is the HttpModu
 contains a bunch of services we can use. And the widget module examples might be the CommonModule, that's the
 thing that comes out of Angular that gives us ngIf and ngFor, and we might create our own SharedModule with our
 own components and directives. Now let's go look through our storyline tracker application and we can see
-different examples of feature modules.
+different examples of feature modules.</p>
 
-Feature Modules in the Storyline Tracker
+<h3>Feature Modules in the Storyline Tracker</h3>
 
-Back in the storyline tracker we can identify the different kinds of modules that we talked about. First we have
+<p>Back in the storyline tracker we can identify the different kinds of modules that we talked about. First we have
 domain feature modules, things like vehicles. This is our vehicle-module and it contains everything we need to
 know about vehicles, our services, our components, and we happen to route to this feature module, which also
 makes it a routed feature module. We have other examples of routed feature modules, such as the dashboard. We
@@ -322,11 +322,11 @@ things in the application and deciding which ones are like minded or related, th
 We can then decide which ones are services, which ones are widgets, and which ones are domains or routed
 domains. As a reminder, there are just ngModules in Angular. These words we're using, they're not part of
 Angular, they're just a way for us to help think about how to divide our application, how to organize it. You'll
-find these terms mentioned in the official style guide on the Angular website in their docs.
+find these terms mentioned in the official style guide on the Angular website in their docs.</p>
 
-Provider Tips
+<h3>Provider Tips</h3>
 
-Sometimes our feature modules have to have providers. We need to make sure their services are available to those
+<p>Sometimes our feature modules have to have providers. We need to make sure their services are available to those
 modules. There's a couple important notes I've learned along the way about using providers in feature modules
 and I want to share them with you. It's really important to consider how we want those providers to behave in
 our system. So let's think about a couple different angles. Let's say we had a component and it's got a bunch of
@@ -357,11 +357,11 @@ providers listed. There is a RouterGuard for an AuthenticationGuard, CharacterSe
 VehicleService. These are all different types that could be used throughout the application. So we provide these
 to the root injector and this makes them available everywhere in the application. NgModules help us organize our
 declarations and our providers. Just keep in mind how those providers work and when in doubt, provide at the
-module level. And these are just some tips to help you with providers as you're designing your application.
+module level. And these are just some tips to help you with providers as you're designing your application.</p>
 
-Wrap-up
+<h3>Wrap-up</h3>
 
-In this module we learned quite a bit about eager loading and lazy loading of different modules. Whenever we're
+<p>In this module we learned quite a bit about eager loading and lazy loading of different modules. Whenever we're
 routing, we have to decide which of these types we want to use. Eager loading gets them on demand up front, lazy
 loading allows us to delay that load so we can front load everything we need for the user with the eager loaded
 modules. We can gain better performance out of lazy loaded modules and remove the delay of when a user clicks on
@@ -374,4 +374,4 @@ Angular progresses through Angular 2. I encourage you to click on the examples, 
 around, and we can discuss them and live fire on the Pluralsight website. And finally, please check out the
 official style guide that I'm helping author on the angular.io website. This is a great place for you to learn
 new tips about designing your applications. I truly hope you've enjoyed taking this Angular 2 first look as much
-as I've enjoyed presenting it to you. Thank you and have fun with Angular.
+as I've enjoyed presenting it to you. Thank you and have fun with Angular.</p>
