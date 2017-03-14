@@ -47,7 +47,10 @@
                     In this first demo we're going to start with a very simple app that does not do any MVVM nor any
                     data binding. First let's see it running so you can visualize what we're going to build up to:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-001.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-001.png"/>
+                    <figcaption>Fig 02-001</figcaption>
+                </figure>
                 <p>This terribly unsophisticated app loads up some data at the beginning, puts it into a data entry
                     form, we could then go in and edit any of those fields and click on Save to Save the changes back
                     down to the database.
@@ -55,7 +58,10 @@
                 <p>Now let's talk about the structure of this app. The ZzeDashboard here is the WPF application project
                     itself:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-002.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-002.png"/>
+                    <figcaption>Fig 02-002</figcaption>
+                </figure>
                 <p>Now the Zza comes from the fact that the sample data that I'll be using throughout the course is
                     based on a pizza ordering domain. So there is a database with tables for Customers, Products, and
                     Orders etc. There is a Data Layer (Zza.Data) which is pre-populated using Entity Framework DbContext
@@ -65,7 +71,10 @@
                     In addition to the raw data access in Zza.Data in the Client Services layer you can see we have two
                     repositories - a Customers repository and an Orders repository:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-003.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-003.png"/>
+                    <figcaption>Fig 02-003</figcaption>
+                </figure>
                 <p>And if you look at the methods on these repositories they return Tasks for their invocation so these
                     are setup for doing the Task based Async of .Net using the async and await keywords.
                 </p>
@@ -74,7 +83,10 @@
                     can pass in mock objects that implement that same interface for unit testing purposes.
                 </p>
                 <p>The implementation of these repositories is basic CRUD data access through Entity Framework</p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-004.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-004.png"/>
+                    <figcaption>Fig 02-004</figcaption>
+                </figure>
                 <p>We have a DbContext, we're doing queries with the ToListAsync to get the Task based Async, we're
                     doing adds and SaveChanges
                 </p>
@@ -84,32 +96,46 @@
                 <p>Now in terms of the functional code for the very simple screen that you saw. We have a MainWindow
                     that has an instance of a User Control in it:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-005.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-005.png"/>
+                    <figcaption>Fig 02-005</figcaption>
+                </figure>
                 <p>For demo purposes here we're hard coding up a CustomerId that we're loading from the database.
                     Obviously in a real app you'd have to have some navigation or selection mechanism to pass that as
                     context into the View. We'll see how that works later with MVVM in other demos.
                 </p>
                 <p>The View implementation is down in this Customers folder:</p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-006.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-006.png"/>
+                    <figcaption>Fig 02-006</figcaption>
+                </figure>
                 <p>It's really just a simple user control with some layout using a grid:</p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-007.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-007.png"/>
+                    <figcaption>Fig 02-007</figcaption>
+                </figure>
                 <p>And then some inputs that have Labels and TextBoxes and you can see each of the inputs has a name to
                     it:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-008.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-008.png"/>
+                    <figcaption>Fig 02-008</figcaption>
+                </figure>
                 <p>Likewise, our Save Button down at the bottom has a Click handler, so it's traditional WPF User
                     Control development where you have to put all the support in the code-behind of the User Control.
                     Here you can see we are newing up an instance of the repository:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-009.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-009.png"/>
+                    <figcaption>Fig 02-009</figcaption>
+                </figure>
                 <p>And when the Loaded event fires we go out and get our Customer asynchronously:</p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-010.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-010.png"/>
+                    <figcaption>Fig 02-010</figcaption>
+                </figure>
                 <p>Notice the async and await keywords here. Because this returns a Task you can await on that Task and
                     the execution of this method will be sequential from the code's declaration perspective but this
                     method:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-011.png"/>
-                <p>but this method will go and potentially execute on a separate thread and then return the value back
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-011.png"/>
+                    <figcaption>Fig 02-011</figcaption>
+                </figure>
+                <p>will go and potentially execute on a separate thread and then return the value back
                     on to the UI thread since that's where it was called from. So it makes it so all the execution
                     within the context of the View or the ViewModel stays on the UI thread.
                 </p>
@@ -117,7 +143,9 @@
                     discrete values out of properties on your model objects and stuff them into properties on individual
                     elements that you're referencing by name here in the code-behind of your view:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig02-012.png"/>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-012.png"/>
+                    <figcaption>Fig 02-012</figcaption>
+                </figure>
                 <p>And then when you go to save you have to pull those discrete values out, put them back on the model
                     object and then you can go ahead an try to persist with that model object or call some business
                     rules, do validation, whatever's appropriate. So you get this kind of grundgy push pull code that
@@ -127,80 +155,188 @@
                 <h2>Demo: Simple View with Data Binding</h2>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-DataBindingNoMVVM</p>
                 <p>
-                    In this next variant     provides the same functionality but implements data-binding to
-                    clean up the code a
-                    bit. Now the individual input controls are using Two-way databinding where they bind to their
+                    In this next variant of the demo we have the same functionality but now we're moving in to actually
+                    using data binding to clean up the code some. So we have the same setup where we have the MainWindow
+                    with an instance of our user control here CustomerEditView inside of it:
+                </p>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-013.png"/>
+                    <figcaption>Fig 02-013</figcaption>
+                </figure>
+                <p>And the CustomerEditView is defined down in the Customers folder still. The main difference here is
+                    that notice now the individual input controls are using Two-way databinding where they bind to their
                     DataContext and expose that DataContext to expose a LastName, FirstName and Phone property. The Save
                     button is just using a click handler to get to an OnSave() method in the code-behind.
                 </p>
                 <p>
-                    The code-behind is somewhat cleaner than the previous example. In the OnLoaded method we still call
-                    GetCustomerAsync from the repository layer but then we can just push that to the DataContext:
+                    So now if we go and look what this does to the code-behind we can see it cleans things up
+                    considerably:
                 </p>
-                <pre><code class="cs hljs">DataContext = _customer;</code></pre>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-014.png"/>
+                    <figcaption>Fig 02-014</figcaption>
+                </figure>
                 <p>
-                    The individual bindings in the View then have two-way data-binding against the properties exposed on
-                    the Model object. Two-way databinding means any changes made by the user get written directly into
-                    that object. So, when it is time to Save we don’t have to gather any values from the input controls
-                    (as we did in the previous example) because the data has already been transferred into that bound
-                    model object.
+                    In that in the OnLoaded method we still have to go out and load our model object through our
+                    repository layer then we can just push that into the DataContext:
+                </p>
+                <figure>
+                    <pre><code class="cs hljs">DataContext = _customer;</code></pre>
+                    <figcaption>Fig 02-015</figcaption>
+                </figure>
+                <p>
+                    And the individual bindings in the View then have two-way data-binding against the properties
+                    exposed on that Model object. Because they are Two-way that means any changes made by the user get
+                    written directly into that object. So, when it is time to Save we don’t have to gather any values
+                    out of the controls themselves (as we did in the previous example) because the data has already been
+                    transferred into that bound model object. So we can just go pass it to our repository layer to get
+                    it saved:
+                </p>
+                <figure>
+                    <pre><code class="cs hljs">await _repository.UpdateCustomerAsync(_customer);</code></pre>
+                    <figcaption>Fig 02-016</figcaption>
+                </figure>
+                <p>So that cleans things up considerably. Then the next logical step is let's get all this junk out of
+                    the code-behind of the view and let it focus just on the structure and move the data manipulation
+                    and interaction logic into this separate thing we call a ViewModel.
                 </p>
                 <h2>Demo: Simple View Transformed to MVVM</h2>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\2WPFMVVMInDepth\ZzaDashboard-SimpleMVVM</p>
-                <p>Now we want to move relevant code out of the code-behind of the View. We need to break up our View
-                    into a View and ViewModel.
+                <p>Now that leads us to this version of our simple little demo. We want to take this thing and turn it
+                    into an MVVM application with our single View that we're using. So that means we need to break up
+                    our View into a View and ViewModel instead of putting code in a code-behind we put all the
+                    interaction logic and data manipulation into our ViewModel. Let's step through it here:
                 </p>
                 <p>
-                    Firstly, in MainWindow.xaml we are still placing an instance of our View (CustomerEditView) into the
-                    container. We have removed the Customer Id property as the data manipulation will be at the
-                    ViewModel level.
+                    Firstly, in MainWindow.xaml we are still just placing statically an instance of our View
+                    (CustomerEditView) into the container.
                 </p>
-                <p>
-                    In CustomerEditView.xaml the Loaded event has been removed. In terms of MVVM we are newing up an
-                    instance of our CustomerEditViewModel in the XAML parsing process. The individual data bindings
-                    reference Customer.FirstName etc. We are expecting our ViewModel to expose a single object called
-                    Customer.
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-017.png"/>
+                    <figcaption>Fig 02-017</figcaption>
+                </figure>
+                <p>Notice the CustomerId property has gone from the MainWindow.xaml file because for the purposes of
+                    this demo we have to move it down a layer since all the data manipulation wil be at the ViewModel
+                    level. Next we can go and look at our View and see whats changed there from the previous demo.
                 </p>
-                <p>The Save button no longer performs click handling into the code behind. Instead it uses a Command
-                    object. So the Command property is bound to another property exposed by our ViewModel called
-                    SaveCommand. We expect that to be an ICommand object. It will be invoked whenever the button is
-                    clicked. It can also be used to enable and disable the button.
-                </p>
-                <p>At the top of the CustomerEditView.xaml file we define a Behaviour. It uses a behaviour from the
-                    Blend SDK called CallMethodAction which is able to call a method on some object. In this scenario,
-                    we want to handle the Loaded event and despatch it as a method call invocation against a method
-                    named LoadCustomer which is on our ViewModel. The binding specified in the TargetObject:
-                </p>
-                <pre><code class="cs hljs">“{Binding}”</code></pre>
-                <p>Gives you a reference to the whole DataContext object or ViewModel.</p>
-                <figure>
-
-                    <img src="app/wpf/images/wpfmvvmindepth//Fig02-01.png"/>
-                    <figcaption>Fig 02-01</figcaption>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-018.png"/>
+                    <figcaption>Fig 02-018</figcaption>
                 </figure>
                 <p>
-                    The ViewModel’s main job is to expose data. We are implementing the INotifyPropertyChanged event
-                    because we are not going to set that Customer until our LoadCustomer method (this is being called
-                    from the Loaded event) gets invoked. By that point construction is already done, the XAML parsing is
-                    done, all the Bindings have been evaluated so we need to be able to signal to the View that it
-                    should refresh its data binding. That happens by firing the PropertyChanged event which is part of
-                    the INotifyPropertyChanged interface.
+                    First off, if you noticed before (in CustomerEditView.xaml) there had been a Loaded event wired up
+                    here on the UserControl root element that has now gone. Probably first and foremost in terms of MVVM
+                    you can see we're newing up an instance of our CustomerEditViewModel statically here in the XAML
+                    parsing process:
                 </p>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-019.png"/>
+                    <figcaption>Fig 02-019</figcaption>
+                </figure>
+                <p>And the instance that's created there will then be set as the value on the DataContext of the View
+                    satisfying the basic equation of MVVM. So this is where we're statically setting our CustomerId for
+                    demo purposes in this case but again we'll get into ways to pass that dynamically later on.
+                </p>
+                <p>The individual data bindings are not much different than they were before but instead of just
+                    referencing for example FirstName and LastName they reference Customer.FirstName so we are expecting
+                    that our ViewModel, which is the overall DataContext for this View now, is exposing a single
+                    property called Customer. That Customer is a reference to a Model object so we're exposing a Model
+                    object through our ViewModel allowing the bindings to dot down through it to it's individual
+                    properties to grab the values in a nice declarative fashion. So that makes it very clear when your'e
+                    reading this XAML as to exactly what this TextBox is bound against on the ViewModel.
+                </p>
+                <p>Next we drop down to our Save button and we can see the button no longer performs click handling into
+                    the code behind. Instead it uses a Command object. So the Command property is bound to another
+                    property exposed by our ViewModel called SaveCommand. We expect that to be an ICommand object (a
+                    standard interface in .Net for Commands) and it will be invoked whenever the button is clicked. It
+                    can also be used to enable and disable the button.
+                </p>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-020.png"/>
+                    <figcaption>Fig 02-020</figcaption>
+                </figure>
+                <p>At the top of the CustomerEditView.xaml file we define a Behaviour:</p>
+                <figure><img src="app/wpf/images/wpfmvvmindepth/Fig02-021.png"/>
+                    <figcaption>Fig 02-021</figcaption>
+                </figure>
+                <p>It uses a behaviour from the Blend SDK called CallMethodAction which is able to call a method on some
+                    object. So we specify what object do we want to invoke something on. Well specifically what we're
+                    trying to do here is we still have that initialization that has to happen on Load of the View. So we
+                    want to handle the Loaded event in a declarative fashion here and dispatch it as a method call
+                    invocation against a method named LoadCustomer which is on our ViewModel which is our DataContext so
+                    a binding specified like this:
+                </p>
+                <figure>
+                    <pre><code class="cs hljs">“{Binding}”</code></pre>
+                    <figcaption>Fig 02-022</figcaption>
+                </figure>
+                <p>Basically gets you a reference to the whole DataContext object or ViewModel. So this little chunk of
+                    code in a nutshell:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-023.png"/>
+                    <figcaption>Fig 02-023</figcaption>
+                </figure>
+                <p>Says go call the LoadCustomer method on my ViewModel when the Loaded event of the View fires. We'll
+                    see how to get this all wired up through Blend quickly in a later module.
+                </p>
+                <p>
+                    That leads us to our ViewModel - the focus of our MVVM world and first of it's main job is to expose
+                    data so the View can present it, and that would be our Customer data. So down here we see a Customer
+                    property of type Customer:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-024.png"/>
+                    <figcaption>Fig 02-024</figcaption>
+                </figure>
+                <p>
+                    We also see that we are implementing the INotifyPropertyChanged event because we are not going to
+                    set that Customer until our LoadCustomer method (this is being called from the Loaded event) gets
+                    invoked. By that point construction is already done, the XAML parsing is done, all the Bindings have
+                    been evaluated so we need to be able to signal to the View that it should refresh its data binding.
+                    That happens by firing the PropertyChanged event which is part of the INotifyPropertyChanged
+                    interface:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-025.png"/>
+                    <figcaption>Fig 02-025</figcaption>
+                </figure>
                 <p>Next we can see our SaveCommand property that we exposed publicly and bound to:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-02.png"/>
-                    <figcaption>Fig 02-02</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-026.png"/>
+                    <figcaption>Fig 02-026</figcaption>
                 </figure>
-                <p>That gets hooked up in the Constructor which points it to the actual handling method itself (OnSave).
+                <p>That gets hooked up in the Constructor which points it to the actual handling method itself which is
+                    the OnSave handler:
                 </p>
-                <p>Note that both the OnSave() and LoadCustomer() methods use task based async with the async/await
-                    keywords.
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-027.png"/>
+                    <figcaption>Fig 02-027</figcaption>
+                </figure>
+                <p>From there you can see that both for the LoadCustomer() and the OnSave() method we're doing task
+                    based async again. So we're just wrapping our repository (our dependency) and we're invoking it with
+                    an await in front of it so that when it completes it's asynchronous execution we come back onto the
+                    UI thread and set the Customer property of our ViewModel with the result:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig02-028.png"/>
+                    <figcaption>Fig 02-028</figcaption>
+                </figure>
+                <p>
+                    So that's a very simple MVVM in a nutshell example of a data entry form. Again through the demos in
+                    the rest of the course we'll get into more complicated Views, nested hierarchies of Views,
+                    navigation between Views and so on, and how all those come together through MVVM
                 </p>
                 <h2>Summary</h2>
                 <p>
-                    Data binding really lays the groundwork for MVVM. MVVM moves the data management interaction logic
-                    into the ViewModel. View-First construction (where the ViewModel is constructed in the XAML through
-                    the mark-up) works out fine when you have static child Views inside a container.
+                    Data binding really lays the groundwork for MVVM. It gets the hookup of data declaratively expressed
+                    through XAML and makes it so there is no code in the code behind that has to directly reference the
+                    UI elements.
+                </p>
+                <p>It allows you to move the data management interaction logic into the ViewModel. You also saw that for
+                    static containment scenarios like this View-First construction (where the ViewModel is constructed
+                    in the XAML through the mark-up) works out fine when you have static child Views inside a container.
+                </p>
+                <p>Finally, you got a quick preview of several forms of communication between View and ViewModel that
+                    we'll dive into more details on in a later module. In the next module, we'll take a look at a number
+                    of things that are just features of the WPF platform, such as data binding and XAML parsing. But
+                    we'll look specifically at how those features support and enable the MVVM pattern. So even if
+                    your an experienced WPF developer and know how to use those features you may want to check out
+                    that module to put them into the context of MVVM.
                 </p>
             </div>
         </div>

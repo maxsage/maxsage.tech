@@ -19,67 +19,78 @@
                 </p>
                 <h4>First Taste of MVVM</h4>
                 <a [routerLink]="['WPFMVVMInDepth02FirstTasteOfMVVM']">First Taste of MVVM</a>
-                <p>This module first covers Asynchronous operations in MVVM. The next sections detail three demos:</p>
+                <p>Welcome back to the second module of WPF MVVM in Depth. In this module I want to give you a quick
+                    exposure or taste of how using MVVM changes some coding patterns for a simple input screen in WPF
+                    application that you may already be used to.
+                </p>
+                <p>I'll do this by stepping through three variants of the same simple application in demos.</p>
                 <ul>
-                    <li>Demo: Simple View with No MVVM or Data Binding</li>
-                    <li>Demo: Simple View with Data Binding</li>
-                    <li>Demo: Simple View Transformed to MVVM</li>
+                    <li>The first will have no MVVM nor data binding in it.</li>
+                    <li>The second will at least leverage data binding but have no MVVM.</li>
+                    <li>The third will evolve into showing the same view with MVVM and a quick look at some of the
+                        communication between View and ViewModel that we'll get into in more detail later in the course.
+                    </li>
                 </ul>
                 <h4>Hooking up Views and ViewModels in MVVM</h4>
                 <a [routerLink]="['WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVM']">Hooking up Views and ViewModels in MVVM</a>
                 <p>
-                    This module starts by going into more detail regarding View-First Construction and View-First with ViewModelLocators. It then covers
-                    data binding support for MVVM. The next section covers ViewModel-First Construction with DataTemplates.
+                    In this module we will cover different ways that Views can be hooked up to ViewModels. We will also cover how databinding is used to expose
+                    data from your Data Models to your Views. We will start with View-First Construction Patterns where the View is constructed first and then
+                    takes care of constructing and hooking up its own ViewModel.
+                </p>
+                <p>Next we will cover Data Binding to make it clear how MVVM relies on data binding and uses it to flow data between the View and the
+                    ViewModel.
+                </p>
+                <p>
+                    Finally, we will cover ViewModel-First approach where Data Templates are used to create the View based on an instance of a ViewModel being
+                    placed into a data binding context.
                 </p>
                 <h4>View/ViewModel Communication in WPF</h4>
                 <a [routerLink]="['WPFMVVMInDepth04ViewViewModelCommunicationInWPF']">View/ViewModel Communication in WPF</a>
                 <p>
-                    The first topic this module covers is using Commands for View to ViewModel Communication. It then moves on to discuss Attached
-                    Properties and Behaviors and how the form a communication path between Views and ViewModels for scenario's where Commands and
-                    Property Change Notifications are not sufficient.
+                    In this module, we will cover View/ViewModel communication in WPF. We will look at how to cleanly call logic that is implemented in the
+                    ViewModel when something happens in the View as well as letting the View know when something happens behind the scenes in your ViewModel,
+                    Model Objects or Client Services.
                 </p>
-                <p>The next section covers Property Change Notifications and implementing the INotifyPropertyChanged interface which can be used to
-                    notify the View when the underlying data changes.
+                <p>
+                    In the second module you saw a quick example of using a Command to invoke some logic in the ViewModel. In this module we will look at how
+                    things get hooked up, and what happens under the covers during that hook-up. In addition, we will see how to use Command Enabling and
+                    Keyboard Shortcuts.
+                </p>
+                <p>
+                    Next we will look at Attached Properties and Behaviors covering what the relationship between them is, what their general capabilities are
+                    and how to use them in the context of MVVM as another means of setting up communication paths between the View elements and View Model logic
+                    or vice a versa.
+                </p>
+                <p>
+                    We will finish the module with a review of how Property Change Notifications work with Data Binding in WPF and show how they can be used as
+                    a signalling mechanism from the ViewModel to make things happen in the View at the appropriate time.
                 </p>
                 <h4>Applied MVVM Part 1 - Hierarchies and Navigation</h4>
                 <a [routerLink]="['WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigation']">Applied MVVM Part 1 - Hierarchies and Navigation</a>
                 <p>
-                    This module starts by covering the MVVM component naming conventions and where you should locate your components (by feature or by
-                    type - the author opts for by type for the demos in this course).
+                    We will now start building out a few more fully functional use cases from start to finish. In doing so we will hit on a number of other
+                    design considerations and things you will need to know how to tackle when using the MVVM pattern. We will start with a few concepts first
+                    including:
                 </p>
-                <p>
-                    The next section discusses Hierarchy and Navigation. if you have a hierarchy of Views and ViewModels the Parent ViewModel can become
-                    a hub for communications so that each Child ViewModel can remain decoupled from the other Child ViewModels and from their Parent as
-                    much as possible.
-                </p>
-                <p>The rest of this module is composed of several demos:</p>
                 <ul>
-                    <li>Building out an MVVM Hierarchy</li>
-                    <li>Encapsulating INotifyPropertyChanged</li>
-                    <li>View Switching Navigation</li>
-                    <li>Data Loading into a ViewModel</li>
-                    <li>Navigation with Parameters</li>
-                    <li>Add/Edit Navigation</li>
+                    <li>Naming and Location of Components</li>
+                    <li>Hierarchical MVVM/Navigation</li>
+                    <li>MVVM App Building</li>
                 </ul>
                 <h4>Applied MVVM Part 2 - Validation and Dependency Injection</h4>
                 <a [routerLink]="['WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjection']">Applied MVVM Part 2 - Validation and Dependency Injection</a>
                 <p>
-                    The final module starts by covering how the Visual Studio Designer and Data Sources can be used to quickly scaffold data bound
-                    forms. Next this module covers Wrapping Model Objects which can be used when you want to add additional properties and functionality
-                    (like implementing INotifyPropertyChanged) that your model objects don't provide.
+                    In this final module we continue to build out use cases surrounding Customers in our Pizza Order Management Application. This will include
+                    fleshing out some data entry for adding and editing Customers by leveraging the Scaffolding of data-centric Views that is available in
+                    Visual Studio. We also look at validation in the context of MVVM.
                 </p>
                 <p>
-                    Then there is a demo covering Command Handling and Converters. The author describes using a form for both Adding and Editing
-                    Customer records, setting the visibility of the buttons accordingly. So the buttons use Commanding and the Visibility is setup as a
-                    custom Converter.
+                    When ViewModels take dependencies on client services you will want to make sure those dependencies are loosely coupled. We will cover
+                    dependency injection.
                 </p>
-                <p>The next topic is Validation in MVVM</p>
-                <p>
-                    After that Dependency Injection is covered which facilitates the decoupling of ViewModels from our Client Services (e.g. the
-                    repository service can be injected into our ViewModel using a dependency injection container such as Unity.
-                </p>
-                <p>The final demo covers Searching and Filtering Data.</p>
-                <p>Finally various MVVM toolkits such as Prism, MVVM Light and Caliburn Micro are discussed.</p>
+                <p>Finally, we will cover some of the toolkits and frameworks that can assist when writing applications that adhere to the MVVM pattern.</p>
+
             </div>
         </div>
     </div>

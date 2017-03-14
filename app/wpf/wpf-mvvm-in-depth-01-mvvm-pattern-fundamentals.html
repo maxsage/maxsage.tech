@@ -26,11 +26,17 @@
                     throw around without really explaining it so let's talk briefly about what it really means.
                 </p>
                 <p>
-                    To explain separation of concerns I like to use an analogy of something we all have to do: get
-                    dressed to go out in public. If you take your laundry and put it away as it comes out of the clothes
-                    drier – all twisted and tangled with intermingled articles of clothing and stuff them into an
-                    available hole in your drawers or shelves that can really expedite the process of putting away your
-                    clothes at that moment in time.
+                    To explain separation of concerns I like to use an analogy of something we all have to do:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-001.png"/>
+                    <figcaption>Fig 01-001</figcaption>
+                </figure>
+                <p>
+                    Get dressed to go out in public. If you take your laundry and put it away as it comes out of the
+                    clothes drier – all twisted and tangled with intermingled articles of clothing and stuff them into
+                    an available hole in your drawers or shelves that can really expedite the process of putting away
+                    your clothes at that moment in time.
                 </p>
                 <p>
                     However, you will pay an ongoing penalty each day when you need to get dressed because you will have
@@ -38,7 +44,12 @@
                 </p>
                 <p>
                     If, on the other hand, you invest a little bit of time upfront to put in the structure in place to
-                    organize your clothes: buy a chest of drawers, put in some shelves, put clothes away neatly each
+                    organize your clothes:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-002.png"/>
+                    <figcaption>Fig 01-002</figcaption>
+                </figure>
+                <p>buy a chest of drawers, put in some shelves, put clothes away neatly each
                     time the laundry is finished then the daily activity of getting dressed becomes a breeze.
                 </p>
                 <p>
@@ -48,7 +59,10 @@
                 <p>
                     Code like the example below doesn’t look too bad at first glance:
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-003.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-003.png"/>
+                    <figcaption>Fig 01-003</figcaption>
+                </figure>
                 <p>
                     If you look closely at what the code is doing you can see code that is touching UI elements,
                     interwoven with code that is doing data access, interwoven with business logic or interaction logic
@@ -80,7 +94,10 @@
                     with data access being well separated from what the UI is doing directly. You might also have some
                     shared client-side logic that's used by multiple views. And that has it's own shelf too.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-004.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-004.png"/>
+                    <figcaption>Fig 01-004</figcaption>
+                </figure>
                 <p>The specific way you setup your shelves and drawers is not really important, it depends on the
                     solution you are working in, the team that your on, and some personal preference but having well
                     defined places for different kinds of code to go and a good sense of what code goes there is very
@@ -128,7 +145,10 @@
                     between the Controller and the View. The Controller produces a View but may not stick around after
                     that until a new request comes in from the user.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-005.jpg"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-005.jpg"/>
+                    <figcaption>Fig 01-005</figcaption>
+                </figure>
                 <p>
                     In the mid 2000’s – Rich/Smart applications were getting a lot of attention. As a result, people
                     started trying to use separation patterns there. However, because the client Views were more
@@ -146,7 +166,10 @@
                     method calls between the View and its counterpart are replaced by Two-Way Databinding flowing data
                     and communications between the View and the ViewModel.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-006.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-006.png"/>
+                    <figcaption>Fig 01-006</figcaption>
+                </figure>
                 <h3>MVVM across Platforms</h3>
                 <p>
                     Since most WPF developers will not be coding exclusively for WPF you should be aware that MVVM can
@@ -168,14 +191,20 @@
                     that produce and persists them either via data access in a two-tier application or via service calls
                     in an n-tier application.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-007.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-007.png"/>
+                    <figcaption>Fig 01-007</figcaption>
+                </figure>
                 <h3>Model Responsibilities</h3>
                 <p>
                     The Model is really the client side data model that supports the Views in the application. It is
                     composed of objects with properties and backing member variables that hold the discreet pieces of
                     data in memory.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-008.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-008.png"/>
+                    <figcaption>Fig 01-008</figcaption>
+                </figure>
                 <p>
                     Some of those properties may reference other Model objects forming the object graph that is the
                     model object as a whole. The Model objects may also expose computed properties (properties whose
@@ -199,7 +228,10 @@
                     the controls and layout of controls that the View is composed of and dynamic being any animations or
                     state changes that are defined as part of the View.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-009.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-009.png"/>
+                    <figcaption>Fig 01-009</figcaption>
+                </figure>
                 <p>
                     There is an overarching goal in MVVM to have “no code behind” in the View. I put no code behind in
                     quotes here because it's impossible to have zero code-behind. You at least need the constructor and
@@ -220,7 +252,10 @@
                     The primary responsibility of a ViewModel is provide data to the View so the View can put it on the
                     screen and, if appropriate, let the user interact with and change that data.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-010.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-010.png"/>
+                    <figcaption>Fig 01-010</figcaption>
+                </figure>
                 <p>
                     The other key responsibility of a ViewModel is to encapsulate the interaction logic for a View. That
                     does not mean that all of the logic of the application should go into the ViewModel. That would just
@@ -239,7 +274,10 @@
                         a Customer property on a ViewModel that exposes a reference to a Customer model object that
                         could be a whole object graph itself. This is called exposing the model objects
                     </li>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-011.png"/>
+                    <figure>
+                        <img src="app/wpf/images/wpfmvvmindepth/Fig01-011.png"/>
+                        <figcaption>Fig 01-011</figcaption>
+                    </figure>
                     <li>ViewModel's can also expose what are called Wrapped Model objects meaning properties that are
                         exposed from the ViewModel that contain data that came from the model but are not Model object
                         references directly. This is done to either simplify the structure of the data for presentation
@@ -251,7 +289,10 @@
                         wanted to present a tabular summary of those bits of data through a collection property for data
                         binding in a grid. These two approaches are called wrapping the model obejct.
                     </li>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-012.png"/>
+                    <figure>
+                        <img src="app/wpf/images/wpfmvvmindepth/Fig01-012.png"/>
+                        <figcaption>Fig 01-012</figcaption>
+                    </figure>
                     <li>The last kind of data that a ViewModel will often manage is Client application state. Things
                         like - is the client application online or offline, or is the user logged in. Flags or
                         properties related to this state can be exposed by the ViewModel to drive the presentation of
@@ -270,14 +311,20 @@
                     time such as your data access strategy as well as any functionality that's needed in more than one
                     ViewModel.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-013.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-013.png"/>
+                    <figcaption>Fig 01-013</figcaption>
+                </figure>
                 <p>A common form of client service is one that insulates the ViewModel from the specific data access
                     strategy based on the repository pattern. For example, your app might start out as a simple two-tier
                     application that talks directly to the database to get and update the data for your module but then
                     you decide to support a more distributed scenario and you need to change things so the clien makes
                     web service calls to get it's data.
                 </p>
-                <img src="app/wpf/images/wpfmvvmindepth/Fig01-014.png"/>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-014.png"/>
+                    <figcaption>Fig 01-014</figcaption>
+                </figure>
                 <p>
                     If you have the code that reads and writes the data encapsulated in a client service the ViewModel
                     and View should not have to change at all when this change is made. All the changes would be
@@ -343,7 +390,10 @@
                     Finally, to get MVVM up and running you have to satisfy the fundamental equation of MVVM by setting
                     the Views DataContext to a reference to the ViewModel:
                 </p>
-                <p>View.DataContext = ViewModel</p>
+                <figure>
+                    <pre><code class="cs hljs">View.DataContext = ViewModel</code></pre>
+                    <figcaption>Fig 01-015</figcaption>
+                </figure>
                 <p>
                     You can do this in a View-First or ViewModel-First way or by just having some code that constructs
                     both and sets the DataContext appropriately. Through the rest of this course you'll see working
