@@ -6,168 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/csit011.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig02-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig02-02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-03.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-05.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-06.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-07.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-08.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-09.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-15.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-17.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig03-19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-03.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-05.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-06.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-07.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-08.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-09.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-15.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-17.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-20.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-21.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-22.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-23.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-24.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-25.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-26.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-27.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-29.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-30.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-31.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-33.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-34.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-35.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig04-36.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-03.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-05.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-06.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-07.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-08.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-09.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-15.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-17.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-20.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-21.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-22.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-23.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-24.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-25.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-26.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-27.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-29.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-30.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-31.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-33.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-34.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-35.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-36.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-37.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-38.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-39.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-40.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-41.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-42.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig05-43.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-03.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-05.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-06.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-07.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-08.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-09.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-15.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-17.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-19.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-20.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-21.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-22.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-23.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-24.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-25.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-26.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-27.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-29.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-30.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-31.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-33.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-34.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-35.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-36.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-37.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-38.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-39.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-40.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-41.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-42.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-43.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-44.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-45.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-46.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-47.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-48.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-49.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-50.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-51.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-52.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-53.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-54.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/wpf/images/wpfmvvmindepth/Fig06-55.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-00-course-contents.html" afterPath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-00-course-contents.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals.html" afterPath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-02-first-taste-of-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-02-first-taste-of-mvvm.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.css" afterPath="$PROJECT_DIR$/main.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -184,13 +24,20 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="130" column="1" lean-forward="false" selection-start-line="130" selection-start-column="1" selection-end-line="145" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="585">
+              <caret line="747" column="80" lean-forward="false" selection-start-line="747" selection-start-column="80" selection-end-line="747" selection-end-column="80" />
+              <folding>
+                <element signature="e#27676#27680#0" expanded="true" />
+                <element signature="e#27688#27692#0" expanded="true" />
+                <element signature="e#29648#29652#0" expanded="true" />
+                <element signature="e#29660#29664#0" expanded="true" />
+                <element signature="e#35158#35162#0" expanded="true" />
+                <element signature="e#35215#35219#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -199,7 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Bundling</find>
       <find>project stru</find>
       <find>Production Build</find>
       <find>Production Deplo</find>
@@ -229,6 +75,7 @@
       <find>Data with h</find>
       <find>you have static child Views inside a container.</find>
       <find>main job</find>
+      <find>ame, last</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;images</replace>
@@ -309,10 +156,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="2576" />
-    <option name="height" value="1416" />
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -332,8 +178,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -343,60 +189,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wpf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wpf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -411,7 +203,7 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files (x86)/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -510,24 +302,25 @@
       <workItem from="1488892425446" duration="4398000" />
       <workItem from="1489144877734" duration="951000" />
       <workItem from="1489401494279" duration="38034000" />
+      <workItem from="1489661994937" duration="18953000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125121000" />
+    <option name="totallyTimeSpent" value="144074000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15957446" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15918803" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22681215" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22647703" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -748,82 +541,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-00-course-contents.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-01-angular-2-in-action.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="27" column="40" lean-forward="false" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-02-angular-2-architecture-whats-new-and-whats-different.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-03-angular-2-essentials-modules-components-templates-and-metadata.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="951">
-          <caret line="412" column="0" lean-forward="true" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-04-displaying-data-data-binding-directives-and-pipes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="509" column="0" lean-forward="true" selection-start-line="509" selection-start-column="0" selection-end-line="509" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-05-services-dependency-injection-and-component-lifecycle-hooks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-06-data-with-http.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="895">
-          <caret line="314" column="0" lean-forward="true" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-07-routing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="895">
-          <caret line="400" column="0" lean-forward="false" selection-start-line="400" selection-start-column="0" selection-end-line="400" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-08-angular-modules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5406">
-          <caret line="319" column="58" lean-forward="false" selection-start-line="319" selection-start-column="58" selection-end-line="319" selection-end-column="59" />
-          <caret line="318" column="58" lean-forward="false" selection-start-line="318" selection-start-column="58" selection-end-line="318" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-00-a-full-course-transcript.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1002">
-          <caret line="2960" column="0" lean-forward="true" selection-start-line="2583" selection-start-column="0" selection-end-line="2960" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-00-course-contents.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-01-angular-2-in-action.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-02-angular-2-architecture-whats-new-and-whats-different.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-03-angular-2-essentials-modules-components-templates-and-metadata.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-04-displaying-data-data-binding-directives-and-pipes.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-05-services-dependency-injection-and-component-lifecycle-hooks.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-06-data-with-http.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-07-routing.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-08-angular-modules.html" />
+    <entry file="file://$PROJECT_DIR$/app/angular2/angular-2-first-look-00-a-full-course-transcript.html" />
     <entry file="file://$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-04-view-viewmodel-communication-in-wpf.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="39" column="21" lean-forward="true" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -831,7 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -839,7 +569,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="737">
           <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,7 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -855,7 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -863,7 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -887,15 +613,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="632">
           <caret line="395" column="25" lean-forward="false" selection-start-line="395" selection-start-column="25" selection-end-line="395" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="130" column="1" lean-forward="false" selection-start-line="130" selection-start-column="1" selection-end-line="145" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="585">
+          <caret line="747" column="80" lean-forward="false" selection-start-line="747" selection-start-column="80" selection-end-line="747" selection-end-column="80" />
+          <folding>
+            <element signature="e#27676#27680#0" expanded="true" />
+            <element signature="e#27688#27692#0" expanded="true" />
+            <element signature="e#29648#29652#0" expanded="true" />
+            <element signature="e#29660#29664#0" expanded="true" />
+            <element signature="e#35158#35162#0" expanded="true" />
+            <element signature="e#35215#35219#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -80,11 +80,13 @@
                     We will put the View and the ViewModel in a Customers feature folder. The View is just a UserControl
                     called CustomerListView and the ViewModel is just a class called CustomerListViewModel. And it
                     follows the naming conventions that the View has View at the end of it's type name and the ViewModel
-                    has ViewModel at the end of it's typename so there easy to correlate. Now before we dig into the
-                    MVVM let's go ahead and build this and I'll place an instance of my View in the MainWindow so we'll
-                    go to the designer, toolbox drag and drop CustomerListView then right-click and select reset all
-                    from the Layout menu to remove the padding and margins etc. This drag and drop operation basically
-                    creates an instance of the UserControl in the View and adds the appropriate namespace.
+                    has ViewModel at the end of it's typename so there easy to correlate.
+                </p>
+                <p>Now before we dig into the MVVM let's go ahead and build this and I'll place an instance of my View
+                    in the MainWindow so we'll go to the designer, toolbox drag and drop CustomerListView then
+                    right-click and select reset all from the Layout menu to remove the padding and margins etc. This
+                    drag and drop operation basically creates an instance of the UserControl in the View and adds the
+                    appropriate namespace.
                 </p>
                 <p>
                     Make the ViewModel class public and add a property (using the prop Visual Studio code snippet). Make
@@ -105,44 +107,59 @@
                     <figcaption>Fig 03-001C</figcaption>
                 </figure>
                 <p>and a constructor to populate our Customers collection.</p>
+                <figure>
+<pre><code class="cs hljs">public CustomerListViewModel()
+{
+    Customers = _repo.GetCustomersAsync()
+}</code></pre>
+                    <figcaption>Fig 03-001D</figcaption>
+                </figure>
+
                 <p>So first we might try setting the Customers collection through the repo:</p>
                 <figure>
                     <pre><code class="cs hljs">Customers = _repo.GetCustomersAsync()</code></pre>
-                    <figcaption>Fig 03-001D</figcaption>
+                    <figcaption>Fig 03-001E</figcaption>
                 </figure>
                 <p>But the challenge here is that this is an async method that produces a Task and not the Result and we
                     can't use async and await keywords in .Net so we will have to force the method to execute
-                    synchronously which you can do with the .Result property on a Task:</p>
+                    synchronously which you can do with the .Result property on a Task:
+                </p>
                 <figure>
                     <pre><code class="cs hljs">Customers = _repo.GetCustomersAsync().Result;</code></pre>
                     <figcaption>Fig 03-001E</figcaption>
                 </figure>
                 <p>Now that still doesn't produce what we need cause the repository produces a List and we need an
-                    ObservableCollection so we'll have to wrap the result:</p>
+                    ObservableCollection so we'll have to wrap the result:
+                </p>
                 <figure>
                     <pre><code class="cs hljs">Customers = new ObservableCollection&lt;Customer&gt;(_repo.GetCustomersAsync().Result);</code></pre>
                     <figcaption>Fig 03-002</figcaption>
                 </figure>
                 <p>Now we would generally be good to go with this but something you generally want to do if you have
-                    lines of code like this in the construction process that are going to do complicated things like
-                    try and go to a database or call a service is to add a guard condition to make sure they don't
-                    execute in the designer or they can break the design surface so you can't use it anymore. To do
-                    that we'll add a simple line of code:</p>
+                    lines of code like this in the construction process that are going to do complicated things like try
+                    and go to a database or call a service is to add a guard condition to make sure they don't execute
+                    in the designer or they can break the design surface so you can't use it anymore. To do that we'll
+                    add a simple line of code:
+                </p>
                 <figure>
                     <pre><code class="cs hljs">if(DesignerProperties.GetIsInDesignMode(
                         new System.Windows.DependencyObject())) return;</code></pre>
                     <figcaption>Fig 03-002A</figcaption>
                 </figure>
                 <p>
-                    is
-                    add
-                    code to
-                    the ViewModel to prevent the
-                    execution of the above code when in the designer using the
-                    GetIsInDesignMode() method.
+                    is add code to the ViewModel to prevent the execution of the above code when in the designer using
+                    the GetIsInDesignMode() method.
                 </p>
-                <p>In the CustomerListView.xaml View add a namespace for the ViewModel. Set the DataContext to an
-                    instance of the ViewModel:
+                <p>In the CustomerListView.xaml View add a namespace to bring in the Customers subfolder and the types
+                    within it:
+                </p>
+                <figure>
+                    <pre><code class="xml hljs">xmlns:Class="MVVMHookupDemo.Customers.CustomerListView"</code></pre>
+                    <figcaption>Fig 03-002B</figcaption>
+                </figure>
+                <p>
+                    Now we can finally hookup MVVM. To do that statically with XAML it's simply a matter of setting the
+                    DataContext in XAML to an instance of the ViewModel:
                 </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-003.png"/>
@@ -153,18 +170,33 @@
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-004.png"/>
                     <figcaption>Fig 03-004</figcaption>
                 </figure>
+                <p>Notice the binding for the DataGrid simply presumes that the DataContext is set in the standard MVVM
+                    way and it can point to the properties exposed by that ViewModel specifically our Customers
+                    collection.
+                </p>
                 <p>Now if you run the application the DataGrid should be populated with data:</p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-005.png"/>
                     <figcaption>Fig 03-005</figcaption>
                 </figure>
-                <p>We can also hook-up the View and ViewModel from the code behind with code like this:</p>
+                <p>We can also hook-up the View and ViewModel from the code behind with code like this (comment out the
+                    lines in the XAML first):
+                </p>
                 <figure>
-                    <pre><code class="cs hljs">this.DataContext = new CustomerListViewModel();</code></pre>
+<pre><code class="cs hljs">
+public CustomerListView()
+{
+    this.DataContext = new CustomerListViewModel();
+    IntializeComponent();
+}</code></pre>
                     <figcaption>Fig 03-006</figcaption>
                 </figure>
-                <p>It generally doesn’t matter whether you set the DataContext before or after the call to
-                    InitializeComponent().
+                <p>Now we have the equation of MVVM satisfied through imperative code. We can run the application again
+                    and we'll see the same result. You can do that construction of the ViewModel before or after the
+                    call to InitializeComponent() it generally doesn’t matter.
+                </p>
+                <p>So those are the basics of statically hooking up your ViewModel from the View either in XAML or in
+                    code-behind.
                 </p>
                 <h2>View-First with ViewModelLocators</h2>
                 <p>
@@ -199,7 +231,7 @@
                 <p>In this demo we will look at using a ViewModelLocator to wire up our View and ViewModel in a
                     View-First way.
                 </p>
-                <p>Firstly, make sure you remove the DataContext hook-up XAML and code in the code behind.</p>
+                <p>Firstly, make sure you remove the DataContext hook-up in XAML and code in the code behind.</p>
                 <p>Define a ViewModelLocator class called ViewModelLocator. Make it public and static.</p>
                 <p>
                     Use the propa code snippet to stub out a new Attached Property called AutoWireViewModel, make its
@@ -209,6 +241,7 @@
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-007.png"/>
                     <figcaption>Fig03-007</figcaption>
                 </figure>
+                <p>Don't forget to resolve dependency object by adding the System.Windows namespace.</p>
                 <p>
                     You now have a basic Attached Property definition. Next we will turn this into a simple Behaviour by
                     wiring up a change event handler for the property. Add a handler in the PropertyMetadata called
@@ -225,8 +258,13 @@
                 </figure>
                 <p>
                     In the new method we want to automate the process of figuring what ViewModel to create and wiring it
-                    up to the View. Firstly, add a guard condition that does nothing if we are in DesignMode. Next we
-                    need to get the ViewType name using the following code:
+                    up to the View. Firstly, add a guard condition that does nothing if we are in DesignMode:
+                </p>
+                <figure>
+                    <pre><code class="cs hljs">if (DesignerProperties.GetIsInDesignMode(d)) return;</code></pre>
+                    <figcaption>Fig 03-009A</figcaption>
+                </figure>
+                <p>Next we need to get the ViewType name using the following code:
                 </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-010.png"/>
@@ -255,46 +293,105 @@
                     <figcaption>Fig03-013</figcaption>
                 </figure>
                 <p>Now that our simple ViewModelLocator is complete we can use it to wire up our View and ViewModel.</p>
-                <p>In the View add a namespace so that we can get to the ViewModelLocator type.</p>
+                <p>In the View add a namespace so that we can get to the ViewModelLocator type in the root of our
+                    project:
+                </p>
+                <figure>
+                    <pre><code class="xml hljs">xmlns:local="clr-namespace:MVVMHookupDemo"</code></pre>
+                    <figcaption>Fig 03-013A</figcaption>
+                </figure>
                 <p>Next on our root element which is the ViewType I add the AutoWireViewModel property:</p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-014.png"/>
                     <figcaption>Fig03-014</figcaption>
                 </figure>
                 <p>By doing that our ViewModelLocator will kick in as that property is being set and will take care of
-                    the wiring for us.
+                    the wiring for us. A key thing to notice about this is the View is no longer coupled in anyway to
+                    what the type of it's ViewModel is or how it get's constructed. That's all been moved out to that
+                    central location inside the ViewModelLocator. So now not only does the ViewModel not know exactly
+                    what type it's married up to. The View doesn't know what it's married to in terms of a ViewModel
+                    which gives you even better decoupling.
                 </p>
                 <p>
-                    You do the exact same thing in any View that you want to hook up to a ViewModel. To emphasize this
-                    let’s add another View (CustomerDetailView) and associated ViewModel (CustomerDetailViewModel) in
-                    the Customers folder.
+                    You do the exact same thing in any View that you want to hook up to a ViewModel. You just used the
+                    Attached Property and by convention it finds the right ViewModel for you. To emphasize this let’s
+                    add another View (CustomerDetailView) and associated ViewModel (CustomerDetailViewModel) in the
+                    Customers folder.
                 </p>
-                <p>Add the local namespace and AutoWireViewModel property (set to true) in the new Views XAML as we did
-                    before.
+                <p>Add a constructor to the ViewModel so we can set a breakpoint and see that it is being called:</p>
+                <figure>
+<pre><code class="cs hljs">public CustomerDetailViewModel()
+{
+
+}</code></pre>
+                    <figcaption>Fig03-014A</figcaption>
+                </figure>
+                <p>And again add the local namespace:</p>
+                <figure>
+                    <pre><code class="xml hljs">xmlns:local="clr-namespace:MVVMHookupDemo"</code></pre>
+                    <figcaption>Fig03-014B</figcaption>
+                </figure>
+                <p>
+                    And add the AutoWireViewModel property (set to true) in the new Views XAML as we did before:
                 </p>
+                <figure>
+                    <pre><code class="xml hljs">local:ViewModelLocator.AutoWireViewModel="True"</code></pre>
+                    <figcaption>Fig03-014C</figcaption>
+                </figure>
+
                 <p>In the MainWindow drag the CustomerDetailView from the toolbox to the design surface (make some room
                     for it first).
                 </p>
                 <p>Run the application.</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-014D.png"/>
+                    <figcaption>Fig03-014D</figcaption>
+                </figure>
+                <p>You can see that we are hitting the breakpoint in our ViewModel's constructor because it was auto
+                    wired up and our previous view is getting it's ViewModel data so that's all wired up as well:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-014DA.png"/>
+                    <figcaption>Fig03-014DA</figcaption>
+                </figure>
+
                 <p>The advantages of using a ViewModelLocator are:</p>
                 <ul>
                     <li>A standard declaration in every View</li>
-                    <li>The View is not coupled to its particular ViewModel Type</li>
-                    <li>You can potentially use DI in a ViewModelLocator</li>
+                    <li>The View is not coupled to its particular ViewModel Type other than through the conventions of
+                        the ViewModelLocator
+                    </li>
+                    <li>You can potentially use DI in a ViewModelLocator (we will see a demo of this later when we get
+                        to the Prism framework that has a ViewModelLocator in it)
+                    </li>
                 </ul>
                 <h2>Data Binding Support for MVVM</h2>
                 <p>
-                    Data binding is the key feature that differentiates MVVM from other UI separation patterns. For data
-                    binding to work you need to have a View. You also need another object that the bindings will point
-                    to. In MVVM the main thing the elements in your View bind to are properties in your ViewModel. The
-                    order that the View and ViewModel are constructed depend on the situation in the application.
+                    Data binding is the key feature that differentiates MVVM from other UI separation patterns like MVC
+                    and MVP. For data binding to work you need to have a View. You also need another object that the
+                    bindings will point to. In MVVM the main thing the elements in your View bind to are properties in
+                    your ViewModel. The order that the View and ViewModel are constructed depend on the situation in the
+                    application. We've already looked at several ways to do View first and later in this module we'll
+                    look at how to do ViewModel first.
+                </p>
+                <p>Whichever order that happens in and wherever the code resides ultimately a View and ViewModel get
+                    constructed and the DataContext of the View gets set to the ViewModel.
                 </p>
                 <p>
                     Because of the way a DataContext works in XAML the DataContext set at the root element also becomes
                     the DataContext for every child element (unless it explicitly sets the DataContext property to
                     something else or it is being rendered out as part of an Items control which sets the DataContext to
-                    the item).
+                    the item). Then child elements in the View have the opportunity to bind to properties exposed by the
+                    ViewModel whether those properties expose model objects, discrete values or commands. Depending on
+                    the element property and what it's bound to in the ViewModel. Those bindings can form a one way or
+                    bi-directional communication path to flow data back and forth between the View and ViewModel as well
+                    as setting up Command or Behaviour based communication paths:
                 </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-014E.png"/>
+                    <figcaption>Fig03-014E</figcaption>
+                </figure>
+                <p>Let's look at data binding in action supporting MVVM in a demo.</p>
                 <h2>Demo: Data Binding for MVVM Data Flows</h2>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataBinding-Start</p>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataBinding-End</p>
@@ -309,7 +406,166 @@
                 </figure>
                 <p>
                     The DataGrid is still bound to the Customers collection exposed by our ViewModel but we have
-                    individual column definitions which have their own Bindings.
+                    individual column definitions which have their own Bindings. As discussed before this ItemSource is
+                    able to bind to the Customers property because the overall DataContext for the View was set to the
+                    ViewModel.
+                </p>
+                <p>These bindings down here are also DataContext bindings:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015A.png"/>
+                    <figcaption>Fig03-015A</figcaption>
+                </figure>
+                <p>But they are not binding against the ViewModel itself because of the way an ItemSource works. When an
+                    ItemSource binds to it's collection it renders out a container for each item it's rendering and it
+                    sets the DataContext for that container to the item. So the overall DataContext for each cell within
+                    a row here is going to be and individual Customer in that collection. So these bindings can just use
+                    the simple path syntax here to point to properties on the individual customer that the row is being
+                    rendered out for.
+                </p>
+                <p>
+                    Now to see things in action here we're going to go expand some of our properties. So let me go to my
+                    CustomerListViewModel and drop down to my Customer property and expand it to have a backing member
+                    variable.
+                </p>
+                <figure>
+<pre><code class="cs hljs">public ObservableCollection&lt;Customer&gt; Customers
+{
+    get
+    {
+        return customers;
+    }
+    set
+    {
+        customers = value;
+    }
+}
+</code></pre>
+                    <figcaption>Fig03-015B</figcaption>
+                </figure>
+                <p>Likewise, I'm going to drop into the Customer Model object type and find the FirstName property and
+                    expand it:
+                </p>
+                <figure>
+                <pre><code class="cs hljs">private string firstName;
+public string FirstName
+{
+    get
+    {
+        return _firstName;
+    }
+    set
+    {
+        _firstName = value;
+    }
+}
+</code></pre>
+                    <figcaption>Fig03-015C</figcaption>
+                </figure>
+                <p>Now we can go back to our ViewModel and I'm going to set a break point on the setter of the Customers
+                    property and on the line of code in our constructor that's actually going to try and set that by
+                    going out to the repository and getting Customers:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015D.png"/>
+                    <figcaption>Fig03-015D</figcaption>
+                </figure>
+                <p>And then I'll drill down into that Customers repository to the GetCustomers method and set a
+                    breakpoint here:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015E.png"/>
+                    <figcaption>Fig03-015E</figcaption>
+                </figure>
+                <p>So if I start up now basically XAML parsing is happening, starting at the top and it's trying to
+                    construct our ViewModel. So it comes into our ViewModel constructor now and it's trying to execute
+                    this line of code:
+                </p>
+                <figure>
+                <pre><code class="cs hljs">Customer = new ObservableCollection&lt;Customer&gt;(
+    _repository.GetCustomersAsync().Result);
+                </code></pre>
+                    <figcaption>Fig03-015F</figcaption>
+                </figure>
+                <p>Which means it first has to go execute GetCustomersAsync. If I hit F5 to continue we'll hit the line
+                    of code inside the repository that is doing an async call to the database to get the Customers back:
+                </p>
+                <figure>
+                    <pre><code class="cs hljs">return context.Customers.ToListAsync();</code></pre>
+                    <figcaption>Fig03-015G</figcaption>
+                </figure>
+                <p>And then when that call completes, if I hit F5 again, now we see we're in the set block for our
+                    Customers property cause this property setter up here is being called.
+                </p>
+                <p>Now if I go ahead and put a break point on the get block for the Customer:</p>
+                <figure>
+                <pre><code class="cs hljs">get
+{
+    return _customers; // breakpoint on this line
+}
+</code></pre>
+                    <figcaption>Fig03-015H</figcaption>
+                </figure>
+                <p>and the get block for the Customer FirstName property in the Customer model object:</p>
+                <figure>
+                <pre><code class="cs hljs">get
+{
+    return _firstName; // breakpoint on this line
+}
+</code></pre>
+                    <figcaption>Fig03-015I</figcaption>
+                </figure>
+
+                <p>and go ahead an run again. Now we see the get block of the Customers property is being called:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015J.png"/>
+                    <figcaption>Fig03-015J</figcaption>
+                </figure>
+                <p>And this is the data binding that's in the View right here:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015K.png"/>
+                    <figcaption>Fig03-015K</figcaption>
+                </figure>
+                <p>on the ItemsSource that now needs to be resolved and is going to pull those Customers into the
+                    DataGrid. If we execute further now we can see the getter of each Customer object, first Derek:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015L.png"/>
+                    <figcaption>Fig03-015L</figcaption>
+                </figure>
+                <p>Then Bernard, then Jordan:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015M.png"/>
+                    <figcaption>Fig03-015M</figcaption>
+                </figure>
+                <p>as it's rendering out the individual rows of the DataGrid.</p>
+                <p>Now if we go ahead and run past all of that:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015N.png"/>
+                    <figcaption>Fig03-015N</figcaption>
+                </figure>
+                <p>because this DataGrid is editable by default we can see the bi-directional nature of the bindings
+                    which allows us to communicate back down into those ViewModel Properties or Model Properties.
+                </p>
+
+                <p>In this case I'm going to set a break point on the set block of the Customer and we'll go ahead and
+                    edit Derek's first name here in the UI:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015O.png"/>
+                    <figcaption>Fig03-015O</figcaption>
+                </figure>
+                <p>Now the way the DataGrid works by default is that I can tab off that field and it's going to buffer
+                    those changes in memory until I actually change focus off of the row and then it actually goes and
+                    sets all of those properties that were modified as part of that editing process.
+                </p>
+                <p>So now we can see the setter being called for this FirstName property because we edited it:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015P.png"/>
+                    <figcaption>Fig03-015P</figcaption>
+                </figure>
+                <p>So you can see that the data bindings to ViewModel Properties and to Model Properties form a
+                    bidirectional communication path - first to pull data into the View from the ViewModel or Model
+                    properties and then to push data back down when things change in the View.
                 </p>
                 <h2>ViewModel-First Construction with DataTemplates</h2>
                 <p>
@@ -319,49 +575,102 @@
                     being rendered by the data binding.
                 </p>
                 <p>
-                    You first have some element that is binding to a Data Object. When the property that is being bound
-                    on the control drives the rendered content on that control (such as ContentControl Content property
-                    or an ItemsControl ItemSource property) the control will look at the object produced by the binding.
-                    If it’s a UI element the control will just render the element as content based on its layout scheme
-                    for children.
+                    The way this works is that you first have some element that is binding to a Data Object:
                 </p>
-                <p>
-                    If the object produced by the binding is not a UI element (such as a ViewModel instance) the Control
-                    will go and look at the current Resource Dictionary that is in scope for the element and see if it
-                    can locate a Data Template that is mapped to the type of the object that is being produced by the
-                    binding. If it finds a match it creates an instance of the root element found in that data template
-                    which implicitly causes the construction of any Child elements. Then it renders that element as the
+                <figure>
+                    <pre><code
+                            class="xml hljs">&lt;ContentControl Content="{Binding CurrentViewModel}" /&gt;</code></pre>
+                    <figcaption>Fig03-015Q</figcaption>
+                </figure>
+                <p>When the property that is being bound on the control drives the rendered content on that control
+                    (such as ContentControl Content property or an ItemsControl ItemSource property) the control will
+                    look at the object produced by the binding. If it’s a UI element the control will just render the
+                    element as content based on its layout scheme for children but if the object produced by the binding
+                    is not a UI element such as a ViewModel instance
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015R.png"/>
+                    <figcaption>Fig03-015R</figcaption>
+                </figure>
+                <p>the Control will go and look at the current Resource Dictionary that is in scope for the element and
+                    see if it can locate a Data Template that is mapped to the type of the object that is being produced
+                    by the binding:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015S.png"/>
+                    <figcaption>Fig03-015S</figcaption>
+                </figure>
+                <p>If it finds a match it creates an instance of the root element found in that data template:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015T.png"/>
+                    <figcaption>Fig03-015T</figcaption>
+                </figure>
+                <p>Which implicitly causes the construction of any Child elements. Then it renders that element as the
                     Child content after having set the DataContext property of the root element to the Data Object
-                    instance that kicked of the whole process. Which in this example means the DataContext of the Child
-                    View is set to its ViewModel.
+                    instance that kicked of the whole process:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015U.png"/>
+                    <figcaption>Fig03-015U</figcaption>
+                </figure>
+                <p>Which in this example means the DataContext of the Child View is set to its ViewModel marrying them
+                    up properly for MVVM.
                 </p>
                 <h2>Demo: Explicit and Implicit DataTemplates</h2>
-                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start</p>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start
+                </p>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-End</p>
                 <p>Now let’s look at how you do ViewModel-First leveraging data templates (specifically implicit data
                     templates).
                 </p>
                 <p>
-                    The first step is to use Data Templates in a basic Data Binding scenario. Split the DataGrid into
-                    two rows of equal height. Put a ListBox in the second row with a Binding to the Customers collection
-                    (the same one the DataGrid is bound to).
+                    Ok, now let's take a look at how you do ViewModel first leveraging data templates - specifically
+                    implicit data templates. Starting point for this demo is the beginning of the module where we had
+                    our CustomersListView all hooked up through XAML and in the case of our ViewModel it's pretty much
+                    unchanged it just exposes that Customers property and populates it on construction.
                 </p>
                 <p>
-                    If you run now each Customer has a display of Zza.Data.Customer because the object is not a UI
-                    element so the Framework is just calling the object’s ToString() method. We can fix this with
-                    implicit templates by defining a data template. Add a Resources section to the root containing a
+                    The first step is to use Data Templates in a basic Data Binding scenario. Split the DataGrid into
+                    two rows of equal height:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015V.png"/>
+                    <figcaption>Fig03-015V</figcaption>
+                </figure>
+                <p>The DataGrid will fall into the first row and we're going to add a ListBox into the second row with a
+                    Binding to the Customers property (the same one the DataGrid is bound to).
+                </p>
+                <p>
+                    If you run now what we're seeing is Zza.Data.Customer for each Customer:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-015W.png"/>
+                    <figcaption>Fig03-015W</figcaption>
+                </figure>
+                <p>What's actually happening there is that when the binding gets the object it looks and sees if it's a
+                    UI element and if so if can just render it out. If not it just ToString()'s the object if it's not
+                    told about a data template or can't locate one through implicit templates. So to fix this with
+                    implicit templates let's go and define a data template.
+                </p>
+                <p>For that I'm going to go up to the root here and add a Resources section to the root containing a
                     DataTemplate called CustomerTemplate:
                 </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-016.png"/>
                     <figcaption>Fig03-016</figcaption>
                 </figure>
-                <p>To use the template, go back to the ListBox and specify an ItemTemplate:</p>
+                <p>So we can see here this is just a DataTemplate containing a StackPanel. It's got a key of
+                    CustomerTemplate. And then to actually use the template, we would go back to the ListBox and use the
+                    ItemTemplate property:
+                </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-017.png"/>
                     <figcaption>Fig03-017</figcaption>
                 </figure>
-                <p>Now when we run we see the presentation setup in the template:</p>
+                <p>So now you can see we instruct the ListBox to go use that specific template for rendering out those
+                    customers and now when we run we wil get that presentation of firstname, lastname, and phone for
+                    each Customer:
+                </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-018.png"/>
                     <figcaption>Fig03-018</figcaption>
@@ -374,21 +683,43 @@
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-019.png"/>
                     <figcaption>Fig03-019</figcaption>
                 </figure>
-                <p>Don’t forget to add a namespace reference for Zza.Data:</p>
+                <p>Using the x:Type markup extension here is very important. If you've been exposed to Silverlight or
+                    other XAML languages that don't have a x:Type markup extension you might be tempted to just put
+                    data:Customer there for the DataType but it wouldn't work in WPF. You have to use the x:Type markup
+                    extension which is like a type of operator in XAML. So we basically point to the Customer data type
+                    which is out in our Zza.Data namespace which I already have an XML namespace defined for at the top.
+                </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-020.png"/>
                     <figcaption>Fig03-020</figcaption>
                 </figure>
-                <h2>Demo: Implicit DataTemplates for ViewModel-First MVVM Hook-up</h2>
-                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start</p>
+                <p>And now when we run we still get the rendering of the Customers as we did before with their
+                    DataTemplate because it's automatically mapping the type of the object being rendered, locating the
+                    appropriate DataTemplate out of the Resources and applying that as the way it visually renders that
+                    Customer.
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-020A.png"/>
+                    <figcaption>Fig03-020A</figcaption>
+                </figure>
+                <p>Next let's take a look at how this can be leveraged for wiring up Views and ViewModels.</p>
+                <h2>Demo: Implicit DataTemplates for ViewModel-First MVVM Ho1ok-up</h2>
+                <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-Start
+                </p>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\3WPFMVVMInDepth\MVVMHookupDemo-DataTemplates-End</p>
-                <p>Now we want to use DataTemplates to wire up our View and ViewModel.</p>
-                <p>Firstly, add a MainWindowViewModel.</p>
+                <p>Now we want to use DataTemplates to wire up our View and ViewModel. To do this you generally want to
+                    have a hierarchical scheme which we'll get into later but first off we're going to add a ViewModel
+                    to our MainWindow
+                </p>
                 <p>
                     Add a CurrentViewModel property to this class. For demo purposes statically wire this up to an
                     instance of the CustomerListViewModel. So we are exposing that child ViewModel now as something that
                     can be data bound to from elements within the MainWindow.
                 </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-020B.png"/>
+                    <figcaption>Fig03-020B</figcaption>
+                </figure>
                 <p>
                     The next step is to wire this up as the ViewModel for the MainWindow. We could use a
                     ViewModelLocator for this step but for this demo we will wire it statically in the XAML:
@@ -397,6 +728,24 @@
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-021.png"/>
                     <figcaption>Fig03-021</figcaption>
                 </figure>
+                <p>First step is to add a namespace for the root folder and then add our standard static XAML wire up of
+                    a ViewModel setting the DataContext to instance of the ViewModel. Then finally to do this ViewModel
+                    first wire up we're going to replace the static instance of the View here:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021A.png"/>
+                    <figcaption>Fig03-021A</figcaption>
+                </figure>
+                <p>with a ContentControl:</p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021B.png"/>
+                    <figcaption>Fig03-021B</figcaption>
+                </figure>
+
+                <p>and that ContentControl's Content property is going to be bound to that CurrentViewModel property on
+                    the MainWindowViewModel which we know contains a CustomerListViewModel:
+                </p>
+                <p>Now, again, if we were to run at this point::::::::::::::::::</p>
                 <p>Next add a DataTemplate to the XAML Window.Resources to specify a Layout.</p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig03-022.png"/>
