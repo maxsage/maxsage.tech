@@ -745,18 +745,42 @@ public string FirstName
                 <p>and that ContentControl's Content property is going to be bound to that CurrentViewModel property on
                     the MainWindowViewModel which we know contains a CustomerListViewModel:
                 </p>
-                <p>Now, again, if we were to run at this point::::::::::::::::::</p>
-                <p>Next add a DataTemplate to the XAML Window.Resources to specify a Layout.</p>
+                <p>Now, again, if we were to run at this point:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-022.png"/>
-                    <figcaption>Fig03-022</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021C.png"/>
+                    <figcaption>Fig03-021C</figcaption>
                 </figure>
-                <p>
-                    The above DataTemplate basically says if you encounter a DataType of CustomerListViewModel (which is
-                    what CurrentViewModel is set to in the MainWindowViewModel) use the CustomerListView as a Layout
-                    template.
+                <p>We would just get a ToString of that type as it tries to render out that object. But if we go into
+                    MainWindow and add into it's resources a DataTemplate that is mapped by type to the
+                    CustomerListViewModel that's being rendered out then we can render the appropriate visual structure
+                    for that which in our case is already defined as it's View
                 </p>
-                <p>Make sure to specify the x:Type mark-up extension otherwise the DataTemplate will just silently fail.
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021D.png"/>
+                    <figcaption>Fig03-021D</figcaption>
+                </figure>
+                <p>So if we just make the Content of the DataTemplate be a ViewType and map the DataType to it's
+                    corresponding ViewModel Type and that ViewModel type is rendered out through a Binding into a
+                    Container control like a ContentControl or an items Control:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021E.png"/>
+                    <figcaption>Fig03-021E</figcaption>
+                </figure>
+                <p>Then the magic of implicit DataTemplates kicks in and as part of trying to render out this content it
+                    will go out to the Resources, it will locate a DataTemplate that's mapped to the appropriate type
+                    and then it will render it's Contents setting the DataContext of that root element to that Data
+                    object which is our ViewModel thereby satisfying the equation of MVVM.
+                </p>
+                <p>To see that in action let's go ahead and run and you can see we're back in business with our View:
+                </p>
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021F.png"/>
+                    <figcaption>Fig03-021F</figcaption>
+                </figure>
+                <p>Just one final reminder because I screw it up all the time myself. Make sure you use that x:Type
+                    mark-up extension to specify the type that you are mapping to. Don't just put the typename or you'll
+                    silently get nothing.
                 </p>
                 <h2>No One’s on First</h2>
                 <p>The last scenario to consider is a case where the View doesn’t construct the ViewModel or vice a
@@ -764,23 +788,40 @@ public string FirstName
                 </p>
                 <p>
                     Sometimes a separate chunk of code that simply constructs an instance of each and then sets the
-                    DataContext of the View to the ViewModel. An example of this would be a Client Service that manages
-                    pop up dialogs to be presented to the user. When a given popup is requested by a Command (say a
-                    tools/options dialog) the code in the client service could do the construction of each, wire them
-                    together and place them into a popup window and show it.
+                    DataContext of the View to the ViewModel:
                 </p>
-                <p>Most of the time you will be doing ViewModel-First or View-First but you don’t always have to take
-                    that approach.
+                <figure>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig03-021G.png"/>
+                    <figcaption>Fig03-021G</figcaption>
+                </figure>
+                <p>An example of this would be a Client Service that manages pop up dialogs to be presented to the user.
+                    When a given popup is requested by a Command (say a tools/options dialog) the code in the client
+                    service could do the construction of each, wire them together and place them into a popup window and
+                    show it.
+                </p>
+                <p>Most of the time you will be doing ViewModel-First or View-First depending on whether there's a
+                    static relationship between the View and The ViewModel or if it's a more dynamic scenario but
+                    don't feel like you always have to take that approach. As long as you meet the goals that neither
+                    the View or ViewModel is tightly coupled and they get constructed properly and married together
+                    through the DataContext your doing MVVM just fine.
                 </p>
                 <h2>Summary</h2>
-                <p>We showed a number of ways to hook-up Views and ViewModels:</p>
+                <p>In this module I showed you a number of ways you can get your Views and ViewModels hooked up or
+                    married as many people call it. You saw how to do:</p>
                 <ul>
-                    <li>View-First Construction via XAML</li>
+                    <li>View-First Construction through declarative XAML wiring </li>
                     <li>View-First Construction via code behind</li>
                     <li>Using a ViewModelLocator</li>
                 </ul>
-                <p>Data binding forms the communication pathways between the View and ViewModel</p>
-                <p>DataTemplates allow dynamic selection and hook-up of ViewModels for View.</p>
+                <p>You saw how data binding forms the basic glue of MVVM including the DataContext being the ring
+                    that binds the View and the ViewModel as well as the data bindings being the communication
+                    channels through which data flows in both directions.</p>
+                <p>You also saw that through the mechanisms of DataTemplates which themselves rely on data binding
+                    you can dynamically create an appropriate View for a ViewModel by placing an instance of a
+                    ViewModel into a databound Container control.</p>
+                <p>In the next module we'll take a look at how Views and ViewModels communicate with each other as
+                    things happen in the application including Commands, Behaviours and Property Change
+                    Notifications. At which point you'll have all the basics of MVVM nailed.</p>
             </div>
         </div>
     </div>
