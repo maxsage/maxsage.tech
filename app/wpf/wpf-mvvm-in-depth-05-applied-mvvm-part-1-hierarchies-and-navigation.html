@@ -617,8 +617,8 @@
                     <img src="app/wpf/images/wpfmvvmindepth/Fig05-030.png"/>
                     <figcaption>Fig 05-030</figcaption>
                 </figure>
-                <p>Now we're not going to fully flesh out this View with taking orders, order items and all that kind
-                    of stuff, we're going to focus on rounding out the functionality for Customers.
+                <p>Now we're not going to fully flesh out this View with taking orders, order items and all that kind of
+                    stuff, we're going to focus on rounding out the functionality for Customers.
                 </p>
                 <h2>Demo: Add/Edit Navigation</h2>
                 <p>Dropbox\DevelopmentTutorials\WPFMVVMInDepth\5WPFMVVMInDepth\ZzaDesktop-Start</p>
@@ -759,8 +759,10 @@
                 </p>
                 <p>Now there are certainly other ways to go about this:</p>
                 <ul>
-                    <li>You could have a client service that manages navigation</li>
-                    <li>You could use a framework like Prism and do region navigation</li>
+                    <li>You could have a client service that manages navigation for a given container or set of
+                        containers.
+                    </li>
+                    <li>If you use a framework like Prism you could do something like region navigation</li>
                 </ul>
                 <p>However, this approach is simple and straightforward and it only takes moments to stub each
                     navigation out.
@@ -776,14 +778,24 @@
                     <li>Doing dependency injection for your ViewModels</li>
                 </ul>
                 <h2>Summary</h2>
-                <p>We saw a number of things:</p>
+                <p>In this module we saw a number of things and got started building out our application. We saw:</p>
                 <ul>
-                    <li>Naming and location of components is important for maintainability</li>
-                    <li>Hierarchical MVVM mirrors the way we normally compose complex screens</li>
-                    <li>Building out an MVVM app is a progressive sequence of defining Views, ViewModels, navigation and
-                        communications to satisfy the requirements
+                    <li>Naming and location of components is important for maintainability and you want to put some
+                        thought into where you want to put things and how you name them so that you don't have to go
+                        hunting around and trying to find a View/ViewModel or Model object that's poorly named for
+                        what it's purpose is.
                     </li>
+                    <li>We saw how hierarchical MVVM works and how it can mirror the way you can compose
+                        a complex screen of multiple child views and have the ViewModels mirror that structure and
+                        allow parent ViewModels control child ViewModels and coordinate between them.  </li>
+                    <li>And then you started to see through the demos that building out an MVVM app is a progressive
+                        sequence of defining Views, ViewModels, navigation and communications to satisfy the
+                        requirement at a granular level for each component.</li>
                 </ul>
+                    <p>In the next module we'll continue building out those use cases and we'll look at things like
+                        leveraging the designer in Visual Studio, validating input from the user and using dependency
+                        injection to tie together ViewModels with their client services. So hang in there for one
+                        more module and you'll be an MVVM ninja</p>
             </div>
         </div>
     </div>
