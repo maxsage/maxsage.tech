@@ -67,7 +67,6 @@
                     <li>DataGrid to contain Customers</li>
                     <li>ListView for Customers</li>
                     <li>Details – in effect a data entry form</li>
-                    </li>
                 </ul>
                 <p>Select the Details option and expand the result. You'll see it has mappings for each of the
                     properties based on it's type. Now we're not going to use all these properties for this data entry
@@ -347,7 +346,7 @@
                     some great built in features in the binding system for validating input and you can still leverage
                     all those features when doing MVVM.
                 <p>The only thing to keep in mind is that the logic that supports your validation and defines what rules
-                    exist for what properties should be part of the Model or the ViewModel, not the View.</li>
+                    exist for what properties should be part of the Model or the ViewModel, not the View.</p>
                 <p>You can still use all of the ways of expressing validation that are supported by WPF databinding
                     including:
                 </p>
@@ -356,7 +355,6 @@
                     <li>Implementing the IDataErrorInfo interface</li>
                     <li>Implementing INotifyDataErrorInfo</li>
                     <li>Using WPF Validation Rules</li>
-                </ul>
                 </ul>
                 <p>
                     In general, the recommendation is to use INotifyDataErrorInfo. This was introduced to WPF in .Net

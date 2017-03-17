@@ -7,7 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation.html" afterPath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection.html" afterPath="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -26,8 +25,98 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="wpf-data-binding-in-depth-00-course-contents.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wpf-data-binding-in-depth-00-course-contents.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-00-course-contents.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-01-course-overview.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-01-course-overview.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-02-data-binding-overview.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-02-data-binding-overview.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-03-data-sources.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-03-data-sources.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-04-binding-core-concepts.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-04-binding-core-concepts.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-05-unleashing-the-full-power-of-bindings.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-05-unleashing-the-full-power-of-bindings.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-06-deep-dive-into-datatemplates.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-06-deep-dive-into-datatemplates.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-07-design-time-data-binding.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-07-design-time-data-binding.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-08-containers-and-collection-controls.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-08-containers-and-collection-controls.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf-data-binding-in-depth-09-data-input-validation.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-09-data-input-validation.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -40,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Testing and</find>
       <find>Linting</find>
       <find>bundling</find>
       <find>transpi</find>
@@ -70,6 +158,7 @@
       <find>leveraging</find>
       <find>&lt;/h2&gt;</find>
       <find>Validation in MVVM</find>
+      <find>g WPF Validation</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;images</replace>
@@ -333,12 +422,12 @@
       <workItem from="1489661994937" duration="18997000" />
       <workItem from="1489698121855" duration="3561000" />
       <workItem from="1489702391121" duration="1861000" />
-      <workItem from="1489739902663" duration="18146000" />
+      <workItem from="1489739902663" duration="19637000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167686000" />
+    <option name="totallyTimeSpent" value="169177000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -403,39 +492,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/javascript/javascript.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="804" column="6" lean-forward="true" selection-start-line="804" selection-start-column="6" selection-end-line="804" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/javascript/main.css" />
-    <entry file="file://$PROJECT_DIR$/app/javascript/highlight.min.js" />
-    <entry file="file://$PROJECT_DIR$/app/wpf/css/site-specific.css" />
-    <entry file="file://$PROJECT_DIR$/app/javascript/building-a-javascript-development-environment-00-course-contents.ts" />
-    <entry file="file://$PROJECT_DIR$/app/javascript/building-a-javascript-development-environment-00-course-contents.js" />
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular2-getting-started-01-course-overview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-contents.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-167">
-          <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.dev.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-contents.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -641,14 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="897" column="0" lean-forward="false" selection-start-line="897" selection-start-column="0" selection-end-line="897" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-00-A-full-course-transcript.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -657,7 +705,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="367" column="91" lean-forward="true" selection-start-line="367" selection-start-column="91" selection-end-line="367" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-00-course-contents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-01-course-overview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-02-data-binding-overview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-03-data-sources.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-04-binding-core-concepts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-05-unleashing-the-full-power-of-bindings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-06-deep-dive-into-datatemplates.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-07-design-time-data-binding.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-08-containers-and-collection-controls.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf-data-binding-in-depth-09-data-input-validation.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
