@@ -44,8 +44,8 @@
                 </p>
                 <p>In Visual Studio switch to the Designer tab and select View>Other Windows>Data Sources:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-01.png"/>
-                    <figcaption>Fig06-01</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-001.png"/>
+                    <figcaption>Fig06-001</figcaption>
                 </figure>
                 <p>
                     Click Add New Datasource either with the hyperlink or the icon at the top left of the Data Sources window. From the next dialog select the
@@ -53,8 +53,8 @@
                     window click on the Dropdown list next to the Customer Datasource you just generated.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-02.png"/>
-                    <figcaption>Fig06-02</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-002.png"/>
+                    <figcaption>Fig06-002</figcaption>
                 </figure>
                 <p>This drop allows you to select the output generated:</p>
                 <ul>
@@ -69,16 +69,16 @@
                     remaining fields (Email, FirstName, LastName and Phone):
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-03.png"/>
-                    <figcaption>Fig06-03</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-003.png"/>
+                    <figcaption>Fig06-003</figcaption>
                 </figure>
                 <p>
                     Remove the Loaded event handler and the associated method in the Code Behind. Also, remove the CollectionViewSource that was auto generated
                     in UserControl.Resources. Modify the DataContext of the Grid so it Binds to a Customer property that we will expose from our ViewModel:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-05.png"/>
-                    <figcaption>Fig06-05</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-005.png"/>
+                    <figcaption>Fig06-005</figcaption>
                 </figure>
                 <p>
                     When Visual Studio autogenerates the code it will put the properties in alphabetical order by Property Name. Re-arrange the property order
@@ -104,18 +104,18 @@
                     adhere to the pattern specified in BindableBase for setting the property:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-06.png"/>
-                    <figcaption>Fig06-06</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-006.png"/>
+                    <figcaption>Fig06-006</figcaption>
                 </figure>
                 <p>Back in AddEditCustomerViewModel we can now add a property of type SimpleEditableCustomer:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-07.png"/>
-                    <figcaption>Fig06-07</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-007.png"/>
+                    <figcaption>Fig06-007</figcaption>
                 </figure>
                 <p>We must populate this property when the Customer object is being passed in from the Parent ViewModel.</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-08.png"/>
-                    <figcaption>Fig06-08</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-008.png"/>
+                    <figcaption>Fig06-008</figcaption>
                 </figure>
                 <p>The two methods shown below achieve the following:</p>
                 <ul>
@@ -124,8 +124,8 @@
                     <li>Use the CopyCustomer helper method to copy the relevant values to the Customer.</li>
                 </ul>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-09.png"/>
-                    <figcaption>Fig06-09</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-009.png"/>
+                    <figcaption>Fig06-009</figcaption>
                 </figure>
                 <p>
                     Not all the properties are set unless we are in EditMode (as you will see later this is to avoid triggering validation). We do need to at
@@ -136,13 +136,13 @@
                     form:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-10.png"/>
-                    <figcaption>Fig06-10</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-010.png"/>
+                    <figcaption>Fig06-010</figcaption>
                 </figure>
                 <p>If we navigate to add Customer we will be presented with a blank data entry from to start adding to:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-11.png"/>
-                    <figcaption>Fig06-11</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-011.png"/>
+                    <figcaption>Fig06-011</figcaption>
                 </figure>
                 <h2>Demo: Command Handling and Converters</h2>
                 <p>Now we need to wire up the actual command handling to Add or Save an edited Customer as well as cancelling.</p>
@@ -151,8 +151,8 @@
                     Grid which contains three buttons:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-12.png"/>
-                    <figcaption>Fig06-12</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-012.png"/>
+                    <figcaption>Fig06-012</figcaption>
                 </figure>
                 <p>
                     Only one of the buttons applies depending on which mode you are in (Edit/Add). So we need to hide or show one of these Buttons. One thing
@@ -169,8 +169,8 @@
                     a Binding like this:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-13.png"/>
-                    <figcaption>Fig06-13</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-013.png"/>
+                    <figcaption>Fig06-013</figcaption>
                 </figure>
                 <p>
                     Once again, if you look at it from a separation of concerns perspective, Visibility is a pure presentation aspect which is a responsibility
@@ -196,8 +196,8 @@
                     will be set to either Collapsed or Hidden – we will default to Collapsed:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-14.png"/>
-                    <figcaption>Fig06-14</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-014.png"/>
+                    <figcaption>Fig06-014</figcaption>
                 </figure>
                 <p>
                     In the Convert method there is a chunk of logic that combines the boolean flag that comes in from the binding and the negate flag to say
@@ -205,21 +205,21 @@
                 </p>
                 <p>Next in the AddEditCustomerView add a XAML namespace for the Converters child namespace:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-15.png"/>
-                    <figcaption>Fig06-15</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-015.png"/>
+                    <figcaption>Fig06-015</figcaption>
                 </figure>
                 <p>Define two instances of the VisibilityConverter (one where we set negate to true and one where we don’t):</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-16.png"/>
-                    <figcaption>Fig06-16</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-016.png"/>
+                    <figcaption>Fig06-016</figcaption>
                 </figure>
                 <p>
                     Now set the Visibility of the Buttons using our existing EditMode flag on our ViewModel and the appropriate instance of our
                     VisibilityConverter (VisConverter or NegVisConverter).
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-17.png"/>
-                    <figcaption>Fig06-17</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-017.png"/>
+                    <figcaption>Fig06-017</figcaption>
                 </figure>
                 <p>
                     When in Edit mode the Save Button should be Visible. With the Add Button we negate the meaning of that Edit Mode in order to hide the Add
@@ -228,45 +228,45 @@
                 <p>Now let's hook up Command Handling for our SaveCommand and our CancelCommand. In the ViewModel</p>
                 <p>Declare the Commands as properties you can bind to:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-18.png"/>
-                    <figcaption>Fig06-18</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-018.png"/>
+                    <figcaption>Fig06-018</figcaption>
                 </figure>
                 <p>Construct our Commands in the ViewModel's Constructor pointing to the handling methods.</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-19.png"/>
-                    <figcaption>Fig06-19</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-019.png"/>
+                    <figcaption>Fig06-019</figcaption>
                 </figure>
                 <p>In the case of the SaveCommand we will be implementing validation so we had a CanSave handler.</p>
                 <p>Stub out the OnCancel(), OnSave and CanSave() methods:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-20.png"/>
-                    <figcaption>Fig06-20</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-020.png"/>
+                    <figcaption>Fig06-020</figcaption>
                 </figure>
                 <p>
                     Similar to the CustomerListView we need to be able to signal our Parent ViewModel when we are done adding, editing or if we cancel. We do
                     this by adding an Event called Done which we can raise from the ViewModel and the Parent can handle to drive navigation:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-21.png"/>
-                    <figcaption>Fig06-21</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-021.png"/>
+                    <figcaption>Fig06-021</figcaption>
                 </figure>
                 <p>In the handling methods, for the moment, just call Done() in each method:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-22.png"/>
-                    <figcaption>Fig06-22</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-022.png"/>
+                    <figcaption>Fig06-022</figcaption>
                 </figure>
                 <p>Now in the Parent ViewModel (MainWindowViewModel in this case) add an event handler for the Done event:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-23.png"/>
-                    <figcaption>Fig06-23</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-023.png"/>
+                    <figcaption>Fig06-023</figcaption>
                 </figure>
                 <p>
                     Now add the handler method (NavToCustomerList()) that sets the current ViewModel back to the desired ViewModel when we are finished editing
                     (_customerListViewModel in this case):
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-24.png"/>
-                    <figcaption>Fig06-24</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-024.png"/>
+                    <figcaption>Fig06-024</figcaption>
                 </figure>
                 <p>
                     No if we run the application, click Customers, edit a selected Customer, make a change, click Save and the changes do not show up! This is
@@ -304,8 +304,8 @@
                 </p>
                 <p>Create a new class called ValidateableBindableBase which inherits from BindableBase and implements INotifyDataErrorInfo:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-25.png"/>
-                    <figcaption>Fig06-25</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-025.png"/>
+                    <figcaption>Fig06-025</figcaption>
                 </figure>
                 <p>
                     After we stub the INotifyDataErrorInfo interface out you can see we have a GetErrors method that gets queried with the propertyName and is
@@ -318,13 +318,13 @@
                     property name and a list of string per property which are the errors associated with that property:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-26.png"/>
-                    <figcaption>Fig06-26</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-026.png"/>
+                    <figcaption>Fig06-026</figcaption>
                 </figure>
                 <p>Now we just need to integrate the use of that Dictionary with the members down below:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-27.png"/>
-                    <figcaption>Fig06-27</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-027.png"/>
+                    <figcaption>Fig06-027</figcaption>
                 </figure>
                 <p>
                     We look into the Dictionary when we are queried for a property. If there are any errors in there return them as a list of strings. If not
@@ -332,8 +332,8 @@
                 </p>
                 <p>Next we need to add a trigger to say when does this thing evaluate errors:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-28.png"/>
-                    <figcaption>Fig06-28</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-028.png"/>
+                    <figcaption>Fig06-028</figcaption>
                 </figure>
                 <p>
                     Since we are inhereting from BindableBase we can override the SetProperty method. We will still want to call the base so that the
@@ -345,8 +345,8 @@
                     Data Annotations:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-29.png"/>
-                    <figcaption>Fig06-29</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-029.png"/>
+                    <figcaption>Fig06-029</figcaption>
                 </figure>
                 <p>
                     Data Annotations contain the concept of a data validation context. You can point at a given object, say what member or property on that
@@ -361,16 +361,16 @@
                 <p>Next we raise the ErrorsChanged event so that the binding can go and requery for errors.</p>
                 <p>Back in our AddEditCustomerView we can look at the bindings that were generated from our earlier drag and drop operations:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-30.png"/>
-                    <figcaption>Fig06-30</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-030.png"/>
+                    <figcaption>Fig06-030</figcaption>
                 </figure>
                 <p>
                     We can see they already have Validation and Mode flags on them already. We will replace those flags with the minimum we need to support
                     NotifyDataErrorInfo:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-31.png"/>
-                    <figcaption>Fig06-31</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-031.png"/>
+                    <figcaption>Fig06-031</figcaption>
                 </figure>
                 <p>
                     On each one of the bindings we have added ValidatesOnNotifyDataErrors=True. That causes that binding to look when it first hooks up to its
@@ -385,23 +385,23 @@
                 </ul>
                 <p>Now we need to add some Data Annotation attributes to SimpleEditableCustomer we will make the FirstName and LastName required:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-32.png"/>
-                    <figcaption>Fig06-32</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-032.png"/>
+                    <figcaption>Fig06-032</figcaption>
                 </figure>
                 <p>Then we will use the built in Email and Phone annotations:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-33.png"/>
-                    <figcaption>Fig06-33</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-033.png"/>
+                    <figcaption>Fig06-033</figcaption>
                 </figure>
                 <p>Now we just need to make the base class ValidatableBindableBase instead of BindableBase:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-34.png"/>
-                    <figcaption>Fig06-34</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-034.png"/>
+                    <figcaption>Fig06-034</figcaption>
                 </figure>
                 <p>Now if we run the application, edit a Customer, try to Edit by clearing the FirstName field and we will see it gets red boxed:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-35.png"/>
-                    <figcaption>Fig06-35</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-035.png"/>
+                    <figcaption>Fig06-035</figcaption>
                 </figure>
                 <p>Unfortunately, WPF doesn’t have much in the way of validation indications so we will add two enhancements:</p>
                 <ul>
@@ -410,8 +410,8 @@
                 </ul>
                 <p>To support disabling the SaveCommand we need to go to the AddEditCustomerViewModel and modify the SetCustomer method:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-36.png"/>
-                    <figcaption>Fig06-36</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-036.png"/>
+                    <figcaption>Fig06-036</figcaption>
                 </figure>
                 <p>
                     Now when the Customer is set we subscribe to the ErrorsChanged event and trigger the RaiseCanExecuteChanged. We will also put a check in to
@@ -419,8 +419,8 @@
                 </p>
                 <p>Next we change our CanSave method to check the HasErrors flag of the Customer object:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-37.png"/>
-                    <figcaption>Fig06-37</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-037.png"/>
+                    <figcaption>Fig06-037</figcaption>
                 </figure>
                 <p>
                     Now run the application and edit a Customer. When you remove the FirstName text you will see the field is red boxed again and the Save
@@ -428,8 +428,8 @@
                 </p>
                 <p>Adding a ToolTip for the validation error is as simple as defining a style for it to the AddEditCustomerView:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-38.png"/>
-                    <figcaption>Fig06-38</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-038.png"/>
+                    <figcaption>Fig06-038</figcaption>
                 </figure>
                 <p>
                     In the style we will implicitly target the TextBox within this scope, we will setup a Style Trigger that watches the Attached Property
@@ -439,8 +439,8 @@
                 </p>
                 <p>Now if we run the application and cause a validation error we will see a ToolTip when we hover over the invalid field:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-39.png"/>
-                    <figcaption>Fig06-39</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-039.png"/>
+                    <figcaption>Fig06-039</figcaption>
                 </figure>
                 <p>
                     Check out the WPF Data Binding in Depth Pluralsight course by Brian Noyes for examples of adding Icons to indicate validation errors and
@@ -505,8 +505,8 @@
                     CustomersRepository.:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-40.png"/>
-                    <figcaption>Fig06-40</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-040.png"/>
+                    <figcaption>Fig06-040</figcaption>
                 </figure>
                 <p>
                     Then drop down to the OnSave handling method and call UpdateCustomer or AddCustomer methods of that repository. There are a couple of issues
@@ -526,8 +526,8 @@
                 </ul>
                 <p>The first thing we want to do is change the code in our ViewModel to take in a reference to an ICustomersRepository:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-41.png"/>
-                    <figcaption>Fig06-41</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-041.png"/>
+                    <figcaption>Fig06-041</figcaption>
                 </figure>
                 <p>
                     Now you can see this type is not coupled to the concrete type at all just the interface and provides a path for passing in a mock object in
@@ -539,13 +539,13 @@
                     the instance of the CustomersRepository here:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-42.png"/>
-                    <figcaption>Fig06-42</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-042.png"/>
+                    <figcaption>Fig06-042</figcaption>
                 </figure>
                 <p>Then change the construction of those child ViewModels to pass it in through the constructor:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-43.png"/>
-                    <figcaption>Fig06-43</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-043.png"/>
+                    <figcaption>Fig06-043</figcaption>
                 </figure>
                 <p>
                     So this fixes the problem for our child ViewModels in that they get passed in the appropriate thing at runtime but can have an alternate
@@ -557,8 +557,8 @@
                 </p>
                 <p>Firstly, get Unity from NuGet:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-44.png"/>
-                    <figcaption>Fig06-44</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-044.png"/>
+                    <figcaption>Fig06-044</figcaption>
                 </figure>
                 <p>
                     Now when using a container, you generally have a singleton model for the container itself so we will wire up a simple helper for the
@@ -567,8 +567,8 @@
                     container to be responsible for creating:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-45.png"/>
-                    <figcaption>Fig06-45</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-045.png"/>
+                    <figcaption>Fig06-045</figcaption>
                 </figure>
                 <p>
                     In the API of Unity what we do here is basically say whenever someone asks for an ICustomersRepository give them the CustomersRepository as
@@ -578,13 +578,13 @@
                 </p>
                 <p>To use this, we go back to MainWindowViewModel and add a namespace for the Unity namespace:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-46.png"/>
-                    <figcaption>Fig06-46</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-046.png"/>
+                    <figcaption>Fig06-046</figcaption>
                 </figure>
                 <p>Next we will change the way the child ViewModels are created so that they use the Container:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-47.png"/>
-                    <figcaption>Fig06-47</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-047.png"/>
+                    <figcaption>Fig06-047</figcaption>
                 </figure>
                 <p>
                     We use a Resolve method in Unity specifying the type that we want to create. When it goes to construct that object it will satisfy its
@@ -592,8 +592,8 @@
                     ICustomersRepository. Now this parent ViewModel doesn’t even have to know about this dependency so we can delete the line:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-48.png"/>
-                    <figcaption>Fig06-48</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-048.png"/>
+                    <figcaption>Fig06-048</figcaption>
                 </figure>
                 <p>
                     Now finally we can wire up the Save handling in our AddEditCustomerViewModel. So now when we call Save we will first copy the contents of
@@ -601,8 +601,8 @@
                     and pulls the relevant properties:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-49.png"/>
-                    <figcaption>Fig06-49</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-049.png"/>
+                    <figcaption>Fig06-049</figcaption>
                 </figure>
                 <p>
                     You could use a tool like AutoMapper for doing this kind of thing. Then depending on our mode we either call UpdateCustomerAsync or
@@ -630,8 +630,8 @@
                     </ul>
                 </ul>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-50.png"/>
-                    <figcaption>Fig06-50</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-050.png"/>
+                    <figcaption>Fig06-050</figcaption>
                 </figure>
                 <p>That means our ViewModel needs to support two new things:</p>
                 <ul>
@@ -641,8 +641,8 @@
                     <li>We also need a ClearSearchCommand to clear out the search term</li>
                 </ul>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-51.png"/>
-                    <figcaption>Fig06-51</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-051.png"/>
+                    <figcaption>Fig06-051</figcaption>
                 </figure>
                 <p>
                     In our CustomerListViewModel we define that SearchInput property so when the property gets set we need to trigger filtering of the Customers
@@ -654,8 +654,8 @@
                 </p>
                 <p>So we just need to add the _allCustomers collection and we need to populate that when we load our Customers:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-52.png"/>
-                    <figcaption>Fig06-52</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-052.png"/>
+                    <figcaption>Fig06-052</figcaption>
                 </figure>
                 <p>
                     We declare the list of _allCustomers, we can await and hold onto that and then we can do our initial population of the Customers property
@@ -663,18 +663,18 @@
                 </p>
                 <p>Expose a property for the Command:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-53.png"/>
-                    <figcaption>Fig06-53</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-053.png"/>
+                    <figcaption>Fig06-053</figcaption>
                 </figure>
                 <p>Construct the Command and point it to its handling method:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-54.png"/>
-                    <figcaption>Fig06-54</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-054.png"/>
+                    <figcaption>Fig06-054</figcaption>
                 </figure>
                 <p>And define that handling method in this case nulling out the SearchInput:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-55.png"/>
-                    <figcaption>Fig06-55</figcaption>
+                    <img src="app/wpf/images/wpfmvvmindepth/Fig06-055.png"/>
+                    <figcaption>Fig06-055</figcaption>
                 </figure>
                 <p>
                     Now if we run the application, go to the Customers view, put in a search term and you can see the list tailoring to your search criteria.
@@ -740,7 +740,6 @@
                 </p>
                 <p>Finally, we talked about MVVM frameworks and Toolkits out there and you should look into these and use one to help you implement MVVM.</p>
 
-                <script src="bundle.js"></script>
             </div>
         </div>
     </div>
