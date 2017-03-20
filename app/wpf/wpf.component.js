@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1;
-    var WPFComponent, WPFDataBindingInDepth00CourseContentsComponent, WPFDataBindingInDepth01CourseOverviewComponent, WPFDataBindingInDepth02DataBindingOverviewComponent, WPFDataBindingInDepth03DataSourcesComponent, WPFDataBindingInDepth04BindingCoreConceptsComponent, WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent, WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent, WPFDataBindingInDepth07DesignTimeDataBindingComponent, WPFDataBindingInDepth08ContainersAndCollectionControlsComponent, WPFDataBindingInDepth09DataInputValidationComponent, WPFMVVMInDepth00CourseContentsComponent, WPFMVVMInDepth01MVVMPatternFundamentalsComponent, WPFMVVMInDepth02FirstTasteOfMVVMComponent, WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent, WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent, WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent, WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent;
+    var WPFComponent, WPFDataBindingInDepth00CourseContentsComponent, WPFDataBindingInDepth01CourseOverviewComponent, WPFDataBindingInDepth02DataBindingOverviewComponent, WPFDataBindingInDepth03DataSourcesComponent, WPFDataBindingInDepth04BindingCoreConceptsComponent, WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent, WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent, WPFDataBindingInDepth07DesignTimeDataBindingComponent, WPFDataBindingInDepth08ContainersAndCollectionControlsComponent, WPFDataBindingInDepth09DataInputValidationComponent, WPFMVVMInDepth00CourseContentsComponent, WPFMVVMInDepth01MVVMPatternFundamentalsComponent, WPFMVVMInDepth02FirstTasteOfMVVMComponent, WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent, WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent, WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent, WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent, MVVMLightToolkitFundamentals00CourseContentsComponent, MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent, MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent, MVVMLightToolkitFundamentals03TheCoreComponentsComponent, MVVMLightToolkitFundamentals04TheExtrasComponent, MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent, MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -273,6 +273,105 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 return WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent;
             }());
             exports_1("WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent", WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent);
+            MVVMLightToolkitFundamentals00CourseContentsComponent = (function () {
+                function MVVMLightToolkitFundamentals00CourseContentsComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - Course Contents";
+                }
+                MVVMLightToolkitFundamentals00CourseContentsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-00-course-contents.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals00CourseContentsComponent);
+                return MVVMLightToolkitFundamentals00CourseContentsComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals00CourseContentsComponent", MVVMLightToolkitFundamentals00CourseContentsComponent);
+            MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent = (function () {
+                function MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - Introduction to the MVVM";
+                }
+                MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent);
+                return MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent", MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent);
+            MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent = (function () {
+                function MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - Refactoring the App to MVVM";
+                }
+                MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent);
+                return MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent", MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent);
+            MVVMLightToolkitFundamentals03TheCoreComponentsComponent = (function () {
+                function MVVMLightToolkitFundamentals03TheCoreComponentsComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - The Core Components";
+                }
+                MVVMLightToolkitFundamentals03TheCoreComponentsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals03TheCoreComponentsComponent);
+                return MVVMLightToolkitFundamentals03TheCoreComponentsComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals03TheCoreComponentsComponent", MVVMLightToolkitFundamentals03TheCoreComponentsComponent);
+            MVVMLightToolkitFundamentals04TheExtrasComponent = (function () {
+                function MVVMLightToolkitFundamentals04TheExtrasComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - The Extras";
+                }
+                MVVMLightToolkitFundamentals04TheExtrasComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals04TheExtrasComponent);
+                return MVVMLightToolkitFundamentals04TheExtrasComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals04TheExtrasComponent", MVVMLightToolkitFundamentals04TheExtrasComponent);
+            MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent = (function () {
+                function MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - Installing the MVVM Light Toolkit and Additional" +
+                        " Components";
+                }
+                MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent);
+                return MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent", MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent);
+            MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent = (function () {
+                function MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent() {
+                    this.pageTitle = "MVVM Light Toolkit Fundamentals - Advanced Examples with MVVM Light";
+                }
+                MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html',
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent);
+                return MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent;
+            }());
+            exports_1("MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent", MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent);
         }
     }
 });

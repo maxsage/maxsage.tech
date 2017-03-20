@@ -23,7 +23,12 @@ import {
     WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent,
     WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent,
     WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent,
-    WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent
+    WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent,
+    MVVMLightToolkitFundamentals00CourseContentsComponent, MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent,
+    MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent,
+    MVVMLightToolkitFundamentals03TheCoreComponentsComponent, MVVMLightToolkitFundamentals04TheExtrasComponent,
+    MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent,
+    MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent
 } from './wpf/wpf.component';
 
 import {
@@ -158,6 +163,14 @@ import { DGenComponent } from './dgen/dgen.component';
     { path: '/wpf-mvvm-in-depth-04-view-viewmodel-communication-in-wpf', name: 'WPFMVVMInDepth04ViewViewModelCommunicationInWPF', component: WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent },
     { path: '/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation', name: 'WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigation', component: WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent },
     { path: '/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection', name: 'WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjection', component: WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent },
+
+    { path: '/mvvm-light-toolkit-fundamentals-00-course-contents', name: 'MVVMLightToolkitFundamentals00CourseContents', component: MVVMLightToolkitFundamentals00CourseContentsComponent },
+    { path: '/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm', name: 'MVVMLightToolkitFundamentals01IntroductionToTheMVVM', component: MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent },
+    { path: '/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm', name: 'MVVMLightToolkitFundamentals02RefactoringTheAppToMVVM', component: MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent },
+    { path: '/mvvm-light-toolkit-fundamentals-03-the-core-components', name: 'MVVMLightToolkitFundamentals03TheCoreComponents', component: MVVMLightToolkitFundamentals03TheCoreComponentsComponent },
+    { path: '/mvvm-light-toolkit-fundamentals-04-the-extras', name: 'MVVMLightToolkitFundamentals04TheExtras', component: MVVMLightToolkitFundamentals04TheExtrasComponent },
+    { path: '/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components', name: 'MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponents', component: MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent },
+    { path: '/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light', name: 'MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLight', component: MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent },
 
     { path: '/angular2', name: 'Angular2', component: Angular2Component },
     { path: '/angular2-getting-started-00-course-contents', name: 'Angular2GettingStarted00CourseContents', component: Angular2GettingStarted00CourseContentsComponent},

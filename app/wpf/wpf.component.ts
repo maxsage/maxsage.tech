@@ -144,3 +144,60 @@ export class WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent {
 export class WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent {
     public pageTitle: string = "WPF MVVM In Depth - Applied MVVM Part 2 - Validation and Dependency Injection";
 }
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-00-course-contents.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals00CourseContentsComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - Course Contents";
+}
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - Introduction to the MVVM";
+}
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - Refactoring the App to MVVM";
+}
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals03TheCoreComponentsComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - The Core Components";
+}
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals04TheExtrasComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - The Extras";
+}
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - Installing the MVVM Light Toolkit and Additional" +
+        " Components";
+}
+
+@Component({
+    templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html',
+    directives: [ROUTER_DIRECTIVES]
+})
+export class MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent {
+    public pageTitle: string = "MVVM Light Toolkit Fundamentals - Advanced Examples with MVVM Light";
+}
