@@ -1114,149 +1114,432 @@
                     <figcaption>Fig 04-120</figcaption>
                 </figure>
                 <p>and I'm going to go into the MainSkin.xaml ResourceDictionary, which is already merged into the
-                    UserControl.Resources. Let's do that. Here is MainSkin, and I'm going to paste the code that I
-                    copied just before. If I try to run the application now, I'm going to get an error, because the
-                    MouseLeftButtonDown event handler is not found. And, of course, there is absolutely no way to add
-                    this event handler inside the ResourceDictionary, because there is no code behind. Let's modify this
-                    example to use EventToCommand to select a Command defined on the item represented by this
-                    DataTemplate. So first I'm removing the event handler, and then let's show the Command itself, which
-                    is defined here inside the DataItemViewModel. So here we see the ShowItemCommand, which is going to
-                    show a MessageBox using the Model.Title. Here is how you would do this in Blend. First I'm going to
-                    edit the DataTemplate of the ListBox. (Typing) And then I'm going to take an EventToCommand in the
-                    Assets Library and drag it on the Grid. Then I'm going to go to the Properties panel and I'm going
-                    to configure the Command property using the Data Binding Editor, and here Blend knows that the
-                    DataContext of this DataTemplate is the DataItemViewModel, on which the ShowItemCommand is defined.
-                    Now if I run the application again, we can see that we can click on the item and then the Command is
-                    executed, which is just fine. If we want to move the Command to the MainViewModel, this is possible
-                    too. Here we are inside the MainViewModel class and we have such a Command here. This Command
-                    receives an item, this is a DataItemViewModel, and then it will create a message and use a
-                    MessageBox to show this message. Notice how we use item.Model.Title. In Blend, it is very easy to
-                    retarget the Command. Let's go and Edit the ItemTemplate. Then I will select the EventToCommand and
-                    open the Data Binding Editor. Because of the way that the MVVM Light Application is structured, I
-                    can see the ViewModelLocator as a data source, I can select it and see the MainViewModel property,
-                    and here, the ShowItemCommand. Notice that this Command expects a DataItemViewModel as parameter. So
-                    let's select it here. And after I press OK, I need to set up the CommandParameter property. I need
-                    to pass a reference to the DataItemViewModel itself. This is a little unusual, because the
-                    DataItemViewModel is the DataContext of the DataTemplate. Let's open the Data Binding Editor, and
-                    now we see that the DataContext of this Binding is a DataItemViewModel, which is just what I want.
-                    So I don't select any property, but instead I just press OK. Now I can run the application again.
-                    And this time if I select, we see that we are in the MainViewModel, and this is item #1, and here is
-                    item #2. Here is a syntax in XAML. Here we see the Interaction.Triggers, this is an attached
-                    property, just like before we had Interactions.Behaviors. Then we have the EventTrigger, which is
-                    configured to use a MouseLeftButtonDown event. Here is the EventToCommand itself, which is using the
-                    Command property data bound through the StaticResource Locator, to the Main.ShowItemCommand. And
-                    finally, we have the CommandParameter, which is a Binding to the DataContext itself, represented by
-                    this DataTemplate.
+                    UserControl.Resources:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-121.png"/>
+                    <figcaption>Fig 04-121</figcaption>
+                </figure>
+                <p>Let's do that. Here is MainSkin, and I'm going to paste the code that I copied just before:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-122.png"/>
+                    <figcaption>Fig 04-122</figcaption>
+                </figure>
+                <p>If I try to run the application now, I'm going to get an error:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-123.png"/>
+                    <figcaption>Fig 04-123</figcaption>
+                </figure>
+                <p>because the MouseLeftButtonDown event handler is not found. And, of course, there is absolutely no
+                    way to add this event handler inside the ResourceDictionary, because there is no code behind. Let's
+                    modify this example to use EventToCommand to select a Command defined on the item represented by
+                    this DataTemplate.</p>
+                <p>So first I'm removing the event handler</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-124.png"/>
+                    <figcaption>Fig 04-124</figcaption>
+                </figure>
+                <p>and then let's show the Command itself, which is defined here inside the DataItemViewModel.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-125.png"/>
+                    <figcaption>Fig 04-125</figcaption>
+                </figure>
+                <p>So here we see the ShowItemCommand, which is going to show a MessageBox using the Model.Title:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-126.png"/>
+                    <figcaption>Fig 04-126</figcaption>
+                </figure>
+                <p>
+                    Here is how you would do this in Blend. First I'm going to edit the DataTemplate of the ListBox.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-127.png"/>
+                    <figcaption>Fig 04-127</figcaption>
+                </figure>
+                <p>
+                    And then I'm going to take an EventToCommand in the Assets Library and drag it on the Grid
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-128.png"/>
+                    <figcaption>Fig 04-128</figcaption>
+                </figure>
+                <p>
+                    Then I'm going to go to the Properties panel and I'm going to configure the Command property using
+                    the Data Binding Editor:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-129.png"/>
+                    <figcaption>Fig 04-129</figcaption>
+                </figure>
+                <p>and here Blend knows that the DataContext of this DataTemplate is the DataItemViewModel, on which the
+                    ShowItemCommand is defined:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-130.png"/>
+                    <figcaption>Fig 04-130</figcaption>
+                </figure>
+                <p>Now if I run the application again, we can see that we can click on the item and then the Command is
+                    executed, which is just fine:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-131.png"/>
+                    <figcaption>Fig 04-131</figcaption>
+                </figure>
+                <p>
+                    If we want to move the Command to the MainViewModel, this is possible too. Here we are inside the
+                    MainViewModel class and we have such a Command here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-132.png"/>
+                    <figcaption>Fig 04-132</figcaption>
+                </figure>
+                <p>
+                    This Command receives an item, this is a DataItemViewModel, and then it will create a message and
+                    use a MessageBox to show this message. Notice how we use item.Model.Title:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-133.png"/>
+                    <figcaption>Fig 04-133</figcaption>
+                </figure>
+                <p>In Blend, it is very easy to retarget the Command. Let's go and Edit the ItemTemplate:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-134.png"/>
+                    <figcaption>Fig 04-134</figcaption>
+                </figure>
+                <p>Then I will select the EventToCommand:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-135.png"/>
+                    <figcaption>Fig 04-135</figcaption>
+                </figure>
+                <p>
+                    and open the Data Binding Editor:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-136.png"/>
+                    <figcaption>Fig 04-136</figcaption>
+                </figure>
+                <p>
+                    Because of the way that the MVVM Light Application is structured, I can see the ViewModelLocator as
+                    a data source, I can select it and see the MainViewModel property, and here, the
+                    ShowItemCommand:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-137.png"/>
+                    <figcaption>Fig 04-137</figcaption>
+                </figure>
+                <p>
+                    Notice that this Command expects a DataItemViewModel as parameter:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-138.png"/>
+                    <figcaption>Fig 04-138</figcaption>
+                </figure>
+                <p>
+                    So let's select it here. And after I press OK, I need to set up the CommandParameter property. I
+                    need to pass a reference to the DataItemViewModel itself. This is a little unusual, because the
+                    DataItemViewModel is the DataContext of the DataTemplate. Let's open the Data Binding Editor:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-139.png"/>
+                    <figcaption>Fig 04-139</figcaption>
+                </figure>
+                <p>
+                    and now we see that the DataContext of this Binding is a DataItemViewModel, which is just what I
+                    want. So I don't select any property:
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-140.png"/>
+                    <figcaption>Fig 04-140</figcaption>
+                </figure>
+                <p>
+                    but instead I just press OK. Now I can run the application again. And this time if I select, we see
+                    that we are in the MainViewModel, and this is item #1:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-141.png"/>
+                    <figcaption>Fig 04-141</figcaption>
+                </figure>
+                <p>
+                    and here is item #2.
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-142.png"/>
+                    <figcaption>Fig 04-142</figcaption>
+                </figure>
+                <p>
+                    Here is a syntax in XAML. Here we see the Interaction.Triggers:
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-143.png"/>
+                    <figcaption>Fig 04-143</figcaption>
+                </figure>
+                <p>
+                    this is an attached property, just like before we had Interactions.Behaviors. Then we have the
+                    EventTrigger:
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-144.png"/>
+                    <figcaption>Fig 04-144</figcaption>
+                </figure>
+                <p>
+                    which is configured to use a MouseLeftButtonDown event. Here is the EventToCommand itself:
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-145.png"/>
+                    <figcaption>Fig 04-145</figcaption>
+                </figure>
+                <p>
+                    which is using the Command property data bound through the StaticResource Locator, to the
+                    Main.ShowItemCommand. And finally, we have the CommandParameter, which is a Binding to the
+                    DataContext itself, represented by this DataTemplate.
                 </p>
                 <h3>EventToCommand Demo 3: DataTrigger and EventToCommand</h3>
                 <p>For the next sample, we will use a DataTrigger inside of an EventTrigger in the Windows Phone
                     Application. In standard MVVM scenarios, it is actually quite rare to use DataTrigger, because most
-                    data operations can be done directly in the ViewModel. But here, I will show an example where we use
-                    two ViewModels located in a satellite assembly. We will pretend that both ViewModels cannot
-                    communicate with each other, and so we will use an EventToCommand coupled with a DataTrigger to do
-                    that. Here is the application in question. The MainViewModel and the SettingsViewModel are located
-                    in a referenced assembly here. The MainViewModel has one Command, called ValidateCommand. This
-                    command will simply set a text into the string property named Result. As for the SettingsViewModel,
-                    we have the Value property, which is an integer, and then we have the IncDecCommand, which we use to
-                    increment or decrement the Value. Both these ViewModels are exposing the ViewModelLocator as
-                    properties for easy access. Now let's open the MainPage in Blend. Here we see the Decrement and
-                    Increment buttons, which are using the corresponding command in the SettingsViewModel. The Value is
-                    shown below the buttons. The textbox below, which shows ‘Waiting…' for the moment, is bound to the
-                    Result property on the MainViewModel. So really this view is a composite of two ViewModels, which is
-                    a little bit unusual, but which happens sometimes when you build larger applications. The scenario
-                    we want to fulfill is to listen to the Value property, and when it reaches a Value of 0, we want to
-                    trigger the ValidateCommand on the MainViewModel. There are, of course, multiple ways to solve that,
-                    and here for the illustration, I will solve this using a DataTrigger. Let's add an EventToCommand to
-                    the page from the Assets Library. As we saw before, the default TriggerType is an EventTrigger, but
-                    here we want to use a DataTrigger, so I will click on the New button. In the dialog, I will select a
-                    DataTrigger from the Microsoft.Expression.Interactions DLL, which is a library from the SDK. There
-                    are multiple other triggers, such as KeyTrigger for the keyboard, a TimerTrigger, etc. Here I select
-                    the DataTrigger and then I click OK. The DataTrigger requires a Binding, which we will set thanks to
-                    the Binding Editor. Let's navigate through the ViewModelLocator, as a data source, to the
-                    SettingsViewModel. And here we select the Value property, and I can click OK. You can verify that
-                    the Value is correct thanks to the Value -5 shown here. Then we will set the Trigger Value to 0. So
-                    when the Value property reaches 0, the trigger will fire. Know that you can use some Comparison
-                    operators, such as Equal, NotEqual, GreaterThan, LessThan, etc. Finally, let's configure the
-                    Command. And here we will make a Binding to the MainViewModel's ValidateCommand property. This way,
-                    we have established the connection between the SettingsViewModel and the MainViewModel without
-                    touching these two components, only through Data Binding. Now we can test the application. If I
-                    click on the Increment button, when it reaches 0, we see that the Command was executed, and the
-                    Result property is set, as expected.
+                    data operations can be done directly in the ViewModel.</p>
+                <p>But here, I will show an example where we use two ViewModels located in a satellite assembly. We will
+                    pretend that both ViewModels cannot communicate with each other, and so we will use an
+                    EventToCommand coupled with a DataTrigger to do that.</p>
+                <p>Here is the application in question. The MainViewModel and the SettingsViewModel are located in a
+                    referenced assembly here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-146.png"/>
+                    <figcaption>Fig 04-146</figcaption>
+                </figure>
+                <p>The MainViewModel has one Command, called ValidateCommand:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-147.png"/>
+                    <figcaption>Fig 04-147</figcaption>
+                </figure>
+                <p>
+                    This command will simply set a text into the string property named Result.
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-148.png"/>
+                    <figcaption>Fig 04-148</figcaption>
+                </figure>
+                <p>
+                    As for the SettingsViewModel, we have the Value property:
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-149.png"/>
+                    <figcaption>Fig 04-149</figcaption>
+                </figure>
+                <p>
+                    which is an integer, and then we have the IncDecCommand</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-150.png"/>
+                    <figcaption>Fig 04-150</figcaption>
+                </figure>
+                <p>
+                    which we use to increment or decrement the Value.</p>
+                <p>
+                    Both these ViewModels are exposing the ViewModelLocator as properties for easy access.</p>
+                <p>
+                    Now let's open the MainPage in Blend. Here we see the Decrement and Increment buttons, which are
+                    using the corresponding command in the SettingsViewModel:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-151.png"/>
+                    <figcaption>Fig 04-151</figcaption>
+                </figure>
+                <p>
+                    The Value is shown below the buttons. The textbox below, which shows ‘Waiting…' for the moment, is
+                    bound to the Result property on the MainViewModel.</p>
+                <p>
+                    So really this view is a composite of two ViewModels, which is a little bit unusual, but which
+                    happens sometimes when you build larger applications. The scenario we want to fulfill is to listen
+                    to the Value property, and when it reaches a Value of 0, we want to trigger the ValidateCommand on
+                    the MainViewModel. There are, of course, multiple ways to solve that, and here for the illustration,
+                    I will solve this using a DataTrigger.</p>
+                <p>
+                    Let's add an EventToCommand to the page from the Assets Library:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-152.png"/>
+                    <figcaption>Fig 04-152</figcaption>
+                </figure>
+                <p>
+                    As we saw before, the default TriggerType is an EventTrigger, but here we want to use a DataTrigger,
+                    so I will click on the New button:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-153.png"/>
+                    <figcaption>Fig 04-153</figcaption>
+                </figure>
+                <p>
+                    In the dialog, I will select a DataTrigger from the Microsoft.Expression.Interactions DLL, which is
+                    a library from the SDK:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-154.png"/>
+                    <figcaption>Fig 04-154</figcaption>
+                </figure>
+                <p>
+                    There are multiple other triggers, such as KeyTrigger for the keyboard, a TimerTrigger, etc. Here I
+                    select the DataTrigger and then I click OK.</p>
+                <p>
+                    The DataTrigger requires a Binding, which we will set thanks to the Binding Editor:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-155.png"/>
+                    <figcaption>Fig 04-155</figcaption>
+                </figure>
+                <p>
+                    Let's navigate through the ViewModelLocator, as a data source, to the SettingsViewModel. And here we
+                    select the Value property, and I can click OK:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-156.png"/>
+                    <figcaption>Fig 04-156</figcaption>
+                </figure>
+                <p>
+                    You can verify that the Value is correct thanks to the Value -5 shown here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-157.png"/>
+                    <figcaption>Fig 04-157</figcaption>
+                </figure>
+                <p>
+                    Then we will set the Trigger Value to 0:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-158.png"/>
+                    <figcaption>Fig 04-158</figcaption>
+                </figure>
+                <p>
+                    So when the Value property reaches 0, the trigger will fire. Know that you can use some Comparison
+                    operators, such as Equal, NotEqual, GreaterThan, LessThan, etc:</p>
+
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-159.png"/>
+                    <figcaption>Fig 04-159</figcaption>
+                </figure>
+                <p>
+                    Finally, let's configure the Command. And here we will make a Binding to the MainViewModel's
+                    ValidateCommand property:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-160.png"/>
+                    <figcaption>Fig 04-160</figcaption>
+                </figure>
+                <p>
+                    This way, we have established the connection between the SettingsViewModel and the MainViewModel
+                    without touching these two components, only through Data Binding.</p>
+                <p>
+                    Now we can test the application. If I click on the Increment button:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-161.png"/>
+                    <figcaption>Fig 04-161</figcaption>
+                </figure>
+                <p>when it reaches 0, we see that the Command was executed, and the Result property is set, as expected.
                 </p>
                 <h3>EventToCommand Demo 4: EventArgsConverter</h3>
-                <p>In this example, we will handle the MouseClick on the blue rectangle. We want the ViewModel to know
-                    where the MouseClick occurred, relatively to the top-left corner of TheRectangle itself. The
-                    MouseButtonEventArgs has a method called GetPosition, which allows us to do this calculation. If we
-                    set PassEventArgsToCommand to true, the MouseButtonEventArgs will be passed down to the Command as
-                    its parameter, but this is not a clean interaction, because ideally the ViewModel should not know
-                    about the objects at all. So let's see how we can set an EventArgsConverter up. Here is the
-                    EventArgsConverter, this is called MouseButtonEventArgsToPointConverter, and implements the
-                    IEventArgsConverter interface from MVVM Light. This interface requires only one method, called
-                    Convert. It has two arguments, the value and the parameter. Let's first set up the XAML markup. Here
-                    we have the EventToCommand code. We set the EventArgsConverter property to a StaticResource, which
-                    is defined in the page's resources. This is an instance of the MouseButtonEventArgsToPointConverter
-                    class that we just saw. As EventArgsConverterParameter, we set the Binding to the ElementName,
-                    TheRectangle, itself. Here we can see the Name of TheRectangle element. This is the actual element
-                    on which the EventToCommand is applied. And here in the page resources, we have the
-                    MouseButtonEventArgsToPointConverter, which is defined. Of course, as usual, this converter could
-                    also be defined in the application resources. Inside the converter, the MouseButtonEventArgs is
-                    received as a value and TheRectangle is a parameter. So we can cast these two elements and do the
-                    calculation here. The returned value, in this case a point, will be passed to the Command as a
-                    CommandParameter. Finally, here is a RelayCommand code inside the MainViewModel. Notice how the
-                    point, which is a result of the calculation of the EventArgsConverter, is received and how we can
-                    use it to format a message and then show this message in the MessageBox. Of course in a real-life
-                    application, we would probably use this point to do additional calculations. If we run the
-                    application now, we can click on TheRectangle and see the position relatively to the top-left corner
-                    of TheRectangle. Here I am very close from this corner, as you can see. We can also easily change
-                    the parameter to reference a page itself. Here, the page has a Name set to PageRoot. So if I go into
-                    the Parameter value here, I can change TheRectangle with PageRoot, and then if I run the application
-                    again, we will see that the position is now displayed in reference to the page's top-left corner;
-                    for example, here, the top-left point of TheRectangle itself. This example is quite clean, because
-                    the ViewModel only knows the point class, which is not directly related to the View. It is a level
-                    of abstraction, which is comfortable. We could, of course, imagine other examples; for example, with
-                    Drag & Drop. The EventArgsConverter is an advanced tool, but it is very convenient when you want to
-                    perform specific calculations inside the ViewModel.
+                <p>In this example, we will handle the MouseClick on the blue rectangle:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-162.png"/>
+                    <figcaption>Fig 04-162</figcaption>
+                </figure>
+                <p>
+                    We want the ViewModel to know where the MouseClick occurred, relatively to the top-left corner of
+                    TheRectangle itself. The MouseButtonEventArgs has a method called GetPosition, which allows us to do
+                    this calculation. If we set PassEventArgsToCommand to true, the MouseButtonEventArgs will be passed
+                    down to the Command as its parameter, but this is not a clean interaction, because ideally the
+                    ViewModel should not know about the objects at all. So let's see how we can set an
+                    EventArgsConverter up.</p>
+                <p>
+                    Here is the EventArgsConverter, this is called MouseButtonEventArgsToPointConverter:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-163.png"/>
+                    <figcaption>Fig 04-163</figcaption>
+                </figure>
+                <p>
+                    and implements the IEventArgsConverter interface from MVVM Light. This interface requires only one
+                    method, called Convert. It has two arguments, the value and the parameter. Let's first set up the
+                    XAML markup. Here we have the EventToCommand code:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-164.png"/>
+                    <figcaption>Fig 04-164</figcaption>
+                </figure>
+                <p>
+                    We set the EventArgsConverter property to a StaticResource, which is defined in the page's
+                    resources:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-165.png"/>
+                    <figcaption>Fig 04-165</figcaption>
+                </figure>
+                <p>
+                    This is an instance of the MouseButtonEventArgsToPointConverter class that we just saw:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-166.png"/>
+                    <figcaption>Fig 04-166</figcaption>
+                </figure>
+                <p>
+                    As EventArgsConverterParameter, we set the Binding to the ElementName, TheRectangle, itself:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-167.png"/>
+                    <figcaption>Fig 04-167</figcaption>
+                </figure>
+                <p>
+                    Here we can see the Name of TheRectangle element:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-168.png"/>
+                    <figcaption>Fig 04-168</figcaption>
+                </figure>
+                <p>
+                    This is the actual element on which the EventToCommand is applied. And here in the page resources,
+                    we have the MouseButtonEventArgsToPointConverter, which is defined:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-169.png"/>
+                    <figcaption>Fig 04-169</figcaption>
+                </figure>
+                <p>
+                    Of course, as usual, this converter could also be defined in the application resources. Inside the
+                    converter, the MouseButtonEventArgs is received as a value and TheRectangle is a parameter.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-170.png"/>
+                    <figcaption>Fig 04-170</figcaption>
+                </figure>
+                <p>
+                    So we can cast these two elements and do the calculation here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-171.png"/>
+                    <figcaption>Fig 04-171</figcaption>
+                </figure>
+                <p>
+                    The returned value, in this case a point:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-172.png"/>
+                    <figcaption>Fig 04-172</figcaption>
+                </figure>
+                <p>
+                    will be passed to the Command as a CommandParameter.</p>
+                <p>
+                    Finally, here is a RelayCommand code inside the MainViewModel:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-173.png"/>
+                    <figcaption>Fig 04-173</figcaption>
+                </figure>
+                <p>
+                    Notice how the point, which is a result of the calculation of the EventArgsConverter, is received
+                    and how we can use it to format a message and then show this message in the MessageBox.</p>
+                <p>
+                    Of course in a real-life application, we would probably use this point to do additional
+                    calculations. If we run the application now, we can click on TheRectangle and see the position
+                    relatively to the top-left corner of TheRectangle:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-174.png"/>
+                    <figcaption>Fig 04-174</figcaption>
+                </figure>
+                <p>
+                    We can also easily change the parameter to reference a page itself. Here, the page has a Name set to
+                    PageRoot:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-175.png"/>
+                    <figcaption>Fig 04-175</figcaption>
+                </figure>
+                <p>
+                    So if I go into the Parameter value here, I can change TheRectangle with PageRoot:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-176.png"/>
+                    <figcaption>Fig 04-176</figcaption>
+                </figure>
+                <p>
+                    and then if I run the application again, we will see that the position is now displayed in reference
+                    to the page's top-left corner; for example, here, the top-left point of TheRectangle itself:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-178.png"/>
+                    <figcaption>Fig 04-178</figcaption>
+                </figure>
+                <p>
+                    This example is quite clean, because the ViewModel only knows the point class, which is not directly
+                    related to the View. It is a level of abstraction, which is comfortable. We could, of course,
+                    imagine other examples; for example, with Drag & Drop.</p>
+                <p>
+                    The EventArgsConverter is an advanced tool, but it is very convenient when you want to perform
+                    specific calculations inside the ViewModel.
                 </p>
                 <h3>EventToCommand vs. InvokeCommandAction</h3>
                 <p>If you've used the Blend SDK before, you may have noticed an action named InvokeCommandAction. This
                     action fulfills the same purpose in EventToCommand and can be used instead of EventToCommand in many
                     scenarios; however, it does not have a way to pass the EventArgs to the Command or to convert them.
-                    This is why EventToCommand is still the recommended way to trigger commands in advanced scenarios.
+                    This is why EventToCommand is still the recommended way to trigger commands in advanced
+                    scenarios.</p>
+                <p>
                     In Windows 8.1, however, the Blend Team took our feedback and added a way to convert EventArgs and
                     pass them to the Command. This is what the InputConverter and InputConverterParameter are for. Note
                     that the InputConverter is an IValueConverter, so it is a slightly different implementation than in
-                    MVVM Light. Because the InvokeCommandAction is fulfilling the same features as EventToCommand in
-                    Windows 8.1, there are currently no plans to port EventToCommand to this version of the XAML
-                    framework. In Windows 8.0, there are no Blend behaviors at all; however, at this URL, you will find
-                    a workaround, which allows you to use something similar to EventToCommand, even if you cannot
-                    upgrade to Windows 8.1 for some reason. For reference, here is a XAML syntax in Windows 8.1 for
-                    InvokeCommandAction with a Command Binding, the InputConverter, and a Parameter. And again, in other
-                    XAML frameworks, InvokeCommandAction does not support the InputConverter, in which case you may want
-                    to use EventToCommand instead.
+                    MVVM Light.</p>
+                <p>
+                    Because the InvokeCommandAction is fulfilling the same features as EventToCommand in Windows 8.1,
+                    there are currently no plans to port EventToCommand to this version of the XAML framework. In
+                    Windows 8.0, there are no Blend behaviors at all; however, at this URL, you will find a workaround,
+                    which allows you to use something similar to EventToCommand, even if you cannot upgrade to Windows
+                    8.1 for some reason.</p>
+                <p>
+                    For reference, here is a XAML syntax in Windows 8.1 for InvokeCommandAction with a Command Binding,
+                    the InputConverter, and a Parameter:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-178.png"/>
+                    <figcaption>Fig 04-178</figcaption>
+                </figure>
+                <p>
+                    And again, in other XAML frameworks, InvokeCommandAction does not support the InputConverter, in
+                    which case you may want to use EventToCommand instead.
                 </p>
                 <h3>Summary</h3>
                 <p>In this module, we talked about the architecture of an MVVM Light application and about the extra
                     components of MVVM Light. We started this module with a discussion about DataContext and how it can
-                    be data bound to the View. We introduced the ViewModelLocator, an object which is not part of the
-                    MVVM Light assemblies, but rather introduced in typical MVVM Light applications as a place to set
-                    the application services up, to set up the IOC container, and to provide some binding points for the
-                    View in a way that is optimized for the Visual Designers. Then, we talked about the reasons for
-                    having a separate assembly for the SimpleIoc and the EventToCommand. We understood that it is
-                    because of the search party reference assemblies that these components use, and one thing to make it
-                    easier for everyone to use the core components. Then we had a long, in-depth study of SimpleIoc; an
-                    IOC container that is easy to use, but powerful enough to cover many of the needs for a client
-                    application. SimpleIoc is well suited for MVVM applications, and it works beautifully in DesignMode
-                    with Blend, so it is a good component to know when working closely with designers, which is a
-                    trademark of the MVVM Light Toolkit. The last component of MVVM Light that we studied is
-                    EventToCommand, an action that works coupled with a trigger, such as an EventTrigger or a
-                    DataTrigger. First, we understood what Blend behaviors are and how they can be added to an element
-                    and configured. Then we saw specifically how EventToCommand can be used to handle any event of any
-                    UI element and invoke a command when the event fires. We also saw how EventToCommand can be used
-                    with a DataTrigger instead. And finally, we discussed the EventArgsConverter, which is useful to
-                    cleanly handle event arguments in the Command directly at the ViewModel level. The next module will
-                    show how MVVM Light is installed on a machine, either as a standalone complete installation or with
-                    NuGet. Then we will review the Project Templates, Item Templates, and the Code Snippets; some
-                    important components that can get you started faster.
+                    be data bound to the View.</p>
+                <p>
+                    We introduced the ViewModelLocator, an object which is not part of the MVVM Light assemblies, but
+                    rather introduced in typical MVVM Light applications as a place to set the application services up,
+                    to set up the IOC container, and to provide some binding points for the View in a way that is
+                    optimized for the Visual Designers.
+                </p>
+                <p>
+                    Then, we talked about the reasons for having a separate assembly for the SimpleIoc and the
+                    EventToCommand. We understood that it is because of the search party reference assemblies that these
+                    components use, and one thing to make it easier for everyone to use the core components.</p>
+                <p>
+                    Then we had a long, in-depth study of SimpleIoc; an IOC container that is easy to use, but powerful
+                    enough to cover many of the needs for a client application. SimpleIoc is well suited for MVVM
+                    applications, and it works beautifully in DesignMode with Blend, so it is a good component to know
+                    when working closely with designers, which is a trademark of the MVVM Light Toolkit.</p>
+                <p>
+                    The last component of MVVM Light that we studied is EventToCommand, an action that works coupled
+                    with a trigger, such as an EventTrigger or a DataTrigger. First, we understood what Blend behaviors
+                    are and how they can be added to an element and configured. Then we saw specifically how
+                    EventToCommand can be used to handle any event of any UI element and invoke a command when the event
+                    fires. We also saw how EventToCommand can be used with a DataTrigger instead.</p>
+                <p>
+                    And finally, we discussed the EventArgsConverter, which is useful to cleanly handle event arguments
+                    in the Command directly at the ViewModel level.</p>
+                <p>
+                    The next module will show how MVVM Light is installed on a machine, either as a standalone complete
+                    installation or with NuGet. Then we will review the Project Templates, Item Templates, and the Code
+                    Snippets; some important components that can get you started faster.
                 </p>
             </div>
         </div>
