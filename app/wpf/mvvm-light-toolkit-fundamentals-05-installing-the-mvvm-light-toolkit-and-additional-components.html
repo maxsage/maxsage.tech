@@ -76,27 +76,50 @@
                     offline mechanism is also available to create new applications, even when the target PC is not
                     online.</p>
                 <p>
-                    On Visual Studio 2012 and 2013, NuGet is already available by default. In Visual Studio
-                    2010, however, you need to install it manually. It is quite simple by using the integrated Extension
+                    On Visual Studio 2012 and 2013, NuGet is already available by default. In Visual Studio 2010,
+                    however, you need to install it manually. It is quite simple by using the integrated Extension
                     Manager. Here is Visual Studio 2010. Now I can open the Extension Manager from the Tools menu, and
                     here we see that NuGet is already installed. If that is not the case, I can search in the Online
                     Gallery and install NuGet from there.</p>
                 <h3>A Quick Nuget Demo</h3>
                 <p>Let's see a quick demo about NuGet. Here we have a WPF application without any additional components.
                     This application needs to load and parse a JSON file from a web server when the Main button is
-                    clicked. Here is a code, which is using the WebClient to connect to the web server and load the JSON
-                    file as text. And here is a small C# class, which will be used to contain the data parsed from the
-                    JSON file. Instead of writing the passing code ourselves, it is easier to use an existing package;
-                    for example, the popular Json.NET. This great library is available on NuGet, so let's look for it.
-                    Here I will right-click on the References folder and select ‘Manage NuGet Packages'. Then, I make
-                    sure that the nuget.org option is selected on the left, and I search for JSON. I make sure to select
-                    the correct package and then I select Install. What just happened now is that Json.NET was
-                    downloaded from the NuGet servers and the assemblies were referenced in our application. Then we can
-                    close this dialog, and go back to the code. The last thing I need to do, is go back to my
-                    MainWindow.xaml and add the line which is going to deserialize the JSON text into an instance of
-                    MyClass. Let's inspect this line, and here we see the usage of the JsonConvert class, which comes
-                    from Json.NET. If I run the code now and click on the button, we see that the deserialization takes
-                    place and the properties were passed properly. (Typing)</p>
+                    clicked.</p>
+                <p>Here is the code, which is using the WebClient:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-179.png"/>
+                    <figcaption>Fig 04-179</figcaption>
+                </figure>
+                <p>
+                    to connect to the web server and load the JSON file as text. And here is a small C# class, which
+                    will be used to contain the data parsed from the JSON file:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-180.png"/>
+                    <figcaption>Fig 04-180</figcaption>
+                </figure>
+                <p>
+                    Instead of writing the passing code ourselves, it is easier to use an existing package; for example,
+                    the popular Json.NET. This great library is available on NuGet, so let's look for it. Here I will
+                    right-click on the References folder and select ‘Manage NuGet Packages'. Then, I make sure that the
+                    nuget.org option is selected on the left, and I search for JSON. I make sure to select the correct
+                    package and then I select Install.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-181.png"/>
+                    <figcaption>Fig 04-181</figcaption>
+                </figure>
+                <p>
+                    What just happened now is that Json.NET was downloaded from the NuGet servers and the assemblies
+                    were referenced in our application. Then we can close this dialog, and go back to the code.</p>
+                <p>
+                    The last thing I need to do, is go back to my MainWindow.xaml and add the line which is going to
+                    deserialize the JSON text into an instance of MyClass. Let's inspect this line, and here we see the
+                    usage of the JsonConvert class, which comes from Json.NET.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-182.png"/>
+                    <figcaption>Fig 04-182</figcaption>
+                </figure>
+                <p>
+                    If I run the code now and click on the button, we see that the deserialization takes place and the
+                    properties were passed properly.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-183.png"/>
+                    <figcaption>Fig 04-183</figcaption>
+                </figure>
                 <h3>Libraries Only vs. Full</h3>
                 <p>When you search for MVVM Light in NuGet, you will see that there are three versions of MVVM Light
                     there. Let's understand the differences. One of the packages is named libraries only. This is a
@@ -106,85 +129,187 @@
                     order to use its objects, you must select the libraries only. The library is loaded with Core and
                     Extras elements of MVVM Light, as well as the System.Windows.Interactivity DLL required by
                     EventToCommand. On platforms where it is available, it also adds a dependency to another NuGet
-                    package, named CommonServiceLocator. In addition to the libraries, the full version of MVVM Light
-                    available on NuGet also installs a ViewModelLocator and a MainViewModel. This version of the package
-                    is most suited for new applications that have just been created. It uses an Install script to add
-                    additional plumbing in App.xaml, so that the ViewModelLocator is loaded as a global resource, as we
-                    saw in the previous module. Note that in this version of the package, the libraries are added as a
-                    dependency through the "libraries only" NuGet Package. It makes it easier to handle the DLL.
-                    Notably, the application has a main application and some satellite assemblies, which also need MVVM
-                    Light. In that case, the DLLs are loaded only once from NuGet. Finally, there is also a portable
-                    class library version of MVVM Light, which is handled as a separate package.</p>
+                    package, named CommonServiceLocator.</p>p
+                <p>In addition to the libraries, the full version of MVVM Light available on NuGet also installs a
+                    ViewModelLocator and a MainViewModel. This version of the package is most suited for new
+                    applications that have just been created. It uses an Install script to add additional plumbing in
+                    App.xaml, so that the ViewModelLocator is loaded as a global resource, as we saw in the previous
+                    module.</p>
+                <p>
+                    Note that in this version of the package, the libraries are added as a dependency through the
+                    "libraries only" NuGet Package. It makes it easier to handle the DLL. Notably, the application has a
+                    main application and some satellite assemblies, which also need MVVM Light. In that case, the DLLs
+                    are loaded only once from NuGet. Finally, there is also a portable class library version of MVVM
+                    Light, which is handled as a separate package.</p>
                 <h3>Adding MVVM Light to an App With Nuget (Demo)</h3>
-                <p>For the demo, I created an empty WPF application here. Then, I will add the MVVM Light Libraries
-                    using NuGet. We do the same things as we did before with Json.NET. First, we right-click on the
-                    References folder and select ‘Manage NuGet Packages'. Once a dialog is loaded, we search online for
-                    MVVM Light. Here, I will add the libraries only package. Notice that you can see all the details on
-                    the right, including the description, the tags, dependencies, and the link to the license. Let's
-                    click on Install. After a short while, the MVVM Light libraries are installed. If I close the dialog
-                    and expand the References folder, I can see the DLLs here and here. From this moment on, I can use
-                    all the objects that we studied in the previous modules. For example, this is the MainPage. And here
-                    I can use the Messenger to send an initialization message when the MainPage has been loaded.
-                    (Typing) Now let's see what happens when we pull the Full MVVM Light through NuGet. First, I created
-                    a new empty Windows Phone application. I will, again, use NuGet, but this time I will select the
-                    Full MVVM Light package. Let's search here for mvvmlight. And this time I click Install on the first
-                    package here. (Typing) And once installation is complete, we notice what we mentioned before; the
-                    Full MVVM Light package also uses the libraries only. Now I can close this dialog. I see a new
-                    folder, named ViewModel. Inside it, we find the ViewModelLocator and the MainViewModel. Also, if I
-                    switch to App.xaml, I see that the ViewModelLocator has been added to the application's global
-                    resources, like we explained in the previous module. So now we can do the following. First, I'm
-                    going to open the MainViewModel and I'm going to add a property named Message. This is a simple
-                    string property. Now let's build the application. Then I can open the application's MainPage in
-                    Blend. If we switch to the Data pane and check the DataContext of the page, we see that it is not
-                    set. The NuGet version of MVVM Light does not set the MainPage's DataContext, because it would be
-                    too dangerous to tinker with an existing application's DataContext. But in Blend it is very easy to
-                    correct. Notice that on the Project, we can see the ViewModelLocator in the Resources. This is the
-                    content of the App.xaml's resources. The ViewModelLocator is visible to Blend, because the NuGet
-                    Install script took care of setting the IsDataSource attribute to true. So now it is possible to
-                    expand the ViewModelLocator and to drag the Main property, which is the MainViewModel, on the
-                    application page. Blend proposes to set the page's DataContext to the MainViewModel, which is what
-                    we want. And now the DataContext has been set. Note that in WPF the experience is just a little bit
-                    different, but the same steps can be followed and the end result is the same. Now that the
-                    DataContext has been set, we can expand the MainViewModel here and drag the Message property on the
-                    MainPage, which is going to create a TextBlock with the appropriate DataBinding.</p>
+                <p>For the demo, I created an empty WPF application here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-184.png"/>
+                    <figcaption>Fig 04-184</figcaption>
+                </figure>
+                <p>
+                    Then, I will add the MVVM Light Libraries using NuGet. We do the same things as we did before with
+                    Json.NET.</p>
+                <p>
+                    First, we right-click on the References folder and select ‘Manage NuGet Packages'. Once a dialog is
+                    loaded, we search online for MVVM Light. Here, I will add the libraries only package. Notice that
+                    you can see all the details on the right, including the description, the tags, dependencies, and the
+                    link to the license.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-185.png"/>
+                    <figcaption>Fig 04-185</figcaption>
+                </figure>
+                <p>
+                    Let's click on Install. After a short while, the MVVM Light libraries are installed. If I close the
+                    dialog and expand the References folder, I can see the DLLs here and here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-186.png"/>
+                    <figcaption>Fig 04-186</figcaption>
+                </figure>
+                <p>
+                    From this moment on, I can use all the objects that we studied in the previous modules. For example,
+                    this is the MainPage. And here I can use the Messenger to send an initialization message when the
+                    MainPage has been loaded:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-187.png"/>
+                    <figcaption>Fig 04-187</figcaption>
+                </figure>
+                <p>
+                    Now let's see what happens when we pull the Full MVVM Light through NuGet. First, I created a new
+                    empty Windows Phone application:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-188.png"/>
+                    <figcaption>Fig 04-188</figcaption>
+                </figure>
+                <p>
+                    I will, again, use NuGet, but this time I will select the Full MVVM Light package. Let's search here
+                    for mvvmlight. And this time I click Install on the first package here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-189.png"/>
+                    <figcaption>Fig 04-189</figcaption>
+                </figure>
+                <p>
+                    And once installation is complete, we notice what we mentioned before; the Full MVVM Light package
+                    also uses the libraries only:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-190.png"/>
+                    <figcaption>Fig 04-190</figcaption>
+                </figure>
+                <p>
+                    Now I can close this dialog. I see a new folder, named ViewModel:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-191.png"/>
+                    <figcaption>Fig 04-191</figcaption>
+                </figure>
+                <p>
+                    Inside it, we find the ViewModelLocator and the MainViewModel. Also, if I switch to App.xaml, I see
+                    that the ViewModelLocator has been added to the application's global resources, like we explained in
+                    the previous module:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-192.png"/>
+                    <figcaption>Fig 04-192</figcaption>
+                </figure>
+                <p>
+                    So now we can do the following. First, I'm going to open the MainViewModel and I'm going to add a
+                    property named Message:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-193.png"/>
+                    <figcaption>Fig 04-193</figcaption>
+                </figure>
+                <p>
+                    This is a simple string property. Now let's build the application. Then I can open the application's
+                    MainPage in Blend. If we switch to the Data pane and check the DataContext of the page, we see that
+                    it is not set.</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-194.png"/>
+                    <figcaption>Fig 04-194</figcaption>
+                </figure>
+                <p>
+                    The NuGet version of MVVM Light does not set the MainPage's DataContext, because it would be too
+                    dangerous to tinker with an existing application's DataContext. But in Blend it is very easy to
+                    correct. Notice that on the Project, we can see the ViewModelLocator in the Resources:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-195.png"/>
+                    <figcaption>Fig 04-195</figcaption>
+                </figure>
+                <p>
+                    This is the content of the App.xaml's resources. The ViewModelLocator is visible to Blend, because
+                    the NuGet Install script took care of setting the IsDataSource attribute to true. So now it is
+                    possible to expand the ViewModelLocator and to drag the Main property, which is the MainViewModel,
+                    on the application page:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-196.png"/>
+                    <figcaption>Fig 04-196</figcaption>
+                </figure>
+                <p>
+                    Blend proposes to set the page's DataContext to the MainViewModel, which is what we want. And now
+                    the DataContext has been set. Note that in WPF the experience is just a little bit different, but
+                    the same steps can be followed and the end result is the same. Now that the DataContext has been
+                    set, we can expand the MainViewModel here:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-197.png"/>
+                    <figcaption>Fig 04-197</figcaption>
+                </figure>
+                <p>
+                    and drag the Message property on the MainPage, which is going to create a TextBlock with the
+                    appropriate DataBinding.</p>
                 <h3>Installing the Whole Package in Visual Studio</h3>
                 <p>NuGet is great when you want to make sure that you have the latest version of the package, but it
                     also has limitations. As we mentioned earlier, it only works when you are online. If not, the
                     Package Explorer cannot connect to the server. Of course nowadays it is mostly not a problem, but I
-                    sometimes encounter situations, for example on a plane, where I cannot use NuGet. The other problem
-                    is that NuGet cannot install templates or snippets, at least not without some kind of workaround.
-                    These additional tools are very convenient. The project and item templates are creating projects,
-                    respectively items, which are already formatted to follow the MVVM Light recommendations. We will
-                    check these items more in details later. As for the code snippets, they are shortcuts adding code at
-                    the cursor location and allow easy replacement of certain tokens. For example, you can use the MVVM
-                    Light code snippets to add a RelayCommand or an observable property to your code easily, as we will
-                    see in just a moment. Note that because the installation process changes in the latest versions of
-                    MVVM Light, you should uninstall previous versions before you proceed with the installation of the
-                    most recent. To do this, please follow the steps on the page listed here. To add the full MVVM Light
-                    installation to your development environment, we are going to use another installation medium, also
-                    directly from within Visual Studio, the Extensions Dialog. Here we have a fresh new installation of
-                    Visual Studio without MVVM Light installed. We can see that, because if I select File, New, Project,
-                    we don't see the MVVM Light Project Templates here on the Visual C#. So now let's open the
-                    Extensions and Updates dialog from the Tools menu here. I'm going to select Online and then I'm
-                    going to type mvvmlight here. (Typing) Immediately we see the latest version of MVVM Light
-                    available, and we can install it by selecting Download. Here we need to Accept the license. And
-                    after the installation is complete, we need to restart Visual Studio, which can be done very easily.
-                    Now if I reopen the File, New, Project dialog, I can see the MvvmLight Project Templates. For
-                    example, on the Windows Store, Windows, Silverlight, Windows Phone, etc. Also, the code snippets
+                    sometimes encounter situations, for example on a plane, where I cannot use NuGet.</p>
+                <p>
+                    The other problem is that NuGet cannot install templates or snippets, at least not without some kind
+                    of workaround. These additional tools are very convenient. The project and item templates are
+                    creating projects, respectively items, which are already formatted to follow the MVVM Light
+                    recommendations. We will check these items more in details later. As for the code snippets, they are
+                    shortcuts adding code at the cursor location and allow easy replacement of certain tokens.</p>
+                <p>
+                    For example, you can use the MVVM Light code snippets to add a RelayCommand or an observable
+                    property to your code easily, as we will see in just a moment.</p>
+                <p>
+                    Note that because the installation process changes in the latest versions of MVVM Light, you should
+                    uninstall previous versions before you proceed with the installation of the most recent. To do this,
+                    please follow the steps on the page listed here.</p>
+                <p>
+                    To add the full MVVM Light installation to your development environment, we are going to use another
+                    installation medium, also directly from within Visual Studio, the Extensions Dialog. Here we have a
+                    fresh new installation of Visual Studio without MVVM Light installed. We can see that, because if I
+                    select File, New, Project, we don't see the MVVM Light Project Templates here under Visual C#:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-198.png"/>
+                    <figcaption>Fig 04-198</figcaption>
+                </figure>
+                <p>
+                    So now let's open the Extensions and Updates dialog from the Tools menu. I'm going to select Online
+                    and then I'm going to type mvvmlight here:
+                </p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-199.png"/>
+                    <figcaption>Fig 04-199</figcaption>
+                </figure>
+                <p>
+                    Immediately we see the latest version of MVVM Light available, and we can install it by selecting
+                    Download. Here we need to Accept the license. And after the installation is complete, we need to
+                    restart Visual Studio, which can be done very easily.</p>
+                <p>
+                    Now if I reopen the File, New, Project dialog, I can see the MvvmLight Project Templates:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-200.png"/>
+                    <figcaption>Fig 04-200</figcaption>
+                </figure>
+                <p>
+                    For example, on the Windows Store, Windows, Silverlight, Windows Phone, etc. Also, the code snippets
                     have been installed. So, for example, if I create a new MvvmLight application for Silverlight 5
-                    here, I can open the MainPage.xaml, here is a code behind, and then I can type anywhere in the code,
-                    mvvm, and here we see the code snippets installed. We will talk much more about the code snippets in
-                    a moment, so don't worry if you don't see them yet after you install MVVM Light on your machine. So
-                    to recapitulate, in order to install the full-blown MVVM Light installation, first uninstall
+                    here, I can open the MainPage.xaml, here is a code behind:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-201.png"/>
+                    <figcaption>Fig 04-201</figcaption>
+                </figure>
+                <p>
+                    and then I can type anywhere in the code, mvvm, and here we see the code snippets installed:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-202.png"/>
+                    <figcaption>Fig 04-202</figcaption>
+                </figure>
+                <p>
+                    We will talk much more about the code snippets in a moment, so don't worry if you don't see them yet
+                    after you install MVVM Light on your machine</p>
+                <p>
+                    So to recapitulate, in order to install the full-blown MVVM Light installation, first uninstall
                     previous version. Then, from within Visual Studio, you can select Tools, Extensions and Updates,
-                    Online, and then Search for "mvvmlight". Or if you prefer, you can also navigate to
-                    mvvmlight.codeplex.com, and then download the Installer package from the Downloads page. However,
-                    make sure that you select the correct version of the VSIX Installer package; for example, there is a
-                    different one for Visual Studio 2012 and for Visual Studio 2013. If you are using Visual Studio
-                    Express, you cannot use a Visual Studio Gallery to install MVVM Light, unfortunately. There are a
-                    few technical restrictions in place. So here, what you want to do, after you install Visual Studio
-                    Express, is to navigate to mvvmlight.codeplex.com, and install the VSIX Installer from the Downloads
-                    page. Here, too, make sure to select the right version.</p>
+                    Online, and then Search for "mvvmlight".</p>
+                <p>
+                    Or if you prefer, you can also navigate to mvvmlight.codeplex.com, and then download the Installer
+                    package from the Downloads page. However, make sure that you select the correct version of the VSIX
+                    Installer package; for example, there is a different one for Visual Studio 2012 and for Visual
+                    Studio 2013.</p>
+                <p>
+                    If you are using Visual Studio Express, you cannot use a Visual Studio Gallery to install MVVM
+                    Light, unfortunately. There are a few technical restrictions in place. So here, what you want to do,
+                    after you install Visual Studio Express, is to navigate to mvvmlight.codeplex.com, and install the
+                    VSIX Installer from the Downloads page. Here, too, make sure to select the right version.</p>
                 <h3>Introducing the Code Snippets</h3>
                 <p>All MVVM Light code snippets start with the letters "mvvm". So like we saw earlier, if you place your
                     cursor in the code and type "mvvm", you should see the list of all snippets shown in IntelliSense.
