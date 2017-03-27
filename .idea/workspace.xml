@@ -8,6 +8,7 @@
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,21 +26,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4842">
-              <caret line="310" column="57" lean-forward="false" selection-start-line="310" selection-start-column="57" selection-end-line="310" selection-end-column="57" />
+            <state relative-caret-position="356">
+              <caret line="1205" column="0" lean-forward="false" selection-start-line="1205" selection-start-column="0" selection-end-line="1207" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvvm-light-toolkit-fundamentals-04-the-extras.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html">
+      <file leaf-file-name="mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1007">
-              <caret line="1503" column="0" lean-forward="false" selection-start-line="1503" selection-start-column="0" selection-end-line="1505" selection-end-column="25" />
+            <state relative-caret-position="646">
+              <caret line="887" column="83" lean-forward="false" selection-start-line="887" selection-start-column="83" selection-end-line="887" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -151,9 +152,9 @@
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
-        <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" />
+        <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" />
       </list>
     </option>
   </component>
@@ -167,9 +168,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-14" />
-    <option name="width" value="1948" />
-    <option name="height" value="2074" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1416" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -189,7 +191,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -236,7 +238,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -380,29 +382,38 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250132000" />
+    <option name="totallyTimeSpent" value="272630000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-14" y="0" width="1948" height="2074" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5490605" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28132388" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2196057" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21901792" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2196057" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5490605" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20888543" sideWeight="0.49177718" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -709,25 +720,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15510">
-          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1007">
           <caret line="1503" column="0" lean-forward="false" selection-start-line="1503" selection-start-column="0" selection-end-line="1505" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4842">
-          <caret line="310" column="57" lean-forward="false" selection-start-line="310" selection-start-column="57" selection-end-line="310" selection-end-column="57" />
+        <state relative-caret-position="356">
+          <caret line="1205" column="0" lean-forward="false" selection-start-line="1205" selection-start-column="0" selection-end-line="1207" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="887" column="83" lean-forward="false" selection-start-line="887" selection-start-column="83" selection-end-line="887" selection-end-column="83" />
           <folding />
         </state>
       </provider>
