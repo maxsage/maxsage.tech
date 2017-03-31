@@ -675,21 +675,17 @@
                 <p>
                     As expected. However, a call to ContainsCreated will return false:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-071.png"/>
-                    <figcaption>Fig 04-071</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-072.png"/>
+                    <figcaption>Fig 04-072</figcaption>
                 </figure>
                 <p>
                     because even though IDataService has been registered, the cache does not contain any instance yet.
                     If, after that, a call to GetInstance is made:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-072.png"/>
-                    <figcaption>Fig 04-072</figcaption>
-                </figure>
-                <p>the SimpleIoc will create an instance of DataService and cache it.</p>
-                <figure><img
-                        src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-073.png"/>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-073.png"/>
                     <figcaption>Fig 04-073</figcaption>
                 </figure>
+                <p>the SimpleIoc will create an instance of DataService and cache it.</p>
                 <p>This is why the next call to ContainsCreated returns, this time, true:</p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-074.png"/>
                     <figcaption>Fig 04-074</figcaption>
@@ -1470,8 +1466,8 @@
                 <p>
                     and then if I run the application again, we will see that the position is now displayed in reference
                     to the page's top-left corner; for example, here, the top-left point of TheRectangle itself:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-178.png"/>
-                    <figcaption>Fig 04-178</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-177.png"/>
+                    <figcaption>Fig 04-177</figcaption>
                 </figure>
                 <p>
                     This example is quite clean, because the ViewModel only knows the point class, which is not directly

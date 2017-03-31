@@ -99,15 +99,15 @@
                     clicked.
                 </p>
                 <p>Here is the code, which is using the WebClient:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-179.png"/>
-                    <figcaption>Fig 04-179</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-001.png"/>
+                    <figcaption>Fig 05-001</figcaption>
                 </figure>
                 <p>
                     to connect to the web server and load the JSON file as text. And here is a small C# class, which
                     will be used to contain the data parsed from the JSON file:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-180.png"/>
-                    <figcaption>Fig 04-180</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-002.png"/>
+                    <figcaption>Fig 05-002</figcaption>
                 </figure>
                 <p>
                     Instead of writing the passing code ourselves, it is easier to use an existing package; for example,
@@ -116,8 +116,8 @@
                     nuget.org option is selected on the left, and I search for JSON. I make sure to select the correct
                     package and then I select Install.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-181.png"/>
-                    <figcaption>Fig 04-181</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-003.png"/>
+                    <figcaption>Fig 05-003</figcaption>
                 </figure>
                 <p>
                     What just happened now is that Json.NET was downloaded from the NuGet servers and the assemblies
@@ -128,15 +128,15 @@
                     deserialize the JSON text into an instance of MyClass. Let's inspect this line, and here we see the
                     usage of the JsonConvert class, which comes from Json.NET.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-182.png"/>
-                    <figcaption>Fig 04-182</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-004.png"/>
+                    <figcaption>Fig 05-004</figcaption>
                 </figure>
                 <p>
                     If I run the code now and click on the button, we see that the deserialization takes place and the
                     properties were passed properly.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-183.png"/>
-                    <figcaption>Fig 04-183</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-005.png"/>
+                    <figcaption>Fig 05-005</figcaption>
                 </figure>
                 <h3>Libraries Only vs. Full</h3>
                 <p>When you search for MVVM Light in NuGet, you will see that there are three versions of MVVM Light
@@ -165,8 +165,8 @@
                 </p>
                 <h3>Adding MVVM Light to an App With Nuget (Demo)</h3>
                 <p>For the demo, I created an empty WPF application here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-184.png"/>
-                    <figcaption>Fig 04-184</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-006.png"/>
+                    <figcaption>Fig 05-006</figcaption>
                 </figure>
                 <p>
                     Then, I will add the MVVM Light Libraries using NuGet. We do the same things as we did before with
@@ -178,81 +178,81 @@
                     you can see all the details on the right, including the description, the tags, dependencies, and the
                     link to the license.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-185.png"/>
-                    <figcaption>Fig 04-185</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-007.png"/>
+                    <figcaption>Fig 05-007</figcaption>
                 </figure>
                 <p>
                     Let's click on Install. After a short while, the MVVM Light libraries are installed. If I close the
                     dialog and expand the References folder, I can see the DLLs here and here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-186.png"/>
-                    <figcaption>Fig 04-186</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-008.png"/>
+                    <figcaption>Fig 05-008</figcaption>
                 </figure>
                 <p>
                     From this moment on, I can use all the objects that we studied in the previous modules. For example,
                     this is the MainPage. And here I can use the Messenger to send an initialization message when the
                     MainPage has been loaded:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-187.png"/>
-                    <figcaption>Fig 04-187</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-009.png"/>
+                    <figcaption>Fig 05-009</figcaption>
                 </figure>
                 <p>
                     Now let's see what happens when we pull the Full MVVM Light through NuGet. First, I created a new
                     empty Windows Phone application:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-188.png"/>
-                    <figcaption>Fig 04-188</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-010.png"/>
+                    <figcaption>Fig 05-010</figcaption>
                 </figure>
                 <p>
                     I will, again, use NuGet, but this time I will select the Full MVVM Light package. Let's search here
                     for mvvmlight. And this time I click Install on the first package here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-189.png"/>
-                    <figcaption>Fig 04-189</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-011.png"/>
+                    <figcaption>Fig 05-011</figcaption>
                 </figure>
                 <p>
                     And once installation is complete, we notice what we mentioned before; the Full MVVM Light package
                     also uses the libraries only:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-190.png"/>
-                    <figcaption>Fig 04-190</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-012.png"/>
+                    <figcaption>Fig 05-012</figcaption>
                 </figure>
                 <p>
                     Now I can close this dialog. I see a new folder, named ViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-191.png"/>
-                    <figcaption>Fig 04-191</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-013.png"/>
+                    <figcaption>Fig 05-013</figcaption>
                 </figure>
                 <p>
                     Inside it, we find the ViewModelLocator and the MainViewModel. Also, if I switch to App.xaml, I see
                     that the ViewModelLocator has been added to the application's global resources, like we explained in
                     the previous module:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-192.png"/>
-                    <figcaption>Fig 04-192</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-014.png"/>
+                    <figcaption>Fig 05-014</figcaption>
                 </figure>
                 <p>
                     So now we can do the following. First, I'm going to open the MainViewModel and I'm going to add a
                     property named Message:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-193.png"/>
-                    <figcaption>Fig 04-193</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-015.png"/>
+                    <figcaption>Fig 05-015</figcaption>
                 </figure>
                 <p>
                     This is a simple string property. Now let's build the application. Then I can open the application's
                     MainPage in Blend. If we switch to the Data pane and check the DataContext of the page, we see that
                     it is not set.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-194.png"/>
-                    <figcaption>Fig 04-194</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-016.png"/>
+                    <figcaption>Fig 05-016</figcaption>
                 </figure>
                 <p>
                     The NuGet version of MVVM Light does not set the MainPage's DataContext, because it would be too
                     dangerous to tinker with an existing application's DataContext. But in Blend it is very easy to
                     correct. Notice that on the Project, we can see the ViewModelLocator in the Resources:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-195.png"/>
-                    <figcaption>Fig 04-195</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-017.png"/>
+                    <figcaption>Fig 05-017</figcaption>
                 </figure>
                 <p>
                     This is the content of the App.xaml's resources. The ViewModelLocator is visible to Blend, because
@@ -260,8 +260,8 @@
                     possible to expand the ViewModelLocator and to drag the Main property, which is the MainViewModel,
                     on the application page:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-196.png"/>
-                    <figcaption>Fig 04-196</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-018.png"/>
+                    <figcaption>Fig 05-018</figcaption>
                 </figure>
                 <p>
                     Blend proposes to set the page's DataContext to the MainViewModel, which is what we want. And now
@@ -269,8 +269,8 @@
                     the same steps can be followed and the end result is the same. Now that the DataContext has been
                     set, we can expand the MainViewModel here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-197.png"/>
-                    <figcaption>Fig 04-197</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-019.png"/>
+                    <figcaption>Fig 05-019</figcaption>
                 </figure>
                 <p>
                     and drag the Message property on the MainPage, which is going to create a TextBlock with the
@@ -304,15 +304,15 @@
                     fresh new installation of Visual Studio without MVVM Light installed. We can see that, because if I
                     select File, New, Project, we don't see the MVVM Light Project Templates here under Visual C#:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-198.png"/>
-                    <figcaption>Fig 04-198</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-020.png"/>
+                    <figcaption>Fig 05-020</figcaption>
                 </figure>
                 <p>
                     So now let's open the Extensions and Updates dialog from the Tools menu. I'm going to select Online
                     and then I'm going to type mvvmlight here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-199.png"/>
-                    <figcaption>Fig 04-199</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-021.png"/>
+                    <figcaption>Fig 05-021</figcaption>
                 </figure>
                 <p>
                     Immediately we see the latest version of MVVM Light available, and we can install it by selecting
@@ -322,22 +322,22 @@
                 <p>
                     Now if I reopen the File, New, Project dialog, I can see the MvvmLight Project Templates:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-200.png"/>
-                    <figcaption>Fig 04-200</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-022.png"/>
+                    <figcaption>Fig 05-022</figcaption>
                 </figure>
                 <p>
                     For example, on the Windows Store, Windows, Silverlight, Windows Phone, etc. Also, the code snippets
                     have been installed. So, for example, if I create a new MvvmLight application for Silverlight 5
                     here, I can open the MainPage.xaml, here is a code behind:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-201.png"/>
-                    <figcaption>Fig 04-201</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-023.png"/>
+                    <figcaption>Fig 05-023</figcaption>
                 </figure>
                 <p>
                     and then I can type anywhere in the code, mvvm, and here we see the code snippets installed:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-202.png"/>
-                    <figcaption>Fig 04-202</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-024.png"/>
+                    <figcaption>Fig 05-024</figcaption>
                 </figure>
                 <p>
                     We will talk much more about the code snippets in a moment, so don't worry if you don't see them yet
@@ -376,8 +376,8 @@
                     adds a RelayCommand with a generic parameter. In the demo later, we will review these snippets. Here
                     we see the IntelliSense window with all the MVVM Light snippets:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-203.png"/>
-                    <figcaption>Fig 04-203</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-025.png"/>
+                    <figcaption>Fig 05-025</figcaption>
                 </figure>
                 <p>
                     Note that each snippet is documented, so if you select it without pressing Enter, you will see what
@@ -395,8 +395,8 @@
                     too many, but we will see the most important ones and then you can study the others on your own.
                     Here is the ViewModel class:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-204.png"/>
-                    <figcaption>Fig 04-204</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-026.png"/>
+                    <figcaption>Fig 05-026</figcaption>
                 </figure>
                 <p>
                     and I will add some properties to it. Because the ViewModel inherits a ViewModelBase class, I have
@@ -410,14 +410,14 @@
                     To automate adding a property, let's just type mvvm. In the inpc section, we have a few choices.
                     Here, let's start with the basic mvvminpc:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-205.png"/>
-                    <figcaption>Fig 04-205</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-027.png"/>
+                    <figcaption>Fig 05-027</figcaption>
                 </figure>
                 <p>
                     If I expand the snippet by typing Tab we can see the expanded code:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-206.png"/>
-                    <figcaption>Fig 04-206</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-028.png"/>
+                    <figcaption>Fig 05-028</figcaption>
                 </figure>
                 <p>
                     There are a few tokens that can be replaced. You can jump from token to token using the Tab key. The
@@ -427,36 +427,36 @@
                     anything you prefer. Finally, we type the initial value, in this case a _status message, such as
                     "Initializing":
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-207.png"/>
-                    <figcaption>Fig 04-207</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-029.png"/>
+                    <figcaption>Fig 05-029</figcaption>
                 </figure>
                 <p>
                     Once you are done, press Escape and the snippet is complete. Notice that this snippet had the
                     constant for the property's name:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-208.png"/>
-                    <figcaption>Fig 04-208</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-030.png"/>
+                    <figcaption>Fig 05-030</figcaption>
                 </figure>
                 <p>
                     which can be useful when you are outside of this class and need to handle the PropertyChanged event.
                     Here, there is a check of the new value:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-209.png"/>
-                    <figcaption>Fig 04-209</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-031.png"/>
+                    <figcaption>Fig 05-031</figcaption>
                 </figure>
                 <p>
                     and then we raise two events; PropertyChanging before the value is set, and PropertyChanged after
                     the value is saved:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-210.png"/>
-                    <figcaption>Fig 04-210</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-032.png"/>
+                    <figcaption>Fig 05-032</figcaption>
                 </figure>
                 <p>
                     Let's add another property for the user's first name. This time we will use another snippet; for
                     example, let's select the one called mvvminpclambda:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-211.png"/>
-                    <figcaption>Fig 04-211</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-033.png"/>
+                    <figcaption>Fig 05-033</figcaption>
                 </figure>
                 <p>
                     This snippet uses a RaisePropertyChanged method overload, which takes an expression instead of a
@@ -468,8 +468,8 @@
                     private attribute is also called _firstName, and the initial value will be empty. And then we can
                     see the result, which is almost the same as the previous example:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-212.png"/>
-                    <figcaption>Fig 04-212</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-034.png"/>
+                    <figcaption>Fig 05-034</figcaption>
                 </figure>
                 <p>
                     but this time using Expressions instead of the string-based property name.
@@ -477,8 +477,8 @@
                 <p>
                     Now, let's add the last name too. This time we can use a Set method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-213.png"/>
-                    <figcaption>Fig 04-213</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-035.png"/>
+                    <figcaption>Fig 05-035</figcaption>
                 </figure>
                 <p>
                     If you'll remember, we saw in Module 3 how this method simplifies the status code a bit. Let's
@@ -486,8 +486,8 @@
                     private attribute, and no initial value. After we replace the tokens, we see that the setter is only
                     one line of code, instead of seven like before:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-214.png"/>
-                    <figcaption>Fig 04-214</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-036.png"/>
+                    <figcaption>Fig 05-036</figcaption>
                 </figure>
                 <p>
                     We saw the meaning of the Set method in Module 3 about the ViewModelBase and ObservableObject
@@ -501,20 +501,20 @@
                     snippet. Add any of the mvvminpc snippets with a Name and with the letter msg. For example, here I
                     will use mvvminpcsetlambdamsg, which is quite a long name:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-215.png"/>
-                    <figcaption>Fig 04-215</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-037.png"/>
+                    <figcaption>Fig 05-037</figcaption>
                 </figure>
                 <p>
                     When the snippet is expanded and after we replace all the tokens, this is the Age property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-216.png"/>
-                    <figcaption>Fig 04-216</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-038.png"/>
+                    <figcaption>Fig 05-038</figcaption>
                 </figure>
                 <p>
                     Note that the Set method here takes a Boolean parameter set to true:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-217.png"/>
-                    <figcaption>Fig 04-217</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-039.png"/>
+                    <figcaption>Fig 05-039</figcaption>
                 </figure>
                 <p>
                     which will call the Messenger to send a PropertyChangedMessage. This is one of the built-in types in
@@ -523,28 +523,28 @@
                 <p>
                     To illustrate that, I built a small UI here in Blend with the FirstName, the LastName, and the Age:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-218.png"/>
-                    <figcaption>Fig 04-218</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-040.png"/>
+                    <figcaption>Fig 05-040</figcaption>
                 </figure>
                 <p>
                     These fields are data bound to the corresponding properties on the MainViewModel. Now, in Visual
                     Studio, let's check this Emailer class that I added:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-219.png"/>
-                    <figcaption>Fig 04-219</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-041.png"/>
+                    <figcaption>Fig 05-041</figcaption>
                 </figure>
                 <p>
                     We see that when it is created, it registers a handler for a PropertyChangedMessage of int. First,
                     it will check the type of the Sender and the Name of the Property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-220.png"/>
-                    <figcaption>Fig 04-220</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-042.png"/>
+                    <figcaption>Fig 05-042</figcaption>
                 </figure>
                 <p>
                     If the Property is the Age, it sends an email here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-221.png"/>
-                    <figcaption>Fig 04-221</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-043.png"/>
+                    <figcaption>Fig 05-043</figcaption>
                 </figure>
                 <p>
                     using the NewValue that it just received. In addition, just for test, it will show a MessageBox here
@@ -556,8 +556,8 @@
                     works, after we run the application, we can change the Age here, and here is a MessageBox from the
                     Emailer class:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-222.png"/>
-                    <figcaption>Fig 04-222</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-044.png"/>
+                    <figcaption>Fig 05-044</figcaption>
                 </figure>
                 <h3>The "RELAY" Code Snippets Demo</h3>
                 <p>
@@ -571,51 +571,51 @@
                     show the user's full name. First I'm going to Tab mvvmr and then I'm going to select the mvvmrelay
                     snippet:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-223.png"/>
-                    <figcaption>Fig 04-223</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-045.png"/>
+                    <figcaption>Fig 05-045</figcaption>
                 </figure>
                 <p>
                     Let's expand it. And then I can Tab to replace the tokens. The first token is the name of the field
                     hosting the command. We are going to type _showFullNameCommand. And then Tab to the next one, which
                     is the name of the property itself, again, ShowFullNameCommand. And now we are done already:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-224.png"/>
-                    <figcaption>Fig 04-224</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-046.png"/>
+                    <figcaption>Fig 05-046</figcaption>
                 </figure>
                 <p>
                     So I can go back to the first token and type Enter, which is going to automatically place a cursor
                     in the location where it makes the most sense to start typing code. Here I will cheat a little bit
                     and use some code that I prepared already. And here we go:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-225.png"/>
-                    <figcaption>Fig 04-225</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-047.png"/>
+                    <figcaption>Fig 05-047</figcaption>
                 </figure>
                 <p>
                     this code is going to use a MessageBox to show the user's full name. Let's get ready to build the
                     application, here we are. Now I can build. Now I go back to Blend, where I added a button saying
                     ‘Show full name':
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-226.png"/>
-                    <figcaption>Fig 04-226</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-048.png"/>
+                    <figcaption>Fig 05-048</figcaption>
                 </figure>
                 <p>
                     And what I'm going to do is bind the Command property of the button:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-227.png"/>
-                    <figcaption>Fig 04-227</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-049.png"/>
+                    <figcaption>Fig 05-049</figcaption>
                 </figure>
                 <p>
                     to the command that we just added in the ViewModel, here we are:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-228.png"/>
-                    <figcaption>Fig 04-228</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-050.png"/>
+                    <figcaption>Fig 05-050</figcaption>
                 </figure>
                 <p>
                     Here, too, I can run the application directly from Blend. Let's Enter my name, and now I can click
                     on ‘Show full name', which is going to show the full name as defined:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-229.png"/>
-                    <figcaption>Fig 04-229</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-051.png"/>
+                    <figcaption>Fig 05-051</figcaption>
                 </figure>
                 <p>
                     This last snippet was a basic RelayCommand without the canexecute delegate and without a generic
@@ -625,16 +625,16 @@
                 <p>
                     Let's consider this UI here. We have a textbox and a button:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-230.png"/>
-                    <figcaption>Fig 04-230</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-052.png"/>
+                    <figcaption>Fig 05-052</figcaption>
                 </figure>
                 <p>
                     Now let's extend the MainViewModel and add the RelayCommand with a generic parameter and the
                     canexecute method. So I'm typing mvvm and I'm going to select the mvvmrelaygenericcanexecute, here
                     we go:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-231.png"/>
-                    <figcaption>Fig 04-231</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-053.png"/>
+                    <figcaption>Fig 05-053</figcaption>
                 </figure>
                 <p>
                     Then I will replace the token. The first token is a type of the Command parameter. Here, I want to
@@ -649,8 +649,8 @@
                     just checking if the user entered some characters. Of course in production, you will want to
                     validate the email address against a regular expression, etc:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-232.png"/>
-                    <figcaption>Fig 04-232</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-054.png"/>
+                    <figcaption>Fig 05-054</figcaption>
                 </figure>
                 <p>
                     Let's build the application now to have everything up-to-date in Blend.
@@ -659,42 +659,42 @@
                     Now we can do some data binding. I can bind the Command property of the button to the new Command
                     that we just declared on the MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-233.png"/>
-                    <figcaption>Fig 04-233</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-055.png"/>
+                    <figcaption>Fig 05-055</figcaption>
                 </figure>
                 <p>
                     Let's use a ‘Create Data Binding' Editor, and here I can see the ShowEmailCommand:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-234.png"/>
-                    <figcaption>Fig 04-234</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-056.png"/>
+                    <figcaption>Fig 05-056</figcaption>
                 </figure>
                 <p>
                     Then, I will bind the CommandParameter to the text value of the EmailTextBox:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-235.png"/>
-                    <figcaption>Fig 04-235</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-057.png"/>
+                    <figcaption>Fig 05-057</figcaption>
                 </figure>
                 <p>
                     Let's go here and select ElementName, then EmailTextBox, and here I will choose the Text property,
                     which is down there:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-236.png"/>
-                    <figcaption>Fig 04-236</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-058.png"/>
+                    <figcaption>Fig 05-058</figcaption>
                 </figure>
                 <p>
                     Whenever the parameter changes, the canexecute delegate will be reevaluated. If the returned value
                     is false, which is when the email field is empty, the button will be disabled, like we see now on
                     the screen:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-237.png"/>
-                    <figcaption>Fig 04-237</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-059.png"/>
+                    <figcaption>Fig 05-059</figcaption>
                 </figure>
                 <p>
                     Let's run the application to test what we just did. And here if I go to the email field and enter
                     something, you see that the button is now enabled:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-238.png"/>
-                    <figcaption>Fig 04-238</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-060.png"/>
+                    <figcaption>Fig 05-060</figcaption>
                 </figure>
                 <p>If, on the other hand, I delete everything, the button is now disabled.
                 </p>
@@ -715,14 +715,14 @@
                     dependency property in a ViewModel or in a plain old object. It needs to be a DependencyObject; for
                     example, here, the application's MainWindow:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-239.png"/>
-                    <figcaption>Fig 04-239</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-061.png"/>
+                    <figcaption>Fig 05-061</figcaption>
                 </figure>
                 <p>
                     I will use a default non-MVVM Light snippet. I simply type propdp and then I expand the snippet:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-240.png"/>
-                    <figcaption>Fig 04-240</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-062.png"/>
+                    <figcaption>Fig 05-062</figcaption>
                 </figure>
                 <p>
                     We see the typical declaration of a DependencyProperty, including the type, the convenient getter
@@ -739,8 +739,8 @@
                     Now let's declare a DependencyProperty using the MVVM Light snippet; it is called mvvmpropdp. If we
                     expand this snippet now, we see that there is one single difference:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-241.png"/>
-                    <figcaption>Fig 04-241</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-063.png"/>
+                    <figcaption>Fig 05-063</figcaption>
                 </figure>
                 <p>
                     the property's name is declared as a constant, which is a much better practice. Notably, when an
@@ -786,8 +786,8 @@
                     File, New, Project, and then on the Windows we will take a (WPF45) application. Let's click OK. Once
                     this application is created, let's run it:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-242.png"/>
-                    <figcaption>Fig 04-242</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-064.png"/>
+                    <figcaption>Fig 05-064</figcaption>
                 </figure>
                 <p>
                     We see a new window with the text, "Welcome to MVVM Light". This is not earth-shattering, but let's
@@ -797,8 +797,8 @@
                     Here, when we open the MainWindow, notice that the text is different. We already saw before the
                     power of design time data, and this is exactly what we witness here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-243.png"/>
-                    <figcaption>Fig 04-243</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-065.png"/>
+                    <figcaption>Fig 05-065</figcaption>
                 </figure>
                 <p>
                     The application is architected in a way that triggers Blend to run some of the code. This, coupled
@@ -809,21 +809,21 @@
                     The most important point of a new MvvmLight application can be seen in the code. First, let's open
                     App.xaml, and here we see that the ViewModelLocator is defined in the global resource:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-244.png"/>
-                    <figcaption>Fig 04-244</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-066.png"/>
+                    <figcaption>Fig 05-066</figcaption>
                 </figure>
                 <p>
                     Then, in MainWindow.xaml, we see that the DataContext is set to the Main property of the
                     ViewModelLocator:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-245.png"/>
-                    <figcaption>Fig 04-245</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-067.png"/>
+                    <figcaption>Fig 05-067</figcaption>
                 </figure>
                 <p>
                     Let's open the ViewModelLocator itself. Here, it is configuring the SimpleIoc with a DataService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-246.png"/>
-                    <figcaption>Fig 04-246</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-068.png"/>
+                    <figcaption>Fig 05-068</figcaption>
                 </figure>
                 <p>
                     Of course, this is just basic scaffolding and the DataService will be expanded or replaced in your
@@ -832,16 +832,16 @@
                 <p>
                     Let's take a look at the DataService, which is located in the Model folder:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-247.png"/>
-                    <figcaption>Fig 04-247</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-069.png"/>
+                    <figcaption>Fig 05-069</figcaption>
                 </figure>
                 <p>It is very simple and only creates a dummy DataItem and then returns it. This is where you will
                     connect to an actual data service, a database, a web service, etc. There is also a design time
                     implementation of the DesignDataService in the Design folder, and this is where the text that we saw
                     in Blend earlier is set:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-248.png"/>
-                    <figcaption>Fig 04-248</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-070.png"/>
+                    <figcaption>Fig 05-070</figcaption>
                 </figure>
                 <p>
                     Of course, in your application, you are going to do a lot of operations in the DataService, and some
@@ -853,8 +853,8 @@
                     Finally, let's open the MainViewModel to look at the code. Here, we see the DataService being
                     injected inside the constructor and then we call it immediately:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-249.png"/>
-                    <figcaption>Fig 04-249</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-071.png"/>
+                    <figcaption>Fig 05-071</figcaption>
                 </figure>
                 <p>
                     Here, too, in your production application, you will have some logic to handle user input and call
@@ -864,8 +864,8 @@
                     A few small details that are not critical, but interesting to note; here, in MainWindow.xaml.cs, we
                     call the Cleanup method on the ViewModelLocator when the MainWindow is closed:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-250.png"/>
-                    <figcaption>Fig 04-250</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-072.png"/>
+                    <figcaption>Fig 05-072</figcaption>
                 </figure>
                 <p>
                     This method is not doing anything at this point, but it would be a good place to put code to close
@@ -874,8 +874,8 @@
                 <p>
                     Now let's open App.xaml.cs, and here we see that we Initialize the DispatcherHelper:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-251.png"/>
-                    <figcaption>Fig 04-251</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-073.png"/>
+                    <figcaption>Fig 05-073</figcaption>
                 </figure>
                 <p>
                     The exact location of this line of code is different depending on the framework that you are using;
@@ -897,8 +897,8 @@
                 <p>
                     When you create a Windows Store 8.1 application, here is what you get:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-252.png"/>
-                    <figcaption>Fig 04-252</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-074.png"/>
+                    <figcaption>Fig 05-074</figcaption>
                 </figure>
                 <p>
                     Let's run the application in the Simulator first and see how it is built. The application starts
@@ -909,8 +909,8 @@
                 <p>
                     Let's go back to the MainPage. Now you see that the label changed with the date of the last visit:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-253.png"/>
-                    <figcaption>Fig 04-253</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-075.png"/>
+                    <figcaption>Fig 05-075</figcaption>
                 </figure>
                 <p>
                     This is done to demonstrate how you can save the state of a page, and you can find the corresponding
@@ -918,16 +918,16 @@
                     here is to show how you can handle the different page mode. For example, let's see what happens when
                     we move the Simulator to Portray mode. Here, we see that the User Control turned to green:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-254.png"/>
-                    <figcaption>Fig 04-254</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-076.png"/>
+                    <figcaption>Fig 05-076</figcaption>
                 </figure>
                 <p>
                     Let's go back to Landscape mode. And now it is red again. Now I will place the page in Split mode.
                     At first nothing happens, but if we resize the slider here, after a stress hold, the page's layout
                     changes again. The User Control turns purple and its layout is different:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-255.png"/>
-                    <figcaption>Fig 04-255</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-077.png"/>
+                    <figcaption>Fig 05-077</figcaption>
                 </figure>
                 <p>
                     The Navigation button goes from top-right to bottom-centered; also, the page's title is using a
@@ -936,8 +936,8 @@
                 <p>
                     Most of the objects that make this happen are added here in the Common folder:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-256.png"/>
-                    <figcaption>Fig 04-256</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-078.png"/>
+                    <figcaption>Fig 05-078</figcaption>
                 </figure>
                 <p>
                     The purpose is mostly educational, in order to show to MVVM Light users how certain operations are
@@ -952,43 +952,43 @@
                 <p>
                     Here, we have the Behavior implementation for the User Control:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-257.png"/>
-                    <figcaption>Fig 04-257</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-079.png"/>
+                    <figcaption>Fig 05-079</figcaption>
                 </figure>
                 <p>
                     There are a few properties used to enter the name of the visual states defining the control's
                     appearance. Then we have the Attach method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-258.png"/>
-                    <figcaption>Fig 04-258</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-080.png"/>
+                    <figcaption>Fig 05-080</figcaption>
                 </figure>
                 <p>
                     This method will be called automatically by the system when the page is loaded and the behavior is
                     attached. The key of the process here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-259.png"/>
-                    <figcaption>Fig 04-259</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-081.png"/>
+                    <figcaption>Fig 05-081</figcaption>
                 </figure>
                 <p>
                     is that the Behavior registers to the MVVM Light Messenger, for an OrientationStateMessage. When
                     this message is received, the HandleOrientation method is called. We use a VisualStateManager to go
                     to the correct state:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-260.png"/>
-                    <figcaption>Fig 04-260</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-082.png"/>
+                    <figcaption>Fig 05-082</figcaption>
                 </figure>
                 <p>
                     This Behavior can be attached to a User Control. For a page we use a slightly different one, called
                     OrientationStateBehavior. Let's open this one. In fact, it is inheriting the one that we just saw:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-261.png"/>
-                    <figcaption>Fig 04-261</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-083.png"/>
+                    <figcaption>Fig 05-083</figcaption>
                 </figure>
                 <p>
                     The main difference is that this Behavior is an additional property, called SnapViewMaximumWidth:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-262.png"/>
-                    <figcaption>Fig 04-262</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-084.png"/>
+                    <figcaption>Fig 05-084</figcaption>
                 </figure>
                 <p>
                     This can be used to specify when the page should go from Landscape mode to Split mode.
@@ -997,14 +997,14 @@
                     Further below, this is where we attach to the OrientationChanged event and to the SizeChanged event
                     for the page:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-263.png"/>
-                    <figcaption>Fig 04-263</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-085.png"/>
+                    <figcaption>Fig 05-085</figcaption>
                 </figure>
                 <p>
                     Finally, here is where the Messenger is used to send the OrientationStateMessage:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-264.png"/>
-                    <figcaption>Fig 04-264</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-086.png"/>
+                    <figcaption>Fig 05-086</figcaption>
                 </figure>
                 <p>
                     This will be received by the Behaviors attached to User Controls and they, in turn, will go to the
@@ -1013,107 +1013,107 @@
                 <p>
                     First, I will add a new User Control to the project:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-265.png"/>
-                    <figcaption>Fig 04-265</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-087.png"/>
+                    <figcaption>Fig 05-087</figcaption>
                 </figure>
                 <p>Now I build the User Control with three columns, a big button on the right, three buttons in the
                     middle, and a blue rectangle on the left:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-266.png"/>
-                    <figcaption>Fig 04-266</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-088.png"/>
+                    <figcaption>Fig 05-088</figcaption>
                 </figure>
                 <p>
                     Let's add the Behavior to the UserControl. In the Assets Library, I will select the
                     OrientationStateControlBehavior:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-267.png"/>
-                    <figcaption>Fig 04-267</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-089.png"/>
+                    <figcaption>Fig 05-089</figcaption>
                 </figure>
                 <p> and drag it on the UserControl itself:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-268.png"/>
-                    <figcaption>Fig 04-268</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-090.png"/>
+                    <figcaption>Fig 05-090</figcaption>
                 </figure>
                 <p>
                     On the right-hand side, notice the name of the visual state:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-269.png"/>
-                    <figcaption>Fig 04-269</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-091.png"/>
+                    <figcaption>Fig 05-091</figcaption>
                 </figure>
                 <p>
                     Here, you could change these names if you want to, but here in the demo I'm going to leave them by
                     default. Now let's go and define the state. I have to do that in the States tab here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-270.png"/>
-                    <figcaption>Fig 04-270</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-092.png"/>
+                    <figcaption>Fig 05-092</figcaption>
                 </figure>
                 <p>
                     Let's add a StateGroup name, OrientationStates. And here, I will only handle two states, the
                     Landscape mode and the Snap mode:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-271.png"/>
-                    <figcaption>Fig 04-271</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-093.png"/>
+                    <figcaption>Fig 05-093</figcaption>
                 </figure>
                 <p>
                     Now I am in recording mode; this is shown by the red border around the designer area:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-272.png"/>
-                    <figcaption>Fig 04-272</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-094.png"/>
+                    <figcaption>Fig 05-094</figcaption>
                 </figure>
                 <p>
                     So here I can specify how the Snap mode is going to look like. For example, let's select this big
                     button, and I'm going to make it Invisible. I can also select Button #2 here and hide it as well.
                     And finally, let's take this blue rectangle here and turn it red:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-273.png"/>
-                    <figcaption>Fig 04-273</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-095.png"/>
+                    <figcaption>Fig 05-095</figcaption>
                 </figure>
                 <p>
                     Now let's exit the state recording mode and go back to the page. After I build the application, I
                     can go to the Assets Library, and on the Project, I will see the UserControl that I just created:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-274.png"/>
-                    <figcaption>Fig 04-274</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-096.png"/>
+                    <figcaption>Fig 05-096</figcaption>
                 </figure>
                 <p>
                     Let's add one to the page. When the page gets created, it already has an OrientationStateBehavior;
                     this is in the Project Template by default. Notice that this is the other behavior:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-275.png"/>
-                    <figcaption>Fig 04-275</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-097.png"/>
+                    <figcaption>Fig 05-097</figcaption>
                 </figure>
                 <p>
                     the OrientationStateBehavior, in the contrary of the one we used in the UserControl, which is called
                     OrientationStateControlBehavior. And here on the right side, you can see, again, the Visual
                     StateNames:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-276.png"/>
-                    <figcaption>Fig 04-276</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-098.png"/>
+                    <figcaption>Fig 05-098</figcaption>
                 </figure>
                 <p>
                     as well as a SnapViewMaximumWidth for the page, which is set to 500 pixels by default:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-277.png"/>
-                    <figcaption>Fig 04-277</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-099.png"/>
+                    <figcaption>Fig 05-099</figcaption>
                 </figure>
                 <p>In the page, the states are already defined by the Project Template, so I don't need to redefine
                     them:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-278.png"/>
-                    <figcaption>Fig 04-278</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-100.png"/>
+                    <figcaption>Fig 05-100</figcaption>
                 </figure>
                 <p>
                     Now let's go to Snap mode, and what I'm going to do is take this UserControl and move it down here
                     to this location:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-279.png"/>
-                    <figcaption>Fig 04-279</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-101.png"/>
+                    <figcaption>Fig 05-101</figcaption>
                 </figure>
                 <p>
                     Let's run the code and navigate to the second page. If I resize the application in Snap mode, we
                     will see that after a certain stress hold, the application is going to toggle to Snap mode:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-280.png"/>
-                    <figcaption>Fig 04-280</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-102.png"/>
+                    <figcaption>Fig 05-102</figcaption>
                 </figure>
                 <p>
                     as well as the UserControl here.
@@ -1122,8 +1122,8 @@
                 <p>The last component that MVVM Light installs are the Item Templates. When you have an existing
                     project, like here a Windows Phone application:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-281.png"/>
-                    <figcaption>Fig 04-281</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-103.png"/>
+                    <figcaption>Fig 05-103</figcaption>
                 </figure>
                 <p>
                     you can right-click the Project and select Add, New Item. In the dialog you will see a few MVVM
@@ -1131,80 +1131,80 @@
                     Studio, so you need to pay attention to the items that you add. Here, for Windows Phone, look for
                     the suffix:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-282.png"/>
-                    <figcaption>Fig 04-282</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-104.png"/>
+                    <figcaption>Fig 05-104</figcaption>
                 </figure>
                 <p>
                     We can add a new View, a new ViewModel, and a new ViewModelLocator. In this case the application
                     already has a ViewModelLocator, so it doesn't really make sense to add a new one. Instead, let's add
                     an MvvmView and we can call that SettingsPage.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-283.png"/>
-                    <figcaption>Fig 04-283</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-105.png"/>
+                    <figcaption>Fig 05-105</figcaption>
                 </figure>
                 <p>
                     This page has a few predefined attributes, notably the DataContext is set, by default, to the
                     MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-284.png"/>
-                    <figcaption>Fig 04-284</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-106.png"/>
+                    <figcaption>Fig 05-106</figcaption>
                 </figure>
                 <p>
                     Let's change that to a new ViewModel called Settings that we will create in a moment. Let's add the
                     SettingsViewModel inside the ViewModel folder. Then I will select an MvvmViewModel and call that
                     SettingsViewModel. Let's add a new observable property, called DefaultEmailAddress:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-285.png"/>
-                    <figcaption>Fig 04-285</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-107.png"/>
+                    <figcaption>Fig 05-107</figcaption>
                 </figure>
                 <p>
                     Then, inside the ViewModelLocator, I will add a property for this ViewModel. Let's open it. And for
                     this I can use a snippet that we didn't see yet, called mvvmlocatorproperty:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-286.png"/>
-                    <figcaption>Fig 04-286</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-108.png"/>
+                    <figcaption>Fig 05-108</figcaption>
                 </figure>
                 <p>
                     Here we go. Let's replace a token, this is a SettingsViewModel, and the name for the property is
                     going to be Settings, just like we added in the SettingsPage a moment ago:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-287.png"/>
-                    <figcaption>Fig 04-287</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-109.png"/>
+                    <figcaption>Fig 05-109</figcaption>
                 </figure>
                 <p>
                     This snippet creates noncompilable code, because it adds a static constructor for the
                     ViewModelLocator, but in fact we have one already. This is done this way so the developer can simply
                     cut this line out:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-288.png"/>
-                    <figcaption>Fig 04-288</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-110.png"/>
+                    <figcaption>Fig 05-110</figcaption>
                 </figure>
                 <p>
                     then I'm going to remove the ViewModelLocator here, go to the actual constructor that we had before,
                     and here I can paste the line that I just cut:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-289.png"/>
-                    <figcaption>Fig 04-289</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-111.png"/>
+                    <figcaption>Fig 05-111</figcaption>
                 </figure>
                 <p>After I build the application and open the SettingsPage in Blend, we see that the DataContext is set
                     to the SettingsViewModel as expected:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-290.png"/>
-                    <figcaption>Fig 04-290</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-112.png"/>
+                    <figcaption>Fig 05-112</figcaption>
                 </figure>
                 <p>
                     So, for example, I can add a TextBox to the page, and then if I take the DefaultEmailAddress
                     property and drag it:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-291.png"/>
-                    <figcaption>Fig 04-291</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-113.png"/>
+                    <figcaption>Fig 05-113</figcaption>
                 </figure>
                 <p>
                     it's going to data bind the TextBox.Text property to this property in the ViewModel, and here we go,
                     we have the DefaultEmailAddress that we defined just before:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-292.png"/>
-                    <figcaption>Fig 04-292</figcaption>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-114.png"/>
+                    <figcaption>Fig 05-114</figcaption>
                 </figure>
                 <h3>Summary</h3>
                 <p>In this module, we started by seeing how the MVVM Light Toolkit gets installed. There are two ways to
