@@ -124,10 +124,11 @@ import { DGenComponent } from './dgen/dgen.component';
                             <li><a [routerLink]="['CSharp']">C#</a></li>
                             <li><a [routerLink]="['OData']">OData</a></li>
                             <li><a [routerLink]="['DGen']">DGen</a></li>
-
                         </ul>
                     </div>
+                    
                 </div>
+               
             </div>
             <div class='container body-content'>
                 <router-outlet></router-outlet>
