@@ -239,7 +239,7 @@
                     to go in the code-behind. Any code that's required to have a reference to a UI element is inherently
                     view code. Things like animations expressed in code instead of XAML are one example and many
                     controls have parts of their API that is not conducive to data binding forcing you to program
-                    against them in the code behind. But the ke concept here is that when using the MVVM pattern you
+                    against them in the code behind. But the key concept here is that when using the MVVM pattern you
                     should always analyze any code that you start to put in the code-behind and see if there's any way
                     to make it more declarative in the XAML itself with mechanisms like data binding, commands, or
                     behaviours to despatch calls into the ViewModel and put that logic there instead.
@@ -316,7 +316,7 @@
                 <p>A common form of client service is one that insulates the ViewModel from the specific data access
                     strategy based on the repository pattern. For example, your app might start out as a simple two-tier
                     application that talks directly to the database to get and update the data for your module but then
-                    you decide to support a more distributed scenario and you need to change things so the clien makes
+                    you decide to support a more distributed scenario and you need to change things so the client makes
                     web service calls to get it's data.
                 </p>
                 <figure>
@@ -349,7 +349,7 @@
                 </p>
                 <h3>Who’s on First</h3>
                 <p>
-                    That last high level structural topic I want to touch on is w ho constructs who? You will hear the
+                    That last high level structural topic I want to touch on is who constructs who? You will hear the
                     terms View-First and ViewModel-First used by many when describing their approach to MVVM. What those
                     terms refer to is which object gets constructed first and does it construct the other as part of its
                     own construction or initialization process. You will typically use both of these in different parts
