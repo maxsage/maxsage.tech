@@ -67,8 +67,10 @@
 
 
                 <h2>Demo: View-First MVVM Hook-up</h2>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-XAMLHookup-Start</p>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-XAMLHookup-End</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-XAMLHookup-Start</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-XAMLHookup-End</p>
                 <p>
                     In this demo we will create a View and a ViewModel and hook them up statically through the XAML. The
                     starting point for this demo is that we have a data layer (Zza.Data) covered previously. It's a
@@ -121,8 +123,8 @@
                     <figcaption>Fig 03-001E</figcaption>
                 </figure>
                 <p>But the challenge here is that this is an async method that produces a Task and not the Result and we
-                    can't use async and await keywords in .Net so we will have to force the method to execute
-                    synchronously which you can do with the .Result property on a Task:
+                    can't use async and await keywords in a constructor in .Net so we will have to force the method to
+                    execute synchronously which you can do with the .Result property on a Task:
                 </p>
                 <figure>
                     <pre><code class="cs hljs">Customers = _repo.GetCustomersAsync().Result;</code></pre>
@@ -147,7 +149,7 @@
                     <figcaption>Fig 03-002A</figcaption>
                 </figure>
                 <p>
-                    is add code to the ViewModel to prevent the execution of the above code when in the designer using
+                    to the ViewModel to prevent the execution of the above code when in the designer using
                     the GetIsInDesignMode() method.
                 </p>
                 <p>In the CustomerListView.xaml View add a namespace to bring in the Customers subfolder and the types
@@ -226,8 +228,10 @@ public CustomerListView()
                     <li>Finally, it sets the Views DataContext property to the ViewModel</li>
                 </ul>
                 <h2>Demo: MVVM Hook-up with ViewModelLocator</h2>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-ViewModelLocator-Start</p>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-ViewModelLocator-End</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-ViewModelLocator-Start</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-ViewModelLocator-End</p>
                 <p>In this demo we will look at using a ViewModelLocator to wire up our View and ViewModel in a
                     View-First way.
                 </p>
@@ -393,8 +397,10 @@ public CustomerListView()
                 </figure>
                 <p>Let's look at data binding in action supporting MVVM in a demo.</p>
                 <h2>Demo: Data Binding for MVVM Data Flows</h2>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-DataBinding-Start</p>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-DataBinding-End</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-DataBinding-Start</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-DataBinding-End</p>
                 <p>
                     In this demo we will review how data binding works and show how it supports the ViewModel and Model
                     Types. Open the CustomerListView. Replace the previous DataGrid (which by default has
@@ -617,9 +623,11 @@ public string FirstName
                     up properly for MVVM.
                 </p>
                 <h2>Demo: Explicit and Implicit DataTemplates</h2>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-DataTemplates-Start
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-DataTemplates-Start
                 </p>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-DataTemplates-End</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-DataTemplates-End</p>
                 <p>Now let’s look at how you do ViewModel-First leveraging data templates (specifically implicit data
                     templates).
                 </p>
@@ -704,9 +712,11 @@ public string FirstName
                 </figure>
                 <p>Next let's take a look at how this can be leveraged for wiring up Views and ViewModels.</p>
                 <h2>Demo: Implicit DataTemplates for ViewModel-First MVVM Ho1ok-up</h2>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-DataTemplates-Start
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-DataTemplates-Start
                 </p>
-                <p>Dropbox\DevelopmentTutorials\Pluralsight Courses\WPF MVVM In Depth\3Pluralsight Courses\WPF MVVM In Depth\MVVMHookupDemo-DataTemplates-End</p>
+                <p>Dropbox\Development Tutorials\Pluralsight Courses\WPF MVVM In Depth\Module
+                    3\MVVMHookupDemo-DataTemplates-End</p>
                 <p>Now we want to use DataTemplates to wire up our View and ViewModel. To do this you generally want to
                     have a hierarchical scheme which we'll get into later but first off we're going to add a ViewModel
                     to our MainWindow
@@ -800,28 +810,28 @@ public string FirstName
                     show it.
                 </p>
                 <p>Most of the time you will be doing ViewModel-First or View-First depending on whether there's a
-                    static relationship between the View and The ViewModel or if it's a more dynamic scenario but
-                    don't feel like you always have to take that approach. As long as you meet the goals that neither
-                    the View or ViewModel is tightly coupled and they get constructed properly and married together
-                    through the DataContext your doing MVVM just fine.
+                    static relationship between the View and The ViewModel or if it's a more dynamic scenario but don't
+                    feel like you always have to take that approach. As long as you meet the goals that neither the View
+                    or ViewModel is tightly coupled and they get constructed properly and married together through the
+                    DataContext your doing MVVM just fine.
                 </p>
                 <h2>Summary</h2>
                 <p>In this module I showed you a number of ways you can get your Views and ViewModels hooked up or
                     married as many people call it. You saw how to do:</p>
                 <ul>
-                    <li>View-First Construction through declarative XAML wiring </li>
+                    <li>View-First Construction through declarative XAML wiring</li>
                     <li>View-First Construction via code behind</li>
                     <li>Using a ViewModelLocator</li>
                 </ul>
-                <p>You saw how data binding forms the basic glue of MVVM including the DataContext being the ring
-                    that binds the View and the ViewModel as well as the data bindings being the communication
-                    channels through which data flows in both directions.</p>
-                <p>You also saw that through the mechanisms of DataTemplates which themselves rely on data binding
-                    you can dynamically create an appropriate View for a ViewModel by placing an instance of a
-                    ViewModel into a databound Container control.</p>
+                <p>You saw how data binding forms the basic glue of MVVM including the DataContext being the ring that
+                    binds the View and the ViewModel as well as the data bindings being the communication channels
+                    through which data flows in both directions.</p>
+                <p>You also saw that through the mechanisms of DataTemplates which themselves rely on data binding you
+                    can dynamically create an appropriate View for a ViewModel by placing an instance of a ViewModel
+                    into a databound Container control.</p>
                 <p>In the next module we'll take a look at how Views and ViewModels communicate with each other as
-                    things happen in the application including Commands, Behaviours and Property Change
-                    Notifications. At which point you'll have all the basics of MVVM nailed.</p>
+                    things happen in the application including Commands, Behaviours and Property Change Notifications.
+                    At which point you'll have all the basics of MVVM nailed.</p>
             </div>
         </div>
     </div>
