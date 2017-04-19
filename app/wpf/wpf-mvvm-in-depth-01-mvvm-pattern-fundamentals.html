@@ -5,7 +5,17 @@
                 <h2>MVVM Pattern Fundamentals</h2>
             </div>
             <div class="panel-body">
-                <h3>Welcome</h3>
+                <a href="#Welcome">Welcome</a><br />
+                <a href="#SeparationOfConcerns">Separation Of Concerns</a><br />
+                <a href="#SeparationOfConcernsInMVVM">Separation Of Concerns in MVVM</a><br />
+                <a pageScroll href="#MVVMGoalsAndBenefits">Take me to the awesomeness</a><br />
+                <a [routerLink]="['WPFMVVMInDepth01MVVMPatternFundamentals']" fragment="MVVMGoalsAndBenefits">Jump to 'Test'
+                    anchor </a><br />
+                <a href="#MVVMGoalsAndBenefits">MVVM Goals and Benefits</a><br />
+                <a href="#RelatedUISeparationPatterns">Related UI Separation Patterns</a><br />
+                <a href="#MVVMAcrossPlatforms">MVVM Across Platforms</a><br />
+
+                <h3 id="Welcome">Welcome</h3>
                 <p>
                     Every good WPF developer wants to write great applications that delight their users. You may be able
                     to achieve that on a first release without putting a lot of consideration into the structure of your
@@ -19,7 +29,7 @@
                     level concepts of MVVM. Make sure you understand what it does for you, why you would want to use it,
                     where it comes from and some of the high level concepts around the structural parts of MVVM.
                 </p>
-                <h3>Separation of Concerns</h3>
+                <h3 id="SeparationOfConcerns">Separation of Concerns</h3>
                 <p>
                     First thing to understand about MVVM is that it is mostly about providing a standard structure for
                     you to apply the principle of separation of concerns. No that's a pretty lofty phrase that people
@@ -53,7 +63,7 @@
                 <p>
                     Developers face a very similar choice with the way we write code.
                 </p>
-                <h3>Separation of Concerns in MVVM</h3>
+                <h3 id="SeparationOfConcernsInMVVM">Separation of Concerns in MVVM</h3>
                 <p>
                     Code like the example below doesn’t look too bad at first glance:
                 </p>
@@ -102,7 +112,7 @@
                     important and is really what MVVM is meant to guide you in doing for developing client application
                     code.
                 </p>
-                <h3>MVVM Goals and Benefits</h3>
+                <h3 id="MVVMGoalsAndBenefits">MVVM Goals and Benefits</h3>
                 <p>Beyond achieving separation of concerns and the efficiency that you gain from having that; what are
                     you really trying to gain from using the MVVM pattern. There are really three key things that flow
                     out of applying MVVM.
