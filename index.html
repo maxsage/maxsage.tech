@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="default.css" />
     <link rel="stylesheet" href="darcula.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.0/clipboard.min.js"></script>
     <!-- 2. Configure SystemJS -->
     <script>
         System.config({
@@ -41,6 +42,8 @@
       System.import('app/main')
             .then(null, console.error.bind(console));
     </script>
+
+
 </head>
 <body>
     <div>
@@ -57,9 +60,13 @@
         </script>
         <gcse:search></gcse:search>
     </div>
+
     <pm-app>Loading Application....</pm-app>
 
 </body>
-
+    <!-- configure clipboard.js -->
+    <script>
+        var clipboard = new Clipboard('.btn');
+    </script>
 
 </html>
