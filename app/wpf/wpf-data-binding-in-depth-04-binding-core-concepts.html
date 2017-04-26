@@ -57,6 +57,30 @@
             </div>
             <div class="panel-body">
                 <h3>Demo: RelativeSource Bindings</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-001" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\before\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-001">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-002" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\after\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-002">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+
+
                 <p>
                     In this series of demos, I want to get you familiar with the other ways you can provide a Source object to your bindings other than using
                     the DataContext that is the default. The first one we're going to look at is RelativeSource bindings.
@@ -121,13 +145,13 @@
                 </p>
                 <p>
                     I'm going to drop into my code-behind here and go down to the bottom here, and the idea is that we want to have a method that looks like
-                    this on Delete customer that takes in a customer reference and removes it and possibly deletes it from our database.
+                    this OnDeleteCustomer that takes in a customer reference and removes it and possibly deletes it from our database.
                 </p>
                 <img src="app/wpf/images/wpfdatabindingindepth/Fig03-008.png" class="image"/>
                 <p>In this case, I'm just going to remove it from the data bound collection, and we need a way to target that method in a data bound way.
                 </p>
                 <p>
-                    Now a common way to do that would be to use a command object, so I'm going to add in a new DependencyProperty here called
+                    Now a common way to do that would be to use a Command object, so I'm going to add in a new DependencyProperty here called
                     DeleteCustomerCommand:
                 </p>
                 <img src="app/wpf/images/wpfdatabindingindepth/Fig03-009.png" class="image"/>
@@ -232,6 +256,28 @@
             </div>
             <div class="panel-body">
                 <h3>Demo: ElementName Bindings</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-003" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\before\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-003">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-004" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\after\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-004">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>In this demo, I'm going to show you how to use the ElementName to specify a Source object for a binding. Our scenario for this one is we
                     still want to delete customers like in the last demo, but instead we decide we want to put the Delete button outside the DataGrid and not
                     have it repeated in every row.
@@ -304,6 +350,28 @@
             </div>
             <div class="panel-body">
                 <h3>Demo: Source Bindings</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-005" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\before\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-005">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-006" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\after\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-006">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>The last binding source we're going to look at here is the Source property on a binding. If I wanted to get customers down into my DataGrid
                     here:
                 </p>
@@ -400,6 +468,28 @@
             </div>
             <div class="panel-body">
                 <h3>Demo: Binding Property Paths</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-007" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\before\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-007">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-008" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\after\BindingSources\BindingSources.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-008">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>In this demo, I just want to quickly revisit Property Paths on bindings to make sure it is clear the power you have to locate the particular
                     value you want once you have some Source object. I'm going to drop into the XAML of our last demo and just point out a couple of these paths
                     that we've been using here.
@@ -469,7 +559,7 @@
                 </p>
                 <p>The default mode for a binding is really determined by the DependencyProperty that's the target of that binding. So when that
                     DependencyProperty is declared, if it doesn't say anything, the default is going to be one-way. But through its PropertyMetadata it can
-                    indicate that it wants to be a two-way binding by default, such that the text property on a TextBox or any primary prosperity that's an edit
+                    indicate that it wants to be a two-way binding by default, such that the text property on a TextBox or any primary property that's an edit
                     input on editable controls.
                 </p>
                 <p>So in WPF, the primary properties of editable controls are set to two-way by default, but other read-only controls such as a label and other
@@ -490,6 +580,28 @@
             </div>
             <div class="panel-body">
                 <h3>Demo: Binding Mode</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-009" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\before\BindingProperties\BindingProperties.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-009">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-010" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\after\BindingProperties\BindingProperties.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-010">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>In this demo we're going to cover the Binding Mode property and how it influences the direction of flow of data through a binding. The
                     starting point for this demo is a simple little data app that has a data entry form for a Customer object here and it has this button to
                     trigger a customer change.
@@ -540,6 +652,28 @@
             </div>
             <div class="panel-body">
                 <h3>Demo: Defining Default Binding Mode</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-011" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\before\BindingProperties\BindingProperties.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-011">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-012" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\WPF Data Binding in Depth\Module 4\after\BindingProperties\BindingProperties.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-012">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>Now, in this demo, I want to show you how the Default mode really works based on the property that you're binding. When controls are created
                     and their properties are defined as DependencyProperties that can be bound to:
                 </p>
@@ -560,14 +694,12 @@
                 <p>With the default code snippet, it's going to define just a PropertyMetadata object here and allow you to set the default and possibly hook up
                     a Change handler.
                 </p>
-                <p>And then I'm also going to drop into the constructor of my CustomControl here and add an Event handler for the MouseDown event on my
-                    rectangle that's my content. And what I'm going to do when I get that Click on it, is I'm going to explicitly set the MyBackground property
-                    to red so that we can see that that change actually occurred.
-                </p>
                 <p>If you change that to be a FrameworkPropertyMetadata, you can still set a default value, which you can see I'm setting to gray here, but you
                     have this FrameworkPropertyMetadataOptions, and you see that there's an option to say BindsTwoWayByDefault. Then I also hook up a Change
                     handler here (<span class="code">OnBrushChanged</span>):
                 </p>
+
+
                 <img src="app/wpf/images/wpfdatabindingindepth/Fig03-060.png" class="image"/>
                 <p>so that whenever my background gets set I'm going to go set the Fill property of the rectangle that's my content.</p>
                 <p>Im also going to drop into the contstructor of my Custom Control here and add an EventHandler for the MouseDown event on my rectangle that's
