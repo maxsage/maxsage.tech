@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1, router_1, welcome_component_1, wpf_component_1, angular2_component_1, typescript_component_1, javascript_component_1, jquery_component_1, bootstrap3_component_1, visualstudio_component_1, visualstudiocode_component_1, emmet_component_1, csharp_component_1, odata_component_1, dgen_component_1;
-    var AppComponent;
+    var PreHighlight, AppComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -64,6 +64,18 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                 dgen_component_1 = dgen_component_1_1;
             }],
         execute: function() {
+            PreHighlight = (function () {
+                function PreHighlight(refElem) {
+                    hljs.highlightBlock(refElem.nativeElement);
+                }
+                PreHighlight = __decorate([
+                    core_1.Directive({
+                        selector: 'pre'
+                    }), 
+                    __metadata('design:paramtypes', [core_1.ElementRef])
+                ], PreHighlight);
+                return PreHighlight;
+            }());
             AppComponent = (function () {
                 function AppComponent() {
                     this.pageTitle = 'maxsage.tech';
@@ -71,8 +83,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', 'angular2/router',
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-app',
-                        template: "\n            <div class='navbar navbar-inverse'>\n                <div class='container'>\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span class=\"sr-only\">Toggle navigation</span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </button>\n                        <a [routerLink]=\"['Welcome']\" class=\"navbar-brand\">maxsage.tech</a>\n                    </div>\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class='nav navbar-nav'>\n                            <li><a [routerLink]=\"['WPF']\">WPF</a></li>\n                            <li><a [routerLink]=\"['Angular2']\">Angular 2</a></li>\n                            <li><a [routerLink]=\"['TypeScript']\">TypeScript</a></li>\n                            <li><a [routerLink]=\"['JavaScript']\">JavaScript</a></li>\n                            <li><a [routerLink]=\"['JQuery']\">JQuery</a></li>\n                            <li><a [routerLink]=\"['Bootstrap3']\">Bootstrap 3</a></li>\n                            <li><a [routerLink]=\"['VisualStudio']\">Visual Studio</a></li>\n                            <li><a [routerLink]=\"['VisualStudioCode']\">Visual Studio Code</a></li>\n                            <li><a [routerLink]=\"['Emmet']\">Emmet</a></li>\n                            <li><a [routerLink]=\"['CSharp']\">C#</a></li>\n                            <li><a [routerLink]=\"['OData']\">OData</a></li>\n                            <li><a [routerLink]=\"['DGen']\">DGen</a></li>\n                        </ul>\n                    </div>\n                    \n                </div>\n               \n            </div>\n            <div class='container body-content'>\n                <router-outlet></router-outlet>\n                <hr />\n                <footer>\n                    <p>&copy; 2016 - maxsage.tech</p>\n                </footer>\n            </div>\n    ",
-                        directives: [router_1.ROUTER_DIRECTIVES],
+                        template: "\n            <div class='navbar navbar-inverse'>\n                <div class='container'>\n                    <div class=\"navbar-header\">\n                        <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                            <span class=\"sr-only\">Toggle navigation</span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </button>\n                        <a [routerLink]=\"['Welcome']\" class=\"navbar-brand\">maxsage.tech</a>\n                    </div>\n                    <div class=\"navbar-collapse collapse\">\n                        <ul class='nav navbar-nav'>\n                            <li><a [routerLink]=\"['WPF']\">WPF</a></li>\n                            <li><a [routerLink]=\"['Angular2']\">Angular 2</a></li>\n                            <li><a [routerLink]=\"['TypeScript']\">TypeScript</a></li>\n                            <li><a [routerLink]=\"['JavaScript']\">JavaScript</a></li>\n                            <li><a [routerLink]=\"['JQuery']\">JQuery</a></li>\n                            <li><a [routerLink]=\"['Bootstrap3']\">Bootstrap 3</a></li>\n                            <li><a [routerLink]=\"['VisualStudio']\">Visual Studio</a></li>\n                            <li><a [routerLink]=\"['VisualStudioCode']\">Visual Studio Code</a></li>\n                            <li><a [routerLink]=\"['Emmet']\">Emmet</a></li>\n                            <li><a [routerLink]=\"['CSharp']\">C#</a></li>\n                            <li><a [routerLink]=\"['OData']\">OData</a></li>\n                            <li><a [routerLink]=\"['DGen']\">DGen</a></li>\n                        </ul>\n                    </div>\n                    \n                </div>\n               \n            </div>\n            <div class='container body-content'>\n                <pre>\n                    <code class=\"html\">\n                        &lt;html&gt;\n                            &lt;body&gt;\n            \n                                &lt;h1&gt;My First Heading&lt;/h1&gt;\n                                &lt;p&gt;My first paragraph.&lt;/p&gt;\n            \n                            &lt;/body&gt;\n                        &lt;/html&gt;\n                    </code>\n                </pre>\n                <router-outlet></router-outlet>\n                <hr />\n                <footer>\n                    <p>&copy; 2017 - maxsage.tech</p>\n                </footer>\n            </div>\n    ",
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight],
                         providers: [http_1.HTTP_PROVIDERS,
                             router_1.ROUTER_PROVIDERS]
                     }),
