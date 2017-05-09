@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, Directive, ElementRef } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 
 @Component({
@@ -65,13 +65,24 @@ export class BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent {
     public pageTitle: string = "Building A JavaScript Development Environment - Transpiling";
 }
 
+@Directive({
+    selector: 'pre'
+})
+
+class PreHighlight {
+    constructor(refElem: ElementRef) {
+        hljs.highlightBlock(refElem.nativeElement);
+    }
+}
 @Component({
     templateUrl: 'app/javascript/building-a-javascript-development-environment-07-bundling.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent {
     public pageTitle: string = "Building A JavaScript Development Environment - Bundling";
 }
+
+
 
 @Component({
     templateUrl: 'app/javascript/building-a-javascript-development-environment-08-linting.html',

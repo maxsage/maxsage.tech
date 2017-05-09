@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import {Component, Directive, ElementRef} from 'angular2/core';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import 'rxjs/Rx'; // Load all features
 import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
@@ -96,8 +96,19 @@ import { CSharpComponent } from './csharp/csharp.component';
 import { ODataComponent } from './odata/odata.component';
 import { DGenComponent } from './dgen/dgen.component';
 
+@Directive({
+    selector: 'pre'
+})
+
+class PreHighlight {
+    constructor(refElem: ElementRef) {
+        hljs.highlightBlock(refElem.nativeElement);
+    }
+}
+
 @Component ({
     selector: 'pm-app',
+
     template: `
             <div class='navbar navbar-inverse'>
                 <div class='container'>
@@ -131,14 +142,26 @@ import { DGenComponent } from './dgen/dgen.component';
                
             </div>
             <div class='container body-content'>
+                <pre>
+                    <code class="html">
+                        &lt;html&gt;
+                            &lt;body&gt;
+            
+                                &lt;h1&gt;My First Heading&lt;/h1&gt;
+                                &lt;p&gt;My first paragraph.&lt;/p&gt;
+            
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </code>
+                </pre>
                 <router-outlet></router-outlet>
                 <hr />
                 <footer>
-                    <p>&copy; 2016 - maxsage.tech</p>
+                    <p>&copy; 2017 - maxsage.tech</p>
                 </footer>
             </div>
     `,
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES ,PreHighlight],
     providers: [HTTP_PROVIDERS,
         ROUTER_PROVIDERS]
 })

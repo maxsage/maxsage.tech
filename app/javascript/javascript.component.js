@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1;
-    var JavaScriptComponent, BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent, BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKitComponent, BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfigurationComponent, BuildingAJavaScriptDevelopmentEnvironment03PackageManagementComponent, BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServerComponent, BuildingAJavaScriptDevelopmentEnvironment05AutomationComponent, BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent, BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent, BuildingAJavaScriptDevelopmentEnvironment08LintingComponent, BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegrationComponent, BuildingAJavaScriptDevelopmentEnvironment10HTTPCallsComponent, BuildingAJavaScriptDevelopmentEnvironment11ProjectStructureComponent, BuildingAJavaScriptDevelopmentEnvironment12ProductionBuildComponent, BuildingAJavaScriptDevelopmentEnvironment13ProductionDeployComponent;
+    var JavaScriptComponent, BuildingAJavaScriptDevelopmentEnvironment00CourseContentsComponent, BuildingAJavaScriptDevelopmentEnvironment01YouNeedAStarterKitComponent, BuildingAJavaScriptDevelopmentEnvironment02EditorsAndConfigurationComponent, BuildingAJavaScriptDevelopmentEnvironment03PackageManagementComponent, BuildingAJavaScriptDevelopmentEnvironment04DevelopmentWebServerComponent, BuildingAJavaScriptDevelopmentEnvironment05AutomationComponent, BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent, PreHighlight, BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent, BuildingAJavaScriptDevelopmentEnvironment08LintingComponent, BuildingAJavaScriptDevelopmentEnvironment09TestingAndContinuousIntegrationComponent, BuildingAJavaScriptDevelopmentEnvironment10HTTPCallsComponent, BuildingAJavaScriptDevelopmentEnvironment11ProjectStructureComponent, BuildingAJavaScriptDevelopmentEnvironment12ProductionBuildComponent, BuildingAJavaScriptDevelopmentEnvironment13ProductionDeployComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -133,6 +133,18 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 return BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent;
             }());
             exports_1("BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent", BuildingAJavaScriptDevelopmentEnvironment06TranspilingComponent);
+            PreHighlight = (function () {
+                function PreHighlight(refElem) {
+                    hljs.highlightBlock(refElem.nativeElement);
+                }
+                PreHighlight = __decorate([
+                    core_1.Directive({
+                        selector: 'pre'
+                    }), 
+                    __metadata('design:paramtypes', [core_1.ElementRef])
+                ], PreHighlight);
+                return PreHighlight;
+            }());
             BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent = (function () {
                 function BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent() {
                     this.pageTitle = "Building A JavaScript Development Environment - Bundling";
@@ -140,7 +152,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/javascript/building-a-javascript-development-environment-07-bundling.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], BuildingAJavaScriptDevelopmentEnvironment07BundlingComponent);
