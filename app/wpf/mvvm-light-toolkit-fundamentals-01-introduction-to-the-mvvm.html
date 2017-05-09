@@ -25,12 +25,34 @@
                     composed together to create a more maintainable and more testable application.
                 </p>
                 <h3>Showing the Data Service Output</h3>
-                <p>Let's start the demo with an application that we are going to build without MVVM. And this is going
-                    to be a Windows Phone 8 Application connecting to a data service running on the web. Now this data
-                    service is delivering data in the form of JSON, and we are going to have one big object with a data
-                    property, which is an array of another type of object here with a unique id, a first_name, a
-                    last_name, a picture, a location, a message, etc. Now we are going to name this object here, the
-                    friend, and this is going to be the list of friends.
+                <p>Let's start the demo with an application that we are going to build without MVVM:</p>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex01-001" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 1\before\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex01-001">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex01-002" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 1\after\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex01-002">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <p>And this is going to be a Windows Phone 8 Application connecting to a data service running on the
+                    web. Now this data service is delivering data in the form of JSON, and we are going to have one big
+                    object with a data property, which is an array of another type of object here with a unique id, a
+                    first_name, a last_name, a picture, a location, a message, etc. Now we are going to name this object
+                    here, the friend, and this is going to be the list of friends.
                 </p>
                 <h3>Building the Model</h3>
                 <p>In Visual Studio, I created a Windows Phone 8 Application. This is an absolutely standard
@@ -136,7 +158,7 @@
                     <figcaption>Fig 01-014</figcaption>
                 </figure>
                 <p>And then, I'm going to build a StringContent with MediaTypeHeaderValue("application/json"), and then
-                    I'm going to post this JSON foul to this uri:
+                    I'm going to post this JSON file to this URI:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-015.png"/>
                     <figcaption>Fig 01-015</figcaption>
@@ -469,7 +491,7 @@
                     <figcaption>Fig 01-052</figcaption>
                 </figure>
                 <p>Another such example is INavigationService, which will have methods like GoBack and NavigateTo and
-                    HereTo. We will have an object implementing this and acting on the View directly to perform the
+                    here to we will have an object implementing this and acting on the View directly to perform the
                     navigation:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-053.png"/>
