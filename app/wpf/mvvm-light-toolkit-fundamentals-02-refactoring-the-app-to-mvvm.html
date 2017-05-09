@@ -59,8 +59,10 @@
                 <p>Let's start the refactoring with a Friend class inside the Model folder. In order to make this class
                     observable, we wanted to implement the INotifyPropertyChanged interface:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-001.png"/>
-                    <figcaption>Fig 02-001</figcaption>
+                <figure>
+                <pre>
+<code class="csharp">public class Friend : INotifyPropertyChanged</code></pre>
+                <figcaption>Fig 02-001</figcaption>
                 </figure>
                 <p>This interface is probably the most important when it comes to data binding. It's going to allow the
                     data bindings to be updated whenever a property changes on the Model object. To implement this
@@ -68,18 +70,76 @@
                     method, RaisePropertyChanged, which is going to raise the PropertyChanged event if necessary,
                     meaning if somebody subscribed to this event, for example a XAML DataBinding:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-002.png"/>
+                <figure>
+<pre><code class="csharp">public event PropertyChangedEventHandler PropertyChanged;
+
+protected virtual void RaisePropertyChanged(string propertyName)
+{
+    var handler = PropertyChanged;
+    if (handler != null)
+    {
+        handler(this, new PropertyChangedEventArgs(propertyName));
+    }
+}</code></pre>
                     <figcaption>Fig 02-002</figcaption>
                 </figure>
                 <p>Now we can modify the properties which are going to be observable. So let's remove here FirstName and
                     LastName, and instead we are going to add some observable properties, the FirstName property, which
                     is going to raise the PropertyChanged event if necessary:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-003.png"/>
+                <figure>
+<pre><code class="csharp">private string _firstName;
+
+[JsonProperty("first_name")]
+
+public string FirstName
+{
+    get
+    {
+        return _firstName;
+    }
+
+    set
+    {
+        if (_firstName == value)
+        {
+            return;
+        }
+
+        _firstName = value;
+        RaisePropertyChanged("FirstName");
+    }
+}</code></pre>
                     <figcaption>Fig 02-003</figcaption>
                 </figure>
                 <p>And we do the same for LastName:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-004.png"/>
+<figure>
+<pre><code class="csharp">private string _lastName;
+
+[JsonProperty("last_name")]
+public string LastName
+{
+    get
+    {
+        return _lastName;
+    }
+
+    set
+    {
+        if (_lastName == value)
+        {
+            return;
+        }
+
+        _lastName = value;
+        RaisePropertyChanged("LastName");
+    }
+}
+</code></pre>
+<figcaption>Fig02-004</figcaption>
+</figure>
+                <figure>
+                    <img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-004.png"/>
                     <figcaption>Fig 02-004</figcaption>
                 </figure>
                 <p>So now this Friend class is observable. From a XAML standpoint, we can data bind to those observable

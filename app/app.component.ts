@@ -142,18 +142,6 @@ class PreHighlight {
                
             </div>
             <div class='container body-content'>
-                <pre>
-                    <code class="html">
-                        &lt;html&gt;
-                            &lt;body&gt;
-            
-                                &lt;h1&gt;My First Heading&lt;/h1&gt;
-                                &lt;p&gt;My first paragraph.&lt;/p&gt;
-            
-                            &lt;/body&gt;
-                        &lt;/html&gt;
-                    </code>
-                </pre>
                 <router-outlet></router-outlet>
                 <hr />
                 <footer>

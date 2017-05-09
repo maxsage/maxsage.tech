@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1;
-    var WPFComponent, WPFDataBindingInDepth00CourseContentsComponent, WPFDataBindingInDepth01CourseOverviewComponent, WPFDataBindingInDepth02DataBindingOverviewComponent, WPFDataBindingInDepth03DataSourcesComponent, WPFDataBindingInDepth04BindingCoreConceptsComponent, WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent, WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent, WPFDataBindingInDepth07DesignTimeDataBindingComponent, WPFDataBindingInDepth08ContainersAndCollectionControlsComponent, WPFDataBindingInDepth09DataInputValidationComponent, WPFMVVMInDepth00CourseContentsComponent, WPFMVVMInDepth01MVVMPatternFundamentalsComponent, WPFMVVMInDepth02FirstTasteOfMVVMComponent, WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent, WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent, WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent, WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent, MVVMLightToolkitFundamentals00CourseContentsComponent, MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent, MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent, MVVMLightToolkitFundamentals03TheCoreComponentsComponent, MVVMLightToolkitFundamentals04TheExtrasComponent, MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent, MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent;
+    var PreHighlight, WPFComponent, WPFDataBindingInDepth00CourseContentsComponent, WPFDataBindingInDepth01CourseOverviewComponent, WPFDataBindingInDepth02DataBindingOverviewComponent, WPFDataBindingInDepth03DataSourcesComponent, WPFDataBindingInDepth04BindingCoreConceptsComponent, WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent, WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent, WPFDataBindingInDepth07DesignTimeDataBindingComponent, WPFDataBindingInDepth08ContainersAndCollectionControlsComponent, WPFDataBindingInDepth09DataInputValidationComponent, WPFMVVMInDepth00CourseContentsComponent, WPFMVVMInDepth01MVVMPatternFundamentalsComponent, WPFMVVMInDepth02FirstTasteOfMVVMComponent, WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent, WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent, WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent, WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent, MVVMLightToolkitFundamentals00CourseContentsComponent, MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent, MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent, MVVMLightToolkitFundamentals03TheCoreComponentsComponent, MVVMLightToolkitFundamentals04TheExtrasComponent, MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent, MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -21,6 +21,18 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 router_1 = router_1_1;
             }],
         execute: function() {
+            PreHighlight = (function () {
+                function PreHighlight(refElem) {
+                    hljs.highlightBlock(refElem.nativeElement);
+                }
+                PreHighlight = __decorate([
+                    core_1.Directive({
+                        selector: 'pre'
+                    }), 
+                    __metadata('design:paramtypes', [core_1.ElementRef])
+                ], PreHighlight);
+                return PreHighlight;
+            }());
             WPFComponent = (function () {
                 function WPFComponent() {
                     this.pageTitle = "WPF";
@@ -308,7 +320,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent);

@@ -1,5 +1,16 @@
-import { Component } from 'angular2/core';
+import { Component, Directive, ElementRef } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
+
+
+@Directive({
+    selector: 'pre'
+})
+
+class PreHighlight {
+    constructor(refElem: ElementRef) {
+        hljs.highlightBlock(refElem.nativeElement);
+    }
+}
 
 @Component({
     templateUrl: 'app/wpf/wpf.component.html',
@@ -163,7 +174,7 @@ export class MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent {
 
 @Component({
     templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent {
     public pageTitle: string = "MVVM Light Toolkit Fundamentals - Refactoring the App to MVVM";
