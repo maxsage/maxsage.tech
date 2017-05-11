@@ -6,17 +6,19 @@
             </div>
             <div class="panel-body">
                 <h3>Introduction</h3>
-                <p>In the previous module, we built a Windows Phone Application without using the Model-View-ViewModel Pattern. We
-                    saw some of the disadvantages of this tightly coupled approach using quite a lot of events and code behind.
-                    All those principles apply to all XAML-based frameworks, not just Windows Phone Apps. And similarly, what we
-                    will do in this module applies to all XAML-based frameworks as well.
+                <p>In the previous module, we built a Windows Phone Application without using the Model-View-ViewModel
+                    Pattern. We saw some of the disadvantages of this tightly coupled approach using quite a lot of
+                    events and code behind. All those principles apply to all XAML-based frameworks, not just Windows
+                    Phone Apps. And similarly, what we will do in this module applies to all XAML-based frameworks as
+                    well.
                 </p>
-                <p>In this module, we will refactor the application to use a Model-View-ViewModel Pattern. This is going to solve
-                    the disadvantages that we saw in the previous module.
+                <p>In this module, we will refactor the application to use a Model-View-ViewModel Pattern. This is going
+                    to solve the disadvantages that we saw in the previous module.
                 </p>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex02-001" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 2\before\WhyMvvm.sln">
+                        <input id="Ex02-001" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 2\before\WhyMvvm.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex02-001">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -26,7 +28,8 @@
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex02-002" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 2\after\WhyMvvm.sln">
+                        <input id="Ex02-002" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 2\after\WhyMvvm.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex02-002">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -35,17 +38,22 @@
                     </div>
                 </div>
                 <ul>
-                    <li>First of all, we will start by making the model, the Friend object, observable, so that we can apply
-                        DataBindings directly to those properties. </li>
+                    <li>First of all, we will start by making the model, the Friend object, observable, so that we can
+                        apply DataBindings directly to those properties.
+                    </li>
                     <li>We are going to create a ViewModel for the main View.</li>
-                    <li>We are going to create some View services that the ViewModel can call in an abstracting manner, in order
-                        to execute operations on the View, such as showing dialogs or doing some navigation. </li>
-                    <li>We will bind the ViewModel to the View in order to create a One-to-One relationship between those two
-                        items. </li>
-                    <li>We will add some design time data and that will give us the opportunity to use Blend to do some visual
-                        design. </li>
-                    <li>Finally, we will add a unit test to your application and we will see how we can mock the services in order
-                        to simulate test conditions. </li>
+                    <li>We are going to create some View services that the ViewModel can call in an abstracting manner,
+                        in order to execute operations on the View, such as showing dialogs or doing some navigation.
+                    </li>
+                    <li>We will bind the ViewModel to the View in order to create a One-to-One relationship between
+                        those two items.
+                    </li>
+                    <li>We will add some design time data and that will give us the opportunity to use Blend to do some
+                        visual design.
+                    </li>
+                    <li>Finally, we will add a unit test to your application and we will see how we can mock the
+                        services in order to simulate test conditions.
+                    </li>
                 </ul>
                 <h3>Refactor the Model Object</h3>
                 <p>Let's start the refactoring with a Friend class inside the Model folder. In order to make this class
@@ -56,11 +64,11 @@
 <code class="csharp">public class Friend : INotifyPropertyChanged</code></pre>
                     <figcaption>Fig 02-001</figcaption>
                 </figure>
-                <p>This interface is probably the most important when it comes to data binding. It's going to allow the data
-                    bindings to be updated whenever a property changes on the Model object. To implement this interface, we need
-                    just one event, the PropertyChanged event. But in addition, we add a Utility method, RaisePropertyChanged,
-                    which is going to raise the PropertyChanged event if necessary, meaning if somebody subscribed to this event,
-                    for example a XAML DataBinding:
+                <p>This interface is probably the most important when it comes to data binding. It's going to allow the
+                    data bindings to be updated whenever a property changes on the Model object. To implement this
+                    interface, we need just one event, the PropertyChanged event. But in addition, we add a Utility
+                    method, RaisePropertyChanged, which is going to raise the PropertyChanged event if necessary,
+                    meaning if somebody subscribed to this event, for example a XAML DataBinding:
                 </p>
                 <figure>
 <pre><code class="csharp">public event PropertyChangedEventHandler PropertyChanged;
@@ -75,9 +83,9 @@ protected virtual void RaisePropertyChanged(string propertyName)
 }</code></pre>
                     <figcaption>Fig 02-002</figcaption>
                 </figure>
-                <p>Now we can modify the properties which are going to be observable. So let's remove here FirstName and LastName,
-                    and instead we are going to add some observable properties, the FirstName property, which is going to raise
-                    the PropertyChanged event if necessary:
+                <p>Now we can modify the properties which are going to be observable. So let's remove here FirstName and
+                    LastName, and instead we are going to add some observable properties, the FirstName property, which
+                    is going to raise the PropertyChanged event if necessary:
                 </p>
                 <figure>
 <pre><code class="csharp">private string _firstName;
@@ -134,8 +142,8 @@ public string LastName
                     properties, and the data bindings are going to be updated whenever those properties change.
                 </p>
                 <h3>MainViewModel Part 1: Properties</h3>
-                <p>Then we are going to add a new class, and this is going to be the ViewModel. So let's add, first, a New Folder.
-                    And inside this folder, I add a new class, which I name MainViewModel:
+                <p>Then we are going to add a new class, and this is going to be the ViewModel. So let's add, first, a
+                    New Folder. And inside this folder, I add a new class, which I name MainViewModel:
                 </p>
                 <figure>
 <pre><code class="csharp">namespace WhyMvvm.ViewModel
@@ -147,13 +155,14 @@ public string LastName
 </code></pre>
                     <figcaption>Fig02-005</figcaption>
                 </figure>
-                <p>Now just like there is a MainPage, we will have a MainViewModel. If we had a SettingsPage, we would have a
-                    SettingsViewModel, etc. There is normally a One-to-One correspondence between the pages and the ViewModel, but
-                    this rule has quite a lot of exceptions, like we will see in the rest of the course when we do some more
-                    advanced topics. This MainViewModel, just like before, is going to implement INotifyPropertyChanged, because
-                    we're also going to have some DataBindings to that. So let's add the same code as before:
+                <p>Now just like there is a MainPage, we will have a MainViewModel. If we had a SettingsPage, we would
+                    have a SettingsViewModel, etc. There is normally a One-to-One correspondence between the pages and
+                    the ViewModel, but this rule has quite a lot of exceptions, like we will see in the rest of the
+                    course when we do some more advanced topics. This MainViewModel, just like before, is going to
+                    implement INotifyPropertyChanged, because we're also going to have some DataBindings to that. So
+                    let's add the same code as before:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class MainViewModel : INotifyPropertyChanged
 {
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -168,34 +177,34 @@ public string LastName
         }
     }
 }</code></pre>
-<figcaption>Fig02-006</figcaption>
-</figure>
-                <p>And here we see something which is quite frequent in MVVM Applications. There is quite a lot of repetition
-                    inside those applications. We have to implement INotifyPropertyChanged quite often, we have to declare
-                    observable properties quite often, and eventually it would be nice to have something which breaks the monotony
-                    of MVVM, like, for example, the MVVM Light Toolkit is doing.
+                    <figcaption>Fig02-006</figcaption>
+                </figure>
+                <p>And here we see something which is quite frequent in MVVM Applications. There is quite a lot of
+                    repetition inside those applications. We have to implement INotifyPropertyChanged quite often, we
+                    have to declare observable properties quite often, and eventually it would be nice to have something
+                    which breaks the monotony of MVVM, like, for example, the MVVM Light Toolkit is doing.
                 </p>
-                <p>Let's add a collection to hold all the friends, and for this we are going to use an ObservableCollection of
-                    Friends:
+                <p>Let's add a collection to hold all the friends, and for this we are going to use an
+                    ObservableCollection of Friends:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public ObservableCollection&lt;Friend&gt; Friends
 {
     get;
     private set;
 }</code></pre>
-<figcaption>Fig02-007</figcaption>
-</figure>
+                    <figcaption>Fig02-007</figcaption>
+                </figure>
 
-                <p>In this small example, I'm using the Friend, which is the data object, model object, directly inside the
-                    MainViewModel. And I made this Friends class observable, which is okay because it's going to make our life
-                    quite a lot easier. But it's very possible in more complex application that we want to wrap this Friend data
-                    object inside something else, called, for example, the FriendViewModel
+                <p>In this small example, I'm using the Friend, which is the data object, model object, directly inside
+                    the MainViewModel. And I made this Friends class observable, which is okay because it's going to
+                    make our life quite a lot easier. But it's very possible in more complex application that we want to
+                    wrap this Friend data object inside something else, called, for example, the FriendViewModel
                 </p>
                 <p>
                     Then I'm going to add the constructor for this class:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public MainViewModel(
 	IFriendsService dataService)
 {
@@ -203,16 +212,16 @@ public string LastName
 	Friends = new ObservableCollection&lt;Friend&gt;();
 }
 </code></pre>
-<figcaption>Fig02-008</figcaption>
-</figure>
-                <p>and notice that I inject an IFriendsService, which is, if you remember, the abstraction of the FriendService
-                    inside the MainViewModel constructor. And I am going to save here, this _dataService, as a field of type
-                    IFriendsService. So from the standpoint of this constructor, we don't know how the FriendService is
-                    implemented, but we know that we can use it because the methods of this _dataService are known through the
-                    IFriendsService abstraction.
+                    <figcaption>Fig02-008</figcaption>
+                </figure>
+                <p>and notice that I inject an IFriendsService, which is, if you remember, the abstraction of the
+                    FriendService inside the MainViewModel constructor. And I am going to save here, this _dataService,
+                    as a field of type IFriendsService. So from the standpoint of this constructor, we don't know how
+                    the FriendService is implemented, but we know that we can use it because the methods of this
+                    _dataService are known through the IFriendsService abstraction.
                 </p>
                 <p>Another property I want to add to the MainViewModel is a SelectedFriend:</p>
-<figure>
+                <figure>
 <pre><code class="csharp">private Friend _selectedFriend;
 
 public Friend SelectedFriend
@@ -234,31 +243,32 @@ public Friend SelectedFriend
     }
 }
 </code></pre>
-<figcaption>Fig02-009</figcaption>
-</figure>
+                    <figcaption>Fig02-009</figcaption>
+                </figure>
 
-                <p>And here, just like before in the Friend model object, I'm going to raise the PropertyChanged event whenever
-                    the SelectedFriend changes, which is going to force all the DataBindings that are using this SelectedFriend to
-                    update themselves and to update the user interface.
+                <p>And here, just like before in the Friend model object, I'm going to raise the PropertyChanged event
+                    whenever the SelectedFriend changes, which is going to force all the DataBindings that are using
+                    this SelectedFriend to update themselves and to update the user interface.
                 </p>
                 <h3>MainViewModel Part 2: Commands and Services</h3>
-                <p>At this point, I will need to actuate some methods on the ViewModel from the View. And for this we are going to
-                    use something called Commands. Now don't fret at this point; we are not going to explain how commands are
-                    working in details right now, but we are going to have a dedicated section a little bit later in this course.
-                    For the moment, it is enough to know that the command can be executed and that it can receive a parameter,
-                    which can be of any type.
+                <p>At this point, I will need to actuate some methods on the ViewModel from the View. And for this we
+                    are going to use something called Commands. Now don't fret at this point; we are not going to
+                    explain how commands are working in details right now, but we are going to have a dedicated section
+                    a little bit later in this course. For the moment, it is enough to know that the command can be
+                    executed and that it can receive a parameter, which can be of any type.
                 </p>
                 <p>Now in order to use commands more easily, I'm going to add a small Helper class:</p>
 
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-010.png"/>
                     <figcaption>Fig 02-010</figcaption>
                 </figure>
-                <p>and this is something called RelayCommand. This is a class which is directly taken from MVVM Light. And I know
-                    I said I didn't want to use some Helper classes here, but this is the only exception that I'm doing because
-                    RelayCommand is going to make our life so much easier, even in this small application. So now that I have
-                    RelayCommand added to the application, I can add a RefreshCommand of type RelayCommand:
+                <p>and this is something called RelayCommand. This is a class which is directly taken from MVVM Light.
+                    And I know I said I didn't want to use some Helper classes here, but this is the only exception that
+                    I'm doing because RelayCommand is going to make our life so much easier, even in this small
+                    application. So now that I have RelayCommand added to the application, I can add a RefreshCommand of
+                    type RelayCommand:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private RelayCommand _refreshCommand;
 
 public RelayCommand RefreshCommand
@@ -274,16 +284,16 @@ public RelayCommand RefreshCommand
     }
 }
 </code></pre>
-<figcaption>Fig02-011</figcaption>
-</figure>
-                <p>And remember that this is going to be executed. So when the RefreshCommand is actuated, this lambda expression
-                    is going to be called, and the Refresh method, which is not declared yet, we are going to do that right now,
-                    this Refresh method is going to be executed.
+                    <figcaption>Fig02-011</figcaption>
+                </figure>
+                <p>And remember that this is going to be executed. So when the RefreshCommand is actuated, this lambda
+                    expression is going to be called, and the Refresh method, which is not declared yet, we are going to
+                    do that right now, this Refresh method is going to be executed.
                 </p>
-                <p>Let's add the implementation of the Refresh method, and here we go that essentially we do what we did before in
-                    the RefreshClick event:
+                <p>Let's add the implementation of the Refresh method, and here we go that essentially we do what we did
+                    before in the RefreshClick event:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private async Task Refresh()
 {
     Friends.Clear();
@@ -296,16 +306,17 @@ public RelayCommand RefreshCommand
     }
 }
 </code></pre>
-<figcaption>Fig02-012</figcaption>
-</figure>
+                    <figcaption>Fig02-012</figcaption>
+                </figure>
 
-                <p>We are calling the Refresh method on the _dataService, which is awaitable, which is why the Refresh method is
-                    async, and then, with all those Friends, we are going to add them to the ObservableCollection that we had
-                    earlier inside the MainViewModel as a property.
+                <p>We are calling the Refresh method on the _dataService, which is awaitable, which is why the Refresh
+                    method is async, and then, with all those Friends, we are going to add them to the
+                    ObservableCollection that we had earlier inside the MainViewModel as a property.
                 </p>
-                <p>Another thing we need to do is save the modified Friend. So for this I'm going to use the SaveCommand:
+                <p>Another thing we need to do is save the modified Friend. So for this I'm going to use the
+                    SaveCommand:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private RelayCommand&lt;Friend&gt; _saveCommand;
 
 public RelayCommand&lt;Friend&gt; SaveCommand
@@ -319,17 +330,18 @@ public RelayCommand&lt;Friend&gt; SaveCommand
                           }));
 	}
 }</code></pre>
-<figcaption>Fig02-013</figcaption>
-</figure>
-                <p>and this time the SaveCommand is taking a parameter of type Friend. And here we see the declaration. I'm going
-                    to have my RelayCommand, which is going to take, again, an asynchronous lambda as parameter for the Execute
-                    method, and then here I have the parameter, which is the friend. What the SaveCommand has to do is essentially
-                    the same thing as the SaveClick Event Handler was doing earlier inside the DetailsPage.
+                    <figcaption>Fig02-013</figcaption>
+                </figure>
+                <p>and this time the SaveCommand is taking a parameter of type Friend. And here we see the declaration.
+                    I'm going to have my RelayCommand, which is going to take, again, an asynchronous lambda as
+                    parameter for the Execute method, and then here I have the parameter, which is the friend. What the
+                    SaveCommand has to do is essentially the same thing as the SaveClick Event Handler was doing earlier
+                    inside the DetailsPage.
                 </p>
-                <p>So let's go and copy that block of code, and we can take here the whole SaveClick Event Handler content, I'm
-                    going to cut that out, and then I'm going to paste this inside the SaveCommand instead:
+                <p>So let's go and copy that block of code, and we can take here the whole SaveClick Event Handler
+                    content, I'm going to cut that out, and then I'm going to paste this inside the SaveCommand instead:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">new RelayCommand&lt;Friend&gt;(
 	  async friend =>
 	  {
@@ -354,62 +366,63 @@ public RelayCommand&lt;Friend&gt; SaveCommand
 			  MessageBox.Show("Error");
 		  }
 	  }));</code></pre>
-    <figcaption>Fig02-014</figcaption>
-</figure>
-                <p>Of course there are a few things that we need to change. Notably, we are not going to use the SelectedFriend,
-                    which is a static property inside the global application object. Instead what the service has to save is the
-                    friend which has passed this parameter. So we are more decoupled, we don't use a global object anymore. Let's
-                    replace that code:
+                    <figcaption>Fig02-014</figcaption>
+                </figure>
+                <p>Of course there are a few things that we need to change. Notably, we are not going to use the
+                    SelectedFriend, which is a static property inside the global application object. Instead what the
+                    service has to save is the friend which has passed this parameter. So we are more decoupled, we
+                    don't use a global object anymore. Let's replace that code:
                 </p>
-<figure>
-<pre><code class="csharp">var result = await service.Save(App.SelectedFriend);</code></pre>
-<figcaption>Fig02-015</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var result = await service.Save(App.SelectedFriend);</code></pre>
+                    <figcaption>Fig02-015</figcaption>
+                </figure>
                 <p>here:</p>
-<figure>
-<pre><code class="csharp">var result = await service.Save(friend);</code></pre>
-<figcaption>Fig02-016</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var result = await service.Save(friend);</code></pre>
+                    <figcaption>Fig02-016</figcaption>
+                </figure>
                 <p>Same thing here, with App.SelectedFriend:</p>
-<figure>
+                <figure>
 <pre><code class="csharp">if (id > 0)
 {
   App.SelectedFriend.Id = id;
 }</code></pre>
-<figcaption>Fig02-017</figcaption>
-</figure>
+                    <figcaption>Fig02-017</figcaption>
+                </figure>
                 <p>We are going to set the id on the friend that has passed this parameter.</p>
-<figure>
+                <figure>
 <pre><code class="csharp">if (id > 0)
 {
   friend.Id = id;
 }</code></pre>
-<figcaption>Fig02-018</figcaption>
-</figure>
-                <p>In order to add a little bit more abstraction, we are going to use the _dataService that was injected inside
-                    the constructor, instead of using the actual Runtime Friend service by changing this piece of code:
+                    <figcaption>Fig02-018</figcaption>
+                </figure>
+                <p>In order to add a little bit more abstraction, we are going to use the _dataService that was injected
+                    inside the constructor, instead of using the actual Runtime Friend service by changing this piece of
+                    code:
                 </p>
-<figure>
-<pre><code class="csharp">var service = new Model.FriendsService();</code></pre>
-<figcaption>Fig02-019</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var service = new Model.FriendsService();</code></pre>
+                    <figcaption>Fig02-019</figcaption>
+                </figure>
                 <p>to this:</p>
-<figure>
-<pre><code class="csharp">var service = _dataService;</code></pre>
-<figcaption>Fig02-020</figcaption>
-</figure>
-                <p>This way, the MainViewModel doesn't have to know where the _dataService comes from; it is just going to use
-                    whatever implementation is passed to the MainViewModel constructor.
+                <figure>
+                    <pre><code class="csharp">var service = _dataService;</code></pre>
+                    <figcaption>Fig02-020</figcaption>
+                </figure>
+                <p>This way, the MainViewModel doesn't have to know where the _dataService comes from; it is just going
+                    to use whatever implementation is passed to the MainViewModel constructor.
                 </p>
-                <p>Another thing, which is not very elegant, is using a MessageBox within a ViewModel. Those MessageBoxes are
-                    going to complicate the unit tests quite a lot, because a unit test cannot react to a MessageBox; it doesn't
-                    know how to verify that the MessageBox has been displayed or it doesn't know how to dismiss a MessageBox. So
-                    instead, we are going to remove those two lines of code and we are going to use an abstraction of a
-                    dialogService, which we are going to call the IDialogService. Let's go and add the corresponding interface
-                    inside the Helpers folder. And this interface is going to be very simple; it's going to have here a
-                    ShowMessage method taking a message of type string:
+                <p>Another thing, which is not very elegant, is using a MessageBox within a ViewModel. Those
+                    MessageBoxes are going to complicate the unit tests quite a lot, because a unit test cannot react to
+                    a MessageBox; it doesn't know how to verify that the MessageBox has been displayed or it doesn't
+                    know how to dismiss a MessageBox. So instead, we are going to remove those two lines of code and we
+                    are going to use an abstraction of a dialogService, which we are going to call the IDialogService.
+                    Let's go and add the corresponding interface inside the Helpers folder. And this interface is going
+                    to be very simple; it's going to have here a ShowMessage method taking a message of type string:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace WhyMvvm.Helpers
 {
     public interface IDialogService
@@ -418,15 +431,15 @@ public RelayCommand&lt;Friend&gt; SaveCommand
     }
 }
 </code></pre>
-<figcaption>Fig02-021</figcaption>
-</figure>
-                <p>The MainViewModel doesn't know how this interface is implemented, and in fact, it shouldn't have to know, there
-                    should be no dependency from the ViewModel to the View. But it knows that somewhere inside the application
-                    there is an object, which implements a method called ShowMessage. So we can use that abstraction inside the
-                    MainViewModel. We are going to inject the dialogService inside the ViewModel constructor, we are going to save
-                    this as a field:
+                    <figcaption>Fig02-021</figcaption>
+                </figure>
+                <p>The MainViewModel doesn't know how this interface is implemented, and in fact, it shouldn't have to
+                    know, there should be no dependency from the ViewModel to the View. But it knows that somewhere
+                    inside the application there is an object, which implements a method called ShowMessage. So we can
+                    use that abstraction inside the MainViewModel. We are going to inject the dialogService inside the
+                    ViewModel constructor, we are going to save this as a field:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public MainViewModel(
     IFriendsService dataService,
     IDialogService dialogService)
@@ -435,12 +448,12 @@ public RelayCommand&lt;Friend&gt; SaveCommand
     _dialogService = dialogService;
     Friends = new ObservableCollection&lt;Friend&gt;();
 }</code></pre>
-<figcaption>Fig02-022</figcaption>
-</figure>
-                <p>and then we are going to use that inside the application at this location, and again, inside the catch a little
-                    bit lower:
+                    <figcaption>Fig02-022</figcaption>
+                </figure>
+                <p>and then we are going to use that inside the application at this location, and again, inside the
+                    catch a little bit lower:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">      else
         {
             _dialogService.ShowMessage("Error");
@@ -451,20 +464,20 @@ public RelayCommand&lt;Friend&gt; SaveCommand
         _dialogService.ShowMessage();
     }
 }));</code></pre>
-<figcaption>Fig02-023</figcaption>
-</figure>
+                    <figcaption>Fig02-023</figcaption>
+                </figure>
                 <p>Let's here name this exception, so that we can use the Message inside the _dialogService:</p>
-<figure>
+                <figure>
 <pre><code class="csharp">catch (Exception ex)
 {
     _dialogService.ShowMessage(ex.Message);
 }</code></pre>
-<figcaption>Fig02-024</figcaption>
-</figure>
-                <p>Then last, but not least, we have another command, which is going to be used to do the navigation to the
-                    DetailsPage, and we are going to call that the ShowDetailsCommand. Let's add this command:
+                    <figcaption>Fig02-024</figcaption>
+                </figure>
+                <p>Then last, but not least, we have another command, which is going to be used to do the navigation to
+                    the DetailsPage, and we are going to call that the ShowDetailsCommand. Let's add this command:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private RelayCommand&lt;Friend&gt; _showDetailsCommand;
 
 public RelayCommand&lt;Friend&gt; ShowDetailsCommand
@@ -480,18 +493,19 @@ public RelayCommand&lt;Friend&gt; ShowDetailsCommand
     }
 }
 </code></pre>
-<figcaption>Fig02-025</figcaption>
-</figure>
-                <p>This command is also taking a friend and we are going to set the SelectedFriend property, which we added
-                    earlier inside the ViewModel. Remember that the SelectedFriend property is an observable property, so the
-                    PropertyChanged event is going to be raised and all the bindings are going to be updated automatically.
+                    <figcaption>Fig02-025</figcaption>
+                </figure>
+                <p>This command is also taking a friend and we are going to set the SelectedFriend property, which we
+                    added earlier inside the ViewModel. Remember that the SelectedFriend property is an observable
+                    property, so the PropertyChanged event is going to be raised and all the bindings are going to be
+                    updated automatically.
                 </p>
-                <p>But in addition, we want to do some navigation to the DetailsPage. So again, the MainViewModel shouldn't know
-                    how the navigation is done, so that we have a clean abstraction. And again, we are going to use the same
-                    mechanism, we are going to go to the Helpers folder, add an interface called INavigationService, and the
-                    content of this interface is going to be quite simple:
+                <p>But in addition, we want to do some navigation to the DetailsPage. So again, the MainViewModel
+                    shouldn't know how the navigation is done, so that we have a clean abstraction. And again, we are
+                    going to use the same mechanism, we are going to go to the Helpers folder, add an interface called
+                    INavigationService, and the content of this interface is going to be quite simple:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace WhyMvvm.Helpers
 {
     public interface INavigationService
@@ -500,40 +514,40 @@ public RelayCommand&lt;Friend&gt; ShowDetailsCommand
         void NavigateTo(Uri uri);
     }
 }</code></pre>
-<figcaption>Fig02-026</figcaption>
-</figure>
-                <p>We are going to have a GoBack method and a NavigateTo method, which is taking a uri. Again, the MainViewModel
-                    doesn't know how INavigationService is implemented, and in fact it shouldn't have to know, so we are going to
-                    inject an INavigationService inside the ViewModel constructor:
+                    <figcaption>Fig02-026</figcaption>
+                </figure>
+                <p>We are going to have a GoBack method and a NavigateTo method, which is taking a uri. Again, the
+                    MainViewModel doesn't know how INavigationService is implemented, and in fact it shouldn't have to
+                    know, so we are going to inject an INavigationService inside the ViewModel constructor:
                 </p>
-<figure>
+                <figure>
 <pre><code class="cs hljs">public MainViewModel(
     IFriendsService dataService,
     IDialogService dialogService,
     INavigationService navigationService)</code></pre>
-<figcaption>Fig02-027</figcaption>
-</figure>
+                    <figcaption>Fig02-027</figcaption>
+                </figure>
                 <p>We are going to save a field of this type:</p>
-<figure>
+                <figure>
 <pre><code class="cs hljs">_dataService = dataService;
 _dialogService = dialogService;
 _navigationService = navigationService;</code></pre>
-<figcaption>Fig02-028</figcaption>
-</figure>
-                <p>and then, when the _showDetailsCommand is called, we are going to use this _navigationService abstraction to
-                    navigate to the DetailsPage:
+                    <figcaption>Fig02-028</figcaption>
+                </figure>
+                <p>and then, when the _showDetailsCommand is called, we are going to use this _navigationService
+                    abstraction to navigate to the DetailsPage:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">_navigationService.NavigateTo(
     new Uri("/DetailsPage.xaml", UriKind.Relative));</code></pre>
-<figcaption>Fig02-029</figcaption>
-</figure>
-                <p>Of course those two interfaces need to be implemented, and here in this simple application we are going to keep
-                    things very simple. Let's add a new class, called DialogService. This is going to be public and implement
-                    IDialogService. And here for the ShowMessage method, we are going to simply use the MessageBox to show the
-                    corresponding message:
+                    <figcaption>Fig02-029</figcaption>
+                </figure>
+                <p>Of course those two interfaces need to be implemented, and here in this simple application we are
+                    going to keep things very simple. Let's add a new class, called DialogService. This is going to be
+                    public and implement IDialogService. And here for the ShowMessage method, we are going to simply use
+                    the MessageBox to show the corresponding message:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace WhyMvvm.Helpers
 {
     public class DialogService : IDialogService
@@ -544,18 +558,20 @@ _navigationService = navigationService;</code></pre>
         }
     }
 }</code></pre>
-<figcaption>Fig02-030</figcaption>
-</figure>
-                <p>So it's not very elegant, in a production application we would use a custom MessageBox here inside the Windows
-                    Phone application, but here to keep things simple, I'm simply going to use the MessageBox at this location.
+                    <figcaption>Fig02-030</figcaption>
+                </figure>
+                <p>So it's not very elegant, in a production application we would use a custom MessageBox here inside
+                    the Windows Phone application, but here to keep things simple, I'm simply going to use the
+                    MessageBox at this location.
                 </p>
-                <p>And for the NavigationService, let's do the same thing again; Helpers folder, Add New Class. (Typing) This
-                    implementation is going to be public. And for the implementation itself, what I'm going to do is get the
-                    PhoneApplicationFrame, which is the global frame where all the navigation is happening into a Windows Phone
-                    App. I'm going to call here _mainFrame.GoBack, _mainFrame.Navigate, and in order to get the frame, what we do
-                    is Application.Current.RootVisual, which can be casted to a PhoneApplicationFrame:
+                <p>And for the NavigationService, let's do the same thing again; Helpers folder, Add New Class. (Typing)
+                    This implementation is going to be public. And for the implementation itself, what I'm going to do
+                    is get the PhoneApplicationFrame, which is the global frame where all the navigation is happening
+                    into a Windows Phone App. I'm going to call here _mainFrame.GoBack, _mainFrame.Navigate, and in
+                    order to get the frame, what we do is Application.Current.RootVisual, which can be casted to a
+                    PhoneApplicationFrame:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class NavigationService : INavigationService
 {
     private PhoneApplicationFrame _mainFrame;
@@ -589,23 +605,24 @@ _navigationService = navigationService;</code></pre>
     }
 }
 </code></pre>
-<figcaption>Fig02-031</figcaption>
-</figure>
+                    <figcaption>Fig02-031</figcaption>
+                </figure>
                 <h3>Pairing the View and ViewModel, XAML</h3>
-                <p>So now at this point we have all the pieces of our puzzle, and we can compose the ViewModel with a View. To do
-                    that, I'm going to go into App.xaml, and I'm going to declare a new resource, which I'm going to call "Main",
-                    and this is of type, MainViewModel:
+                <p>So now at this point we have all the pieces of our puzzle, and we can compose the ViewModel with a
+                    View. To do that, I'm going to go into App.xaml, and I'm going to declare a new resource, which I'm
+                    going to call "Main", and this is of type, MainViewModel:
                 </p>
-<figure>
-<pre><code class="xml">&lt;vm:MainViewModel x:Key="Main" /&gt;</code></pre>
-<figcaption>Fig02-032</figcaption>
-</figure>
-                <p>I'm going to use this resource as the source of my DataBindings, but in order to create a resource like that in
-                    XAML, we need to have a default constructor. And for the moment, this is missing in the MainViewModel class.
-                    So let's go, again, inside MainViewModel, and I'm going to add the default constructor, which is going to take
-                    care of creating FriendService, DialogService, and NavigationService:
+                <figure>
+                    <pre><code class="xml">&lt;vm:MainViewModel x:Key="Main" /&gt;</code></pre>
+                    <figcaption>Fig02-032</figcaption>
+                </figure>
+                <p>I'm going to use this resource as the source of my DataBindings, but in order to create a resource
+                    like that in XAML, we need to have a default constructor. And for the moment, this is missing in the
+                    MainViewModel class. So let's go, again, inside MainViewModel, and I'm going to add the default
+                    constructor, which is going to take care of creating FriendService, DialogService, and
+                    NavigationService:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> public MainViewModel()
 	: this(
 		new FriendsService()
@@ -613,14 +630,14 @@ _navigationService = navigationService;</code></pre>
 		new NavigationService())
 {
 }</code></pre>
-<figcaption>Fig02-033</figcaption>
-</figure>
-                <p>What I'm doing here is not very usual in an MVVM application, but again this is a very simple sample. So what
-                    I'm doing here is saying, when the MainViewModel is created from XAML, I want to use, here, the FriendService,
-                    the DialogService, and the NavigationService. But later when we do unit tests, we are going to use this
-                    constructor directly:
+                    <figcaption>Fig02-033</figcaption>
+                </figure>
+                <p>What I'm doing here is not very usual in an MVVM application, but again this is a very simple sample.
+                    So what I'm doing here is saying, when the MainViewModel is created from XAML, I want to use, here,
+                    the FriendService, the DialogService, and the NavigationService. But later when we do unit tests, we
+                    are going to use this constructor directly:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public MainViewModel(
     IFriendsService dataService,
     IDialogService dialogService,
@@ -631,89 +648,91 @@ _navigationService = navigationService;</code></pre>
     _navigationService = navigationService;
     Friends = new ObservableCollection&lt;Friend&gt;();
 }</code></pre>
-<figcaption>Fig02-034</figcaption>
-</figure>
+                    <figcaption>Fig02-034</figcaption>
+                </figure>
                 <p>And we are going to provide some custom implementations of those services.</p>
-                <p>Let's do a little bit more UI. We are going to go inside MainPage.xaml, and here I'm going to declare the
-                    DataContext of this page, which is set through a Binding to the Main StaticResource that I created earlier in
-                    App.xaml:
+                <p>Let's do a little bit more UI. We are going to go inside MainPage.xaml, and here I'm going to declare
+                    the DataContext of this page, which is set through a Binding to the Main StaticResource that I
+                    created earlier in App.xaml:
                 </p>
-<figure>
-<pre><code class="xml">DataContext={Binding Source={StaticResource Main}}</code></pre>
-<figcaption>Fig02-035</figcaption>
-</figure>
-                <p>So from now on, everything which happens inside this page will be in reference to the DataContext implicitly,
-                    except of course if you specified otherwise in an explicit manner. This allows me to go down to the
-                    LongListSelector. I'm going to remove the Name of that List, because we are not going to use that anymore, and
-                    instead I'm going to add here ItemsSource= in a decoupled manner from the markup, through a binding, to the
-                    Friends ObservableCollection that we declared earlier on the MainViewModel:
+                <figure>
+                    <pre><code class="xml">DataContext={Binding Source={StaticResource Main}}</code></pre>
+                    <figcaption>Fig02-035</figcaption>
+                </figure>
+                <p>So from now on, everything which happens inside this page will be in reference to the DataContext
+                    implicitly, except of course if you specified otherwise in an explicit manner. This allows me to go
+                    down to the LongListSelector. I'm going to remove the Name of that List, because we are not going to
+                    use that anymore, and instead I'm going to add here ItemsSource= in a decoupled manner from the
+                    markup, through a binding, to the Friends ObservableCollection that we declared earlier on the
+                    MainViewModel:
                 </p>
-<figure>
-<pre><code class="xml">&lt;phone:LongListSelector ItemsSource="{Binding Friends}" ItemTemplate="{StaticResource FriendTemplate}" /&gt;</code></pre>
-<figcaption>Fig02-036</figcaption>
-</figure>
-                <p>Next thing I can do is take care of the RefreshClick inside MainPage.xaml.cs. Now here, because I am inside a
-                    Windows Phone Application, I'm not going to call the command directly from the XAML, because this is not
-                    possible inside an ApplicationBar:
+                <figure>
+                    <pre><code class="xml">&lt;phone:LongListSelector ItemsSource="{Binding Friends}" ItemTemplate="{StaticResource FriendTemplate}" /&gt;</code></pre>
+                    <figcaption>Fig02-036</figcaption>
+                </figure>
+                <p>Next thing I can do is take care of the RefreshClick inside MainPage.xaml.cs. Now here, because I am
+                    inside a Windows Phone Application, I'm not going to call the command directly from the XAML,
+                    because this is not possible inside an ApplicationBar:
                 </p>
-<figure>
-<pre><code class="xml">&lt;phone:PhoneApplicationPage.ApplicationBar&gt;</code></pre>
-<figcaption>Fig02-037</figcaption>
-</figure>
-                <p>Instead I'm going to continue using RefreshClick, and here what I will do is get the DataContext of the page,
-                    which is a MainViewModel, and then I'm going to call the RefreshCommand directly on that MainViewModel:
+                <figure>
+                    <pre><code class="xml">&lt;phone:PhoneApplicationPage.ApplicationBar&gt;</code></pre>
+                    <figcaption>Fig02-037</figcaption>
+                </figure>
+                <p>Instead I'm going to continue using RefreshClick, and here what I will do is get the DataContext of
+                    the page, which is a MainViewModel, and then I'm going to call the RefreshCommand directly on that
+                    MainViewModel:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private async void RefreshClick(object sender, System.EventArgs e)
 {
     var vm = (MainViewModel)DataContext;
     vm.RefreshCommand.Execute(null);
 }</code></pre>
-<figcaption>Fig02-038</figcaption>
-</figure>
+                    <figcaption>Fig02-038</figcaption>
+                </figure>
                 <p>Later, when we do some Windows 8, we will see that we can use commands directly from the XAML of the
                     ApplicationBar without having to go through the code behind.
                 </p>
-                <p>For the DetailsPage, we will do something very similar. Let's go and open DetailsPage.xaml, and I'm going to
-                    point the DataContext to the exact same StaticResource called "Main":
+                <p>For the DetailsPage, we will do something very similar. Let's go and open DetailsPage.xaml, and I'm
+                    going to point the DataContext to the exact same StaticResource called "Main":
                 </p>
-<figure>
-<pre><code class="xml">DataContext="{Binding Source={StaticResource Main}}"</code></pre>
-<figcaption>Fig02-039</figcaption>
-</figure>
-                <p>Of course I need to change how those TextBoxes are assigned, and the first thing I can do is remove those
-                    TextChanged Event Handlers, we are not going to use that anymore. And why don't we do the DataBinding in
-                    Expression Blend? Like this, we can see how Expression Blend works together with MVVM. I'm going to build the
-                    application in order to have all the objects ready. Let's open DetailsPage.xaml, select here the
-                    FirstNameTextBox:
+                <figure>
+                    <pre><code class="xml">DataContext="{Binding Source={StaticResource Main}}"</code></pre>
+                    <figcaption>Fig02-039</figcaption>
+                </figure>
+                <p>Of course I need to change how those TextBoxes are assigned, and the first thing I can do is remove
+                    those TextChanged Event Handlers, we are not going to use that anymore. And why don't we do the
+                    DataBinding in Expression Blend? Like this, we can see how Expression Blend works together with
+                    MVVM. I'm going to build the application in order to have all the objects ready. Let's open
+                    DetailsPage.xaml, select here the FirstNameTextBox:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-040.png"/>
                     <figcaption>Fig 02-040</figcaption>
                 </figure>
-                <p>and here for the TextProperty I'm going to create a DataBinding. And here notice that Blend knows that the data
-                    context of this page is MainViewModel, and so I can take the SelectedFriend.FirstName and do a TwoWay
-                    DataBinding on this property:
+                <p>and here for the TextProperty I'm going to create a DataBinding. And here notice that Blend knows
+                    that the data context of this page is MainViewModel, and so I can take the SelectedFriend.FirstName
+                    and do a TwoWay DataBinding on this property:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-041.png"/>
                     <figcaption>Fig 02-041</figcaption>
                 </figure>
-                <p> TwoWay meaning that when the user is typing something in the textbox and then the textbox loses a focus, the
-                    DataBinding is going to be updated automatically and the property is going to be set on the Friend object.
-                    Let's do the same thing here for my LastName, SelectedFriend.LastName:
+                <p> TwoWay meaning that when the user is typing something in the textbox and then the textbox loses a
+                    focus, the DataBinding is going to be updated automatically and the property is going to be set on
+                    the Friend object. Let's do the same thing here for my LastName, SelectedFriend.LastName:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-042.png"/>
                     <figcaption>Fig 02-042</figcaption>
                 </figure>
-                <p>So we selected very convenient because we don't have to know in advance how the object is built. We can
-                    visually go and select the right property. Of course we don't have design time data yet. We are going to worry
-                    about that in just a moment.
+                <p>So we selected very convenient because we don't have to know in advance how the object is built. We
+                    can visually go and select the right property. Of course we don't have design time data yet. We are
+                    going to worry about that in just a moment.
                 </p>
                 <p>
-                    Let's save everything, go back to Visual Studio. Studio tells me something changed, which is okay. And here we
-                    see the XAML, which has been created, and notably this TextProperty is set now through a TwoWay binding to
-                    SelectedFriend.LastName, and respectively to SelectedFriend.FirstName:
+                    Let's save everything, go back to Visual Studio. Studio tells me something changed, which is okay.
+                    And here we see the XAML, which has been created, and notably this TextProperty is set now through a
+                    TwoWay binding to SelectedFriend.LastName, and respectively to SelectedFriend.FirstName:
                 </p>
-<figure>
+                <figure>
 <pre><code class="xml">&lt;TextBlock Text="First Name"
                        Style="{StaticResource LabelTextStyle}" /&gt;
 
@@ -725,77 +744,123 @@ _navigationService = navigationService;</code></pre>
 
             &lt;TextBox x:Name="LastNameTextBox"
                      Text="{Binding SelectedFriend.LastName, Mode=TwoWay}"/&gt;</code></pre>
-<figcaption>Fig02-034</figcaption>
-</figure>
-                <p>For the Preview, we are going to do the same thing, so I'm going to copy here this Binding, I'm going to remove
-                    the Name because we don't need that anymore, and then I'm going to paste here the FirstName Binding, but I'm
-                    going to make that OneWay because this is a TextBlock:
+                    <figcaption>Fig02-034</figcaption>
+                </figure>
+                <p>For the Preview, we are going to do the same thing, so I'm going to copy here this Binding, I'm going
+                    to remove the Name because we don't need that anymore, and then I'm going to paste here the
+                    FirstName Binding, but I'm going to make that OneWay because this is a TextBlock:
                 </p>
-<figure>
+                <figure>
 <pre><code class="xml">&lt;StackPanel Margin="12,12,12,0"
             Orientation="Horizontal"&gt;
     &lt;TextBlock Text="{Binding SelectedFriend.FirstName}" /&gt;
     &lt;TextBlock Text=" " /&gt;
     &lt;TextBlock Text="{Binding SelectedFriend.LastName}" /&gt;
 &lt;/StackPanel&gt;</code></pre>
-<figcaption>Fig02-044</figcaption>
-</figure>
-                <p>Same thing for the LastName DataBinding. Let's remove this Name, and use the LastName DataBinding instead:
-                </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-045.png"/>
-                    <figcaption>Fig 02-045</figcaption>
+                    <figcaption>Fig02-044</figcaption>
                 </figure>
-                <p>So you see that with Bindings, this is a very decoupled mechanism, and I can modify my UI without having to
-                    worry about code. I can do that either in Expression Blend or directly in XAML. Inside the code behind of the
-                    DetailsPage, we can remove quite a lot of things. Let's get rid of OnNavigatedTo of the TextChanged Event
-                    Handlers, we don't need that anymore:
+                <p>Same thing for the LastName DataBinding. Let's remove this Name, and use the LastName DataBinding
+                    instead:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-046.png"/>
-                    <figcaption>Fig 02-046</figcaption>
+                <figure>
+                    <pre><code class="xml">&lt;TextBlock Text="{Binding SelectedFriend.LastName}" /&gt;</code></pre>
+                    <figcaption>Fig02-045</figcaption>
                 </figure>
-                <p>And when we Save, what we are going to do is pretty much the same thing as before. I'm going to get the
-                    DataContext, cast it to MainViewModel, and Execute the SaveCommand, using for that, the SelectedFriend as a
-                    parameter:
+                <p>So you see that with Bindings, this is a very decoupled mechanism, and I can modify my UI without
+                    having to worry about code. I can do that either in Expression Blend or directly in XAML. Inside the
+                    code behind of the DetailsPage, we can remove quite a lot of things. Let's get rid of OnNavigatedTo
+                    of the TextChanged Event Handlers, we don't need that anymore:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-047.png"/>
-                    <figcaption>Fig 02-047</figcaption>
+                <figure>
+<pre><code class="csharp">public DetailsPage()
+{
+    InitializeComponent();
+}
+
+private async void SaveClick(object sender, System.EventArgs e)
+{
+}</code></pre>
+                    <figcaption>Fig02-046</figcaption>
                 </figure>
-                <p>Before we do that, we are going to have a method called UpdateBinding, and this method is just to take care of
-                    a small issue in Windows Phone, which is that when you click on an ApplicationBar button when a TextBox has a
-                    focus, the Binding is not automatically updated:
+                <p>And when we Save, what we are going to do is pretty much the same thing as before. I'm going to get
+                    the DataContext, cast it to MainViewModel, and Execute the SaveCommand, using for that, the
+                    SelectedFriend as a parameter:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-048.png"/>
-                    <figcaption>Fig 02-048</figcaption>
+                <figure>
+<pre><code class="csharp">private async void SaveClick(object sender, System.EventArgs e)
+{
+    UpdateBinding();
+
+    var vm = (MainViewModel)DataContext;
+    vm.SaveCommand.Execute(vm.SelectedFriend);
+}
+</code></pre>
+                    <figcaption>Fig02-047</figcaption>
                 </figure>
-                <p>The ApplicationBar in Windows Phone is a component which is a little bit annoying and you have to take care of
-                    a few things manually. So here we are going to use this code, let's just say that it is going to update the
-                    binding and make sure that the ViewModel is up-to-date whenever I click on the Save button.
+                <p>Before we do that, we are going to have a method called UpdateBinding, and this method is just to
+                    take care of a small issue in Windows Phone, which is that when you click on an ApplicationBar
+                    button when a TextBox has a focus, the Binding is not automatically updated:
+                </p>
+                <figure>
+<pre><code class="csharp">private void UpdateBinding()
+{
+    var textbox = FocusManager.GetFocusedElement() as TextBox;
+    if (textbox != null)
+    {
+        var binding = textbox.GetBindingExpression(TextBox.TextProperty);
+        binding.UpdateSource();
+    }
+}</code></pre>
+                    <figcaption>Fig02-048</figcaption>
+                </figure>
+                <p>The ApplicationBar in Windows Phone is a component which is a little bit annoying and you have to
+                    take care of a few things manually. So here we are going to use this code, let's just say that it is
+                    going to update the binding and make sure that the ViewModel is up-to-date whenever I click on the
+                    Save button.
                 </p>
                 <h3>Adding ShowDetailsCommand and Testing the App</h3>
-                <p>Last, but not least, we need to take care of the navigation to a Friend's detail. For the moment, we use this
-                    Tap Event Handler to do the navigation:
+                <p>Last, but not least, we need to take care of the navigation to a Friend's detail. For the moment, we
+                    use this Tap Event Handler to do the navigation:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-049.png"/>
-                    <figcaption>Fig 02-049</figcaption>
+                <figure>
+<pre><code class="xml">&lt;phone:PhoneApplicationPage.Resources&gt;
+    &lt;DataTemplate x:Key="FriendTemplate"&gt;
+        &lt;StackPanel Orientation="Horizontal"
+                    Tap="FriendTap"&gt;</code></pre>
+                    <figcaption>Fig02-049</figcaption>
                 </figure>
                 <p>but if we want to clean the XAML and copy this DataTemplate:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-050.png"/>
-                    <figcaption>Fig 02-050</figcaption>
+                <figure>
+<pre><code class="xml">&lt;DataTemplate x:Key="FriendTemplate"&gt;
+    &lt;StackPanel Orientation="Horizontal"
+                Tap="FriendTap"&gt;
+        &lt;TextBlock Text="{Binding FirstName}"
+                   Style="{StaticResource NameTextBlockStyle}" /&gt;
+
+        &lt;TextBlock Text="{Binding LastName}"
+                   Style="{StaticResource NameTextBlockStyle}" /&gt;
+    &lt;/StackPanel&gt;
+    &lt;/DataTemplate&gt;</code></pre>
+                    <figcaption>Fig02-050</figcaption>
                 </figure>
-                <p>to a ResourceDictionary in order to keep the XAML a little bit cleaner and more organized, so let's do that.
-                    I'm going to cut the DataTemplate from the MainPage.xaml. And then I'm going to move it to Styles,
-                    Styles.xaml. This is a global ResourceDictionary, which means that everything I add to this ResourceDictionary
-                    here will be available throughout the application automatically through a StaticResource.
+                <p>to a ResourceDictionary in order to keep the XAML a little bit cleaner and more organized, so let's
+                    do that. I'm going to cut the DataTemplate from the MainPage.xaml. And then I'm going to move it to
+                    Styles, Styles.xaml. This is a global ResourceDictionary, which means that everything I add to this
+                    ResourceDictionary here will be available throughout the application automatically through a
+                    StaticResource.
                 </p>
-                <p>Because this is a global ResourceDictionary, the FriendTemplate will be found by the XAML parser and the
-                    StaticResource will be working just fine, but we will have a problem here with the Tap Event Handle. The XAML
-                    parser is not going to be able to find this FriendTap Event Handler:
+                <p>Because this is a global ResourceDictionary, the FriendTemplate will be found by the XAML parser and
+                    the StaticResource will be working just fine, but we will have a problem here with the Tap Event
+                    Handle. The XAML parser is not going to be able to find this FriendTap Event Handler:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-051.png"/>
-                    <figcaption>Fig 02-051</figcaption>
+                <figure>
+<pre><code class="xml">&lt;DataTemplate x:Key="FriendTemplate"&gt;
+    &lt;StackPanel Orientation="Horizontal"
+        Tap="FriendTap"&gt;</code></pre>
+                    <figcaption>Fig02-051</figcaption>
                 </figure>
-                <p> And in fact, if we try to run the application now, we will see that when we try to use this DataTemplate, we
-                    will get a crash and the application exits.
+                <p> And in fact, if we try to run the application now, we will see that when we try to use this
+                    DataTemplate, we will get a crash and the application exits.
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-052.png"/>
                     <figcaption>Fig 02-052</figcaption>
@@ -803,51 +868,74 @@ _navigationService = navigationService;</code></pre>
                 <p>What we need to do now is to remove the tight coupling between this StackPanel and the code behind in
                     MainPage.xaml.cs. So I'm going to remove, here, the FriendTap Event Handler:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-053.png"/>
+                <figure>
+<pre><code class="xml">&lt;DataTemplate x:Key="FriendTemplate"&gt;
+    &lt;StackPanel Orientation="Horizontal"
+        &lt;TextBlock Text="{Binding FirstName}"
+                   Style="{StaticResource NameTextBlockStyle}" /&gt;
+
+        &lt;TextBlock Text="{Binding LastName}"
+                   Style="{StaticResource NameTextBlockStyle}" /&gt;
+    &lt;/StackPanel&gt;
+&lt;/DataTemplate&gt;</code></pre>
                     <figcaption>Fig 02-053</figcaption>
                 </figure>
                 <p>I can also go into MainPage.xaml.cs and I'm going to remove the FriendTap here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-054.png"/>
-                    <figcaption>Fig 02-054</figcaption>
+                <figure>
+<pre><code class="csharp">private void FriendTap(object sender, System.Windows.Input.GestureEventArgs e)
+{
+    var element = (FrameworkElement)sender;
+    var friend = element.DataContext as Friend;
+
+    if (friend == null)
+    {
+        return;
+    }
+
+    App.SelectedFriend = friend;
+    NavigationService.Navigate(new Uri("/DetailsPage.xaml", UriKind.Relative));
+
+}</code></pre>
+                    <figcaption>Fig02-054</figcaption>
                 </figure>
-                <p>And instead, we are going to use a loose way of executing a command using a behavior. We have talked about
-                    behavior in the first module in the theory part. Behaviors can be used in XAML directly without using Blend,
-                    but they are a little bit easier to apply if we use Expression Blend. So let's do that and we will talk a lot
-                    more about behaviors a little bit later.
+                <p>And instead, we are going to use a loose way of executing a command using a behavior. We have talked
+                    about behavior in the first module in the theory part. Behaviors can be used in XAML directly
+                    without using Blend, but they are a little bit easier to apply if we use Expression Blend. So let's
+                    do that and we will talk a lot more about behaviors a little bit later.
                 </p>
-                <p>Jumping into Expression Blend, I'm going to select here the LongListSelector, and I'm going to go into ‘Edit
-                    Additional Templates', ‘Edit ItemTemplate', ‘Edit Current':
+                <p>Jumping into Expression Blend, I'm going to select here the LongListSelector, and I'm going to go
+                    into ‘Edit Additional Templates', ‘Edit ItemTemplate', ‘Edit Current':
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-055.png"/>
                     <figcaption>Fig 02-055</figcaption>
                 </figure>
-                <p>Now notice that I'm jumping into the Styles.xaml ResourceDictionary, which is normal, because this is where I
-                    copied the DataTemplate earlier. Now I want to add a Behavior to this StackPanel:
+                <p>Now notice that I'm jumping into the Styles.xaml ResourceDictionary, which is normal, because this is
+                    where I copied the DataTemplate earlier. Now I want to add a Behavior to this StackPanel:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-056.png"/>
                     <figcaption>Fig 02-056</figcaption>
                 </figure>
-                <p>And to do this, I'm going to go into the Assets library, in the Behaviors category, and I'm going to select a
-                    built-in behavior called InvokeCommandAction:
+                <p>And to do this, I'm going to go into the Assets library, in the Behaviors category, and I'm going to
+                    select a built-in behavior called InvokeCommandAction:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-057.png"/>
                     <figcaption>Fig 02-057</figcaption>
                 </figure>
-                <p>Let's Drag & Drop this on the StackPanel. In the Properties I want to make sure that I have selected an
-                    EventTrigger, and I'm going to select the Tap Event:
+                <p>Let's Drag & Drop this on the StackPanel. In the Properties I want to make sure that I have selected
+                    an EventTrigger, and I'm going to select the Tap Event:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-058.png"/>
                     <figcaption>Fig 02-058</figcaption>
                 </figure>
-                <p>And now we'll see what's going to happen. Every time that the user taps on the StackPanel, I want to invoke a
-                    command:
+                <p>And now we'll see what's going to happen. Every time that the user taps on the StackPanel, I want to
+                    invoke a command:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-059.png"/>
                     <figcaption>Fig 02-059</figcaption>
                 </figure>
-                <p>so let's create a DataBinding. And I'm going to invoke the command, not on the Friend, which is a current data
-                    context, but instead I'm going to select here the StaticResource, Main, which is a MainViewModel, and I'm
-                    going to take the ShowDetailsCommand:
+                <p>so let's create a DataBinding. And I'm going to invoke the command, not on the Friend, which is a
+                    current data context, but instead I'm going to select here the StaticResource, Main, which is a
+                    MainViewModel, and I'm going to take the ShowDetailsCommand:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-060.png"/>
                     <figcaption>Fig 02-060</figcaption>
@@ -858,101 +946,165 @@ _navigationService = navigationService;</code></pre>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-061.png"/>
                     <figcaption>Fig 02-061</figcaption>
                 </figure>
-                <p>Remember that the Friend is the current data context, and this is, in fact, exactly what I want to use. So I'm
-                    going to select here a Custom Data Binding and leave the Path empty:
+                <p>Remember that the Friend is the current data context, and this is, in fact, exactly what I want to
+                    use. So I'm going to select here a Custom Data Binding and leave the Path empty:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-062.png"/>
                     <figcaption>Fig 02-062</figcaption>
                 </figure>
-                <p>What it means is that the CommandParameter will be set through the Binding to the current data context of the
-                    StackPanel, which is a current Friend. This is exactly what we want to pass to the ShowDetailsCommand. Let's
-                    click OK, and now we are ready to test the application. Testing the application can be done in Visual Studio
-                    or directly in Blend. I'm going to run the application in the Emulator. If I press the Refresh button, the
-                    command will be actuated, and we get the list of friends:
+                <p>What it means is that the CommandParameter will be set through the Binding to the current data
+                    context of the StackPanel, which is a current Friend. This is exactly what we want to pass to the
+                    ShowDetailsCommand. Let's click OK, and now we are ready to test the application. Testing the
+                    application can be done in Visual Studio or directly in Blend. I'm going to run the application in
+                    the Emulator. If I press the Refresh button, the command will be actuated, and we get the list of
+                    friends:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-063.png"/>
                     <figcaption>Fig 02-063</figcaption>
                 </figure>
-                <p>If I select a friend, the ShowDetailsCommand will be called on Tap, and I see that I can go and edit the
-                    details of the friend and call the SaveCommand to save the modified friend:
+                <p>If I select a friend, the ShowDetailsCommand will be called on Tap, and I see that I can go and edit
+                    the details of the friend and call the SaveCommand to save the modified friend:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-064.png"/>
                     <figcaption>Fig 02-064</figcaption>
                 </figure>
-                <p>If I go back into the MainPage and Refresh, we see that the change has been saved correctly to the server:
+                <p>If I go back into the MainPage and Refresh, we see that the change has been saved correctly to the
+                    server:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-065.png"/>
                     <figcaption>Fig 02-065</figcaption>
                 </figure>
-                <p>After refactoring, we have an application which has the same functionality, but it has a cleaner architecture
-                    and it's going to be easier to test, to design, and to maintain later.
+                <p>After refactoring, we have an application which has the same functionality, but it has a cleaner
+                    architecture and it's going to be easier to test, to design, and to maintain later.
                 </p>
                 <h3>Adding Design Time Data and Designing in Blend</h3>
-                <p>After refactoring the application, we now have a Model-View-ViewModel architecture, which we are going to
-                    leverage. The first thing we want to do is add some design time data to the application to facilitate the work
-                    in the Visual Designer.
+                <p>After refactoring the application, we now have a Model-View-ViewModel architecture, which we are
+                    going to leverage. The first thing we want to do is add some design time data to the application to
+                    facilitate the work in the Visual Designer.
                 </p>
-                <p> When we open the application in Expression Blend, we notice that the list controls are empty. We have some
-                    static UI elements on the screen, but everything which is dynamic is not loaded:
+                <p> When we open the application in Expression Blend, we notice that the list controls are empty. We
+                    have some static UI elements on the screen, but everything which is dynamic is not loaded:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-066.png"/>
                     <figcaption>Fig 02-066</figcaption>
                 </figure>
-                <p>However, Expression Blend is not only displaying a static user interface, but it is also executing some parts
-                    of the code. So we are going to use this fact and force Expression Blend to generate some design time data.
+                <p>However, Expression Blend is not only displaying a static user interface, but it is also executing
+                    some parts of the code. So we are going to use this fact and force Expression Blend to generate some
+                    design time data.
                 </p>
-                <p>In Visual Studio, let's make things a little bit more interesting by adding a new property to the Friend Model
-                    class. We are going to use the PictureUri to show the Friend's picture in the application:
+                <p>In Visual Studio, let's make things a little bit more interesting by adding a new property to the
+                    Friend Model class. We are going to use the PictureUri to show the Friend's picture in the
+                    application:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-067.png"/>
-                    <figcaption>Fig 02-067</figcaption>
+                <figure>
+<pre><code class="csharp">[JsonProperty("picture")]
+public Uri PictureUri
+{
+    get;
+    set;
+}</code></pre>
+                    <figcaption>Fig02-067</figcaption>
                 </figure>
                 <p>Then we are going to create a design time implementation of the IFriendsService interface:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-068.png"/>
-                    <figcaption>Fig 02-068</figcaption>
+                <figure>
+<pre><code class="csharp">public interface IFriendsService
+{
+    Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh();
+    Task&lt;string&gt; Save(Friend updatedFriend);
+}
+</code></pre>
+                    <figcaption>Fig02-068</figcaption>
                 </figure>
                 <p>Remember that the FriendService is implementing this interface</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-069.png"/>
-                    <figcaption>Fig 02-069</figcaption>
+                <figure>
+                    <pre><code class="csharp">public class FriendsService : IFriendsService</code></pre>
+                    <figcaption>Fig02-069</figcaption>
                 </figure>
-                <p>and we are going to use this abstraction to create a version of the class, which is used only at design time.
-                    To do this, we are going to create a new folder. Let's call that Design, and then inside this folder I'm going
-                    to Add the New Class, and I call this the DesignFriendsService. We want this class to be public and to
-                    implement IFriendsService. Let's implement the interface:
+                <p>and we are going to use this abstraction to create a version of the class, which is used only at
+                    design time. To do this, we are going to create a new folder. Let's call that Design, and then
+                    inside this folder I'm going to Add the New Class, and I call this the DesignFriendsService. We want
+                    this class to be public and to implement IFriendsService. Let's implement the interface:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-070.png"/>
-                    <figcaption>Fig 02-070</figcaption>
+                <figure>
+<pre><code class="csharp">namespace WhyMvvm.Design
+{
+    public class DesignFriendsService : IFriendsService
+    {
+        public Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task&lt;string&gt; Save(Friend updateFriend)
+        {
+            throw new NotImpelementedException();
+        }
+    }
+}
+</code></pre>
+                    <figcaption>Fig02-070</figcaption>
                 </figure>
                 <p>
-                    The Save method is not going to be used at design time, but we want to take care of the Refresh method. And
-                    what we are going to do here is create some simulation of the Friends; we are going to create 10 items with a
-                    simulated FirstName, LastName, and a Picture coming from the web:
+                    The Save method is not going to be used at design time, but we want to take care of the Refresh
+                    method. And what we are going to do here is create some simulation of the Friends; we are going to
+                    create 10 items with a simulated FirstName, LastName, and a Picture coming from the web:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-071.png"/>
-                    <figcaption>Fig 02-071</figcaption>
+                <figure>
+<pre><code class="csharp">public Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh()
+{
+    var result = new List&lt;Friend&gt;();
+
+    for (var index = 0; index < 10; index++)
+    {
+        result.Add(
+            new Friend
+            {
+                FirstName = "FirstName" + index,
+                LastName = "LastName" + index,
+                Id = index,
+                PictureUri = new Uri("http://www.galasoft.ch/logo/LogoHead128.png")
+            });
+    }
+
+    return Task.FromResult((IEnumerable&lt;Friend&gt;)result);
+}</code></pre>
+                    <figcaption>Fig02-070</figcaption>
                 </figure>
-                <p>Now we need to tell the MainViewModel which version of the IFriendsService it needs to use. Let's go into the
-                    MainViewModel class, let's select the constructor, and remember that the default constructor is used when the
-                    MainViewModel is instantiated from XAML, and here we are using the default FriendsService. But instead,
-                    because the constructor expects an IFriendsService, we can actually change this definition here, and instead
-                    we are going to use an expression:
+                <p>Now we need to tell the MainViewModel which version of the IFriendsService it needs to use. Let's go
+                    into the MainViewModel class, let's select the constructor, and remember that the default
+                    constructor is used when the MainViewModel is instantiated from XAML, and here we are using the
+                    default FriendsService. But instead, because the constructor expects an IFriendsService, we can
+                    actually change this definition here, and instead we are going to use an expression:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-072.png"/>
-                    <figcaption>Fig 02-072</figcaption>
+                <figure>
+<pre><code class="csharp">public MainViewModel()
+    : this(
+        (DesignerProperties.IsInDesignTool
+            ? (IFriendsService)new Design.DesignFriendsService()
+            : new FriendsService()),
+</code></pre>
+                    <figcaption>Fig02-072</figcaption>
                 </figure>
-                <p>saying that if we are in DesignTool, we are going to use DesignFriendsService; and otherwise, if we are at
-                    Runtime, we are going to use a standard FriendsService implementation. The last thing we need to do is, for
-                    the MainViewModel to execute the Refresh method, of course, at design time the Refresh method will be executed
-                    on the DesignFriendsService:
+                <p>saying that if we are in DesignTool, we are going to use DesignFriendsService; and otherwise, if we
+                    are at Runtime, we are going to use a standard FriendsService implementation. The last thing we need
+                    to do is, for the MainViewModel to execute the Refresh method, of course, at design time the Refresh
+                    method will be executed on the DesignFriendsService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-073.png"/>
-                    <figcaption>Fig 02-073</figcaption>
+                <figure>
+<pre><code class="csharp">#if DEBUG
+    if (DesignerProperties.IsInDesignTool)
+    {
+        Refresh();
+        SelectedFriend = Friends[0];
+    }
+#endif</code></pre>
+                    <figcaption>Fig02-073</figcaption>
                 </figure>
-                <p>And finally, when the 10 design time Friends have been created, we select the first one and assign it to the
-                    SelectedFriend. We are going to use that later in the design of the DetailsPage.
+                <p>And finally, when the 10 design time Friends have been created, we select the first one and assign it
+                    to the SelectedFriend. We are going to use that later in the design of the DetailsPage.
                 </p>
-                <p>Let's build the application now. And if we change into Expression Blend, we notice that some design time data
-                    is up here in the LongListSelector, which will make the design time work much easier:
+                <p>Let's build the application now. And if we change into Expression Blend, we notice that some design
+                    time data is up here in the LongListSelector, which will make the design time work much easier:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-074.png"/>
                     <figcaption>Fig 02-074</figcaption>
@@ -961,7 +1113,8 @@ _navigationService = navigationService;</code></pre>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-075.png"/>
                     <figcaption>Fig 02-075</figcaption>
                 </figure>
-                <p>Here we are inside the Styles.xaml ResourceDictionary. I'm going to take this StackPanel, group it into a grid:
+                <p>Here we are inside the Styles.xaml ResourceDictionary. I'm going to take this StackPanel, group it
+                    into a grid:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-076.png"/>
                     <figcaption>Fig 02-076</figcaption>
@@ -970,165 +1123,265 @@ _navigationService = navigationService;</code></pre>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-077.png"/>
                     <figcaption>Fig 02-077</figcaption>
                 </figure>
-                <p>Then I'm going to take the StackPanel here and I'm going to move it to the second column, and in the first
-                    column I'm going to take an Image control:
+                <p>Then I'm going to take the StackPanel here and I'm going to move it to the second column, and in the
+                    first column I'm going to take an Image control:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-078.png"/>
                     <figcaption>Fig 02-078</figcaption>
                 </figure>
-                <p>And since I have some design time data available, I can create a DataBinding here to the PictureUri of the
-                    Friend:
+                <p>And since I have some design time data available, I can create a DataBinding here to the PictureUri
+                    of the Friend:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-079.png"/>
                     <figcaption>Fig 02-079</figcaption>
                 </figure>
-                <p>And now we see that we have an Image, which is loaded from the web by Expression Blend, which allows me to do
-                    some Visual Design here; for example, let's set the Height of the Image to 100 px. And now we can do a few
-                    things visually; for example, let's change the orientation of the StackPanel to Vertical, we can select here
-                    the LastName and increase the Font Size to 36 password. And then we probably want to change here the margins
-                    to make things a little bit more compact and maybe just add a little bit margin on the FirstName here.
+                <p>And now we see that we have an Image, which is loaded from the web by Expression Blend, which allows
+                    me to do some Visual Design here; for example, let's set the Height of the Image to 100 px. And now
+                    we can do a few things visually; for example, let's change the orientation of the StackPanel to
+                    Vertical, we can select here the LastName and increase the Font Size to 36 password. And then we
+                    probably want to change here the margins to make things a little bit more compact and maybe just add
+                    a little bit margin on the FirstName here.
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-080.png"/>
                     <figcaption>Fig 02-080</figcaption>
                 </figure>
-                <p>So you see that you have the possibility to create your design visually in Blend, which of course, gives us a
-                    lot of creative freedom. If I change into the MainPage, I see the result of my work:
+                <p>So you see that you have the possibility to create your design visually in Blend, which of course,
+                    gives us a lot of creative freedom. If I change into the MainPage, I see the result of my work:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-081.png"/>
                     <figcaption>Fig 02-081</figcaption>
                 </figure>
                 <p>
-                    And for example, here it is easy to see that I need a little bit more margins, so let's add some margins to
-                    the left, to the right, and finally a bit margin at the bottom as well. And here we go; we have something
-                    which is nicer.
+                    And for example, here it is easy to see that I need a little bit more margins, so let's add some
+                    margins to the left, to the right, and finally a bit margin at the bottom as well. And here we go;
+                    we have something which is nicer.
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-082.png"/>
                     <figcaption>Fig 02-082</figcaption>
                 </figure>
-                <p>Now I can run the application directly from Expression Blend, Let's Refresh the page. And here we see the
-                    actual Runtime data showing, including the new designs that we just create:
+                <p>Now I can run the application directly from Expression Blend, Let's Refresh the page. And here we see
+                    the actual Runtime data showing, including the new designs that we just create:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-083.png"/>
                     <figcaption>Fig 02-083</figcaption>
                 </figure>
-                <p>Obviously the application needs a lot more design love at this point, but the point is that you can do this
-                    design visually in Expression Blend or in the Visual Studio Designer, and this is going to make your life as a
-                    designer much easier.
+                <p>Obviously the application needs a lot more design love at this point, but the point is that you can
+                    do this design visually in Expression Blend or in the Visual Studio Designer, and this is going to
+                    make your life as a designer much easier.
                 </p>
                 <h3>
                     Unit Testing the Application
                 </h3>
-                <p>In the next section, we are going to see how we can unit test our application and how we can implement some
-                    test version of our services in order to create some well-known conditions for the unit test.
+                <p>In the next section, we are going to see how we can unit test our application and how we can
+                    implement some test version of our services in order to create some well-known conditions for the
+                    unit test.
                 </p>
-                <p>I will create the unit test project in Visual Studio and use the MSTest framework. You probably have your own
-                    favorite unit test framework, it's absolutely up to you, and in fact all the principles that I'm showing now
-                    apply to any unit test framework in an MVVM application.
+                <p>I will create the unit test project in Visual Studio and use the MSTest framework. You probably have
+                    your own favorite unit test framework, it's absolutely up to you, and in fact all the principles
+                    that I'm showing now apply to any unit test framework in an MVVM application.
                 </p>
-                <p>So I'm going to Add a New Project, and under Windows Phone, I'm going to select a Windows Phone Unit Test
-                    Application. I'm going to name that WhyMvvm.Test:
+                <p>So I'm going to Add a New Project, and under Windows Phone, I'm going to select a Windows Phone Unit
+                    Test Application. I'm going to name that WhyMvvm.Test:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-084.png"/>
                     <figcaption>Fig 02-084</figcaption>
                 </figure>
-                <p>And then I'm going to remove here the generated method. Let's add our own test method, and understand what it
-                    is doing:
+                <p>And then I'm going to remove here the generated method. Let's add our own test method, and understand
+                    what it is doing:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-085.png"/>
-                    <figcaption>Fig 02-085</figcaption>
+                <figure>
+<pre><code class="csharp">namespace WhyMvvm.Test
+{
+    [TestClass]
+    public class UnitTest1
+    {
+        [TestMethod]
+        public void TestShowingErrorWhenSaving()
+        {
+            var dialogService = new TestDialogService();
+
+            var vm = new MainViewModel(
+                new TestFriendsService(),
+                dialogService,
+                new TestNavigationService());
+
+            Assert.IsNull(
+                dialogService.MessageShown);
+
+            vm.SaveCommand.Execute(new Friend
+            {
+                Id = 1
+            });
+
+            Assert.AreEqual(
+                TestFriendsService.ErrorMessage,
+                dialogService.MessageShown);
+        }
+    }</code></pre>
+                    <figcaption>Fig02-085</figcaption>
                 </figure>
-                <p>This test method is going to create a new MainViewModel, so obviously the test application needs a reference to
-                    the WhyMvvm Project. Now we can use the MainViewModel class and the Friend class, and we notice that we are
-                    using the constructor, which is taking some services as parameter. If you remember, there are two constructors
-                    in the MainViewModel, the default constructor, which is used directly from the XAML, and this default
-                    constructor is going to use the runtime implementation of the services. There is, however, a second
-                    constructor, which we call directly here, and we are going to create some test implementations of the
-                    services:
+
+                <p>This test method is going to create a new MainViewModel, so obviously the test application needs a
+                    reference to the WhyMvvm Project. Now we can use the MainViewModel class and the Friend class, and
+                    we notice that we are using the constructor, which is taking some services as parameter. If you
+                    remember, there are two constructors in the MainViewModel, the default constructor, which is used
+                    directly from the XAML, and this default constructor is going to use the runtime implementation of
+                    the services. There is, however, a second constructor, which we call directly here, and we are going
+                    to create some test implementations of the services:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-086.png"/>
-                    <figcaption>Fig 02-086</figcaption>
+                <figure>
+<pre><code class="csharp"> var vm = new MainViewModel(
+    new TestFriendsService(),
+    dialogService,
+    new TestNavigationService());</code></pre>
+                    <figcaption>Fig02-086</figcaption>
                 </figure>
-                <p>We have a TestDialogService, a TestFriendsService, and a TestNavigationService. Let's implement those services.
-                    First, the TestFriendsService is going to implement the IFriendsService interface. But instead of calling a
-                    web service, it's going to have a well-known implementation:
+                <p>We have a TestDialogService, a TestFriendsService, and a TestNavigationService. Let's implement those
+                    services. First, the TestFriendsService is going to implement the IFriendsService interface. But
+                    instead of calling a web service, it's going to have a well-known implementation:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-087.png"/>
-                    <figcaption>Fig 02-087</figcaption>
+                <figure>
+<pre><code class="csharp">public class TestFriendsService : IFriendsService
+    {
+        public const string ErrorMessage = "This is a test error message";
+
+        public Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh()
+        {
+            return Task.FromResult(Enumerable.Empty&lt;Friend&gt;());
+        }
+
+        public Task&lt;string&gt; Save(Friend updatedFriend)
+        {
+            throw new Exception(ErrorMessage);
+        }
+
+    }</code></pre>
+                    <figcaption>Fig02-087</figcaption>
                 </figure>
-                <p>And this implementation, when the Save method is called, is going to throw an Exception using an ErrorMessage,
-                    which is defined here as a constant:
+                <p>And this implementation, when the Save method is called, is going to throw an Exception using an
+                    ErrorMessage, which is defined here as a constant:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-088.png"/>
-                    <figcaption>Fig 02-088</figcaption>
+                <figure>
+                    <pre><code class="csharp">public const string ErrorMessage = "This is a test error message";</code></pre>
+                    <figcaption>Fig02-088</figcaption>
                 </figure>
-                <p>Then, we have a TestDialogService, and here too, we are going to create an implementation of IDialogService,
-                    and we are going to use a well-known implementation:
+
+                <p>Then, we have a TestDialogService, and here too, we are going to create an implementation of
+                    IDialogService, and we are going to use a well-known implementation:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-089.png"/>
-                    <figcaption>Fig 02-089</figcaption>
+                <figure>
+<pre><code class="csharp">public class TestDialogService : IDialogService
+{
+    public string MessageShown
+    {
+        get;
+        private set;
+    }
+
+    public void ShowMessage(string message)
+    {
+        MessageShown = message;
+    }
+
+}
+</code></pre>
+                    <figcaption>Fig02-089</figcaption>
                 </figure>
                 <p>
-                    Which instead of showing an actual MessageBox, is simply going to Save the message that must be shown into a
-                    property.
+                    Which instead of showing an actual MessageBox, is simply going to Save the message that must be
+                    shown into a property.
                 </p>
-                <p>Finally, the last service is a TestNavigationService. And this one is going to be even simpler. It is simply
-                    going to declare the method, but it's not going to do anything to avoid some navigation during the unit test:
+                <p>Finally, the last service is a TestNavigationService. And this one is going to be even simpler. It is
+                    simply going to declare the method, but it's not going to do anything to avoid some navigation
+                    during the unit test:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-090.png"/>
-                    <figcaption>Fig 02-090</figcaption>
+                <figure>
+<pre><code class="csharp">public class TestNavigationService : INavigationService
+{
+    public void GoBack()
+    {
+    }
+
+    public void NavigateTo(Uri uri)
+    {
+    }
+
+}</code></pre>
+                    <figcaption>Fig02-090</figcaption>
                 </figure>
                 <p>So now in our test method, we are using those well-known implementation of services:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-091.png"/>
-                    <figcaption>Fig 02-091</figcaption>
+                <figure>
+<pre><code class="csharp">var vm = new MainViewModel(
+    new TestFriendsService(),
+    dialogService,
+    new TestNavigationService());</code></pre>
+                    <figcaption>Fig02-091</figcaption>
                 </figure>
                 <p>We are going to start the test by asserting that the MessageShown property is null:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-092.png"/>
-                    <figcaption>Fig 02-092</figcaption>
+                <figure>
+<pre><code class="csharp">Assert.IsNull(
+    dialogService.MessageShown);</code></pre>
+                    <figcaption>Fig02-092</figcaption>
                 </figure>
                 <p>Then we are going to execute the SaveCommand on the MainViewModel:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-093.png"/>
-                    <figcaption>Fig 02-093</figcaption>
+                <figure>
+<pre><code class="csharp">vm.SaveCommand.Execute(new Friend
+{
+    Id = 1
+});</code></pre>
+                    <figcaption>Fig02-093</figcaption>
                 </figure>
-                <p>but we know that this SaveCommand is going to call the Save method of our well-known TestFriendsService. This
-                    is going to throw an exception:
+                <p>but we know that this SaveCommand is going to call the Save method of our well-known test
+                    FriendsService. This is going to throw an exception:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-094.png"/>
-                    <figcaption>Fig 02-094</figcaption>
-                </figure>
-                <p>and we want to verify that the corresponding ErrorMessage is passed to the DialogService, which is what we do
-                    here in this Assert:
+<figure>
+<pre><code class="csharp">public async Task&lt;string&gt; Save(Friend updatedFriend)
+{
+    throw new Exception(ErrorMessage);
+}</code></pre>
+<figcaption>Fig02-094</figcaption>
+</figure>
+                <p>and we want to verify that the corresponding ErrorMessage is passed to the DialogService, which is
+                    what we do here in this Assert:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-095.png"/>
-                    <figcaption>Fig 02-095</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Assert.AreEqual(
+    TestFriendsService.ErrorMessage,
+    dialogService.MessageShown);</code></pre>
+<figcaption>Fig02-095</figcaption>
+</figure>
                 <p>Now we can run the test and see if everything works fine. So let's go to Test, Run, All Tests:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-095.png"/>
-                    <figcaption>Fig 02-095</figcaption>
-                </figure>
-                <p>The project is building, so tests are starting, and here we see that the test is green:</p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-096.png"/>
                     <figcaption>Fig 02-096</figcaption>
+                </figure>
+                <p>The project is building, so tests are starting, and here we see that the test is green:</p>
+                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-097.png"/>
+                    <figcaption>Fig 02-097</figcaption>
                 </figure>
                 <p>which is a good sign for the rest of our development process.
                 </p>
                 <h3>Summary</h3>
-                <p>In this section, we have taken our non-MVVM application and we have refactored it to a Model-View-ViewModel
-                    architecture.
+                <p>In this section, we have taken our non-MVVM application and we have refactored it to a
+                    Model-View-ViewModel architecture.
                 </p>
                 <ul>
                     <li>We started by making the Model observable.</li>
                     <li>We implemented the INotifyPropertyChanged interface and raised the PropertyChanged event.</li>
                     <li>We created a MainViewModel to drive the Views.</li>
-                    <li>We moved some of the View functionality in some abstracted View services and we injected those View
-                        services inside the ViewModel. </li>
+                    <li>We moved some of the View functionality in some abstracted View services and we injected those
+                        View services inside the ViewModel.
+                    </li>
                     <li>Then we bound the View to the ViewModel in XAML.</li>
-                    <li>Then we saw how to add design time data in order to make the work in Blend or in the Visual Studio
-                        Designer much easier. </li>
-                    <li>Finally, we added a unit test project to the application and we showed how we can mock services in order
-                        to create some well-known test conditions. </li>
+                    <li>Then we saw how to add design time data in order to make the work in Blend or in the Visual
+                        Studio Designer much easier.
+                    </li>
+                    <li>Finally, we added a unit test project to the application and we showed how we can mock services
+                        in order to create some well-known test conditions.
+                    </li>
                 </ul>
-                <p>In the next module, we are going to get familiar with some of the components of the MVVM Light Toolkit, and we
-                    will see how those components can simplify the creation of Model-View-ViewModel applications.
+                <p>In the next module, we are going to get familiar with some of the components of the MVVM Light
+                    Toolkit, and we will see how those components can simplify the creation of Model-View-ViewModel
+                    applications.
                 </p>
 
             </div>
