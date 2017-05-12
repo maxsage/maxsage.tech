@@ -334,7 +334,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 MVVMLightToolkitFundamentals03TheCoreComponentsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], MVVMLightToolkitFundamentals03TheCoreComponentsComponent);

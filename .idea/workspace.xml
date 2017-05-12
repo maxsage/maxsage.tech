@@ -7,7 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf.component.js" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf.component.js.map" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/wpf.component.ts" afterPath="$PROJECT_DIR$/app/wpf/wpf.component.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,12 +30,12 @@
     <favorites_list name="maxsage.tech" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="1358" column="42" lean-forward="false" selection-start-line="1358" selection-start-column="42" selection-end-line="1358" selection-end-column="42" />
+            <state relative-caret-position="289">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="38" selection-end-column="22" />
               <folding>
                 <element signature="e#37482#37486#0" expanded="true" />
                 <element signature="e#37538#37542#0" expanded="true" />
@@ -104,6 +107,113 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="mvvm-light-toolkit-fundamentals-03-the-core-components.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="562">
+              <caret line="1677" column="174" lean-forward="false" selection-start-line="1677" selection-start-column="174" selection-end-line="1677" selection-end-column="174" />
+              <folding>
+                <element signature="e#25075#25079#0" expanded="true" />
+                <element signature="e#25100#25104#0" expanded="true" />
+                <element signature="e#25106#25110#0" expanded="true" />
+                <element signature="e#25151#25155#0" expanded="true" />
+                <element signature="e#25156#25160#0" expanded="true" />
+                <element signature="e#25182#25186#0" expanded="true" />
+                <element signature="e#25465#25469#0" expanded="true" />
+                <element signature="e#25534#25538#0" expanded="true" />
+                <element signature="e#25904#25908#0" expanded="true" />
+                <element signature="e#26049#26053#0" expanded="true" />
+                <element signature="e#32968#32972#0" expanded="true" />
+                <element signature="e#33140#33144#0" expanded="true" />
+                <element signature="e#36313#36317#0" expanded="true" />
+                <element signature="e#36323#36327#0" expanded="true" />
+                <element signature="e#36643#36647#0" expanded="true" />
+                <element signature="e#36653#36657#0" expanded="true" />
+                <element signature="e#37711#37715#0" expanded="true" />
+                <element signature="e#37721#37725#0" expanded="true" />
+                <element signature="e#38703#38707#0" expanded="true" />
+                <element signature="e#38713#38717#0" expanded="true" />
+                <element signature="e#44539#44543#0" expanded="true" />
+                <element signature="e#44549#44553#0" expanded="true" />
+                <element signature="e#45246#45250#0" expanded="true" />
+                <element signature="e#45256#45260#0" expanded="true" />
+                <element signature="e#45934#45938#0" expanded="true" />
+                <element signature="e#45944#45948#0" expanded="true" />
+                <element signature="e#46049#46053#0" expanded="true" />
+                <element signature="e#46059#46063#0" expanded="true" />
+                <element signature="e#46229#46233#0" expanded="true" />
+                <element signature="e#46239#46243#0" expanded="true" />
+                <element signature="e#50259#50263#0" expanded="true" />
+                <element signature="e#50276#50280#0" expanded="true" />
+                <element signature="e#51108#51112#0" expanded="true" />
+                <element signature="e#51131#51135#0" expanded="true" />
+                <element signature="e#51141#51145#0" expanded="true" />
+                <element signature="e#51145#51149#0" expanded="true" />
+                <element signature="e#51433#51437#0" expanded="true" />
+                <element signature="e#51443#51447#0" expanded="true" />
+                <element signature="e#51827#51831#0" expanded="true" />
+                <element signature="e#51850#51854#0" expanded="true" />
+                <element signature="e#51860#51864#0" expanded="true" />
+                <element signature="e#51864#51868#0" expanded="true" />
+                <element signature="e#53961#53965#0" expanded="true" />
+                <element signature="e#53971#53975#0" expanded="true" />
+                <element signature="e#54519#54523#0" expanded="true" />
+                <element signature="e#54529#54533#0" expanded="true" />
+                <element signature="e#57711#57715#0" expanded="true" />
+                <element signature="e#57723#57727#0" expanded="true" />
+                <element signature="e#58110#58114#0" expanded="true" />
+                <element signature="e#58122#58126#0" expanded="true" />
+                <element signature="e#58170#58174#0" expanded="true" />
+                <element signature="e#58182#58186#0" expanded="true" />
+                <element signature="e#59985#59989#0" expanded="true" />
+                <element signature="e#60008#60012#0" expanded="true" />
+                <element signature="e#61041#61045#0" expanded="true" />
+                <element signature="e#61053#61057#0" expanded="true" />
+                <element signature="e#67593#67597#0" expanded="true" />
+                <element signature="e#67601#67605#0" expanded="true" />
+                <element signature="e#67755#67759#0" expanded="true" />
+                <element signature="e#67763#67767#0" expanded="true" />
+                <element signature="e#71014#71018#0" expanded="true" />
+                <element signature="e#71022#71026#0" expanded="true" />
+                <element signature="e#71176#71180#0" expanded="true" />
+                <element signature="e#71184#71188#0" expanded="true" />
+                <element signature="e#71797#71801#0" expanded="true" />
+                <element signature="e#71807#71811#0" expanded="true" />
+                <element signature="e#71915#71919#0" expanded="true" />
+                <element signature="e#71925#71929#0" expanded="true" />
+                <element signature="e#72577#72581#0" expanded="true" />
+                <element signature="e#72587#72591#0" expanded="true" />
+                <element signature="e#72731#72735#0" expanded="true" />
+                <element signature="e#72741#72745#0" expanded="true" />
+                <element signature="e#74096#74100#0" expanded="true" />
+                <element signature="e#74122#74126#0" expanded="true" />
+                <element signature="e#74505#74509#0" expanded="true" />
+                <element signature="e#74519#74523#0" expanded="true" />
+                <element signature="e#75819#75823#0" expanded="true" />
+                <element signature="e#75829#75833#0" expanded="true" />
+                <element signature="e#75961#75965#0" expanded="true" />
+                <element signature="e#75971#75975#0" expanded="true" />
+                <element signature="e#76927#76931#0" expanded="true" />
+                <element signature="e#76941#76945#0" expanded="true" />
+                <element signature="e#76993#76997#0" expanded="true" />
+                <element signature="e#77019#77023#0" expanded="true" />
+                <element signature="e#82231#82235#0" expanded="true" />
+                <element signature="e#82241#82245#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wpf.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/wpf/wpf.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3111">
+              <caret line="184" column="48" lean-forward="false" selection-start-line="184" selection-start-column="48" selection-end-line="184" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -115,7 +225,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>installing the</find>
       <find>advanced examples</find>
       <find>inally, create a unit test for this simple</find>
       <find>ssembly and the components that it</find>
@@ -145,6 +254,7 @@
       <find>Demo:</find>
       <find>Heret</find>
       <find>02-044</find>
+      <find>Copy to clip</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;images</replace>
@@ -192,14 +302,12 @@
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-00-AAAA-temp.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-00-course-contents.html" />
-        <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" />
         <option value="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-02-first-taste-of-mvvm.html" />
         <option value="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html" />
         <option value="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals.html" />
-        <option value="$PROJECT_DIR$/app/wpf/wpf.component.ts" />
         <option value="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-04-view-viewmodel-communication-in-wpf.html" />
         <option value="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation.html" />
         <option value="$PROJECT_DIR$/app/wpf/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection.html" />
@@ -216,6 +324,8 @@
         <option value="$PROJECT_DIR$/app/app.component.ts" />
         <option value="$PROJECT_DIR$/app/javascript/javascript.component.ts" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" />
+        <option value="$PROJECT_DIR$/app/wpf/wpf.component.ts" />
+        <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
       </list>
     </option>
   </component>
@@ -229,10 +339,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-16" />
-    <option name="y" value="-16" />
-    <option name="width" value="3872" />
-    <option name="height" value="2092" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1416" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -455,26 +565,28 @@
       <workItem from="1493801939859" duration="10645000" />
       <workItem from="1494250006460" duration="3316000" />
       <workItem from="1494497737872" duration="7818000" />
+      <workItem from="1494594162567" duration="10994000" />
+      <workItem from="1494605778049" duration="1159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="399844000" />
+    <option name="totallyTimeSpent" value="419422000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2635884" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1394799" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2212932" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21901792" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -591,13 +703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="1101" column="0" lean-forward="false" selection-start-line="1101" selection-start-column="0" selection-end-line="1103" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="753">
@@ -651,13 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/wpf/wpf.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="101" column="34" lean-forward="false" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -782,11 +880,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/app.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="108" column="13" lean-forward="true" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="901">
+          <caret line="146" column="14" lean-forward="false" selection-start-line="146" selection-start-column="14" selection-end-line="146" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -794,7 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="33" column="1" lean-forward="false" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -802,7 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -810,16 +903,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#65#0" expanded="false" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/wpf.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3111">
+          <caret line="184" column="48" lean-forward="false" selection-start-line="184" selection-start-column="48" selection-end-line="184" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="1358" column="42" lean-forward="false" selection-start-line="1358" selection-start-column="42" selection-end-line="1358" selection-end-column="42" />
+        <state relative-caret-position="289">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="38" selection-end-column="22" />
           <folding>
             <element signature="e#37482#37486#0" expanded="true" />
             <element signature="e#37538#37542#0" expanded="true" />
@@ -886,6 +984,101 @@
             <element signature="e#64642#64646#0" expanded="true" />
             <element signature="e#67866#67870#0" expanded="true" />
             <element signature="e#67876#67880#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="1677" column="174" lean-forward="false" selection-start-line="1677" selection-start-column="174" selection-end-line="1677" selection-end-column="174" />
+          <folding>
+            <element signature="e#25075#25079#0" expanded="true" />
+            <element signature="e#25100#25104#0" expanded="true" />
+            <element signature="e#25106#25110#0" expanded="true" />
+            <element signature="e#25151#25155#0" expanded="true" />
+            <element signature="e#25156#25160#0" expanded="true" />
+            <element signature="e#25182#25186#0" expanded="true" />
+            <element signature="e#25465#25469#0" expanded="true" />
+            <element signature="e#25534#25538#0" expanded="true" />
+            <element signature="e#25904#25908#0" expanded="true" />
+            <element signature="e#26049#26053#0" expanded="true" />
+            <element signature="e#32968#32972#0" expanded="true" />
+            <element signature="e#33140#33144#0" expanded="true" />
+            <element signature="e#36313#36317#0" expanded="true" />
+            <element signature="e#36323#36327#0" expanded="true" />
+            <element signature="e#36643#36647#0" expanded="true" />
+            <element signature="e#36653#36657#0" expanded="true" />
+            <element signature="e#37711#37715#0" expanded="true" />
+            <element signature="e#37721#37725#0" expanded="true" />
+            <element signature="e#38703#38707#0" expanded="true" />
+            <element signature="e#38713#38717#0" expanded="true" />
+            <element signature="e#44539#44543#0" expanded="true" />
+            <element signature="e#44549#44553#0" expanded="true" />
+            <element signature="e#45246#45250#0" expanded="true" />
+            <element signature="e#45256#45260#0" expanded="true" />
+            <element signature="e#45934#45938#0" expanded="true" />
+            <element signature="e#45944#45948#0" expanded="true" />
+            <element signature="e#46049#46053#0" expanded="true" />
+            <element signature="e#46059#46063#0" expanded="true" />
+            <element signature="e#46229#46233#0" expanded="true" />
+            <element signature="e#46239#46243#0" expanded="true" />
+            <element signature="e#50259#50263#0" expanded="true" />
+            <element signature="e#50276#50280#0" expanded="true" />
+            <element signature="e#51108#51112#0" expanded="true" />
+            <element signature="e#51131#51135#0" expanded="true" />
+            <element signature="e#51141#51145#0" expanded="true" />
+            <element signature="e#51145#51149#0" expanded="true" />
+            <element signature="e#51433#51437#0" expanded="true" />
+            <element signature="e#51443#51447#0" expanded="true" />
+            <element signature="e#51827#51831#0" expanded="true" />
+            <element signature="e#51850#51854#0" expanded="true" />
+            <element signature="e#51860#51864#0" expanded="true" />
+            <element signature="e#51864#51868#0" expanded="true" />
+            <element signature="e#53961#53965#0" expanded="true" />
+            <element signature="e#53971#53975#0" expanded="true" />
+            <element signature="e#54519#54523#0" expanded="true" />
+            <element signature="e#54529#54533#0" expanded="true" />
+            <element signature="e#57711#57715#0" expanded="true" />
+            <element signature="e#57723#57727#0" expanded="true" />
+            <element signature="e#58110#58114#0" expanded="true" />
+            <element signature="e#58122#58126#0" expanded="true" />
+            <element signature="e#58170#58174#0" expanded="true" />
+            <element signature="e#58182#58186#0" expanded="true" />
+            <element signature="e#59985#59989#0" expanded="true" />
+            <element signature="e#60008#60012#0" expanded="true" />
+            <element signature="e#61041#61045#0" expanded="true" />
+            <element signature="e#61053#61057#0" expanded="true" />
+            <element signature="e#67593#67597#0" expanded="true" />
+            <element signature="e#67601#67605#0" expanded="true" />
+            <element signature="e#67755#67759#0" expanded="true" />
+            <element signature="e#67763#67767#0" expanded="true" />
+            <element signature="e#71014#71018#0" expanded="true" />
+            <element signature="e#71022#71026#0" expanded="true" />
+            <element signature="e#71176#71180#0" expanded="true" />
+            <element signature="e#71184#71188#0" expanded="true" />
+            <element signature="e#71797#71801#0" expanded="true" />
+            <element signature="e#71807#71811#0" expanded="true" />
+            <element signature="e#71915#71919#0" expanded="true" />
+            <element signature="e#71925#71929#0" expanded="true" />
+            <element signature="e#72577#72581#0" expanded="true" />
+            <element signature="e#72587#72591#0" expanded="true" />
+            <element signature="e#72731#72735#0" expanded="true" />
+            <element signature="e#72741#72745#0" expanded="true" />
+            <element signature="e#74096#74100#0" expanded="true" />
+            <element signature="e#74122#74126#0" expanded="true" />
+            <element signature="e#74505#74509#0" expanded="true" />
+            <element signature="e#74519#74523#0" expanded="true" />
+            <element signature="e#75819#75823#0" expanded="true" />
+            <element signature="e#75829#75833#0" expanded="true" />
+            <element signature="e#75961#75965#0" expanded="true" />
+            <element signature="e#75971#75975#0" expanded="true" />
+            <element signature="e#76927#76931#0" expanded="true" />
+            <element signature="e#76941#76945#0" expanded="true" />
+            <element signature="e#76993#76997#0" expanded="true" />
+            <element signature="e#77019#77023#0" expanded="true" />
+            <element signature="e#82231#82235#0" expanded="true" />
+            <element signature="e#82241#82245#0" expanded="true" />
           </folding>
         </state>
       </provider>

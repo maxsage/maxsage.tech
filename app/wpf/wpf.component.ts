@@ -182,7 +182,7 @@ export class MVVMLightToolkitFundamentals02RefactoringTheAppToMVVMComponent {
 
 @Component({
     templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class MVVMLightToolkitFundamentals03TheCoreComponentsComponent {
     public pageTitle: string = "MVVM Light Toolkit Fundamentals - The Core Components";
