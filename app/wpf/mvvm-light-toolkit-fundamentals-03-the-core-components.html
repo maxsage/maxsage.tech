@@ -1695,20 +1695,63 @@ private void UpdateStatus(string message)
                 <p>In this small application, I have a MainViewModel, which is going to subscribe to a service called
                     ISensorService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-112.png"/>
-                    <figcaption>Fig 03-112</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class MainViewModel : ViewModelBase
+{
+    private readonly ISensorService _sensorService;
+
+    private RelayCommand _startAccelerometerCommand;
+
+    /// &lt;summary&gt;
+    /// Gets the StartAccelerometerCommand.
+    /// &lt;/summarygt;
+    public RelayCommand StartAccelerometerCommand
+    {
+        get
+        {
+            return _startAccelerometerCommand
+                ?? (_startAccelerometerCommand = new RelayCommand(
+                                      () => _sensorService.RegisterForAcceleration(HandleHeading)));
+        }
+    }</code></pre>
+<figcaption>Fig03-112</figcaption>
+</figure>
                 <p>This is an abstraction of the sensors. In this sample I only take care of the acceleration, but we could easily
                     add all the sensors, such as compass or location. The ISensorService is located in the Model. We have one
                     method called RegisterForAcceleration:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-113.png"/>
-                    <figcaption>Fig 03-113</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace DispatcherHelperSample.Model
+{
+    public interface ISensorService
+    {
+        void RegisterForAcceleration(Action&lt;double&gt; callback);
+    }
+}
+</code></pre>
+<figcaption>Fig03-113</figcaption>
+</figure>
                 <p>and here is the implementation of the SensorService, and the RegisterForAcceleration method:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-114.png"/>
-                    <figcaption>Fig 03-114</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class SensorService : ISensorService
+{
+    private Action&ltdouble&gt; _callback;
+
+    public void RegisterForAcceleration(Action&lt;double&gt; callback)
+    {
+        _callback = callback;
+
+        var accelerometer = new Accelerometer();
+        accelerometer.CurrentValueChanged += AccelerometerCurrentValueChanged;
+        accelerometer.Start();
+    }
+
+    void AccelerometerCurrentValueChanged(object sender, SensorReadingEventArgs&lt;AccelerometerReading&gt; e)
+    {
+        ExecuteCallback(e.SensorReading.Acceleration);
+    }</code></pre>
+<figcaption>Fig03-114</figcaption>
+</figure>
                 <p>This method takes a callback and it will execute the callback everything that the value of the accelerometer
                     has changed. The callback is provided by the caller, in this case the MainViewModel. Let's run the application
                     in Debug mode and see what happens. If I press the Start button here:
@@ -1726,33 +1769,74 @@ private void UpdateStatus(string message)
                     Thread, which is also where the callback method is executed. However, if we inspect the MainViewModel code,
                     which provided the callback, we see that it is assigning the returned value to the StatusMessage property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-117.png"/>
-                    <figcaption>Fig 03-117</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void HandleHeading(double heading)
+{
+    StatusMessage = string.Format(
+        "({0:N2})",
+        heading);
+}</code></pre>
+<figcaption>Fig03-117</figcaption>
+</figure>
                 <p>This wouldn't be an issue if the StatusMessage was not bound to a TextBlock in the XAML. We know that all UI
                     elements belong to the Main Thread, so the crash happens when the UI element, the TextBlock, is being touched
                     from the Background Thread through the StatusMessage property.
                 </p>
                 <p>To fix this, we are going to go back into the Service code and we are going to use a DispatcherHelper here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-118.png"/>
-                    <figcaption>Fig 03-118</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void ExecuteCallback(Vector3 heading)
+{
+    _callback(heading.Z);
+}</code></pre>
+<figcaption>Fig03-118</figcaption>
+</figure>
                 <p>I'm going to use the CheckBeginInvokeOnUI method. This method takes an action as parameter, this is a delegate.
                     And now I can copy the code to the _callback method, which is going to be executed on the Main Thread, so this
                     is a safe zone:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-119.png"/>
-                    <figcaption>Fig 03-119</figcaption>
-                </figure>
+ <figure>
+ <pre><code class="csharp">private void ExecuteCallback(Vector3 heading)
+{
+    DispatcherHelper.CheckBeginInvokeOnUI(
+        () =>
+        {
+            _callback(heading.Z);
+
+        });
+
+}</code></pre>
+ <figcaption>Fig03-119</figcaption>
+ </figure>
                 <p>Note that for this to work, we need to initialize a DispatcherHelper. It can be done anywhere in the code,
                     making sure that the Initialize method is called on the UI Thread. Typically, we do this in App.xaml.cs in one
                     of the Initializer method, so that the DispatcherHelper is initialized as early as possible. Here in the Phone
                     application, I do this in the InitializePhoneApplication method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-120.png"/>
-                    <figcaption>Fig 03-120</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void InitializePhoneApplication()
+{
+    if (phoneApplicationInitialized)
+        return;
+
+    // Create the frame but don't set it as RootVisual yet; this allows the splash
+    // screen to remain active until the application is ready to render.
+    RootFrame = new PhoneApplicationFrame();
+    RootFrame.Navigated += CompleteInitializePhoneApplication;
+
+    DispatcherHelper.Initialize();
+
+    // Handle navigation failures
+    RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+
+    // Handle reset requests for clearing the backstack
+    RootFrame.Navigated += CheckForResetNavigation;
+
+    // Ensure we don't initialize again
+    phoneApplicationInitialized = true;
+}</code></pre>
+<figcaption>Fig03-120</figcaption>
+</figure>
                 <p>Now we can run the application again and we will see that this time the application does not crash. And in fact
                     in the Simulator, we can simulate shaking the device, here, using the shake Recorded Data:
                 </p>
@@ -1764,6 +1848,28 @@ private void UpdateStatus(string message)
                     worry about this.
                 </p>
                 <h3>DispatcherHelper WebRequest Samples (WPF and SL)</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex03-012" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\before\viewmodelbase\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex03-012">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex03-013" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\after\dispatcherhelper\DispatcherHelperSample.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex03-013">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>Another example is using a WPF application and a Silverlight 5 application using shared code. We are going to
                     execute web code using an HttpWebRequest. Of course this is a very simple example and we don't really need
                     this complex object; we could do the same using a web client. HttpWebRequest is useful when you need to do
@@ -1771,9 +1877,34 @@ private void UpdateStatus(string message)
                     it gets a response on a Background Thread.
                 </p>
                 <p>So here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-122.png"/>
-                    <figcaption>Fig 03-122</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void BeginGetResponseCompleted(IAsyncResult ar)
+{
+    // We are on a background thread here!
+
+    var request = ar.AsyncState as HttpWebRequest;
+    if (request != null)
+    {
+        using (var stream = request.EndGetResponse(ar).GetResponseStream())
+        {
+            using (var reader = new StreamReader(stream))
+            {
+                var result = reader.ReadToEnd();
+
+                // Do something with result
+                DispatcherHelper.CheckBeginInvokeOnUI(
+                    () =>
+                    {
+                        Status = "Web page was loaded";
+                    });
+
+
+            }
+        }
+    }
+}</code></pre>
+<figcaption>Fig03-122</figcaption>
+</figure>
                 <p>
                     everything inside the BeginGetResponseCompleted method is executed on this Background Thread. And as you see,
                     we are trying to set the Status property, which is data bound to a TextBlock in the XAML UI. If we run this
@@ -1804,9 +1935,34 @@ private void UpdateStatus(string message)
                     have to use a DispatcherHelper again, and I'm going to do that in the BeginGetResponseCompleted method, just
                     when the Status property is set:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-127.png"/>
-                    <figcaption>Fig 03-127</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void BeginGetResponseCompleted(IAsyncResult ar)
+{
+    // We are on a background thread here!
+
+    var request = ar.AsyncState as HttpWebRequest;
+    if (request != null)
+    {
+        using (var stream = request.EndGetResponse(ar).GetResponseStream())
+        {
+            using (var reader = new StreamReader(stream))
+            {
+                var result = reader.ReadToEnd();
+
+                // Do something with result
+                DispatcherHelper.CheckBeginInvokeOnUI(
+                    () =>
+                    {
+                        Status = "Web page was loaded";
+                    });
+
+
+            }
+        }
+    }
+}</code></pre>
+<figcaption>Fig03-127</figcaption>
+</figure>
                 <p>And now, again, I have created a delegate, which will be executed on the Main Thread, and so I can set the
                     Status in this safe zone.
                 </p>
