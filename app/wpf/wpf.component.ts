@@ -190,7 +190,7 @@ export class MVVMLightToolkitFundamentals03TheCoreComponentsComponent {
 
 @Component({
     templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class MVVMLightToolkitFundamentals04TheExtrasComponent {
     public pageTitle: string = "MVVM Light Toolkit Fundamentals - The Extras";

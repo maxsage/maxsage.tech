@@ -34,32 +34,51 @@
                     DataContext, unless explicitly specified otherwise. So we don't need to write the fully-qualified
                     Binding expression, like we have here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-001.png"/>
-                    <figcaption>Fig 04-001</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;TextBox
+    Text="{Binding SearchQuery,
+        Source={StaticResource Main},
+        Mode=TwoWay}" /&gt;</code></pre>
+<figcaption>Fig04-001</figcaption>
+</figure>
                 <p>in different places in this document. Instead, we can define the DataContext; for example, here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-002.png"/>
-                    <figcaption>Fig 04-002</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;Page.DataContext&gt;
+	&lt;Binding Source="{StaticResource Main}" /&gt;
+&lt;/Page.DataContext&gt;</code></pre>
+<figcaption>Fig04-002</figcaption>
+</figure>
                 <p>
                     directly in the XAML. And then we can have tighter XAML expressions, which is much more comfortable;
                     for example, here in the document:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-003.png"/>
-                    <figcaption>Fig 04-003</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;TextBox
+	Text="{Binding Search, Mode=TwoWay}" /&gt;</code></pre>
+<figcaption>Fig04-003</figcaption>
+</figure>
                 <p>and here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-004.png"/>
-                    <figcaption>Fig 04-004</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;Button
+	Content="{Binding SearchText,
+		Source={StaticResource Strings}}"
+	Command="{Binding FindCommand}" /&gt;</code></pre>
+<figcaption>Fig04-004</figcaption>
+</figure>
                 <p>and here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-005.png"/>
-                    <figcaption>Fig 04-005</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;ItemsControl
+	ItemsSource="{Binding Results}" /&gt;</code></pre>
+<figcaption>Fig04-005</figcaption>
+</figure>
                 <p>Of course we can still use fully-qualified expressions; for example, here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-006.png"/>
-                    <figcaption>Fig 04-006</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;Button
+	Content="{Binding SearchText,
+		Source={StaticResource Strings}}"
+	Command="{Binding FindCommand}" /&gt;</code></pre>
+<figcaption>Fig04-006</figcaption>
+</figure>
                 <p>When we're referred to a property, defined in another resource named Strings.</p>
                 <p>So in summary, the DataContext is really just a shortcut. It can be set in XAML, like in the previous
                     slide, which works great with visual designers, such as Blend or the Visual Studio Designer, because
@@ -71,9 +90,14 @@
                     frequent to set the DataContext to this object in the OnNavigatedTo method, such as shown here in
                     Windows 8:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-007.png"/>
-                    <figcaption>Fig 04-007</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">protected override void OnNavigatedTo(NavigationEventArgs e)
+{
+	DataContext = e.Parameter as DetailsViewModel;
+	base.OnNavigatedTo(e);
+}</code></pre>
+<figcaption>Fig04-007</figcaption>
+</figure>
                 <p>These are the two main ways to set the DataContext, either in XAML through a resource or in the code
                     behind. One thing to consider is that when the DataContext is set in code behind and not in XAML,
                     the Visual Designer Tools do not run this code. In fact, they never run any code behind because,
@@ -87,18 +111,31 @@
                 <p>Thankfully the XAML Tooling Team thought of that and created a design time data context, which is
                     very convenient. Here is an example:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-008.png"/>
-                    <figcaption>Fig 04-008</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;Page x:Class="App1.MainPage"
+	xmlns=http://schemas.microsoft.com/winfx/2006/xaml/presentation
+	xmlns:x=http://schemas.microsoft.com/winfx/2006/xaml
+	xmlns:d=http://schemas.microsoft.com/expression/blend/2008
+	xmlns:mc=http://schemas.openxmlformats.org/markup-compatibility/2006
+	xmlns:app1="using:App1"
+	mc:Ignorable="d"
+	d:DataContext="{d:DesignInstance,
+		Type=app1:DetailsViewModel,
+		IsDesignTimeCreatable=True}"&gt;</code></pre>
+<figcaption>Fig04-008</figcaption>
+</figure>
                 <p>First, we declare an xmlns, pointing to the namespace in which the ViewModel is declared. We add
                     another xmlns used by Blend in the Visual Studio Designer, typically with a prefixed "d", like
                     design. This prefix is declared Ignorable. This indicates to any XAML parser that it should ignore
                     any attribute prefixed by "d"; however, the Visual Designers look for these "d" prefixes and will
                     use them for design time tasks. For example, here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-009.png"/>
-                    <figcaption>Fig 04-009</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">d:DataContext="{d:DesignInstance,
+	Type=app1:DetailsViewModel,
+	IsDesignTimeCreatable=True}"&gt;</code></pre>
+<figcaption>Fig04-009</figcaption>
+</figure>
                 <p>the design time DataContext is set to an instance of the DetailsViewModel, which will be created at
                     design time.
                 </p>
@@ -115,21 +152,37 @@
                 <p>The ViewModelLocator declares the most important ViewModels of the application as public properties,
                     for example, here, the MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-010.png"/>
-                    <figcaption>Fig 04-010</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class ViewModelLocator
+{
+	public MainViewModel Main
+	{
+		get;
+		private set;
+	}
+
+	// ...
+}</code></pre>
+<figcaption>Fig04-010</figcaption>
+</figure>
                 <p>so that it is easy to bind to them, for instance, using a visual tool such as Blend.</p>
                 <p>Not all ViewModels are declared by the ViewModelLocator, however. It depends on how long they will be
                     alive, when they are created, and so on. In MVVM Light, here is how the ViewModelLocator is declared
                     in the App.xaml file:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-011.png"/>
-                    <figcaption>Fig 04-011</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;Application.Resources&gt;
+	&lt;vm:ViewModelLocator x:Key="Locator" /&gt;
+&lt;/Application.Resources&gt;
+</code></pre>
+<figcaption>Fig04-011</figcaption>
+</figure>
                 <p>and here is how you can bind to the Main property of type MainViewModel in the view:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-012.png"/>
-                    <figcaption>Fig 04-012</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">DataContext="{Binding Main,
+	Source={StaticResource Locator}}"&gt;</code></pre>
+<figcaption>Fig04-012</figcaption>
+</figure>
                 <p>Of course, if you have multiple ViewModels, you will have multiple properties with different names.
                 </p>
                 <h3>Binding to a ViewModel (Demos)</h3>
@@ -140,94 +193,237 @@
                 <p>We will use a NavigationService, which is closer from the one we use in Production Windows Phone
                     applications. It has one more method, which we add in INavigationService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-013.png"/>
-                    <figcaption>Fig 04-013</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Helpers
+{
+	public interface INavigationService
+	{
+		void GoBack();
+		void NavigateTo(Uri uri);
+		void NavigateTo(Uri uri, object state);
+	}
+}</code></pre>
+<figcaption>Fig04-013</figcaption>
+</figure>
                 <p>This method allows to navigate to a URI and pass an object, a user state, to the page that we
                     navigate to. Let's remove the primitive NavigationService we were using until now. And replace it
                     with another one, which implements the new method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-014.png"/>
-                    <figcaption>Fig 04-014</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Helpers
+{
+    public class NavigationService : INavigationService
+    {
+        private const string QueryUriKey = "userstate";
+
+        private static Dictionary&lt;string, object&gt; _userStates;
+        private PhoneApplicationFrame _mainFrame;
+
+        public void GoBack()
+        {
+            if (EnsureMainFrame()
+                && _mainFrame.CanGoBack)
+            {
+                _mainFrame.GoBack();
+            }
+        }
+
+        public void NavigateTo(Uri pageUri)
+        {
+            if (EnsureMainFrame())
+            {
+                _mainFrame.Navigate(pageUri);
+            }
+        }
+</code></pre>
+<figcaption>Fig04-014</figcaption>
+</figure>
                 <p>This NavigationService implements the new NavigateTo method, it will save the state, and it also
                     provides a new method, GetAndRemoveState:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-015.png"/>
-                    <figcaption>Fig 04-015</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public static object GetAndRemoveState(IDictionary&lt;string, string&gt; query)
+        {
+            lock (_userStates)
+            {
+                if (query.ContainsKey(QueryUriKey)
+                    && _userStates.ContainsKey(query[QueryUriKey]))
+                {
+                    object state = _userStates[query[QueryUriKey]];
+                    _userStates.Remove(query[QueryUriKey]);
+                    return state;
+                }
+
+                return null;
+            }
+        }</code></pre>
+<figcaption>Fig04-015</figcaption>
+</figure>
                 <p>which is static and that every page can use to easily retrieve the state when it is navigated to.</p>
                 <p>
                     Then we will take care of the ViewModelLocator. Let's add this class in the ViewModel folder. This
                     is a plain object, which we will make public, and it exposes one public property, which is the
                     MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-016.png"/>
-                    <figcaption>Fig 04-016</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class ViewModelLocator
+{
+    public MainViewModel Main
+    {
+        get;
+        private set;
+    }
+}</code></pre>
+<figcaption>Fig04-016</figcaption>
+</figure>
                 <p>This property is exposed for data binding purposes.</p>
                 <p> Then, let's add a constructor, which will take care of creating all the services, as well as a
                     MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-017.png"/>
-                    <figcaption>Fig 04-017</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public ViewModelLocator()
+{
+    IFriendsService friendsService;
+
+    if (ViewModelBase.IsInDesignModeStatic)
+    {
+        friendsService = new DesignFriendsService();
+    }
+    else
+    {
+        friendsService = new FriendsService();
+    }
+
+    IDialogService dialogService = new DialogService();
+    INavigationService navigationService = new NavigationService();
+
+    Main = new MainViewModel(friendsService, dialogService, navigationService);
+}</code></pre>
+<figcaption>Fig04-017</figcaption>
+</figure>
                 <p>As you can see here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-018.png"/>
-                    <figcaption>Fig 04-018</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">if (ViewModelBase.IsInDesignModeStatic)
+{
+    friendsService = new DesignFriendsService();
+}
+else
+{
+    friendsService = new FriendsService();
+}</code></pre>
+<figcaption>Fig04-018</figcaption>
+</figure>
                 <p>we use a DesignMode detection to create the correct FriendsService, either the DesignFriendsService
                     or the runtime FriendsService here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-019.png"/>
-                    <figcaption>Fig 04-019</figcaption>
+                <figure>
+<pre><code class="csharp">if (ViewModelBase.IsInDesignModeStatic)
+{
+    friendsService = new DesignFriendsService();
+}
+else
+{
+    friendsService = new FriendsService();
+}</code></pre>
+                    <figcaption>Fig04-019</figcaption>
                 </figure>
                 <p>We also create a dialogService, a navigationService, and we pass those to the MainViewModel
                     constructor:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-020.png"/>
-                    <figcaption>Fig 04-020</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">IDialogService dialogService = new DialogService();
+INavigationService navigationService = new NavigationService();
+
+Main = new MainViewModel(friendsService, dialogService, navigationService);</code></pre>
+<figcaption>Fig04-020</figcaption>
+</figure>
+
                 <p>The ViewModelLocator should be exposed as a global resource in App.xaml, let's open this file. And
                     here we see the MainViewModel that we were using until now
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-021.png"/>
-                    <figcaption>Fig 04-021</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;vm:MainViewModel x:Key="Main" /&gt;</code></pre>
+<figcaption>Fig04-021</figcaption>
+</figure>
                 <p>We can replace this with ViewModelLocator, and change the Key for clarity to name it Locator:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-022.png"/>
-                    <figcaption>Fig 04-022</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;vm:ViewModelLocator x:Key="Locator" /&gt;</code></pre>
+<figcaption>Fig04-022</figcaption>
+</figure>
                 <p>
                     As we mentioned, this is an additional level of flexibility in the creation and lifetime management
                     of the services and of the ViewModels. For convenience we can add a static property in the
                     ViewModelLocator class:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-023.png"/>
-                    <figcaption>Fig 04-023</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public static ViewModelLocator Instance
+{
+    get
+    {
+        return Application.Current.Resources["Locator"] as ViewModelLocator;
+    }
+}</code></pre>
+<figcaption>Fig04-023</figcaption>
+</figure>
                 <p>which retrieves this instance from the application's resources and exposes it to other objects. Then
                     let's take a look at the MainViewModel. The default constructors that we had created were here as a
                     kind of a hack to allow the creation of the MainViewModel in XAML. However, now we don't need this
                     anymore because the creation is taken care of by the ViewModelLocator, so we can simply remove this
                     default constructor:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-024.png"/>
-                    <figcaption>Fig 04-024</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">  public MainViewModel()
+            : this(
+                (DesignerProperties.IsInDesignTool
+                    ? (IFriendsService)new Design.DesignFriendsService()
+                    : new FriendsService()),
+                new DialogService(),
+                new NavigationService())
+        {
+#if DEBUG
+            if (DesignerProperties.IsInDesignTool)
+            {
+                Refresh();
+                SelectedFriend = Friends[0];
+            }
+#endif
+        }
+    }
+}</code></pre>
+<figcaption>Fig04-024</figcaption>
+</figure>
                 <p>As such, we have delegated the creation of the MainViewModel to another object, the ViewModelLocator,
                     thus implementing a common design pattern, named Inversion of Control, or IoC.
                 </p>
                 <p>For design time, let's just add the call to the Refresh method in the unit constructors that we have
                     now:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-025.png"/>
-                    <figcaption>Fig 04-025</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">#if DEBUG
+            if (IsInDesignMode)
+            {
+                Refresh();
+            }
+#endif</code></pre>
+<figcaption>Fig04-025</figcaption>
+</figure>
                 <p>Then, we will remove the SelectedFriend property:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-026.png"/>
-                    <figcaption>Fig 04-026</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public Friend SelectedFriend
+{
+    get
+    {
+        return _selectedFriend;
+    }
+
+    set
+    {
+        Set(() => SelectedFriend, ref _selectedFriend, value);
+    }
+}
+</code></pre>
+<figcaption>Fig04-026</figcaption>
+</figure>
                 <p>While it is not wrong to have the MainViewModel hold a SelectedFriend, it is cleaner to pass this
                     object to each page and to let the page set its own DataContext in code. This way, each page is
                     responsible for its own state. Also, this minimizes the risks of memory leaks by letting the page
@@ -236,60 +432,103 @@
                 <p>So we can just remove this property, and then in the ShowDetailsCommand, instead of saving the
                     SelectedFriend here, we will remove this line here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-027.png"/>
-                    <figcaption>Fig 04-027</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public RelayComman&lt;Friend&gt; ShowDetailsCommand
+{
+    get
+    {
+        return _showDetailsCommand
+            ?? (_showDetailsCommand = new RelayCommand&lt;Friend&gt;(
+                                  friend =&gt;
+                                  {
+                                      SelectedFriend = friend;
+                                      _navigationService.NavigateTo(
+                                          new Uri("/DetailsPage.xaml", UriKind.Relative));
+                                  }));
+    }
+}</code></pre>
+<figcaption>Fig04-027</figcaption>
+</figure>
                 <p>and we will pass the Friend to the new NavigationService that we just added:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-028.png"/>
-                    <figcaption>Fig 04-028</figcaption>
-                </figure>
+<figure>
+<pre><code class="">friend =&gt;
+    {
+      _navigationService.NavigateTo(new Uri("/DetailsPage.xaml", UriKind.Relative));
+    }));</code></pre>
+<figcaption>Fig04-028</figcaption>
+</figure>
                 <p>The Friend will be passed as a state to the page that we navigated to. Let's take care of the XAML
                     now.
                 </p>
                 <p>First, in MainPage.xaml, we need to modify the DataBindings, which we are going to the MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-029.png"/>
-                    <figcaption>Fig 04-029</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">DataContext="{Binding Source={StaticResource Main}}"&gt;</code></pre>
+<figcaption>Fig04-029</figcaption>
+</figure>
                 <p>Instead, we use the Main property of the Locator that we declared as a global resource:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-030.png"/>
-                    <figcaption>Fig 04-030</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">DataContext="{Binding Main, Source={StaticResource Locator}}"&gt;</code></pre>
+<figcaption>Fig04-030</figcaption>
+</figure>
                 <p>The rest remains the same. Then, in Styles.xaml, we are going to do the same to locate the
                     ShowDetailsCommand on the MainViewModel. So here, I'm using the dot syntax in order to drill into
                     the MainViewModel and to locate the command inside it:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-031.png"/>
-                    <figcaption>Fig 04-031</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;i:Interaction.Triggers&gt;
+    &lt;i:EventTrigger EventName="Tap"&gt;
+        &lt;i:InvokeCommandAction Command="{Binding Main.ShowDetailsCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                               CommandParameter="{Binding Mode=OneWay}" /&gt;
+    &lt;/i:EventTrigger&gt;
+&lt;/i:Interaction.Triggers&gt;></code></pre>
+<figcaption>Fig04-031</figcaption>
+</figure>
                 <p>Of course this is in reference, here, to the Locator, which is exposed as a global resource:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-032.png"/>
-                    <figcaption>Fig 04-032</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">{Binding Main.ShowDetailsCommand, Mode=OneWay, Source={StaticResource Locator}}</code></pre>
+<figcaption>Fig04-032</figcaption>
+</figure>
                 <p>
                     Finally, let's open the DetailsPage. And here I need to retrieve the state from the
                     NavigationService and to assign this object as a DataContext of the page. So let's add an
                     OnNavigatedTo method, which is going to take care of this:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-033.png"/>
-                    <figcaption>Fig 04-033</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">protected override void OnNavigatedTo(NavigationEventArgs e)
+{
+    var state = Helpers.NavigationService.GetAndRemoveState(NavigationContext.QueryString);
+    DataContext = state;
+    base.OnNavigatedTo(e);
+}</code></pre>
+<figcaption>Fig04-033</figcaption>
+</figure>
                 <p>We also need to modify the SaveClick Event Handler to retrieve the MainViewModel from the
                     ViewModelLocator, and to execute the SaveCommand:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-034.png"/>
-                    <figcaption>Fig 04-034</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private async void SaveClick(object sender, EventArgs e)
+{
+    UpdateBinding();
+
+    var mainVm = ViewModelLocator.Instance.Main;
+    mainVm.SaveCommand.Execute(DataContext);
+}</code></pre>
+<figcaption>Fig04-034</figcaption>
+</figure>
                 <p>In the XAML, we will remove the DataContext from the XAML here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-035.png"/>
-                    <figcaption>Fig 04-035</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">DataContext="{Binding Source={StaticResource Main}}</code></pre>
+<figcaption>Fig04-035</figcaption>
+</figure>
                 <p>because it is now taken care of in the code behind. Then we need to remove the mention of
                     SelectedFriend in every Binding, since the reference for the Binding is now the Friend itself:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-036.png"/>
-                    <figcaption>Fig 04-036</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;TextBox x:Name="FirstNameTextBox"
+	Text="{Binding SelectedFriend.FirstName, Mode=TwoWay}"/&gt;</code></pre>
+<figcaption>Fig04-036</figcaption>
+</figure>
                 <p>
                     Now we can run the application and see that we have the exact same functionality, but with a cleaner
                     architecture. We can load the Friends list, navigate to a friend, edit and save changes, etc. The
@@ -304,15 +543,24 @@
                     default constructor. So let's do this in Visual Studio. I will open the Friend class, and add a
                     default constructor, which is going to take care of creating design time data here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-038.png"/>
-                    <figcaption>Fig 04-038</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">#if DEBUG
+    public Friend()
+    {
+        FirstName = "FirstName";
+        LastName = "LastName";
+        PictureUri = new Uri("http://www.galasoft.ch/logo/LogoHead128.png");
+    }
+#endif</code></pre>
+<figcaption>Fig04-038</figcaption>
+</figure>
                 <p>Then, using the design time DataContext that we introduced in the slides, we instruct Blend to use
                     that constructor at design time:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-039.png"/>
-                    <figcaption>Fig 04-039</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">d:DataContext="{d:DesignInstance Type=model:Friend, IsDesignTimeCreatable=True}"&gt;</code></pre>
+<figcaption>Fig04-039</figcaption>
+</figure>
                 <p>After we build the project, we can switch back to Blend and we will see that we now have some design
                     time data appearing in the details page:
                 </p>
@@ -344,9 +592,17 @@
                 <p>Dependency Injection is a programming concept. It delegates the creation of services that an object
                     consumes outside of this object. For example, it is quite common to do something like this:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-041.png"/>
-                    <figcaption>Fig 04-041</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class MainViewModel
+{
+	private IDataService _dataService;
+	public MainViewModel()
+	{
+		_dataService = new DataService();
+	}
+}</code></pre>
+<figcaption>Fig04-041</figcaption>
+</figure>
                 <p>We have a DataService and we create the DataService inside the object that uses it; for instance,
                     here in the constructor. Of course, this causes a number of questions:
                 </p>
@@ -361,9 +617,17 @@
                 <p>
                     On the other hand, let's consider this code:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-042.png"/>
-                    <figcaption>Fig 04-042</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class MainViewModel
+{
+	private IDataService _dataService;
+	public MainViewModel(IDataService dataService)
+	{
+		_dataService = dataService();
+	}
+}</code></pre>
+<figcaption>Fig04-042</figcaption>
+</figure>
                 <p>
                     Here, the IDataService is injected inside the MainViewModel constructor, which then Saves it. As a
                     consequence, the MainViewModel is kept completely ignorant from the IDataService implementation. It
@@ -374,9 +638,25 @@
                     to be responsible for the creation of this service. Instead, the dependency is injected inside the
                     consumer. Here is an example:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-043.png"/>
-                    <figcaption>Fig 04-043</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class Startup
+{
+	// ...
+	public void Start()
+	{
+		IDataService service;
+		if(condition)
+		{
+			service = new DataService();
+		}
+		else
+		{
+			service = new AnotherService();
+		}
+		var viewModel = new MainViewModel(service);
+	}</code></pre>
+<figcaption>Fig04-043</figcaption>
+</figure>
                 <p>where an external class, named Startup, takes care of creating the correct implementation of
                     IDataService based on a condition. Then, this service is injected inside the MainViewModel
                     constructor.
@@ -431,21 +711,32 @@
                 <p>
                     In SimpleIoc, this is how you register a class with a container:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-044.png"/>
-                    <figcaption>Fig 04-044</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;MainViewModel&gt;();</code></pre>
+<figcaption>Fig04-044</figcaption>
+</figure>
+
                 <p>Simply use a Register method, like here using it with a class. Another even more frequent case is
                     registering an interface and specifying which implementation to use; like here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-045.png"/>
-                    <figcaption>Fig 04-045</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();</code></pre>
+<figcaption>Fig04-045</figcaption>
+</figure>
                 <p> the IDataService interface and its DataService implementation. This allows for conditional
                     registration; for example, here, based on the condition:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-046.png"/>
-                    <figcaption>Fig 04-046</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">if(condition)
+{
+	SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();
+}
+else
+{
+	SimpleIoc.Default.Register&lt;IDataService, AnotherService&gt;();
+}</code></pre>
+<figcaption>Fig04-046</figcaption>
+</figure>
                 <p>One typical usage for this is a detection of design time mode, when the application runs within the
                     Designer, such as Blend. In that case, we can register a design time DataService, and then at
                     runtime, rather use the actual DataService implementation.
@@ -459,21 +750,28 @@
                 <p>Another way to register a class is to use a Factory. This is a delegate that returns an instance of
                     the given class:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-047.png"/>
-                    <figcaption>Fig 04-047</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var myService = new DataService();
+SimpleIoc.Default.Register&lt;IDataService&gt;(() =&gt; myService);</code></pre>
+<figcaption>Fig04-047</figcaption>
+</figure>
                 <p>
                     Typically, factories are expressed as lambda expressions, like here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-048.png"/>
-                    <figcaption>Fig 04-048</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;IDataService&gt;(() =&gt; myService);</code></pre>
+<figcaption>Fig04-048</figcaption>
+</figure>
                 <p>These can be useful, for example, if we want to return an instance that had been created earlier, or
                     like here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-049.png"/>
-                    <figcaption>Fig 04-049</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var param1 = true;
+var param2 = "Hello world";
+SimpleIoc.Default.Register&lt;MainViewModel&gt;(
+	() =&lt; new MainViewModel(param1, param2);</code></pre>
+<figcaption>Fig04-049</figcaption>
+</figure>
                 <p>if we need to pass parameters to the MainViewModel constructor. Here too, the execution of the
                     factory delegate does not happen immediately when the registration occurs. It is only executed on
                     demand when the first instance is retrieved from the SimpleIoc. The factory is executed once only,
@@ -483,9 +781,11 @@
                     immediately create an instance as soon as the class or the interface has been registered by using a
                     Boolean as shown here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-050.png"/>
-                    <figcaption>Fig 04-050</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;IDataService, DataService>(true);
+SimpleIoc.Default.Register&lt;MainViewModel&gt;(true);</code></pre>
+<figcaption>Fig04-050</figcaption>
+</figure>
                 <p>This can be useful if you want to guarantee that the class exists as early as possible. For instance,
                     imagine that you have a service that needs to listen to a web socket in order to receive messages
                     from a server and to cache them. Of course, it is good if this object can be created as soon as the
@@ -495,17 +795,27 @@
                 <p>Note that it is also possible to force the immediate creation of the instance when a factory is used,
                     like here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-051.png"/>
-                    <figcaption>Fig 04-051</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var myService = new DataService();
+SimpleIoc.Default.Register&lt;IDataService&gt;(() =&gt; myService, true);</code></pre>
+<figcaption>Fig04-051</figcaption>
+</figure>
                 <p>or here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-052.png"/>
-                    <figcaption>Fig 04-052</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;MainViewModel&gt;(
+	() =&gt; new MainViewModel(param1, param2), true);</code></pre>
+<figcaption>Fig04-052</figcaption>
+</figure>
                 <p>Another very useful option is the possibility to register a class or an interface with a Key:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-053.png"/>
-                    <figcaption>Fig 04-053</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;MainViewModel&gt;(
+	() =&lt; new MainViewModel(), "MyUniqueKey");
+
+SimpleIoc.Default.Register&lt;IDataService&gt;(
+	() =&gt; new DataService(), "AnotherUniqueKey");</code></pre>
+<figcaption>Fig04-053</figcaption>
+</figure>
+
                 <p>This allows having multiple instances of the same class or interface inside the IOC container. Of
                     course, the corresponding instance needs to be retrieved with the same Key, so there must be some
                     kind of contract between the class responsible for the registration and the consumers that will get
@@ -514,27 +824,36 @@
                 </p>
                 <h3>Creating and Getting Instances from SimpleIoc</h3>
                 <p>This is where the GetInstance method is useful. It is quite straightforward for example, here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-054.png"/>
-                    <figcaption>Fig 04-054</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var instance 
+	= SimpleIoc.Default.GetInstance&lt;MainViewModel&gt;();
+var service
+	= SimpleIoc.Default.GetInstance&lt;IDataService&gt;();</code></pre>
+<figcaption>Fig04-054</figcaption>
+</figure>
                 <p>retrieving the Default instance of MainViewModel, or of IDataService.</p>
                 <p>During registration, it was possible to pass a key to the Register method:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-055.png"/>
-                    <figcaption>Fig 04-055</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;IDataService&gt;(
+	() =&gt; new DataService(), "UniqueKey");</code></pre>
+<figcaption>Fig04-055</figcaption>
+</figure>
                 <p>
                     Back then, we mentioned that it was useful in order to have more than one instance of the same class
                     or interface inside the IOC container. Now we can also use the same key to retrieve the registered
                     instance. Of course, it means that the same key must be used during the registration, and by the
                     consumer. On the other hand, if the instances are registered without a key:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-056.png"/>
-                    <figcaption>Fig 04-056</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();</code></pre>
+<figcaption>Fig04-056</figcaption>
+</figure>
                 <p>it is possible to use a key anyway to retrieve an instance:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-057.png"/>
-                    <figcaption>Fig 04-057</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var keyedInstance
+	= SimpleIoc.Default.GetInstance&lt;IDataService&gt;("key1");</code></pre>
+<figcaption>Fig04-057</figcaption>
+</figure>
                 <p>In that case, one specific instance per UniqueKey is created and cached. This can be useful if you
                     need a number of instances of the same type for some reason. However, be aware that all created
                     instances are cached. If you want to remove the instance from the cache in order to free memory, you
@@ -545,30 +864,60 @@
                     creating the necessary dependencies and to compose them. For example, consider the following
                     MainViewModel constructor:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-058.png"/>
-                    <figcaption>Fig 04-058</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public MainViewModel(
+	IDataService dataService,
+	INavigationService navigationService)
+{
+	_dataService = dataService;
+	_navigationService = navigationService;
+}</code></pre>
+<figcaption>Fig04-058</figcaption>
+</figure>
                 <p>It requires two services, one instance of IDataService and one instance of INavigationService. In
                     MVVM Light, typically the registration to SimpleIoc takes place in an object, called
                     ViewModelLocator, that we discovered earlier in this module:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-059.png"/>
-                    <figcaption>Fig 04-059</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">static ViewModelLocator()
+{
+
+
+
+}</code></pre>
+<figcaption>Fig04-059</figcaption>
+</figure>
                 <p>Inside the constructor, we can register the services, like shown here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-060.png"/>
-                    <figcaption>Fig 04-060</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">static ViewModelLocator()
+{
+	SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();
+	SimpleIoc.Default.Register&lt;INavigationService&gt;(
+		() =&gt; new NavigationService())
+}</code></pre>
+<figcaption>Fig04-060</figcaption>
+</figure>
                 <p>Then, we take care of registering the MainViewModel itself:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-061.png"/>
-                    <figcaption>Fig 04-061</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">static ViewModelLocator()
+{
+	SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();
+	SimpleIoc.Default.Register&lt;INavigationService&gt;(
+		() =&gt; new NavigationService())
+	SimpleIoc.Default.Register&lt;MainViewModel&gt;();
+}</code></pre>
+<figcaption>Fig04-061</figcaption>
+</figure>
                 <p>
                     Later, when the GetInstance method is called for the MainViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-062.png"/>
-                    <figcaption>Fig 04-062</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public MainViewModel Main
+{
+	get { return SimpleIoc.Default.GetInstance&lt;MainViewModel&gt;(); }
+}</code></pre>
+<figcaption>Fig04-062</figcaption>
+</figure>
                 <p>the SimpleIoc will check if it already has an instance of this class in the cache. If not, it will
                     create one, but of course in order to create the MainViewModel, SimpleIoc needs an instance of
                     IDataService. Again, same story; it checks if it has an instance of IDataService registered, if not,
@@ -576,9 +925,18 @@
                     when all the parameters are ready, the MainViewModel can be created, cached, and returned.
                 </p>
                 <p>Let's take a moment to talk about two ways to do Dependency Injection in a class:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-063.png"/>
-                    <figcaption>Fig 04-063</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class MainViewModel : ViewModelBase
+{
+	private readonly IDataService _dataService;
+
+	public MainViewModel(IDataService dataService)
+	{
+		_dataService = dataService;
+	}
+}</code></pre>
+<figcaption>Fig04-063</figcaption>
+</figure>
                 <p>
                     Of course, we already mentioned the injection in the constructor, which we use in various examples.
                     This is convenient when the service is created in the IOC container and never changes. When the
@@ -587,9 +945,26 @@
                 </p>
 
                 <p>There is, however, another way to inject a dependency in a class, through a property:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-064.png"/>
-                    <figcaption>Fig 04-064</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class MainViewModel : ViewModelBase
+{
+	public IDialogService DialogService
+	{
+		get
+		{
+			return SimpleIoc.Default.GetInstance&lt;IDialogService&gt;();
+		}
+	}
+
+	private readonly IDataService _dataService;
+
+	public MainViewModel(IDataService dataService)
+	{
+		_dataService = dataService;
+	}
+}</code></pre>
+<figcaption>Fig04-064</figcaption>
+</figure>
                 <p>
                     Here, every time that the property is accessed, it is retrieved from the IOC container. This way of
                     doing is useful if the instance of IDialogService may change during the application lifetime. In
@@ -605,16 +980,20 @@
                     before you go Unregister and to save it separately.
                 </p>
                 <p>Unregister can take a parameter, or not. If we call the method without any parameter, like here:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-065.png"/>
-                    <figcaption>Fig 04-065</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Unregister&lt;MainViewModel&gt;();
+SimpleIoc.Default.Unregister&lt;IDialogService&gt;();</code></pre>
+<figcaption>Fig04-065</figcaption>
+</figure>
                 <p>
                     the class or interface is completely removed from SimpleIoc. Any subsequent call to GetInstance will
                     cause an exception to occur. It is, however, possible to pass a parameter to the Unregister method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-066.png"/>
-                    <figcaption>Fig 04-066</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Unregister&lt;IDialogService&gt;(this);
+SimpleIoc.Default.Unregister&lt;IDataService&gt;("key1");</code></pre>
+<figcaption>Fig04-066</figcaption>
+</figure>
                 <p>
                     So parameter can be an instance itself. In that case, the instance passed as parameter, like here
                     the (this) keyword, is removed from the cache. However, the IDialogService interface itself is not
@@ -624,6 +1003,11 @@
                 <p>Similarly, the key can also be passed to the Unregister method to identify an instance with the same
                     result:
                 </p>
+<figure>
+<pre><code class="csharp">SimpleIoc.Default.Unregister&lt;IDataService&gt;("key1");</code></pre>
+<figcaption>Fig04-067</figcaption>
+</figure>
+
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-067.png"/>
                     <figcaption>Fig 04-067</figcaption>
                 </figure>
