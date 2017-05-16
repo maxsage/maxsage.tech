@@ -63,16 +63,39 @@
                     <figcaption>Fig 01-001</figcaption>
                 </figure>
                 <p>Inside the Model folder I have a Constants file, this is shared with the web service.</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-002.png"/>
-                    <figcaption>Fig 01-003</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Model
+{
+    public static class Constants
+    {
+        public const string ActionGet = "get";
+        public const string ActionReset = "reset";
+        public const string ActionSave = "save";
+        public const string Code = "A7DFF044AACD45F6AD91F2ADF9306397";
+        public const string QueryKeyAction = "action";
+        public const string QueryKeyCode = "code";
+    }
+}</code></pre>
+<figcaption>Fig01-002</figcaption>
+</figure>
                 <p>And here I'm going to add an object, which we are going to use for the deserialization of the JSON.
                     Let's call that object, ListOfFriends.
                 </p>
                 <p>I'm going to make that class public, and then I'm going to add some content. Here we are:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-003.png"/>
-                    <figcaption>Fig 01-003</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Model
+{
+    public class ListOfFriends
+    {
+        public List&lt;Friend&gt; Data
+        {
+            get;
+            set;
+        }
+    }
+}</code></pre>
+<figcaption>Fig01-003</figcaption>
+</figure>
                 <p>We have one property called Data, which maps to the JsonProperty("data") with a small ‘d', and this
                     is a JsonProperty, so I'm going to use Json.NET to deserialize this. In order to use Json.NET, I
                     will use NuGet. So let's go and look for Json.NET in the online NuGet package source. Here we are:
@@ -84,17 +107,62 @@
                     And then I'm going to select here Json.NET Install. And now this is added. So I can use here the
                     JsonPropertyAttribute:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-005.png"/>
-                    <figcaption>Fig 01-005</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Model
+{
+    public class ListOfFriends
+    {
+        [JsonProperty("data")]
+        public List&lt;Friend&gt; Data
+        {
+            get;
+            set;
+        }
+    }
+}</code></pre>
+<figcaption>Fig01-005</figcaption>
+</figure>
                 <p>Now I need a friend class. So let's go into the Model, Add, New Class. I'm going to call that Friend,
                     and let's make this public. The Friend class is very simple, it has a few JsonProperty's; the Id,
                     the FirstName, the LastName, and an Update method that we are going to use later if we modify the
                     Friend:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-006.png"/>
-                    <figcaption>Fig 01-006</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Model
+{
+    public class Friend
+    {
+        [JsonProperty("id")]
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        [JsonProperty("first_name")]
+        public string FirstName
+        {
+            get;
+            set;
+        }
+
+        [JsonProperty("last_name")]
+        public string LastName
+        {
+            get;
+            set;
+        }
+
+        public void Update(Friend updatedFriend)
+        {
+            FirstName = updatedFriend.FirstName;
+            LastName = updatedFriend.LastName;
+        }
+    }
+}
+</code></pre>
+<figcaption>Fig01-006</figcaption>
+</figure>
                 <h3>Building the Client Data Service</h3>
                 <p>Then I'm going to add an interface to the Models folder. And I'm going to call that, IFriendsService.
                     And this is what I will use to connect to the data service, this is the definition of the service.
@@ -105,26 +173,68 @@
                     they are awaittable, so we are going to use a new await and async mechanism here to call Refresh and
                     Save:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-007.png"/>
-                    <figcaption>Fig 01-007</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Model
+{
+    public interface IFriendsService
+    {
+        Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh();
+        Task&lt;string&gt; Save(Friend updatedFriend);
+    }
+}
+</code></pre>
+<figcaption>Fig01-007</figcaption>
+</figure>
                 <p>Now I want to implement this interface, so I'm going to add a New Class, call that FriendsService.
                     And then I'm going to make this public and implement IFriendsService. Here we go:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-008.png"/>
-                    <figcaption>Fig 01-008</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace WhyMvvm.Model
+{
+    public class FriendsService : IFriendsService
+    {
+        public Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task&lt;string&gt; Save(Friend updatedFriend)
+		{
+			throw new NotImplementedException();
+		}
+	}
+}
+</code></pre>
+<figcaption>Fig01-008</figcaption>
+</figure>                
                 <p>Now the first thing I'm going to add is a UrlBase; this is a base URL of the web service:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-009.png"/>
-                    <figcaption>Fig 01-009</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private const string UrlBase = "http://www.galasoft.ch/labs/friends/handle.ashx?code={0}&{1}={2}&seed={3}";</code></pre>
+<figcaption>Fig01-009</figcaption>
+</figure>                
                 <p>
                     I have a few parameters that I need to fill. And then here I have the Refresh method, so let's
                     implement this:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-010.png"/>
-                    <figcaption>Fig 01-010</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh()
+{
+    var client = new HttpClient();
+
+    var uri = new Uri(string.Format(
+        UrlBase,
+        Constants.Code,
+        Constants.QueryKeyAction,
+        Constants.ActionGet,
+        DateTime.Now.Ticks));
+
+    var json = await client.GetStringAsync(uri);
+
+    var result = JsonConvert.DeserializeObject&lt;ListOfFriends&gt;(json);
+    return result.Data;
+}</code></pre>
+<figcaption>Fig-</figcaption>
+</figure>
                 <p>And here the Refresh method is going to use an HttpClient. Now for those of you familiar with Windows
                     8, you may have already seen this class, HttpClient, but maybe you know that in Windows Phone we
                     don't have HttpClient yet. So I'm going to use here something which is pretty new. Let's go to
@@ -142,68 +252,131 @@
                     await GetStringAsync, which is going to return to me the json. Because I have await, I need to make
                     this method async:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-012.png"/>
-                    <figcaption>Fig 01-012</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public async Task&lt;IEnumerable&lt;Friend&gt;&gt; Refresh()</code></pre>
+<figcaption>Fig01-012</figcaption>
+</figure>
                 <p>and finally I'm going to Deserialize the result here in the ListOfFriends and return the list of
                     actual friend objects to the caller:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-013.png"/>
-                    <figcaption>Fig 01-013</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var result = JsonConvert.DeserializeObject&lt;ListOfFriends&gt;(json);
+return result.Data;</code></pre>
+<figcaption>Fig01-013</figcaption>
+</figure>
                 <p>In order to Save. What I'm going to do is also build an HttpClient. I'm going to build the uri, this
                     time with Save. I'm going to take the updatedFriend and serialize it in json:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-014.png"/>
-                    <figcaption>Fig 01-014</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public Task&lt;string&gt; Save(Friend updatedFriend)
+{
+    var client = new HttpClient();
+
+    var uri = new Uri(string.Format(
+        UrlBase,
+        Constants.Code,
+        Constants.QueryKeyAction,
+        Constants.ActionSave,
+        DateTime.Now.Ticks));
+
+    var json = JsonConvert.SerializeObject(updatedFriend);
+}</code></pre>
+<figcaption>Fig01-014</figcaption>
+</figure>
                 <p>And then, I'm going to build a StringContent with MediaTypeHeaderValue("application/json"), and then
                     I'm going to post this JSON file to this URI:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-015.png"/>
-                    <figcaption>Fig 01-015</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">try
+{
+    var content = new StringContent(json);
+    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+    var response = await client.PostAsync(uri, content);
+    var result = await response.Content.ReadAsStringAsync();
+
+    return result;
+}
+catch (Exception)
+{
+    return "0";
+}</code></pre>
+<figcaption>Fig01-015</figcaption>
+</figure>
                 <p>Again, this is an awaitable method, so I need to make this method async:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-016.png"/>
-                    <figcaption>Fig 01-016</figcaption>
-                </figure>
+<figure>
+    <pre><code class="csharp">public async Task&lt;string&gt; Save(Friend updatedFriend)</code></pre>
+    <figcaption>Fig01-016</figcaption>
+</figure>
                 <p>Finally I'm going to read the result, which as I'll remind you is the id of the Friend, and I'm going
                     to return that:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-017.png"/>
-                    <figcaption>Fig 01-017</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var result = await response.Content.ReadAsStringAsync();
+
+return result;</code></pre>
+<figcaption>Fig01-017</figcaption>
+</figure>
                 <h3>Creating the UI of the MainPage</h3>
                 <p>Now I'm ready to do some UI. So let's go into the XAML. And here, inside my page, I'm going to add to
                     the ContentPanel, a LongListSelector, this is the list control, here we go, and I name that List:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-018.png"/>
-                    <figcaption>Fig 01-018</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;phone:LongListSelector x:Name="List"
+       ItemTemplate="{StaticResource FriendTemplate}"/&gt;</code></pre>
+<figcaption>Fig01-018</figcaption>
+</figure>
                 <p>
                     Now I also prepared a Refresh button, so let's go and add here, a Click event:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-019.png"/>
-                    <figcaption>Fig 01-019</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;phone:PhoneApplicationPage.ApplicationBar&gt;
+        &lt;shell:ApplicationBar&gt;
+            &lt;shell:ApplicationBarIconButton IconUri="/Assets/AppBar/refresh.png"
+                                            Text="refresh"
+                                            Click="RefreshClick"/&gt;</code></pre>
+<figcaption>Fig01-019</figcaption>
+</figure>
                 <p>And then in the code behind, I'm going to add some code here. The first thing I'm going to do is
                     create a new FriendsService. Then I'm going to call Refresh, which is an await table method, so I
                     need to make this async. And then I'm going to assign the ListOfFriends to the ItemsSource property
                     of the LongListSelector:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-020.png"/>
-                    <figcaption>Fig 01-020</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private async void RefreshClick(object sender, System.EventArgs e)
+{
+    var service = new Model.FriendsService();
+    var list = (await service.Refresh()).ToList();
+
+    List.ItemsSource = list;
+
+}</code></pre>
+<figcaption>Fig01-020</figcaption>
+</figure>
                 <p>Now the LongListSelector needs a DataTemplate, so here I name that FriendTemplate:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-021.png"/>
-                    <figcaption>Fig 01-021</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;phone:LongListSelector x:Name="List"
+    ItemTemplate="{StaticResource FriendTemplate}"/&gt;</code></pre>
+<figcaption>Fig01-021</figcaption>
+</figure>
                 <p>and for this DataTemplate I'm going to keep things simple. I just created here two TextBlocks; the
                     first one bound to FirstName and the second one bound to LastName:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-022.png"/>
-                    <figcaption>Fig 01-022</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;phone:PhoneApplicationPage.Resources&gt;
+        &lt;DataTemplate x:Key="FriendTemplate"&gt;
+            &lt;StackPanel Orientation="Horizontal"
+                        Tap="FriendTap"&gt;
+                &lt;TextBlock Text="{Binding FirstName}"
+                           Style="{StaticResource NameTextBlockStyle}" /&gt;
+
+                &lt;TextBlock Text="{Binding LastName}"
+                           Style="{StaticResource NameTextBlockStyle}" /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/DataTemplate&gt;
+    &lt;/phone:PhoneApplicationPage.Resources&gt;</code></pre>
+<figcaption>Fig01-022</figcaption>
+</figure>
                 <p>Now notice that I had to type this by hand, so I don't have any Visual help, any Visual Designer, and
                     this is what we are going to improve later when we have the design time data.
                 </p>
@@ -211,87 +384,173 @@
                 <p>Now we want to navigate to the DetailsPage when a Friend is Tapped. So the first thing I will do is
                     add here a Tap event to the StackPanel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-023.png"/>
-                    <figcaption>Fig 01-023</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;StackPanel Orientation="Horizontal"
+    Tap="FriendTap"&gt;</code></pre>
+<figcaption>Fig01-023</figcaption>
+</figure>
                 <p>And then inside the Event Handler, I'm going to get the element that was Tapped, I'm going to get
                     DataContext, which in the XAML-based framework is set to the element, which is currently represented
                     by the item control. So now, okay, it is a Friend. And then I'm going to Save this Friend somewhere.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-024.png"/>
-                    <figcaption>Fig 01-024</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> private void FriendTap(object sender, System.Windows.Input.GestureEventArgs e)
+{
+    var element = (FrameworkElement)sender;
+    var friend = element.DataContext as Friend;
+
+    if (friend == null)
+    {
+        return;
+    }
+
+    App.SelectedFriend = friend;
+    NavigationService.Navigate(new Uri("/DetailsPage.xaml", UriKind.Relative));
+
+}</code></pre>
+<figcaption>Fig01-024</figcaption>
+</figure>
                 <p>But here in this application, this is not easy, because I don't have really an object which is
                     persistent, I only have pages. And in order to Save the Friend, I'm going to use here the
                     application, which is a global object:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-025.png"/>
-                    <figcaption>Fig 01-025</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">App.SelectedFriend = friend;</code></pre>
+<figcaption>Fig01-025</figcaption>
+</figure>
                 <p>Now it's not super clean, but this will do for this very simple non-MVVM application. And later we
                     will see how we can clean this up. Let's add the SelectedFriend to the application. It's a static
                     property, so again it is not very clean:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-026.png"/>
-                    <figcaption>Fig 01-026</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public static Friend SelectedFriend
+{
+    get;
+    set;
+}</code></pre>
+<figcaption>Fig01-026</figcaption>
+</figure>
                 <p>And then, I'm going to call the NavigationService in order to Navigate to the DetailsPage:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-027.png"/>
-                    <figcaption>Fig 01-027</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">App.SelectedFriend = friend;
+    NavigationService.Navigate(new Uri("/DetailsPage.xaml", UriKind.Relative));</code></pre>
+<figcaption>Fig01-027</figcaption>
+</figure>
                 <p>Now within the DetailsPage I'm going to retrieve this object, and I'm going to do that inside the
                     OnNavigatedTo method. Here we are. And then inside OnNavigatedTo, what I will do is check if I have
                     a SelectedFriend. And if, yes, I'm going to set TextProperty of FirstNameTextBox and
                     LastNameTextBox, and I also have a Preview, which is just a small UI, in order to see what the
                     DataTemplate is going to look like:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-028.png"/>
-                    <figcaption>Fig 01-028</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+{
+    base.OnNavigatedTo(e);
+
+    if (App.SelectedFriend != null)
+    {
+        FirstNameTextBox.Text = App.SelectedFriend.FirstName;
+        LastNameTextBox.Text = App.SelectedFriend.LastName;
+
+        PreviewFirstNameTextBlock.Text = App.SelectedFriend.FirstName;
+        PreviewLastNameTextBlock.Text = App.SelectedFriend.LastName;
+    }
+}</code></pre>
+<figcaption>Fig01-028</figcaption>
+</figure>
                 <p>Now that I have this, I'm going to do one more thing to DetailsPage; I'm going to worry about what
                     happens when the user is modifying the TextBoxes. So here I have the FirstNameTextBox and
                     LastNameTextBox, and here again, I need to use some Event Handler, so I'm going to use here the
                     TextChanged Event Handler and call that FirstNameTextChanged:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-029.png"/>
-                    <figcaption>Fig 01-029</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;TextBox x:Name="FirstNameTextBox"
+     TextChanged="FirstNameTextChanged"/&gt;</code></pre>
+<figcaption>Fig01-029</figcaption>
+</figure>
                 <p>
                     Let's create this Event Handler:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-030.png"/>
-                    <figcaption>Fig 01-030</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void FirstNameTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+{
+}
+</code></pre>
+<figcaption>Fig01-030</figcaption>
+</figure>
                 <p>And then for the other one, I'm going to have here, of course, LastNameTextChanged:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-031.png"/>
-                    <figcaption>Fig 01-031</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;TextBox x:Name="LastNameTextBox"
+     TextChanged="LastNameTextChanged"/&gt;</code></pre>
+<figcaption>Fig01-031</figcaption>
+</figure>
                 <p>Here we go. Again, create the Event Handler. And now inside the Event Handler what I'm going to do
                     is, again, get this global Friend and set the FirstName to the Text property of the TextBox:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-032.png"/>
-                    <figcaption>Fig 01-032</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void FirstNameTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+{
+    App.SelectedFriend.FirstName = ((TextBox)sender).Text;
+    PreviewFirstNameTextBlock.Text = App.SelectedFriend.FirstName;
+
+}</code></pre>
+<figcaption>Fig01-032</figcaption>
+</figure>
                 <p>And I'm going to do the same for the LastName:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-033.png"/>
-                    <figcaption>Fig 01-033</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private void LastNameTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+{
+    App.SelectedFriend.LastName = ((TextBox)sender).Text;
+    PreviewLastNameTextBlock.Text = App.SelectedFriend.LastName;
+
+}</code></pre>
+<figcaption>Fig01-033</figcaption>
+</figure>
                 <p>So again, here I'm using some global object, which is not super clean, but right now in this
                     event-based application, this is what we have.
                 </p>
                 <h3>Saving the Data Object, Testing</h3>
                 <p>Finally, I'm going to have a Save button, here we are, I prepared it earlier:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-034.png"/>
-                    <figcaption>Fig 01-034</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;shell:ApplicationBar>
+    &lt;shell:ApplicationBarIconButton IconUri="/Assets/AppBar/refresh.png"
+                                    Text="refresh"
+                                    Click="RefreshClick"/>
+&lt;/shell:ApplicationBar&gt;</code></pre>
+<figcaption>Fig01-034</figcaption>
+</figure>
                 <p>And here, again, I'm going to add a Click event, SaveClick, and inside the code behind, I'm going to
                     call the data service and I'm going to call the Save method with the SelectedFriend. And again, this
                     is an awaitable operation, so I need to add async on this method. And in case of Errors, I'm going
                     to use here the MessageBox to Show the message
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-035.png"/>
-                    <figcaption>Fig 01-035</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> private async void SaveClick(object sender, System.EventArgs e)
+{
+    try
+    {
+        var service = new Model.FriendsService();
+        var result = await service.Save(App.SelectedFriend);
+
+        var id = int.Parse(result);
+
+        if (id > 0)
+        {
+            App.SelectedFriend.Id = id;
+        }
+        else
+        {
+            MessageBox.Show("Error");
+        }
+    }
+    catch (Exception)
+    {
+        MessageBox.Show("Error");
+    }
+
+}</code></pre>
+<figcaption>Fig01-035</figcaption>
+</figure>
                 <p>So here we are, our application is complete, and now I'm going to test that. So I'm going to run the
                     code inside the Emulator, I'm going to refresh my list:
                 </p>
@@ -318,9 +577,21 @@
                     MainPage.xaml, we see that have here the Tapped Event Handler, called FriendTap, and this is going
                     to complicate our life because we cannot move this DataTemplate to a resource dictionary:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig01-038.png"/>
-                    <figcaption>Fig 01-038</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;phone:PhoneApplicationPage.Resources&gt;
+        &lt;DataTemplate x:Key="FriendTemplate"&gt;
+            &lt;StackPanel Orientation="Horizontal"
+                        Tap="FriendTap"&gt;
+                &lt;TextBlock Text="{Binding FirstName}"
+                           Style="{StaticResource NameTextBlockStyle}" /&gt;
+
+                &lt;TextBlock Text="{Binding LastName}"
+                           Style="{StaticResource NameTextBlockStyle}" /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/DataTemplate&gt;
+    &lt;/phone:PhoneApplicationPage.Resources&gt;</code></pre>
+<figcaption>Fig01-038</figcaption>
+</figure>
                 <p>
                     Resource dictionaries have great advantages; for example, they allow an integrator, or a designer,
                     to work on the UI of the application while a developer is working on the pages. They also allow you

@@ -306,7 +306,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent);

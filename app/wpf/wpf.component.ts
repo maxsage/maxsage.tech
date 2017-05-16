@@ -166,7 +166,7 @@ export class MVVMLightToolkitFundamentals00CourseContentsComponent {
 
 @Component({
     templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class MVVMLightToolkitFundamentals01IntroductionToTheMVVMComponent {
     public pageTitle: string = "MVVM Light Toolkit Fundamentals - Introduction to the MVVM";
