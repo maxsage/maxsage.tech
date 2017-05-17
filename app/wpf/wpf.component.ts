@@ -198,7 +198,7 @@ export class MVVMLightToolkitFundamentals04TheExtrasComponent {
 
 @Component({
     templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent {
     public pageTitle: string = "MVVM Light Toolkit Fundamentals - Installing the MVVM Light Toolkit and Additional" +
@@ -207,7 +207,7 @@ export class MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAddit
 
 @Component({
     templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, PreHighlight]
 })
 export class MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent {
     public pageTitle: string = "MVVM Light Toolkit Fundamentals - Advanced Examples with MVVM Light";

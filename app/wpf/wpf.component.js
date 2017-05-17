@@ -363,7 +363,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], MVVMLightToolkitFundamentals05InstallingTheMVVMLightToolkitAndAdditionalComponentsComponent);
@@ -377,7 +377,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], MVVMLightToolkitFundamentals06AdvancedExamplesWithMVVMLightComponent);
