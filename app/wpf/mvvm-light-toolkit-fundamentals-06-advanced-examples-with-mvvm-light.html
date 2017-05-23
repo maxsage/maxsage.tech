@@ -53,8 +53,7 @@
                 </p>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex06-001" type="text"
-                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\before\PlugInSample\PlugInSample.sln">
+                        <input id="Ex06-001" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\before\PlugInSample\PlugInSample.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-001">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -64,8 +63,7 @@
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex06-002" type="text"
-                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\after\PlugInSample\PlugInSample.sln">
+                        <input id="Ex06-002" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\after\PlugInSample\PlugInSample.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-002">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -91,7 +89,7 @@
                 <p>
                     For example, here, this is an interface called IPlugIn:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace PlugInSample.Contracts
 {
     public interface IPlugIn
@@ -104,8 +102,8 @@
         FrameworkElement GetElement();
     }
 }</code></pre>
-<figcaption>Fig06-003</figcaption>
-</figure>
+                    <figcaption>Fig06-003</figcaption>
+                </figure>
 
                 <p>
                     It has one property and one method. The property is just for information, and returns a name of the plugin:
@@ -121,22 +119,22 @@
                     Of course, this probably should be a unique name. The GetElement method returns a FrameworkElement, which can
                     be anything that will be placed into the PlugInHost:
                 </p>
-<figure>
-<pre><code class="csharp">FrameworkElement GetElement();</code></pre>
-<figcaption>Fig06-005</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">FrameworkElement GetElement();</code></pre>
+                    <figcaption>Fig06-005</figcaption>
+                </figure>
                 <p>
                     In addition to these members, a PlugIn interface could host other information; for example, the desired
                     position for the plugin inside the host, etc. The next interface is called IPlugInHost:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public interface IPlugInHost
 {
     void Clear();
     void PlacePlugIn(IPlugIn plugIn, object dataContext);
 }</code></pre>
-<figcaption>Fig06-006</figcaption>
-</figure>
+                    <figcaption>Fig06-006</figcaption>
+                </figure>
                 <p>
                     It defines what the host needs to do in order to receive a new plugin. In our case, the host will be the WPF
                     Application's MainWindow, but we could have other scenarios or multiple hosts, etc.
@@ -145,10 +143,10 @@
                     Here we have two methods, clearing all the plugins, for example before we reload, and placing the PlugIn into
                     the host.
                 </p>
-<figure>
-<pre><code class="csharp">void PlacePlugIn(IPlugIn plugIn, object dataContext);</code></pre>
-<figcaption>Fig06-007</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">void PlacePlugIn(IPlugIn plugIn, object dataContext);</code></pre>
+                    <figcaption>Fig06-007</figcaption>
+                </figure>
                 <p>
                     This method gets an instance of the IPlugIn interface that we saw just before and the second parameter is a
                     plugIn's dataContext. In true Model-View-ViewModel form, the dataContext will host functionality and
@@ -180,61 +178,61 @@
                     This class will be responsible for inspecting and loading plugins, so let's check it out. First, the Path of
                     the PlugInFolder is read from the Settings:
                 </p>
-<figure>
-<pre><code class="csharp">var folderPath = (string)Settings.Default["PlugInFolderPath"];</code></pre>
-<figcaption>Fig06-011</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var folderPath = (string)Settings.Default["PlugInFolderPath"];</code></pre>
+                    <figcaption>Fig06-011</figcaption>
+                </figure>
                 <p>
                     This allows the path to change, even after the application is compiled, which is convenient. Then, we go
                     further down, and we will use this foreach loop to load each DLL inside the folder:
                 </p>
-<figure>
-<pre><code class="csharp">foreach (var file in folder.GetFiles("*.dll"))</code></pre>
-<figcaption>Fig06-012</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">foreach (var file in folder.GetFiles("*.dll"))</code></pre>
+                    <figcaption>Fig06-012</figcaption>
+                </figure>
                 <p>
                     We will load all the assembly's types:
                 </p>
-<figure>
-<pre><code class="csharp">foreach (var type in assembly.GetTypes())</code></pre>
-<figcaption>Fig06-013</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">foreach (var type in assembly.GetTypes())</code></pre>
+                    <figcaption>Fig06-013</figcaption>
+                </figure>
                 <p>
                     and check if one or more of these types are implementing the IPlugIn interface from the Contracts assembly:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">if (typeof (IPlugIn).IsAssignableFrom(type)
     &amp;&amp; !type.IsInterface)</code></pre>
-<figcaption>Fig06-014</figcaption>
-</figure>
+                    <figcaption>Fig06-014</figcaption>
+                </figure>
                 <p>
                     If that is the case, we use some Reflection to get the default constructor of the IPlugIn implementation:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var constructor = type.GetConstructor(
         new Type[]
         {
         });</code></pre>
-<figcaption>Fig06-015</figcaption>
-</figure>
+                    <figcaption>Fig06-015</figcaption>
+                </figure>
                 <p>
                     and we invoke it to create a new instance of the plugin:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var manager = constructor.Invoke(
     new object[]
     {
     });
 
 PlugIns.Add((IPlugIn)manager);</code></pre>
-<figcaption>Fig06-016</figcaption>
-</figure>
+                    <figcaption>Fig06-016</figcaption>
+                </figure>
                 <p>
                     Then, this instance is kept in the list. After the plugins have been loaded, the Host can call the GetElement
                     method. Remember that the IPlugIn's GetElement method is returning a FrameworkElement, which can be placed
                     into the user interface:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public FrameworkElement GetElement(IPlugIn plugInManager)
 {
     var fullType = plugInManager.GetType();
@@ -249,12 +247,12 @@ PlugIns.Add((IPlugIn)manager);</code></pre>
 
     return element as FrameworkElement;
 }</code></pre>
-<figcaption>Fig06-017</figcaption>
-</figure>
+                    <figcaption>Fig06-017</figcaption>
+                </figure>
                 <p>
                     Here, too, we are going to use some Reflection to invoke the PlugIn's GetElement method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">  var method = fullType.GetMethod("GetElement");
 
 var element = method.Invoke(
@@ -262,8 +260,8 @@ var element = method.Invoke(
     new object[]
     {
     });</code></pre>
-<figcaption>Fig06-018</figcaption>
-</figure>
+                    <figcaption>Fig06-018</figcaption>
+                </figure>
                 <p>
                     and to return the result casted to a Framework Element.
                 </p>
@@ -273,10 +271,10 @@ var element = method.Invoke(
                     Bootstrapper into the SimpleIoc in order to make it easily available to the application's objects that need
                     it:
                 </p>
-<figure>
-<pre><code class="csharp">SimpleIoc.Default.Register&lt;Bootstrapper&gt;();</code></pre>
-<figcaption>Fig06-019</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">SimpleIoc.Default.Register&lt;Bootstrapper&gt;();</code></pre>
+                    <figcaption>Fig06-019</figcaption>
+                </figure>
                 <p>
                     Now let's see the object that will host the plugins. In this application, we use a MainWindow for that. Here
                     is how it looks like in Blend:
@@ -288,79 +286,95 @@ var element = method.Invoke(
                     The orange and green borders will be where the plugins are placed. The button below will reload the plugins
                     for the PlugInFolder. In the code behind, we see that the MainWindow implements the IPlugInHost interface:
                 </p>
-<figure>
-<pre><code class="csharp">public partial class MainWindow : IPlugInHost</code></pre>
-<figcaption>Fig06-021</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">public partial class MainWindow : IPlugInHost</code></pre>
+                    <figcaption>Fig06-021</figcaption>
+                </figure>
                 <p>
                     We already saw these kinds of things before; for example, when we implemented the IDialogService interface in
                     order to show messages to the user. Here, the MainWindow registers itself in the IOC container when it is
                     loaded:
                 </p>
-<figure>
-<pre><code class="csharp">Loaded += (s, e) =&gt; SimpleIoc.Default.Register&lt;IPlugInHost&gt;(() => this);</code></pre>
-<figcaption>Fig06-022</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Loaded += (s, e) =&gt; SimpleIoc.Default.Register&lt;IPlugInHost&gt;(() => this);</code></pre>
+                    <figcaption>Fig06-022</figcaption>
+                </figure>
                 <p>
                     To keep things clean, the MainWindow also unregisters itself in the closing event handler:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">Closing += (s, e) =>
 {
     SimpleIoc.Default.Unregister&lt;IPlugInHost&gt;(this);
     ViewModelLocator.Cleanup();
 };</code></pre>
-<figcaption>Fig06-023</figcaption>
-</figure>
+                    <figcaption>Fig06-023</figcaption>
+                </figure>
                 <p>
                     The Clear method is required by the IPlugInHost interface:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> Messenger.Default.Send(
     new NotificationMessage(Notifications.CleanupNotification));</code></pre>
-<figcaption>Fig06-024</figcaption>
-</figure>
+                    <figcaption>Fig06-024</figcaption>
+                </figure>
                 <p>
                     We will first send a message to whomever is concerned, warning that it is time for cleanup. Typically, all the
                     plugins are going to be interested in this message. Here, we use a standard NotificationMessage, which is an
                     MVVM Light element. Then, we clear the UI by setting the orange and green borders' Child property to null:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">PlugInHost1.Child = null;
 PlugInHost2.Child = null;</code></pre>
-<figcaption>Fig06-025</figcaption>
-</figure>
+                    <figcaption>Fig06-025</figcaption>
+                </figure>
                 <p>
                     The PlacePlugIn method is also required by the IPlugInHost interface:
                 </p>
-
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-026.png"/>
-                    <figcaption>Fig 06-026</figcaption>
+                <figure>
+                    <pre><code class="csharp">var bootstrapper = ServiceLocator.Current.GetInstance&lt;Bootstrapper&gt;();</code></pre>
+                    <figcaption>Fig06-026</figcaption>
                 </figure>
                 <p>
                     It uses the IOC container to get the Bootstrapper:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-027.png"/>
-                    <figcaption>Fig 06-027</figcaption>
+                <figure>
+                    <pre><code class="csharp">element = bootstrapper.GetElement(plugIn);</code></pre>
+                    <figcaption>Fig06-027</figcaption>
                 </figure>
                 <p>
                     Then, it gets a FrameworkElement that is defined in the plugIn assembly using the Bootstrapper's GetElement
                     method that we just saw:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-028.png"/>
-                    <figcaption>Fig 06-028</figcaption>
+                <figure>
+                    <pre><code class="csharp">element = bootstrapper.GetElement(plugIn);</code></pre>
+                    <figcaption>Fig06-028</figcaption>
                 </figure>
                 <p>
                     It sets the element's DataContext as required here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-029.png"/>
-                    <figcaption>Fig 06-029</figcaption>
+                <figure>
+                    <pre><code class="csharp">element.DataContext = dataContext;</code></pre>
+                    <figcaption>Fig06-029</figcaption>
                 </figure>
                 <p>
                     Then, it uses an algorithm to find out where to place a plugin into the UI:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-030.png"/>
-                    <figcaption>Fig 06-030</figcaption>
+                <figure>
+<pre><code class="csharp">if (PlugInHost1.Child == null)
+{
+    PlugInHost1.Child = element;
+    return;
+}
+
+if (PlugInHost2.Child == null)
+{
+    PlugInHost2.Child = element;
+    return;
+}
+
+MessageBox.Show("No more room");</code></pre>
+                    <figcaption>Fig06-030</figcaption>
                 </figure>
                 <p>
                     Here, this algorithm is very basic, but it could be much more complex; for example, the plugin might require
@@ -370,16 +384,23 @@ PlugInHost2.Child = null;</code></pre>
                     Now let's open the MainViewModel. This will be the ViewModel for the application's MainWindow. It has an
                     ObservableCollection of the IPlugIns:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-031.png"/>
-                    <figcaption>Fig 06-031</figcaption>
+                <figure>
+<pre><code class="csharp">public ObservableCollection&lt;IPlugIn&gt; PlugIns
+{
+    get;
+    private set;
+}</code></pre>
+                    <figcaption>Fig06-031</figcaption>
                 </figure>
                 <p>
                     We will use this collection to show the PlugIn names into the window. Then we have the RelayCommand, which is
                     going to be used to reload all the plugins from the PlugInFolder. To do this, we will get the PlugInHost from
                     the IOC container:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-032.png"/>
-                    <figcaption>Fig 06-032</figcaption>
+                <figure>
+<pre><code class="csharp">var host = ServiceLocator.Current.GetInstance&lt;IPlugInHost&gt;();
+host.Clear();</code></pre>
+                    <figcaption>Fig06-032</figcaption>
                 </figure>
                 <p>
                     and, of course, the MainViewModel doesn't know that this IPlugInHost is actually the MainWindow. Again, this
@@ -389,14 +410,20 @@ PlugInHost2.Child = null;</code></pre>
                     The MainViewModel instructs the PlugInHost to Clear the PlugIns. Then it calls a Refresh method on the
                     Bootstrapper and saves the PlugIns in the ObservableCollection:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-033.png"/>
-                    <figcaption>Fig 06-033</figcaption>
+                <figure>
+                    <pre><code class="csharp">bootstrapper.Refresh();</code></pre>
+                    <figcaption>Fig06-033</figcaption>
                 </figure>
                 <p>
                     And finally, it instructs the PlugInHost to place the PlugIn elements in the user interface:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-034.png"/>
-                    <figcaption>Fig 06-034</figcaption>
+                <figure>
+<pre><code class="csharp">foreach (var plugIn in bootstrapper.PlugIns)
+{
+   PlugIns.Add(plugIn);
+   host.PlacePlugIn(plugIn, this);
+}</code></pre>
+                    <figcaption>Fig06-034</figcaption>
                 </figure>
                 <p>
                     Note that in this simple demo, the PlugIn's ViewModel is a MainViewModel itself. In a production application,
@@ -415,8 +442,31 @@ PlugInHost2.Child = null;</code></pre>
                     I'm going to type the name of the property, Counter, and let's make that a string and the name of the field is
                     also going to be _counter. And then I'm going to type the initial value, which I set to "Initializing":
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-036.png"/>
-                    <figcaption>Fig 06-036</figcaption>
+                <figure>
+<pre><code class="csharp">/// &lt;summary&gt;
+/// The &lt;see cref="Counter" /&gt; property's name.
+/// &lt;/summary&gt;
+public const string CounterPropertyName = "Counter";
+
+private string _counter = "Initializing";
+
+/// &lt;summary&gt;
+/// Sets and gets the Counter property.
+/// Changes to that property's value raise the PropertyChanged event.
+/// &lt;/summary&gt;
+public string Counter
+{
+    get
+    {
+        return _counter;
+    }
+    set
+    {
+        Set(() => Counter, ref _counter, value);
+    }
+}
+</code></pre>
+                    <figcaption>Fig06-036</figcaption>
                 </figure>
                 <p>
                     So this is a simple string property, which raises a PropertyChanged event when it changes. Then I'm going to
@@ -430,15 +480,38 @@ PlugInHost2.Child = null;</code></pre>
                     Tab. And then I'm going to call that _incrementCommand, and the name of the property itself, IncrementCommand,
                     too:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-038.png"/>
-                    <figcaption>Fig 06-038</figcaption>
+                <figure>
+<pre><code class="csharp">private RelayCommand _incrementCounterCommand;
+
+/// &lt;summary&gt;
+/// Gets the IncrementCounterCommand.
+/// &lt;/summary&gt;
+public RelayCommand IncrementCounterCommand
+{
+    get
+    {
+        return _incrementCounterCommand
+            ?? (_incrementCounterCommand = new RelayCommand(
+                () =&gt;
+                {
+                    Counter = string.Format(
+                        "Counter is now {0}",
+                        _counterValue++);
+                }));
+    }
+}</code></pre>
+                    <figcaption>Fig06-038</figcaption>
                 </figure>
                 <p>
                     The implementation is going to be very simple; I'm simply going to take this value here and increment it, and
                     then format the string:
+
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-039.png"/>
-                    <figcaption>Fig 06-039</figcaption>
+                <figure>
+<pre><code class="csharp">Counter = string.Format(
+    "Counter is now {0}",
+    _counterValue++);</code></pre>
+                    <figcaption>Fig06-039</figcaption>
                 </figure>
                 <p>
                     So far, this is just standard MVVM code. However, because the MainViewModel will be set as the PlugIn's
@@ -482,27 +555,94 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     Here is the implementation of the IPlugIn interface.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-046.png"/>
-                    <figcaption>Fig 06-046</figcaption>
+                <figure>
+<pre><code class="csharp">using System.Windows;
+using PlugIn1.ViewModel;
+using PlugInSample.Contracts;
+
+namespace PlugIn1
+{
+    public class PlugInManager : IPlugIn
+    {
+        public string Name
+        {
+            get
+            {
+                return "Plug-in # 1";
+            }
+        }
+
+        public FrameworkElement GetElement()
+        {
+            return new PlugInControl1();
+        }
+    }
+}</code></pre>
+                    <figcaption>Fig06-046</figcaption>
                 </figure>
                 <p>
                     This is a PlugInManager, which is going to handle loading the PlugIn UserControl. The name is defined here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-047.png"/>
-                    <figcaption>Fig 06-047</figcaption>
+                <figure>
+<pre><code class="csharp">public string Name
+{
+    get
+    {
+        return "Plug-in # 1";
+    }
+}</code></pre>
+                    <figcaption>Fig06-047</figcaption>
                 </figure>
                 <p>
                     we simple return a string, and then we have the GetElement method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-048.png"/>
-                    <figcaption>Fig 06-048</figcaption>
+                <figure>
+<pre><code class="csharp">public FrameworkElement GetElement()
+{
+    return new PlugInControl1();
+}</code></pre>
+                    <figcaption>Fig06-048</figcaption>
                 </figure>
                 <p>
                     This creates a new instance of the PlugInControl, again in a very simple manner. In the UserControl.xaml, we
                     see that the DataContext is not explicitly set:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-049.png"/>
-                    <figcaption>Fig 06-049</figcaption>
+                <figure>
+<pre><code class="xml">&lt;UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ignore="http://www.ignore.com"
+             xmlns:viewModel="clr-namespace:PlugIn1.ViewModel"
+             x:Class="PlugIn1.PlugInControl1"
+             mc:Ignorable="d ignore"
+             d:DesignHeight="300"
+             d:DesignWidth="300"&gt;
+
+    &lt;Grid Background="Red"&gt;
+        &lt;Grid.RowDefinitions&gt;
+            &lt;RowDefinition /&gt;
+            &lt;RowDefinition /&gt;
+            &lt;RowDefinition /&gt;
+        &lt;/Grid.RowDefinitions&gt;
+
+        &lt;StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"&gt;
+            &lt;TextBlock Text="Counter"
+                       Foreground="White"
+                       Margin="0,0,0,5"
+                       HorizontalAlignment="Center" /&gt;
+
+            &lt;TextBlock Text="{Binding Counter}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontSize="24" /&gt;
+        &lt;/StackPanel&gt;
+    &lt;/Grid&gt;
+&lt;/UserControl&gt;</code></pre>
+                    <figcaption>Fig06-049</figcaption>
                 </figure>
                 <p>
                     This will be the task of the Bootstrapper in the MainApplication. Remember that the MainViewModel will be used
@@ -512,8 +652,9 @@ PlugInHost2.Child = null;</code></pre>
                     Here, we rely on some knowledge of the ViewModel, notably that there is a Counter property, which is used here
                     in the Databinding:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-050.png"/>
-                    <figcaption>Fig 06-050</figcaption>
+                <figure>
+                    <pre><code class="xml">&lt;TextBlock Text="{Binding Counter}"</code></pre>
+                    <figcaption>Fig06-050</figcaption>
                 </figure>
                 <p>
                     If we open this UserControl in Blend, we see that there is no design time data:
@@ -541,15 +682,27 @@ PlugInHost2.Child = null;</code></pre>
                     If we take a look at the code, we see the two properties that we decided to expose to the PlugIns. There is a
                     Counter property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-053.png"/>
-                    <figcaption>Fig 06-053</figcaption>
+                <figure>
+<pre><code class="csharp">public string Counter
+{
+	get
+	{
+		return "Counter value goes here";
+	}
+}</code></pre>
+                    <figcaption>Fig06-053</figcaption>
                 </figure>
                 <p>which in the real-life MainViewModel is an observable property, but here it just returns a string purely for
                     design time purpose.
                 </p>
                 <p>There is also the IncrementCommand, which is defined here as an ICommand:</p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-054.png"/>
-                    <figcaption>Fig 06-054</figcaption>
+                <figure>
+<pre><code class="csharp">public ICommand IncrementCommand
+{
+	get;
+	set;
+}</code></pre>
+                    <figcaption>Fig06-054</figcaption>
                 </figure>
                 <p>
                     Note that in this case, the Command is never even created, it doesn't matter because it is purely for design
@@ -589,8 +742,10 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     In XAML, here is how the design-time DataContext looks like:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-059.png"/>
-                    <figcaption>Fig 06-059</figcaption>
+                <figure>
+<pre><code class="xml">d:DataContext="{d:DesignInstance {x:Type Design:DesignMainViewModel},
+    IsDesignTimeCreatable=True}"&gt;</code></pre>
+                    <figcaption>Fig06-059</figcaption>
                 </figure>
                 <p>
                     Again, this is just like we demonstrated in earlier modules as one of the ways to set design time data in
@@ -662,16 +817,29 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     When the PartialViewModel is constructed, I'm going to register to the MVVM Light's Messenger:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-069.png"/>
-                    <figcaption>Fig 06-069</figcaption>
+                <figure>
+<pre><code class="csharp">public PartialViewModel()
+{
+	Messenger.Default.Register&lt;NotificationMessage&gt;(
+		this,
+		HandleNotification);
+}</code></pre>
+                    <figcaption>Fig06-069</figcaption>
                 </figure>
                 <p>
                     Remember earlier, we saw that when the PlugIns are unloaded by the PlugInHost, a NotificationMessage is sent
                     through the Messenger. So here in the PlugIn's PartialViewModel, we can listen to that message. Then I can add
                     the method that is going to handle the NotificationMessage.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-070.png"/>
-                    <figcaption>Fig 06-070</figcaption>
+                <figure>
+<pre><code class="csharp">private void HandleNotification(NotificationMessage message)
+{
+    if (message.Notification == Notifications.CleanupNotification)
+    {
+        Messenger.Default.Unregister(this);
+    }
+}</code></pre>
+                    <figcaption>Fig06-070</figcaption>
                 </figure>
                 <p>
                     And here, if this is a CleanupNotification, we are going to Unregister this PlugIn from the Messenger in order
@@ -706,85 +874,229 @@ PlugInHost2.Child = null;</code></pre>
                     Let's open the User class, and we see that it is quite simple; it just has two Observable properties, the
                     FirstName and the LastName:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-072.png"/>
-                    <figcaption>Fig 06-072</figcaption>
+                <figure>
+<pre><code class="csharp">namespace PlugInSample.Contracts
+{
+    public class User : ObservableObject
+    {
+        public const string FirstNamePropertyName = "FirstName";
+        public const string LastNamePropertyName = "LastName";
+
+        private string _firstName = "First name";
+        private string _lastName = "Last name";
+
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+                Set(() =&gt; FirstName, ref _firstName, value);
+            }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+            set
+            {
+                Set(() =&gt; LastName, ref _lastName, value);
+            }
+        }
+    }
+}</code></pre>
+                    <figcaption>Fig06-072</figcaption>
                 </figure>
                 <p>
                     Then I will use this object into the MainViewModel inside the MainApplication. First, I'm going to add an
                     Observable property called CurrentUser and, of course, here, we could use the mvvminpc snippet that we saw
                     before:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-073.png"/>
-                    <figcaption>Fig 06-073</figcaption>
+                <figure>
+<pre><code class="csharp">public const string CurrentUserPropertyName = "CurrentUser";
+
+        private User _currentUser = new User();
+
+        public User CurrentUser
+        {
+            get
+            {
+                return _currentUser;
+            }
+            set
+            {
+                Set(() =&gt; CurrentUser, ref _currentUser, value);
+            }
+        }</code></pre>
+                    <figcaption>Fig06-073</figcaption>
                 </figure>
                 <p>
                     Then a little bit further down, I'm going to add a Command, which is going to be used to send the CurrentUser
                     to all the interested PlugIns:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-074.png"/>
-                    <figcaption>Fig 06-074</figcaption>
+                <figure>
+<pre><code class="csharp"> private RelayCommand _sendUserCommand;
+
+public RelayCommand SendUserCommand
+{
+    get
+    {
+        return _sendUserCommand
+               ?? (_sendUserCommand = new RelayCommand(
+                   () =&gt; Messenger.Default.Send(
+                       new NotificationMessage&lt;User&gt;(
+                           this,
+                           CurrentUser,
+                           Notifications.NewUserNotification))));
+    }
+}</code></pre>
+                    <figcaption>Fig06-074</figcaption>
                 </figure>
                 <p>
                     So let's check the code. What I'm going to do is send a new NotificationMessage of user:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-075.png"/>
-                    <figcaption>Fig 06-075</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">() =&gt; Messenger.Default.Send(
+   new NotificationMessage&lt;User&gt;(</code></pre>
+<figcaption>Fig06-075</figcaption>
+</figure>
                 <p>
                     so this is a special message type, which carries a notification and also a payload:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-076.png"/>
-                    <figcaption>Fig 06-076</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">CurrentUser,
+Notifications.NewUserNotification))));</code></pre>
+<figcaption>Fig06-076</figcaption>
+</figure>
                 <p>in this case the CurrentUser. For example, this could be a notification when a new user looks into the
                     application, etc. Now let's prepare the PlugIn to receive the message.
                 </p>
                 <p>
                     First, I add a property, which will display the UserFullName, according to a specific format:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-077.png"/>
-                    <figcaption>Fig 06-077</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public const string UserFullNamePropertyName = "UserFullName";
+
+private string _userFullName = "No user yet";
+
+public string UserFullName
+{
+    get
+    {
+        return _userFullName;
+    }
+    set
+    {
+        Set(() =&gt; UserFullName, ref _userFullName, value);
+    }
+}</code></pre>
+<figcaption>Fig06-077</figcaption>
+</figure>
                 <p>
                     Then, inside the constructor, I will add another registration to the MVVM Light Messenger:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-078.png"/>
-                    <figcaption>Fig 06-078</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public PartialViewModel()
+{
+    Messenger.Default.Register&lt;NotificationMessage&gt;(
+        this,
+        HandleNotification);
+
+    Messenger.Default.Register&lt;NotificationMessage&lt;User&gt;&gt;(
+        this,
+        message =&gt;
+        {
+            if (message.Notification == Notifications.NewUserNotification)
+            {
+                UserFullName = string.Format(
+                    "{0}, {1}",
+                    message.Content.LastName,
+                    message.Content.FirstName);
+            }
+        });
+}</code></pre>
+<figcaption>Fig06-078</figcaption>
+</figure>
                 <p>
                     We will check if the Notification is a NewUserNotification:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-079.png"/>
-                    <figcaption>Fig 06-079</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">if (message.Notification == Notifications.NewUserNotification)</code></pre>
+<figcaption>Fig06-079</figcaption>
+</figure>
                 <p>and if that is the case, we will use a message.Content to create the UserFullName according to a specific
                     format:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-080.png"/>
-                    <figcaption>Fig 06-080</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">UserFullName = string.Format(
+    "{0}, {1}",
+    message.Content.LastName,
+    message.Content.FirstName);</code></pre>
+<figcaption>Fig06-080</figcaption>
+</figure>
                 <p>
                     Now that the PartialViewModel is ready, let's use it in the XAML. I will add a snippet of XAML here, this is a
                     Grid containing a few elements:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-081.png"/>
-                    <figcaption>Fig 06-081</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;Grid Grid.Row="1"
+	  x:Name="PartialPanel"
+	  d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type viewModel:PartialViewModel}}"
+	  Grid.RowSpan="2"&gt;
+	&lt;Grid.RowDefinitions&gt;
+		&lt;RowDefinition /&gt;
+		&lt;RowDefinition /&gt;
+	&lt;/Grid.RowDefinitions&gt;
+
+	&lt;StackPanel Orientation="Vertical"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"&gt;
+		&lt;TextBlock Text="User"
+				   Foreground="White"
+				   HorizontalAlignment="Center" /&gt;
+
+		&lt;TextBlock Text="{Binding UserFullName}"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"
+				   Foreground="White"
+				   FontSize="24" /&gt;
+	&lt;/StackPanel&gt;
+&lt;/Grid&gt;</code></pre>
+<figcaption>Fig06-081</figcaption>
+</figure>
                 <p>
                     There is a TextBlock here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-082.png"/>
-                    <figcaption>Fig 06-082</figcaption>
-                </figure>
+<figure>
+<pre><code class="xml">&lt;TextBlock Text="{Binding UserFullName}"
+   HorizontalAlignment="Center"
+   VerticalAlignment="Center"
+   Foreground="White"
+   FontSize="24" /&gt;</code></pre>
+<figcaption>Fig06-082</figcaption>
+</figure>
                 <p>
                     which is data bound to the UserFullName property that we added to the PartialViewModel. So now we need to set
                     the DataContext of this Grid to the PartialViewModel, which we can do in code behind. In the
                     PlugInControl1.xaml.cs, I will use this line of code in the constructor to set the PartialPanel's DataContext
                     to a new PartialViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-083.png"/>
-                    <figcaption>Fig 06-083</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public partial class PlugInControl1
+{
+    public PlugInControl1()
+    {
+        InitializeComponent();
+        PartialPanel.DataContext = new PartialViewModel();
+    }
+}</code></pre>
+<figcaption>Fig06-083</figcaption>
+</figure>
                 <p>
                     Of course, because the DataContext is set in the code behind, it means that we need a design-time DataContext
                     for the Visual Designer, in case we need it for design time data. This is easy to set up.
@@ -794,9 +1106,15 @@ PlugInHost2.Child = null;</code></pre>
                     going to detect the DesignMode, and in case the DesignMode is active, we are going to set the UserFullName to
                     a known value:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-084.png"/>
-                    <figcaption>Fig 06-084</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">#if DEBUG
+    if (IsInDesignMode)
+    {
+        UserFullName = "Bugnion, Laurent";
+    }
+#endif</code></pre>
+<figcaption>Fig06-084</figcaption>
+</figure>
                 <p>
                     Now I can build the application at this point. And if we take a quick look in Blend, we can see that the
                     design time data is working:
@@ -847,18 +1165,37 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     Let's take a look at IDataService. This is a very simple interface, which has just one method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-091.png"/>
-                    <figcaption>Fig 06-091</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Task&lt;TestObject&gt; GetTestObject();
+</code></pre>
+<figcaption>Fig06-091</figcaption>
+</figure>
                 <p>
                     and this method is going to be used asynchronously to retrieve a TestObject.
                 </p>
                 <p>
                     The TestObject itself has two properties:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-092.png"/>
-                    <figcaption>Fig 06-092</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace PlugInSample.Contracts
+{
+    public class TestObject
+    {
+        public string Property1
+        {
+            get;
+            set;
+        }
+
+        public int Property2
+        {
+            get;
+            set;
+        }
+    }
+}</code></pre>
+<figcaption>Fig06-092</figcaption>
+</figure>
                 <p>We already saw something like that in the previous module, when we were demonstrating NuGet and the Json.NET
                     assemblies. Now we are going to implement the DataService inside the Main assembly, so let's add a New Class:
                 </p>
@@ -874,16 +1211,42 @@ PlugInHost2.Child = null;</code></pre>
                 <p>And now I can add the implementation of the GetTestObject method, which is going to retrieve the json file from
                     the web server and use Json.NET to deserialize this into a TestObject:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-095.png"/>
-                    <figcaption>Fig 06-095</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public async Task&lt;TestObject&gt; GetTestObject()
+{
+    var client = new HttpClient();
+
+    var json = await client.GetStringAsync(
+        new Uri("http://www.galasoft.ch/labs/pluralsight/nugetintro/jsonsample.txt"));
+
+    var instance = JsonConvert.DeserializeObject&lt;TestObject&gt;(json);
+    return instance;
+}</code></pre>
+<figcaption>Fig06-095</figcaption>
+</figure>
                 <p>
                     Now I can register the DataService inside the ViewModelLocator, like we did multiple times during this course.
                     And I'm going to do this, here, inside the constructor:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-096.png"/>
-                    <figcaption>Fig 06-096</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">static ViewModelLocator()
+{
+    ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
+
+    if(ViewModelBase.IsInDesignModeStatic)
+    {
+        //SimpleIoc.Default.Register&lt;IDataService, DesignDataService&gt;();
+    }
+    else
+    {
+        SimpleIoc.Default.Register&lt;IDataService, DataService&gt;();
+    }
+
+    SimpleIoc.Default.Register&lt;Bootstrapper&gt;();
+    SimpleIoc.Default.Register&lt;MainViewModel&gt;();
+}</code></pre>
+<figcaption>Fig06-096</figcaption>
+</figure>
                 <p>
                     And, of course, just like before, I could also go ahead and define a DesignDataService used at design time,
                     but here for the purpose of the demo, I'm not going to do that.
@@ -892,9 +1255,19 @@ PlugInHost2.Child = null;</code></pre>
                     Now let's go back to the PlugIn assembly. Here, I'm going to start by adding a property to retrieve the
                     DataService from the IOC container:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-097.png"/>
-                    <figcaption>Fig 06-097</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class PartialViewModel : ViewModelBase
+{
+	public IDataService DataService
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance&lt;IDataService&gt;();
+            }
+        }
+}</code></pre>
+<figcaption>Fig06-097</figcaption>
+</figure>
                 <p>
                     This is the same DataService that we just registered into the MainApplication's ViewModelLocator. Of course,
                     because we are using the IDataService abstraction, it could be any implementation; we don't need to know about
@@ -904,28 +1277,93 @@ PlugInHost2.Child = null;</code></pre>
                     Now I can go ahead and add a RelayCommand here, so I'm going to use mvvmr, like before, and I will call this,
                     _callServiceCommand, here we go. And here, too, CallServiceCommand:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-098.png"/>
-                    <figcaption>Fig 06-098</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private RelayCommand _callServiceCommand;
+
+/// &lt;summary&gt;
+/// Gets the CallServiceCommand.
+/// &lt;/summary&gt;
+public RelayCommand CallServiceCommand
+{
+    get
+    {
+        return _callServiceCommand
+            ?? (_callServiceCommand = new RelayCommand(
+                () =&gt;
+                {
+
+                }));
+    }
+}</code></pre>
+<figcaption>Fig06-098</figcaption>
+</figure>
                 <p>
                     Let's implement this command now, so I'm going to drag the code here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-099.png"/>
-                    <figcaption>Fig 06-099</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">/// &lt;summary&gt;
+/// Gets the CallDataServiceCommand.
+/// &lt;/summary&gt;
+public RelayCommand CallDataServiceCommand
+{
+    get
+    {
+        return _callDataServiceCommand
+            ?? (_callDataServiceCommand = new RelayCommand(
+                async () =&gt;
+                {
+                       try
+                       {
+                           var instance = await DataService.GetTestObject();
+
+                           MessageBox.Show(
+                               string.Format(
+                                   "{0} : {1}",
+                                   instance.Property1,
+                                   instance.Property2));
+                       }
+                       catch (Exception ex)
+                       {
+                           MessageBox.Show(ex.Message);
+                       }
+
+                }));
+    }
+}</code></pre>
+<figcaption>Fig06-099</figcaption>
+</figure>
                 <p>
                     And what we will do here is call the DataService in order to get the TestObject:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-100.png"/>
-                    <figcaption>Fig 06-100</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var instance = await DataService.GetTestObject();</code></pre>
+<figcaption>Fig06-100</figcaption>
+</figure>
                 <p>
                     Of course, this is an asynchronous method so we need to await that, and because this is awaited, I need to set
                     this lambda expression to async:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-101.png"/>
-                    <figcaption>Fig 06-101</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">async () =&gt;
+{
+       try
+       {
+           var instance = await DataService.GetTestObject();
+
+           MessageBox.Show(
+               string.Format(
+                   "{0} : {1}",
+                   instance.Property1,
+                   instance.Property2));
+       }
+       catch (Exception ex)
+       {
+           MessageBox.Show(ex.Message);
+       }
+
+}));</code></pre>
+<figcaption>Fig06-101</figcaption>
+</figure>
                 <p>
                     Once a TestObject is retrieved, we are simply going to show a MessageBox for the demo, but of course in a
                     production application, we would actually use those values.
@@ -958,9 +1396,24 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     So here is a new class library, in which I added a new user control:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-104.png"/>
-                    <figcaption>Fig 06-104</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class PlugInManager : IPlugIn
+{
+    public string Name
+    {
+        get
+        {
+            return "Plug-in # 2";
+        }
+    }
+
+    public FrameworkElement GetElement()
+    {
+        return new AnotherPlugInControl();
+    }
+}</code></pre>
+<figcaption>Fig06-104</figcaption>
+</figure>
                 <p>
                     In the References folder, I added a reference to the Contracts assembly, like just before:
                 </p>
@@ -970,9 +1423,21 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     And here, I also implemented the PlugInManager with a Name and, of course, a GetElement method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-106.png"/>
-                    <figcaption>Fig 06-106</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public string Name
+{
+    get
+    {
+        return "Plug-in # 2";
+    }
+}
+
+public FrameworkElement GetElement()
+{
+    return new AnotherPlugInControl();
+}</code></pre>
+<figcaption>Fig06-106</figcaption>
+</figure>
                 <p>
                     And I also added the DesignMainViewModel, just like before. So let's go in Blend and do a little bit of
                     design. First of all, I'm going to set the design-time DataContext, just like before, let's select here
@@ -1073,6 +1538,28 @@ PlugInHost2.Child = null;</code></pre>
                     well suited to help you build the functionalities that you need in a much easier manner.
                 </p>
                 <h3>Expandable List: Preparing the Infrastructure</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex06-003" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\before\SelectableList\SelectableList.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex06-003">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex06-004" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\after\SelectableList\SelectableList.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex06-004">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>In this second sample, we will see an application of the Messenger component of MVVM Light. This is especially
                     useful when you don't know in advance how many recipients will subscribe to a message, from 0 to a large
                     number.
@@ -1113,51 +1600,74 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     First we see the two properties that I just mentioned, IsExpanded and IsSelected.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-122.png"/>
-                    <figcaption>Fig 06-122</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public bool IsExpanded
+{
+    get
+    {
+        return _isExpanded;
+    }
+    set
+    {
+        Set(() => IsExpanded, ref _isExpanded, value);
+    }
+}
+
+public const string IsSelectedPropertyName = "IsSelected";
+
+private bool _isSelected;
+
+public bool IsSelected</code></pre>
+<figcaption>Fig06-122</figcaption>
+</figure>
                 <p>IsExpanded is a standard observable property, which works because a SelectableViewModel inherits the MVVM Light
                     ViewModelBase:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-123.png"/>
-                    <figcaption>Fig 06-123</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class SelectableViewModel : ViewModelBase</code></pre>
+<figcaption>Fig06-123</figcaption>
+</figure>
                 <p>
                     The IsSelected property is a little bit more complex; we'll come to that in a moment. Let's scroll down for
                     now. Here, we expose a Command, which is called ExpandCommand:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-124.png"/>
-                    <figcaption>Fig 06-124</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public RelayCommand ExpandCommand</code></pre>
+<figcaption>Fig06-124</figcaption>
+</figure>
                 <p>
                     This is what will be actuated by the small button on the far left of the screen. What happened when this
                     command is actuated is this; first, the IsExpanded property is set to true:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-125.png"/>
-                    <figcaption>Fig 06-125</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">IsExpanded = true;</code></pre>
+<figcaption>Fig06-125</figcaption>
+</figure>
                 <p>
                     then the IsSelected value is also set to true:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-126.png"/>
-                    <figcaption>Fig 06-126</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">IsSelected=true;</code></pre>
+<figcaption>Fig06-126</figcaption>
+</figure>
                 <p>
                     because when the button is tapped, we want the corresponding item to be selected, just like we saw in the
                     Email Application. Then comes the important part, we use a Messenger to send an ExpandMessage:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-127.png"/>
-                    <figcaption>Fig 06-127</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Messenger.Default.Send(new ExpandMessage(this, IsExpanded));</code></pre>
+<figcaption>Fig06-127</figcaption>
+</figure>
                 <p>
                     This is because the other items in the list must also expand when one item gets expanded.
                 </p>
                 <p>
                     The ExpandMessage is here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-128.png"/>
-                    <figcaption>Fig 06-128</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class ExpandMessage : GenericMessage&lt;bool&gt;</code></pre>
+<figcaption>Fig06-128</figcaption>
+</figure>
                 <p>
                     and we see that it is a simple GenericMessage of bool. It means that it is sent carrying a simple Boolean
                     value as payload. Because it has a specific type, however, there can be no confusion as of the intent of the
@@ -1167,15 +1677,28 @@ PlugInHost2.Child = null;</code></pre>
                     Back to SelectableViewModel, the next interesting method is a constructor. Here, we register each item for two
                     different message types. The first one is the ExpandMessage that we just saw:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-129.png"/>
-                    <figcaption>Fig 06-129</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> Messenger.Default.Register&lt;ExpandMessage&gt;(
+    this,
+    msg =&gt;
+    {
+        if (msg.Sender != this)
+        {
+            IsExpanded = msg.Content;
+        }
+    });</code></pre>
+<figcaption>Fig06-129</figcaption>
+</figure>
                 <p>
                     First, we will check if the Sender is the item itself:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-130.png"/>
-                    <figcaption>Fig 06-130</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> if (msg.Sender != this)
+{
+    IsExpanded = msg.Content;
+}</code></pre>
+<figcaption>Fig06-130</figcaption>
+</figure>
                 <p>
                     This is necessary, because the item can both send and receive ExpandMessages. In order to avoid unwanted
                     effects, we need to prevent the item from doing anything if the Message received was sent by the item itself.
@@ -1185,29 +1708,77 @@ PlugInHost2.Child = null;</code></pre>
                     information from all the items. What we want to know is if an item is currently selected or not. If all items
                     are unselected, we want the whole list to collapse.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-131.png"/>
-                    <figcaption>Fig 06-131</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public SelectableViewModel()
+{
+    Messenger.Default.Register&lt;ExpandMessage&gt;(
+        this,
+        msg =&gt;
+        {
+            if (msg.Sender != this)
+            {
+                IsExpanded = msg.Content;
+            }
+        });
+
+    Messenger.Default.Register&lt;IsItemSelectedMessage&gt;(
+        this,
+        msg =&gt; msg.Execute(IsSelected));
+}</code></pre>
+<figcaption>Fig06-131</figcaption>
+</figure>
                 <p>
                     In order to do this, we will use a different type of message, called IsItemSelectedMessage. Let's take a look
                     at the code. Here is a code of IsItemSelectedMessage:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-132.png"/>
-                    <figcaption>Fig 06-132</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">using System;
+using GalaSoft.MvvmLight.Messaging;
+
+namespace SelectableList.ViewModel
+{
+    public class IsItemSelectedMessage : MessageBase
+    {
+        private readonly Action&lt;bool&gt; _callback;
+
+        public IsItemSelectedMessage(object sender, Action&lt;bool&gt; callback)
+            : base(sender)
+        {
+            _callback = callback;
+        }
+
+        public void Execute(bool result)
+        {
+            if (_callback != null)
+            {
+                _callback(result);
+            }
+        }
+    }
+}</code></pre>
+<figcaption>Fig06-132</figcaption>
+</figure>
                 <p>
                     This message has an Action as payload, which is a _callback:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-133.png"/>
-                    <figcaption>Fig 06-133</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private readonly Action&lt;bool&gt; _callback;</code></pre>
+<figcaption>Fig06-133</figcaption>
+</figure>
                 <p>
                     The _callback should immediately be executed when the message is received, in order to inform the sender about
                     the state of the item. To allow this, the message has an Execute method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-134.png"/>
-                    <figcaption>Fig 06-134</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public void Execute(bool result)
+{
+    if (_callback != null)
+    {
+        _callback(result);
+    }
+}</code></pre>
+<figcaption>Fig06-134</figcaption>
+</figure>
                 <p>
                     which is just a friendly way to execute the _callback.
                 </p>
@@ -1215,15 +1786,19 @@ PlugInHost2.Child = null;</code></pre>
                     So here, back into the SelectableViewModel, how do we use this message? First, in the item constructor, we
                     register for this message type:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-135.png"/>
-                    <figcaption>Fig 06-135</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Messenger.Default.Register&lt;IsItemSelectedMessage&gt;(
+    this,
+    msg =&gt; msg.Execute(IsSelected));</code></pre>
+<figcaption>Fig06-135</figcaption>
+</figure>
                 <p>
                     When it is received, the Execute method is called on the message:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-136.png"/>
-                    <figcaption>Fig 06-136</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">msg =&gt; msg.Execute(IsSelected));</code></pre>
+<figcaption>Fig06-136</figcaption>
+</figure>
                 <p>
                     What it does is very simple; it just returns a value of the IsSelected property to the sender. This way, the
                     sender will know the state of all the items in the list.
@@ -1231,48 +1806,111 @@ PlugInHost2.Child = null;</code></pre>
                 <p>
                     Let's see who sent the IsSelected message. This happened here, all the way up into the IsSelected property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-137.png"/>
-                    <figcaption>Fig 06-137</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public bool IsSelected
+{
+    get
+    {
+        return _isSelected;
+    }
+    set
+    {
+        if (Set(() => IsSelected, ref _isSelected, value))
+        {
+            if (!_isSelected)
+            {
+                var allItemsAreUnselected = true;
+
+                Messenger.Default.Send(
+                    new IsItemSelectedMessage(
+                        this,
+                        result =>
+                        {
+                            allItemsAreUnselected &= !result;
+                        }));
+
+                if (allItemsAreUnselected)
+                {
+                    IsExpanded = false;
+                    Messenger.Default.Send(new ExpandMessage(this, false));
+                }
+            }
+        }
+    }
+}</code></pre>
+<figcaption>Fig06-137</figcaption>
+</figure>
                 <p>
                     Because this property will be data bound to the item's checkbox in the user interface, we know when the user
                     deselects one item. If the value is false:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-138.png"/>
-                    <figcaption>Fig 06-138</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">if (!_isSelected)</code></pre>
+<figcaption>Fig06-138</figcaption>
+</figure>
                 <p>
                     we need to check all the other items, in order to know if the list should be collapsed. So we will ask all the
                     items by sending the IsItemSelectedMessage here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-139.png"/>
-                    <figcaption>Fig 06-139</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Messenger.Default.Send(
+    new IsItemSelectedMessage(
+        this,
+        result =&gt;
+        {
+            allItemsAreUnselected &= !result;
+        }));</code></pre>
+<figcaption>Fig06-139</figcaption>
+</figure>
+
                 <p>
                     When an item executes a callback, we check the result and we use this to compute the global value of all the
                     items.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-140.png"/>
-                    <figcaption>Fig 06-140</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">allItemsAreUnselected &= !result;</code></pre>
+<figcaption>Fig06-140</figcaption>
+</figure>
                 <p>
                     Then, if all the items replied that they are already unselected, we can collapse the list by sending an
                     ExpandMessage with the value of false:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-141.png"/>
-                    <figcaption>Fig 06-141</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">if (allItemsAreUnselected)
+{
+    IsExpanded = false;
+    Messenger.Default.Send(new ExpandMessage(this, false));
+}</code></pre>
+<figcaption>Fig06-141</figcaption>
+</figure>
                 <p>
                     Now let's see how we can use this SelectableViewModel inside an application. So here I create an
                     ItemViewModel, which derives from SelectableViewModel:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-142.png"/>
-                    <figcaption>Fig 06-142</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> public class ItemViewModel : SelectableViewModel
+{
+    public string Title
+    {
+        get;
+        set;
+    }
+}</code></pre>
+<figcaption>Fig06-142</figcaption>
+</figure>
                 <p>
                     For the demo, it is very simple and has just one Text property. Inside the MainViewModel here, I added an
                     ObservableCollection of ItemViewModel:
                 </p>
+<figure>
+<pre><code class="csharp">public ObservableCollection&lt;ItemViewModel&gt; Items
+{
+    get;
+    set;
+}</code></pre>
+<figcaption>Fig06-143</figcaption>
+</figure>
+
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-143.png"/>
                     <figcaption>Fig 06-143</figcaption>
                 </figure>
