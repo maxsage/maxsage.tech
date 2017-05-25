@@ -1910,17 +1910,32 @@ namespace SelectableList.ViewModel
 }</code></pre>
 <figcaption>Fig06-143</figcaption>
 </figure>
-
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-143.png"/>
-                    <figcaption>Fig 06-143</figcaption>
-                </figure>
                 <p>
                     and here inside the constructor, I create two initial items, which I add to the collection. I also added a
                     RelayCommand here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-144.png"/>
-                    <figcaption>Fig 06-144</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public RelayCommand AddItemCommand
+{
+    get
+    {
+        return _addItemCommand
+               ?? (_addItemCommand = new RelayCommand(
+                   () =&gt;
+                   {
+                       var expanded = Items.Any(i =&gt; i.IsExpanded);
+                       var item = new ItemViewModel
+                       {
+                           Title = "Item # " + (Items.Count + 1),
+                           IsExpanded = expanded
+                       };
+
+                       Items.Add(item);
+                   }));
+    }
+}</code></pre>
+<figcaption>Fig06-144</figcaption>
+</figure>
                 <p>
                     which is going to be used to add new items to the list on the go.
                 </p>
@@ -1928,16 +1943,25 @@ namespace SelectableList.ViewModel
                     When an item is created and added to the list, I set the IsExpanded property according to the state of the
                     other items:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-145.png"/>
-                    <figcaption>Fig 06-145</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var expanded = Items.Any(i =&gt; i.IsExpanded);
+var item = new ItemViewModel
+{
+   Title = "Item # " + (Items.Count + 1),
+   IsExpanded = expanded
+};
+
+Items.Add(item);</code></pre>
+<figcaption>Fig06-145</figcaption>
+</figure>
                 <p>
                     Know that I could also use the IsItemSelectedMessage here if I wanted to, but it is easy enough to use a query
                     against the items in the Observable Collection instead.
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-146.png"/>
-                    <figcaption>Fig 06-146</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var expanded = Items.Any(i =&gt; i.IsExpanded);</code></pre>
+<figcaption>Fig06-146</figcaption>
+</figure>
                 <h3>Expandable List: Creating the UI and TestingX</h3>
                 <p>
                     Let's look at the User Interface in Blend now. Right now it is not really what we want. We have a Button, a
@@ -2246,9 +2270,20 @@ namespace SelectableList.ViewModel
                     added automatically. In fact, it is a totally standard class, which is decorated with a test class attribute.
                     We also have one TestMethod also decorated with an attribute, this time called TestMethod:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-187.png"/>
-                    <figcaption>Fig 06-187</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">namespace TestApp1
+{
+	[TestClass]
+	public class UnitTest1
+	{
+		[TestMethod]
+		public void TestMethod1()
+		{
+		}
+	}
+}</code></pre>
+<figcaption>Fig06-187</figcaption>
+</figure>
                 <p>
                     You can have as many test classes and TestMethods as you need. Let's just rename this one to TestExpansion.
                     Then we can write the code for this method.
@@ -2256,29 +2291,41 @@ namespace SelectableList.ViewModel
                 <p>
                     First, we will create a List of 5 SelectableViewModels:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-188.png"/>
-                    <figcaption>Fig 06-188</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var list = new List&lt;SelectableViewModel&gt;();
+
+for (var index = 0; index &lt; 5; index++)
+{
+    list.Add(new SelectableViewModel());
+}</code></pre>
+<figcaption>Fig06-188</figcaption>
+</figure>
                 <p>
                     Then we will call the ExpandCommand on the first item of the list:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-189.png"/>
-                    <figcaption>Fig 06-189</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">list[0].ExpandCollapseCommand.Execute(null);</code></pre>
+<figcaption>Fig06-189</figcaption>
+</figure>
                 <p>
                     This simulates the interactions that the user has when he taps the small Expand button on the far-left of the
                     screen. Then we can Assert the result of the test. First, we know that each item in the list should be
                     expanded:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-190.png"/>
-                    <figcaption>Fig 06-190</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">foreach (var item in list)
+{
+    Assert.IsTrue(item.IsExpanded);
+}</code></pre>
+<figcaption>Fig06-190</figcaption>
+</figure>
                 <p>
                     Then, we also test that the first item, the one that was tapped, IsSelected:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-191.png"/>
-                    <figcaption>Fig 06-191</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Assert.IsTrue(list[0].IsSelected);</code></pre>
+<figcaption>Fig06-191</figcaption>
+</figure>
                 <p>
                     Let's run that test using the Test Explorer. First I need to build the application, and then I can click on
                     Run All. And here we go, the test passed.
@@ -2290,41 +2337,59 @@ namespace SelectableList.ViewModel
                 <p>The second test I want to write is to test what happens when all the items get unselected. Let's call it
                     TestCollapse. Here I will get the code, and here again, we create a list of 5 SelectableViewModels:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-193.png"/>
-                    <figcaption>Fig 06-193</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var list = new List&lt;SelectableViewModel&gt;();
+
+for (var index = 0; index < 5; index++)
+{
+    list.Add(new SelectableViewModel());
+}</code></pre>
+<figcaption>Fig06-193</figcaption>
+</figure>
                 <p>
                     Then I'm going to expand the list using the first item, just like before:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-194.png"/>
-                    <figcaption>Fig 06-194</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">list[0].ExpandCollapseCommand.Execute(null);
+list[1].IsSelected = true;</code></pre>
+<figcaption>Fig06-194</figcaption>
+</figure>
                 <p>
                     After that, though, we also select the second item in the list. So now we have two items, which are selected.
                     Now, let's unselect the first item:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-195.png"/>
-                    <figcaption>Fig 06-195</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">list[0].IsSelected = false;</code></pre>
+<figcaption>Fig06-195</figcaption>
+</figure>
                 <p>
                     We can now Assert that all the items should still be expanded because the second item is still selected and so
                     the list may not collapse yet:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-196.png"/>
-                    <figcaption>Fig 06-196</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> foreach (var item in list)
+{
+    Assert.IsTrue(item.IsExpanded);
+}</code></pre>
+<figcaption>Fig06-196</figcaption>
+</figure>
                 <p>
                     Then I unselect the second item in the list:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-197.png"/>
-                    <figcaption>Fig 06-197</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">list[1].IsSelected = false;</code></pre>
+<figcaption>Fig06-197</figcaption>
+</figure>
                 <p>
                     and now I can Assert that all the items in the list should collapse:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-198.png"/>
-                    <figcaption>Fig 06-198</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">foreach (var item in list)
+{
+    Assert.IsFalse(item.IsExpanded);
+}</code></pre>
+<figcaption>Fig06-198</figcaption>
+</figure>
                 <p>
                     After I build the application, let's run the second test. Here we see that the second test passed as well,
                     which is great:
@@ -2352,9 +2417,13 @@ namespace SelectableList.ViewModel
                     To do this, we have a static method called Messenger.Reset, that we should call in the beginning of each
                     TestMethod. Let's do that:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-200.png"/>
-                    <figcaption>Fig 06-200</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">[TestMethod]
+public void TestCollapse()
+{
+    Messenger.Reset();</code></pre>
+<figcaption>Fig06-200</figcaption>
+</figure>
                 <p>
                     And I'm going to add the same thing here in the first method as well. Now I can go back, build the
                     application, and run all the tests again. And this time, both tests pass, which is correct.
@@ -2378,6 +2447,26 @@ namespace SelectableList.ViewModel
                     sure that you call the ResetMethod before you test a piece of code that uses this component.
                 </p>
                 <h3>Unit Test: Creating and Using Test Services</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex06-005" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\before\UnitTestSample\UnitTestSample.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex06-006">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex06-006" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 6\after\UnitTestSample\UnitTestSample.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex06-006">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>For this next sample, we will see how we can use a SimpleIoc component of MVVM Light to mock a DataService and
                     to simulate a web service access in a unit test.
                 </p>
@@ -2390,15 +2479,40 @@ namespace SelectableList.ViewModel
                     Let's review the application. I just created a new MVVM Light Windows Store Application and then I changed a
                     few things. First, I modified the DataItem and I added those two properties, called Property1 and Property2:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-201.png"/>
-                    <figcaption>Fig 06-201</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class DataItem
+{
+    public string Property1
+    {
+        get;
+        set;
+    }
+
+    public int Property2
+    {
+        get;
+        set;
+    }
+}</code></pre>
+<figcaption>Fig06-201</figcaption>
+</figure>
                 <p>
                     Then, in the DataService implementation, I added code that we already saw before:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-202.png"/>
-                    <figcaption>Fig 06-202</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class DataService : IDataService
+{
+    public async Task&lt;DataItem&gt; GetData()
+    {
+        var client = new HttpClient();
+        var json = await client.GetStringAsync("http://www.galasoft.ch/labs/pluralsight/nugetintro/jsonsample.txt");
+
+        var myInstance = JsonConvert.DeserializeObject&lt;DataItem&gt;(json);
+        return myInstance;
+    }
+}</code></pre>
+<figcaption>Fig06-202</figcaption>
+</figure>
                 <p>
                     It is getting the json file from my web server, deserializes it into a DataItem, and returns it. Note that
                     this code is asynchronous, like every web service code in Windows Store, Windows Phone, etc.
@@ -2407,28 +2521,66 @@ namespace SelectableList.ViewModel
                     Let's open the MainViewModel now. Here in the MainViewModel, I barely modified the default code that we
                     studied in the previous module. So here we have the NavigateCommand:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-203.png"/>
-                    <figcaption>Fig 06-203</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public RelayCommand NavigateCommand
+{
+    get
+    {
+        return _navigateCommand
+               ?? (_navigateCommand = new RelayCommand(
+                   () =&gt; _navigationService.Navigate(typeof(SecondPage))));
+    }
+}</code></pre>
+<figcaption>Fig06-203</figcaption>
+</figure>
                 <p>
                     which is going to navigate to the second page, and down here we have the WelcomeTitle property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-204.png"/>
-                    <figcaption>Fig 06-204</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">/// &lt;summary&gt;
+/// Gets the WelcomeTitle property.
+/// Changes to that property's value raise the PropertyChanged event.
+/// &lt;/summary&gt;
+public string WelcomeTitle
+{
+    get
+    {
+        return _welcomeTitle;
+    }
+
+    set
+    {
+        Set(ref _welcomeTitle, value);
+    }
+}</code></pre>
+<figcaption>Fig06-204</figcaption>
+</figure>
                 <p>
                     just like before. Here in the constructor, I call the Initialize method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-205.png"/>
-                    <figcaption>Fig 06-205</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Initialize();</code></pre>
+<figcaption>Fig06-205</figcaption>
+</figure>
                 <p>
                     which is defined further below, and here I modify the default Initialize method slightly in order to get the
                     DataItem from the DataService, and then to set the WelcomeTitle based on this value:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-206.png"/>
-                    <figcaption>Fig 06-206</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">private async Task Initialize()
+{
+    try
+    {
+        var item = await _dataService.GetData();
+        WelcomeTitle = item.Property1 + " / " + item.Property2;
+    }
+    catch (Exception ex)
+    {
+        // Report error here
+    }
+}</code></pre>
+<figcaption>Fig06-206</figcaption>
+</figure>
                 <p>
                     If we want to test this MainViewModel with a unit test, we have a couple of challenges.
                 </p>
@@ -2460,17 +2612,46 @@ namespace SelectableList.ViewModel
                     Let's open the UnitTest class here, and I'm going to implement the first TestMethod. In order to create a new
                     MainViewModel, if we check the constructor here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-208.png"/>
-                    <figcaption>Fig 06-208</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public MainViewModel(
+    IDataService dataService,
+    INavigationService navigationService)</code></pre>
+<figcaption>Fig06-208</figcaption>
+</figure>
                 <p>
                     we see that the MainViewModel requires an instance of IDataService and also an instance of INavigationService,
                     but we said we want to simulate those objects, so let's create two Test classes here. Let's create the first
                     class, the TestNavigationService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-209.png"/>
-                    <figcaption>Fig 06-209</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">[TestClass]
+public class UnitTest1
+{
+	[TestMethod]
+	public void TestMethod1()
+	{
+	}
+}
+
+public class TestNavigationService : INavigationService
+{
+	public bool CanGoBack
+	{
+		get;
+		private set;
+	}
+
+	public Type CurrentPageType
+	{
+		get;
+		private set;
+	}
+
+	public void GoBack()
+	{
+	}</code></pre>
+<figcaption>Fig06-209</figcaption>
+</figure>
                 <p>
                     Here, I will implement the INavigationService interface using ReSharper. Notice that I have, here, the
                     CurrentPageType, which exposes a property.
@@ -2478,41 +2659,86 @@ namespace SelectableList.ViewModel
                 <p>
                     And if I go down here, I have the Navigate method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-210.png"/>
-                    <figcaption>Fig 06-210</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public void Navigate(Type sourcePageType)
+{
+}</code></pre>
+<figcaption>Fig06-210</figcaption>
+</figure>
                 <p>
                     I can test that the Navigate method has been called correctly, by saving the new page type inside the
                     CurrentPageType
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-211.png"/>
-                    <figcaption>Fig 06-211</figcaption>
+                <figure>
+<pre><code class="csharp">public void Navigate(Type sourcePageType)
+{
+    CurrentPageType = sourcePageType;
+}</code></pre>
+                    <figcaption>Fig06-211</figcaption>
                 </figure>
                 <p>
                     Now I can create the second test service class, which is a TestDataService. Here, too, I need to implement the
                     methods. There is only one method here:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-212.png"/>
-                    <figcaption>Fig 06-212</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> public class TestDataService : IDataService
+    {
+        public Task&lt;DataItem&gt; GetData()
+        {
+            return null;
+        }
+    }</code></pre>
+<figcaption>Fig06-212</figcaption>
+</figure>
                 <p>
                     This TestDataService needs a little bit of infrastructure, let's add this:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-213.png"/>
-                    <figcaption>Fig 06-213</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public class TestDataService : IDataService
+{
+	private string _prop1;
+	private int _prop2;
+
+	public void Initialize(string prop1, int prop2)
+	{
+		_prop1 = prop1;
+		_prop2 = prop2;
+	}
+
+	public Task&lt;DataItem&gt; GetData()
+	{
+		return null;
+	}
+}</code></pre>
+<figcaption>Fig06-213</figcaption>
+</figure>
                 <p>
                     And then I can easily implement the GetData method, like this:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-214.png"/>
-                    <figcaption>Fig 06-214</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public Task&lt;DataItem&gt; GetData()
+{
+    var item = new DataItem
+    {
+        Property1 = _prop1,
+        Property2 = _prop2
+    };
+
+    return Task.FromResult(item);
+}</code></pre>
+<figcaption>Fig06-214</figcaption>
+</figure>
                 <p>
                     So what is happening here? Well first I will call the Initialize method:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-215.png"/>
-                    <figcaption>Fig 06-215</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">public void Initialize(string prop1, int prop2)
+{
+    _prop1 = prop1;
+    _prop2 = prop2;
+}</code></pre>
+<figcaption>Fig06-215</figcaption>
+</figure>
                 <p>
                     which is going to allow me to Save the value of Property1 and Property2.
                 </p>
@@ -2520,9 +2746,14 @@ namespace SelectableList.ViewModel
                 <p>
                     And then when I call GetData, I'm going to return a new DataItem with those well-known properties:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-216.png"/>
-                    <figcaption>Fig 06-216</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var item = new DataItem
+{
+    Property1 = _prop1,
+    Property2 = _prop2
+};</code></pre>
+<figcaption>Fig06-216</figcaption>
+</figure>
                 <p>
                     and then I'm going to be able to Assert that the correct values are passed back to me.
                 </p>
@@ -2531,28 +2762,65 @@ namespace SelectableList.ViewModel
                     I'm going to implement the TestMethod1 here. First, I'm going to create a TestNavigationService and a
                     TestDataService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-217.png"/>
-                    <figcaption>Fig 06-217</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">[TestMethod]
+public void TestMethod1()
+{
+    var nav = new TestNavigationService();
+    var data = new TestDataService();
+}</code></pre>
+<figcaption>Fig06-217</figcaption>
+</figure>
                 <p>
                     Then I'm going to Initialize the TestDataService with some known values:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-218.png"/>
-                    <figcaption>Fig 06-218</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp"> [TestMethod]
+public void TestMethod1()
+{
+    var nav = new TestNavigationService();
+    var data = new TestDataService();
+
+    const string testProp1 = "this is a test";
+    const int testProp2 = 1234;
+
+    data.Initialize(testProp1, testProp2);
+</code></pre>
+<figcaption>Fig06-218</figcaption>
+</figure>
                 <p>
                     And finally, I'm going to create a new MainViewModel with those two well-known DataServices:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-219.png"/>
-                    <figcaption>Fig 06-219</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">[TestMethod]
+public void TestMethod1()
+{
+    var nav = new TestNavigationService();
+    var data = new TestDataService();
+
+    const string testProp1 = "this is a test";
+    const int testProp2 = 1234;
+
+    data.Initialize(testProp1, testProp2);
+
+    var vm = new MainViewModel(data, nav);
+
+    Assert.AreEqual(
+        string.Format("{0} / {1}", testProp1, testProp2),
+        vm.WelcomeTitle);
+}</code></pre>
+<figcaption>Fig06-219</figcaption>
+</figure>
                 <p>
                     And then I'm going to Assert that the WelcomeTitle property has been set, according to the format that we want
                     to use:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-220.png"/>
-                    <figcaption>Fig 06-220</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Assert.AreEqual(
+    string.Format("{0} / {1}", testProp1, testProp2),
+    vm.WelcomeTitle);</code></pre>
+<figcaption>Fig06-220</figcaption>
+</figure>
                 <p>
                     So here this is quite a simple test, but nonetheless it is using the TestNavigationService and the
                     TestDataService, which are needed in order to build the MainViewModel.
@@ -2561,23 +2829,33 @@ namespace SelectableList.ViewModel
                 <p>Let's create a new UnitTest, this time to test a NavigateCommand. So first, just like before, I add a new
                     UnitTest method, and here I create a new TestNavigationService and a new TestDataService:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-221.png"/>
-                    <figcaption>Fig 06-221</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">[TestMethod]
+public void TestNavigation()
+{
+    var nav = new TestNavigationService();
+    var data = new TestDataService();
+
+    var vm = new MainViewModel(data, nav);
+}</code></pre>
+<figcaption>Fig06-221</figcaption>
+</figure>
                 <p>
                     Then, using those two objects, I'm going to create a new MainViewModel, which is my TestObject. Now I'm going
                     to execute the NavigateCommand. Here, I call Execute with a null parameter:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-222.png"/>
-                    <figcaption>Fig 06-222</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">vm.NavigateCommand.Execute(null);</code></pre>
+<figcaption>Fig06-222</figcaption>
+</figure>
                 <p>
                     And then I can Assert that inside the TestNavigationService, the CurrentPageType is now set to the type of
                     second page:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-223.png"/>
-                    <figcaption>Fig 06-223</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Assert.AreEqual(typeof (SecondPage), nav.CurrentPageType);</code></pre>
+<figcaption>Fig06-223</figcaption>
+</figure>
                 <p>
                     What we test here is that the NavigateCommand has been executed properly and that it calls the
                     NavigationService. Of course, the MainViewModel doesn't know that the Navigation has not actually been
@@ -2593,42 +2871,60 @@ namespace SelectableList.ViewModel
                     create a new TestNavigationService, a new TestDataService, and then I create the new MainViewModel, which is a
                     TestObject:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-224.png"/>
-                    <figcaption>Fig 06-224</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">[TestMethod]
+public void TestWelcomeTitle()
+{
+    var nav = new TestNavigationService();
+    var data = new TestDataService();
+
+    var vm = new MainViewModel(data, nav);
+}</code></pre>
+<figcaption>Fig06-224</figcaption>
+</figure>
                 <p>
                     What we will do then is handle the PropertyChanged event of the TestObject. We can do that with a local event
                     handler here defined as a lambda expression:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-225.png"/>
-                    <figcaption>Fig 06-225</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">var propertyChangedWasRaised = false;
+
+vm.PropertyChanged += (s, e) =&gt;
+{
+    propertyChangedWasRaised = true;
+};</code></pre>
+<figcaption>Fig06-225</figcaption>
+</figure>
                 <p>
                     When the event is raised, the code will be executed and set the local variable accordingly:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-226.png"/>
-                    <figcaption>Fig 06-226</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">propertyChangedWasRaised = true;</code></pre>
+<figcaption>Fig06-226</figcaption>
+</figure>
                 <p>
                     Then we can test the values with Asserts. First, we Assert that the value is false, before the property is
                     changed:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-227.png"/>
-                    <figcaption>Fig 06-227</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Assert.IsFalse(propertyChangedWasRaised);</code></pre>
+<figcaption>Fig06-227</figcaption>
+</figure>
                 <p>
                     Then we assign a new string value to the WelcomeTitle property:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-228.png"/>
-                    <figcaption>Fig 06-228</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">vm.WelcomeTitle = "This is a new value";</code></pre>
+<figcaption>Fig06-228</figcaption>
+</figure>                
                 <p>
                     And finally here, we test that the event has been raised properly by asserting that the local value is set to
                     true:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig06-229.png"/>
-                    <figcaption>Fig 06-229</figcaption>
-                </figure>
+<figure>
+<pre><code class="csharp">Assert.IsTrue(propertyChangedWasRaised);</code></pre>
+<figcaption>Fig06-229</figcaption>
+</figure>
                 <p>
                     Now we can run all the tests from the Test Explorer window. Like before, we need to build the application
                     first, and then let's select here ‘Run All'. And after a short delay, we see that the three tests are
