@@ -7,8 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" />
+=======
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,8 +35,13 @@
       <file leaf-file-name="mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="544">
               <caret line="876" column="65" lean-forward="true" selection-start-line="876" selection-start-column="20" selection-end-line="876" selection-end-column="65" />
+=======
+            <state relative-caret-position="-602">
+              <caret line="517" column="29" lean-forward="false" selection-start-line="517" selection-start-column="29" selection-end-line="517" selection-end-column="29" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
               <folding>
                 <element signature="e#30120#30124#0" expanded="true" />
                 <element signature="e#30155#30159#0" expanded="true" />
@@ -251,6 +259,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -413,12 +422,22 @@
       <workItem from="1495011774310" duration="18499000" />
       <workItem from="1495708778070" duration="91000" />
       <workItem from="1495718265151" duration="15318000" />
+<<<<<<< HEAD
       <workItem from="1496222781370" duration="11340000" />
+=======
+      <workItem from="1495743197056" duration="31000" />
+      <workItem from="1496010873351" duration="20000" />
+      <workItem from="1496141077368" duration="1200000" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="522012000" />
+=======
+    <option name="totallyTimeSpent" value="509444000" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -430,8 +449,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-7" y="0" width="1294" height="1407" extended-state="0" />
     <editor active="true" />
+=======
+    <frame x="-14" y="0" width="3856" height="1995" extended-state="1" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22292994" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -440,7 +463,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17739403" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17972894" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -771,6 +798,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="748">
           <caret line="795" column="25" lean-forward="true" selection-start-line="795" selection-start-column="25" selection-end-line="795" selection-end-column="25" />
           <folding>
@@ -783,13 +811,22 @@
             <element signature="e#16280#16284#0" expanded="false" />
             <element signature="e#16354#16358#0" expanded="false" />
           </folding>
+=======
+        <state relative-caret-position="499">
+          <caret line="2927" column="0" lean-forward="false" selection-start-line="2927" selection-start-column="0" selection-end-line="2927" selection-end-column="0" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="544">
           <caret line="876" column="65" lean-forward="true" selection-start-line="876" selection-start-column="20" selection-end-line="876" selection-end-column="65" />
+=======
+        <state relative-caret-position="-602">
+          <caret line="517" column="29" lean-forward="false" selection-start-line="517" selection-start-column="29" selection-end-line="517" selection-end-column="29" />
+>>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
           <folding>
             <element signature="e#30120#30124#0" expanded="true" />
             <element signature="e#30155#30159#0" expanded="true" />
