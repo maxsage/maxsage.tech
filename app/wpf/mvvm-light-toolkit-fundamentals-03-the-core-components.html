@@ -426,7 +426,8 @@ protected virtual void RaisePropertyChanged(string propertyName)
                 </p>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex03-003" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\before\viewmodelbase\WhyMvvm.sln">
+                        <input id="Ex03-003" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\before\viewmodelbase\WhyMvvm.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex03-003">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -655,17 +656,8 @@ public SayHello(MainViewModel owner)
                 <h3>RelayCommand Demo</h3>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex03-005" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\before\viewmodelbase\WhyMvvm.sln">
-                        <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex03-005">
-                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
-                            </button>
-        	            </span>
-                    </div>
-                </div>
-                <div class="example">
-                    <div class="input-group">
-                        <input id="Ex03-006" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\after\commanding\Commanding.sln">
+                        <input id="Ex03-006" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 3\after\relaycommanding\RelayCommanding.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex03-006">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -731,7 +723,7 @@ public SayHello(MainViewModel owner)
         m => _counter % 2 == 0);</code></pre>
                     <figcaption>Fig03-051</figcaption>
                 </figure>
-                <p>In order for the CanExecuteChanged event to be raised, we use a built-in raised CanExecuteChanged method. Here:
+                <p>In order for the CanExecuteChanged event to be raised, we use a built-in RaiseCanExecuteChanged method. Here:
                 </p>
                 <figure>
 <pre><code class="csharp">public int Counter
@@ -829,7 +821,7 @@ public SayHello(MainViewModel owner)
                 <figure>
 <pre><code class="csharp">public MainViewModel()
 {
-	DoSomethingCommand = new RelayCommad(
+	DoSomethingCommand = new RelayCommand(
 		() =>
 		{
 			// This is the Execute delegate
@@ -840,7 +832,7 @@ public SayHello(MainViewModel owner)
                 <figure>
 <pre><code class="csharp">public MainViewModel()
 {
-	DoSomethingCommand = new RelayCommad(
+	DoSomethingCommand = new RelayCommand(
 		() =>
 		{
 			// This is the Execute delegate
@@ -855,7 +847,7 @@ public SayHello(MainViewModel owner)
                 <figure>
 <pre><code class="csharp">public MainViewModel()
 {
-	DoSomethingCommand = new RelayCommad(
+	DoSomethingCommand = new RelayCommand(
 		DoSomething,
 		() true);</code></pre>
                     <figcaption>Fig03-060</figcaption>
@@ -878,7 +870,13 @@ public SayHello(MainViewModel owner)
                     parameter of the DoSomething method:
                 </p>
                 <figure>
-<pre><code class="csharp">public MainViewModel()
+<pre><code class="csharp">public RelayCommand&lt;string&gt; DoSomethingCommand
+{
+	get;
+	private set;
+}
+
+public MainViewModel()
 {
 	DoSomethingCommand = new RelayCommand&lt;string&gt;(DoSomething);
 }</code></pre>
@@ -887,9 +885,15 @@ public SayHello(MainViewModel owner)
 
                 <p>Same thing for the CanExecute delegate, it also receives as a string parameter:</p>
                 <figure>
-<pre><code class="csharp">private void DoSomething(string parameter)
+<pre><code class="csharp">public MainViewModel()
 {
-	// This is the Execute delegate
+    DoSomethingCommand = new RelayCommand&lt;string&gt;(DoSomething, CanDoSomething);
+}
+
+private void CanDoSomething(string parameter)
+{
+	// This is the CanExecute delegate
+    return true; // true --> command is enabled
 }</code></pre>
                     <figcaption>Fig03-063</figcaption>
                 </figure>
@@ -931,10 +935,10 @@ public SayHello(MainViewModel owner)
                     <ul>
                         <li>So if you forget, or cannot unregister the event, there is the risk of a potential memory leak. </li>
                     </ul>
-                    <li>For reference, this is how you register an event handler in .NET: button.Click += ButtonClick; for
-                        example, the Click event of the button. </li>
-                    <li>And this is how you unregister: button.Click -= ButtonClick; in order to remove any risk to a potential
-                        memory leak. </li>
+                    <li>For reference, this is how you register an event handler in .NET: <code>button.Click +=
+                        ButtonClick;</code> for example, the Click event of the button. </li>
+                    <li>And this is how you unregister: <code>button.Click -= ButtonClick;</code> in order to remove any risk
+                        to a potential memory leak. </li>
                     <li>
                         Of course there is also another difficulty, which is how to even find the instance raising the event that
                         we want to register to. Sometimes, this instance can be hidden, or it can be located in a part of the

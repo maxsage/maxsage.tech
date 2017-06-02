@@ -7,11 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-<<<<<<< HEAD
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" />
-=======
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,33 +29,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html">
+      <file leaf-file-name="mvvm-light-toolkit-fundamentals-03-the-core-components.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="544">
-              <caret line="876" column="65" lean-forward="true" selection-start-line="876" selection-start-column="20" selection-end-line="876" selection-end-column="65" />
-=======
-            <state relative-caret-position="-602">
-              <caret line="517" column="29" lean-forward="false" selection-start-line="517" selection-start-column="29" selection-end-line="517" selection-end-column="29" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
+            <state relative-caret-position="373">
+              <caret line="940" column="39" lean-forward="false" selection-start-line="940" selection-start-column="39" selection-end-line="940" selection-end-column="39" />
               <folding>
-                <element signature="e#30120#30124#0" expanded="true" />
-                <element signature="e#30155#30159#0" expanded="true" />
-                <element signature="e#33407#33411#0" expanded="true" />
-                <element signature="e#33452#33456#0" expanded="true" />
-                <element signature="e#33465#33469#0" expanded="true" />
-                <element signature="e#33489#33493#0" expanded="true" />
-                <element signature="e#33506#33510#0" expanded="true" />
-                <element signature="e#33703#33707#0" expanded="true" />
-                <element signature="e#33716#33720#0" expanded="true" />
-                <element signature="e#33741#33745#0" expanded="true" />
-                <element signature="e#33750#33754#0" expanded="true" />
-                <element signature="e#33796#33800#0" expanded="true" />
-                <element signature="e#35333#35337#0" expanded="true" />
-                <element signature="e#35411#35415#0" expanded="true" />
-                <element signature="e#38799#38803#0" expanded="true" />
-                <element signature="e#38849#38853#0" expanded="true" />
+                <element signature="e#44651#44655#0" expanded="true" />
+                <element signature="e#44661#44665#0" expanded="true" />
+                <element signature="e#45119#45123#0" expanded="true" />
+                <element signature="e#45129#45133#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,7 +55,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>WPFMVVMInDepth\</find>
       <find>WPFMVVM</find>
       <find>Dropbox</find>
       <find>Basicall</find>
@@ -105,6 +84,7 @@
       <find>class=&quot;example&quot;</find>
       <find>Unit Test:</find>
       <find>nother wa</find>
+      <find>Unit Testing the Applicati</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;images</replace>
@@ -169,13 +149,13 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/app/app.component.ts" />
         <option value="$PROJECT_DIR$/app/javascript/javascript.component.ts" />
-        <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html" />
         <option value="$PROJECT_DIR$/app/wpf/wpf.component.ts" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-05-installing-the-mvvm-light-toolkit-and-additional-components.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html" />
         <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html" />
+        <option value="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html" />
       </list>
     </option>
   </component>
@@ -211,8 +191,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -259,6 +237,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -422,22 +401,16 @@
       <workItem from="1495011774310" duration="18499000" />
       <workItem from="1495708778070" duration="91000" />
       <workItem from="1495718265151" duration="15318000" />
-<<<<<<< HEAD
       <workItem from="1496222781370" duration="11340000" />
-=======
       <workItem from="1495743197056" duration="31000" />
       <workItem from="1496010873351" duration="20000" />
       <workItem from="1496141077368" duration="1200000" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
+      <workItem from="1496392492106" duration="8582000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
-    <option name="totallyTimeSpent" value="522012000" />
-=======
-    <option name="totallyTimeSpent" value="509444000" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
+    <option name="totallyTimeSpent" value="518026000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -449,27 +422,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-<<<<<<< HEAD
     <frame x="-7" y="0" width="1294" height="1407" extended-state="0" />
-    <editor active="true" />
-=======
-    <frame x="-14" y="0" width="3856" height="1995" extended-state="1" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22292994" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17739403" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17972894" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1789639" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -775,13 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="1663" column="0" lean-forward="false" selection-start-line="1663" selection-start-column="0" selection-end-line="1684" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="771">
@@ -798,52 +755,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-01-introduction-to-the-mvvm.html">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="748">
           <caret line="795" column="25" lean-forward="true" selection-start-line="795" selection-start-column="25" selection-end-line="795" selection-end-column="25" />
-          <folding>
-            <element signature="e#9490#9494#0" expanded="false" />
-            <element signature="e#9505#9509#0" expanded="false" />
-            <element signature="e#9515#9519#0" expanded="false" />
-            <element signature="e#9519#9523#0" expanded="false" />
-            <element signature="e#9623#9627#0" expanded="false" />
-            <element signature="e#9633#9637#0" expanded="false" />
-            <element signature="e#16280#16284#0" expanded="false" />
-            <element signature="e#16354#16358#0" expanded="false" />
-          </folding>
-=======
-        <state relative-caret-position="499">
-          <caret line="2927" column="0" lean-forward="false" selection-start-line="2927" selection-start-column="0" selection-end-line="2927" selection-end-column="0" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-02-refactoring-the-app-to-mvvm.html">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="544">
-          <caret line="876" column="65" lean-forward="true" selection-start-line="876" selection-start-column="20" selection-end-line="876" selection-end-column="65" />
-=======
-        <state relative-caret-position="-602">
-          <caret line="517" column="29" lean-forward="false" selection-start-line="517" selection-start-column="29" selection-end-line="517" selection-end-column="29" />
->>>>>>> 598e1bf733f752cb3a569650f214d38a15452743
+        <state relative-caret-position="373">
+          <caret line="1237" column="20" lean-forward="true" selection-start-line="1237" selection-start-column="20" selection-end-line="1237" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="940" column="39" lean-forward="false" selection-start-line="940" selection-start-column="39" selection-end-line="940" selection-end-column="39" />
           <folding>
-            <element signature="e#30120#30124#0" expanded="true" />
-            <element signature="e#30155#30159#0" expanded="true" />
-            <element signature="e#33407#33411#0" expanded="true" />
-            <element signature="e#33452#33456#0" expanded="true" />
-            <element signature="e#33465#33469#0" expanded="true" />
-            <element signature="e#33489#33493#0" expanded="true" />
-            <element signature="e#33506#33510#0" expanded="true" />
-            <element signature="e#33703#33707#0" expanded="true" />
-            <element signature="e#33716#33720#0" expanded="true" />
-            <element signature="e#33741#33745#0" expanded="true" />
-            <element signature="e#33750#33754#0" expanded="true" />
-            <element signature="e#33796#33800#0" expanded="true" />
-            <element signature="e#35333#35337#0" expanded="true" />
-            <element signature="e#35411#35415#0" expanded="true" />
-            <element signature="e#38799#38803#0" expanded="true" />
-            <element signature="e#38849#38853#0" expanded="true" />
+            <element signature="e#44651#44655#0" expanded="true" />
+            <element signature="e#44661#44665#0" expanded="true" />
+            <element signature="e#45119#45123#0" expanded="true" />
+            <element signature="e#45129#45133#0" expanded="true" />
           </folding>
         </state>
       </provider>

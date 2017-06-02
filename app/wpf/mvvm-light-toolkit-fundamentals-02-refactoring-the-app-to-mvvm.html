@@ -921,7 +921,7 @@ private async void SaveClick(object sender, System.EventArgs e)
                     <figcaption>Fig 02-052</figcaption>
                 </figure>
                 <p>What we need to do now is to remove the tight coupling between this StackPanel and the code behind in
-                    MainPage.xaml.cs. So I'm going to remove, here, the FriendTap Event Handler:
+                    MainPage.xaml.cs. So I'm going to remove, here (in Styles.xaml), the FriendTap Event Handler:
                 </p>
                 <figure>
 <pre><code class="xml">&lt;DataTemplate x:Key="FriendTemplate"&gt;
@@ -1188,7 +1188,8 @@ public Uri PictureUri
                 <p>And now we see that we have an Image, which is loaded from the web by Expression Blend, which allows me to do
                     some Visual Design here; for example, let's set the Height of the Image to 100 px. And now we can do a few
                     things visually; for example, let's change the orientation of the StackPanel to Vertical, we can select here
-                    the LastName and increase the Font Size to 36 password. And then we probably want to change here the margins
+                    the LastName and increase the Font Size to 36 pixels. And then we probably want to change here the
+                    margins
                     to make things a little bit more compact and maybe just add a little bit margin on the FirstName here.
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-080.png"/>
@@ -1209,7 +1210,7 @@ public Uri PictureUri
                     <figcaption>Fig 02-082</figcaption>
                 </figure>
                 <p>Now I can run the application directly from Expression Blend, Let's Refresh the page. And here we see the
-                    actual Runtime data showing, including the new designs that we just create:
+                    actual Runtime data showing, including the new designs that we just created:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig02-083.png"/>
                     <figcaption>Fig 02-083</figcaption>
@@ -1221,6 +1222,17 @@ public Uri PictureUri
                 <h3>
                     Unit Testing the Application
                 </h3>
+                <p><strong>Note:</strong> I was not able to run the UnitTest Application on my PC at work. I am getting an
+                    error when selecting Test > Run All Tests:</p>
+                <code>
+                    <pre>------ Run test started ------
+Deploying application for project: WhyMvvm.SilverlightTest...
+Absolute path of the package to be deployed: C:\Users\csit011\Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 2\after\WhyMvvm.SilverlightTest\Bin\x86\Debug\WhyMvvm.SilverlightTest_Debug_x86.xap
+Value cannot be null.
+Parameter name: deviceID
+Unit tests in source C:\Users\csit011\Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 2\after\WhyMvvm.SilverlightTest\Bin\x86\Debug\WhyMvvm.SilverlightTest.dll cannot be run. Please create a Windows Store or Windows Phone Unit Test project.
+                    </pre>
+                </code>
                 <p>In the next section, we are going to see how we can unit test our application and how we can implement some
                     test version of our services in order to create some well-known conditions for the unit test.
                 </p>
