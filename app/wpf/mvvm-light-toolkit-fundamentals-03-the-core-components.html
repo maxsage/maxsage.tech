@@ -925,7 +925,7 @@ private void CanDoSomething(string parameter)
                     with a single difference that the lambda expression is declared with a parameter, in this case of type string.
                 </p>
                 <h3>The Messenger, Receiving and Sending Messages</h3>
-                <p>I AM HERE Now I would like to talk about an important component of the MVVM Light Toolkit, a component which is easy to
+                <p>Now I would like to talk about an important component of the MVVM Light Toolkit, a component which is easy to
                     love, but which can also be easy to overuse, the Messenger.
                 </p>
                 <p>First let's review how conventional event handling works in .NET:</p>
@@ -956,7 +956,7 @@ private void CanDoSomething(string parameter)
                 <p>Simply said, it is a system that sends messages to a list of recipients (a message distribution system)
                 </p>
                 <p>
-                    It is fully decoupled, so the center doesn't know if any recipient gets the message. And the recipient also
+                    It is fully decoupled, so the sender doesn't know if any recipient gets the message. And the recipient also
                     doesn't know who sends the message, so recipients register to receive the messages based on some criteria.
                 </p>
                 <p>Typically, we use a default instance of the Messenger but it is also possible to create new instances of the
@@ -1050,7 +1050,7 @@ public class MyMessageType
                     example, here's a selectedFriend:
                 </p>
                 <figure>
-                    <pre><code class="csharp">Messenger.Default.Send(true);</code></pre>
+                    <pre><code class="csharp">Messenger.Default.Send(selectedFriend);</code></pre>
                     <figcaption>Fig03-071</figcaption>
                 </figure>
                 <p>Of course, here too, some context is missing, and if the application grows more complex, it might be necessary
