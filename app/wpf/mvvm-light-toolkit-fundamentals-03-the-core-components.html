@@ -1106,7 +1106,7 @@ Messenger.Default.Send(message2);</code></pre>
                     make sure to analyze your scenario carefully. If you see a risk for a memory leak, you should unregister the
                     message handling method.
                 </p>
-                <p>Unregistering is quite easy and is generally a good idea to keep things clean. You can easily register a
+                <p>Unregistering is quite easy and is generally a good idea to keep things clean. You can either register a
                     recipient altogether, for all the delegates that it registered:
                 </p>
                 <figure>
@@ -1292,7 +1292,7 @@ private void HandleMessage(IMessage message)
                     <figcaption>Fig 03-089</figcaption>
                 </figure>
                 <p>because each of the ReceiverViewModel subscribed to this message type, we can see that those three user
-                    controls are getting it. If we add a false user control and send the message again, we see that all four user
+                    controls are getting it. If we add a forth user control and send the message again, we see that all four user
                     controls get the message, but for the sender it doesn't make any difference. In fact, if I remove all the
                     receivers, and send the message again, nothing happens. The sender doesn't know that no one got the message.
                 </p>
@@ -1493,12 +1493,12 @@ private void HandleMessage(IMessage message)
 }</code></pre>
                     <figcaption>Fig03-101</figcaption>
                 </figure>
-                <p>and this is where we will register for the type of message that we want to receiver, either for
+                <p>and this is where we will register for the type of message that we want to receive, either for
                     LogMessageWithFeedback or with a simple LogMessage. Like we saw in the slide, the Receiver method needs a
                     reference to the receiver itself, in order to monitor the lifetime, and a delegate to the method which will be
                     executed, in this case we will build a string with the parameters from the message, Text and Timestamp, and
                     then we will assign this to the Display property, which is data bound in the XAML. In the case of the Feedback
-                    message, we will also Save the _feedback property, which is an Action , so that we can execute it later.
+                    message, we will also Save the _feedback property, which is an Action of bool , so that we can execute it later.
                 </p>
 
                 <p>The execution of the Feedback is shown here:</p>
@@ -1567,7 +1567,7 @@ private void HandleMessage(IMessage message)
                     <figcaption>Fig 03-105</figcaption>
                 </figure>
                 <p>In a more complex manner, however, some operations can also operate on a Background Thread, without the
-                    developer being always aware of it. For example in a Phone application, some senses can raise events on the
+                    developer being always aware of it. For example in a Phone application, some sensors can raise events on the
                     Background Thread; for example, the Compass Sensor or the accelerometer, etc. Another example is the
                     HttpWebRequest class, which is used to send complex web requests to a server. Even if the request is sent from
                     an application's Main Thread, the response is always received on the Background Thread.
@@ -1580,7 +1580,7 @@ private void HandleMessage(IMessage message)
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig03-106.png"/>
                     <figcaption>Fig 03-106</figcaption>
                 </figure>
-                <p>Here we see an example of code that can crush the application, because the StatusTextBlock is a UI element, but
+                <p>Here we see an example of code that can crash the application, because the StatusTextBlock is a UI element, but
                     it is accessed from the Background Thread:
                 </p>
                 <figure>
