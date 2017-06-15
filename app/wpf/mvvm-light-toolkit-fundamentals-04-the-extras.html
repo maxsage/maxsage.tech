@@ -82,7 +82,7 @@
                 <p>When we're referred to a property, defined in another resource named Strings.</p>
                 <p>So in summary, the DataContext is really just a shortcut. It can be set in XAML, like in the previous
                     slide, which works great with visual designers, such as Blend or the Visual Studio Designer, because
-                    these tools pass the XAML code when they render an element. So, of course, a DataContext is taken in
+                    these tools parse the XAML code when they render an element. So, of course, a DataContext is taken in
                     to account by the designer, and the built-in helpers take advantage of this knowledge.
                 </p>
                 <p>Sometimes, however, it is more convenient to set the DataContext in the code behind directly; for
@@ -186,6 +186,26 @@
                 <p>Of course, if you have multiple ViewModels, you will have multiple properties with different names.
                 </p>
                 <h3>Binding to a ViewModel (Demos)</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-001" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\view-viewmodel\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-001">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-002" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\view-viewmodel\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-002">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>Let's implement these changes in our application. Again, I want to stress that this application is a
                     Windows Phone app, that the toolkit and all the implementation works exactly the same on every other
                     XAML framework, such as WPF, Silverlight or Windows 8.
@@ -624,7 +644,7 @@ Main = new MainViewModel(friendsService, dialogService, navigationService);</cod
 	private IDataService _dataService;
 	public MainViewModel(IDataService dataService)
 	{
-		_dataService = dataService();
+		_dataService = dataService;
 	}
 }</code></pre>
                     <figcaption>Fig04-042</figcaption>
@@ -668,9 +688,9 @@ Main = new MainViewModel(friendsService, dialogService, navigationService);</cod
                     consumer class, like we saw before in the MainViewModel, the creation is delegated to someone else,
                     thus passing the control to that external instance.
                 </p>
-                <p>
+                <p>An IOC container is an object responsible for a few things.</p>
                 <ul>
-                    <li>An IOC container is an object responsible for a few things.</li>
+
                     <li>It will create services on demand.</li>
                     <li>It is responsible for composing objects together by resolving dependencies and injecting the
                         correct instances.
