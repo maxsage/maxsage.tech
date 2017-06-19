@@ -27,23 +27,18 @@
     <favorites_list name="maxsage.tech" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="mvvm-light-toolkit-fundamentals-03-the-core-components.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7095">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="mvvm-light-toolkit-fundamentals-04-the-extras.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="646" column="34" lean-forward="false" selection-start-line="646" selection-start-column="34" selection-end-line="646" selection-end-column="34" />
-              <folding />
+            <state relative-caret-position="942">
+              <caret line="1555" column="22" lean-forward="false" selection-start-line="1555" selection-start-column="22" selection-end-line="1555" selection-end-column="22" />
+              <folding>
+                <element signature="e#40810#40814#0" expanded="true" />
+                <element signature="e#43069#43073#0" expanded="true" />
+                <element signature="e#43432#43436#0" expanded="true" />
+                <element signature="e#43528#43532#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,8 +54,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Basically</find>
-      <find>Basically gets you a reference to</find>
       <find>Development Tutorials</find>
       <find>NgModule</find>
       <find>Selected Customer Property</find>
@@ -82,13 +75,15 @@
       <find>05-106</find>
       <find>Expandable List: P</find>
       <find>06-143</find>
-      <find>class=&quot;example&quot;</find>
       <find>Unit Test:</find>
       <find>nother wa</find>
       <find>Unit Testing the Applicati</find>
       <find>03-105</find>
       <find>pass the XAML code</find>
-      <find>pass the XAML code</find>
+      <find>replay the SimpleIoc</find>
+      <find>class=&quot;example&quot;</find>
+      <find>class=&quot;exampl</find>
+      <find>Introduction to</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;images</replace>
@@ -173,10 +168,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-16" />
-    <option name="y" value="-16" />
-    <option name="width" value="3872" />
-    <option name="height" value="2092" />
+    <option name="x" value="-7" />
+    <option name="width" value="1352" />
+    <option name="height" value="1407" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -418,7 +412,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="530436000" />
+    <option name="totallyTimeSpent" value="536926000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -430,26 +424,36 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
+    <frame x="-7" y="0" width="1352" height="1407" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22216359" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22070014" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17224081" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17189953" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17224081" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22216359" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20888543" sideWeight="0.49177718" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -771,17 +775,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-03-the-core-components.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7095">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="362">
+          <caret line="941" column="24" lean-forward="true" selection-start-line="941" selection-start-column="24" selection-end-line="941" selection-end-column="24" />
+          <folding>
+            <element signature="e#44651#44655#0" expanded="false" />
+            <element signature="e#44661#44665#0" expanded="false" />
+            <element signature="e#45119#45123#0" expanded="false" />
+            <element signature="e#45129#45133#0" expanded="false" />
+            <element signature="e#49980#49984#0" expanded="false" />
+            <element signature="e#49997#50001#0" expanded="false" />
+            <element signature="e#50829#50833#0" expanded="false" />
+            <element signature="e#50852#50856#0" expanded="false" />
+            <element signature="e#50862#50866#0" expanded="false" />
+            <element signature="e#50866#50870#0" expanded="false" />
+            <element signature="e#51154#51158#0" expanded="false" />
+            <element signature="e#51164#51168#0" expanded="false" />
+            <element signature="e#51548#51552#0" expanded="false" />
+            <element signature="e#51571#51575#0" expanded="false" />
+            <element signature="e#51581#51585#0" expanded="false" />
+            <element signature="e#51585#51589#0" expanded="false" />
+            <element signature="e#53692#53696#0" expanded="false" />
+            <element signature="e#53702#53706#0" expanded="false" />
+            <element signature="e#54250#54254#0" expanded="false" />
+            <element signature="e#54260#54264#0" expanded="false" />
+            <element signature="e#57442#57446#0" expanded="false" />
+            <element signature="e#57454#57458#0" expanded="false" />
+            <element signature="e#57841#57845#0" expanded="false" />
+            <element signature="e#57853#57857#0" expanded="false" />
+            <element signature="e#57901#57905#0" expanded="false" />
+            <element signature="e#57913#57917#0" expanded="false" />
+            <element signature="e#59716#59720#0" expanded="false" />
+            <element signature="e#59739#59743#0" expanded="false" />
+            <element signature="e#60772#60776#0" expanded="false" />
+            <element signature="e#60784#60788#0" expanded="false" />
+            <element signature="e#67324#67328#0" expanded="false" />
+            <element signature="e#67332#67336#0" expanded="false" />
+            <element signature="e#67486#67490#0" expanded="false" />
+            <element signature="e#67494#67498#0" expanded="false" />
+            <element signature="e#70745#70749#0" expanded="false" />
+            <element signature="e#70753#70757#0" expanded="false" />
+            <element signature="e#70907#70911#0" expanded="false" />
+            <element signature="e#70915#70919#0" expanded="false" />
+            <element signature="e#71528#71532#0" expanded="false" />
+            <element signature="e#71538#71542#0" expanded="false" />
+            <element signature="e#71646#71650#0" expanded="false" />
+            <element signature="e#71656#71660#0" expanded="false" />
+            <element signature="e#72308#72312#0" expanded="false" />
+            <element signature="e#72318#72322#0" expanded="false" />
+            <element signature="e#72462#72466#0" expanded="false" />
+            <element signature="e#72472#72476#0" expanded="false" />
+            <element signature="e#73827#73831#0" expanded="false" />
+            <element signature="e#73853#73857#0" expanded="false" />
+            <element signature="e#74236#74240#0" expanded="false" />
+            <element signature="e#74250#74254#0" expanded="false" />
+            <element signature="e#75557#75561#0" expanded="false" />
+            <element signature="e#75567#75571#0" expanded="false" />
+            <element signature="e#75699#75703#0" expanded="false" />
+            <element signature="e#75709#75713#0" expanded="false" />
+            <element signature="e#76665#76669#0" expanded="false" />
+            <element signature="e#76679#76683#0" expanded="false" />
+            <element signature="e#76731#76735#0" expanded="false" />
+            <element signature="e#76757#76761#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-04-the-extras.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="646" column="34" lean-forward="false" selection-start-line="646" selection-start-column="34" selection-end-line="646" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="942">
+          <caret line="1555" column="22" lean-forward="false" selection-start-line="1555" selection-start-column="22" selection-end-line="1555" selection-end-column="22" />
+          <folding>
+            <element signature="e#40810#40814#0" expanded="true" />
+            <element signature="e#43069#43073#0" expanded="true" />
+            <element signature="e#43432#43436#0" expanded="true" />
+            <element signature="e#43528#43532#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

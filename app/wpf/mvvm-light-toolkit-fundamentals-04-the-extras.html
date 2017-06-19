@@ -721,7 +721,7 @@ Main = new MainViewModel(friendsService, dialogService, navigationService);</cod
                 <p>So instead, I decided to provide a very simple one with basic functionality, a little bit like a
                     "gateway drug" to Inversion Of Control and Dependency Injection. Once the developers get familiar
                     with the concept, they may be interested to check more advanced components, and of course it is
-                    possible to replay the SimpleIoc of MVVM Light with another IOC container later. Because of these
+                    possible to replace the SimpleIoc of MVVM Light with another IOC container later. Because of these
                     considerations, SimpleIoc was born and integrated into MVVM Light.
                 </p>
                 <p>An IOC container always has two important phases:</p>
@@ -765,7 +765,7 @@ else
                 </p>
                 <p>Note that when the class is registered, it still does not mean that any instance is created. The
                     creation is on demand, only when the GetInstance method is called for the first time. Also, the
-                    created objects are cached and can be accessed as many times as needed. The SimpleIoc act is a
+                    created objects are cached and can be accessed as many times as needed. The SimpleIoc acts as a
                     global cache for the application, which can be very convenient. However, if an object must be
                     removed from the cache because it is not needed anymore, this must be done explicitly.
                 </p>
@@ -791,7 +791,7 @@ SimpleIoc.Default.Register&lt;IDataService&gt;(() =&gt; myService);</code></pre>
 <pre><code class="csharp">var param1 = true;
 var param2 = "Hello world";
 SimpleIoc.Default.Register&lt;MainViewModel&gt;(
-	() =&lt; new MainViewModel(param1, param2);</code></pre>
+	() =&gt; new MainViewModel(param1, param2);</code></pre>
                     <figcaption>Fig04-049</figcaption>
                 </figure>
                 <p>if we need to pass parameters to the MainViewModel constructor. Here too, the execution of the
@@ -831,7 +831,7 @@ SimpleIoc.Default.Register&lt;IDataService&gt;(() =&gt; myService, true);</code>
                 <p>Another very useful option is the possibility to register a class or an interface with a Key:</p>
                 <figure>
 <pre><code class="csharp">SimpleIoc.Default.Register&lt;MainViewModel&gt;(
-	() =&lt; new MainViewModel(), "MyUniqueKey");
+	() =&gt; new MainViewModel(), "MyUniqueKey");
 
 SimpleIoc.Default.Register&lt;IDataService&gt;(
 	() =&gt; new DataService(), "AnotherUniqueKey");</code></pre>
@@ -1018,7 +1018,7 @@ SimpleIoc.Default.Unregister&lt;IDataService&gt;("key1");</code></pre>
                     <figcaption>Fig04-066</figcaption>
                 </figure>
                 <p>
-                    So parameter can be an instance itself. In that case, the instance passed as parameter, like here
+                    The parameter can be an instance itself. In that case, the instance passed as parameter, like here
                     the (this) keyword, is removed from the cache. However, the IDialogService interface itself is not
                     removed completely from the IOC container. Calling GetInstance again, at this point, will force the
                     creation of a new instance, which will then be cached again.
@@ -1082,7 +1082,7 @@ SimpleIoc.Default.Unregister&lt;IDataService&gt;("key1");</code></pre>
                     container.
                 </p>
                 <h3>SimpleIoc's Utility Methods and Properties</h3>
-                <p>In addition to the Call methods, SimpleIoc proposes a set of Utility Methods. For example, sometimes
+                <p>In addition to the core methods, SimpleIoc proposes a set of Utility Methods. For example, sometimes
                     it is useful to know which classes or interfaces have been registered to SimpleIoc. Also, we might
                     be interested to know if a given class or interface has been not only registered, but also created
                     and cached. This is what the IsRegistered and the ContainsCreated methods do. Consider this code
@@ -1216,6 +1216,28 @@ var instance2
                     of code to modify.
                 </p>
                 <h3>SimpleIoc Demos</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-003" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\simpleioc\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-003">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-004" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\simpleioc\WhyMvvm.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-004">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>The WhyMvvm application that we built in the previous modules of this course runs fine without an IOC
                     container, but adding SimpleIoc to it brings some advantages. Most importantly, it will make it
                     easier to extend the application with new features when the time comes.
@@ -1342,7 +1364,7 @@ SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
 <figcaption>Fig04-093</figcaption>
 </figure>
                 <p>
-                    because this is what is used by the DataBinding in XAML. So let's replay the Main property by a
+                    because this is what is used by the DataBinding in XAML. So let's replace the Main property by a
                     property with only a getter, and call GetInstance from here:
                 </p>
 <figure>
@@ -1380,13 +1402,36 @@ SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
                     handy component of the MVVM Light Toolkit.
                 </p>
                 <h3>Introduction to Behaviors</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-005" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.WP8.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-005">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-006" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.WP8.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-006">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>Now let's discuss the last component of MVVM Light Version 4, the EventToCommand. This is a so-called
                     behavior, or like we sometimes hear, Blend Behavior. First, let's understand what Behaviors are.
                     Initially, behaviors are a modified version of a pattern that the WPF community came up with, called
                     Attached Behaviors, and based on attached properties that are available in all XAML-based
-                    frameworks. For more information about Attached Behaviors, see the link here.
+                    frameworks. For more information about Attached Behaviors, see the link
+                    <a href="http://galasoft.ch/s/attbehaviors">here</a>.
                 </p>
-                <a href="http://galasoft.ch/s/atthehaviors"></a>
+
                 <p>I won't go deeper in the details of Attached Behaviors, because this is off topic for this course,
                     but it is enough to say that these are very powerful and useful in certain situations. The behaviors
                     we are using here are sometimes called Blend Behaviors, because they were developed initially by the
@@ -1394,8 +1439,8 @@ SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
                     easy to use in a tool such as Blend and had to be added in XAML manually.
                 </p>
                 <p>
-                    On the other hand, the so-called Blend Behaviors were great in Blend, as you would expect. However,
-                    they are not directly related to Blend, and you can use them, even if you never stop blending your
+                    On the other hand, the so-called Blend Behaviors worked great in Blend, as you would expect. However,
+                    they are not directly related to Blend, and you can use them, even if you never start blend in your
                     life, which of course would be a pity.
                 </p>
                 <p>
@@ -1487,7 +1532,28 @@ xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"</code></pre
                     also the interactions namespace, which contains a MouseDragElementBehavior itself that we just used.
                 </p>
                 <h3>Introduction to EventToCommand</h3>
-                <p>DEMO HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</p>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-005" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.WP8.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-005">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex04-006" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.WP8.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex04-006">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>In addition to Behaviors, there is another group of elements we can use in a similar manner, named
                     Actions. There are differences between Behaviors and Actions. Behaviors are standalone and
                     self-sufficient. On the other hand, Actions are always attached to a trigger to be useful. In
@@ -1960,9 +2026,10 @@ public RelayCommand ShowItemCommand
                 <p>Here is the application in question:</p>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex04-00" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.WP8.sln">
+                        <input id="Ex04-007" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.WP8.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex04-00">
+                	        <button class="btn" data-clipboard-target="#Ex04-007">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -1970,9 +2037,10 @@ public RelayCommand ShowItemCommand
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex04-00" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.WP8.sln">
+                        <input id="Ex04-008" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.WP8.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex04-00">
+                	        <button class="btn" data-clipboard-target="#Ex04-008">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -2116,9 +2184,10 @@ public RelayCommand ShowItemCommand
                 <h3>EventToCommand Demo 4: EventArgsConverter</h3>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex04-00" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.sln">
+                        <input id="Ex04-008" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex04-00">
+                	        <button class="btn" data-clipboard-target="#Ex04-008">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -2126,9 +2195,10 @@ public RelayCommand ShowItemCommand
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex04-00" type="text" value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.sln">
+                        <input id="Ex04-009" type="text"
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex04-00">
+                	        <button class="btn" data-clipboard-target="#Ex04-009">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
