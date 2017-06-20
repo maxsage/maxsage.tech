@@ -1405,7 +1405,7 @@ SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex04-005" type="text"
-                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.WP8.sln">
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\before\eventtocommand\EventToCommandSamples.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex04-005">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1416,7 +1416,7 @@ SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex04-006" type="text"
-                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.WP8.sln">
+                               value="Dropbox\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 4\after\eventtocommand\EventToCommandSamples.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex04-006">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1503,14 +1503,21 @@ SimpleIoc.Default.Register&lt;INavigationService, NavigationService&gt;();
                 <p>So in Blend, it is really easy to just drag and drop the behavior on the element and then to
                     configure it. Here is how the code looks like in XAML:
                 </p>
-                <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig04-103.png"/>
-                    <figcaption>Fig 04-103</figcaption>
-                </figure>
+        <figure>
+<pre><code class="xml">&lt;Rectangle Fill="Blue"
+    Height="100"
+    Width="150"&gt;
+    &lt;i:Interaction.Behaviors&gt;
+        &lt;ei:MouseDragElementBehavior ConstrainToParentBounds="True"/&gt;
+    &lt;/i:Interaction.Behaviors&gt;
+&lt;/Rectangle&gt;</code></pre>
+        <figcaption>Fig04-103</figcaption>
+        </figure>
                 <p>Notice how the behavior is neatly attached to the rectangle using the Interaction.Behaviors
                     construct:
                 </p>
 <figure>
-<pre><code class="csharp">&lt;Rectangle Fill="Blue"
+<pre><code class="xml">&lt;Rectangle Fill="Blue"
 	Height="100"
 	Width="150">
 	&lt;i:Interaction.Behaviors&gt;
