@@ -12,7 +12,7 @@
                     some repetitive operations could benefit from some automation.
                 </p>
                 <p>
-                    This is when we introduce the MVVM Light Toolkit's components, starting with the Code DLL and then
+                    This is when we introduce the MVVM Light Toolkit's components, starting with the Core DLL and then
                     following up with the Extras DLL. This rounded up the presentation of the first-half of the
                     toolkit's elements.
                 </p>
@@ -121,15 +121,15 @@
                     clicked.
                 </p>
                 <p>Here is the code, which is using the WebClient:</p>
-<figure>
-<pre><code class="csharp">var client = new WebClient();</code></pre>
-<figcaption>Fig05-001</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var client = new WebClient();</code></pre>
+                    <figcaption>Fig05-001</figcaption>
+                </figure>
                 <p>
                     to connect to the web server and load the JSON file as text. And here is a small C# class, which
                     will be used to contain the data parsed from the JSON file:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class MyClass
     {
         public string Property1
@@ -145,10 +145,10 @@
         }
     }
 </code></pre>
-<figcaption>Fig05-002</figcaption>
-</figure>
+                    <figcaption>Fig05-002</figcaption>
+                </figure>
                 <p>
-                    Instead of writing the passing code ourselves, it is easier to use an existing package; for example,
+                    Instead of writing the parsing code ourselves, it is easier to use an existing package; for example,
                     the popular Json.NET. This great library is available on NuGet, so let's look for it. Here I will
                     right-click on the References folder and select ‘Manage NuGet Packages'. Then, I make sure that the
                     nuget.org option is selected on the left, and I search for JSON. I make sure to select the correct
@@ -166,7 +166,7 @@
                     deserialize the JSON text into an instance of MyClass. Let's inspect this line, and here we see the
                     usage of the JsonConvert class, which comes from Json.NET.
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">try
 {
     var myInstance = JsonConvert.DeserializeObject&lt;MyClass&gt;(e.Result);
@@ -198,7 +198,6 @@ catch
                     EventToCommand. On platforms where it is available, it also adds a dependency to another NuGet
                     package, named CommonServiceLocator.
                 </p>
-                p
                 <p>In addition to the libraries, the full version of MVVM Light available on NuGet also installs a
                     ViewModelLocator and a MainViewModel. This version of the package is most suited for new
                     applications that have just been created. It uses an Install script to add additional plumbing in
@@ -209,10 +208,32 @@ catch
                     Note that in this version of the package, the libraries are added as a dependency through the
                     "libraries only" NuGet Package. It makes it easier to handle the DLL. Notably, the application has a
                     main application and some satellite assemblies, which also need MVVM Light. In that case, the DLLs
-                    are loaded only once from NuGet. Finally, there is also a portable class library version of MVVM
-                    Light, which is handled as a separate package.
-                </p>
+                    are loaded only once from NuGet.</p>
+                <p>Finally, there is also a portable class library version of MVVM Light, which is handled as a
+                separate package.</p>
                 <h3>Adding MVVM Light to an App With Nuget (Demo)</h3>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex05-002" type="text"
+                               value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\before\NugetLibsOnly\NugetLibsOnly.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex05-002">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex05-003" type="text"
+                               value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\after\NugetLibsOnly\NugetLibsOnly.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex05-003">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
                 <p>For the demo, I created an empty WPF application here:</p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-006.png"/>
                     <figcaption>Fig 05-006</figcaption>
@@ -242,7 +263,7 @@ catch
                     this is the MainPage. And here I can use the Messenger to send an initialization message when the
                     MainPage has been loaded:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public partial class MainWindow : Window
 {
 	public MainWindow()
@@ -255,11 +276,33 @@ catch
 		};
 	}
 }</code></pre>
-<figcaption>Fig05-009</figcaption>
-</figure>
+                    <figcaption>Fig05-009</figcaption>
+                </figure>
                 <p>
-                    Now let's see what happens when we pull the Full MVVM Light through NuGet. First, I created a new
-                    empty Windows Phone application:
+                    Now let's see what happens when we pull the Full MVVM Light through NuGet.</p>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex05-004" type="text"
+                               value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\before\NugetFull\NugetFull.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex05-004">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="input-group">
+                        <input id="Ex05-005" type="text"
+                               value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\after\NugetFull\NugetFull.sln">
+                        <span class="input-group-btn">
+                	        <button class="btn" data-clipboard-target="#Ex05-005">
+                        	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
+                            </button>
+        	            </span>
+                    </div>
+                </div>
+                <p>First, I created a new empty Windows Phone application:
                 </p>
                 <figure><img src="app/wpf/images/mvvmlighttoolkitfundamentals/Fig05-010.png"/>
                     <figcaption>Fig 05-010</figcaption>
@@ -289,19 +332,19 @@ catch
                     that the ViewModelLocator has been added to the application's global resources, like we explained in
                     the previous module:
                 </p>
-<figure>
+                <figure>
 <pre><code class="xml">&lt;Application.Resources&gt;
     &lt;ResourceDictionary&gt;
         &lt;vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Mvvmlight.ViewModel" /&gt;
     &lt;/ResourceDictionary&gt;
 &lt;/Application.Resources&gt;</code></pre>
-<figcaption>Fig05-014</figcaption>
-</figure>
+                    <figcaption>Fig05-014</figcaption>
+                </figure>
                 <p>
                     So now we can do the following. First, I'm going to open the MainViewModel and I'm going to add a
                     property named Message:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public string Message
         {
             get
@@ -309,8 +352,8 @@ catch
                 return "Hello Nuget";
             }
         }</code></pre>
-<figcaption>Fig05-015</figcaption>
-</figure>
+                    <figcaption>Fig05-015</figcaption>
+                </figure>
                 <p>
                     This is a simple string property. Now let's build the application. Then I can open the application's
                     MainPage in Blend. If we switch to the Data pane and check the DataContext of the page, we see that
@@ -403,7 +446,7 @@ catch
                     have been installed. So, for example, if I create a new MvvmLight application for Silverlight 5
                     here, I can open the MainPage.xaml, here is a code behind:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace MvvmLight1
 {
 	public partial class MainPage : UserControl
@@ -415,8 +458,8 @@ catch
 		}
 	}
 }</code></pre>
-<figcaption>Fig05-023</figcaption>
-</figure>
+                    <figcaption>Fig05-023</figcaption>
+                </figure>
                 <p>
                     and then I can type anywhere in the code, mvvm, and here we see the code snippets installed:
                 </p>
@@ -477,10 +520,10 @@ catch
                 <h3>The "INPC" Code Snippets Demo</h3>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex05-003" type="text"
+                        <input id="Ex05-005" type="text"
                                value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\before\NugetIntro\NugetIntro.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex05-003">
+                	        <button class="btn" data-clipboard-target="#Ex05-005">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -488,10 +531,10 @@ catch
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex05-004" type="text"
+                        <input id="Ex05-006" type="text"
                                value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\after\SnippetsSample\SnippetsSample.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex05-004">
+                	        <button class="btn" data-clipboard-target="#Ex05-006">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -501,7 +544,7 @@ catch
                     too many, but we will see the most important ones and then you can study the others on your own.
                     Here is the ViewModel class:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">using GalaSoft.MvvmLight;
 
 namespace MvvmLight1.ViewModel
@@ -511,8 +554,8 @@ namespace MvvmLight1.ViewModel
 
 	}
 }</code></pre>
-<figcaption>Fig05-026</figcaption>
-</figure>
+                    <figcaption>Fig05-026</figcaption>
+                </figure>
                 <p>
                     and I will add some properties to it. Because the ViewModel inherits a ViewModelBase class, I have
                     access to some Utility methods like we saw in Module 3, but we also saw that adding an observable
@@ -525,17 +568,17 @@ namespace MvvmLight1.ViewModel
                     To automate adding a property, let's just type mvvm. In the inpc section, we have a few choices.
                     Here, let's start with the basic mvvminpc:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class MainViewModel : ViewModelBase
 {
 	mvvminpc
 }</code></pre>
-<figcaption>Fig05-027</figcaption>
-</figure>
+                    <figcaption>Fig05-027</figcaption>
+                </figure>
                 <p>
                     If I expand the snippet by typing Tab we can see the expanded code:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="MyProperty" /&gt; property's name.
 /// &lt;/summary&gt;
@@ -566,8 +609,8 @@ public bool MyProperty
 	}
 }
 </code></pre>
-<figcaption>Fig05-028</figcaption>
-</figure>
+                    <figcaption>Fig05-028</figcaption>
+                </figure>
                 <p>
                     There are a few tokens that can be replaced. You can jump from token to token using the Tab key. The
                     first token is a property's name. Let's type the name "Status" here. The second token is a
@@ -576,7 +619,7 @@ public bool MyProperty
                     anything you prefer. Finally, we type the initial value, in this case a _status message, such as
                     "Initializing":
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="Status" /&gt; property's name.
 /// &lt;/summary&gt;
@@ -606,40 +649,40 @@ public string Status
 		RaisePropertyChanged(StatusPropertyName);
 	}
 }</code></pre>
-<figcaption>Fig05-029</figcaption>
-</figure>
+                    <figcaption>Fig05-029</figcaption>
+                </figure>
                 <p>
                     Once you are done, press Escape and the snippet is complete. Notice that this snippet had the
                     constant for the property's name:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="Status" /&gt; property's name.
 /// &lt;/summary&gt;
 public const string StatusPropertyName = "Status";</code></pre>
-<figcaption>Fig05-030</figcaption>
-</figure>
+                    <figcaption>Fig05-030</figcaption>
+                </figure>
                 <p>
                     which can be useful when you are outside of this class and need to handle the PropertyChanged event.
                     Here, there is a check of the new value:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">if (_status == value)
 {
     return;
 }</code></pre>
-<figcaption>Fig05-031</figcaption>
-</figure>
+                    <figcaption>Fig05-031</figcaption>
+                </figure>
                 <p>
                     and then we raise two events; PropertyChanging before the value is set, and PropertyChanged after
                     the value is saved:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">RaisePropertyChanging(StatusPropertyName);
 _status = value;
 RaisePropertyChanged(StatusPropertyName);</code></pre>
-<figcaption>Fig05-032</figcaption>
-</figure>
+                    <figcaption>Fig05-032</figcaption>
+                </figure>
                 <p>
                     Let's add another property for the user's first name. This time we will use another snippet; for
                     example, let's select the one called mvvminpclambda:
@@ -657,7 +700,7 @@ RaisePropertyChanged(StatusPropertyName);</code></pre>
                     private attribute is also called _firstName, and the initial value will be empty. And then we can
                     see the result, which is almost the same as the previous example:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="FirstName" /&gt; property's name.
 /// &lt;/summary&gt;
@@ -688,8 +731,8 @@ public string FirstName
 		RaisePropertyChanged(() =&gt; FirstName);
 	}
 }</code></pre>
-<figcaption>Fig05-034</figcaption>
-</figure>
+                    <figcaption>Fig05-034</figcaption>
+                </figure>
                 <p>
                     but this time using Expressions instead of the string-based property name.
                 </p>
@@ -705,10 +748,10 @@ public string FirstName
                     private attribute, and no initial value. After we replace the tokens, we see that the setter is only
                     one line of code, instead of seven like before:
                 </p>
-<figure>
-<pre><code class="csharp">Set(LastNamePropertyName, ref _lastName, value);</code></pre>
-<figcaption>Fig05-036</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Set(LastNamePropertyName, ref _lastName, value);</code></pre>
+                    <figcaption>Fig05-036</figcaption>
+                </figure>
                 <p>
                     We saw the meaning of the Set method in Module 3 about the ViewModelBase and ObservableObject
                     classes. This convenient method simplifies ViewModel code. As a reminder, it also returns true, if
@@ -727,7 +770,7 @@ public string FirstName
                 <p>
                     When the snippet is expanded and after we replace all the tokens, this is the Age property:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="Age" /&gt; property's name.
 /// &lt;/summary&gt;
@@ -752,15 +795,15 @@ public int Age
 		Set(() =&gt; Age, ref _age, value, true);
 	}
 }</code></pre>
-<figcaption>Fig05-038</figcaption>
-</figure>
+                    <figcaption>Fig05-038</figcaption>
+                </figure>
                 <p>
                     Note that the Set method here takes a Boolean parameter set to true:
                 </p>
-<figure>
-<pre><code class="csharp">Set(() =&gt; Age, ref _age, value, true);</code></pre>
-<figcaption>Fig05-039</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Set(() =&gt; Age, ref _age, value, true);</code></pre>
+                    <figcaption>Fig05-039</figcaption>
+                </figure>
                 <p>
                     which will call the Messenger to send a PropertyChangedMessage. This is one of the built-in types in
                     MVVM Light.
@@ -800,20 +843,20 @@ public int Age
                     We see that when it is created, it registers a handler for a PropertyChangedMessage of int. First,
                     it will check the type of the Sender and the Name of the Property:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">if (message.Sender is MainViewModel
     && message.PropertyName == MainViewModel.AgePropertyName)</code></pre>
-<figcaption>Fig05-042</figcaption>
-</figure>
+                    <figcaption>Fig05-042</figcaption>
+                </figure>
                 <p>
                     If the Property is the Age, it sends an email here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">// Send an email congratulating for the birthday
 
 MessageBox.Show(string.Format("Your new age is {0}", message.NewValue));</code></pre>
-<figcaption>Fig05-043</figcaption>
-</figure>
+                    <figcaption>Fig05-043</figcaption>
+                </figure>
                 <p>
                     using the NewValue that it just received. In addition, just for test, it will show a MessageBox here
                     as well.
@@ -830,10 +873,10 @@ MessageBox.Show(string.Format("Your new age is {0}", message.NewValue));</code><
                 <h3>The "RELAY" Code Snippets Demo</h3>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex05-005" type="text"
+                        <input id="Ex05-007" type="text"
                                value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\before\NugetIntro\NugetIntro.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex05-005">
+                	        <button class="btn" data-clipboard-target="#Ex05-007">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -841,10 +884,10 @@ MessageBox.Show(string.Format("Your new age is {0}", message.NewValue));</code><
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex05-006" type="text"
+                        <input id="Ex05-008" type="text"
                                value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\after\SnippetsSample\SnippetsSample.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex05-006">
+                	        <button class="btn" data-clipboard-target="#Ex05-008">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -869,7 +912,7 @@ MessageBox.Show(string.Format("Your new age is {0}", message.NewValue));</code><
                     hosting the command. We are going to type _showFullNameCommand. And then Tab to the next one, which
                     is the name of the property itself, again, ShowFullNameCommand. And now we are done already:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// Gets the ShowFullName.
 /// &lt;/summary&gt;
@@ -887,8 +930,8 @@ public RelayCommand ShowFullNameCommand
 	}
 }
 </code></pre>
-<figcaption>Fig05-046</figcaption>
-</figure>
+                    <figcaption>Fig05-046</figcaption>
+                </figure>
                 <p>
                     So I can go back to the first token and type Enter, which is going to automatically place a cursor
                     in the location where it makes the most sense to start typing code. Here I will cheat a little bit
@@ -902,8 +945,8 @@ public RelayCommand ShowFullNameCommand
               MessageBox.Show(
                   string.Format("{0}, {1}", LastName, FirstName));
           }));</code></pre>
-    <figcaption>Fig05-047</figcaption>
-</figure>
+                    <figcaption>Fig05-047</figcaption>
+                </figure>
                 <p>
                     this code is going to use a MessageBox to show the user's full name. Let's get ready to build the
                     application, here we are. Now I can build. Now I go back to Blend, where I added a button saying
@@ -1033,10 +1076,10 @@ public RelayCommand&lt;string&gt; SendEmailCommand
                 <h3>'The "PROPDP" and "PROPA" Snippets Demo</h3>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex05-007" type="text"
+                        <input id="Ex05-009" type="text"
                                value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\before\NugetIntro\NugetIntro.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex05-007">
+                	        <button class="btn" data-clipboard-target="#Ex05-009">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -1044,10 +1087,10 @@ public RelayCommand&lt;string&gt; SendEmailCommand
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex05-008" type="text"
+                        <input id="Ex05-010" type="text"
                                value="C:\Development Tutorials\Pluralsight Courses\MVVM Light Toolkit Fundamentals\Module 5\after\SnippetsSample\SnippetsSample.sln">
                         <span class="input-group-btn">
-                	        <button class="btn" data-clipboard-target="#Ex05-008">
+                	        <button class="btn" data-clipboard-target="#Ex05-010">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
                             </button>
         	            </span>
@@ -1069,7 +1112,7 @@ public RelayCommand&lt;string&gt; SendEmailCommand
                     dependency property in a ViewModel or in a plain old object. It needs to be a DependencyObject; for
                     example, here, the application's MainWindow:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// Interaction logic for MainWindow.xaml
 /// &lt;/summary&gt;
@@ -1084,12 +1127,12 @@ public partial class MainWindow : Window
 		Closing += (s, e) =&gt; ViewModelLocator.Cleanup();
 	}
 }</code></pre>
-<figcaption>Fig05-061</figcaption>
-</figure>
+                    <figcaption>Fig05-061</figcaption>
+                </figure>
                 <p>
                     I will use a default non-MVVM Light snippet. I simply type propdp and then I expand the snippet:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> public int MyProperty
 {
 	get { return (int)GetValue(MyPropertyProperty); }
@@ -1099,8 +1142,8 @@ public partial class MainWindow : Window
 // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
 public static readonly DependencyProperty MyPropertyProperty =
 	DependencyProperty.Register("MyProperty", typeof(int), typeof(ownerclass), new PropertyMetadata(0));</code></pre>
-<figcaption>Fig05-062</figcaption>
-</figure>
+                    <figcaption>Fig05-062</figcaption>
+                </figure>
                 <p>
                     We see the typical declaration of a DependencyProperty, including the type, the convenient getter
                     and setter for the value, and the registration itself, with the property's name declared as a
@@ -1116,7 +1159,7 @@ public static readonly DependencyProperty MyPropertyProperty =
                     Now let's declare a DependencyProperty using the MVVM Light snippet; it is called mvvmpropdp. If we
                     expand this snippet now, we see that there is one single difference:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="MyProperty" /&gt; dependency property's name.
 /// &lt;/summary&gt;
@@ -1146,8 +1189,8 @@ public static readonly DependencyProperty MyPropertyProperty = DependencyPropert
 	typeof(int),
 	typeof(ownerclass),
 	new UIPropertyMetadata(0));</code></pre>
-<figcaption>Fig05-063</figcaption>
-</figure>
+                    <figcaption>Fig05-063</figcaption>
+                </figure>
                 <p>
                     the property's name is declared as a constant, which is a much better practice. Notably, when an
                     external object is listening to the DependencyProperty for changes, it will need to know the name of
@@ -1215,26 +1258,27 @@ public static readonly DependencyProperty MyPropertyProperty = DependencyPropert
                     The most important point of a new MvvmLight application can be seen in the code. First, let's open
                     App.xaml, and here we see that the ViewModelLocator is defined in the global resource:
                 </p>
-<figure>
+                <figure>
 <pre><code class="xml">&lt;Application.Resources&gt;
 	&lt;!--Global View Model Locator--&gt;
 	&lt;vm:ViewModelLocator x:Key="Locator"
 						 d:IsDataSource="True" /&gt;
 &lt;/Application.Resources&gt;</code></pre>
-<figcaption>Fig05-066</figcaption>
-</figure>
+                    <figcaption>Fig05-066</figcaption>
+                </figure>
                 <p>
                     Then, in MainWindow.xaml, we see that the DataContext is set to the Main property of the
                     ViewModelLocator:
                 </p>
-<figure>
-<pre><code class="csharp">DataContext="{Binding Main, Source={StaticResource Locator}}"&gt;</code></pre>
-<figcaption>Fig05-067</figcaption>
-</figure>
+                <figure>
+                    <pre><code
+                            class="csharp">DataContext="{Binding Main, Source={StaticResource Locator}}"&gt;</code></pre>
+                    <figcaption>Fig05-067</figcaption>
+                </figure>
                 <p>
                     Let's open the ViewModelLocator itself. Here, it is configuring the SimpleIoc with a DataService:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class ViewModelLocator
 {
     static ViewModelLocator()
@@ -1252,8 +1296,8 @@ public static readonly DependencyProperty MyPropertyProperty = DependencyPropert
 
         SimpleIoc.Default.Register&lt;MainViewModel&gt;();
     }</code></pre>
-<figcaption>Fig05-068</figcaption>
-</figure>
+                    <figcaption>Fig05-068</figcaption>
+                </figure>
                 <p>
                     Of course, this is just basic scaffolding and the DataService will be expanded or replaced in your
                     application, but this gives you a good starting point.
@@ -1261,7 +1305,7 @@ public static readonly DependencyProperty MyPropertyProperty = DependencyPropert
                 <p>
                     Let's take a look at the DataService, which is located in the Model folder:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace MvvmLight1.Model
 {
     public class DataService : IDataService
@@ -1275,8 +1319,8 @@ public static readonly DependencyProperty MyPropertyProperty = DependencyPropert
         }
     }
 }</code></pre>
-<figcaption>Fig05-069</figcaption>
-</figure>
+                    <figcaption>Fig05-069</figcaption>
+                </figure>
                 <p>It is very simple and only creates a dummy DataItem and then returns it. This is where you will
                     connect to an actual data service, a database, a web service, etc. There is also a design time
                     implementation of the DesignDataService in the Design folder, and this is where the text that we saw
@@ -1285,8 +1329,8 @@ public static readonly DependencyProperty MyPropertyProperty = DependencyPropert
                 <figure>
 <pre><code class="csharp">var item = new DataItem("Welcome to MVVM Light [design]");
 callback(item, null);</code></pre>
-<figcaption>Fig05-070</figcaption>
-</figure>
+                    <figcaption>Fig05-070</figcaption>
+                </figure>
                 <p>
                     Of course, in your application, you are going to do a lot of operations in the DataService, and some
                     of them will be asynchronous. Note that for now, I am not using the async and await keywords, mostly
@@ -1297,10 +1341,10 @@ callback(item, null);</code></pre>
                     Finally, let's open the MainViewModel to look at the code. Here, we see the DataService being
                     injected inside the constructor and then we call it immediately:
                 </p>
-<figure>
-<pre><code class="csharp">public class MainViewModel : ViewModelBase</code></pre>
-<figcaption>Fig05-071</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">public class MainViewModel : ViewModelBase</code></pre>
+                    <figcaption>Fig05-071</figcaption>
+                </figure>
                 <p>
                     Here, too, in your production application, you will have some logic to handle user input and call
                     the service on demand, refresh the data, etc.
@@ -1309,10 +1353,10 @@ callback(item, null);</code></pre>
                     A few small details that are not critical, but interesting to note; here, in MainWindow.xaml.cs, we
                     call the Cleanup method on the ViewModelLocator when the MainWindow is closed:
                 </p>
-<figure>
-<pre><code class="csharp">Closing += (s, e) =&gt; ViewModelLocator.Cleanup();</code></pre>
-<figcaption>Fig05-072</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Closing += (s, e) =&gt; ViewModelLocator.Cleanup();</code></pre>
+                    <figcaption>Fig05-072</figcaption>
+                </figure>
                 <p>
                     This method is not doing anything at this point, but it would be a good place to put code to close
                     database connections, save the application states, etc.
@@ -1325,8 +1369,8 @@ callback(item, null);</code></pre>
 {
     DispatcherHelper.Initialize();
 }</code></pre>
-<figcaption>Fig05-073</figcaption>
-</figure>
+                    <figcaption>Fig05-073</figcaption>
+                </figure>
                 <p>
                     The exact location of this line of code is different depending on the framework that you are using;
                     for example, Windows Phone, Silverlight, WPF, etc. But you can be assured that the DispatcherHelper
@@ -1402,7 +1446,7 @@ callback(item, null);</code></pre>
                 <p>
                     Here, we have the Behavior implementation for the User Control:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">    public class OrientationStateControlBehavior : DependencyObject, IBehavior
     {
         /// &lt;summary&gt;
@@ -1429,13 +1473,13 @@ callback(item, null);</code></pre>
         /// The &lt;see cref="SnapStateName" /&gt; dependency property's name.
         /// &lt;/summary&gt;
 </code></pre>
-<figcaption>Fig05-079</figcaption>
-</figure>
+                    <figcaption>Fig05-079</figcaption>
+                </figure>
                 <p>
                     There are a few properties used to enter the name of the visual states defining the control's
                     appearance. Then we have the Attach method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> public virtual void Attach(DependencyObject associatedObject)
         {
             AssociatedObject = associatedObject;
@@ -1451,43 +1495,44 @@ callback(item, null);</code></pre>
                 this,
                 HandleOrientationMessage);
         }</code></pre>
-<figcaption>Fig05-080</figcaption>
-</figure>
+                    <figcaption>Fig05-080</figcaption>
+                </figure>
                 <p>
                     This method will be called automatically by the system when the page is loaded and the behavior is
                     attached. The key of the process here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> Messenger.Default.Register&lt;OrientationStateMessage&gt;(
     this,
     HandleOrientationMessage);</code></pre>
-<figcaption>Fig05-081</figcaption>
-</figure>
+                    <figcaption>Fig05-081</figcaption>
+                </figure>
 
                 <p>
                     is that the Behavior registers to the MVVM Light Messenger, for an OrientationStateMessage. When
                     this message is received, the HandleOrientation method is called. We use a VisualStateManager to go
                     to the correct state:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">case PageOrientations.Portrait:
     VisualStateManager.GoToState(control, PortraitStateName, true);
     SendMessage(PageOrientations.Portrait);
     break;</code></pre>
-<figcaption>Fig05-082</figcaption>
-</figure>
+                    <figcaption>Fig05-082</figcaption>
+                </figure>
                 <p>
                     This Behavior can be attached to a User Control. For a page we use a slightly different one, called
                     OrientationStateBehavior. Let's open this one. In fact, it is inheriting the one that we just saw:
                 </p>
-<figure>
-<pre><code class="csharp">public class OrientationStateBehavior : OrientationStateControlBehavior</code></pre>
-<figcaption>Fig05-083</figcaption>
-</figure>
+                <figure>
+                    <pre><code
+                            class="csharp">public class OrientationStateBehavior : OrientationStateControlBehavior</code></pre>
+                    <figcaption>Fig05-083</figcaption>
+                </figure>
                 <p>
                     The main difference is that this Behavior is an additional property, called SnapViewMaximumWidth:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// The &lt;see cref="SnapViewMaximumWidth" /&gt; dependency property's name.
 /// &lt;/summary&gt;
@@ -1501,8 +1546,8 @@ public static readonly DependencyProperty SnapViewMaximumWidthProperty = Depende
     typeof(double),
     typeof(OrientationStateBehavior),
     new PropertyMetadata(500.0));</code></pre>
-<figcaption>Fig05-084</figcaption>
-</figure>
+                    <figcaption>Fig05-084</figcaption>
+                </figure>
                 <p>
                     This can be used to specify when the page should go from Landscape mode to Split mode.
                 </p>
@@ -1510,21 +1555,21 @@ public static readonly DependencyProperty SnapViewMaximumWidthProperty = Depende
                     Further below, this is where we attach to the OrientationChanged event and to the SizeChanged event
                     for the page:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">_associatedPage.SizeChanged += PageBaseSizeChanged;
 DisplayInformation.GetForCurrentView().OrientationChanged += PageBaseOrientationChanged;</code></pre>
-<figcaption>Fig05-085</figcaption>
-</figure>
+                    <figcaption>Fig05-085</figcaption>
+                </figure>
                 <p>
                     Finally, here is where the Messenger is used to send the OrientationStateMessage:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">protected override void SendMessage(PageOrientations orientation)
 {
     Messenger.Default.Send(new OrientationStateMessage(orientation));
 }</code></pre>
-<figcaption>Fig05-086</figcaption>
-</figure>
+                    <figcaption>Fig05-086</figcaption>
+                </figure>
                 <p>
                     This will be received by the Behaviors attached to User Controls and they, in turn, will go to the
                     correct state. Let's open the second page in Blend and see how we can use this Behavior.
@@ -1665,16 +1710,17 @@ DisplayInformation.GetForCurrentView().OrientationChanged += PageBaseOrientation
                     This page has a few predefined attributes, notably the DataContext is set, by default, to the
                     MainViewModel:
                 </p>
-<figure>
-<pre><code class="csharp">DataContext="{Binding Main, Source={StaticResource Locator}}"&gt;</code></pre>
-<figcaption>Fig05-106</figcaption>
-</figure>
+                <figure>
+                    <pre><code
+                            class="csharp">DataContext="{Binding Main, Source={StaticResource Locator}}"&gt;</code></pre>
+                    <figcaption>Fig05-106</figcaption>
+                </figure>
                 <p>
                     Let's change that to a new ViewModel called Settings that we will create in a moment. Let's add the
                     SettingsViewModel inside the ViewModel folder. Then I will select an MvvmViewModel and call that
                     SettingsViewModel. Let's add a new observable property, called DefaultEmailAddress:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace MvvmLight3.ViewModel
 {
     /// &lt;summary&gt;
@@ -1717,8 +1763,8 @@ DisplayInformation.GetForCurrentView().OrientationChanged += PageBaseOrientation
         }
     }
 }</code></pre>
-<figcaption>Fig05-107</figcaption>
-</figure>
+                    <figcaption>Fig05-107</figcaption>
+                </figure>
                 <p>
                     Then, inside the ViewModelLocator, I will add a property for this ViewModel. Let's open it. And for
                     this I can use a snippet that we didn't see yet, called mvvmlocatorproperty:
@@ -1745,14 +1791,14 @@ DisplayInformation.GetForCurrentView().OrientationChanged += PageBaseOrientation
                     cut this line out:
                 </p>
                 <figure>
-<pre><code class="csharp">SimpleIoc.Default.Register&lt;SettingsViewModel&gt;();</code></pre>
-<figcaption>Fig05-110</figcaption>
-</figure>
+                    <pre><code class="csharp">SimpleIoc.Default.Register&lt;SettingsViewModel&gt;();</code></pre>
+                    <figcaption>Fig05-110</figcaption>
+                </figure>
                 <p>
                     then I'm going to remove the ViewModelLocator here, go to the actual constructor that we had before,
                     and here I can paste the line that I just cut:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">static ViewModelLocator()
 {
 	ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
@@ -1771,8 +1817,8 @@ DisplayInformation.GetForCurrentView().OrientationChanged += PageBaseOrientation
 
   }
 </code></pre>
-<figcaption>Fig05-111</figcaption>
-</figure>
+                    <figcaption>Fig05-111</figcaption>
+                </figure>
                 <p>After I build the application and open the SettingsPage in Blend, we see that the DataContext is set
                     to the SettingsViewModel as expected:
                 </p>
