@@ -259,7 +259,10 @@ var element = method.Invoke(
     plugInManager,
     new object[]
     {
-    });</code></pre>
+    });
+
+    return element as FrameworkElement;
+</code></pre>
                     <figcaption>Fig06-018</figcaption>
                 </figure>
                 <p>
@@ -314,8 +317,14 @@ var element = method.Invoke(
                     The Clear method is required by the IPlugInHost interface:
                 </p>
                 <figure>
-<pre><code class="csharp"> Messenger.Default.Send(
-    new NotificationMessage(Notifications.CleanupNotification));</code></pre>
+<pre><code class="csharp">public void Clear()
+{
+    Messenger.Default.Send(
+        new NotificationMessage(Notifications.CleanupNotification));
+
+    PlugInHost1.Child = null;
+    PlugInHost2.Child = null;
+}</code></pre>
                     <figcaption>Fig06-024</figcaption>
                 </figure>
                 <p>
@@ -332,14 +341,15 @@ PlugInHost2.Child = null;</code></pre>
                     The PlacePlugIn method is also required by the IPlugInHost interface:
                 </p>
                 <figure>
-                    <pre><code class="csharp">var bootstrapper = ServiceLocator.Current.GetInstance&lt;Bootstrapper&gt;();</code></pre>
+                    <pre><code class="csharp">public void PlacePlugIn(IPlugIn plugIn, object dataContext)
+{</code></pre>
                     <figcaption>Fig06-026</figcaption>
                 </figure>
                 <p>
                     It uses the IOC container to get the Bootstrapper:
                 </p>
                 <figure>
-                    <pre><code class="csharp">element = bootstrapper.GetElement(plugIn);</code></pre>
+                    <pre><code class="csharp">var bootstrapper = ServiceLocator.Current.GetInstance&lt;Bootstrapper&gt;();</code></pre>
                     <figcaption>Fig06-027</figcaption>
                 </figure>
                 <p>
@@ -960,26 +970,26 @@ public RelayCommand SendUserCommand
                 <p>
                     So let's check the code. What I'm going to do is send a new NotificationMessage of user:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">() =&gt; Messenger.Default.Send(
    new NotificationMessage&lt;User&gt;(</code></pre>
-<figcaption>Fig06-075</figcaption>
-</figure>
+                    <figcaption>Fig06-075</figcaption>
+                </figure>
                 <p>
                     so this is a special message type, which carries a notification and also a payload:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">CurrentUser,
 Notifications.NewUserNotification))));</code></pre>
-<figcaption>Fig06-076</figcaption>
-</figure>
+                    <figcaption>Fig06-076</figcaption>
+                </figure>
                 <p>in this case the CurrentUser. For example, this could be a notification when a new user looks into the
                     application, etc. Now let's prepare the PlugIn to receive the message.
                 </p>
                 <p>
                     First, I add a property, which will display the UserFullName, according to a specific format:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public const string UserFullNamePropertyName = "UserFullName";
 
 private string _userFullName = "No user yet";
@@ -995,12 +1005,12 @@ public string UserFullName
         Set(() =&gt; UserFullName, ref _userFullName, value);
     }
 }</code></pre>
-<figcaption>Fig06-077</figcaption>
-</figure>
+                    <figcaption>Fig06-077</figcaption>
+                </figure>
                 <p>
                     Then, inside the constructor, I will add another registration to the MVVM Light Messenger:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public PartialViewModel()
 {
     Messenger.Default.Register&lt;NotificationMessage&gt;(
@@ -1020,30 +1030,30 @@ public string UserFullName
             }
         });
 }</code></pre>
-<figcaption>Fig06-078</figcaption>
-</figure>
+                    <figcaption>Fig06-078</figcaption>
+                </figure>
                 <p>
                     We will check if the Notification is a NewUserNotification:
                 </p>
-<figure>
-<pre><code class="csharp">if (message.Notification == Notifications.NewUserNotification)</code></pre>
-<figcaption>Fig06-079</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">if (message.Notification == Notifications.NewUserNotification)</code></pre>
+                    <figcaption>Fig06-079</figcaption>
+                </figure>
                 <p>and if that is the case, we will use a message.Content to create the UserFullName according to a specific
                     format:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">UserFullName = string.Format(
     "{0}, {1}",
     message.Content.LastName,
     message.Content.FirstName);</code></pre>
-<figcaption>Fig06-080</figcaption>
-</figure>
+                    <figcaption>Fig06-080</figcaption>
+                </figure>
                 <p>
                     Now that the PartialViewModel is ready, let's use it in the XAML. I will add a snippet of XAML here, this is a
                     Grid containing a few elements:
                 </p>
-<figure>
+                <figure>
 <pre><code class="xml">&lt;Grid Grid.Row="1"
 	  x:Name="PartialPanel"
 	  d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type viewModel:PartialViewModel}}"
@@ -1067,26 +1077,26 @@ public string UserFullName
 				   FontSize="24" /&gt;
 	&lt;/StackPanel&gt;
 &lt;/Grid&gt;</code></pre>
-<figcaption>Fig06-081</figcaption>
-</figure>
+                    <figcaption>Fig06-081</figcaption>
+                </figure>
                 <p>
                     There is a TextBlock here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="xml">&lt;TextBlock Text="{Binding UserFullName}"
    HorizontalAlignment="Center"
    VerticalAlignment="Center"
    Foreground="White"
    FontSize="24" /&gt;</code></pre>
-<figcaption>Fig06-082</figcaption>
-</figure>
+                    <figcaption>Fig06-082</figcaption>
+                </figure>
                 <p>
                     which is data bound to the UserFullName property that we added to the PartialViewModel. So now we need to set
                     the DataContext of this Grid to the PartialViewModel, which we can do in code behind. In the
                     PlugInControl1.xaml.cs, I will use this line of code in the constructor to set the PartialPanel's DataContext
                     to a new PartialViewModel:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public partial class PlugInControl1
 {
     public PlugInControl1()
@@ -1095,8 +1105,8 @@ public string UserFullName
         PartialPanel.DataContext = new PartialViewModel();
     }
 }</code></pre>
-<figcaption>Fig06-083</figcaption>
-</figure>
+                    <figcaption>Fig06-083</figcaption>
+                </figure>
                 <p>
                     Of course, because the DataContext is set in the code behind, it means that we need a design-time DataContext
                     for the Visual Designer, in case we need it for design time data. This is easy to set up.
@@ -1106,15 +1116,15 @@ public string UserFullName
                     going to detect the DesignMode, and in case the DesignMode is active, we are going to set the UserFullName to
                     a known value:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">#if DEBUG
     if (IsInDesignMode)
     {
         UserFullName = "Bugnion, Laurent";
     }
 #endif</code></pre>
-<figcaption>Fig06-084</figcaption>
-</figure>
+                    <figcaption>Fig06-084</figcaption>
+                </figure>
                 <p>
                     Now I can build the application at this point. And if we take a quick look in Blend, we can see that the
                     design time data is working:
@@ -1165,18 +1175,18 @@ public string UserFullName
                 <p>
                     Let's take a look at IDataService. This is a very simple interface, which has just one method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">Task&lt;TestObject&gt; GetTestObject();
 </code></pre>
-<figcaption>Fig06-091</figcaption>
-</figure>
+                    <figcaption>Fig06-091</figcaption>
+                </figure>
                 <p>
                     and this method is going to be used asynchronously to retrieve a TestObject.
                 </p>
                 <p>
                     The TestObject itself has two properties:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace PlugInSample.Contracts
 {
     public class TestObject
@@ -1194,8 +1204,8 @@ public string UserFullName
         }
     }
 }</code></pre>
-<figcaption>Fig06-092</figcaption>
-</figure>
+                    <figcaption>Fig06-092</figcaption>
+                </figure>
                 <p>We already saw something like that in the previous module, when we were demonstrating NuGet and the Json.NET
                     assemblies. Now we are going to implement the DataService inside the Main assembly, so let's add a New Class:
                 </p>
@@ -1211,7 +1221,7 @@ public string UserFullName
                 <p>And now I can add the implementation of the GetTestObject method, which is going to retrieve the json file from
                     the web server and use Json.NET to deserialize this into a TestObject:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public async Task&lt;TestObject&gt; GetTestObject()
 {
     var client = new HttpClient();
@@ -1222,13 +1232,13 @@ public string UserFullName
     var instance = JsonConvert.DeserializeObject&lt;TestObject&gt;(json);
     return instance;
 }</code></pre>
-<figcaption>Fig06-095</figcaption>
-</figure>
+                    <figcaption>Fig06-095</figcaption>
+                </figure>
                 <p>
                     Now I can register the DataService inside the ViewModelLocator, like we did multiple times during this course.
                     And I'm going to do this, here, inside the constructor:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">static ViewModelLocator()
 {
     ServiceLocator.SetLocatorProvider(() =&gt; SimpleIoc.Default);
@@ -1245,8 +1255,8 @@ public string UserFullName
     SimpleIoc.Default.Register&lt;Bootstrapper&gt;();
     SimpleIoc.Default.Register&lt;MainViewModel&gt;();
 }</code></pre>
-<figcaption>Fig06-096</figcaption>
-</figure>
+                    <figcaption>Fig06-096</figcaption>
+                </figure>
                 <p>
                     And, of course, just like before, I could also go ahead and define a DesignDataService used at design time,
                     but here for the purpose of the demo, I'm not going to do that.
@@ -1255,7 +1265,7 @@ public string UserFullName
                     Now let's go back to the PlugIn assembly. Here, I'm going to start by adding a property to retrieve the
                     DataService from the IOC container:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class PartialViewModel : ViewModelBase
 {
 	public IDataService DataService
@@ -1266,8 +1276,8 @@ public string UserFullName
             }
         }
 }</code></pre>
-<figcaption>Fig06-097</figcaption>
-</figure>
+                    <figcaption>Fig06-097</figcaption>
+                </figure>
                 <p>
                     This is the same DataService that we just registered into the MainApplication's ViewModelLocator. Of course,
                     because we are using the IDataService abstraction, it could be any implementation; we don't need to know about
@@ -1277,7 +1287,7 @@ public string UserFullName
                     Now I can go ahead and add a RelayCommand here, so I'm going to use mvvmr, like before, and I will call this,
                     _callServiceCommand, here we go. And here, too, CallServiceCommand:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private RelayCommand _callServiceCommand;
 
 /// &lt;summary&gt;
@@ -1295,12 +1305,12 @@ public RelayCommand CallServiceCommand
                 }));
     }
 }</code></pre>
-<figcaption>Fig06-098</figcaption>
-</figure>
+                    <figcaption>Fig06-098</figcaption>
+                </figure>
                 <p>
                     Let's implement this command now, so I'm going to drag the code here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// Gets the CallDataServiceCommand.
 /// &lt;/summary&gt;
@@ -1330,20 +1340,20 @@ public RelayCommand CallDataServiceCommand
                 }));
     }
 }</code></pre>
-<figcaption>Fig06-099</figcaption>
-</figure>
+                    <figcaption>Fig06-099</figcaption>
+                </figure>
                 <p>
                     And what we will do here is call the DataService in order to get the TestObject:
                 </p>
-<figure>
-<pre><code class="csharp">var instance = await DataService.GetTestObject();</code></pre>
-<figcaption>Fig06-100</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var instance = await DataService.GetTestObject();</code></pre>
+                    <figcaption>Fig06-100</figcaption>
+                </figure>
                 <p>
                     Of course, this is an asynchronous method so we need to await that, and because this is awaited, I need to set
                     this lambda expression to async:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">async () =&gt;
 {
        try
@@ -1362,8 +1372,8 @@ public RelayCommand CallDataServiceCommand
        }
 
 }));</code></pre>
-<figcaption>Fig06-101</figcaption>
-</figure>
+                    <figcaption>Fig06-101</figcaption>
+                </figure>
                 <p>
                     Once a TestObject is retrieved, we are simply going to show a MessageBox for the demo, but of course in a
                     production application, we would actually use those values.
@@ -1396,7 +1406,7 @@ public RelayCommand CallDataServiceCommand
                 <p>
                     So here is a new class library, in which I added a new user control:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class PlugInManager : IPlugIn
 {
     public string Name
@@ -1412,8 +1422,8 @@ public RelayCommand CallDataServiceCommand
         return new AnotherPlugInControl();
     }
 }</code></pre>
-<figcaption>Fig06-104</figcaption>
-</figure>
+                    <figcaption>Fig06-104</figcaption>
+                </figure>
                 <p>
                     In the References folder, I added a reference to the Contracts assembly, like just before:
                 </p>
@@ -1423,7 +1433,7 @@ public RelayCommand CallDataServiceCommand
                 <p>
                     And here, I also implemented the PlugInManager with a Name and, of course, a GetElement method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public string Name
 {
     get
@@ -1436,8 +1446,8 @@ public FrameworkElement GetElement()
 {
     return new AnotherPlugInControl();
 }</code></pre>
-<figcaption>Fig06-106</figcaption>
-</figure>
+                    <figcaption>Fig06-106</figcaption>
+                </figure>
                 <p>
                     And I also added the DesignMainViewModel, just like before. So let's go in Blend and do a little bit of
                     design. First of all, I'm going to set the design-time DataContext, just like before, let's select here
@@ -1540,8 +1550,7 @@ public FrameworkElement GetElement()
                 <h3>Expandable List: Preparing the Infrastructure</h3>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex06-003" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\MVVM Light Toolkit Fundamentals\Module 6\before\SelectableList\SelectableList.sln">
+                        <input id="Ex06-003" type="text" value="C:\Development Tutorials\Pluralsight-Courses\MVVM Light Toolkit Fundamentals\Module 6\before\SelectableList\SelectableList.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-003">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1551,8 +1560,7 @@ public FrameworkElement GetElement()
                 </div>
                 <div class="example">
                     <div class="input-group">
-                        <input id="Ex06-004" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\MVVM Light Toolkit Fundamentals\Module 6\after\SelectableList\SelectableList.sln">
+                        <input id="Ex06-004" type="text" value="C:\Development Tutorials\Pluralsight-Courses\MVVM Light Toolkit Fundamentals\Module 6\after\SelectableList\SelectableList.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-004">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1600,7 +1608,7 @@ public FrameworkElement GetElement()
                 <p>
                     First we see the two properties that I just mentioned, IsExpanded and IsSelected.
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public bool IsExpanded
 {
     get
@@ -1618,56 +1626,56 @@ public const string IsSelectedPropertyName = "IsSelected";
 private bool _isSelected;
 
 public bool IsSelected</code></pre>
-<figcaption>Fig06-122</figcaption>
-</figure>
+                    <figcaption>Fig06-122</figcaption>
+                </figure>
                 <p>IsExpanded is a standard observable property, which works because a SelectableViewModel inherits the MVVM Light
                     ViewModelBase:
                 </p>
-<figure>
-<pre><code class="csharp">public class SelectableViewModel : ViewModelBase</code></pre>
-<figcaption>Fig06-123</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">public class SelectableViewModel : ViewModelBase</code></pre>
+                    <figcaption>Fig06-123</figcaption>
+                </figure>
                 <p>
                     The IsSelected property is a little bit more complex; we'll come to that in a moment. Let's scroll down for
                     now. Here, we expose a Command, which is called ExpandCommand:
                 </p>
-<figure>
-<pre><code class="csharp">public RelayCommand ExpandCommand</code></pre>
-<figcaption>Fig06-124</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">public RelayCommand ExpandCommand</code></pre>
+                    <figcaption>Fig06-124</figcaption>
+                </figure>
                 <p>
                     This is what will be actuated by the small button on the far left of the screen. What happened when this
                     command is actuated is this; first, the IsExpanded property is set to true:
                 </p>
-<figure>
-<pre><code class="csharp">IsExpanded = true;</code></pre>
-<figcaption>Fig06-125</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">IsExpanded = true;</code></pre>
+                    <figcaption>Fig06-125</figcaption>
+                </figure>
                 <p>
                     then the IsSelected value is also set to true:
                 </p>
-<figure>
-<pre><code class="csharp">IsSelected=true;</code></pre>
-<figcaption>Fig06-126</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">IsSelected=true;</code></pre>
+                    <figcaption>Fig06-126</figcaption>
+                </figure>
                 <p>
                     because when the button is tapped, we want the corresponding item to be selected, just like we saw in the
                     Email Application. Then comes the important part, we use a Messenger to send an ExpandMessage:
                 </p>
-<figure>
-<pre><code class="csharp">Messenger.Default.Send(new ExpandMessage(this, IsExpanded));</code></pre>
-<figcaption>Fig06-127</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Messenger.Default.Send(new ExpandMessage(this, IsExpanded));</code></pre>
+                    <figcaption>Fig06-127</figcaption>
+                </figure>
                 <p>
                     This is because the other items in the list must also expand when one item gets expanded.
                 </p>
                 <p>
                     The ExpandMessage is here:
                 </p>
-<figure>
-<pre><code class="csharp">public class ExpandMessage : GenericMessage&lt;bool&gt;</code></pre>
-<figcaption>Fig06-128</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">public class ExpandMessage : GenericMessage&lt;bool&gt;</code></pre>
+                    <figcaption>Fig06-128</figcaption>
+                </figure>
                 <p>
                     and we see that it is a simple GenericMessage of bool. It means that it is sent carrying a simple Boolean
                     value as payload. Because it has a specific type, however, there can be no confusion as of the intent of the
@@ -1677,7 +1685,7 @@ public bool IsSelected</code></pre>
                     Back to SelectableViewModel, the next interesting method is a constructor. Here, we register each item for two
                     different message types. The first one is the ExpandMessage that we just saw:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> Messenger.Default.Register&lt;ExpandMessage&gt;(
     this,
     msg =&gt;
@@ -1687,18 +1695,18 @@ public bool IsSelected</code></pre>
             IsExpanded = msg.Content;
         }
     });</code></pre>
-<figcaption>Fig06-129</figcaption>
-</figure>
+                    <figcaption>Fig06-129</figcaption>
+                </figure>
                 <p>
                     First, we will check if the Sender is the item itself:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> if (msg.Sender != this)
 {
     IsExpanded = msg.Content;
 }</code></pre>
-<figcaption>Fig06-130</figcaption>
-</figure>
+                    <figcaption>Fig06-130</figcaption>
+                </figure>
                 <p>
                     This is necessary, because the item can both send and receive ExpandMessages. In order to avoid unwanted
                     effects, we need to prevent the item from doing anything if the Message received was sent by the item itself.
@@ -1708,7 +1716,7 @@ public bool IsSelected</code></pre>
                     information from all the items. What we want to know is if an item is currently selected or not. If all items
                     are unselected, we want the whole list to collapse.
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public SelectableViewModel()
 {
     Messenger.Default.Register&lt;ExpandMessage&gt;(
@@ -1725,13 +1733,13 @@ public bool IsSelected</code></pre>
         this,
         msg =&gt; msg.Execute(IsSelected));
 }</code></pre>
-<figcaption>Fig06-131</figcaption>
-</figure>
+                    <figcaption>Fig06-131</figcaption>
+                </figure>
                 <p>
                     In order to do this, we will use a different type of message, called IsItemSelectedMessage. Let's take a look
                     at the code. Here is a code of IsItemSelectedMessage:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">using System;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -1756,20 +1764,20 @@ namespace SelectableList.ViewModel
         }
     }
 }</code></pre>
-<figcaption>Fig06-132</figcaption>
-</figure>
+                    <figcaption>Fig06-132</figcaption>
+                </figure>
                 <p>
                     This message has an Action as payload, which is a _callback:
                 </p>
-<figure>
-<pre><code class="csharp">private readonly Action&lt;bool&gt; _callback;</code></pre>
-<figcaption>Fig06-133</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">private readonly Action&lt;bool&gt; _callback;</code></pre>
+                    <figcaption>Fig06-133</figcaption>
+                </figure>
                 <p>
                     The _callback should immediately be executed when the message is received, in order to inform the sender about
                     the state of the item. To allow this, the message has an Execute method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public void Execute(bool result)
 {
     if (_callback != null)
@@ -1777,8 +1785,8 @@ namespace SelectableList.ViewModel
         _callback(result);
     }
 }</code></pre>
-<figcaption>Fig06-134</figcaption>
-</figure>
+                    <figcaption>Fig06-134</figcaption>
+                </figure>
                 <p>
                     which is just a friendly way to execute the _callback.
                 </p>
@@ -1786,19 +1794,19 @@ namespace SelectableList.ViewModel
                     So here, back into the SelectableViewModel, how do we use this message? First, in the item constructor, we
                     register for this message type:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">Messenger.Default.Register&lt;IsItemSelectedMessage&gt;(
     this,
     msg =&gt; msg.Execute(IsSelected));</code></pre>
-<figcaption>Fig06-135</figcaption>
-</figure>
+                    <figcaption>Fig06-135</figcaption>
+                </figure>
                 <p>
                     When it is received, the Execute method is called on the message:
                 </p>
-<figure>
-<pre><code class="csharp">msg =&gt; msg.Execute(IsSelected));</code></pre>
-<figcaption>Fig06-136</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">msg =&gt; msg.Execute(IsSelected));</code></pre>
+                    <figcaption>Fig06-136</figcaption>
+                </figure>
                 <p>
                     What it does is very simple; it just returns a value of the IsSelected property to the sender. This way, the
                     sender will know the state of all the items in the list.
@@ -1806,7 +1814,7 @@ namespace SelectableList.ViewModel
                 <p>
                     Let's see who sent the IsSelected message. This happened here, all the way up into the IsSelected property:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public bool IsSelected
 {
     get
@@ -1838,21 +1846,21 @@ namespace SelectableList.ViewModel
         }
     }
 }</code></pre>
-<figcaption>Fig06-137</figcaption>
-</figure>
+                    <figcaption>Fig06-137</figcaption>
+                </figure>
                 <p>
                     Because this property will be data bound to the item's checkbox in the user interface, we know when the user
                     deselects one item. If the value is false:
                 </p>
-<figure>
-<pre><code class="csharp">if (!_isSelected)</code></pre>
-<figcaption>Fig06-138</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">if (!_isSelected)</code></pre>
+                    <figcaption>Fig06-138</figcaption>
+                </figure>
                 <p>
                     we need to check all the other items, in order to know if the list should be collapsed. So we will ask all the
                     items by sending the IsItemSelectedMessage here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">Messenger.Default.Send(
     new IsItemSelectedMessage(
         this,
@@ -1860,34 +1868,34 @@ namespace SelectableList.ViewModel
         {
             allItemsAreUnselected &= !result;
         }));</code></pre>
-<figcaption>Fig06-139</figcaption>
-</figure>
+                    <figcaption>Fig06-139</figcaption>
+                </figure>
 
                 <p>
                     When an item executes a callback, we check the result and we use this to compute the global value of all the
                     items.
                 </p>
-<figure>
-<pre><code class="csharp">allItemsAreUnselected &= !result;</code></pre>
-<figcaption>Fig06-140</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">allItemsAreUnselected &= !result;</code></pre>
+                    <figcaption>Fig06-140</figcaption>
+                </figure>
                 <p>
                     Then, if all the items replied that they are already unselected, we can collapse the list by sending an
                     ExpandMessage with the value of false:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">if (allItemsAreUnselected)
 {
     IsExpanded = false;
     Messenger.Default.Send(new ExpandMessage(this, false));
 }</code></pre>
-<figcaption>Fig06-141</figcaption>
-</figure>
+                    <figcaption>Fig06-141</figcaption>
+                </figure>
                 <p>
                     Now let's see how we can use this SelectableViewModel inside an application. So here I create an
                     ItemViewModel, which derives from SelectableViewModel:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> public class ItemViewModel : SelectableViewModel
 {
     public string Title
@@ -1896,25 +1904,25 @@ namespace SelectableList.ViewModel
         set;
     }
 }</code></pre>
-<figcaption>Fig06-142</figcaption>
-</figure>
+                    <figcaption>Fig06-142</figcaption>
+                </figure>
                 <p>
                     For the demo, it is very simple and has just one Text property. Inside the MainViewModel here, I added an
                     ObservableCollection of ItemViewModel:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public ObservableCollection&lt;ItemViewModel&gt; Items
 {
     get;
     set;
 }</code></pre>
-<figcaption>Fig06-143</figcaption>
-</figure>
+                    <figcaption>Fig06-143</figcaption>
+                </figure>
                 <p>
                     and here inside the constructor, I create two initial items, which I add to the collection. I also added a
                     RelayCommand here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public RelayCommand AddItemCommand
 {
     get
@@ -1934,8 +1942,8 @@ namespace SelectableList.ViewModel
                    }));
     }
 }</code></pre>
-<figcaption>Fig06-144</figcaption>
-</figure>
+                    <figcaption>Fig06-144</figcaption>
+                </figure>
                 <p>
                     which is going to be used to add new items to the list on the go.
                 </p>
@@ -1943,7 +1951,7 @@ namespace SelectableList.ViewModel
                     When an item is created and added to the list, I set the IsExpanded property according to the state of the
                     other items:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var expanded = Items.Any(i =&gt; i.IsExpanded);
 var item = new ItemViewModel
 {
@@ -1952,16 +1960,16 @@ var item = new ItemViewModel
 };
 
 Items.Add(item);</code></pre>
-<figcaption>Fig06-145</figcaption>
-</figure>
+                    <figcaption>Fig06-145</figcaption>
+                </figure>
                 <p>
                     Know that I could also use the IsItemSelectedMessage here if I wanted to, but it is easy enough to use a query
                     against the items in the Observable Collection instead.
                 </p>
-<figure>
-<pre><code class="csharp">var expanded = Items.Any(i =&gt; i.IsExpanded);</code></pre>
-<figcaption>Fig06-146</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">var expanded = Items.Any(i =&gt; i.IsExpanded);</code></pre>
+                    <figcaption>Fig06-146</figcaption>
+                </figure>
                 <h3>Expandable List: Creating the UI and TestingX</h3>
                 <p>
                     Let's look at the User Interface in Blend now. Right now it is not really what we want. We have a Button, a
@@ -2270,7 +2278,7 @@ Items.Add(item);</code></pre>
                     added automatically. In fact, it is a totally standard class, which is decorated with a test class attribute.
                     We also have one TestMethod also decorated with an attribute, this time called TestMethod:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">namespace TestApp1
 {
 	[TestClass]
@@ -2282,8 +2290,8 @@ Items.Add(item);</code></pre>
 		}
 	}
 }</code></pre>
-<figcaption>Fig06-187</figcaption>
-</figure>
+                    <figcaption>Fig06-187</figcaption>
+                </figure>
                 <p>
                     You can have as many test classes and TestMethods as you need. Let's just rename this one to TestExpansion.
                     Then we can write the code for this method.
@@ -2291,41 +2299,41 @@ Items.Add(item);</code></pre>
                 <p>
                     First, we will create a List of 5 SelectableViewModels:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var list = new List&lt;SelectableViewModel&gt;();
 
 for (var index = 0; index &lt; 5; index++)
 {
     list.Add(new SelectableViewModel());
 }</code></pre>
-<figcaption>Fig06-188</figcaption>
-</figure>
+                    <figcaption>Fig06-188</figcaption>
+                </figure>
                 <p>
                     Then we will call the ExpandCommand on the first item of the list:
                 </p>
-<figure>
-<pre><code class="csharp">list[0].ExpandCollapseCommand.Execute(null);</code></pre>
-<figcaption>Fig06-189</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">list[0].ExpandCollapseCommand.Execute(null);</code></pre>
+                    <figcaption>Fig06-189</figcaption>
+                </figure>
                 <p>
                     This simulates the interactions that the user has when he taps the small Expand button on the far-left of the
                     screen. Then we can Assert the result of the test. First, we know that each item in the list should be
                     expanded:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">foreach (var item in list)
 {
     Assert.IsTrue(item.IsExpanded);
 }</code></pre>
-<figcaption>Fig06-190</figcaption>
-</figure>
+                    <figcaption>Fig06-190</figcaption>
+                </figure>
                 <p>
                     Then, we also test that the first item, the one that was tapped, IsSelected:
                 </p>
-<figure>
-<pre><code class="csharp">Assert.IsTrue(list[0].IsSelected);</code></pre>
-<figcaption>Fig06-191</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Assert.IsTrue(list[0].IsSelected);</code></pre>
+                    <figcaption>Fig06-191</figcaption>
+                </figure>
                 <p>
                     Let's run that test using the Test Explorer. First I need to build the application, and then I can click on
                     Run All. And here we go, the test passed.
@@ -2337,59 +2345,59 @@ for (var index = 0; index &lt; 5; index++)
                 <p>The second test I want to write is to test what happens when all the items get unselected. Let's call it
                     TestCollapse. Here I will get the code, and here again, we create a list of 5 SelectableViewModels:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var list = new List&lt;SelectableViewModel&gt;();
 
 for (var index = 0; index < 5; index++)
 {
     list.Add(new SelectableViewModel());
 }</code></pre>
-<figcaption>Fig06-193</figcaption>
-</figure>
+                    <figcaption>Fig06-193</figcaption>
+                </figure>
                 <p>
                     Then I'm going to expand the list using the first item, just like before:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">list[0].ExpandCollapseCommand.Execute(null);
 list[1].IsSelected = true;</code></pre>
-<figcaption>Fig06-194</figcaption>
-</figure>
+                    <figcaption>Fig06-194</figcaption>
+                </figure>
                 <p>
                     After that, though, we also select the second item in the list. So now we have two items, which are selected.
                     Now, let's unselect the first item:
                 </p>
-<figure>
-<pre><code class="csharp">list[0].IsSelected = false;</code></pre>
-<figcaption>Fig06-195</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">list[0].IsSelected = false;</code></pre>
+                    <figcaption>Fig06-195</figcaption>
+                </figure>
                 <p>
                     We can now Assert that all the items should still be expanded because the second item is still selected and so
                     the list may not collapse yet:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> foreach (var item in list)
 {
     Assert.IsTrue(item.IsExpanded);
 }</code></pre>
-<figcaption>Fig06-196</figcaption>
-</figure>
+                    <figcaption>Fig06-196</figcaption>
+                </figure>
                 <p>
                     Then I unselect the second item in the list:
                 </p>
-<figure>
-<pre><code class="csharp">list[1].IsSelected = false;</code></pre>
-<figcaption>Fig06-197</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">list[1].IsSelected = false;</code></pre>
+                    <figcaption>Fig06-197</figcaption>
+                </figure>
                 <p>
                     and now I can Assert that all the items in the list should collapse:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">foreach (var item in list)
 {
     Assert.IsFalse(item.IsExpanded);
 }</code></pre>
-<figcaption>Fig06-198</figcaption>
-</figure>
+                    <figcaption>Fig06-198</figcaption>
+                </figure>
                 <p>
                     After I build the application, let's run the second test. Here we see that the second test passed as well,
                     which is great:
@@ -2417,13 +2425,13 @@ list[1].IsSelected = true;</code></pre>
                     To do this, we have a static method called Messenger.Reset, that we should call in the beginning of each
                     TestMethod. Let's do that:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">[TestMethod]
 public void TestCollapse()
 {
     Messenger.Reset();</code></pre>
-<figcaption>Fig06-200</figcaption>
-</figure>
+                    <figcaption>Fig06-200</figcaption>
+                </figure>
                 <p>
                     And I'm going to add the same thing here in the first method as well. Now I can go back, build the
                     application, and run all the tests again. And this time, both tests pass, which is correct.
@@ -2479,7 +2487,7 @@ public void TestCollapse()
                     Let's review the application. I just created a new MVVM Light Windows Store Application and then I changed a
                     few things. First, I modified the DataItem and I added those two properties, called Property1 and Property2:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class DataItem
 {
     public string Property1
@@ -2494,12 +2502,12 @@ public void TestCollapse()
         set;
     }
 }</code></pre>
-<figcaption>Fig06-201</figcaption>
-</figure>
+                    <figcaption>Fig06-201</figcaption>
+                </figure>
                 <p>
                     Then, in the DataService implementation, I added code that we already saw before:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class DataService : IDataService
 {
     public async Task&lt;DataItem&gt; GetData()
@@ -2511,8 +2519,8 @@ public void TestCollapse()
         return myInstance;
     }
 }</code></pre>
-<figcaption>Fig06-202</figcaption>
-</figure>
+                    <figcaption>Fig06-202</figcaption>
+                </figure>
                 <p>
                     It is getting the json file from my web server, deserializes it into a DataItem, and returns it. Note that
                     this code is asynchronous, like every web service code in Windows Store, Windows Phone, etc.
@@ -2521,7 +2529,7 @@ public void TestCollapse()
                     Let's open the MainViewModel now. Here in the MainViewModel, I barely modified the default code that we
                     studied in the previous module. So here we have the NavigateCommand:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public RelayCommand NavigateCommand
 {
     get
@@ -2531,12 +2539,12 @@ public void TestCollapse()
                    () =&gt; _navigationService.Navigate(typeof(SecondPage))));
     }
 }</code></pre>
-<figcaption>Fig06-203</figcaption>
-</figure>
+                    <figcaption>Fig06-203</figcaption>
+                </figure>
                 <p>
                     which is going to navigate to the second page, and down here we have the WelcomeTitle property:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">/// &lt;summary&gt;
 /// Gets the WelcomeTitle property.
 /// Changes to that property's value raise the PropertyChanged event.
@@ -2553,20 +2561,20 @@ public string WelcomeTitle
         Set(ref _welcomeTitle, value);
     }
 }</code></pre>
-<figcaption>Fig06-204</figcaption>
-</figure>
+                    <figcaption>Fig06-204</figcaption>
+                </figure>
                 <p>
                     just like before. Here in the constructor, I call the Initialize method:
                 </p>
-<figure>
-<pre><code class="csharp">Initialize();</code></pre>
-<figcaption>Fig06-205</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Initialize();</code></pre>
+                    <figcaption>Fig06-205</figcaption>
+                </figure>
                 <p>
                     which is defined further below, and here I modify the default Initialize method slightly in order to get the
                     DataItem from the DataService, and then to set the WelcomeTitle based on this value:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">private async Task Initialize()
 {
     try
@@ -2579,8 +2587,8 @@ public string WelcomeTitle
         // Report error here
     }
 }</code></pre>
-<figcaption>Fig06-206</figcaption>
-</figure>
+                    <figcaption>Fig06-206</figcaption>
+                </figure>
                 <p>
                     If we want to test this MainViewModel with a unit test, we have a couple of challenges.
                 </p>
@@ -2612,18 +2620,18 @@ public string WelcomeTitle
                     Let's open the UnitTest class here, and I'm going to implement the first TestMethod. In order to create a new
                     MainViewModel, if we check the constructor here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public MainViewModel(
     IDataService dataService,
     INavigationService navigationService)</code></pre>
-<figcaption>Fig06-208</figcaption>
-</figure>
+                    <figcaption>Fig06-208</figcaption>
+                </figure>
                 <p>
                     we see that the MainViewModel requires an instance of IDataService and also an instance of INavigationService,
                     but we said we want to simulate those objects, so let's create two Test classes here. Let's create the first
                     class, the TestNavigationService:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">[TestClass]
 public class UnitTest1
 {
@@ -2650,8 +2658,8 @@ public class TestNavigationService : INavigationService
 	public void GoBack()
 	{
 	}</code></pre>
-<figcaption>Fig06-209</figcaption>
-</figure>
+                    <figcaption>Fig06-209</figcaption>
+                </figure>
                 <p>
                     Here, I will implement the INavigationService interface using ReSharper. Notice that I have, here, the
                     CurrentPageType, which exposes a property.
@@ -2659,12 +2667,12 @@ public class TestNavigationService : INavigationService
                 <p>
                     And if I go down here, I have the Navigate method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public void Navigate(Type sourcePageType)
 {
 }</code></pre>
-<figcaption>Fig06-210</figcaption>
-</figure>
+                    <figcaption>Fig06-210</figcaption>
+                </figure>
                 <p>
                     I can test that the Navigate method has been called correctly, by saving the new page type inside the
                     CurrentPageType
@@ -2680,7 +2688,7 @@ public class TestNavigationService : INavigationService
                     Now I can create the second test service class, which is a TestDataService. Here, too, I need to implement the
                     methods. There is only one method here:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> public class TestDataService : IDataService
     {
         public Task&lt;DataItem&gt; GetData()
@@ -2688,12 +2696,12 @@ public class TestNavigationService : INavigationService
             return null;
         }
     }</code></pre>
-<figcaption>Fig06-212</figcaption>
-</figure>
+                    <figcaption>Fig06-212</figcaption>
+                </figure>
                 <p>
                     This TestDataService needs a little bit of infrastructure, let's add this:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public class TestDataService : IDataService
 {
 	private string _prop1;
@@ -2710,12 +2718,12 @@ public class TestNavigationService : INavigationService
 		return null;
 	}
 }</code></pre>
-<figcaption>Fig06-213</figcaption>
-</figure>
+                    <figcaption>Fig06-213</figcaption>
+                </figure>
                 <p>
                     And then I can easily implement the GetData method, like this:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public Task&lt;DataItem&gt; GetData()
 {
     var item = new DataItem
@@ -2726,19 +2734,19 @@ public class TestNavigationService : INavigationService
 
     return Task.FromResult(item);
 }</code></pre>
-<figcaption>Fig06-214</figcaption>
-</figure>
+                    <figcaption>Fig06-214</figcaption>
+                </figure>
                 <p>
                     So what is happening here? Well first I will call the Initialize method:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">public void Initialize(string prop1, int prop2)
 {
     _prop1 = prop1;
     _prop2 = prop2;
 }</code></pre>
-<figcaption>Fig06-215</figcaption>
-</figure>
+                    <figcaption>Fig06-215</figcaption>
+                </figure>
                 <p>
                     which is going to allow me to Save the value of Property1 and Property2.
                 </p>
@@ -2746,14 +2754,14 @@ public class TestNavigationService : INavigationService
                 <p>
                     And then when I call GetData, I'm going to return a new DataItem with those well-known properties:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var item = new DataItem
 {
     Property1 = _prop1,
     Property2 = _prop2
 };</code></pre>
-<figcaption>Fig06-216</figcaption>
-</figure>
+                    <figcaption>Fig06-216</figcaption>
+                </figure>
                 <p>
                     and then I'm going to be able to Assert that the correct values are passed back to me.
                 </p>
@@ -2762,19 +2770,19 @@ public class TestNavigationService : INavigationService
                     I'm going to implement the TestMethod1 here. First, I'm going to create a TestNavigationService and a
                     TestDataService:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">[TestMethod]
 public void TestMethod1()
 {
     var nav = new TestNavigationService();
     var data = new TestDataService();
 }</code></pre>
-<figcaption>Fig06-217</figcaption>
-</figure>
+                    <figcaption>Fig06-217</figcaption>
+                </figure>
                 <p>
                     Then I'm going to Initialize the TestDataService with some known values:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp"> [TestMethod]
 public void TestMethod1()
 {
@@ -2786,12 +2794,12 @@ public void TestMethod1()
 
     data.Initialize(testProp1, testProp2);
 </code></pre>
-<figcaption>Fig06-218</figcaption>
-</figure>
+                    <figcaption>Fig06-218</figcaption>
+                </figure>
                 <p>
                     And finally, I'm going to create a new MainViewModel with those two well-known DataServices:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">[TestMethod]
 public void TestMethod1()
 {
@@ -2809,18 +2817,18 @@ public void TestMethod1()
         string.Format("{0} / {1}", testProp1, testProp2),
         vm.WelcomeTitle);
 }</code></pre>
-<figcaption>Fig06-219</figcaption>
-</figure>
+                    <figcaption>Fig06-219</figcaption>
+                </figure>
                 <p>
                     And then I'm going to Assert that the WelcomeTitle property has been set, according to the format that we want
                     to use:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">Assert.AreEqual(
     string.Format("{0} / {1}", testProp1, testProp2),
     vm.WelcomeTitle);</code></pre>
-<figcaption>Fig06-220</figcaption>
-</figure>
+                    <figcaption>Fig06-220</figcaption>
+                </figure>
                 <p>
                     So here this is quite a simple test, but nonetheless it is using the TestNavigationService and the
                     TestDataService, which are needed in order to build the MainViewModel.
@@ -2829,7 +2837,7 @@ public void TestMethod1()
                 <p>Let's create a new UnitTest, this time to test a NavigateCommand. So first, just like before, I add a new
                     UnitTest method, and here I create a new TestNavigationService and a new TestDataService:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">[TestMethod]
 public void TestNavigation()
 {
@@ -2838,24 +2846,24 @@ public void TestNavigation()
 
     var vm = new MainViewModel(data, nav);
 }</code></pre>
-<figcaption>Fig06-221</figcaption>
-</figure>
+                    <figcaption>Fig06-221</figcaption>
+                </figure>
                 <p>
                     Then, using those two objects, I'm going to create a new MainViewModel, which is my TestObject. Now I'm going
                     to execute the NavigateCommand. Here, I call Execute with a null parameter:
                 </p>
-<figure>
-<pre><code class="csharp">vm.NavigateCommand.Execute(null);</code></pre>
-<figcaption>Fig06-222</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">vm.NavigateCommand.Execute(null);</code></pre>
+                    <figcaption>Fig06-222</figcaption>
+                </figure>
                 <p>
                     And then I can Assert that inside the TestNavigationService, the CurrentPageType is now set to the type of
                     second page:
                 </p>
-<figure>
-<pre><code class="csharp">Assert.AreEqual(typeof (SecondPage), nav.CurrentPageType);</code></pre>
-<figcaption>Fig06-223</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Assert.AreEqual(typeof (SecondPage), nav.CurrentPageType);</code></pre>
+                    <figcaption>Fig06-223</figcaption>
+                </figure>
                 <p>
                     What we test here is that the NavigateCommand has been executed properly and that it calls the
                     NavigationService. Of course, the MainViewModel doesn't know that the Navigation has not actually been
@@ -2871,7 +2879,7 @@ public void TestNavigation()
                     create a new TestNavigationService, a new TestDataService, and then I create the new MainViewModel, which is a
                     TestObject:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">[TestMethod]
 public void TestWelcomeTitle()
 {
@@ -2880,51 +2888,51 @@ public void TestWelcomeTitle()
 
     var vm = new MainViewModel(data, nav);
 }</code></pre>
-<figcaption>Fig06-224</figcaption>
-</figure>
+                    <figcaption>Fig06-224</figcaption>
+                </figure>
                 <p>
                     What we will do then is handle the PropertyChanged event of the TestObject. We can do that with a local event
                     handler here defined as a lambda expression:
                 </p>
-<figure>
+                <figure>
 <pre><code class="csharp">var propertyChangedWasRaised = false;
 
 vm.PropertyChanged += (s, e) =&gt;
 {
     propertyChangedWasRaised = true;
 };</code></pre>
-<figcaption>Fig06-225</figcaption>
-</figure>
+                    <figcaption>Fig06-225</figcaption>
+                </figure>
                 <p>
                     When the event is raised, the code will be executed and set the local variable accordingly:
                 </p>
-<figure>
-<pre><code class="csharp">propertyChangedWasRaised = true;</code></pre>
-<figcaption>Fig06-226</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">propertyChangedWasRaised = true;</code></pre>
+                    <figcaption>Fig06-226</figcaption>
+                </figure>
                 <p>
                     Then we can test the values with Asserts. First, we Assert that the value is false, before the property is
                     changed:
                 </p>
-<figure>
-<pre><code class="csharp">Assert.IsFalse(propertyChangedWasRaised);</code></pre>
-<figcaption>Fig06-227</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Assert.IsFalse(propertyChangedWasRaised);</code></pre>
+                    <figcaption>Fig06-227</figcaption>
+                </figure>
                 <p>
                     Then we assign a new string value to the WelcomeTitle property:
                 </p>
-<figure>
-<pre><code class="csharp">vm.WelcomeTitle = "This is a new value";</code></pre>
-<figcaption>Fig06-228</figcaption>
-</figure>                
+                <figure>
+                    <pre><code class="csharp">vm.WelcomeTitle = "This is a new value";</code></pre>
+                    <figcaption>Fig06-228</figcaption>
+                </figure>
                 <p>
                     And finally here, we test that the event has been raised properly by asserting that the local value is set to
                     true:
                 </p>
-<figure>
-<pre><code class="csharp">Assert.IsTrue(propertyChangedWasRaised);</code></pre>
-<figcaption>Fig06-229</figcaption>
-</figure>
+                <figure>
+                    <pre><code class="csharp">Assert.IsTrue(propertyChangedWasRaised);</code></pre>
+                    <figcaption>Fig06-229</figcaption>
+                </figure>
                 <p>
                     Now we can run all the tests from the Test Explorer window. Like before, we need to build the application
                     first, and then let's select here ‘Run All'. And after a short delay, we see that the three tests are
