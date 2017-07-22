@@ -1548,6 +1548,8 @@ public FrameworkElement GetElement()
                     well suited to help you build the functionalities that you need in a much easier manner.
                 </p>
                 <h3>Expandable List: Preparing the Infrastructure</h3>
+                <p>In Order to get this to work I had to manually add a reference to: C:\Program Files (x86)\Microsoft
+                    SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\Microsoft.Expresssions.dll</p>
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex06-003" type="text" value="C:\Development Tutorials\Pluralsight-Courses\MVVM Light Toolkit Fundamentals\Module 6\before\SelectableList\SelectableList.sln">
@@ -1603,7 +1605,7 @@ public FrameworkElement GetElement()
                 </p>
                 <p>
                     In order to manage these properties and all the interaction, we can create a BaseViewModel that these items
-                    will _____; we will name that the SelectableViewModel. Let's check the SelectableViewModel's code.
+                    will inherit; we will name that the SelectableViewModel. Let's check the SelectableViewModel's code.
                 </p>
                 <p>
                     First we see the two properties that I just mentioned, IsExpanded and IsSelected.
