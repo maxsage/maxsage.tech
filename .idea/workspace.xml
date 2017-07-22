@@ -7,7 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f8c7887f-a368-4131-a0b7-4884170032af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" afterPath="$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,7 +21,6 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="maxsage.tech" />
   </component>
@@ -31,8 +29,8 @@
       <file leaf-file-name="mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="985" column="111" lean-forward="false" selection-start-line="985" selection-start-column="111" selection-end-line="985" selection-end-column="111" />
+            <state relative-caret-position="480">
+              <caret line="996" column="26" lean-forward="false" selection-start-line="996" selection-start-column="26" selection-end-line="996" selection-end-column="26" />
               <folding>
                 <element signature="e#11804#11809#0" expanded="true" />
                 <element signature="e#11809#11814#0" expanded="true" />
@@ -344,10 +342,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-16" />
-    <option name="y" value="-16" />
-    <option name="width" value="3872" />
-    <option name="height" value="2092" />
+    <option name="x" value="3000" />
+    <option name="y" value="-3600" />
+    <option name="width" value="3227" />
+    <option name="height" value="3512" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -367,53 +365,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="maxsage.tech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wpf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -453,6 +406,14 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -488,15 +449,6 @@
       <option name="cucumberJsArguments" value="" />
       <option name="executablePath" />
       <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -588,12 +540,20 @@
       <workItem from="1499848248268" duration="4001000" />
       <workItem from="1499941170197" duration="192000" />
       <workItem from="1499952735806" duration="3867000" />
-      <workItem from="1500562261154" duration="1348000" />
+      <workItem from="1500562261154" duration="2012000" />
+      <workItem from="1500734939950" duration="82000" />
+      <workItem from="1500735074920" duration="73000" />
+      <workItem from="1500735180633" duration="76000" />
+      <workItem from="1500735278097" duration="599000" />
+      <workItem from="1500736600012" duration="106000" />
+      <workItem from="1500736862615" duration="200000" />
+      <workItem from="1500737174709" duration="5000" />
+      <workItem from="1500744705085" duration="1246000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="558591000" />
+    <option name="totallyTimeSpent" value="561642000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -605,17 +565,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
-    <editor active="true" />
+    <frame x="3000" y="-3600" width="3227" height="3512" extended-state="0" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20546874" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24507043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5082228" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936978" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3204989" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18583256" sideWeight="0.4923077" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -647,13 +606,45 @@
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
+    <option name="version" value="1" />
     <option name="exactExcludedFiles">
       <list>
+        <option value="$PROJECT_DIR$/webpack.config.dev.js" />
+        <option value="$PROJECT_DIR$/webpack.config.dev.js.map" />
+        <option value="$PROJECT_DIR$/app/app.component.js" />
+        <option value="$PROJECT_DIR$/app/app.component.js.map" />
+        <option value="$PROJECT_DIR$/app/main.js" />
+        <option value="$PROJECT_DIR$/app/main.js.map" />
+        <option value="$PROJECT_DIR$/app/wpf/wpf.component.js" />
+        <option value="$PROJECT_DIR$/app/wpf/wpf.component.js.map" />
+        <option value="$PROJECT_DIR$/app/dgen/dgen.component.js" />
+        <option value="$PROJECT_DIR$/app/dgen/dgen.component.js.map" />
+        <option value="$PROJECT_DIR$/app/home/welcome.component.js" />
+        <option value="$PROJECT_DIR$/app/home/welcome.component.js.map" />
+        <option value="$PROJECT_DIR$/app/emmet/emmet.component.js" />
+        <option value="$PROJECT_DIR$/app/emmet/emmet.component.js.map" />
+        <option value="$PROJECT_DIR$/app/odata/odata.component.js" />
+        <option value="$PROJECT_DIR$/app/odata/odata.component.js.map" />
+        <option value="$PROJECT_DIR$/app/csharp/csharp.component.js" />
+        <option value="$PROJECT_DIR$/app/csharp/csharp.component.js.map" />
+        <option value="$PROJECT_DIR$/app/jquery/jquery.component.js" />
+        <option value="$PROJECT_DIR$/app/jquery/jquery.component.js.map" />
         <option value="$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-contents.js" />
         <option value="$PROJECT_DIR$/app/angular2/angular2-getting-started-00-course-contents.js.map" />
-        <option value="$PROJECT_DIR$/webpack.config.dev.js.map" />
-        <option value="$PROJECT_DIR$/webpack.config.dev.js" />
+        <option value="$PROJECT_DIR$/app/angular2/angular2.component.js" />
+        <option value="$PROJECT_DIR$/app/angular2/angular2.component.js.map" />
+        <option value="$PROJECT_DIR$/app/bootstrap/bootstrap3.component.js" />
+        <option value="$PROJECT_DIR$/app/bootstrap/bootstrap3.component.js.map" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript.component.js" />
+        <option value="$PROJECT_DIR$/app/javascript/javascript.component.js.map" />
+        <option value="$PROJECT_DIR$/app/typescript/typescript.component.js" />
+        <option value="$PROJECT_DIR$/app/typescript/typescript.component.js.map" />
+        <option value="$PROJECT_DIR$/app/typescript/Car.js" />
+        <option value="$PROJECT_DIR$/app/typescript/Car.js.map" />
+        <option value="$PROJECT_DIR$/app/visualstudio/visualstudio.component.js" />
+        <option value="$PROJECT_DIR$/app/visualstudio/visualstudio.component.js.map" />
+        <option value="$PROJECT_DIR$/app/visualstudiocode/visualstudiocode.component.js" />
+        <option value="$PROJECT_DIR$/app/visualstudiocode/visualstudiocode.component.js.map" />
       </list>
     </option>
   </component>
@@ -948,16 +939,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12000">
           <caret line="300" column="37" lean-forward="false" selection-start-line="300" selection-start-column="37" selection-end-line="300" selection-end-column="37" />
-          <folding>
-            <marker date="1500559125966" expanded="true" signature="70128:70221" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/wpf/mvvm-light-toolkit-fundamentals-06-advanced-examples-with-mvvm-light.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="985" column="111" lean-forward="false" selection-start-line="985" selection-start-column="111" selection-end-line="985" selection-end-column="111" />
+        <state relative-caret-position="480">
+          <caret line="996" column="26" lean-forward="false" selection-start-line="996" selection-start-column="26" selection-end-line="996" selection-end-column="26" />
           <folding>
             <element signature="e#11804#11809#0" expanded="true" />
             <element signature="e#11809#11814#0" expanded="true" />
