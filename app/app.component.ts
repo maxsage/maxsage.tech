@@ -221,7 +221,7 @@ class PreHighlight {
     { path: '/angular2-reactive-forms-06-reacting-to-changes', name: 'Angular2ReactiveForms06ReactingToChanges', component: Angular2ReactiveForms06ReactingToChangesComponent},
     { path: '/angular2-reactive-forms-07-dynamically-duplicate-input-elements', name: 'Angular2ReactiveForms07DynamicallyDuplicateInputElements', component: Angular2ReactiveForms07DynamicallyDuplicateInputElementsComponent},
     { path: '/angular2-reactive-forms-08-reactive-form-in-context', name: 'Angular2ReactiveForms08ReactiveFormInContext', component: Angular2ReactiveForms08ReactiveFormInContextComponent},
-    { path: '/angular2-reactive-forms-09-create-read-update-and-delete-crud-using-http', name: 'Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttp', component: Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent}
+    { path: '/angular2-reactive-forms-09-create-read-update-and-delete-crud-using-http', name: 'Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttp', component: Angular2ReactiveForms09CreateReadUpdateAndDeleteCrudUsingHttpComponent},
     { path: '/angular2-reactive-forms-10-final-words', name: 'Angular2ReactiveForms10FinalWords', component: Angular2ReactiveForms10FinalWordsComponent},
 
     { path: '/javascript', name: 'JavaScript', component: JavaScriptComponent },
