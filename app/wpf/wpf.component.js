@@ -40,7 +40,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf.component.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFComponent);
@@ -54,7 +54,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth00CourseContentsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-00-course-contents.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth00CourseContentsComponent);
@@ -68,7 +68,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth01CourseOverviewComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-01-course-overview.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth01CourseOverviewComponent);
@@ -82,7 +82,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth02DataBindingOverviewComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-02-data-binding-overview.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth02DataBindingOverviewComponent);
@@ -96,7 +96,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth03DataSourcesComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-03-data-sources.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth03DataSourcesComponent);
@@ -110,7 +110,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth04BindingCoreConceptsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-04-binding-core-concepts.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth04BindingCoreConceptsComponent);
@@ -124,7 +124,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-05-unleashing-the-full-power-of-bindings.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth05UnleashingTheFullPowerOfBindingsComponent);
@@ -138,7 +138,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-06-deep-dive-into-datatemplates.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth06DeepDiveIntoDataTemplatesComponent);
@@ -152,7 +152,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth07DesignTimeDataBindingComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-07-design-time-data-binding.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth07DesignTimeDataBindingComponent);
@@ -166,7 +166,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth08ContainersAndCollectionControlsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-08-containers-and-collection-controls.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth08ContainersAndCollectionControlsComponent);
@@ -180,7 +180,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFDataBindingInDepth09DataInputValidationComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-data-binding-in-depth-09-data-input-validation.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFDataBindingInDepth09DataInputValidationComponent);
@@ -194,7 +194,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth00CourseContentsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-00-course-contents.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth00CourseContentsComponent);
@@ -208,7 +208,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth01MVVMPatternFundamentalsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth01MVVMPatternFundamentalsComponent);
@@ -222,7 +222,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth02FirstTasteOfMVVMComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-02-first-taste-of-mvvm.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth02FirstTasteOfMVVMComponent);
@@ -236,7 +236,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-03-hooking-up-views-and-viewmodels-in-mvvm.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth03HookingUpViewsAndViewModelsInMVVMComponent);
@@ -250,7 +250,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-04-view-viewmodel-communication-in-wpf.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth04ViewViewModelCommunicationInWPFComponent);
@@ -264,7 +264,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-05-applied-mvvm-part-1-hierarchies-and-navigation.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth05AppliedMVVMPart1HierarchiesAndNavigationComponent);
@@ -278,7 +278,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/wpf-mvvm-in-depth-06-applied-mvvm-part-2-validation-and-dependency-injection.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], WPFMVVMInDepth06AppliedMVVMPart2ValidationAndDependencyInjectionComponent);
@@ -292,7 +292,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 MVVMLightToolkitFundamentals00CourseContentsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/wpf/mvvm-light-toolkit-fundamentals-00-course-contents.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, PreHighlight]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], MVVMLightToolkitFundamentals00CourseContentsComponent);
