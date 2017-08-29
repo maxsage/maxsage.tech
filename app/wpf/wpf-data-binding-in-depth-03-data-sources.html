@@ -1050,7 +1050,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                         bindings.
                     </p>
                     <figure>
-                    <pre><code class="xml">&lt;Label Content="Order ID:" /&gt;
+                    <pre><code class="xml">&lt;Label Content=&quot;Order ID:&quot; /&gt;
 &lt;Label Content=&quot;{Binding Id}&quot;
        Grid.Column=&quot;1&quot; /&gt;
 &lt;Label Content=&quot;Order Date:&quot;
@@ -1060,16 +1060,16 @@ public static readonly DependencyProperty OrderStatusesProperty =
          Text=&quot;{Binding OrderDate}&quot; /&gt;
 &lt;Label Content=&quot;Order Total:&quot;
        Grid.Row=&quot;2&quot; /&gt;
-&lt;TextBox Grid.Column="1"
-         Grid.Row="2"
-         Text="{Binding ItemsTotal}" /&gt;
-&lt;Label Content="Order Status:"
-       Grid.Row="3" /&gt;
-&lt;ComboBox x:Name="OrderStatusCombo"
-          ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.OrderStatuses}"
-          DisplayMemberPath="Name"
-          SelectedValuePath="Id"
-          SelectedValue="{Binding Path=NewOrder.OrderStatusId, Mode=TwoWay}"</code></pre>
+&lt;TextBox Grid.Column=&quot;1&quot;
+         Grid.Row=&quot;2&quot;
+         Text=&quot;{Binding ItemsTotal}&quot; /&gt;
+&lt;Label Content=&quot;Order Status:&quot;
+       Grid.Row=&quot;3&quot; /&gt;
+&lt;ComboBox x:Name=&quot;OrderStatusCombo&quot;
+          ItemsSource=&quot;{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.OrderStatuses}&quot;
+          DisplayMemberPath=&quot;Name&quot;
+          SelectedValuePath=&quot;Id&quot;
+          SelectedValue=&quot;{Binding Path=NewOrder.OrderStatusId, Mode=TwoWay}"</code></pre>
                     </figure>
                     <figure>
                         <img src="app/wpf/images/wpfdatabindingindepth/Fig02-042.png" class="image"/>
