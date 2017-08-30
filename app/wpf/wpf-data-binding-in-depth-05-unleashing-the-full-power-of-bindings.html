@@ -92,15 +92,63 @@
                     a two-way data bound scenario here, the point where data flows is when you tab out of the field, and that's
                     called LostFocus.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-001.png" class="image"/>
+
+
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-001.png" class="image"/>
+                    <figcaption>Fig 04-001</figcaption>
+                </figure>
                 <p>That is the default UpdateSourceTrigger for most bindings. I'm going to drop into the XAML here and add a
                     couple of Labels and TextBoxes which we can show up down here as Source and Target, two different TextBoxes.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-002.png" class="image"/>
+
+                <figure>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;SourceTextBox&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;35,200,0,0&quot;
+    TextWrapping=&quot;Wrap&quot;
+    VerticalAlignment=&quot;Top&quot;
+    Width=&quot;120&quot; /&gt;
+&lt;TextBox x:Name=&quot;TargetTextBox&quot;
+    Text=&quot;{Binding ElementName=SourceTextBox, Path=Text, UpdateSourceTrigger=PropertyChanged, Delay=500}&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;207,200,0,0&quot;
+    TextWrapping=&quot;Wrap&quot;
+    VerticalAlignment=&quot;Top&quot;
+    Width=&quot;120&quot; /&gt;
+&lt;Label Content=&quot;Source:&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Margin=&quot;35,175,0,0&quot;
+    VerticalAlignment=&quot;Top&quot; /&gt;
+&lt;Label Content=&quot;Target:&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Margin=&quot;207,175,0,0&quot;
+    VerticalAlignment=&quot;Top&quot; /&gt;</code></pre>
+                    <figcaption>Fig 04-002</figcaption>
+                </figure>
                 <p>And the way the bindings are set up here between these is that you can see the Source TextBox has no binding,
                     so it's just going to reflect whatever is put into it as a source object.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-003.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;SourceTextBox&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;35,200,0,0&quot;
+    TextWrapping=&quot;Wrap&quot;
+    VerticalAlignment=&quot;Top&quot;
+    Width=&quot;120&quot; /&gt;
+&lt;TextBox x:Name=&quot;TargetTextBox&quot;
+    Text=&quot;{Binding ElementName=SourceTextBox, Path=Text, UpdateSourceTrigger=PropertyChanged, Delay=500}&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;207,200,0,0&quot;
+    TextWrapping=&quot;Wrap&quot;
+    VerticalAlignment=&quot;Top&quot;
+    Width=&quot;120&quot; /&gt;</code></pre>
+                    <figcaption>Fig 04-003</figcaption>
+                </figure>
                 <p>The Target TextBox has its text bound, but it's using an ElementName binding, which we covered earlier, to
                     point to the source TextBox as a source object. And because the Path that we point to is a DependencyProperty,
                     that's going to raise Change Notifications, and we should see the Target update whenever the Source value
@@ -108,18 +156,32 @@
                     going to update the Target to reflect that.
                 </p>
                 <p>Now notice this UpdateSourceTrigger=PropertyChanged.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-004.png" class="image"/>
+                <figure>
+                <pre><code class="xml">Path=Text, UpdateSourceTrigger=PropertyChanged}</code></pre>
+                <figcaption>Fig 04-004</figcaption>
+                </figure>
                 <p>If I leave it on Default:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-005.png" class="image"/>
+                <figure>
+                <pre><code class="xml">Path=Text, UpdateSourceTrigger=Default}</code></pre>
+                <figcaption>Fig 04-005</figcaption>
+                </figure>
                 <p>once I start putting stuff in the Source, you can see that the Target stays in synch on every keystroke:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-006.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-006.png" class="image"/>
+                    <figcaption>Fig 04-006</figcaption>
+                </figure>
                 <p>However, if I go to the Target and start putting stuff in, the Source does not update until I tab out of the
                     field and then the Source is updated because of the focus change.
                 </p>
                 <p>So the Default UpdateSourceTrigger is really a focus change for most elements. So if I change this to
                     PropertyChanged:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-007.png" class="image"/>
+                <figure>
+                <pre><code class="xml">TextBox x:Name="TargetTextBox"
+                    Text="{Binding ElementName=SourceTextBox,
+                    Path=Text, UpdateSourceTrigger=PropertyChanged}"</code></pre>
+                <figcaption>Fig 04-007</figcaption>
+                </figure>
                 <p>It basically says, every time the Target property changes, which is the Text property of this TextBox, go ahead
                     and push its current value down into the source object's property.
                 </p>
@@ -128,13 +190,21 @@
                     keystroke because the text of the Source is changing, but now on every keystroke in the Target, it's pushing
                     the current value of the text of the Target down into the Source property.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-008.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-008.png" class="image"/>
+                    <figcaption>Fig 04-008</figcaption>
+                </figure>
                 <p>So basically, when you want the source set immediately every time the bound property changes, then you want to
                     use the PropertyChanged on UpdateSourceTrigger. This is especially good for validation scenarios where you
                     want immediate feedback to the user and not wait until they tab out of the field.
                 </p>
                 <p>Now you can see here there's actually four choices there:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-009.png" class="image"/>
+                <ul>
+                    <li>Default</li>
+                    <li>Explicit</li>
+                    <li>LostFocus</li>
+                    <li>PropertyChanged</li>
+                </ul>
                 <p>There's Default and LostFocus, which for most controls mean exactly the same thing, lost focus. The place where
                     they're different is if you're inside of a DataGrid. If the bound control is inside of a DataGrid, Default
                     means losing focus on the row that the control is within, whereas LostFocus means losing focus on the cell
@@ -199,12 +269,29 @@
                     converter.
                 </p>
                 <p>So I'm going to go and add a class to my project here called NegativeNumberConverter:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-010.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-010.png" class="image"/>
+                    <figcaption>Fig 04-010</figcaption>
+                </figure>
                 <p>To implement a Converter, you're going to want it to be public so it can be called by the framework, and you're
                     going to implement the IValueConverter interface. I can stub out the methods on that interface and you can see
                     that it has two methods, Convert, and ConvertBack.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-011.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class NegativeNumberConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}</code></pre>
+                <figcaption>Fig 04-011</figcaption>
+                </figure>
                 <p>Convert gets called as data is flowing from the source to the target. The value that is going to be set, flows
                     in here and tells you what the type of the Target property is that's going to be set and it has an optional
                     parameter, and will tell you what culture it's being done in, so you can use converters to actually modify
@@ -212,7 +299,27 @@
                     being pushed down from the target down into the source object.
                 </p>
                 <p>So I'm going to replace this implementation with a fully fleshed out version:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-012.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class NegativeNumberConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        int input = (int)value;
+        if (input &gt;= 0) return input.ToString();
+        else return string.Format(&quot;({0})&quot;, 0 - input);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value.ToString().StartsWith(&quot;(&quot;) &amp;&amp; value.ToString().EndsWith(&quot;)&quot;))
+        {
+            return -int.Parse(value.ToString().Substring(1, value.ToString().Length - 2));
+        }
+        else return value;
+    }
+}</code></pre>
+                <figcaption>Fig 04-012</figcaption>
+                </figure>
                 <p>and you can see what the implementation does here, is it's expecting this to only be hooked up to integers. Now
                     to write a production of one of these, you want to do a little more type checking and not just blindly cast
                     the value here, which could blow up if it's not an integer.
@@ -225,9 +332,22 @@
                     around them, then the value is going to flow in here when they tab out of the field or if you're using
                     UpdateSourceTrigger=PropertyChanged.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-013.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)</code></pre>
+                <figcaption>Fig 04-013</figcaption>
+                </figure>
                 <p> And we're going to look here and see if it starts with parentheses and ends with parentheses.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-014.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+{
+    if (value.ToString().StartsWith(&quot;(&quot;) &amp;&amp; value.ToString().EndsWith(&quot;)&quot;))
+    {
+        return -int.Parse(value.ToString().Substring(1, value.ToString().Length - 2));
+    }
+    else return value;
+}</code></pre>
+                <figcaption>Fig 04-014</figcaption>
+                </figure>
                 <p>We're basically going to strip those off and negate the value that's there to return the negative integer down
                     to the source object.
                 </p>
@@ -235,13 +355,29 @@
                     to my MainWindow and I'm going to go to its Resource section. And the way you'll typically use a converter is
                     by creating an instance of it in your Resources collection and give it a key:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-015.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;Window.Resources&gt;
+    &lt;local:NegativeNumberConverter x:Key=&quot;NegConverter&quot; /&gt;
+&lt;/Window.Resources&gt;</code></pre>
+                <figcaption>Fig 04-015</figcaption>
+                </figure>
                 <p>Then you can refer to it in a binding using a StaticResource.</p>
                 <p>So then we're going to drop down into the form here to the field that we have that's a numeric value, such as
                     an age, and we're going to use the Converter property, say StaticResource, grab the key name of our Converter
                     as we defined it up above, and pass that as the key in the StaticResource.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-016.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;ageTextBox&quot;
+     Width=&quot;120&quot;
+     VerticalAlignment=&quot;Center&quot;
+     Text=&quot;{Binding Path=Age, Converter={StaticResource NegConverter}}&quot;
+     Grid.Row=&quot;3&quot;
+     Margin=&quot;3&quot;
+     Height=&quot;23&quot;
+     HorizontalAlignment=&quot;Left&quot;
+     Grid.Column=&quot;1&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-016</figcaption>
+                </figure>
                 <p>So that's going to pull in a reference to that converter and basically invoke it.</p>
                 <p>Anytime data is flowing from the source to the target, it's going to call the Convert method, and then if we
                     edit this and push a value down through, it's going to invoke the ConvertBack method on that converter.
@@ -249,24 +385,85 @@
                 <p>With that in place, we can go back here to where our Customer is being initialized and we'll set the Age
                     property as -35 there:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-017.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">Customer = new Customer
+{
+    Id = 42,
+    Name = &quot;Joe&quot;,
+    PremiumCustomer = true,
+    Age = -35
+};</code></pre>
+                <figcaption>Fig 04-017</figcaption>
+                </figure>
+
                 <p>I'll go over to the Age property on my Customer object and set a breakpoint so we can see when it's being set
                     what it's being set to.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-018.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public int Age
+{
+    get
+    {
+        return _Age;
+    }
+    set
+    {
+        if (value != _Age) // Set breakpoint here
+        {
+            _Age = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;Age&quot;));
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 04-018</figcaption>
+                </figure>
                 <p>We'll go ahead and start up and it will be called here one time as it's initializing</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-019.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-019.png" class="image"/>
+                    <figcaption>Fig 04-019</figcaption>
+                </figure>
                 <p>and we see it renders out with parentheses instead of the -35.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-020.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-020.png" class="image"/>
+                    <figcaption>Fig 04-020</figcaption>
+                </figure>
                 <p>And if we put in some other values, such as 99, and tab out of the field, our set block gets called, and the
                     current value is -99:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-021.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-021.png" class="image"/>
+                    <figcaption>Fig 04-021</figcaption>
+                </figure>
                 <p>so it strips off those parentheses and turns it into an actual negative integer.</p>
                 <p>Now as another example, let's say we want to set a style based on a Boolean property in our model. I'm going to
                     add a BoolToStyle Converter class and I'll quickly flesh out the implementation:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-022.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class BoolToStyleConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        string[] styles = parameter.ToString().Split(';');
+        if (targetType == typeof(Style) &amp;&amp; value is bool)
+        {
+            if ((bool)value) { return GetStyle(styles[0]); }
+            else { return GetStyle(styles[1]); }
+        }
+        else return value;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+
+    Style GetStyle(string key)
+    {
+        return Application.Current.Resources[key] as Style;
+    }
+}</code></pre>
+                <figcaption>Fig 04-022</figcaption>
+                </figure>
                 <p>You can see what this is doing is it's doing a little more type checking, so it's saying, if the target type is
                     a style and the input is a Boolean, then that's what this thing was designed to do, otherwise, it's just going
                     to blindly return the value and say, this converter doesn't know what to do with that.
@@ -274,46 +471,111 @@
                 <p>And for a starting point here, it's going to say, I could hard code here a style name of TrueStyle and
                     FalseStyle corresponding to those Boolean values:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-023.png" class="image"/>
+                <figure>
+                <pre><code class="csharp"> if (targetType == typeof(Style) && value is bool)
+{
+    if ((bool)value) { return GetStyle(styles[0]); }
+    else { return GetStyle("FalseStyle"); }
+</code></pre>
+                <figcaption>Fig 04-023</figcaption>
+                </figure>
                 <p>and go use a Helper method here:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-024.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">Style GetStyle(string key)
+{
+    return Application.Current.Resources[key] as Style;
+}</code></pre>
+                <figcaption>Fig 04-024</figcaption>
+                </figure>
                 <p>to reach out to my Application Resources and get the Style by name out of my Resource dictionary:</p>
                 <p>Then I'm just going to return that as the value that actually gets set on the target of the binding.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-025.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">if ((bool)value) { return GetStyle(styles[0]); }
+else { return GetStyle(styles[1]); }</code></pre>
+                <figcaption>Fig 04-025</figcaption>
+                </figure>
                 <p>Based on that code, I'll need those styles to exist so I'll go out of here to my Application.Resources and pop
                     in a Name Style called TrueStyle and FalseStyle that are just going to set the foreground to Red for True and
                     Black for False:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-026.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;Application x:Class=&quot;BindingProperties.App&quot;
+             xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+             StartupUri=&quot;MainWindow.xaml&quot;&gt;
+    &lt;Application.Resources&gt;
+        &lt;Style x:Key=&quot;TrueStyle&quot;&gt;
+            &lt;Setter Property=&quot;Control.Foreground&quot;
+                    Value=&quot;Red&quot; /&gt;
+        &lt;/Style&gt;
+        &lt;Style x:Key=&quot;FalseStyle&quot;&gt;
+            &lt;Setter Property=&quot;Control.Foreground&quot;
+                    Value=&quot;Black&quot; /&gt;
+        &lt;/Style&gt;
+    &lt;/Application.Resources&gt;
+&lt;/Application&gt;</code></pre>
+                <figcaption>Fig 04-026</figcaption>
+                </figure>
                 <p>Now to use that in my application, I would go to my MainWindow to the Resources, and create an instance of that
                     Converter and give it a name. And then on the control that I wanted to use it on, such as my TextBox, I would
                     set the Style property using a Binding so the value that's going to come out of the Converter is a Style, but
                     the input is a Boolean:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-027.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;nameTextBox&quot;
+    Style=&quot;{Binding Path=PremiumCustomer,
+        Converter={StaticResource BoolToStyleConverter}}&quot;
+    Width=&quot;120&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Text=&quot;{Binding Path=Name, Mode=OneTime}&quot;
+    Grid.Row=&quot;1&quot;
+    Margin=&quot;3&quot;
+    Height=&quot;23&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Grid.Column=&quot;1&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-027</figcaption>
+                </figure>
                 <p>So I'm pointing to a Boolean property on my model called premium customer and then I'm using my Converter
                     instance to convert that Boolean value into a Style value.
                 </p>
                 <p>With that in place, I can go ahead and run, and we can see that Joe is red right now because it is a Premium
                     Customer:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-028.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-028.png" class="image"/>
+                    <figcaption>Fig 04-028</figcaption>
+                </figure>
                 <p>If I uncheck it, it goes to black and back to red.</p>
                 <p>Now obviously hard-coding Style names down inside some code like this is not a great idea, and that's where
                     this object parameter can come in.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-029.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public object Convert(object value, Type targetType, object parameter, CultureInfo culture)</code></pre>
+                <figcaption>Fig 04-029</figcaption>
+                </figure>
                 <p>You can pass ConverterParameters to a converter to drive its behavior. So if I modify that implementation a
                     little bit, and I expect my parameter to be a semi-colon separated pair of Style names:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-030.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">string[] styles = parameter.ToString().Split(';');
+if (targetType == typeof(Style) &amp;&amp; value is bool)
+{
+    if ((bool)value) { return GetStyle(styles[0]); }
+    else { return GetStyle(styles[1]); }
+}
+else return value;</code></pre>
+                <figcaption>Fig 04-030</figcaption>
+                </figure>
                 <p>I can split that out into an array and then use the first one as my TrueStyle and the second one as my
                     FalseStyle.
                 </p>
                 <p>Now I can just go back to where I was binding the Style and add another property on my binding called
                     ConverterParameter, and pass that value, which is going to be TrueStyle;FalseStyle:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-031.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">Converter={StaticResource BoolToStyleConverter}, ConverterParameter=TrueStyle;FalseStyle}</code></pre>
+                <figcaption>Fig 04-031</figcaption>
+                </figure>
                 <p>With that in place, the same behavior is manifest, it's red now, it goes to black when I uncheck the Premium
                     Customer property.
                 </p>
@@ -321,7 +583,10 @@
                     that it supports as a parameter when you use the Converter. The one downside to be aware of is when you use a
                     ConverterParameter, the values will have to be statically expressible in the code here:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-032.png" class="image"/>
+                <figure>
+                    <pre><code class="csharp">Converter={StaticResource BoolToStyleConverter}, ConverterParameter=TrueStyle;FalseStyle}</code></pre>
+                    <figcaption>Fig 04-032</figcaption>
+                </figure>
                 <p>And that's the basics of using Converters.</p>
             </div>
             <div class="panel-body">
@@ -387,22 +652,64 @@
                     behind the scenes that gets these things loaded up asynchronously, but the binding itself won't have to be
                     Async.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-033.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public string Phone
+{
+    get
+    {
+        return _Phone;
+    }
+    set
+    {
+        if (value != _Phone)
+        {
+            _Phone = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;Phone&quot;));
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 04-033</figcaption>
+                </figure>
                 <p>But depending on the way you structure things, you may have setters and getters on a given property that take a
                     while to execute. So I'm going to simulate that in this case by putting a Thread.Sleep in the get and set
                     block of my Phone property on my Customer:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-034.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public string Phone
+{
+    get
+    {
+        Thread.Sleep(5000);
+        return _Phone;
+    }
+    set
+    {
+        Thread.Sleep(5000);
+        if (value != _Phone)
+        {
+            _Phone = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;Phone&quot;));
+        }
+    }
+}</code></pre>
+                    <figcaption>Fig 04-034</figcaption>
+                </figure>
                 <p>And if I did that without doing anything else and tried to run, first off, we can see as it starts up it's
                     waiting a full 5 seconds before the UI becomes responsive because it's got to read that value in to populate
                     the UI through the binding and it's got to wait for that full execution of the get block to complete:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-035.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-035.png" class="image"/>
+                    <figcaption>Fig 04-035</figcaption>
+                </figure>
                 <p>Likewise, if we go and change that field and tab out of the field, you can see the cursor didn't move, it's
                     gone completely unresponsive, and will stay that way until the set block execution completes and then it comes
                     back to life:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-036.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-036.png" class="image"/>
+                    <figcaption>Fig 04-036</figcaption>
+                </figure>
                 <p>Obviously not the user experience you're going for.</p>
                 <p>So if you're doing complex model objects that you're binding to where the get and set blocks of the properties
                     you're binding to execute real work such as doing a database query or a service call or something, you may
@@ -411,11 +718,28 @@
                 <p>So all you would do to leverage Async bindings, is go to the binding on the property that you want to be Async
                     and say, IsAsync=True:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-037.png" class="image"/>
+                <figure>
+                <pre><code class="xml"> &lt;TextBox x:Name=&quot;phoneTextBox&quot;
+    Width=&quot;120&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Text=&quot;{Binding Phone, IsAsync=True}&quot;
+    Grid.Row=&quot;2&quot;
+    Margin=&quot;3&quot;
+    Height=&quot;23&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Grid.Column=&quot;1&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-037</figcaption>
+                </figure>
                 <p>Now, if we start up our same exact scenario, you can see the UI comes up and is responsive right away:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-038.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-038.png" class="image"/>
+                    <figcaption>Fig 04-038</figcaption>
+                </figure>
                 <p>And then 5 seconds later the Phone pops in there when the set block is finally done executing:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-039.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-039.png" class="image"/>
+                    <figcaption>Fig 04-039</figcaption>
+                </figure>
                 <p>And, likewise, if we modify it and tab out of the field, it just goes blank and we can be using the rest of the
                     UI until the point where the Phone set block completes and the value pops back in there.
                 </p>
@@ -437,7 +761,17 @@
                 <p>So another binding property related to Async that you might use in some scenarios is the Delay property. So I
                     can add Delay=500 on my data binding to my two TextBoxes down here:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-040.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">&lt;TextBox x:Name=&quot;TargetTextBox&quot;
+    Text=&quot;{Binding ElementName=SourceTextBox, Path=Text, UpdateSourceTrigger=PropertyChanged, Delay=500}&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;207,200,0,0&quot;
+    TextWrapping=&quot;Wrap&quot;
+    VerticalAlignment=&quot;Top&quot;
+    Width=&quot;120&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-040</figcaption>
+                </figure>
                 <p>So I could add Delay=500, and that's in ms, on my two TextBoxes that are bound to each other down here. And
                     what that's going to do is act as a throttle for input. So this only affects the calling of the set block and
                     it basically says, my input may be coming quicker than I actually want to go set it on the data bound source
@@ -447,7 +781,10 @@
                 <p>So with that in place, we can see the visual impact of this behavior. If I go down here to my source, I start
                     setting things there in sync. I go to my target and I rapidly input some stuff:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-041.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-041.png" class="image"/>
+                    <figcaption>Fig 04-041</figcaption>
+                </figure>
                 <p>500 ms later, it fills in the source and it only set the source one time in that case at the 500 ms point. Do
                     it again, and 500 ms later, one set of the source happens, not one for each character that I was setting.
                 </p>
@@ -503,14 +840,44 @@
                     that is, I can go into my MainWindow here, and we'll just use my Name TextBox that I've been binding, we'll go
                     to its Text Binding here for name, get rid of the Mode=OneTime here, and we'll say, TargetNullValue-'Not set'.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-042.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;nameTextBox&quot;
+        Style=&quot;{Binding Path=PremiumCustomer,
+            Converter={StaticResource BoolToStyleConverter}, ConverterParameter=TrueStyle;FalseStyle}&quot;
+         Width=&quot;120&quot;
+         VerticalAlignment=&quot;Center&quot;
+         Text=&quot;{Binding Path=Namex, Mode=Default, TargetNullValue='Not set', FallbackValue='no value'}&quot;
+
+         Grid.Row=&quot;1&quot;
+         Margin=&quot;3&quot;
+         Height=&quot;23&quot;
+         HorizontalAlignment=&quot;Left&quot;
+         Grid.Column=&quot;1&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-042</figcaption>
+                </figure>
+
                 <p>What TargetNullValue means, the name is a little misleading there, it's really if the source value is null,
                     then what is the value you want to set on the target instead of null? So if we go to the code-behind to the
                     point where we're setting the name, and we set it to null here:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-043.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">private void Window_Loaded(object sender, RoutedEventArgs e)
+{
+    Customer = new Customer
+    {
+        Id = 42,
+        Name = null,
+        PremiumCustomer = true,
+        Age = -35
+    };
+}</code></pre>
+                <figcaption>Fig 04-043</figcaption>
+                </figure>
                 <p>Start up the UI, and we see, Not set:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-044.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-044.png" class="image"/>
+                    <figcaption>Fig 04-044</figcaption>
+                </figure>
                 <p>So because of the value that the binding came up with was equal to null, and we had the TargetNullValue there,
                     it used the value provided by the TargetNullValue property on the binding.
                 </p>
