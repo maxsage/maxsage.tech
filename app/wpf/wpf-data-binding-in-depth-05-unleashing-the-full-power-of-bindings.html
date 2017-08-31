@@ -883,21 +883,33 @@ else return value;</code></pre>
                 </p>
                 <p>Another somewhat similar property is the FallbackValue. So here we're going to say FallbackValue='no value':
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-045.png" class="image"/>
+                <figure>
+                <pre><code class="xml">{Binding Path=Name, TargetNullValue='Not set', FallbackValue='no value'}</code></pre>
+                <figcaption>Fig 04-045</figcaption>
+                </figure>
                 <p>This will be used when the binding is unable to come up with a value at all based on the Path that it's given.
                     So if I corrupt my Path over here and say Namex, which doesn't exist on my DataContext object:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-046.png" class="image"/>
+                <figure>
+                    <pre><code class="xml">{Binding Path=Name, TargetNullValue='Not set', FallbackValue='no value'}</code></pre>
+                    <figcaption>Fig 04-046</figcaption>
+                </figure>
                 <p>and I run, now we see no value in there because the binding was unable to evaluate and come up with a value to
                     set the target property. And, again, down here in the output window, notice that we have one of these
                     System.Data Warnings that says, Namex not found on Customer:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-047.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-047.png" class="image"/>
+                    <figcaption>Fig 04-047</figcaption>
+                </figure>
                 <p>So you always want to be looking for those. In this case, it was a warning, not an error, because we had the
                     FallbackValue here. If we get rid of the FallbackValue and run with Namex in place there, now you can see it's
                     a System.Windows.Data Error down here because it can't come up with any value to present in the UI:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-048.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-048.png" class="image"/>
+                    <figcaption>Fig 04-048</figcaption>
+                </figure>
                 <p>So those are TargetNullValue used when the Source property is null, and gives a value to set on the target and
                     FallbackValue when it can't resolve a value from the specified binding Path.
                 </p>
@@ -947,31 +959,81 @@ else return value;</code></pre>
                     to this point and what I'm going to focus on is this Age field. If you remember from previous demo, we were
                     applying a converter there that's putting the parentheses there for a negative value.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-049.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-049.png" class="image"/>
+                    <figcaption>Fig 04-049</figcaption>
+                </figure>
                 <p>We're going to replace that and do some string formatting. So, first off, I'm going to drop into my Customer
                     and change my Age property (I created a new property called Age2) to be a floating value so that we can put
                     some decimal points in there:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-050.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class Customer : INotifyPropertyChanged
+{
+    private bool _PremiumCustomer;
+    private int _Age;
+    private float _Age2;
+    private string _Phone = &quot;555-555-5555&quot;;
+    private string _Name;
+    private int _Id;</code></pre>
+                <figcaption>Fig 04-050</figcaption>
+                </figure>
                 <p>And I'll do that on the member variable and on the property:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-051.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public float Age2
+{
+    get
+    {
+        return _Age2;
+    }
+    set
+    {
+        if (value != _Age2)
+        {
+            _Age2 = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;Age2&quot;));
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 04-051</figcaption>
+                </figure>
                 <p>Then I'm going to drop into the UI and find the Age input, and I'm going to replace that with a slightly
                     different Text Binding.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-052.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;ageTextBox&quot;
+    Width=&quot;120&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Text=&quot;{Binding Path=Age, StringFormat=f2}&quot;
+    Grid.Row=&quot;3&quot;
+    Margin=&quot;3&quot;
+    Height=&quot;23&quot;
+    HorizontalAlignment=&quot;Left&quot;
+Grid.Column=&quot;1&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-052</figcaption>
+                </figure>
                 <p>So here we can see we're still binding to the Age Property, but now we just simply set the StringFormat
                     property and here we're using one of the pre-defined StringFormats, a floating point with two decimals. If we
                     go ahead and run now, we can see that that value which is set to -35 now displays with two decimals. If we go
                     and make other mods to it, let's say we set it to 44.444 and we tab out of the field, notice as we tab out of
                     the field the value is written to the underlying object and the value becomes 44.44.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-053.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-053.png" class="image"/>
+                    <figcaption>Fig 04-053</figcaption>
+                </figure>
                 <p>Now let's go set a breakpoint in the set block and do that again, and we'll say 44.55, tab out, and we can see
                     the value that's being set is the full precision value:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-054.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-054.png" class="image"/>
+                    <figcaption>Fig 04-054</figcaption>
+                </figure>
                 <p> but when we run, all we see is the rounded off value applied by StringFormat:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-055.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-055.png" class="image"/>
+                    <figcaption>Fig 04-055</figcaption>
+                </figure>
                 <p>So one downside to using these is to realize that what you see on the screen and what the actual underlying
                     values are might be slightly different, but if the way you want to display it to the user is always with two
                     decimal places, then that's up to you to manage the actual precision under the covers.
@@ -979,18 +1041,28 @@ else return value;</code></pre>
                 <p>Now there's one other gotcha to be aware of with using StringFormat. If we also add the
                     UpdateSourceTrigger=PropertyChanged property on our binding, which we saw earlier in the module:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-056.png" class="image"/>
+                <figure>
+                <pre><code class="xml">{Binding Path=Age, StringFormat=f2, UpdateSourceTrigger=PropertyChanged}}</code></pre>
+                <figcaption>Fig 04-056</figcaption>
+                </figure>
+
                 <p>and go run our scenario again, now watch what happens as I put in a value. I hit 5, and it immediately
                     StringFormats because we've got UpdateSourceTrigger=PropertyChanged. As soon as the Target property changes,
                     which happens on every keystroke, it's going to set the underlying source property.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-057.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-057.png" class="image"/>
+                    <figcaption>Fig 04-057</figcaption>
+                </figure>
                 <p>The source property raises a PropertyChangedEvent, that forces the binding to re-bind and re-render based on
                     the StringFormat. The problem with this is, for a rapid input scenario, say that I wanted to highlight this
                     and say 55.55.
                 </p>
                 <p>If I do that quickly, 55.55, look what I end up with.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig04-058.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig04-058.png" class="image"/>
+                    <figcaption>Fig 04-058</figcaption>
+                </figure>
                 <p>It's because after each keystroke it's re-rendering, it's putting the decimal place in there for me, so when I
                     get around and type the decimal place I'm actually adding another decimal place and I've got an invalid
                     StringFormat now that can't be converted to the underlying Type, and that's why we see the red box, which
