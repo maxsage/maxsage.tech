@@ -701,7 +701,7 @@
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex06-003" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\WPF Data Binding in Depth\Module 6\after\DataTemplates\DataTemplates.sln">
+                               value="C:\Development Tutorials\Pluralsight-Courses\WPF Data Binding in Depth\Module 6\before\DataTemplates - Start\DataTemplates.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-003">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1108,7 +1108,7 @@ private void ShowView2()
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex06-005" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\WPF Data Binding in Depth\Module 6\after\DataTemplates\DataTemplates.sln">
+                               value="C:\Development Tutorials\Pluralsight-Courses\WPF Data Binding in Depth\Module 6\before\DataTemplates - Start\DataTemplates.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-005">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1194,7 +1194,11 @@ private void ShowView2()
                     then I can locate it with a FindResource and just return that.
                 </p>
                 <p>Now obviously, you could have whatever convoluted logic you want here:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-076.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">DataTemplate template = element.FindResource(product.Type + &quot;Template&quot;) as DataTemplate;
+            return template;</code></pre>
+                <figcaption>Fig 05-076</figcaption>
+                </figure>
                 <p>you could new up a DataTemplate from scratch and dynamically populate its elements from programmatic
                     code. Generally you're going to want to declare these in XAML and locate them as a Resource, as I'm
                     doing here, through some kind of naming convention. Now we need to go ahead and hook this up to our
@@ -1204,18 +1208,58 @@ private void ShowView2()
                     DataTemplateSelectorsView, and I'm going to add in a Resources section that creates an instance of
                     my ProductTemplateSelector, and I'll need a local namespace up above.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-077.png" class="image"/>
+                <figure>
+                <pre><code class="xml">    xmlns:local=&quot;clr-namespace:DataTemplates&quot;
+    mc:Ignorable=&quot;d&quot;
+    d:DesignHeight=&quot;300&quot;
+    d:DesignWidth=&quot;300&quot;&gt;
+&lt;UserControl.Resources&gt;
+    &lt;local:ProductTemplateSelector x:Key=&quot;ProductTemplateSelector&quot; /&gt;
+&lt;/UserControl.Resources&gt;</code></pre>
+                <figcaption>Fig 05-077</figcaption>
+                </figure>
                 <p>Now that I have an instance of that Selector available, I can use it in the data-bound Context. So
                     I'm going to replace my TextBox down here with a ListBox. We'll bind the ItemsSource of that ListBox
                     to Products and we'll set a property called ItemTemplateSelector, pointing through a StaticResource
                     to the instance of our ProductTemplateSelector.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-078.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;Grid&gt;
+    &lt;ListBox ItemsSource=&quot;{Binding Products}&quot;
+             ItemTemplateSelector=&quot;{StaticResource ProductTemplateSelector}&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-078</figcaption>
+                </figure>
                 <p>Now we just need to get these products from somewhere, so I'm going to wire that up in the ViewModel
                     for this View. So if I go to the DataTemplateSelectorsViewModel and replace that class with
                     something similar to what we've seen before:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-079.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class DataTemplateSelectorsViewModel : INotifyPropertyChanged
+{
+    private ObservableCollection&lt;Product&gt; _Products;
+
+    public DataTemplateSelectorsViewModel()
+    {
+        if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            ZzaDbContext context = new ZzaDbContext();
+            Products = new ObservableCollection&lt;Product&gt;(context.Products.ToList());
+        }
+    }
+    public ObservableCollection&lt;Product&gt; Products
+    {
+        get
+        {
+            return _Products;
+        }
+        set
+        {
+            if (value != _Products)
+            {
+                _Products = value;</code></pre>
+                <figcaption>Fig 05-079</figcaption>
+                </figure>
                 <p>We have a Products collection exposed. We only populate that Products collection from the database if
                     we're not in Design mode and it raises PropertyChanged events when it gets set.
                 </p>
@@ -1223,28 +1267,89 @@ private void ShowView2()
                     ImplicitDataTemplates demo, it's being automatically associated through the DataTemplates out in the
                     MainWindow.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-080.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;Window.Resources&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type local:ExplicitDataTemplatesViewModel}&quot;&gt;
+        &lt;local:ExplicitDataTemplatesView/&gt;
+    &lt;/DataTemplate&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type local:DataTemplateSelectorsViewModel}&quot;&gt;
+        &lt;local:DataTemplateSelectorsView/&gt;
+    &lt;/DataTemplate&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type local:HierachicalDataTemplatesViewModel}&quot;&gt;
+        &lt;local:HierarchicalDataTemplatesView/&gt;
+    &lt;/DataTemplate&gt;
+&lt;/Window.Resources&gt;</code></pre>
+                <figcaption>Fig 05-080</figcaption>
+                </figure>
                 <p>So remember we had this DataTemplateSelectorViewModel ImplicitDataTemplate rendering out the
                     DataTemplateSelectorsView, which will set its DataContext to the instance of the ViewModel
                 </p>
                 <p>So the only thing we have left to do is define the DataTemplates that are going to be rendered out by
                     our ProductTemplateSelector. So if we add into our Resources section here, three DataTemplates:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-081.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;UserControl.Resources&gt;
+        &lt;local:ProductTemplateSelector x:Key=&quot;ProductTemplateSelector&quot; /&gt;
+        &lt;DataTemplate x:Key=&quot;pizzaTemplate&quot;&gt;
+            &lt;Grid&gt;
+                &lt;Grid.ColumnDefinitions&gt;
+                    &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
+                    &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+                &lt;/Grid.ColumnDefinitions&gt;
+                &lt;Image Source=&quot;Images/pizza.jpg&quot;
+                       Width=&quot;100&quot;
+                       Height=&quot;100&quot; /&gt;
+                &lt;TextBlock Text=&quot;{Binding Name}&quot;
+                           Grid.Column=&quot;1&quot; /&gt;
+            &lt;/Grid&gt;
+        &lt;/DataTemplate&gt;
+        &lt;DataTemplate x:Key=&quot;saladTemplate&quot;&gt;
+            &lt;Grid&gt;
+                &lt;Grid.ColumnDefinitions&gt;
+                    &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
+                    &lt;ColumnDefinition Width=&quot;*&quot; /&gt;</code></pre>
+                <figcaption>Fig 05-081</figcaption>
+                </figure>
+
                 <p>One called pizzaTemplate, one called saladTemplate, and one called drinkTemplate, the Type property
                     on the product is going to be salad, drink or pizza, and we concatenate that template name onto it
                     inside of our ProductTemplateSelector. Each of these:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-082.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;DataTemplate x:Key=&quot;pizzaTemplate&quot;&gt;
+    &lt;Grid&gt;
+        &lt;Grid.ColumnDefinitions&gt;
+            &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
+            &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+        &lt;/Grid.ColumnDefinitions&gt;
+        &lt;Image Source=&quot;Images/pizza.jpg&quot;
+               Width=&quot;100&quot;
+               Height=&quot;100&quot; /&gt;
+        &lt;TextBlock Text=&quot;{Binding Name}&quot;
+                   Grid.Column=&quot;1&quot; /&gt;
+    &lt;/Grid&gt;
+&lt;/DataTemplate&gt;
+&lt;DataTemplate x:Key=&quot;saladTemplate&quot;&gt;</code></pre>
+                <figcaption>Fig 05-082</figcaption>
+                </figure>
                 <p>is just going to render out a simple representation of a pizza, salad or drink. So by setting that
                     ItemTemplateSelector, it will invoke our DataTemplateSelector, and we can run, go to the
                     DataTemplateSelectorsView, and there you can see the pizzas look like that:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-083.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-083.png" class="image"/>
+                    <figcaption>Fig 05-083</figcaption>
+                </figure>
                 <p>the salads look like that:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-084.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-084.png" class="image"/>
+                    <figcaption>Fig 05-084</figcaption>
+                </figure>
                 <p>and the drinks look like that.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-085.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-085.png" class="image"/>
+                    <figcaption>Fig 05-085</figcaption>
+                </figure>
                 <p>So by defining your own DataTemplateSelector, overriding the SelectTemplate, and invoking whatever
                     logic is needed inside your DataTemplateSelector, you can dynamically return whatever DataTemplate
                     is needed for your scenario.
@@ -1284,7 +1389,7 @@ private void ShowView2()
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex06-007" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\WPF Data Binding in Depth\Module 6\after\DataTemplates\DataTemplates.sln">
+                               value="C:\Development Tutorials\Pluralsight-Courses\WPF Data Binding in Depth\Module 6\before\DataTemplates - Start\DataTemplates.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex06-007">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -1311,42 +1416,122 @@ private void ShowView2()
                     allowing us to switch between multiple views, the ExplicitDataTemplatesViewModel and the
                     DataTemplateSelectorsViewModel.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-086.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-086.png" class="image"/>
+                    <figcaption>Fig 05-086</figcaption>
+                </figure>
                 <p>I've added one more view here that we're going to start fleshing out in this demo called
                     HierarchicalDataTemplateView and ViewModel. And to get those switching, the way we did the other
                     views, I added another ViewModel instance to the MainWindowViewModel:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-087.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class MainWindowViewModel : INotifyPropertyChanged
+{
+    private object _CurrentViewModel;
+    ExplicitDataTemplatesViewModel _ViewModel1 = new ExplicitDataTemplatesViewModel();
+    DataTemplateSelectorsViewModel _ViewModel2 = new DataTemplateSelectorsViewModel();
+    HierachicalDataTemplatesViewModel _ViewModel3 = new HierachicalDataTemplatesViewModel();</code></pre>
+                <figcaption>Fig 05-087</figcaption>
+                </figure>
                 <p>another Command to trigger switching to that view:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-088.png" class="image"/>
+                <figure>
+                <pre><code class="csharp"> public MainWindowViewModel()
+{
+    View1Command = new RelayCommand(ShowView1);
+    View2Command = new RelayCommand(ShowView2);
+    View3Command = new RelayCommand(ShowView3);
+    CurrentViewModel = _ViewModel1;
+}</code></pre>
+                <figcaption>Fig 05-088</figcaption>
+                </figure>
                 <p>and the Command handler that sets that as the CurrentViewModel on the MainWindowViewModel.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-089.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">private void ShowView3()
+{
+    CurrentViewModel = _ViewModel3;
+}</code></pre>
+                <figcaption>Fig 05-089</figcaption>
+                </figure>
                 <p>So that should all look familiar from the ImplicitDataTemplates demo. So if I run at this point, I
                     can start up the app. We'll have three buttons now at the top of the screen:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-090.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-090.png" class="image"/>
+                    <figcaption>Fig 05-090</figcaption>
+                </figure>
                 <p>and I can switch between the DataTemplateSelectorsView, the ExplicitDataTemplatesView, and this new
                     blank HierarchicalDataTemplatesView and its corresponding ViewModel.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-091.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-091.png" class="image"/>
+                    <figcaption>Fig 05-091</figcaption>
+                </figure>
                 <p>So the first thing we're going to want is some real data to work with, in our ViewModel, so I fleshed
                     out some code here. You can see that our ViewModel implements INotifyPropertyChanged, as usual:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-092.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public class HierachicalDataTemplatesViewModel : INotifyPropertyChanged</code></pre>
+                <figcaption>Fig 05-092</figcaption>
+                </figure>
                 <p>We have a constructor that is, only when we're not in the Designer, going out to the database through
                     our DBContext and retrieving the Customers collection from our DBContext.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-093.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">public HierachicalDataTemplatesViewModel()
+{
+    if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+    {
+        using (ZzaDbContext context = new ZzaDbContext())
+        {
+            Customers = new ObservableCollection&lt;Customer&gt;(
+                context.Customers.Include(&quot;Orders&quot;)
+                .Include(&quot;Orders.OrderItems&quot;)
+                .Include(&quot;Orders.OrderItems.Product&quot;).ToList());
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 05-093</figcaption>
+                </figure>
                 <p>In this case, however, it's also using the .Include method of Entity Framework to retrieve the
                     related Orders, OrderItems, and the Product for each OrderItem, which sets up a hierarchical data
                     object graph for us to work with in this demo.
                 </p>
                 <p>The exposed property from our ViewModel is just the root Customers collection:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-094.png" class="image"/>
+                <figure>
+                <pre><code class="csharp">private ObservableCollection&lt;Customer&gt; _Customers;
+public ObservableCollection&lt;Customer&gt; Customers
+{
+    get
+    {
+        return _Customers;
+    }
+    set
+    {
+        _Customers = value;
+        PropertyChanged(this, new PropertyChangedEventArgs(&quot;Customers&quot;));
+    }
+}
+public event PropertyChangedEventHandler PropertyChanged = delegate { };</code></pre>
+                <figcaption>Fig 05-094</figcaption>
+                </figure>
                 <p>and we're going to data bind to that in a TreeView control. So now let's go over to the view for this
                     HierarchicalDataTemplate and let's add a little bit of XAML:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-095.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;UserControl.Resources&gt;
+    &lt;DataTemplate x:Key=&quot;CustomerTemplate&quot;&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+            &lt;Image Source=&quot;Images/person.jpg&quot; Margin=&quot;3&quot; /&gt;
+            &lt;TextBlock Text=&quot;{Binding LastName}&quot; Margin=&quot;5&quot;/&gt;
+        &lt;/StackPanel&gt;
+    &lt;/DataTemplate&gt;
+&lt;/UserControl.Resources&gt;
+&lt;Grid&gt;
+    &lt;TreeView ItemsSouce=&quot;{Binding Customers}&quot;
+              ItemTemplate=&quot;{StaticResource CustomerTemplate}&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-095</figcaption>
+                </figure>
                 <p>What I added here in terms of the root structure of the View is a TreeView control. You can see that
                     the ItemsSource is pointing to our Customers collection, which will be on our DataContext that is
                     our ViewModel.
@@ -1356,7 +1541,10 @@ private void ShowView2()
                     it's just got some simple structure, which is a StackPanel with an Image and a TextBlock in it.
                 </p>
                 <p>If we run our demo at this point, and we switch to the HierarchicalDataTemplatesView:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-096.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-096.png" class="image"/>
+                    <figcaption>Fig 05-096</figcaption>
+                </figure>
                 <p>you can see that we are getting data rendered out based on our DataTemplate, but notice there's no
                     expander nodes next to these Customer objects, it's really more like a ListBox at this point, and
                     we're not really getting that hierarchical presentation that we want. This is where
@@ -1366,13 +1554,43 @@ private void ShowView2()
                     goes one level deeper to the Orders.
                 </p>
                 <p>So now you can see what we have is a HierarchicalDataTemplate:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-097.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;UserControl.Resources&gt;
+    &lt;HierarchicalDataTemplate x:Key=&quot;CustomerTemplate&quot;
+                              ItemsSource=&quot;{Binding Orders}&quot;&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+            &lt;Image Source=&quot;Images/person.jpg&quot;
+                   Margin=&quot;3&quot;
+                   Width=&quot;50&quot; /&gt;
+            &lt;TextBlock Text=&quot;{Binding LastName}&quot;
+                       Margin=&quot;5&quot;/&gt;
+        &lt;/StackPanel&gt;
+        &lt;HierarchicalDataTemplate.ItemTemplate&gt;
+            &lt;DataTemplate&gt;
+                &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                    &lt;Image Source=&quot;Images/checkmark.jpg&quot;
+                           Margin=&quot;3&quot;
+                           Width=&quot;&quot;50&quot; /&gt;
+                    &lt;TextBlock Text=&quot;{Binding Path=OrderDate, StringFormat=d}&quot;
+                               Margin=&quot;5&quot; /&gt;
+                &lt;/StackPanel&gt;
+            &lt;/DataTemplate&gt;
+        &lt;/HierarchicalDataTemplate.ItemTemplate&gt;
+    &lt;/HierarchicalDataTemplate&gt;
+&lt;/UserControl.Resources&gt;</code></pre>
+                    <figcaption>Fig 05-097</figcaption>
+                </figure>
                 <p>It still has the same key as before, so that the ItemTemplate can point to it. It's got the same root
                     level structure of a StackPanel with an Image and a TextBlock next to it, but then it's got two
                     additional things.
                 </p>
                 <p>The first is the ItemsSource property.</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-098.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;HierarchicalDataTemplate x:Key=&quot;CustomerTemplate&quot;
+        ItemsSource=&quot;{Binding Orders}&quot;&gt;
+                </code></pre>
+                <figcaption>Fig 05-098</figcaption>
+                </figure>
                 <p>The ItemsSource property on a HierarchicalDataTemplate points to some property hanging off of the
                     current node object, which will be a customer, in this case, that is a collection itself, a child
                     collection. So in this case, the child collection of orders for a given customer will be on an
@@ -1381,7 +1599,21 @@ private void ShowView2()
                     what is the DataTemplate that is going to be used to render that.
                 </p>
                 <p>And here, one level down:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-099.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;HierarchicalDataTemplate.ItemTemplate&gt;
+    &lt;DataTemplate&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+            &lt;Image Source=&quot;Images/checkmark.jpg&quot;
+                   Margin=&quot;3&quot;
+                   Width=&quot;&quot;50&quot; /&gt;
+            &lt;TextBlock Text=&quot;{Binding Path=OrderDate, StringFormat=d}&quot;
+                       Margin=&quot;5&quot; /&gt;
+        &lt;/StackPanel&gt;
+    &lt;/DataTemplate&gt;
+&lt;/HierarchicalDataTemplate.ItemTemplate&gt;
+                </code></pre>
+                <figcaption>Fig 05-099</figcaption>
+                </figure>
                 <p>we can see we can just use a normal DataTemplate at that level and we have some simple structure
                     there with another StackPanel with an Image and a TextBlock, in this case, binding against the
                     OrderDate using a StringFormat for a short Date string and we'll have the Image pointing to some
@@ -1391,27 +1623,81 @@ private void ShowView2()
                     each customer. So we go to the HierarchicalDataTemplatesView, you can see we have the Expander icon
                     here, and when we expand, we see the orders for Puckett and the orders for Russell, and so on.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-100.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-100.png" class="image"/>
+                    <figcaption>Fig 05-100</figcaption>
+                </figure>
                 <p>Now we can take this even deeper and I can replace this HierarchicalDataTemplate with an even bigger
                     one that goes one level deeper. So we still have the root HierarchicalDataTemplate that our
                     ItemTemplate is pointing to.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-101.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;UserControl.Resources&gt;
+    &lt;HierarchicalDataTemplate x:Key=&quot;CustomerTemplate&quot;
+                              ItemsSource=&quot;{Binding Orders}&quot;&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+            &lt;Image Source=&quot;Images/person.jpg&quot;
+                   Margin=&quot;3&quot;
+                   Width=&quot;50&quot; /&gt;
+            &lt;TextBlock Text=&quot;{Binding LastName}&quot;
+                       Margin=&quot;5&quot;/&gt;
+        &lt;/StackPanel&gt;
+        &lt;HierarchicalDataTemplate.ItemTemplate&gt;
+            &lt;HierarchicalDataTemplate ItemsSource=&quot;{Binding OrderItems}&quot;&gt;
+                &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                    &lt;Image Source=&quot;Images/checkmark.jpg&quot;
+                           Margin=&quot;3&quot;
+                           Width=&quot;&quot;50&quot; /&gt;
+                    &lt;TextBlock Text=&quot;{Binding Path=OrderDate, StringFormat=d}&quot;
+                               Margin=&quot;5&quot; /&gt;</code></pre>
+                <figcaption>Fig 05-101</figcaption>
+                </figure>
+
                 <p>It's got the binding to the Orders collection on each customer and the structure for each customer.
                     Then it's got the ItemTemplate for each Order in that Orders collection, which again, has its root
                     structure that's a StackPanel, but then it has its own ItemsSource that says each order has an
                     OrderItems property.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-102.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;HierarchicalDataTemplate.ItemTemplate&gt;
+    &lt;HierarchicalDataTemplate ItemsSource=&quot;{Binding OrderItems}&quot;&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+            &lt;Image Source=&quot;Images/checkmark.jpg&quot; Margin=&quot;3&quot; Width=&quot;50&quot;/&gt;
+            &lt;TextBlock Text=&quot;{Binding Path=OrderDate, StringFormat=d}&quot; Margin=&quot;5&quot;/&gt;
+        &lt;/StackPanel&gt;
+        &lt;HierarchicalDataTemplate.ItemTemplate&gt;
+            &lt;DataTemplate&gt;
+                &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                    &lt;Border BorderBrush=&quot;Blue&quot; BorderThickness=&quot;2&quot; CornerRadius=&quot;3&quot;&gt;
+                        &lt;Image Source=&quot;Images/items.jpg&quot; Margin=&quot;3&quot; Width=&quot;50&quot;/&gt;
+                    &lt;/Border&gt;</code></pre>
+                <figcaption>Fig 05-102</figcaption>
+                </figure>
+
                 <p>For each OrderItem, what is the template for that? We go another level down and specify the
                     ItemTemplate for that child HierarchicalDataTemplate and give it some structure:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-103.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;HierarchicalDataTemplate.ItemTemplate&gt;
+    &lt;DataTemplate&gt;
+        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+            &lt;Border BorderBrush=&quot;Blue&quot; BorderThickness=&quot;2&quot; CornerRadius=&quot;3&quot;&gt;
+                &lt;Image Source=&quot;Images/items.jpg&quot; Margin=&quot;3&quot; Width=&quot;50&quot;/&gt;
+            &lt;/Border&gt;
+            &lt;TextBlock Text=&quot;{Binding Path=Product.Name, StringFormat=d}&quot; Margin=&quot;5&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+        &lt;/StackPanel&gt;
+    &lt;/DataTemplate&gt;
+&lt;/HierarchicalDataTemplate.ItemTemplate&gt;</code></pre>
+                    <figcaption>Fig 05-103</figcaption>
+                </figure>
                 <p>And in this case, if this is our leaf node, we can just use a standard DataTemplate. So if we run
                     this, go to the HierarchicalDataTemplatesView, expand down to Orders, and expand down to OrderItems,
                     then we can see we have different icons and different levels for those.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-104.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-104.png" class="image"/>
+                    <figcaption>Fig 05-104</figcaption>
+                </figure>
                 <p>Now the problem with what we've shown so far is, this works if there's a single child collection per
                     level of the hierarchy that you want to drill down into, but what if there's multiple child
                     collections and what if they are composed of heterogeneous derived types from some base type, such
@@ -1422,30 +1708,72 @@ private void ShowView2()
                 <p>So I'm going to replace all of these HierarchicalDataTemplates with a series of three DataTemplates
                     in our Resource collection.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-105.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;UserControl.Resources&gt;
+    &lt;HierarchicalDataTemplate DataType=&quot;{x:Type data:Customer}&quot; ItemsSource=&quot;{Binding Orders}&quot;&gt;
+        &lt;TextBlock Text=&quot;{Binding LastName}&quot;/&gt;
+    &lt;/HierarchicalDataTemplate&gt;
+    &lt;HierarchicalDataTemplate DataType=&quot;{x:Type data:Order}&quot; ItemsSource=&quot;{Binding OrderItems}&quot;&gt;
+        &lt;TextBlock Text=&quot;{Binding OrderDate}&quot;/&gt;
+    &lt;/HierarchicalDataTemplate&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type data:OrderItem}&quot;&gt;
+        &lt;TextBlock Text=&quot;{Binding Product.Name}&quot;/&gt;
+    &lt;/DataTemplate&gt;
+&lt;/UserControl.Resources&gt;
+&lt;Grid&gt;
+    &lt;TreeView ItemsSource=&quot;{Binding Customers}&quot;/&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-105</figcaption>
+                </figure>
                 <p>Notice these are ImplicitDataTemplates using the DataType property to say, if a given data-bound node
                     happens to be a Customer object, then we render it out with this content
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-106.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;HierarchicalDataTemplate DataType=&quot;{x:Type data:Customer}&quot; ItemsSource=&quot;{Binding Orders}&quot;&gt;
+    &lt;TextBlock Text=&quot;{Binding LastName}&quot;/&gt;
+&lt;/HierarchicalDataTemplate&gt;
+                </code></pre>
+                <figcaption>Fig 05-106</figcaption>
+                </figure>
                 <p>as our DataTemplate and we can have an ItemSource for that. Now we don't have to specify the
                     ItemTemplate here for those orders, because that can be matched up with a separate
                     ImplicitDataTemplate:
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-107.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;HierarchicalDataTemplate DataType=&quot;{x:Type data:Order}&quot; ItemsSource=&quot;{Binding OrderItems}&quot;&gt;
+    &lt;TextBlock Text=&quot;{Binding OrderDate}&quot;/&gt;
+&lt;/HierarchicalDataTemplate&gt;</code></pre>
+                <figcaption>Fig 05-107</figcaption>
+                </figure>
                 <p>so here we have another ImplicitDataTemplate that maps to Order objects and it knows how to render
                     out those nodes and what child collection it can bind against on those nodes.
                 </p>
                 <p>And then finally, down at the leaf node level, for OrderItem, it's got the structure for those</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-108.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;DataTemplate DataType=&quot;{x:Type data:OrderItem}&quot;&gt;
+    &lt;TextBlock Text=&quot;{Binding Product.Name}&quot;/&gt;
+&lt;/DataTemplate&gt;
+                </code></pre>
+                <figcaption>Fig 05-108</figcaption>
+                </figure>
                 <p>So then we just get rid of the ItemTemplate down here:</p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-109.png" class="image"/>
+                <figure>
+                <pre><code class="xml">&lt;Grid&gt;
+    &lt;TreeView ItemsSource=&quot;{Binding Customers}&quot;/&gt;
+    &lt;!--&lt;TreeView ItemsSource=&quot;{Binding Customers}&quot; ItemTemplate=&quot;{StaticResource CustomerTemplate}&quot;/&gt;--&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-109</figcaption>
+                </figure>
                 <p>and go ahead and run, switch to the HierarchicalDataTemplatesView, and now you can see the rendering
                     is simpler.
                 </p>
                 <p>I don't have images involved in the templates now, but you can see we've got the name of the
                     customer, the Order Date for the order, and the Product name for the OrderItems.
                 </p>
-                <img src="app/wpf/images/wpfdatabindingindepth/Fig05-110.png" class="image"/>
+                <figure>
+                    <img src="app/wpf/images/wpfdatabindingindepth/Fig05-110.png" class="image"/>
+                    <figcaption>Fig 05-110</figcaption>
+                </figure>
                 <p>So it's able to match up the right DataTemplate for the right node in the Tree based on the type of
                     the data object being rendered.
                 </p>
