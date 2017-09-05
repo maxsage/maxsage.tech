@@ -68,8 +68,24 @@
                     Code like the example below doesn’t look too bad at first glance:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig01-003.png"/>
-                    <figcaption>Fig 01-003</figcaption>
+                <pre><code class="csharp">private void ComputeCustomerOrdersTotal(object sender, RoutedEventArgs e)
+{
+    var selectedCustomer = this.customerDataGrid.SelectedItem as Customer;
+    var orders = (from order in dbContext.Orders.Include(&quot;OrderItems&quot;)
+        where order.CustomerId = selectedCustomer.Id
+        select order);
+
+    var sum = 0;
+    foreach (var order in orders)
+    {
+        foreach (var item in order.OrderItems)
+        {
+            sum += item.UnitPrice * item.Quantity;
+        }
+    }
+    this.customerOrderDetail.text = sum.ToString();
+}</code></pre>
+                <figcaption>Fig 01-003</figcaption>
                 </figure>
                 <p>
                     If you look closely at what the code is doing you can see code that is touching UI elements,
@@ -399,7 +415,7 @@
                     the Views DataContext to a reference to the ViewModel:
                 </p>
                 <figure>
-                    <pre><code class="cs hljs">View.DataContext = ViewModel</code></pre>
+                    <pre><code class="csharp">View.DataContext = ViewModel;</code></pre>
                     <figcaption>Fig 01-015</figcaption>
                 </figure>
                 <p>

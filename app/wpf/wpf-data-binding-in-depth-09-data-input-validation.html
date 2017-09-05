@@ -665,8 +665,16 @@ public string HomePhone
                     these extra properties, and just put one additional property, which is ValidatesOnDataErrors=true.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-220.png" class="image"/>
-                    <figcaption>Fig 07-220</figcaption>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;cellPhoneTextBox&quot;
+    Grid.Column=&quot;1&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;3&quot;
+    Grid.Row=&quot;0&quot;
+    Text=&quot;{Binding CellPhone, ValidatesOnNotifyDataErrors=true, NotifyOnValidationError=True}&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Width=&quot;120&quot; /&gt;</code></pre>
+                <figcaption>Fig 07-220</figcaption>
                 </figure>
                 <p>We saw ValidatesOnExceptions earlier, this is an alternative to that, using IDataErrorInfo to derive
                     your validation instead of exceptions. You can certainly do both. In fact, there are times for a
@@ -681,13 +689,23 @@ public string HomePhone
                 <p>So I'll drop into my Customer and add the IDataErrorInfo interface and implement it using Visual
                     Studio.</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-221.png" class="image"/>
-                    <figcaption>Fig 07-221</figcaption>
+                <pre><code class="csharp">namespace ValidationDemo
+{
+    public class Customer : INotifyPropertyChanged, IDataErrorInfo</code></pre>
+                <figcaption>Fig 07-221</figcaption>
                 </figure>
                 <p>Down at the bottom of my class it added two members</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-222.png" class="image"/>
-                    <figcaption>Fig 07-222</figcaption>
+                <pre><code class="csharp">public string Error
+{
+    get { throw new NotImplementedException(); }
+}
+
+public string this[string columnName]
+{
+    get { throw new NotImplementedException(); }
+}</code></pre>
+                <figcaption>Fig 07-222</figcaption>
                 </figure>
                 <p>A string called Error, and an Indexer that says columnName here, but you can think of this, really,
                     as propertyName. The reason it generates it as columnName is this dates back to .NET 1.0 and the
@@ -696,15 +714,21 @@ public string HomePhone
                     to be passed into the Indexer and it returns a string.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-223.png" class="image"/>
-                    <figcaption>Fig 07-223</figcaption>
+                <pre><code class="csharp">public string this[string propertyName]
+{
+    get { throw new NotImplementedException(); }
+}</code></pre>
+                <figcaption>Fig 07-223</figcaption>
                 </figure>
                 <p>So the idea here is that the Error property is meant to represent an error for the object as a whole.
                     For that, I'm just going to return string.Empty.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-224.png" class="image"/>
-                    <figcaption>Fig 07-224</figcaption>
+                <pre><code class="csharp">public string Error
+{
+    get { return string.Empty; }
+}</code></pre>
+                <figcaption>Fig 07-224</figcaption>
                 </figure>
                 <p>The Indexer is what we're going to focus our effort on, and the idea is that this will be invoked by
                     the binding when you say NofityOnDataErrors=true, the binding will call this Indexer for the
@@ -714,30 +738,60 @@ public string HomePhone
                 </p>
                 <p>You do have to first accept the value into the property:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-225.png" class="image"/>
-                    <figcaption>Fig 07-225</figcaption>
+                <pre><code class="csharp">private string _CellPhone;
+public string CellPhone
+{
+    get { return _CellPhone; }
+    set
+    {
+        if (_CellPhone != value)
+        {
+            _CellPhone = value;
+            PropertyChanged(this, new PropertyChangedEventArgs("CellPhone"));
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 07-225</figcaption>
                 </figure>
                 <p>so you're going to have to let the set block be called, not throw an exception, write it into your
                     member variable, so that down here in the Indexer:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-226.png" class="image"/>
-                    <figcaption>Fig 07-226</figcaption>
+                <pre><code class="csharp[">public string this[string propertyName]
+{
+    get { throw new NotImplementedException(); }
+}</code></pre>
+                <figcaption>Fig 07-226</figcaption>
                 </figure>
                 <p>you can then look at that value in the member variable and decide whether you like it or not, and if
                     not, return an error string.
                 </p>
                 <p>So what I'm going to do here is I'm going to return a method:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-227.png" class="image"/>
-                    <figcaption>Fig 07-227</figcaption>
+                <pre><code class="csharp">public string this[string propertyName]
+{
+    get { return GetErrorForProperty(propertyName); }
+}</code></pre>
+                <figcaption>Fig 07-227</figcaption>
                 </figure>
                 <p>because I don't like putting a bunch of logic in a get block of a property. Then I'll go right below
                     that and implement that method:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-228.png" class="image"/>
-                    <figcaption>Fig 07-228</figcaption>
+                <pre><code class="csharp">private string GetErrorForProperty(string propertyName)
+{
+    switch (propertyName)
+    {
+        case &quot;CellPhone&quot;:
+            Regex regex = new Regex(@&quot;^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$&quot;);
+            if (regex.Match(CellPhone) == Match.Empty)
+                return &quot;Invalid phone format&quot;;
+            else return string.Empty;
+        default:
+            return string.Empty;
+    }
+}</code></pre>
+                <figcaption>Fig 07-228</figcaption>
                 </figure>
                 <p>And the nature of the method that you're going to have to implement is, unfortunately, generally a
                     big switch case statement with a case for each property that you have ValidationRules you want to
@@ -756,8 +810,8 @@ public string HomePhone
                 </p>
                 <p>So by virtue of the fact that our entity that we're binding to now implements this interface:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-229.png" class="image"/>
-                    <figcaption>Fig 07-229</figcaption>
+                <pre><code class="csharp">public class Customer : INotifyPropertyChanged, IDataErrorInfo</code></pre>
+                <figcaption>Fig 07-229</figcaption>
                 </figure>
                 <p>and our binding says that we do want to honor that interface, this binding will basically hook up to
                     that interface and query for errors every time it goes to set the property that it's bound to.
@@ -843,16 +897,29 @@ public string HomePhone
                     IDataErrorInfo:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-232.png" class="image"/>
-                    <figcaption>Fig 07-232</figcaption>
+                <pre><code class="csharp">namespace ValidationDemo
+{
+    public class Customer : INotifyPropertyChanged, INotifyDataErrorInfo
+    {</code></pre>
+                <figcaption>Fig 07-232</figcaption>
                 </figure>
                 <p>So I changed my interface to INotifyDataErrorInfo, I will use Visual Studio to stub it out, and then
                     I'll go down to the bottom here and I'm going to comment out the IDataErrorInfo methods since
                     they're not going to be used anymore, and let's look at the API of INotifyDataErrorInfo.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-233.png" class="image"/>
-                    <figcaption>Fig 07-233</figcaption>
+                <pre><code class="csharp">public event EventHandler&lt;DataErrorsChangedEventArgs&gt; ErrorsChanged;
+
+public System.Collections.IEnumerable GetErrors(string propertyName)
+{
+    throw new NotImplementedException();
+}
+
+public bool HasErrors
+{
+    throw new NotImplementedException();
+}</code></pre>
+                <figcaption>Fig 07-233</figcaption>
                 </figure>
                 <p>First off, it's got an ErrorsChanged event and I'm going to use the delegate trick here to make it so
                     I don't have to check for nulls, which was discussed earlier in the course. It's got a GetErrors
@@ -870,13 +937,19 @@ public string HomePhone
                     property, it's going to check and call the HasErrors property:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-234.png" class="image"/>
-                    <figcaption>Fig 07-234</figcaption>
+                <pre><code class="csharp">public bool HasErrors
+{
+    throw new NotImplementedException();
+}</code></pre>
+                <figcaption>Fig 07-234</figcaption>
                 </figure>
                 <p>If that returns true, then it's going to call GetErrors:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-235.png" class="image"/>
-                    <figcaption>Fig 07-235</figcaption>
+                <pre><code class="csharp">public System.Collections.IEnumerable GetErrors(string propertyName)
+{
+    throw new NotImplementedException();
+}</code></pre>
+                <figcaption>Fig 07-235</figcaption>
                 </figure>
                 <p>If at some point after it's called GetErrors, the ErrorsChanged event fires, it will come back in and
                     call GetErrors again, assuming that there is some asynchronous process that went out and determined
@@ -887,16 +960,24 @@ public string HomePhone
                     shape of that is generally going to be a Dictionary&lt;string, List&lt;string&gt;&gt;:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-236.png" class="image"/>
-                    <figcaption>Fig 07-236</figcaption>
+                <pre><code class="csharp">Dictionary&lt;string, List&lt;string&gt;&gt; _PropertyErrors = new Dictionary&lt;string, List&lt;string&gt;&gt;();</code></pre>
+                <figcaption>Fig 07-236</figcaption>
                 </figure>
                 <p>So you want to have that collection of errors that you return up here for a given property name where
                     the key is the property name. For the implementation of GetErrors, we can just simply reach into
                     that PropertyErrors collection:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-237.png" class="image"/>
-                    <figcaption>Fig 07-237</figcaption>
+                <pre><code class="csharp">public System.Collections.IEnumerable GetErrors(string propertyName)
+{
+    lock (_PropertyErrors)
+    {
+        if (_PropertyErrors.ContainsKey(propertyName))
+            return _PropertyErrors[propertyName];
+    }
+    return null;
+}</code></pre>
+                <figcaption>Fig 07-237</figcaption>
                 </figure>
                 <p>see if there is a key for the propertyName, and if so, return whatever the value is the list of
                     strings associated with it.
@@ -912,8 +993,24 @@ public string HomePhone
                 <p>Next, we need to implement this HasErrors method, so I'm going to flesh that out by calling a
                     method:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-238.png" class="image"/>
-                    <figcaption>Fig 07-238</figcaption>
+                <pre><code class="csharp">public bool HasErrors
+{
+    get { return PropertyErrorsPresent(); }
+}
+
+private bool PropertyErrorsPresent()
+{
+    bool errors = false;
+    foreach (var key in _PropertyErrors.Keys)
+    {
+        if (_PropertyErrors[key] != null)
+        {
+            errors = true;
+            break;
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 07-238</figcaption>
                 </figure>
                 <p>again, because I don't like putting complex logic in a get block, personally. And what this method
                     really does is it just loops through all the keys in the dictionary, checks whether the underlying
@@ -931,8 +1028,19 @@ public string HomePhone
                     it, I'm just going to use a task-based method to simulate this.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-239.png" class="image"/>
-                    <figcaption>Fig 07-239</figcaption>
+                <pre><code class="csharp">Task&lt;List&lt;string&gt;&gt; GetErrorsForPhone(string value)
+{
+    // Simulate async call - typically to a web service
+    return Task.Factory.StartNew&lt;List&lt;string&gt;&gt;(() =&gt;
+    {
+        Thread.Sleep(5000);
+        Regex regex = new Regex(@&quot;^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$&quot;);
+        if (regex.Match(value) == Match.Empty)
+            return new List&lt;string&gt; { &quot;Invalid phone format&quot; };
+        return null;
+    });
+}</code></pre>
+                <figcaption>Fig 07-239</figcaption>
                 </figure>
                 <p>So this method is using the Task Parallel Library, it's defining a method called GetErrorsForPhone
                     where I can pass in a value. And what it's going to return, ultimately, is a list of strings, but it
@@ -943,8 +1051,8 @@ public string HomePhone
                     Task.Factory.StartNew, which causes it to dispatch whatever's inside of this action delegate
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-240.png" class="image"/>
-                    <figcaption>Fig 07-240</figcaption>
+                <pre><code class="csharp">return Task.Factory.StartNew&lt;List&lt;string&gt;&gt;(() =&gt;</code></pre>
+                <figcaption>Fig 07-240</figcaption>
                 </figure>
                 <p>on a separate thread.</p>
                 <p>The first thing I'm going to do is go sleep for 5 seconds, so that you can see when I run this that's
@@ -954,16 +1062,48 @@ public string HomePhone
                 </p>
                 <p>So, basically, I want this:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-241.png" class="image"/>
+                <pre><code class="csharp">Task&lt;List&lt;string&gt;&gt; GetErrorsForPhone(string value)
+{
+    // Simulate async call - typically to a web service
+    return Task.Factory.StartNew&lt;List&lt;string&gt;&gt;(() =&gt;
+    {
+        Thread.Sleep(5000);
+        Regex regex = new Regex(@&quot;^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$&quot;);
+        if (regex.Match(value) == Match.Empty)
+            return new List&lt;string&gt; { &quot;Invalid phone format&quot; };
+        return null;
+    });
+}</code></pre>
                     <figcaption>Fig 07-241</figcaption>
-                </figure>
-                <p>to be invoked at a point where I know that a phone value has changed. So, naturally, a good place for
+                </figure>                <p>to be invoked at a point where I know that a phone value has changed. So, naturally, a good place for
                     that would be in the set block of our property. So I can go up in here, and after the property has
                     been set, I can dispatch some asynchronous work.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-242.png" class="image"/>
-                    <figcaption>Fig 07-242</figcaption>
+                <pre><code class="csharp">private string _CellPhone;
+public string CellPhone
+{
+    get { return _CellPhone; }
+    set
+    {
+        if (_CellPhone != value)
+        {
+            _CellPhone = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;CellPhone&quot;));
+            // Trigger async validation check
+            GetErrorsForPhone(CellPhone).ContinueWith((errorsTask) =&gt;
+            {
+                lock (_PropertyErrors)
+                {
+                    _PropertyErrors[&quot;CellPhone&quot;] = errorsTask.Result;
+                    ErrorsChanged(this, new DataErrorsChangedEventArgs(&quot;CellPhone&quot;));
+                }
+            });
+
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 07-242</figcaption>
                 </figure>
                 <p>So I'm going to call that task-based method, which is non-blocking because it's asynchronous, and
                     when it is complete I use a ContinueWith, this is part of the Task Parallel Library, and say what I
@@ -976,25 +1116,25 @@ public string HomePhone
                 </p>
                 <p>So I basically just take the result property:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-243.png" class="image"/>
-                    <figcaption>Fig 07-243</figcaption>
+                <pre><code class="csharp">_PropertyErrors[&quot;CellPhone&quot;] = errorsTask.Result;</code></pre>
+                <figcaption>Fig 07-243</figcaption>
                 </figure>
                 <p>of the task that come back in from our ContinueWith:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-244.png" class="image"/>
-                    <figcaption>Fig 07-244</figcaption>
+                <pre><code class="csharp">GetErrorsForPhone(CellPhone).ContinueWith((errorsTask) =&gt;</code></pre>
+                <figcaption>Fig 07-244</figcaption>
                 </figure>
                 <p>that will be the list of strings that came out of my Task, and I can push that into the appropriate
                     dictionary entry based on the property that I'm setting.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-245.png" class="image"/>
+                    <pre><code class="csharp">_PropertyErrors[&quot;CellPhone&quot;] = errorsTask.Result;</code></pre>
                     <figcaption>Fig 07-245</figcaption>
                 </figure>
                 <p>Once I know I've modified that collection, I need to raise that ErrorsChanged event:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-246.png" class="image"/>
-                    <figcaption>Fig 07-246</figcaption>
+                <pre><code class="csharp">ErrorsChanged(this, new DataErrorsChangedEventArgs(&quot;CellPhone&quot;));</code></pre>
+                <figcaption>Fig 07-246</figcaption>
                 </figure>
                 <p>associated with the INotifyDataErrorInfo and tell it what property has changed. That's going to
                     trigger the binding that is tied to that property to go ahead and re-query GetErrors.
@@ -1015,37 +1155,91 @@ public string HomePhone
                     All it's doing here:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-248.png" class="image"/>
-                    <figcaption>Fig 07-248</figcaption>
+                <pre><code class="csharp">public System.Collections.IEnumerable GetErrors(string propertyName)
+{
+    lock (_PropertyErrors)
+    {
+        if (_PropertyErrors.ContainsKey(propertyName))
+            return _PropertyErrors[propertyName];
+    }
+    return null;
+}</code></pre>
+                <figcaption>Fig 07-248</figcaption>
                 </figure>
                 <p>is returning whatever is already in the Errors collection. So if we're able to synchronously invoke a
                     ValidationRule client-side up here from the set block:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-249.png" class="image"/>
-                    <figcaption>Fig 07-249</figcaption>
+                <pre><code class="csharp">private string _CellPhone;
+public string CellPhone
+{
+    get { return _CellPhone; }
+    set
+    {
+        if (_CellPhone != value)
+        {
+            _CellPhone = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;CellPhone&quot;));
+            // Trigger async validation check
+            GetErrorsForPhone(CellPhone).ContinueWith((errorsTask) =&gt;
+            {
+                lock (_PropertyErrors)
+                {
+                    _PropertyErrors[&quot;CellPhone&quot;] = errorsTask.Result;
+                    ErrorsChanged(this, new DataErrorsChangedEventArgs(&quot;CellPhone&quot;));
+                }
+            });
+
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 07-249</figcaption>
                 </figure>
                 <p>of the property and populate the PropertyErrors then, those errors will show up automatically as soon
                     as GetErrors gets called.
                 </p>
                 <p>Those errors will be returned automatically when this gets called:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-250.png" class="image"/>
-                    <figcaption>Fig 07-250</figcaption>
+                <pre><code class="csharp"> public System.Collections.IEnumerable GetErrors(string propertyName)
+{
+    lock (_PropertyErrors)
+    {
+        if (_PropertyErrors.ContainsKey(propertyName))
+            return _PropertyErrors[propertyName];
+    }
+    return null;
+}</code></pre>
+                <figcaption>Fig 07-250</figcaption>
                 </figure>
                 <p>Which happens after the PropertyChanged fires from the set block. Now notice that our demo worked
                     even though we have ValidatesOnDataErrors=true here.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-251.png" class="image"/>
-                    <figcaption>Fig 07-251</figcaption>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;cellPhoneTextBox&quot;
+    Grid.Column=&quot;1&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;3&quot;
+    Grid.Row=&quot;0&quot;
+    Text=&quot;{Binding CellPhone, ValidatesOnDataErrors=true, NotifyOnValidationError=True}&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Width=&quot;120&quot;</code></pre>
+                <figcaption>Fig 07-251</figcaption>
                 </figure>
                 <p>There's a separate property for ValidatesOnNotifyDataErrors if you only want to support
                     INotifyDataErrorInfo:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-252.png" class="image"/>
-                    <figcaption>Fig 07-252</figcaption>
+                <pre><code class="csharp">&lt;TextBox x:Name=&quot;cellPhoneTextBox&quot;
+    Grid.Column=&quot;1&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;3&quot;
+    Grid.Row=&quot;0&quot;
+    Text=&quot;{Binding CellPhone, ValidatesOnNotifyDataErrors=true, NotifyOnValidationError=True}&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Width=&quot;120&quot;</code></pre>
+                <figcaption>Fig 07-252</figcaption>
                 </figure>
                 <p>but ValidateOnDataErrors will also pick up INotifyDataErrorInfo.</p>
             </div>
@@ -1101,8 +1295,16 @@ public string HomePhone
                     binding and we set another property called NotifyOnValidationError=true.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-253.png" class="image"/>
-                    <figcaption>Fig 07-253</figcaption>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;cellPhoneTextBox&quot;
+    Grid.Column=&quot;1&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;3&quot;
+    Grid.Row=&quot;0&quot;
+    Text=&quot;{Binding CellPhone, ValidatesOnNotifyDataErrors=true, NotifyOnValidationError=True}&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Width=&quot;120&quot;</code></pre>
+                <figcaption>Fig 07-253</figcaption>
                 </figure>
                 <p>Once that flag is set, anytime the validation state of that control, meaning errors present or not,
                     changes, it's going to raise a validation event, which we can hook wherever we want in our UI.
@@ -1112,24 +1314,32 @@ public string HomePhone
                     code-behind.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-254.png" class="image"/>
-                    <figcaption>Fig 07-254</figcaption>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;cellPhoneTextBox&quot;
+                     Validation.Error=&quot;cellPhoneTextBox_Error&quot;
+                    Grid.Column=&quot;1&quot;</code></pre>
+                <figcaption>Fig 07-254</figcaption>
                 </figure>
                 <p>Because these are bubbling events, I could also put them further up the chain. So instead of on the
                     TextBox itself, I could put it all the way up at Grid level here. Now I need to add that error
                     handler to my code-behind, so I'll drop into the code, add the method:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-255.png" class="image"/>
-                    <figcaption>Fig 07-255</figcaption>
+                <pre><code class="csharp">private void cellPhoneTextBox_Error(object sender, ValidationErrorEventArgs e)
+{
+    Debug.WriteLine(e.Error.ErrorContent);
+}</code></pre>
+                <figcaption>Fig 07-255</figcaption>
                 </figure>
                 <p>and you can see you get passed a ValidationErrorEventArgs.</p>
                 <p>This thing has several properties on it. It's got a ValidationError is the main thing you're going to
                     look at and that error has a bunch of context on it.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-256.png" class="image"/>
-                    <figcaption>Fig 07-256</figcaption>
+                <pre><code class="csharp">public ValidationRule RuleInError { get; set; }
+public object ErrorContent { get; set; }
+public Exception Exception { get; set; }
+public object BindingInError { get; }</code></pre>
+                <figcaption>Fig 07-256</figcaption>
                 </figure>
                 <p>The ErrorContent property is the main thing you're going to look at, it's generally going to be the
                     error string that you're dealing with. So I'm just going to Debug.WriteLine out the
@@ -1223,29 +1433,46 @@ public string HomePhone
                 </p>
                 <p>I'm going to give this Style a name of ErrorStyle and let its TargetType be FrameworkElement</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-259.png" class="image"/>
-                    <figcaption>Fig 07-259</figcaption>
+                <pre><code class="xml">&lt;Window.Resources&gt;
+    &lt;CollectionViewSource x:Key=&quot;customerViewSource&quot;
+                          d:DesignSource=&quot;{d:DesignInstance {x:Type local:Customer}, CreateList=True}&quot; /&gt;
+    &lt;Style x:Key=&quot;ErrorStyle&quot;
+           TargetType=&quot;FrameworkElement&quot;&gt;
+        &lt;Style.Triggers&gt;
+            &lt;Trigger Property=&quot;Validation.HasError&quot;
+                     Value=&quot;true&quot;&gt;
+                &lt;Setter Property=&quot;ToolTip&quot;
+                        Value=&quot;{Binding RelativeSource={x:Static RelativeSource.Self},
+            Path=(Validation.Errors).CurrentItem.ErrorContent}&quot; /&gt;
+            &lt;/Trigger&gt;
+        &lt;/Style.Triggers&gt;
+    &lt;/Style&gt;
+&lt;/Window.Resources&gt;</code></pre>
+                <figcaption>Fig 07-259</figcaption>
                 </figure>
                 <p>so any FrameworkElement can have a ToolTip, we don't have to constrain it to a particular type. What
                     we're going to leverage here is some attached properties that the Validation Class has.
                 </p>
                 <p>So we set up a Trigger section to our Style:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-260.png" class="image"/>
-                    <figcaption>Fig 07-260</figcaption>
+                <pre><code class="xml">&lt;Style.Triggers&gt;</code></pre>
+                <figcaption>Fig 07-260</figcaption>
                 </figure>
                 <p>and we set up a Property Trigger on the attached property, Validation.HasError:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-261.png" class="image"/>
-                    <figcaption>Fig 07-261</figcaption>
+                <pre><code class="xml">&lt;Trigger Property=&quot;Validation.HasError&quot;
+                         Value=&quot;true&quot;&gt;</code></pre>
+                <figcaption>Fig 07-261</figcaption>
                 </figure>
                 <p>So whichever FrameworkElement that we apply this to, basically, this is going to be monitoring the
                     HasError property and whenever that HasError property goes true, the value that we specify here,
                     it's going to trigger this Setter.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-262.png" class="image"/>
-                    <figcaption>Fig 07-262</figcaption>
+                <pre><code class="xml">&lt;Setter Property=&quot;ToolTip&quot;
+            Value=&quot;{Binding RelativeSource={x:Static RelativeSource.Self},
+            Path=(Validation.Errors).CurrentItem.ErrorContent}&quot; /&gt;</code></pre>
+                <figcaption>Fig 07-262</figcaption>
                 </figure>
                 <p>This Setter is going to go set the ToolTip property of that FrameworkElement, and it's going to set
                     it to a value that it obtains from the Errors collection on the Validation Class.
@@ -1260,8 +1487,18 @@ public string HomePhone
                     Style="(StaticResource ErrorStyle)":
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-263.png" class="image"/>
-                    <figcaption>Fig 07-263</figcaption>
+                <pre><code class="xml">&lt;TextBox x:Name=&quot;cellPhoneTextBox&quot;
+    Grid.Column=&quot;1&quot;
+    HorizontalAlignment=&quot;Left&quot;
+    Height=&quot;23&quot;
+    Margin=&quot;3&quot;
+    Grid.Row=&quot;0&quot;
+    Text=&quot;{Binding CellPhone, ValidatesOnNotifyDataErrors=true, NotifyOnValidationError=True}&quot;
+    VerticalAlignment=&quot;Center&quot;
+    Width=&quot;120&quot;
+    Validation.Error=&quot;cellPhoneTextBox_Error&quot;
+Style=&quot;{StaticResource ErrorStyle}&quot; /&gt;</code></pre>
+                <figcaption>Fig 07-263</figcaption>
                 </figure>
                 <p>Now with that in place, I can put in my abc, tab out, wait for the 5 seconds:</p>
                 <figure>
@@ -1281,8 +1518,26 @@ public string HomePhone
                     a little bit:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-266.png" class="image"/>
-                    <figcaption>Fig 07-266</figcaption>
+                <pre><code class="xml">&lt;ControlTemplate x:Key=&quot;TextBoxErrorTemplate&quot;&gt;
+    &lt;DockPanel&gt;
+        &lt;Ellipse DockPanel.Dock=&quot;Right&quot;
+                 Margin=&quot;2,0&quot;
+                 ToolTip=&quot;Contains invalid data&quot;
+                 Width=&quot;10&quot;
+                 Height=&quot;10&quot;&gt;
+            &lt;Ellipse.Fill&gt;
+                &lt;LinearGradientBrush&gt;
+                    &lt;GradientStop Color=&quot;#11FF1111&quot;
+                                  Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;#FFFF0000&quot;
+                                  Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Ellipse.Fill&gt;
+        &lt;/Ellipse&gt;
+        &lt;AdornedElementPlaceholder /&gt;
+    &lt;/DockPanel&gt;
+&lt;/ControlTemplate&gt;</code></pre>
+                <figcaption>Fig 07-266</figcaption>
                 </figure>
                 <p>because what we're doing is we're defining a custom ControlTemplate that we're going to apply to our
                     input control.
@@ -1300,8 +1555,8 @@ public string HomePhone
                     circle. Notice it also has a ToolTip associated with it:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-267.png" class="image"/>
-                    <figcaption>Fig 07-267</figcaption>
+                <pre><code class="xml">ToolTip=&quot;Contains invalid data&quot;</code></pre>
+                <figcaption>Fig 07-267</figcaption>
                 </figure>
                 <p>that we can hover over. So we've defined this ControlTemplate and now we have to associate it with
                     the controls that are going to use it.
@@ -1309,8 +1564,24 @@ public string HomePhone
                 <p>So we apply an implicit Style here which is going to apply to all TextBoxes that don't already have a
                     Style</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-268.png" class="image"/>
-                    <figcaption>Fig 07-268</figcaption>
+                <pre><code class="xml">&lt;Style TargetType=&quot;TextBox&quot;&gt;
+    &lt;Setter Property=&quot;Margin&quot;
+            Value=&quot;4,4,15,4&quot; /&gt;
+    &lt;Setter Property=&quot;Validation.ErrorTemplate&quot;
+            Value=&quot;{StaticResource TextBoxErrorTemplate}&quot; /&gt;
+    &lt;Style.Triggers&gt;
+        &lt;Trigger Property=&quot;Validation.HasError&quot;
+                 Value=&quot;True&quot;&gt;
+            &lt;Setter Property=&quot;ToolTip&quot;&gt;
+                &lt;Setter.Value&gt;
+                    &lt;Binding Path=&quot;(Validation.Errors).CurrentItem.ErrorContent&quot;
+                             RelativeSource=&quot;{x:Static RelativeSource.Self}&quot; /&gt;
+                &lt;/Setter.Value&gt;
+            &lt;/Setter&gt;
+        &lt;/Trigger&gt;
+    &lt;/Style.Triggers&gt;
+&lt;/Style&gt;</code></pre>
+                <figcaption>Fig 07-268</figcaption>
                 </figure>
                 <p>setting some margin, and then the key thing here is we're setting the ErrorTemplate and this
                     Validation.ErrorTemplate is an attached property that we can set and we're setting it to our
@@ -1318,8 +1589,9 @@ public string HomePhone
                 </p>
                 <p>Validation system is smart enough to know, only use this template:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-269.png" class="image"/>
-                    <figcaption>Fig 07-269</figcaption>
+                <pre><code class="xml">&lt;Setter Property=&quot;Validation.ErrorTemplate&quot;
+                    Value=&quot;{StaticResource TextBoxErrorTemplate}&quot; /&gt;</code></pre>
+                <figcaption>Fig 07-269</figcaption>
                 </figure>
                 <p>if there are validation errors. In addition, we want a ToolTip on these controls as well, so similar
                     to the Style trigger that we put separately, we embed that same ToolTip using the
@@ -1411,29 +1683,37 @@ public string HomePhone
                     this EntityBase.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-273.png" class="image"/>
-                    <figcaption>Fig 07-273</figcaption>
+                <pre><code class="csharp">public class EntityBase
+{
+    protected virtual void ValidateProperty(string propertyName, object value)
+    {
+        ValidationContext context = new ValidationContext(this, null, null);
+        context.MemberName = propertyName;
+        Validator.ValidateProperty(value, context);
+    }
+}</code></pre>
+                <figcaption>Fig 07-273</figcaption>
                 </figure>
                 <p>And we're using this to encapsulate just the few lines of code that we need to evaluate
                     DataAnnotations.</p>
                 <p>Specifically, there's a class called the ValidationContext.</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-274.png" class="image"/>
-                    <figcaption>Fig 07-274</figcaption>
+                <pre><code class="csharp">ValidationContext context = new ValidationContext(this, null, null);</code></pre>
+                <figcaption>Fig 07-274</figcaption>
                 </figure>
                 <p>You pass it a reference to the object that you're trying to validate, you set a property on it called
                     MemberName to tell it what property is being evaluated:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-275.png" class="image"/>
-                    <figcaption>Fig 07-275</figcaption>
+                <pre><code class="csharp">context.MemberName = propertyName;</code></pre>
+                <figcaption>Fig 07-275</figcaption>
                 </figure>
                 <p>and then you use the Validator class .ValidateProperty method, passing in the value that's being set
                     on that property, and the context object that you created up above:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-276.png" class="image"/>
-                    <figcaption>Fig 07-276</figcaption>
+                <pre><code class="csharp">Validator.ValidateProperty(value, context);</code></pre>
+                <figcaption>Fig 07-276</figcaption>
                 </figure>
                 <p>that wraps the object being validated.</p>
                 <p>ValidateProperty is going to throw an exception if this value is not appropriate based on attributes
@@ -1444,13 +1724,29 @@ public string HomePhone
                     to add several DataAnnotation attributes.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-277.png" class="image"/>
-                    <figcaption>Fig 07-277</figcaption>
+                <pre><code class="csharp">private string _HomePhone;
+[RegularExpression(@&quot;^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$&quot;)]
+[Required]
+[StringLength(12)]
+public string HomePhone
+{
+    get { return _HomePhone; }
+    set
+    {
+        if (_HomePhone != value)
+        {
+            //ValidatePhone(value);
+            _HomePhone = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(&quot;HomePhone&quot;));
+        }
+    }
+}</code></pre>
+                <figcaption>Fig 07-277</figcaption>
                 </figure>
                 <p>So first off, I'm going to put a RegularExpression:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-278.png" class="image"/>
-                    <figcaption>Fig 07-278</figcaption>
+                <pre><code class="csharp">[RegularExpression(@&quot;^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$&quot;)]</code></pre>
+                <figcaption>Fig 07-278</figcaption>
                 </figure>
                 <p>as one of the built-in attributes, so that we can just declaratively put the RegularExpression that
                     applies to this property, right there where it's defined, instead of having to call out to some
@@ -1458,13 +1754,13 @@ public string HomePhone
                 </p>
                 <p>Likewise, we could say this is a Required field:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-279.png" class="image"/>
-                    <figcaption>Fig 07-279</figcaption>
+                <pre><code class="csharp">[Required]</code></pre>
+                <figcaption>Fig 07-279</figcaption>
                 </figure>
                 <p>and it will give a validation error if it's empty or null. We could give it a StringLength:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-280.png" class="image"/>
-                    <figcaption>Fig 07-280</figcaption>
+                <pre><code class="csharp">[StringLength(12)]</code></pre>
+                <figcaption>Fig 07-280</figcaption>
                 </figure>
                 <p>If it was a numeric value, there is a Range attribute. There's also a CustomValidation attribute that
                     you can point to a method to encapsulate your own logic. So these are just a nice declarative way to
@@ -1473,21 +1769,29 @@ public string HomePhone
                 </p>
                 <p>So that is why we put that EntityBase class in place, if we add EntityBase:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-281.png" class="image"/>
-                    <figcaption>Fig 07-281</figcaption>
+                <pre><code class="csharp">public class Customer : EntityBase, INotifyPropertyChanged, INotifyDataErrorInfo</code></pre>
+                <figcaption>Fig 07-281</figcaption>
                 </figure>
                 <p>as a base class for our entity, and then in the property we invoke that validate method. So we call
                     ValidateProperty on our base class
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-282.png" class="image"/>
-                    <figcaption>Fig 07-282</figcaption>
+                <pre><code class="csharp">ValidateProperty(&quot;HomePhone&quot;, value);</code></pre>
+                <figcaption>Fig 07-282</figcaption>
                 </figure>
                 <p>passing in the property name and the value that's being set.</p>
                 <p>That's going to trigger that code down in EntityBase:</p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-283.png" class="image"/>
-                    <figcaption>Fig 07-283</figcaption>
+                <pre><code class="csharp">public class EntityBase
+{
+    protected virtual void ValidateProperty(string propertyName, object value)
+    {
+        ValidationContext context = new ValidationContext(this, null, null);
+        context.MemberName = propertyName;
+        Validator.ValidateProperty(value, context);
+    }
+}</code></pre>
+                <figcaption>Fig 07-283</figcaption>
                 </figure>
                 <p>to use the ValidationContext and Validator to basically reach back up to this property, pull off each
                     of the DataAnnotation attributes, execute them to find out if there's an error, and if so, throw an
