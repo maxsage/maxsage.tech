@@ -218,7 +218,7 @@
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex05-002" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\WPF MVVM In Depth\Module 5\ZzaDesktop-Start\ZzaDesktop.sln">
+                               value="C:\Development Tutorials\Pluralsight-Courses\WPF MVVM In Depth\Module 5\ZzaDesktop-End\ZzaDesktop.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex05-002">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -269,7 +269,9 @@
                     functionality:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-001.png"/>
+                <pre><code class="xml"> &lt;Grid&gt;
+    &lt;TextBlock Text=&quot;OrderPrep View&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
                     <figcaption>Fig 05-001</figcaption>
                 </figure>
                 <p>
@@ -282,17 +284,25 @@
                     instance of a ViewModel and having a data template for it we can drive the rendering of the View and
                     its ViewModel.
                 </p>
+
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-002.png"/>
-                    <figcaption>Fig 05-002</figcaption>
+                <pre><code class="xml">&lt;Grid&gt;
+    &lt;ContentControl Content=&quot;{Binding CurrentViewModel}&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-002</figcaption>
                 </figure>
                 <p>
                     Now we need to add data templates that match up to our Views and ViewModels. To define the data
                     templates for each View we will need to bring in their corresponding child namespaces:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-003.png"/>
-                    <figcaption>Fig 05-003</figcaption>
+                <pre><code class="xml">xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+xmlns:cust=&quot;clr-namespace:ZzaDesktop.Customers&quot;
+xmlns:order=&quot;clr-namespace:ZzaDesktop.Orders&quot;
+xmlns:prep=&quot;clr-namespace:ZzaDesktop.OrderPrep&quot;
+xmlns:local=&quot;clr-namespace:ZzaDesktop&quot;
+Title=&quot;MainWindow&quot;</code></pre>
+                <figcaption>Fig 05-003</figcaption>
                 </figure>
                 <p>
                     So we have a child namespace per sub folder and one for the root folder. Now we can define the
@@ -300,8 +310,22 @@
                     mapping to its ViewType:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-004.png"/>
-                    <figcaption>Fig 05-004</figcaption>
+                <pre><code class="xml">&lt;Window.Resources&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type cust:CustomerListViewModel}&quot;&gt;
+        &lt;cust:CustomerListView /&gt;
+    &lt;/DataTemplate&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type order:OrderViewModel}&quot;&gt;
+        &lt;order:OrderView /&gt;
+    &lt;/DataTemplate&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type prep:OrderPrepViewModel}&quot;&gt;
+        &lt;prep:OrderPrepView /&gt;
+    &lt;/DataTemplate&gt;
+    &lt;DataTemplate DataType=&quot;{x:Type cust:AddEditCustomerViewModel}&quot;&gt;
+        &lt;cust:AddEditCustomerView /&gt;
+    &lt;/DataTemplate&gt;
+
+&lt;/Window.Resources&gt;</code></pre>
+                <figcaption>Fig 05-004</figcaption>
                 </figure>
                 <p>
                     Note how each DataTemplate maps a DataType (the ViewModel Type) to a corresponding View and the use
@@ -316,9 +340,12 @@
                 <p>Create a class called MainWindowViewModel. In MainWindow view we can use static hook-up in the XAML:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-005.png"/>
-                    <figcaption>Fig 05-005</figcaption>
+                <pre><code class="xml">&lt;Window.DataContext&gt;
+    &lt;local:MainWindowViewModel /&gt;
+&lt;/Window.DataContext&gt;</code></pre>
+                <figcaption>Fig 05-005</figcaption>
                 </figure>
+
                 <p>The above XAML just creates an instance of the ViewModel from XAML and use it to set the DataContext
                     property of the Window.
                 </p>
