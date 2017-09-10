@@ -354,8 +354,8 @@ Title=&quot;MainWindow&quot;</code></pre>
                     is a property called CurrentViewModel which we will set to a type of object for now:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-006.png"/>
-                    <figcaption>Fig 05-006</figcaption>
+                <pre><code class="csharp">public object CurrentViewModel { get; set; }</code></pre>
+                <figcaption>Fig 05-006</figcaption>
                 </figure>
                 <p>
                     To drive the navigation, the MainWindowViewModel is going to act as a Parent in a hierarchy of
@@ -364,8 +364,10 @@ Title=&quot;MainWindow&quot;</code></pre>
                     CurrentViewModel property:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-007.png"/>
-                    <figcaption>Fig 05-007</figcaption>
+                <pre><code class="csharp">private CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
+private OrderViewModel _orderViewModel = new OrderViewModel();
+private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();</code></pre>
+                <figcaption>Fig 05-007</figcaption>
                 </figure>
                 <p>
                     We can see that just like the MainWindow ContentControl will act as a Container for the rendered
@@ -408,7 +410,7 @@ Title=&quot;MainWindow&quot;</code></pre>
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex05-004" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\WPF MVVM In Depth\Module 5\ZzaDesktop-Start\ZzaDesktop.sln">
+                               value="C:\Development Tutorials\Pluralsight-Courses\WPF MVVM In Depth\Module 5\ZzaDesktop-End\ZzaDesktop.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex05-004">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -424,8 +426,13 @@ Title=&quot;MainWindow&quot;</code></pre>
                     needs to implement INPC:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-007A.png"/>
-                    <figcaption>Fig 05-007A</figcaption>
+                <pre><code class="csharp">namespace ZzaDesktop
+{
+    public class BindableBase : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+}</code></pre>
+<figcaption>Fig 05-007A</figcaption>
                 </figure>
                 <p>and then it needs to expose a way for the derived classes to trigger that PropertyChanged event at
                     the appropriate time as well as encapsulating the check to make sure that the value of any property
@@ -436,8 +443,19 @@ Title=&quot;MainWindow&quot;</code></pre>
                     OnPropertyChanged:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-007B.png"/>
-                    <figcaption>Fig 05-007B</figcaption>
+                <pre><code class="csharp">protected virtual void SetProperty&lt;T&gt;(ref T member, T val, [CallerMemberName] string propertyName = null)
+{
+    if (object.Equals(member, val)) return;
+
+    member = val;
+    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+}
+
+protected virtual void OnPropertyChanged(string propertyName)
+{
+    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+}</code></pre>
+                <figcaption>Fig 05-007B</figcaption>
                 </figure>
                 <p>The SetProperty method is intended to be set from the set block of each property and encapsulates the
                     check to see if the value actually changed and if so it sets the member variable and triggers the
@@ -459,8 +477,20 @@ Title=&quot;MainWindow&quot;</code></pre>
                     sure you set MainWindowViewModel to inherit from BindableBase:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-008.png"/>
-                    <figcaption>Fig 05-008</figcaption>
+                <pre><code class="csharp">class MainWindowViewModel : BindableBase
+{
+    private CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
+    private OrderViewModel _orderViewModel = new OrderViewModel();
+    private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
+
+    private BindableBase _CurrentViewModel;
+
+    public BindableBase CurrentViewModel
+    {
+        get { return _CurrentViewModel; }
+        set { SetProperty(ref _CurrentViewModel, value); }
+}</code></pre>
+                <figcaption>Fig 05-008</figcaption>
                 </figure>
                 <p>
                     The standard use of SetProperty is that you pass in the backing variable by ref into the SetProperty
@@ -471,23 +501,38 @@ Title=&quot;MainWindow&quot;</code></pre>
                     In the BindableBase implementation of SetProperty you can see how those members are coming in:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-008A.png"/>
-                    <figcaption>Fig 05-008A</figcaption>
+                <pre><code class="csharp">public class BindableBase : INotifyPropertyChanged
+{
+    protected virtual void SetProperty&lt;T&gt;(ref T member, T val,
+                [CallerMemberName] string propertyName = null)</code></pre>
+                <figcaption>Fig 05-008A</figcaption>
                 </figure>
                 <p>The by ref member variable comes in in the first argument, the value comes in second and the third
                     one gets set with a nice feature of C# which is the CallerMemberName attribute:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-008B.png"/>
-                    <figcaption>Fig 05-008B</figcaption>
+                <pre><code class="csharp">[CallerMemberName] string propertyName = null</code></pre>
+                <figcaption>Fig 05-008B</figcaption>
                 </figure>
                 <p>That attribute makes it so it can automatically pick off the name of the thing that called in here –
                     which in our case, since the SetProperty it being called from the property is the property name
                     itself – CurrentViewModel.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-009.png"/>
-                    <figcaption>Fig 05-009</figcaption>
+                <pre><code class="csharp">class MainWindowViewModel : BindableBase
+{
+    private CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
+    private OrderViewModel _orderViewModel = new OrderViewModel();
+    private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
+
+    private BindableBase _CurrentViewModel;
+
+    public BindableBase CurrentViewModel
+    {
+        get { return _CurrentViewModel; }
+        set { SetProperty(ref _CurrentViewModel, value); }
+    }</code></pre>
+                <figcaption>Fig 05-009</figcaption>
                 </figure>
                 <p>
                     You can see it allows you to have a nice compact property definition with the get and set blocks but
@@ -497,16 +542,27 @@ Title=&quot;MainWindow&quot;</code></pre>
                     BindableBase to each of our ViewModels.
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-009A.png"/>
-                    <figcaption>Fig 05-009A</figcaption>
+                <pre><code class="csharp">namespace ZzaDesktop.Customers
+{
+    class CustomerListViewModel : BindableBase
+    {</code></pre>
+                <figcaption>Fig 05-009A</figcaption>
                 </figure>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-009B.png"/>
-                    <figcaption>Fig 05-009B</figcaption>
+                <pre><code class="csharp">namespace ZzaDesktop.Orders
+{
+    class OrderViewModel : BindableBase
+    {</code></pre>
+                <figcaption>Fig 05-009B</figcaption>
                 </figure>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-009C.png"/>
-                    <figcaption>Fig 05-009C</figcaption>
+                <pre><code class="csharp">namespace ZzaDesktop.OrderPrep
+{
+    class OrderPrepViewModel : BindableBase
+    {
+    }
+}</code></pre>
+                <figcaption>Fig 05-009C</figcaption>
                 </figure>
                 <p>So next we'll hook up the Commanding to actually drive this switching and navigation.</p>
                 <h2>Demo: View Switching Navigation</h2>
@@ -547,8 +603,20 @@ Title=&quot;MainWindow&quot;</code></pre>
                     identifier comes in:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-010.png"/>
-                    <figcaption>Fig 05-010</figcaption>
+                <pre><code class="csharp">private void OnNav(string destination)
+{
+    switch (destination)
+    {
+        case &quot;orderPrep&quot;:
+            CurrentViewModel = _orderPrepViewModel;
+            break;
+        case &quot;customers&quot;:
+        default:
+            CurrentViewModel = _customerListViewModel;
+            break;
+    }
+}</code></pre>
+                <figcaption>Fig 05-010</figcaption>
                 </figure>
                 <p>
                     We need some way to call that when the user interacts with the View. We know from previous modules a
@@ -556,24 +624,46 @@ Title=&quot;MainWindow&quot;</code></pre>
                     with:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-011.png"/>
-                    <figcaption>Fig 05-011</figcaption>
+                <pre><code class="csharp">public RelayCommand&lt;string&gt; NavCommand { get; private set; }</code></pre>
+                <figcaption>Fig 05-011</figcaption>
                 </figure>
                 <p>
                     Now we just need to construct that so we will add a Constructor to the class and set that Command
                     pointing to the OnNav method:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-012.png"/>
-                    <figcaption>Fig 05-012</figcaption>
+                <pre><code class="csharp"> public MainWindowViewModel()
+{
+    NavCommand = new RelayCommand&lt;string&gt;(OnNav);
+}</code></pre>
+                <figcaption>Fig 05-012</figcaption>
                 </figure>
                 <p>
                     Now we just need to be able to trigger that Command from our View so keeping it simple we will use
                     some Buttons. Add two rows to the Grid in the MainWindow.xaml View:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-013.png"/>
-                    <figcaption>Fig 05-013</figcaption>
+                <pre><code class="xml">&lt;Grid&gt;
+&lt;Grid.RowDefinitions&gt;
+    &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+    &lt;RowDefinition Height=&quot;*&quot; /&gt;
+&lt;/Grid.RowDefinitions&gt;
+&lt;Grid x:Name=&quot;NavBar&quot;&gt;
+    &lt;Grid.ColumnDefinitions&gt;
+        &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+        &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+        &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+    &lt;/Grid.ColumnDefinitions&gt;
+    &lt;Button Content=&quot;Customers&quot;
+            Command=&quot;{Binding NavCommand}&quot;
+            CommandParameter=&quot;customers&quot;
+            Grid.Column=&quot;0&quot; /&gt;
+    &lt;Button Content=&quot;OrderPrep&quot;
+            Command=&quot;{Binding NavCommand}&quot;
+            CommandParameter=&quot;orderPrep&quot;
+            Grid.Column=&quot;2&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-013</figcaption>
                 </figure>
                 <p>
                     We add some Buttons to the top row, in the second row of the Grid we have our ContentControl as
@@ -610,7 +700,7 @@ Title=&quot;MainWindow&quot;</code></pre>
                 <div class="example">
                     <div class="input-group">
                         <input id="Ex05-008" type="text"
-                               value="C:\Development Tutorials\Pluralsight-Courses\WPF MVVM In Depth\Module 5\ZzaDesktop-Start\ZzaDesktop.sln">
+                               value="C:\Development Tutorials\Pluralsight-Courses\WPF MVVM In Depth\Module 5\ZzaDesktop-End\ZzaDesktop.sln">
                         <span class="input-group-btn">
                 	        <button class="btn" data-clipboard-target="#Ex05-008">
                         	    <img src="app/images/clippy.svg" width="13" alt="Copy to clipboard">
@@ -622,8 +712,28 @@ Title=&quot;MainWindow&quot;</code></pre>
                     CustomerListView. Replace the TextBox with a DataGrid:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-015.png"/>
-                    <figcaption>Fig 05-015</figcaption>
+                <pre><code class="xml">&lt;Grid&gt;
+    &lt;DataGrid ItemsSource=&quot;{Binding Customers}&quot;
+              AutoGenerateColumns=&quot;False&quot;
+              CanUserAddRows=&quot;False&quot;
+              Grid.Row=&quot;1&quot;&gt;
+        &lt;DataGrid.Columns&gt;
+            &lt;DataGridTextColumn Binding=&quot;{Binding FullName}&quot;
+                                Width=&quot;*&quot; /&gt;
+            &lt;DataGridTemplateColumn Width=&quot;Auto&quot;&gt;
+                &lt;DataGridTemplateColumn.CellTemplate&gt;
+                    &lt;DataTemplate&gt;
+                        &lt;Button Content=&quot;Place Order&quot;
+                                Command=&quot;{Binding DataContext.PlaceOrderCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}&quot;
+                                CommandParameter=&quot;{Binding}&quot;
+                                Margin=&quot;5&quot; /&gt;
+                    &lt;/DataTemplate&gt;
+                &lt;/DataGridTemplateColumn.CellTemplate&gt;
+            &lt;/DataGridTemplateColumn&gt;
+        &lt;/DataGrid.Columns&gt;
+    &lt;/DataGrid&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 05-015</figcaption>
                 </figure>
                 <p>
                     We have added a DataGrid that is binding to Customers which means our ViewModel must now expose a
@@ -638,8 +748,11 @@ Title=&quot;MainWindow&quot;</code></pre>
                     RelativeSource binding:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfmvvmindepth/Fig05-015A.png"/>
-                    <figcaption>Fig 05-015A</figcaption>
+                <pre><code class="xml"> &lt;Button Content=&quot;Place Order&quot;
+    Command=&quot;{Binding DataContext.PlaceOrderCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}&quot;
+    CommandParameter=&quot;{Binding}&quot;
+    Margin=&quot;5&quot; /&gt;</code></pre>
+                <figcaption>Fig 05-015A</figcaption>
                 </figure>
                 <p>
                     that let’s us walk up the Visual Tree until we get to the DataGrid at which point we are in the part
