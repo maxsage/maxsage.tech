@@ -123,8 +123,8 @@
                     </figure>
                     <p>
                         We've got a customer as a top level object, you can see this is a Plain Old CLR Object, just
-                        simple auto-implemented properties here, for an Id, a FirstName, a LastName, an Email, A
-                        collection of Orders as a list. And then notice you can also have computed properties here, ones
+                        simple auto-implemented properties here, for an Id, a FirstName, a LastName, an Email, a
+                        Collection of Orders as a List. And then notice you can also have computed properties here, ones
                         that are read-only, and in this case computed from the FirstName and LastName property and those
                         are data bindable as well.
                     </p>
@@ -141,7 +141,7 @@
                         <figcaption>Fig 02-004</figcaption>
                     </figure>
                     <p>
-                        We've got an OrderObject that has an Id, a parent Customerid, an OrderDate, and a related object
+                        We've got an OrderObject that has an Id, a parent CustomerId, an OrderDate, and a related object
                         and OrderStatusId that will set through a drop-down ComboBox, and then finally an ItemsTotal.
                     </p>
                     <figure>
@@ -227,7 +227,7 @@ private void OnCancel(object sender, RoutedEventArgs e)
                     <figure>
                     <pre><code class="csharp">public List&lt;Customer&gt; Customers { get; set; }
 public Customer SelectedCustomer { get; set; }</code></pre>
-                        <figcaption>Fig -</figcaption>
+                        <figcaption>Fig 02-009</figcaption>
                     </figure>
                     <p>
                         I'm going to need an instance of my DbContext to go ahead and populate that data, and then I
@@ -278,9 +278,9 @@ private void OnCustomerSelected(object sender, SelectionChangedEventArgs e)
                     </p>
                     <p>
                         First we're going to set the ItemsSource to the Customers property exposed on our DataContext,
-                        which is the Window instance itself. Each item in that collection is a whole customer object and
+                        which is the Window instance itself. Each item in that collection is a whole Customer object and
                         we don't want it to ToString that for us, so we'll set the DisplayMemberPath property to
-                        FullName, that computed property on our entity and we'll set the SelectedValuePath to the Id
+                        FullName, that computed property on our Entity and we'll set the SelectedValuePath to the Id
                         property.
                     </p>
                     <figure>
@@ -296,8 +296,8 @@ private void OnCustomerSelected(object sender, SelectionChangedEventArgs e)
                         <figcaption>Fig 02-012</figcaption>
                     </figure>
                     <p>
-                        And then I'll go down to my data form here and I'll add a binding for the FirstName property,
-                        we'll point that binding to the SelectedCustomer property that's on our DataContext, which is
+                        And then I'll go down to my data form here and I'll add a Binding for the FirstName property,
+                        we'll point that Binding to the SelectedCustomer property that's on our DataContext, which is
                         the Window, and then we can dot down to the FirstName property on that SelectedCustomer to set
                         the text there, likewise, for the LastName and for the Email.
                     </p>
@@ -355,42 +355,42 @@ private void OnCustomerSelected(object sender, SelectionChangedEventArgs e)
                     </figure>
                     <p>
                         So things are wildly out of sync here because our entities are not properly defined to really
-                        support data binding. So in the next couple of demos, we'll fix that by supporting Change
+                        support Data Binding. So in the next couple of demos, we'll fix that by supporting Change
                         Notifications when things are changing.
                     </p>
                 </div>
                 <div class="panel-body">
                     <h3>Change Notifications</h3>
                     <p>
-                        Now one of the most important concepts when dealing with data binding to entities and data
-                        objects where you're building a rich interactive UI around those objects, is property and
-                        collection Change Notifications. Basically, Change Notifications are going to be necessary if
-                        those source object properties that you're binding to or the collections can be modified by any
-                        other code, other than the binding itself.
+                        Now one of the most important concepts when dealing with Data Binding to Entities and Data
+                        Objects where you're building a rich interactive UI around those Objects, is Property and
+                        Collection Change Notifications. Basically, Change Notifications are going to be necessary if
+                        those Source Object Properties that you're Binding to or the Collections can be modified by any
+                        other code, other than the Binding itself.
                     </p>
                     <p>
-                        So this includes things like if you go out and do an asynchronous service call to load some data
-                        into your UI's memory space, you're going to end up setting properties or populating collections
+                        So this includes things like if you go out and do an Asynchronous service call to load some Data
+                        into your UI's memory space, you're going to end up setting Properties or populating Collections
                         behind the scenes after the UI has already rendered and the XAML has been parsed. Another
-                        scenario is if you have a command or event handler in code and that reaches out and modifies the
-                        data source object for another control. And certainly if you have any background threads or
-                        things going on in the background that are modifying your data objects, that's another source
+                        scenario is if you have a Command or Event Handler in code and that reaches out and modifies the
+                        Data Source Object for another control. And certainly if you have any background Threads or
+                        things going on in the background that are modifying your Data Objects, that's another source
                         where things are going to change behind the scenes, not directly from user input, through the
                         bound control.
                     </p>
                     <p>
-                        In any of these scenarios, you're going to need property or collection Change Notifications to
+                        In any of these scenarios, you're going to need Property or collection Change Notifications to
                         make sure that the UI stays fresh, because if there's no notification, the UI is going to
-                        continue to show the value that was in the source property at the initial binding, the point
-                        where the XAML was parsed. So to keep that UI fresh and in sync with the data source object, the
-                        data source object has to raise Change Notifications to tell the binding in the UI, hey, come
+                        continue to show the value that was in the Source property at the initial Binding, the point
+                        where the XAML was parsed. So to keep that UI fresh and in sync with the Data Source Object, the
+                        Data Source Object has to raise Change Notifications to tell the binding in the UI, hey, come
                         and read my value again because it's changed.
                     </p>
                     <p>
-                        Now when it comes to supporting property level Change Notifications, you really have two
+                        Now when it comes to supporting Property level Change Notifications, you really have two
                         options. The first is to support the INotifyPropertyChanged interface, which I'll often call
                         INPC for short based on the capitals in that name. INotifyPropertyChanged is a simple interface
-                        with a single member on it called PropertyChanged, an event that you're supposed to raise
+                        with a single Member on it called PropertyChanged, an event that you're supposed to raise
                         whenever the properties on your object change.
                     </p>
                     <figure>
@@ -398,14 +398,14 @@ private void OnCustomerSelected(object sender, SelectionChangedEventArgs e)
                         <figcaption>Fig 02-019</figcaption>
                     </figure>
                     <p>
-                        Bindings are aware of this interface and when they go to data bind to a source object, they will
-                        query it to see if it supports this interface. And if it does, then the binding itself will
-                        subscribe to that PropertyChanged event so it can be notified and refresh the bound property if
-                        that PropertyChanged event indicates that that property has changed.
+                        Bindings are aware of this interface and when they go to Data Bind to a Source Object, they will
+                        query it to see if it supports this interface. And if it does, then the Binding itself will
+                        subscribe to that PropertyChanged event so it can be notified and refresh the bound Property if
+                        that PropertyChanged event indicates that that Property has changed.
                     </p>
                     <p>
-                        The other option you have is to use DependencyProperties. If your source object inherits from
-                        DependencyObject as a base class and the properties that it's exposing that you're binding to
+                        The other option you have is to use DependencyProperties. If your Source object inherits from
+                        DependencyObject as a base class and the Properties that it's exposing that you're binding to
                         are DependencyProperties, there's an internal mechanism that can raise Change Notifications to
                         bindings so that they know to refresh.
                     </p>
@@ -449,7 +449,7 @@ private void OnCustomerSelected(object sender, SelectionChangedEventArgs e)
                     </div>
                     <p>
                         So in the last demo we saw the synchronization problem because we're using simple Plain Old CLR
-                        Object Entities that if we are make selections they're not reflecting in the fields. If we edit
+                        Object Entities that when we are making selections they're not reflecting in the fields. If we edit
                         a field and then tab out, then it jumps to the current object it didn't update in the list here,
                         but if we select the guy, then the change shows up. Now part of that is caused by the lack of
                         support for INotifyPropertyChanged, which is what we're going to remedy here.
@@ -525,9 +525,9 @@ public Guid Id
                     </figure>
                     <p>
                         Now this Id property you might treat as invariant. In this case it's a GUID so it actually does
-                        have to be set. What you really want to be doing on every property is what the other ones are
-                        doing, which is raising the PropertyChanged event, passing a reference for the object sender of
-                        this, and then a PropertyChangedEventArg that takes the name of the property that's being
+                        have to be set. What you really want to be doing on every Property is what the other ones are
+                        doing, which is raising the PropertyChanged event, passing a reference for the Object Sender of
+                        this, and then a PropertyChangedEventArg that takes the name of the Property that's being
                         changed.
                     </p>
                     <figure>
