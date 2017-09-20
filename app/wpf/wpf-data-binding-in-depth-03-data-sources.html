@@ -546,8 +546,8 @@ public Guid Id
                         <figcaption>Fig 02-024</figcaption>
                     </figure>
                     <p>
-                        So I should really add this PropertyChanged to the ID as well and make sure the name of the
-                        property is Id. So on any object that implements INotifyPropertyChanged, the way to think about
+                        So I should really add this PropertyChanged to the Id as well and make sure the name of the
+                        Property is Id. So on any object that implements INotifyPropertyChanged, the way to think about
                         it is any of the public properties you expose that have a set block should raise
                         PropertyChanged. Now if we slide down to the bottom, we've still got our FullName property that
                         we're actually binding to in the ComboBox, and it's computed based off the FirstName and
@@ -754,14 +754,10 @@ public static readonly DependencyProperty MyPropertyProperty =
                         <figcaption>Fig 02-029</figcaption>
                     </figure>
                     <p>
-                        The first one was my list of customers called Customers:
+                        The first one was my List of Customers called Customers:
                     </p>
                     <figure>
-                    <pre><code class="csharp">public ObservableCollection&lt;Customer&gt; Customers
-{
-    get { return (ObservableCollection&lt;Customer&gt;)GetValue(CustomersProperty); }
-    set { SetValue(CustomersProperty, value); }
-}</code></pre>
+                    <pre><code class="csharp">public List&lt;Customer&gt; Customers { get; set; }</code></pre>
                         <figcaption>Fig 02-030</figcaption>
                     </figure>
                     <p>
@@ -852,7 +848,7 @@ public static readonly DependencyProperty CustomersProperty =
                 <div class="panel-body">
                     <h3>ObservableCollections</h3>
                     <p>
-                        Now when it comes to collections that we're going to data bind to, we have a change notification
+                        Now when it comes to Collections that we're going to Data Bind to, we have a change notification
                         challenge there as well. If we're just using something like a simple array or even the <span
                             class="code">List&lt;T&gt;</span> and we're adding and removing items from that collection,
                         the binding is not going to know anything about that and we're not going to see the changes
@@ -925,7 +921,7 @@ public static readonly DependencyProperty CustomersProperty =
                         </div>
                     </div>
                     <p>
-                        So in this demo I'm going to hook up the rest of this form with this list of orders for the
+                        So in this demo I'm going to hook up the rest of this form with this List of Orders for the
                         <span class="code">SelectedCustomer</span> and then the ability to add new orders to that list
                         from the form at the bottom. To do that, we're going to drop into the code-behind here and we're
                         going to need a couple more properties, which I'll go ahead and define as DependencyProperties
@@ -963,8 +959,8 @@ public static readonly DependencyProperty OrderStatusesProperty =
                         <figcaption>Fig 02-037</figcaption>
                     </figure>
                     <p>
-                        Next we're going to need to populate the orders, so I'm going to go up here to where we are
-                        initializing our customer information in our DataContext and add a few more things.
+                        Next we're going to need to populate the Orders, so I'm going to go up here to where we are
+                        initializing our Customer information in our DataContext and add a few more things.
                     </p>
                     <figure>
                     <pre><code class="csharp">public MainWindow()
@@ -1046,7 +1042,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                         the properties on that object.
                     </p>
                     <p>
-                        And then I'm going to slide down and update the fields in our order form to include appropriate
+                        And then I'm going to slide down and update the fields in our Order form to include appropriate
                         bindings.
                     </p>
                     <figure>
@@ -1102,7 +1098,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                         <figcaption>Fig 02-043</figcaption>
                     </figure>
                     <p>
-                        So I'm going to add some code to that that basically takes that <span
+                        So I'm going to add some code to that basically takes that <span
                             class="code">NewOrder</span> object at the point where the <span class="code">Add</span>
                         button is pressed and adds that object into the <span class="code">Orders</span> collection on
                         the <span class="code">SelectedCustomer</span>. We're also going to persist that change so you
@@ -1177,7 +1173,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                     <p>
                         And there's one other place in the code-behind where we first populate that <span class="code">Orders</span>
                         collection, so we're now newing up an <span class="code">ObservableCollection</span> and passing
-                        in the <span class="code">IEnumerable</span> that comes out of this link expression to populate
+                        in the <span class="code">IEnumerable</span> that comes out of this LINQ expression to populate
                         that collection.
                     </p>
                     <figure>
@@ -1186,7 +1182,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                     </figure>
                     <p>
                         With that code in place, we can go ahead and run, we can make our selection, let's add a new
-                        order, this one for January 1, 33, and Delivered, and watch the grid up above when we click Add.
+                        order, this one for January 1, 33.30, and Delivered, and watch the grid up above when we click Add.
                     </p>
                     <figure>
                         <img src="app/wpf/images/wpfdatabindingindepth/Fig02-049.png" class="image"/>
@@ -1224,7 +1220,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                     <p>
                         Basically, anytime you're exposing a collection for data binding purposes, if there is any
                         chance whatsoever that items will be added and removed to it, then that collection should be an
-                        <span class="code">ObservableCollection</span>, not something like a list.
+                        <span class="code">ObservableCollection</span>, not something like a List.
                     </p>
                     <p>
                         And because of that change, we have to change the initialization code for the <span
@@ -1245,7 +1241,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                     </figure>
                     <p>
                         We just do a similar thing. We call the constructor of <span class="code">ObservableCollection&lt;T&gt;</span>,
-                        passing in an enumerable to populate it, and assigning that into our property.
+                        passing in an Enumerable to populate it, and assigning that into our property.
                     </p>
                 </div>
                 <div class="panel-body">
@@ -1253,7 +1249,7 @@ public static readonly DependencyProperty OrderStatusesProperty =
                     <p>
                         Now another thing you can support on your entities, that honestly is not often used, but I
                         wanted to get you exposed to it anyway here since it does relate to entities as data source
-                        objects, is <span class="code">EditableObject</span> Support based on the <span
+                        objects, is <span class="code">EditableObject</span> support based on the <span
                             class="code">IEditableObject</span> interface. What this is all about is that you may want
                         your objects to be able to back out changes that have been made on multiple properties.
                     </p>
@@ -2094,7 +2090,7 @@ private void OnMoveUp(object sender, RoutedEventArgs e)
                         access.
                     </p>
                     <figure>
-                    <pre><code class="csharp">  public CustomersDataSet.CustomerDataTable Customers
+                    <pre><code class="csharp">public CustomersDataSet.CustomerDataTable Customers
 {
     get { return (CustomersDataSet.CustomerDataTable)GetValue(CustomersProperty); }
     set { SetValue(CustomersProperty, value); }
@@ -2156,9 +2152,9 @@ public static readonly DependencyProperty SelectedCustomerProperty =
                     </p>
                     <figure>
                     <pre><code class="csharp">private void OnCustomerSelected(object sender, SelectionChangedEventArgs e)
-                    {
-                        SelectedCustomer = CustomersCombo.SelectedItem as DataRowView;
-                    }</code></pre>
+{
+    SelectedCustomer = CustomersCombo.SelectedItem as DataRowView;
+}</code></pre>
                     <figcaption>Fig 02-092</figcaption>
                     </figure>
                     <p>
