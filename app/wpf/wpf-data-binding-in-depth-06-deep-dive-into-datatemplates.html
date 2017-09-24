@@ -361,15 +361,16 @@
                 </p>
                 <figure>
                 <pre><code class="xml">&lt;Grid&gt;
-        &lt;ListBox x:Name=&quot;ProductsListBox&quot; ItemsSource=&quot;{Binding Products}&quot;
-                    ItemTemplate=&quot;{StaticResource ProductTemplate}&quot;&gt;
-        &lt;/ListBox&gt;
-    &lt;/Grid&gt;</code></pre>
+    &lt;ListBox x:Name=&quot;ProductsListBox&quot;
+        ItemsSource=&quot;{Binding Products}&quot;
+        DisplayMemberPath=&quot;Name&quot;&gt;
+    &lt;/ListBox&gt;
+&lt;/Grid&gt;</code></pre>
                     <figcaption>Fig 05-022</figcaption>
                 </figure>
-                <p>If we run with that we get a slightly more functional ListBox where we see the product name, but it's
+                <p>If we run with that we get a slightly more functional ListBox where we see the Product name, but it's
                     not very pretty to look at. This is WPF and we can put a little more visual flare on presenting a
-                    product, and that's where DataTemplates come in.
+                    Product, and that's where DataTemplates come in.
                 </p>
                 <p>Now normally when you define DataTemplates, you're going to want to make them reusable. That means
                     you're going to put them into a Resource dictionary. So I'm going to go into the
@@ -416,15 +417,15 @@
                     <figcaption>Fig 05-024</figcaption>
                 </figure>
                 <p>And we can see what I've added here is a root Grid that has two columns. In the first column is an
-                    Image control that's going to render out our Image property of an individual product. Then there's a
-                    nested Grid that has two rows. The first row is going to show the name of the product and the second
-                    row is going to show the description of the product. Notice that each of these bindings is assuming
-                    that the DataContext is going to be set to an individual product, and that's an important part of
+                    Image control that's going to render out our Image property of an individual Product. Then there's a
+                    nested Grid that has two rows. The first row is going to show the Name of the Product and the second
+                    row is going to show the Description of the Product. Notice that each of these bindings is assuming
+                    that the DataContext is going to be set to an individual Product, and that's an important part of
                     how DataTemplates work.
                 </p>
                 <p>An instance of this DataTemplate and its contents is going to be rendered out for each data-bound
                     object in a bound context. So in the case of a ListBox, we're going to have a collection of
-                    products. For each product in that collection, it's going to render out an instance of the contents
+                    Products. For each Product in that collection, it's going to render out an instance of the contents
                     of this DataTemplate.
                 </p>
                 <p>And as part of that process, conceptually, it is setting the DataContext property to that Product
@@ -492,9 +493,9 @@
     Height=&quot;{Binding ElementName=ProductImage, Path=ActualHeight}&quot;&gt;</code></pre>
                     <figcaption>Fig 05-029</figcaption>
                 </figure>
-                <p>Whenever you bind to a height or width, make sure you're binding to the ActualHeight or
+                <p>Whenever you bind to a Height or Width, make sure you're binding to the ActualHeight or
                     ActualWidth.</p>
-                <p>Likewise, I could add a couple more row definitions to this nested grid, and then drop down and add a
+                <p>Likewise, I could add a couple more Row definitions to this nested Grid, and then drop down and add a
                     couple more TextBlocks:
                 </p>
                 <figure>
@@ -508,12 +509,12 @@
                     the way up using the AncestorType to get to the ListBox that this is going to be rendered in.
                 </p>
                 <p>Even though this DataTemplate itself does not explicitly know about the ListBox, this stuff all comes
-                    together at runtime into the visual tree. So an ancestor of this TextBlock element will be somewhere
+                    together at runtime into the Visual Tree. So an ancestor of this TextBlock element will be somewhere
                     up the chain, will be the ListBox itself.
                 </p>
-                <p>So we can walk all the way up there, use the ListBox as our source object, and then we could us a
-                    path that dots down to the ItemsSource, which will be our Products collection, and the Count on that
-                    collection, and render that out in a TextBox.
+                <p>So we can walk all the way up there, use the ListBox as our Source object, and then we could us a
+                    Path that dots down to the ItemsSource, which will be our Products Collection, and the Count on that
+                    Collection, and render that out in a TextBox.
                 </p>
                 <figure>
                 <pre><code class="xml">&lt;TextBlock Grid.Row=&quot;2&quot;
@@ -557,7 +558,7 @@
                     <img src="app/wpf/images/wpfdatabindingindepth/Fig05-035.png" class="image"/>
                     <figcaption>Fig 05-035</figcaption>
                 </figure>
-                <p>41 products in our collection, getting 1 by walking up the element tree to the ListBox, and getting
+                <p>41 products in our collection, getting one by walking up the Element Tree to the ListBox, and getting
                     the Products collection off of the ItemsSource there, the other one using the ElementName binding to
                     get to the ListBox and gets the Products collection from there.
                 </p>
@@ -829,8 +830,8 @@
                 </p>
                 <figure>
                 <pre><code class="csharp">private object _CurrentViewModel;
-        ExplicitDataTemplatesViewModel _ViewModel1 = new ExplicitDataTemplatesViewModel();
-        DataTemplateSelectorsViewModel _ViewModel2 = new DataTemplateSelectorsViewModel();</code></pre>
+ExplicitDataTemplatesViewModel _ViewModel1 = new ExplicitDataTemplatesViewModel();
+DataTemplateSelectorsViewModel _ViewModel2 = new DataTemplateSelectorsViewModel();</code></pre>
                     <figcaption>Fig 05-053</figcaption>
                 </figure>
                 <p>Now we need some logic that's actually going to switch between those two and we're going to do that
@@ -1185,7 +1186,7 @@ private void ShowView2()
                     product has a Type property on it:
                 </p>
                 <figure>
-                <pre><code class="csharp">DataTemplate template = element.FindResource(product.Type + &amp;quot;Template&amp;quot;) as DataTemplate;</code></pre>
+                <pre><code class="csharp">DataTemplate template = element.FindResource(product.Type + &quot;Template&quot;) as DataTemplate;</code></pre>
                 <figcaption>Fig 05-075</figcaption>
                 </figure>
                 <p>and that Type is going to be pizza, salad or drink in our Zza data examples.</p>
@@ -1537,7 +1538,7 @@ public event PropertyChangedEventHandler PropertyChanged = delegate { };</code><
                     our ViewModel.
                 </p>
                 <p>Then we use the ItemTemplate as we did before with the ExplicitDataTemplates demo, to point to a
-                    Resource that has a DataTemplate. That DataTemplate is up at the tope, named CustomerTemplate, and
+                    Resource that has a DataTemplate. That DataTemplate is up at the top, named CustomerTemplate, and
                     it's just got some simple structure, which is a StackPanel with an Image and a TextBlock in it.
                 </p>
                 <p>If we run our demo at this point, and we switch to the HierarchicalDataTemplatesView:</p>
