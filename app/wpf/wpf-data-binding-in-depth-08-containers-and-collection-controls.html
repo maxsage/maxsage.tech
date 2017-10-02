@@ -1120,10 +1120,6 @@ private void DataGridCell_Loaded(object sender, RoutedEventArgs e)
                     property, so we can get rid of both DisplayMemberPath and SelectedValuePath:
                 </p>
                 <figure>
-                    <img src="app/wpf/images/wpfdatabindingindepth/Fig07-080.png" class="image"/>
-                    <figcaption>Fig 07-080</figcaption>
-                </figure>
-                <figure>
                 <pre><code class="xml">DisplayMemberPath=&quot;Name&quot;
 SelectedValuePath=&quot;Id&quot;</code></pre>
                 <figcaption>Fig 07-080</figcaption>
@@ -1906,7 +1902,7 @@ SelectedValuePath=&quot;Id&quot;</code></pre>
                     SelectedItemBinding
                 </p>
                 <figure>
-                <pre><code class="xml">SelectedItemBeinding=&quot;{Binding State}&quot;</code></pre>
+                <pre><code class="xml">SelectedItemBinding=&quot;{Binding State}&quot;</code></pre>
                 <figcaption>Fig 07-136</figcaption>
                 </figure>
                 <p>which corresponds to the SelectedItem property for the ComboBox that will be rendered out. As long as
@@ -2054,7 +2050,7 @@ SelectedValuePath=&quot;Id&quot;</code></pre>
                     form, some sort of rendering of the properties of an individual object hanging off of the current
                     row object, such as an address for the customer or so on.
                 </p>
-                <p>So let's go ahead and run with that. Let's also resize our Gird, do a Reset Layout, All, so it fills
+                <p>So let's go ahead and run with that. Let's also resize our Grid, do a Reset Layout, All, so it fills
                     the window here, and go ahead and run:
                 </p>
                 <figure>
@@ -2205,11 +2201,11 @@ Click=&quot;OnSort&quot; /&gt;</code></pre>
                 <figure>
                 <pre><code class="csharp">private void OnSort(object sender, RoutedEventArgs e)
 {
-    //var customerViewSource = FindResource(&amp;quot;customerViewSource&amp;quot;) as CollectionViewSource;
-    //customerViewSource.SortDescriptions.Add(new SortDescription(&amp;quot;State&amp;quot;, ListSortDirection.Ascending));
+    //var customerViewSource = FindResource(&quot;customerViewSource&quot;) as CollectionViewSource;
+    //customerViewSource.SortDescriptions.Add(new SortDescription(&quot;State&quot;, ListSortDirection.Ascending));
 
     ICollectionView view = customerViewSource.View as ICollectionView;
-    view.SortDescriptions.Add(new SortDescription(&amp;quot;State&amp;quot;, ListSortDirection.Ascending));
+    view.SortDescriptions.Add(new SortDescription(&quot;State&quot;, ListSortDirection.Ascending));
 }</code></pre>
                 <figcaption>Fig 07-158</figcaption>
                 </figure>
@@ -2643,7 +2639,7 @@ public static readonly DependencyProperty CustomersProperty =
                     emphasized.
                 </p>
                 <p>Column definitions result in rows and cells being rendered. So the bindings you specify at a column
-                    level, really result in cell-level container bindings at runtime. AS a result, certain kinds of
+                    level, really result in cell-level container bindings at runtime. As a result, certain kinds of
                     bindings won't work in columns, specifically RelativeSource bindings and ElementName bindings.
                 </p>
                 <p>For those, you can use a CellTemplate. CellTemplate gives you full control of exactly what's going in
