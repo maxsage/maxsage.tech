@@ -56,7 +56,7 @@
                     capable of calling the Receiver in the delegating fashion.
                 </p>
                 <p>In XAML frameworks like WPF ICommand is a built-in Interface of the platform and while WPF does have
-                    some built-in implementations of concrete Commands called routed commands they are not designed with
+                    some built-in implementations of concrete Commands called Routed Commands they are not designed with
                     the delegating capability needed to be used cleanly with MVVM. What you will typically use in MVVM
                     is a Command Type that uses .NET delegates to be able to point to the handling method that resides
                     in your ViewModel. Depending on whether you write your own or use a popular MVVM framework these are
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <p>
-                    In this demo I'm are going to do a deep dive into Commands and demonstrate how to use them to
+                    In this demo I'm going to do a deep dive into Commands and demonstrate how to use them to
                     communicate from the View down to the ViewModel in a loosely coupled way.
                 </p>
                 <p>
@@ -240,7 +240,7 @@ void ICommand.Execute(object parameter)
 
 private bool CanDelete()
 {
-    return SelectedCustomer != null;
+    return true;
 }</code></pre>
                 <figcaption>Fig 04-007</figcaption>
                 </figure>
@@ -268,7 +268,6 @@ public Customer SelectedCustomer
     set
     {
         _selectedCustomer = value;
-        DeleteCommand.RaiseCanExecuteChanged();
     }
 }</code></pre>
                 <figcaption>Fig 04-008</figcaption>
@@ -532,7 +531,7 @@ private bool CanDelete()
                 </p>
                 <p>Now that we are going to add a method that will fire later after construction when the Loaded event
                     of the View fires we can move that initialization logic out to that Loaded handler and do it
-                    properly async. So cut the code out of the constructor, add a LoadCustomers method and past the code
+                    properly async. So cut the code out of the constructor, add a LoadCustomers method and paste the code
                     in. Remove the Result property that forced the GetCustomerAsync method to run synchronous, put an
                     await in front of the GetCustomerAsync method call and make the LoadCustomers method async:
                 </p>
@@ -615,11 +614,11 @@ xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;</
                 </figure>
                 <p>Scrolling down you see that Blend has added some more XAML:</p>
                 <figure>
-                <pre><code class="xml"> &lt;i:Interaction.Triggers&gt;
-        &lt;i:EventTrigger EventName=&quot;MouseLeftButtonDown&quot;&gt;
-            &lt;ei:CallMethodAction /&gt;
-        &lt;/i:EventTrigger&gt;
-    &lt;/i:Interaction.Triggers&gt;</code></pre>
+                <pre><code class="xml">&lt;i:Interaction.Triggers&gt;
+    &lt;i:EventTrigger EventName=&quot;MouseLeftButtonDown&quot;&gt;
+        &lt;ei:CallMethodAction /&gt;
+    &lt;/i:EventTrigger&gt;
+&lt;/i:Interaction.Triggers&gt;</code></pre>
                 <figcaption>Fig 04-022</figcaption>
                 </figure>
                 
@@ -876,8 +875,8 @@ public static readonly DependencyProperty MessageProperty =
                 </p>
                 <figure>
                 <pre><code class="csharp">var behavior = ((ShowNotificationMessageBehavior)d);
-            behavior.AssociatedObject.Content = e.NewValue;
-            behavior.AssociatedObject.Visibility = Visibility.Visible;</code></pre>
+behavior.AssociatedObject.Content = e.NewValue;
+behavior.AssociatedObject.Visibility = Visibility.Visible;</code></pre>
                 <figcaption>Fig 04-030A</figcaption>
                 </figure>
                 <p>
@@ -903,20 +902,20 @@ public static readonly DependencyProperty MessageProperty =
                 </p>
                 <figure>
                 <pre><code class="xml">&lt;Grid&gt;
-        &lt;Grid.RowDefinitions&gt;
-            &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
-            &lt;RowDefinition /&gt;
-        &lt;/Grid.RowDefinitions&gt;
-        &lt;ContentControl&gt;
-            &lt;i:Interaction.Behaviors&gt;
-                &lt;local:ShowNotificationMessageBehavior Message=&quot;{Binding NotificationMessage}&quot; /&gt;
-            &lt;/i:Interaction.Behaviors&gt;
-        &lt;/ContentControl&gt;
-        &lt;ContentControl Content=&quot;{Binding CurrentViewModel}&quot;
-                        Grid.Row=&quot;1&quot; /&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+        &lt;RowDefinition /&gt;
+    &lt;/Grid.RowDefinitions&gt;
+    &lt;ContentControl&gt;
+        &lt;i:Interaction.Behaviors&gt;
+            &lt;local:ShowNotificationMessageBehavior Message=&quot;{Binding NotificationMessage}&quot; /&gt;
+        &lt;/i:Interaction.Behaviors&gt;
+    &lt;/ContentControl&gt;
+    &lt;ContentControl Content=&quot;{Binding CurrentViewModel}&quot;
+                    Grid.Row=&quot;1&quot; /&gt;
 
-        &lt;!--&lt;Customers:CustomerListView /&gt;--&gt;
-    &lt;/Grid&gt;</code></pre>
+    &lt;!--&lt;Customers:CustomerListView /&gt;--&gt;
+&lt;/Grid&gt;</code></pre>
                 <figcaption>Fig 04-032</figcaption>
                 </figure>
                 <p>

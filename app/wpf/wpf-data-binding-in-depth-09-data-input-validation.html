@@ -842,7 +842,7 @@ public string CellPhone
                     such as calling a service, and whenever the results come back, you can raise an event that will
                     cause the binding to re-query for errors.
                 </p>
-                <p>So to use this, you set a validateOnNotifyDataErrors property on the binding, the binding will call
+                <p>So to use this, you set a ValidateOnNotifyDataErrors property on the binding, the binding will call
                     the GetErrors method of the INotifyDataErrorInfo after it has set a property. It also subscribes to
                     the ErrorsChanged event on the interface, and so if the ErrorsChanged is fired, it will go and
                     re-query GetErrors at the point where that event is raised.
