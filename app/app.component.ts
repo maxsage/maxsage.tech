@@ -32,6 +32,21 @@ import {
 } from './wpf/wpf.component';
 
 import {
+    XamarinComponent,
+    XamarinFormsCrossPlatform00CourseContentsComponent,
+    XamarinFormsCrossPlatform01GettingStartedComponent,
+    XamarinFormsCrossPlatform02XAMLEssentialsComponent,
+    XamarinFormsCrossPlatform03LayoutsComponent,
+    XamarinFormsCrossPlatform04ImagesComponent,
+    XamarinFormsCrossPlatform05ListsComponent,
+    XamarinFormsCrossPlatform06NavigationComponent,
+    XamarinFormsCrossPlatform07FormsAndSettingsPagesComponent,
+    XamarinFormsCrossPlatform08DataAccessComponent,
+    XamarinFormsCrossPlatform09ModelViewViewModelArchitecturalPatternComponent,
+    XamarinFormsCrossPlatform10BeyondTheBasicsComponent
+} from './xamarin/xamarin.component';
+
+import {
     Angular2Component,
     Angular2GettingStarted00CourseContentsComponent,
     Angular2GettingStarted01CourseOverviewComponent,
@@ -124,6 +139,7 @@ class PreHighlight {
                     <div class="navbar-collapse collapse">
                         <ul class='nav navbar-nav'>
                             <li><a [routerLink]="['WPF']">WPF</a></li>
+                            <li><a [routerLink]="['Xamarin']">Xamarin</a></li>
                             <li><a [routerLink]="['Angular2']">Angular 2</a></li>
                             <li><a [routerLink]="['TypeScript']">TypeScript</a></li>
                             <li><a [routerLink]="['JavaScript']">JavaScript</a></li>
@@ -167,6 +183,19 @@ class PreHighlight {
     { path: '/wpf-data-binding-in-depth-07-design-time-data-binding', name: 'WPFDataBindingInDepth07DesignTimeDataBinding', component: WPFDataBindingInDepth07DesignTimeDataBindingComponent },
     { path: '/wpf-data-binding-in-depth-08-containers-and-collection-controls', name: 'WPFDataBindingInDepth08ContainersAndCollectionControls', component: WPFDataBindingInDepth08ContainersAndCollectionControlsComponent },
     { path: '/wpf-data-binding-in-depth-09-data-input-validation', name: 'WPFDataBindingInDepth09DataInputValidation', component: WPFDataBindingInDepth09DataInputValidationComponent },
+
+    { path: '/xamarin', name: 'Xamarin', component: XamarinComponent },
+    { path: '/xamarin-forms-cross-platform-00-course-contents', name: 'XamarinFormsCrossPlatform00CourseContents', component: XamarinFormsCrossPlatform00CourseContentsComponent },
+    { path: '/xamarin-forms-cross-platform-01-getting-started', name: 'XamarinFormsCrossPlatform01GettingStarted', component: XamarinFormsCrossPlatform01GettingStartedComponent },
+    { path: '/xamarin-forms-cross-platform-02-xaml-essentials', name: 'XamarinFormsCrossPlatform02XAMLEssentials', component: XamarinFormsCrossPlatform02XAMLEssentialsComponent },
+    { path: '/xamarin-forms-cross-platform-03-layouts', name: 'XamarinFormsCrossPlatform03Layouts', component: XamarinFormsCrossPlatform03LayoutsComponent },
+    { path: '/xamarin-forms-cross-platform-04-images', name: 'XamarinFormsCrossPlatform04Images', component: XamarinFormsCrossPlatform04ImagesComponent },
+    { path: '/xamarin-forms-cross-platform-05-lists', name: 'XamarinFormsCrossPlatform05Lists', component: XamarinFormsCrossPlatform05ListsComponent },
+    { path: '/xamarin-forms-cross-platform-06-navigation', name: 'XamarinFormsCrossPlatform06Navigation', component: XamarinFormsCrossPlatform06NavigationComponent },
+    { path: '/xamarin-forms-cross-platform-07-forms-and-settings-pages', name: 'XamarinFormsCrossPlatform07FormsAndSettingsPages', component: XamarinFormsCrossPlatform07FormsAndSettingsPagesComponent },
+    { path: '/xamarin-forms-cross-platform-08-data-access', name: 'XamarinFormsCrossPlatform08DataAccess', component: XamarinFormsCrossPlatform08DataAccessComponent },
+    { path: '/xamarin-forms-cross-platform-09-model-view-viewmodel-architectural-pattern', name: 'XamarinFormsCrossPlatform09ModelViewViewModelArchitecturalPattern', component: XamarinFormsCrossPlatform09ModelViewViewModelArchitecturalPatternComponent },
+    { path: '/xamarin-forms-cross-platform-10-getting-started', name: 'XamarinFormsCrossPlatform10BeyondTheBasics', component: XamarinFormsCrossPlatform10BeyondTheBasicsComponent },
 
     { path: '/wpf-mvvm-in-depth-00-course-contents', name: 'WPFMVVMInDepth00CourseContents', component: WPFMVVMInDepth00CourseContentsComponent },
     { path: '/wpf-mvvm-in-depth-01-mvvm-pattern-fundamentals', name: 'WPFMVVMInDepth01MVVMPatternFundamentals', component: WPFMVVMInDepth01MVVMPatternFundamentalsComponent },
