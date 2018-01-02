@@ -63,7 +63,7 @@
                 <p>This terribly unsophisticated app loads up some data at the beginning, puts it into a data entry form, we could
                     then go in and edit any of those fields and click on Save to Save the changes back down to the database.
                 </p>
-                <p>Now let's talk about the structure of this app. The ZzeDashboard here is the WPF application project itself:
+                <p>Now let's talk about the structure of this app. The ZzaDashboard here is the WPF application project itself:
                 </p>
                 <figure>
                     <img src="app/wpf/images/wpfmvvmindepth/Fig02-002.png"/>
@@ -368,7 +368,7 @@ private async void OnSave(object sender, RoutedEventArgs e)
                 <figcaption>Fig 02-017</figcaption>
                 </figure>
                 <p>Notice the CustomerId property has gone from the MainWindow.xaml file because for the purposes of this demo we
-                    have to move it down a layer since all the data manipulation wil be at the ViewModel level. Next we can go and
+                    have to move it down a layer since all the data manipulation will be at the ViewModel level. Next we can go and
                     look at our View and see whats changed there from the previous demo.
                 </p>
                 <figure>
@@ -504,7 +504,7 @@ private async void OnSave(object sender, RoutedEventArgs e)
                 <p>Next we can see our SaveCommand property that we exposed publicly and bound to:</p>
                 <figure>
                 <pre><code class="csharp">public Guid CustomerId { get; set; }
-        public ICommand SaveCommand { get; set; }</code></pre>
+public ICommand SaveCommand { get; set; }</code></pre>
                 <figcaption>Fig 02-026</figcaption>
                 </figure>
                 <p>That gets hooked up in the Constructor which points it to the actual handling method itself which is the OnSave
