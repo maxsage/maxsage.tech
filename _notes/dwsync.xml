@@ -21,7 +21,8 @@
 <file name="sftp-config.json" server="ftp.maxsage.tech//httpdocs/" local="131347629321264030" remote="131594082000000000" Dst="1" />
 <file name="tsconfig.json" server="ftp.maxsage.tech//httpdocs/" local="131347629321319168" remote="131594082000000000" Dst="1" />
 <file name="typings.json" server="ftp.maxsage.tech//httpdocs/" local="131347629321354268" remote="131594082000000000" Dst="1" />
-<file name="webpack.config.dev.js.map" server="ftp.maxsage.tech//httpdocs/" local="131594053683044812" remote="131594082000000000" Dst="1" />
+<file name="webpack.config.dev.js.map" server="ftp.maxsage.tech//httpdocs/" local="131596500529201716" remote="131598067800000000" Dst="1" />
 <file name="webpack.config.dev.ts" server="ftp.maxsage.tech//httpdocs/" local="131347629321630008" remote="131594082000000000" Dst="1" />
-<file name="webpack.config.dev.js" server="ftp.maxsage.tech//httpdocs/" local="131594053683064832" remote="131594082000000000" Dst="1" />
+<file name="webpack.config.dev.js" server="ftp.maxsage.tech//httpdocs/" local="131596500529241819" remote="131598067800000000" Dst="1" />
+<file name="npm-debug.log" server="ftp.maxsage.tech//httpdocs/" local="131596565097114198" remote="131598067800000000" Dst="1" />
 </dwsync>
