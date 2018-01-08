@@ -6,46 +6,218 @@
             </div>
             <div class="panel-body">
                 <h3>Introduction</h3>
-                <p>Introduction</p>
+                <p>XAML is an XML based language that we use to define the appearance of our applications. In this
+                section we will cover XAML in more detail.</p>
             </div>
             <div class="panel-body">
-                <h3>XAML Vs Code</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
+                <h3>XAML vs Code</h3>
+                <p>You can create UI elements in XAML or in code-behind. For example to create a Label in XAML we
+                would enter something like this:</p>
+                <figure>
+                <pre><code class="xml">&lt;Label HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot; Text=&quot;Hello World&quot; /&gt;</code></pre>
+                <figcaption>Fig 02-001</figcaption>
+                </figure>
+                <p>The same label in code-behind would be created in the constructor like this:</p>
+                <figure>
+                <pre><code class="csharp">Content = new Label
+{
+    HorizonalOptions = LayoutOptions.Center,
+    VerticalOptions = LayoutOptions.Cener,
+    Text = "Hello World"
+};</code></pre>
+                <figcaption>Fig 02-002</figcaption>
+                </figure>
+                <p>The Content property shown above is derived from ContentPage which is the base class for our GreetPage</p>
+                <p>The majority of the time we would create UI elements using XAML. Generally we would only use
+                code-behind in specific scenarios, for example when generating UI elements dynamically.</p>
+                <p>Even when we use XAML at runtime we have a XAML Parser that reads the XAML files in a project and
+                instantiates objects just like the code we wrote in the code-behind file above.</p>
+                <p>To see how this works, click on the project in Solution Explorer and click on the Show All Files
+                button. Expand the obj>Debug folder and you should see a file with a xaml.g.cs suffix. The g stands for
+                generated which indicates this file has been automatically generated.</p>
+                <p>This generated class is a partial class (the other part of it is the code-behind). In the constructor
+                in the code-behind file you will see a call to:</p>
+                <figure>
+                <pre><code class="csharp">InitializeComponent();</code></pre>
+                <figcaption>Fig 02-003</figcaption>
+                </figure>
+                <p>You may think this method is inherited from ContentPage but it is actually defined in the generated
+                code:</p>
+                <figure>
+                <pre><code class="csharp">private void InitializeComponent() {
+    this.LoadFromXaml(typeof(PageName));</code></pre>
+                <figcaption>Fig 02-004</figcaption>
+                </figure>
+                <p>Inside this method we have a call to LoadFromXaml. When we compile our application file our XAML
+                files are embedded in our assembly. At runtime, when InitializeComponent is called this XAML file
+                is extracted from the assembly and passed to the XAML parser which takes the XAML and generates a
+                user interface like this:</p>
+                <figure>
+                <pre><code class="csharp">Content = new Label
+{
+    HorizonalOptions = LayoutOptions.Center,
+    VerticalOptions = LayoutOptions.Cener,
+    Text = "Hello World"
+};</code></pre>
+                    <figcaption>Fig 02-003</figcaption>
+                </figure>
                 <h3>Content Property</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
+                <p>Ponder the following XAML:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;XamarinFormExample1.ContactMethodsPage&quot;&gt;
+    &lt;Label HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot; Text=&quot;Hello World&quot; /&gt;
+    &lt;Slider /&gt;
+&lt;/ContentPage&gt;</code></pre>
+                <figcaption>Fig 02-004</figcaption>
+                </figure>
+                <p>If you were to run this application the page would only display a label:</p>
+                <figure>
+                    <img src="app/xamarin/images/Fig02-004.png"/>
+                    <figcaption>Fig 02-004</figcaption>
+                </figure>
+                <p>and not the slider. To find out why let's search the Xamarin Documentation for the ContentPage class.
+                This ContentPage class is decorated with an attribute called ContentProperty:</p>
+                <figure>
+                <pre><code class="csharp">[Xamarin.Forms.ContentProperty(&quot;Content&quot;)]
+public class ContentPage : TemplatedPage</code></pre>
+                <figcaption>Fig 02-005</figcaption>
+                </figure>
+                <p>In this attribute we have a string which specifies one of the properties of ContentPage. In this case
+                the name of that property is Content. We used that in a previous lecture when we set the Content property
+                to Label.</p>
+                <p>If we look at the declaration of the Content property we will see it's type is View:</p>
+                <pre><code>Content         View. Gets or set the view that contains the content of the page</code></pre>
+                <p>View is the base class for all our visual elements like Button, Label, Slider and so on. So because
+                the type of Content is View we can set it to an instance of a single view - not multiple views. That is
+                why we cannot have multiple elements in a ContentPage directly which is why only the Label was displayed
+                in our earier example. So what's the solution.</p>
+                <h4>StackLayout</h4>
+                <p>The StackLayout allows you to stack multiple UI elements horizontally or vertically like this:</p>
+                <figure>
+                <pre><code class="xml">&lt;StackLayout HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;&gt;
+    &lt;Label Text=&quot;Hello World&quot; /&gt;
+    &lt;Slider /&gt;
+&lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 02-006</figcaption>
+                </figure>
+                <p>Now if you run the application again both the Label and Slider will be displayed:</p>
+                <figure>
+                    <img src="app/xamarin/images/Fig02-007.png"/>
+                    <figcaption>Fig 02-007</figcaption>
+                </figure>
+                <p>Now let's examine the StackLayout class by search for Xamarin StackLayout Class. This class derives
+                from Layout of View:</p>
+                <figure>
+                <pre><code class="xml">public class StackLayout : Layout&lt;View&gt;</code></pre>
+                <figcaption>Fig 02-007</figcaption>
+                </figure>
+                <p>If you look at the declaration of Layout class you can see the ContentProperty attribute again:</p>
+                <figure>
+                <pre><code class="csharp">[Xamarin.Forms.ContentProperty(&quot;Children&quot;)]
+public abstract class Layout&lt;T&gt; : Layout, IViewContainer&lt;T&gt;
+where T : View</code></pre>
+                <figcaption>Fig 02-008</figcaption>
+                </figure>
+                <p>In this case the name of the Content Property for the Layout is Children. We can view the Children
+                Property by navigating up the Hierarchy. This can be achieved by clicking at the Layout Class. The Layout
+                Class implements ILayoutController and this interface defines a Children Property - it's of type
+                IReadOnlyList. So because the Children property is a kind of List it can contain multiple UI elements
+                and that's the reason we can use a StackLayout to stack multiple widgets on the screen.</p>
                 <h3>Accessing Elements in Code-behind</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
+                <p>We will improve on the app from the previous lecture to update the Label control with the current
+                    value of the Slider when the Slider is moved.</p>
+                <p>To implement this we need to handle the ValueChanged event of the Slider and then in our event
+                handler we can get the current value and set the Label.</p>
+                <figure>
+                <pre><code class="xml">&lt;Slider ValueChanged=&quot;&quot; /&gt;</code></pre>
+                <figcaption>Fig 02-009</figcaption>
+                </figure>
+                <p>Inside the event handler in the code-behind we can use the e argument that gets passed to get the new
+                value of the slider:</p>
+                <figure>
+                <pre><code class="csharp">void Handle_ValueChanged(object sender, Xamarin.Forms.ValueChangedEventArgs e)
+{
+    e.NewValue;
+}</code></pre>
+                <figcaption>Fig 02-010</figcaption>
+                </figure>
+                <p>In order to update the Label from code-behind we need to assign it a name:</p>
+                <figure>
+                <pre><code class="xml">&lt;Label Text=&quot;Hello World&quot; x:Name=&quot;label&quot; /&gt;</code></pre>
+                <figcaption>Fig 02-011</figcaption>
+                </figure>
+                <p>You can see from the x: prefix that the Name attribute belongs the standard XAML that Microsoft
+                    introduced in 2009 which is defined in the Microsoft namespace we discussed earlier.</p>
+                <p>Now if we go back to the code-behind we can reference the Label in the following manner:</p>
+                <figure>
+                <pre><code class="csharp">label.Text = String.Format(&quot;Value is {0}&quot;, e.NewValue);</code></pre>
+                <figcaption>Fig 02-012</figcaption>
+                </figure>
+                <p>The NewValue property returns a floating point number between 0 and 1. So we can add an additional
+                argument to the Format property to constrain the result to 2 decimal places:</p>
+                <figure>
+                    <pre><code class="csharp">label.Text = String.Format(&quot;Value is {0:F2}&quot;, e.NewValue);</code></pre>
+                    <figcaption>Fig 02-012</figcaption>
+                </figure>
+                <p>Now if we run the application and move the slider the value is updated:</p>
+                <figure>
+                    <img src="app/xamarin/images/Fig02-013.png"/>
+                    <figcaption>Fig 02-013</figcaption>
+                </figure>
+                <p>At the moment when you first run the app the value of the label is set to HelloWorld. In order to
+                show the value of the slider instead we need to get a reference to the Slider in code-behind. We do this
+                by adding a Name attribute (like we did before with the label):</p>
+                <figure>
+                <pre><code class="xml">&lt;Slider ValueChanged=&quot;Handle_ValueChanged&quot; x:Name=&quot;slider&quot; /&gt;</code></pre>
+                <figcaption>Fig 02-014</figcaption>
+                </figure>
+                <p>Back in the code-behind in the constructor we can set an initial value for the Slider:</p>
+                <figure>
+                <pre><code class="csharp">public GreetPage()
+{
+    InitializeComponent();
+
+    slider.Value = 0.5;
+}</code></pre>
+                <figcaption>Fig 02-015</figcaption>
+                </figure>
+                <p>If you were to move the code that sets the slider value above the call to InitializeComponent() you
+                would get a null reference exception. We can see the reason for this if we take another look at the .g.cs auto
+                    generated file located in the obj>Debug folder. There are two private fields defined - one for the
+                label and one for the slider.</p>
+                <figure>
+                <pre><code class="csharp">[global::System.CodeDom.Compiler.GeneratedCodeAttribute(&quot;Xamarin.Forms.Build.Tasks.XamlG&quot;, &quot;0.0.0.0&quot;)]
+                private global::Xamarin.Forms.Label label;
+
+                [global::System.CodeDom.Compiler.GeneratedCodeAttribute(&quot;Xamarin.Forms.Build.Tasks.XamlG&quot;, &quot;0.0.0.0&quot;)]
+                private global::Xamarin.Forms.Slider slider;</code></pre>
+                <figcaption>Fig 02-016</figcaption>
+                </figure>
+                <p>Without adding the x:Name attribute these fields wouldn't be generated.</p>
+                <p>In the InitializeComponent method after the call to LoadFromXaml the two fields are initialized:</p>
+                <figure>
+                <pre><code class="csharp"> [global::System.CodeDom.Compiler.GeneratedCodeAttribute(&quot;Xamarin.Forms.Build.Tasks.XamlG&quot;, &quot;0.0.0.0&quot;)]
+private void InitializeComponent() {
+    global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ContactMethodsPage));
+    label = global::Xamarin.Forms.NameScopeExtensions.FindByName&lt;global::Xamarin.Forms.Label&gt;(this, &quot;label&quot;);
+    slider = global::Xamarin.Forms.NameScopeExtensions.FindByName&lt;global::Xamarin.Forms.Slider&gt;(this, &quot;slider&quot;);
+}</code></pre>
+                <figcaption>Fig 02-017</figcaption>
+                </figure>
+                <p>The FindByName method is inherited from the base class ContentPage. We give the FindByName method an
+                argument which specifies the name or identifier for our UI element. Now back in the code-behind page
+                we can access the fields from our autogenerated class (but only after the call to InitializeComponent()</p>
                 <h3>Data Binding</h3>
                 <p></p>
-            </div>
-            <div class="panel-body">
                 <h3>Binding Context</h3>
                 <p></p>
-            </div>
-            <div class="panel-body">
                 <h3>Dealing with Device Differences</h3>
                 <p></p>
-            </div>
-            <div class="panel-body">
                 <h3>Property Element Syntax</h3>
                 <p></p>
-            </div>
-            <div class="panel-body">
                 <h3>XAML Compilation</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Cheat Sheet</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Exercise</h3>
                 <p></p>
             </div>
         </div>
