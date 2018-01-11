@@ -273,9 +273,177 @@ private void InitializeComponent() {
                   <figcaption>Fig 02-022</figcaption>
                 </figure>
                 <h3>Binding Context</h3>
-                <p></p>
+                <p>Now, what if we also want to bind the opacity value of the Label to the value of the slider. To do
+                this we add another Binding Expression to the Label</p>
+                <figure>
+                    <pre><code
+                            class="csharp">Opacity=&quot;{Binding Source={x:Reference slider}, Path=Value}&quot;</code></pre>
+                    <figcaption>Fig 02-023</figcaption>
+                </figure>
+                <p>Now if we run the application we will see that moving the slider to the left makes the Label more
+                transparent whilst moving it to the right makes it more opaque:</p>
+                <figure>
+                  <img src="app/xamarin/images/Fig02-024.png"/>
+                  <figcaption>Fig 02-024</figcaption>
+                </figure>
+                <p>Our Binding Expressions are a little bit noisy at the moment. In both cases we are using the slider
+                as the source object. So let's try and make the code a little bit cleaner.</p>
+                <p>First let's set the BindingContext of our Label to the slider:</p>
+                <figure>
+                    <pre><code class="xml">BindingContext=&quot;{x: Reference slider}&quot;</code></pre>
+                    <figcaption>Fig 02-025</figcaption>
+                </figure>
+                <p>Now slider will be the source object for any properties of the Label. Which means in our Binding
+                Expressions for the Text and Opacity Properties we can remove the Source attribute:</p>
+                <figure>
+<pre><code class="xml">&lt;Label BindingContext=&quot;{x:Reference slider}&quot;
+    Text=&quot;{Binding
+        Path=Value,
+        StringFormat='Value is {0:F2}' }&quot;
+    Opacity=&quot;{Binding
+        Path=Value }&quot;
+    x:Name=&quot;label&quot;/&gt;</code></pre>
+                    <figcaption>Fig 02-026</figcaption>
+                </figure>
+                <p>In addition we can now remove the Path attribute and just keep Value:</p>
+                <figure>
+                <pre><code class="xml">&lt;Label BindingContext=&quot;{x:Reference slider}&quot;
+    Text=&quot;{Binding Value, StringFormat='Value is {0:F2}' }&quot;
+    Opacity=&quot;{Binding Value}&quot;
+    x:Name=&quot;label&quot;/&gt;</code></pre>
+                <figcaption>Fig 02-027</figcaption>
+                </figure>
+<p>Now let's add a BoxView above the label. A BoxView is just a box filled with a colour.</p>
+                <figure>
+                    <pre><code class="xml">&lt;BoxView Color=&quot;Green&quot; Opacity=&quot;{Binding Source={x:Reference, slider}, Path=Value&quot; /&gt;</code></pre>
+                    <figcaption>Fig 02-028</figcaption>
+                </figure>
+                <p>If we run the application - here is the result:</p>
+                <figure>
+                  <img src="app/xamarin/images/Fig02-029.png"/>
+                  <figcaption>Fig 02-029</figcaption>
+                </figure>
+                <p>Again, there is a little bit of duplication in this Xaml. Both the BoxView and the Label are referencing
+                the Slider as their Binding context. So we can basically move the BindingContext setup from the Label to
+                our StackLayout which is the container for both the BoxView and the Label:</p>
+                <figure>
+                    <pre><code class="xml">&lt;StackLayout BindingContext=&quot;{x:Reference slider}&quot; HorizontalOptions=&quot;Center&quot;
+                                                        VerticalOptions=&quot;Center&quot;&gt;</code></pre>
+                    <figcaption>Fig 02-030</figcaption>
+                </figure>
+                <p>And this will be inherited by all the elements inside StackLayout which means we simplify the Binding
+                expression for the Opacity of the BoxView, remove the Source and the Path:</p>
+                <figure>
+                    <pre><code class="xml">&lt;BoxView Color=&quot;Green&quot; Opacity=&quot;{Binding Value}&quot;/&gt;</code></pre>
+                    <figcaption>Fig 02-031</figcaption>
+                </figure>
+                <p>So this is how we setup DataBinding. Finally we can remove the Label's x:Name as it is no longer being
+                referenced anywhere.</p>
                 <h3>Dealing with Device Differences</h3>
-                <p></p>
+                <p>To illustrate the differences you can encounter between various devices use the code from the previous
+                    lecture:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+                    &lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                                 xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                                 x:Class=&quot;UdemyXamarinForms.DeviceDifferences&quot;&gt;
+    &lt;StackLayout
+            BindingContext=&quot;{x:Reference slider}&quot;
+            HorizontalOptions=&quot;Center&quot;
+            VerticalOptions=&quot;Center&quot;&gt;
+        &lt;BoxView Color=&quot;Green&quot; Opacity=&quot;{Binding Value}&quot;/&gt;
+        &lt;Label
+                Text=&quot;{Binding Value,
+            StringFormat='Value is {0:F2}' }&quot;
+                Opacity=&quot;{Binding Value}&quot;/&gt;
+        &lt;Slider x:Name=&quot;slider&quot;/&gt;
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 02-032</figcaption>
+                </figure>
+                <p>remove the VerticalOptions attribute from the StackLayout and run the application in Android:</p>
+                <figure>
+                  <img src="app/xamarin/images/Fig02-033.png"/>
+                  <figcaption>Fig 02-033</figcaption>
+                </figure>
+                <p>Note that the BoxView is on top of the page just below the blue bar. Now if we run the same app in
+                iOS:</p>
+                <figure>
+                  <img src="app/xamarin/images/Fig02-034.png"/>
+                  <figcaption>Fig 02-034</figcaption>
+                </figure>
+                <p>Note that in iOS the BoxView is positioned at the very top of the screen - underneath the time
+                display. This is one of the key differences between Android and iOS.</p>
+                <p>We will add some padding to the top of the page that will only take effect in iOS. In the
+                code-behind add the following code:</p>
+                <figure>
+                <pre><code class="csharp">if (Device.OS == TargetPlatform.iOS)
+    Padding = new Thickness(0, 20, 0, 0);</code></pre>
+                    <figcaption>Fig 02-035</figcaption>
+                </figure>
+                <p>The Device class has a static property called OS which is an enumeration of type TargetPlatform. So
+                we can check if TargetPlatform is iOS. If this is the case then we can set the Padding of the Page (
+                which we inherit from ContentPage class) to a new Thickness object. Thickness has several different
+                constructors. The one we use here takes four arguments - left, top, right and bottom.</p>
+                <p>So with iOS we always want to add 20 pixels padding to the top of our page to stop our page content clashing
+                with the standard bar at the top of the screen.</p>
+                <p>Now let's assume that we want to have different Padding settings for Android and Windows. You could
+                use the technique above adding elseif statements for each OS but we can achieve the same result with
+                cleaner code.</p>
+                <p>The Device class has a method called OnPlatform. This method has two overloads, one that is generic and
+                another that takes Actions. Starting with the generic overload:
+                    <figure>
+<pre><code class="csharp">Device.OnPlatform&lt;Thickness&gt;(
+    iOS: new Thickness(0, 20, 0, 0),
+    Android: new Thickness(10, 20, 0, 0),
+    WinPhone: new Thickness(30, 20, 0, 0)
+);</code></pre>
+                        <figcaption>Fig 02-036</figcaption>
+                    </figure>
+                    <p>The generic parameter in this instance is Thickness because we want different thicknesses
+                depending on the OS. Next we supply different Thickness objects for different platforms - using C#
+                named parameters. As you can see this is a cleaner approach than using multiple else if statements.</p>
+                <p>We can assign the result we get from this method to Padding:</p>
+                <figure>
+<pre><code class="csharp">Device.OnPlatform(
+    iOS: new Thickness(0, 20, 0, 0),
+    Android: new Thickness(10, 20, 0, 0),
+    WinPhone: new Thickness(30, 20, 0, 0)
+);</code></pre>
+                    <figcaption>Fig 02-037</figcaption>
+                </figure>
+                <p>Obviously the OnPlatform method is not limited to Thickness objects. We can use OnPlatform with
+                pretty much any objects - e.g. in your app you might be interested in an integer being different
+                depending on the Platform. In this case you would supply integers to the OnPlatform method instead of
+                Thickness objects.</p>
+                <p>The OnPlatform method also has a non-generic overload. Let's say we want to execute code only on Android:
+                </p>
+                <figure>
+<pre><code class="csharp">Device.OnPlatform(
+    Android: () =&gt; {
+        Padding = new Thickness(0, 20, 0, 0);
+});</code></pre>
+                    <figcaption>Fig 02-038</figcaption>
+                </figure>
+                <p>Firstly we supply the OnPlatform with the Android named parameter. Next I need to supply an Action.
+                We use a lambda expression here and then set the desired padding as before.</p>
+                <p><strong>Please note - </strong>OnPlatform is now deprecated and has been replaced with
+                switch(RuntimePlatform):</p>
+                <figure>
+<pre><code class="csharp">switch (Device.RuntimePlatform)
+{
+    case Device.iOS:
+        Padding = new Thickness(0, 20, 0, 0);
+        break;
+    case Device.Android:
+        Padding = new Thickness(0, 100, 0, 0);
+        break;
+    case Device.WinPhone:
+        Padding = new Thickness(0, 10, 0, 0);
+        break;
+}</code></pre>
+                    <figcaption>Fig 02-039</figcaption>
+                </figure>
                 <h3>Property Element Syntax</h3>
                 <p></p>
                 <h3>XAML Compilation</h3>
