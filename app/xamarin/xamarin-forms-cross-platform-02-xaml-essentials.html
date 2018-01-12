@@ -445,7 +445,65 @@ private void InitializeComponent() {
                     <figcaption>Fig 02-039</figcaption>
                 </figure>
                 <h3>Property Element Syntax</h3>
-                <p></p>
+                <p>In the last lecture we learned that Padding is a property of the Page and we can set it to a
+                Thickness object like this:</p>
+                <figure>
+                <pre><code class="csharp">Padding = new Thickness(0, 20, 0, 0);</code></pre>
+                <figcaption>Fig 02-040</figcaption>
+                </figure>
+                <p>If you wanted to apply this padding in XAML instead you could add it to the ContentPage element using
+                    a string literal like this:</p>
+<figure>
+<pre><code class="xml">&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;UdemyXamarinForms.PropertyElementSyntax&quot;
+             Padding=&quot;0, 20, 0, 0&quot;&gt;</code></pre>
+<figcaption>Fig 02-040</figcaption>
+</figure>
+                <p>Now at runtime the XAML parser will get this string and give it to a Type Converter that will parse
+                it into a Thickness object. This will apply to all platforms. What if you want to apply this only in
+                    iOS. Then we need to use an element called OnPlatform:</p>
+                <figure>
+                <pre><code class="xml">&lt;OnPlatform
+    iOS=&quot;...&quot;&gt;
+&lt;/OnPlatform&gt;</code></pre>
+                <figcaption>Fig 02-041</figcaption>
+                </figure>
+                <p>The OnPlatform element has attributes for iOS, Android. The problem is we can't use this element
+                as the Value of the Padding attribute because these values (as you have seen so far) are either simple
+                strings or XAML markup extensions - but they cant be an XML element. This is when we use a special
+                syntax in XAML called Property Element Syntax.</p>
+                <p>To demonstrate first of all remove the Padding attribute from the ContentPage element. Then inside
+                the ContentPage element add another element:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage.Padding&gt;
+&lt;/ContentPage.Padding&gt;</code></pre>
+                    <figcaption>Fig 02-042</figcaption>
+                </figure>
+                <p>So we are using an XML element instead of an XML attribute to set the Padding property. That's
+                    the reason why this syntax is called Property Element Syntax - because we set C# properties using
+                        XML elements not attributes./</p>
+                <p>Inside this element we can either add a simple string:</p>
+<figure>
+<pre><code class="xml">&lt;ContentPage.Padding&gt;
+    0, 20, 0, 0
+&lt;/ContentPage.Padding&gt;</code></pre>
+<figcaption>Fig 02-043</figcaption>
+</figure>
+                <p>Or I can use another element to represent a complex object. In this case I want to use the OnPlatform
+                element:</p>
+<figure>
+<pre><code class="xml">&lt;ContentPage.Padding&gt;
+    &lt;OnPlatform
+        iOS=&quot;...&quot;&gt;
+
+    &lt;/OnPlatform&gt;
+&lt;/ContentPage.Padding&gt;</code></pre>
+<figcaption>Fig 02-044</figcaption>
+</figure>
+
+
+
                 <h3>XAML Compilation</h3>
                 <p></p>
             </div>
