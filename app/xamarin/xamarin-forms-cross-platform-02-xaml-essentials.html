@@ -8,8 +8,6 @@
                 <h3>Introduction</h3>
                 <p>XAML is an XML based language that we use to define the appearance of our applications. In this
                 section we will cover XAML in more detail.</p>
-            </div>
-            <div class="panel-body">
                 <h3>XAML vs Code</h3>
                 <p>You can create UI elements in XAML or in code-behind. For example to create a Label in XAML we
                 would enter something like this:</p>
@@ -482,7 +480,7 @@ private void InitializeComponent() {
                 </figure>
                 <p>So we are using an XML element instead of an XML attribute to set the Padding property. That's
                     the reason why this syntax is called Property Element Syntax - because we set C# properties using
-                        XML elements not attributes./</p>
+                        XML elements not attributes.</p>
                 <p>Inside this element we can either add a simple string:</p>
 <figure>
 <pre><code class="xml">&lt;ContentPage.Padding&gt;
@@ -501,11 +499,115 @@ private void InitializeComponent() {
 &lt;/ContentPage.Padding&gt;</code></pre>
 <figcaption>Fig 02-044</figcaption>
 </figure>
+                <p>This OnPlatform element maps to a C# class. To illustrate this go back to the code-behind and
+                declare a temporary variable:</p>
+<figure>
+<pre><code class="csharp">var x = new OnPlatform&lt;Thickness&gt;
+{
+    Android = new Thickness(0),
+    iOS = new Thickness(0, 20, 0, 0)
+};</code></pre>
+<figcaption>Fig 02-045</figcaption>
+</figure>
 
+                <p>OnPlatform is a generic class so we need to use a generic parameter, in this instance we use
+                Thickness. The OnPlatform class has properties such as Android, iOS etc. </p>
+                <p>Now we can assign this Thickness object to Padding:</p>
+                <figure>
+                <pre><code class="csharp">Padding = x;</code></pre>
+                <figcaption>Fig 02-046</figcaption>
+                </figure>
+                <p>There will be an implicit conversion between OnPlatform object and Thickness object. Now we want
+                to achieve the same thing in XAML. When creating this OnPlatform object we need to specify a generic
+                argument. So we use another attribute here - x:TypeArguments:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage.Padding&gt;
+    &lt;OnPlatform x:TypeArguments=&quot;Thickness&quot;
+                iOS=&quot;...&quot;&gt;
+    &lt;/OnPlatform&gt;
+&lt;/ContentPage.Padding&gt;</code></pre>
+                <figcaption>Fig 02-047</figcaption>
+                </figure>
+                <p>Again to emphasize here because this attribute is prefixed with x: it belongs to the Microsoft
+                namespace.</p>
+                <p>So this line in XAML:</p>
+                <figure>
+                <pre><code class="xml">&lt;OnPlatform x:TypeArguments=&quot;Thickness&quot;&gt;</code></pre>
+                <figcaption>Fig 02-048</figcaption>
+                </figure>
+                <p>is exactly like this line in C#:</p>
+                <figure>
+                <pre><code class="xml">new OnPlatform&lt;Thickness&gt;</code></pre>
+                <figcaption>Fig 02-049</figcaption>
+                </figure>
+                <p>Ok, now we need to set values for our OnPlatform properties:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage.Padding&gt;
+    &lt;OnPlatform x:TypeArguments=&quot;Thickness&quot;
+                iOS=&quot;0, 20, 0, 0&quot;
+                Android=&quot;0, 40, 0, 0&quot;&gt;
 
+    &lt;/OnPlatform&gt;
+&lt;/ContentPage.Padding&gt;</code></pre>
+                <figcaption>Fig 02-050</figcaption>
+                </figure>
 
+                <p>The numbers represent Left, Right, Top and Bottom.  </p>
+                <p>So, to recap, we use Property Element Syntax when we want to deal with complex objects that cannot
+                be represented using simple strings.</p>
                 <h3>XAML Compilation</h3>
-                <p></p>
+                <p>In this lecture we will demonstrate how to catch and prevent errors in XAML. So, for example, if we
+                introduce an error into the XAML by for example removing the s from Arguments in the following line:</p>
+                <figure>
+                <pre><code class="xml">&lt;OnPlatform x:Argument=&quot;Thickness&quot;</code></pre>
+                <figcaption>Fig 02-051</figcaption>
+                </figure>
+                <p>Now if we run the application, it launces ok but then terminates immediately wihtout any indication
+                of what the problem was. In these situations the first place we should check is the Output
+                tab in Visual Studio. </p>
+
+                <p>In the Output window we will see there is a XamlParseException:</p>
+                <figure>
+                    <img src="app/xamarin/images/Fig02-052.png"/>
+                    <figcaption>Fig 02-052</figcaption>
+                </figure>
+                <p>The exception says Type OnPlatform not found. So what is happening here is that we don't have an
+                OnPlatform type that is not generic. So this is one way to find the exception. Another way is to run
+                the app in debug mode. In Visual Studio you press F5 to Start in Debugging. If you do this you will see
+                the exception again:</p>
+                <figure>
+                    <img src="app/xamarin/images/Fig02-053.png"/>
+                    <figcaption>Fig 02-053</figcaption>
+                </figure>
+                <p>The problem is we don't see these errors until runtime. We can include our XAML files in compilation
+                    so they will be compiled into Intermediate Language (IL). This has a number of benefits:</p>
+                <ul>
+                    <li>Catch errors at compile-time</li>
+                    <li>Reduced assembly size - the Xaml files are compiled to IL which means the Xaml is not included
+                    in the final assembly</li>
+                    <li>Fast loading of XAML elements</li>
+                </ul>
+                <p>To enable compilation load the AssemblyInfo.cs file (located under Properties). Here we will find
+                    attributes that apply to the assembly as a whole like the title, version, copyright information etc.</p>
+                <p>We can include another attribute here: </p>
+                <figure>
+                <pre><code class="csharp">[assembly: XamlCompliation(XamlComplationOptions.Compile)]</code></pre>
+                <figcaption>Fig 02-054</figcaption>
+                </figure>
+                <p>Don't forget to add the XamarinForms.Xaml namespace. The colon indicates this attribute is applied
+                    to the whole assembly. The parameter for this attribute is an enumeration called
+                    XamlCompilationOptions which has a default value of Skip. If we set the value to Compile and build
+                the solution we will get a compilation error that is exactly the same as the runtime error we received.</p>
+                 <p>The attribute can be applied at class or assembly level. This means that if you want to disable or
+                     enable it on a specific class you can apply the attribute on that class:</p>
+                <figure>
+                <pre><code class="csharp">[XamlCompilation(XamlCompilationOptions.Skip)]
+public partial class PropertyElementSyntax : ContentPage
+{</code></pre>
+                <figcaption>Fig 02-055</figcaption>
+                </figure>
+                <h3>Cheat Sheet</h3>
+                <h3>Exercise</h3>
             </div>
         </div>
     </div>

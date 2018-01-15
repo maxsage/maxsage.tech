@@ -2,61 +2,536 @@
     <div class="panel-group">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h2>Getting Started</h2>
+                <h2>Layouts</h2>
             </div>
-            <div class="panel-body">
-                <h3>Introduction</h3>
-                <p>Introduction</p>
-            </div>
-            <div class="panel-body">
-                <h3>Stack Layout in XAML</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Stack Layout in Code</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Stack Layout Exercise</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Grid in XAML</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Grid in Code</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Grid Exercise</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Absolute Layout in XAML</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Absolute Layout in Code</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Absolute Layout Exercise</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Relative Layout in XAML</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Relative Layout in Code</h3>
-                <p></p>
-            </div>
-            <div class="panel-body">
-                <h3>Relative Layout Exercise</h3>
-                <p></p>
-            </div>
+            <p class="panel-body">
+            <h3>Introduction</h3>
+            <p>In Xamarin Forms we have this concept called Layout which we use for arranging visual elements on screen.
+                In this lecture we will look at how to integrate Layouts into XamarinForms to build various user
+                interfaces.
+            </p>
+            <h3>Stack Layout in XAML</h3>
+            <p>Add a new Xaml file (Forms ContentPage Xaml) to the project from the last lecture called StackPage. We
+                get two new files - a Xaml file and a C# code-behind file.
+            </p>
+            <p>In the App.cs class file change the MainPage to StackPage:</p>
+            <figure>
+                <pre><code class="csharp">MainPage = new StackPage();</code></pre>
+                <figcaption>Fig 03-001</figcaption>
+            </figure>
+            <p>In our new StackPage we apply some padding:</p>
+            <figure>
+                <pre><code class="csharp">Padding=&quot;0, 20, 0, 0&quot;</code></pre>
+                <figcaption>Fig 03-002</figcaption>
+            </figure>
+            <p>This padding will apply to all platforms. I could use the OnPlatform element to apply this padding just
+                to iOS.
+            </p>
+            <p>Next remove the ContentPage.Content element and add three labels:</p>
+            <figure>
+                <pre><code class="xml">&lt;Label Text=&quot;Label 1&quot; /&gt;
+&lt;Label Text=&quot;Label 2&quot; /&gt;
+&lt;Label Text=&quot;Label 3&quot; /&gt;</code></pre>
+                <figcaption>Fig 03-003</figcaption>
+            </figure>
+            <p>If we run the application we will only see Label 3:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-004.png"/>
+                <figcaption>Fig 03-004</figcaption>
+            </figure>
+            <p>The reason for this is that inside ContentPage we can only have one element or child. In order to add
+                more than one element to a page, as is the case in most real world apps, we need to use a Layout. In
+                this lecture we are going to explore the StackLayout which is one of the simplest layouts.
+            </p>
+            <p>Wrap the three Labels inside a StackLayout:</p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout&gt;
+    &lt;Label Text=&quot;Label 1&quot; /&gt;
+    &lt;Label Text=&quot;Label 2&quot; /&gt;
+    &lt;Label Text=&quot;Label 3&quot; /&gt;
+&lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-005</figcaption>
+            </figure>
+            <p>With a StackLayout we can position multiple layouts in a line - vertically or horizontally. If we run the
+                application now we will see all three labels:
+            </p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-006.png"/>
+                <figcaption>Fig 03-006</figcaption>
+            </figure>
+            <p>Now let's apply a background colour to our StackLayout:</p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout BackgroundColor=&quot;Yellow&quot;&gt;
+    &lt;Label Text=&quot;Label 1&quot; /&gt;
+    &lt;Label Text=&quot;Label 2&quot; /&gt;
+    &lt;Label Text=&quot;Label 3&quot; /&gt;
+&lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-006</figcaption>
+            </figure>
+            <p>If we run our application now we will see that the StackLayout is taking up the whole page even though
+                there are only three items:
+            </p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-007.png"/>
+                <figcaption>Fig 03-007</figcaption>
+            </figure>
+            <p>By default StackLayout fills it's parent/container. However if we go back to the Xaml and set the
+                VerticalOptions property of the StackLayout to any value other than Fill (which is the default), for
+                example Center:
+            </p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout BackgroundColor=&quot;Yellow&quot; VerticalOptions=&quot;Center&quot;&gt;</code></pre>
+                <figcaption>Fig 03-008</figcaption>
+            </figure>
 
+            <figure>
+                <img src="app/xamarin/images/Fig03-009.png"/>
+                <figcaption>Fig 03-009</figcaption>
+            </figure>
+            <p>vertically our StackLayout is in the middle of the screen and is no longer stretching to fill it's
+                parent. It's height is now determined based on the height of it's children (in this case the three
+                labels). Note that horizontally it is still stretching to fill it's container. We can go back to the
+                Xaml and enter HorizontalOptions:
+            </p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout BackgroundColor=&quot;Yellow&quot; VerticalOptions=&quot;Center&quot; HorizontalOptions=&quot;Center&quot;&gt;
+        &lt;Label Text=&quot;Label 1&quot; /&gt;
+        &lt;Label Text=&quot;Label 2&quot; /&gt;
+        &lt;Label Text=&quot;Label 3&quot; /&gt;
+    &lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-009</figcaption>
+            </figure>
+            <p>Now the StackLayout will be in the middle of the devices screen.</p>
+            <p>Next let's apply a background colour to each of the labels:</p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout BackgroundColor=&quot;Yellow&quot; VerticalOptions=&quot;Center&quot; HorizontalOptions=&quot;Center&quot;&gt;
+        &lt;Label Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+        &lt;Label Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+        &lt;Label Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-010</figcaption>
+            </figure>
+            <p>If we run the application now you will notice a small gap between each label:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-011.png"/>
+                <figcaption>Fig 03-011</figcaption>
+            </figure>
+            <p>We can change this using the StackLayout Spacing property:</p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout Spacing=&quot;20&quot; BackgroundColor=&quot;Yellow&quot; VerticalOptions=&quot;Center&quot; HorizontalOptions=&quot;Center&quot;&gt;
+        &lt;Label Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+        &lt;Label Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+        &lt;Label Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-012</figcaption>
+            </figure>
+            <p>The default Spacing value is 6 units.</p>
+            <p>There is a similar property called padding:</p>
+            <figure>
+                <pre><code class="xml"> &lt;StackLayout Padding=&quot;40&quot;
+            Spacing=&quot;20&quot;
+            BackgroundColor=&quot;Yellow&quot;
+            VerticalOptions=&quot;Center&quot;
+            HorizontalOptions=&quot;Center&quot;&gt;
+        &lt;Label Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+        &lt;Label Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+        &lt;Label Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-013</figcaption>
+            </figure>
+            <p>Padding is the amount of space between a Layout and it's children:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-014.png"/>
+                <figcaption>Fig 03-014</figcaption>
+            </figure>
+            <p>If you only wanted padding on one side (e.g. the Top) you set the Property as follows (Left, Top, Right,
+                Bottom):
+            </p>
+            <figure>
+                <pre><code class="xml">Padding=&quot;0, 40, 0, 0&quot;</code></pre>
+                <figcaption>Fig 03-015</figcaption>
+            </figure>
+            <p>Another property of StackLayout is Orientation. The default value is Vertical. If we set this property to
+                horizontal:
+            </p>
+            <figure>
+                <pre><code class="xml">&lt;StackLayout Padding=&quot;40&quot;
+            Spacing=&quot;20&quot;
+            VerticalOptions=&quot;Center&quot;
+            HorizontalOptions=&quot;Center&quot;
+            Orientation=&quot;Horizontal&quot;&gt;
+        &lt;Label Text=&quot;Label 1&quot; /&gt;
+        &lt;Label Text=&quot;Label 2&quot; /&gt;
+        &lt;Label Text=&quot;Label 3&quot; /&gt;
+    &lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-016</figcaption>
+            </figure>
+            <p>it results in a Layout like this:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-017.png"/>
+                <figcaption>Fig 03-017</figcaption>
+            </figure>
+            <p>We can also nest StackLayouts inside other StackLayouts. For example imagine you want to put an image or
+                an Icon right above Label 1:
+            </p>
+            <figure>
+<pre><code class="xml">&lt;StackLayout Padding=&quot;40&quot;
+        Spacing=&quot;20&quot;
+        BackgroundColor=&quot;Yellow&quot;
+        VerticalOptions=&quot;Center&quot;
+        HorizontalOptions=&quot;Center&quot;
+        Orientation=&quot;Horizontal&quot;&gt;
+    &lt;StackLayout&gt;
+        &lt;Image Source=&quot;http://placehold.it/100x100&quot; /&gt;
+        &lt;Label Text=&quot;Label 1&quot; /&gt;
+    &lt;/StackLayout&gt;
+    &lt;Label Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+&lt;/StackLayout&gt;</code></pre>
+                <figcaption>Fig 03-018</figcaption>
+            </figure>
+            <p>We have a main StackLayout which has a Horizontal orientation and inside that we have another StackLayout
+                which is Vertical where the Icon and Label 1 are located.
+            </p>
+            <p>So to recap, we use StackLayout to position multiple elements in a single line either horizontally or
+                vertically. The key properties of StackLayout you need to know are:
+            </p>
+            <ul>
+                <li>Orientation</li>
+                <li>Padding</li>
+                <li>Spacing</li>
+                <li>VerticalOptions</li>
+                <li>HorizontalOptions</li>
+            </ul>
+            <h3>Stack Layout in Code</h3>
+            <p>As discussed previously, we use Xaml to define user interfaces most of the time. Sometimes, if you are
+                creating dynamic interfaces, you may have to do things in code. Let's see how to create a StackLayout in
+                code-behind. Firsly comment out the StackLayout in Xaml. In the code-behind after the call to
+                InitializeComponent() create a variable called layout and assign it to a new StackLayout setting it's
+                Spacing, Padding and Orientation:
+            </p>
+            <figure>
+<pre><code class="csharp">var layout = new StackLayout
+{
+    Spacing = 40,
+    Padding = new Thickness(0, 20, 0, 0),
+    Orientation = StackOrientation.Horizontal
+};</code></pre>
+                <figcaption>Fig 03-019</figcaption>
+            </figure>
+            <p>StackLayout has a property called Children. You can add multiple elements inside children (e.g. Label or
+                even another StackLayout):
+            </p>
+            <figure>
+                <pre><code class="csharp">layout.Children.Add(new Label { Text = &quot;Label 1&quot; });</code></pre>
+                <figcaption>Fig 03-020</figcaption>
+            </figure>
+            <p>Finally, once we have initialized our layout we set the Content property to the layout object:</p>
+            <figure>
+                <pre><code class="csharp">Content = layout;</code></pre>
+                <figcaption>Fig 03-021</figcaption>
+            </figure>
+            <p>If you compare the code-behind with the Xaml we created in the previous lecture we can see that creating
+                Layouts or user interfaces in code is a little bit verbose. That's why I always prefer to do things in
+                Xaml if possible.
+            </p>
+            <h3>Stack Layout Exercise</h3>
+            <p></p>
+            <h3>Grid in XAML</h3>
+            <p>So as we discussed in the previous lecture we use StackLayout to position elements in a line - either
+                horizontally or vertically. Another Layout we have is Grid which we use to position elements in rows and
+                columns. Real world examples of where Grids are used include:
+            </p>
+            <ul>
+                <li>Keypads</li>
+                <li>Calculators</li>
+                <li>Calendars</li>
+                <li>Metro-stle Designs (Win8)</li>
+                <li>Photo albums</li>
+            </ul>
+            <p>To demonstrate create a new Content Page called GridPage and again in the App.cs file set the MainPage to
+                GridPage. In the GridPage XAML let's add a Padding, remove the ContentPage.Content element and instead
+                add a Grid element:
+            </p>
+            <figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;UdemyXamarinForms.GridPage&quot;
+             Padding=&quot;0, 20, 0, 0&quot;&gt;
+    &lt;Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ContentPage&gt;</code></pre>
+                <figcaption>Fig 03-022</figcaption>
+            </figure>
+            <p>Inside the Grid we layout four labels in two rows and two columns:</p>
+            <figure>
+<pre><code class="xml">&lt;Grid&gt;
+    &lt;Label Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Text=&quot;Label 4&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 03-023</figcaption>
+            </figure>
+            <p>Now we need to put each label in a particular row and column in the Grid. For this we use a special
+                syntax:
+            </p>
+            <figure>
+                <pre><code class="xml">&lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;</code></pre>
+                <figcaption>Fig 03-024</figcaption>
+            </figure>
+            <p>It's important to note that the Column and Row properties do not belong to the Label class. To illustrate
+                if you go to the code-behind and declare a Label:
+            </p>
+            <figure>
+                <pre><code class="csharp">Label l;</code></pre>
+                <figcaption>Fig 03-025</figcaption>
+            </figure>
+            <p>And then type l.Row or l.Column. You will see the Label doesn't have those properties. These properties
+                are known as Attached Bindable Properties which means they are defined by the Grid class but can be set
+                by other classes. With this technique we can put any elements inside the Grid and assign them a row and
+                a column in the Grid.
+            </p>
+            <p>Next assign the other Labels to different rows and columns and add a background color of the Grid:</p>
+            <figure>
+<pre><code class="xml">&lt;Grid BackgroundColor=&quot;Yellow&quot;&gt;
+    &lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot; Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot; Text=&quot;Label 4&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+&lt;/Grid&gt;</code></pre>
+                <figcaption>Fig 03-026</figcaption>
+            </figure>
+            <p>You will notice that, similar to the StackLayout, the Grid expands to fill it's container - so it takes
+                up all the space on the page. Also each of our Labels stretch to fill the containing row and column. Now
+                you see a yellow line that separates rows and columns. This is because of the default spacing between
+                rows and columns in the Grid. We can set the spacing using the RowSpacing and ColumnSpacing properties
+                like this:
+            </p>
+            <figure>
+<pre><code class="xml">&lt;Grid BackgroundColor=&quot;Yellow&quot;
+    RowSpacing=&quot;40&quot;
+    ColumnSpacing=&quot;40&quot;&gt;</code></pre>
+                <figcaption>Fig 03-027</figcaption>
+            </figure>
+            <p>The result looks like this:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-028.png"/>
+                <figcaption>Fig 03-028</figcaption>
+            </figure>
+            <p>To illustrate another feature of the Grid let's add another Label to the third row. We want this Label to
+                take up three columns. We achieve this using the ColumnSpan property:
+            </p>
+            <figure>
+<pre><code class="xml">    &lt;Grid BackgroundColor=&quot;Yellow&quot;
+      RowSpacing=&quot;40&quot;
+      ColumnSpacing=&quot;40&quot;&gt;
+    &lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot; Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot; Text=&quot;Label 4&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;3&quot; Grid.ColumnSpan=&quot;3&quot; Text=&quot;Columnspan&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+&lt;/Grid&gt;  </code></pre>
+                <figcaption>Fig 03-029</figcaption>
+            </figure>
+            <p>You might see this type of layout in a photo gallery app where you have a bunch of thumbnails one of
+                which stands out because it is larger than the others.
+            </p>
+            <p>Next let's add a label to the third columns that takes three rows:</p>
+            <figure>
+<pre><code class="xml">&lt;Grid BackgroundColor=&quot;Yellow&quot;
+      RowSpacing=&quot;40&quot;
+      ColumnSpacing=&quot;40&quot;&gt;
+    &lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 1&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;0&quot; Grid.Column=&quot;1&quot; Text=&quot;Label 2&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;0&quot; Text=&quot;Label 3&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot; Text=&quot;Label 4&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Row=&quot;3&quot; Grid.ColumnSpan=&quot;3&quot; Text=&quot;Columnspan&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+    &lt;Label Grid.Column=&quot;2&quot; Grid.RowSpan=&quot;3&quot; Text=&quot;Rowspan&quot; BackgroundColor=&quot;Silver&quot; /&gt;
+&lt;/Grid&gt;  </code></pre>
+                <figcaption>Fig 03-030</figcaption>
+            </figure>
+            <p>The result looks like this:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-031.png"/>
+                <figcaption>Fig 03-031</figcaption>
+            </figure>
+            <p>Now let's talk about the size of columns and rows. Currently all columns have the same width and all rows
+                have the same height. What if you want more control over the sizing of the columns and rows? Inside the
+                Grid element you can set Grid.RowDefinitions (using Property Element Syntax).
+            </p>
+            <figure>
+<pre><code class="xml">&lt;Grid.RowDefinitions&gt;
+&lt;/Grid.RowDefinitions&gt;</code></pre>
+                <figcaption>Fig 03-032</figcaption>
+            </figure>
+            <p>RowDefinitions is a collection type, it's a complex type so we cannot set it using an attribute - that's
+                why we set it using Property Element Syntax. Inside the collection we will add multiple RowDefinition
+                elements. For each row we specify a Height. The Height value can be absolute or proportional:
+            </p>
+            <figure>
+<pre><code class="xml">&lt;Grid.RowDefinitions&gt;
+    &lt;RowDefinition Height=&quot;100&quot; /&gt;
+    &lt;RowDefinition Height=&quot;2*&quot; /&gt;
+    &lt;RowDefinition Height=&quot;*&quot; /&gt;
+&lt;/Grid.RowDefinitions&gt;</code></pre>
+                <figcaption>Fig 03-033</figcaption>
+            </figure>
+            <p>The first row will be 100 units tall, and the remainder of the space will be divided between the second
+                and third rows with the second row being twice the height of the third. You can use a similar technique
+                to gain more control over the width of the columns.
+            </p>
+            <p>Underneath the RowDefinitions you add a complex type called ColumnDefinitions which has multiple
+                ColumnDefinition elements (depending on the number of columns) on which we set the Width property:
+            </p>
+            <figure>
+<pre><code class="xml">&lt;Grid.ColumnDefinitions&gt;
+    &lt;ColumnDefinition Width=&quot;100&quot; /&gt;
+    &lt;ColumnDefinition Width=&quot;2*&quot; /&gt;
+    &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+&lt;/Grid.ColumnDefinitions&gt;</code></pre>
+                <figcaption>Fig 03-034</figcaption>
+            </figure>
+            <p>We set the first column to be 100 units wide and the second column to be twice the width of the the third
+                one. The result looks like this:
+            </p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-035.png"/>
+                <figcaption>Fig 03-035</figcaption>
+            </figure>
+            <p>Before we move on look closely at the first column - there is some padding on the right side of the
+                Label:
+            </p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-036.png"/>
+                <figcaption>Fig 03-036</figcaption>
+            </figure>
+            <p>And that's because the absolute value of 100 units that we specified is slightly too big for a short
+                label. Setting the Width of the first column to Auto:
+            </p>
+            <figure>
+<pre><code class="xml">&lt;Grid.ColumnDefinitions&gt;
+    &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
+    &lt;ColumnDefinition Width=&quot;2*&quot; /&gt;
+    &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+&lt;/Grid.ColumnDefinitions&gt;</code></pre>
+                <figcaption>Fig 03-037</figcaption>
+            </figure>
+            <p>This means the column will be wide enough to fit all it's children. Look at the result:</p>
+            <figure>
+                <img src="app/xamarin/images/Fig03-038.png"/>
+                <figcaption>Fig 03-038</figcaption>
+            </figure>
+            <p>The padding on the right side of the label is gone but the column is still wide enough to fit all it's
+                children.
+            </p>
+            <p>So to recap, with Grid we can layout multiple elements in rows and columns. If you want all your rows and
+                columns to be the same size you can simply add your elements to the Grid and assign them to a row and
+                column in the Grid.
+            </p>
+            <p>If you want to have more control over the sizing of rows and columns you can use Property Element Syntax
+                to specify RowDefinitions and ColumnDefinitions.
+            </p>
+            <h3>Grid in Code</h3>
+            <p>To create a Grid in code we first create a Grid object specifying Row and Column Spacing:</p>
+            <figure>
+<pre><code class="csharp">var grid = new Grid
+{
+    RowSpacing = 20,
+    ColumnSpacing = 40
+};</code></pre>
+                <figcaption>Fig 03-039</figcaption>
+            </figure>
+            <p>To add elements to this Grid we use the Children property:</p>
+            <figure>
+                <pre><code
+                        class="csharp">grid.Children.Add(new Label { Text = &quot;Label 1&quot; }, 0, 0);</code></pre>
+                <figcaption>Fig 03-040</figcaption>
+            </figure>
+            <p>The first argument in the Add method is View which is the base class for all visual elements like Labels,
+                Images etc. In this example we add a Label. The second argument is left which represents how far from
+                the left of the Grid this element should be - in other words what column? In this example we put it in
+                the first column. The last argument is top - how far from the top of the Grid or which row should this
+                element be in.
+            </p>
+            <p>Now if you want to set the RowSpan or ColumnSpan for an element you have to use the static method of the
+                Grid class. To demonstrate let's extract the Label into a separate variable, add it to the Children
+                property and finally pass it to the SetRowSpan method:
+            </p>
+            <figure>
+                <pre><code class="csharp">Grid.SetRowSpan(label, 2);</code></pre>
+                <figcaption>Fig 03-041</figcaption>
+            </figure>
+            <p>We have another static method on the Grid class called SetColumnSpan:</p>
+            <figure>
+                <pre><code class="csharp">Grid.SetRowSpan(label, 2);</code></pre>
+                <figcaption>Fig 03-042</figcaption>
+            </figure>
+            <p>Again we supply our element here and then specify the number of columns we want it to take.</p>
+            <p>Interestingly there a couple more methods on the Grid class - Grid.SetRow and Grid.SetColumn. Now most of
+                the time we don't use these two methods because often we specify them whilst adding the element in the
+                Children collection. Internally the Add method will call the static SetRow and SetColumn messages on the
+                Grid class.
+            </p>
+            <p>Also in the Xaml we use Grid.Row or Grid.Column properties to specify the row or column for an element.
+                We refer to these properties as Attached Bindable Properties because they don't belong to elements on
+                which they are defined. They are attached to the element.
+            </p>
+            <p>When the Xaml parser parses our file it will actually call one or more of these static methods on the
+                Grid class:
+            </p>
+            <figure>
+<pre><code class="csharp">Grid.SetRowSpan(label, 2);
+Grid.SetColumnSpan(label, 2);
+Grid.SetRow(label, 0);
+Grid.SetColumn(label, 0);</code></pre>
+                <figcaption>Fig 03-043</figcaption>
+            </figure>
+            <p>Finally, if you want to work with row or column definitions you would use the following syntax:</p>
+            <figure>
+<pre><code class="csharp">grid.RowDefinitions.Add(new RowDefinition
+{
+    Height = new GridLength(100, GridUnitType.Absolute)
+});
+
+grid.RowDefinitions.Add(new RowDefinition
+{
+    Height = new GridLength(2, GridUnitType.Star)
+});
+
+grid.RowDefinitions.Add(new RowDefinition
+{
+    Height = new GridLength(1, GridUnitType.Star)
+});</code></pre>
+                <figcaption>Fig 03-044</figcaption>
+            </figure>
+            <p>The GridUnitType enumeration contains another member - Auto which means the height of this row should be
+                calculated based on it's children.
+            </p>
+            <p>Again from this example we can see that defining user interfaces in Xaml is a lot simpler and cleaner
+                than in code-behind. In code-behind we have to create objects, we have to write more code etc.
+            </p>
+            <p>However there are still times when it makes sense to use code-behind to generate user interfaces. For
+                example, imagine you want to render a Calendar. You cannot hard code the days and months of a Calendar
+                using Xaml - that would be very tedious. It would be better to use code-behind with a couple of loops to
+                dynamically generate elements and put them in a Grid.
+            </p>
+            <h3>Grid Exercise</h3>
+            <p></p>
+            <h3>Absolute Layout in XAML</h3>
+            <p></p>
+            <h3>Absolute Layout in Code</h3>
+            <p></p>
+            <h3>Absolute Layout Exercise</h3>
+            <p></p>
+            <h3>Relative Layout in XAML</h3>
+            <p></p>
+            <h3>Relative Layout in Code</h3>
+            <p></p>
+            <h3>Relative Layout Exercise</h3>
+            <p></p>
         </div>
     </div>
 </div>
