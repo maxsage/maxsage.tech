@@ -6,15 +6,177 @@
             </div>
             <div class="panel-body">
                 <h3>Introduction</h3>
-                <p>Introduction</p>
+                <p>So at this point you know a simple way to load an image from a Url. In this section you are going to
+                learn various ways of adding images to your applications. You will learn about:</p>
+                <ul>
+                    <li>How to control the caching of image downloaded from the internet</li>
+                    <li>How to display an activity indicator when downloading images</li>
+                    <li>Embed images with your application so they don't have to be downloaded evertyime</li>
+                    <li>Adding Icons</li>
+                    <li>Rendering images with round corners</li>
+                </ul>
+                <p>Let's get started.</p>
                 <h3>Image Sources</h3>
-                <p></p>
+                <p>Let's start with image sources. In Xamarin Forms apps we have two different types of images:</p>
+                <ul>
+                    <li>Platform-independent (backgrounds)</li>
+                    <li>Platform-specific (icons, splash screens)</li>
+                </ul>
+                <p>To include platform-independent images in our applications we have two options:</p>
+                <ul>
+                    <li>We can download them using a URI or Uniform Resource Identifier</li>
+                    <li>We can embed them in our Portable Class Library (PCL)</li>
+                </ul>
+                <p>If you want to work with platform-specific images (icons for buttons, toolbars etc.) you need to
+                include different images in each application project (Android, iOS, Windows etc.) Throughout the rest
+                of this section we will explore these image sources in more detail.</p>
                 <h3>Downloaded Images</h3>
-                <p></p>
+                <p>Add a new Content Page called ImagePage.xaml and delete the ContentPage.Content element, add padding
+                    if required and set the MainPage property to this new page in the App.cs:</p>
+                <figure>
+                <pre><code class="csharp">MainPage = new UdemyXamarinForms.ImagePage();</code></pre>
+                <figcaption>Fig 04-001</figcaption>
+                </figure>
+                <p>In the ImagePage.xaml file add an Image element:</p>
+                <figure>
+                <pre><code class="xml">&lt;Image Source=&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;  x:Name="image" /&gt;</code></pre>
+                <figcaption>Fig 04-002</figcaption>
+                </figure>
+                <p>Now let's look at what happens behind the scenes when you set the Source property to a Uri. In the
+                code-behind after the call to InitializeComponent() add the following code:</p>
+                <figure>
+                <pre><code class="csharp">image.Source</code></pre>
+                <figcaption>Fig 04-003</figcaption>
+                </figure>
+                <p>If we look at the type of the Source property we will see it is of type ImageSource:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-004.png"/>
+                    <figcaption>Fig 04-004</figcaption>
+                </figure>
+                <p>It is not a string. In XamarinForms we have different image sources. This ImageSource class is the
+                base for all of them. Also note that this is an abstract class so we can't create and ImageSource like
+                this:</p>
+                <figure>
+                <pre><code class="csharp">new ImageSource()</code></pre>
+                <figcaption>Fig 04-005</figcaption>
+                </figure>
+                <p>Instead we need to use one of it's derivatives. When working with Uris we have two options:</p>
+                <ul>
+                    <li>Use one of the factory methods on the ImageSource class:</li>
+                        <ul>
+                            <li>FormUri</li>
+                            <li>FromFile</li>
+                            <li>FromStream</li>
+                            <li>FromResource</li>
+                        </ul>
+                    <li> </li>
+                </ul>
+                <p>In this instance we can use FromUri:</p>
+                <figure>
+                <pre><code class="csharp">var imageSource = ImageSource.FromUri(new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;));</code></pre>
+                <figcaption>Fig 04-006</figcaption>
+                </figure>
+                <p>Note that this method return an ImageSource (the abstract base class for all image sources) so we
+                    need to explicitly cast this to a UriImageSource</p>
+                <p>As an alternative to the FromUri method we could create a UriImageSource by creating a new
+                UriImageSource directly, set the Uri and store the result in an imageSource object:</p>
+                <figure>
+                <pre><code class="csharp">var imageSource = new UriImageSource { Uri = new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;) };</code></pre>
+                <figcaption>Fig 04-007</figcaption>
+                </figure>
+                <p>The UriImageSource object has a couple of interesting properties:</p>
+                <ul>
+                    <li>CachingEnabled - true by default (24 hours is the default caching period)</li>
+                    <li>CacheValidity - a TimeSpan object which specifies the duration for which our cache is valid (24
+                        hours is the default caching period)</li>
+                </ul>
+                <p>This means when you use Xaml to add an image to your application and you set the Source to a Uri the
+                Xaml parser will internally create the UriImageSource and because caching is enabled by default that
+                image is cached for 24 hours. Sometimes this is the desired result but sometimes you may wish to disable
+                caching. In those cases you cannot use Xaml. You need to go to code-behind, directly create a
+                UriImageSource object and set CachingEnabled to false:</p>
+                <figure>
+                <pre><code class="csharp">imageSource.CachingEnabled = false;</code></pre>
+                <figcaption>Fig 04-008</figcaption>
+                </figure>
+                <p>You can also specify how long the Cache is valid for by using the CacheVadility property:</p>
+                <figure>
+                <pre><code class="csharp">imageSource.CacheValidity = TimeSpan.FromHours(1);</code></pre>
+                <figcaption>Fig 04-008</figcaption>
+                </figure>
+                <p>Now that we have an ImageSource we can set the image object's Source property:</p>
+                <figure>
+                <pre><code class="csharp">image.Source = imageSource;</code></pre>
+                <figcaption>Fig 04-009</figcaption>
+                </figure>
+                <p>By the way, there is an implicit conversion from a string to UriImageSource. So if I set the
+                image.Source to Uri like this:</p>
+                <figure>
+                <pre><code class="csharp">image.Source = &quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;;</code></pre>
+                <figcaption>Fig 04-010</figcaption>
+                </figure>
+                <p>This string will be implicitly converted to a UriImageSource and that's the reason we can set the
+                Source property of an Image element in Xaml to a string and it will be implicitly converted to a
+                UriImageSource.</p>
                 <h3>Aspects</h3>
-                <p></p>
+                <p>Edit the ImagePage.xaml code-behind to look like this:</p>
+                <figure>
+                <pre><code class="csharp">var imageSource = new UriImageSource { Uri = new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;) };
+imageSource.CachingEnabled = false;
+image.Source = imageSource;</code></pre>
+                <figcaption>Fig 04-011</figcaption>
+                </figure>
+                <p>Edit the Image element in Xaml to look like this:</p>
+                <figure>
+                <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-012</figcaption>
+                </figure>
+                <p>If I run the application now this is what we get:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-013.png"/>
+                    <figcaption>Fig 04-013</figcaption>
+                </figure>
+                <p>So this 1920 by 1080 image is scaled down to fit on the screen. This is known as AspectFit. The
+                Image object has a property called Aspect which is an enumeration with three members:</p>
+                <ul>
+                    <li>AspectFill</li>
+                    <li>AspectFit</li>
+                    <li>Fill - which is the default</li>
+                </ul>
+                <p>This property can be set in code-behind or in Xaml. So in Xaml it would look like this:</p>
+                <figure>
+                <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; Aspect=&quot;Fill&quot; /&gt;</code></pre>
+                <figcaption>Fig 04-014</figcaption>
+                </figure>
+                <p>Which would result in the image being displayed like this:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-015.png"/>
+                    <figcaption>Fig 04-015</figcaption>
+                </figure>
+                <p>We can see the image is distorted - because we have a landscape image that is stretched to fit into
+                dimensions of this device.</p>
+                <p>We also have AspectFill which results in the image being displayed like this:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-016.png"/>
+                    <figcaption>Fig 04-016</figcaption>
+                </figure>
+                <p>The image fills the entire display area but the aspect is preserved - this results in an image that
+                is not distorted but will more than likely result in cropping. This is useful for displaying background
+                images.</p>
+                <p>When displaying images from the internet sometimes it can take a short time before the image is
+                loaded. In those cases it is a good idea to display an activity indicator - which is like loader icon
+                in the center of the screen. This is the topic of the next lecture.</p>
                 <h3>Activity Indicator</h3>
-                <p></p>
+                <p>Now let's add an activity indicator on the page. Now, because we are going to have multiple elements
+                we are going to use the AbsoluteLayout because we want to position the activity indicator right in the
+                middle of the page:</p>
+                <figure>
+                <pre><code class="xml">&lt;AbsoluteLayout&gt;
+    &lt;Image x:Name=&quot;image&quot; Aspect=&quot;Fill&quot; /&gt;
+&lt;/AbsoluteLayout&gt;</code></pre>
+                <figcaption>Fig 04-017</figcaption>
+                </figure>
+
                 <h3>Embedded Images</h3>
                 <p></p>
                 <h3>Embedded Images in XAML</h3>

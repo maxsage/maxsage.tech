@@ -36,7 +36,7 @@
             </figure>
             <p>If we run the application we will only see Label 3:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-004.png"/>
+                <img src="app/xamarin/images/03/Fig03-004.png"/>
                 <figcaption>Fig 03-004</figcaption>
             </figure>
             <p>The reason for this is that inside ContentPage we can only have one element or child. In order to add
@@ -56,7 +56,7 @@
                 application now we will see all three labels:
             </p>
             <figure>
-                <img src="app/xamarin/images/Fig03-006.png"/>
+                <img src="app/xamarin/images/03/Fig03-006.png"/>
                 <figcaption>Fig 03-006</figcaption>
             </figure>
             <p>Now let's apply a background colour to our StackLayout:</p>
@@ -72,7 +72,7 @@
                 there are only three items:
             </p>
             <figure>
-                <img src="app/xamarin/images/Fig03-007.png"/>
+                <img src="app/xamarin/images/03/Fig03-007.png"/>
                 <figcaption>Fig 03-007</figcaption>
             </figure>
             <p>By default StackLayout fills it's parent/container. However if we go back to the Xaml and set the
@@ -85,7 +85,7 @@
             </figure>
 
             <figure>
-                <img src="app/xamarin/images/Fig03-009.png"/>
+                <img src="app/xamarin/images/03/Fig03-009.png"/>
                 <figcaption>Fig 03-009</figcaption>
             </figure>
             <p>vertically our StackLayout is in the middle of the screen and is no longer stretching to fill it's
@@ -113,7 +113,7 @@
             </figure>
             <p>If we run the application now you will notice a small gap between each label:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-011.png"/>
+                <img src="app/xamarin/images/03/Fig03-011.png"/>
                 <figcaption>Fig 03-011</figcaption>
             </figure>
             <p>We can change this using the StackLayout Spacing property:</p>
@@ -141,7 +141,7 @@
             </figure>
             <p>Padding is the amount of space between a Layout and it's children:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-014.png"/>
+                <img src="app/xamarin/images/03/Fig03-014.png"/>
                 <figcaption>Fig 03-014</figcaption>
             </figure>
             <p>If you only wanted padding on one side (e.g. the Top) you set the Property as follows (Left, Top, Right,
@@ -168,7 +168,7 @@
             </figure>
             <p>it results in a Layout like this:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-017.png"/>
+                <img src="app/xamarin/images/03/Fig03-017.png"/>
                 <figcaption>Fig 03-017</figcaption>
             </figure>
             <p>We can also nest StackLayouts inside other StackLayouts. For example imagine you want to put an image or
@@ -318,7 +318,7 @@
             </figure>
             <p>The result looks like this:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-028.png"/>
+                <img src="app/xamarin/images/03/Fig03-028.png"/>
                 <figcaption>Fig 03-028</figcaption>
             </figure>
             <p>To illustrate another feature of the Grid let's add another Label to the third row. We want this Label to
@@ -355,7 +355,7 @@
             </figure>
             <p>The result looks like this:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-031.png"/>
+                <img src="app/xamarin/images/03/Fig03-031.png"/>
                 <figcaption>Fig 03-031</figcaption>
             </figure>
             <p>Now let's talk about the size of columns and rows. Currently all columns have the same width and all rows
@@ -398,14 +398,14 @@
                 one. The result looks like this:
             </p>
             <figure>
-                <img src="app/xamarin/images/Fig03-035.png"/>
+                <img src="app/xamarin/images/03/Fig03-035.png"/>
                 <figcaption>Fig 03-035</figcaption>
             </figure>
             <p>Before we move on look closely at the first column - there is some padding on the right side of the
                 Label:
             </p>
             <figure>
-                <img src="app/xamarin/images/Fig03-036.png"/>
+                <img src="app/xamarin/images/03/Fig03-036.png"/>
                 <figcaption>Fig 03-036</figcaption>
             </figure>
             <p>And that's because the absolute value of 100 units that we specified is slightly too big for a short
@@ -421,7 +421,7 @@
             </figure>
             <p>This means the column will be wide enough to fit all it's children. Look at the result:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-038.png"/>
+                <img src="app/xamarin/images/03/Fig03-038.png"/>
                 <figcaption>Fig 03-038</figcaption>
             </figure>
             <p>The padding on the right side of the label is gone but the column is still wide enough to fit all it's
@@ -525,7 +525,7 @@ grid.RowDefinitions.Add(new RowDefinition
                 For example you might want to anchor them to the edge of the screen or you may want to overlay multiple
                 objects on top of each other. For example look at this page:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-045.png"/>
+                <img src="app/xamarin/images/03/Fig03-045.png"/>
                 <figcaption>Fig 03-045</figcaption>
             </figure>
             <p>We have an Aqua colour BoxView that is filling the whole page. Potentially this could be a background
@@ -539,7 +539,7 @@ grid.RowDefinitions.Add(new RowDefinition
                 positioning irrespective of the size of the device running this app. Now if I change the orientation of
                 my device we still get the same layout:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-046.png"/>
+                <img src="app/xamarin/images/03/Fig03-046.png"/>
                 <figcaption>Fig 03-046</figcaption>
             </figure>
             <p>Let's see how we can implement this design using absolute layout. Add a new ContentPage called
@@ -566,7 +566,7 @@ grid.RowDefinitions.Add(new RowDefinition
             </figure>
             <p>Now if we run the application:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-049.png"/>
+                <img src="app/xamarin/images/03/Fig03-049.png"/>
                 <figcaption>Fig 03-049</figcaption>
             </figure>
             <p>We can see that similar to StackLayout and Grid our AbsoluteLayout stretches to fill it's container which
@@ -588,7 +588,7 @@ grid.RowDefinitions.Add(new RowDefinition
                 they are all absolute)</p>
             <p>If we run the application this is what we get:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-051.png"/>
+                <img src="app/xamarin/images/03/Fig03-051.png"/>
                 <figcaption>Fig 03-051</figcaption>
             </figure>
             <p>What if we want the BoxView to fill the container but we don't know what the Width and Height of the
@@ -628,7 +628,7 @@ grid.RowDefinitions.Add(new RowDefinition
             </figure>
             <p>Now if we run the application this is what we get:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-054.png"/>
+                <img src="app/xamarin/images/03/Fig03-054.png"/>
                 <figcaption>Fig 03-054</figcaption>
             </figure>
             <p>Now let's put the white BoxView on top of this Aqua BoxView:</p>
@@ -647,7 +647,7 @@ grid.RowDefinitions.Add(new RowDefinition
                 This is why in the LayoutFlags we specify that only the position is proportional.</p>
             <p>Let's preview the result:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-056.png"/>
+                <img src="app/xamarin/images/03/Fig03-056.png"/>
                 <figcaption>Fig 03-056</figcaption>
             </figure>
             <p>So our new BoxView is 100x100 units and the Y Axis its about 10% from the top of the page and on the X
@@ -676,7 +676,7 @@ grid.RowDefinitions.Add(new RowDefinition
                 WidthProportional.</p>
             <p>Let's run the application:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-058.png"/>
+                <img src="app/xamarin/images/03/Fig03-058.png"/>
                 <figcaption>Fig 03-058</figcaption>
             </figure>
             <p>So absolute layout is useful when you want to have more control over position and size of elements on
@@ -704,7 +704,7 @@ AbsoluteLayout.SetLayoutFlags(aquaBox, AbsoluteLayoutFlags.All);</code></pre>
             <p>First of all we create a BoxView called aquaBox, then we add that BoxView to our Children collection.
                 The Add method has a few different overloads, the one we are going to use is shown here:</p>
             <figure>
-                <img src="app/xamarin/images/Fig03-060.png"/>
+                <img src="app/xamarin/images/03/Fig03-060.png"/>
                 <figcaption>Fig 03-060</figcaption>
             </figure>
             <p>It takes a View (which means an element), and a Rectangle(X, Y, Width, Height) for specifying the
@@ -733,7 +733,7 @@ AbsoluteLayout.SetLayoutFlags(aquaBox, AbsoluteLayoutFlags.All);</code></pre>
             than AbsoluteLayout because you can apply constraints to the position or size of an element relative to
             another element. This gives us more control over the position and size of elements. Here is an example:</p>
             <figure>
-              <img src="app/xamarin/images/Fig03-061.png"/>
+              <img src="app/xamarin/images/03/Fig03-061.png"/>
               <figcaption>Fig 03-061</figcaption>
             </figure>
             <p>Again we have an Aqua BoxView which is occupying about a third of the page. We have another BoxView
@@ -744,7 +744,7 @@ AbsoluteLayout.SetLayoutFlags(aquaBox, AbsoluteLayoutFlags.All);</code></pre>
             <p>A real world example of this is a users profile in a Social Networking app. Each profile has what we call
             a banner or background image on the top and then somewhere around here:</p>
             <figure>
-              <img src="app/xamarin/images/Fig03-062.png"/>
+              <img src="app/xamarin/images/03/Fig03-062.png"/>
               <figcaption>Fig 03-062</figcaption>
             </figure>
             <p>we have the users photo. We wont implement the user photo in this lecture for simplicity - it will be
@@ -819,7 +819,7 @@ AbsoluteLayout.SetLayoutFlags(aquaBox, AbsoluteLayoutFlags.All);</code></pre>
             </p>
             <p>Let's look at the result:</p>
             <figure>
-              <img src="app/xamarin/images/Fig03-065.png"/>
+              <img src="app/xamarin/images/03/Fig03-065.png"/>
               <figcaption>Fig 03-065</figcaption>
             </figure>
             <p>There is nothing particularly special about this layout. We could build the exact same thing using
@@ -837,16 +837,119 @@ AbsoluteLayout.SetLayoutFlags(aquaBox, AbsoluteLayoutFlags.All);</code></pre>
             negative value</p>
             <p>Now let's look at the result:</p>
             <figure>
-              <img src="app/xamarin/images/Fig03-066.png"/>
+              <img src="app/xamarin/images/03/Fig03-066.png"/>
               <figcaption>Fig 03-066</figcaption>
             </figure>
             <p>So you see our Silver BoxView is 20 units below the Aqua BoxView. So with RelativeLayout we can set the
             position or size of an element based on another element. This is something we cannot achieve using
             AbsoluteLayout</p>
-
-
             <h3>Relative Layout in Code</h3>
-            <p></p>
+            <p>Firstly, comment out the XAML for the RelativeLayout in the RelativePage.xaml file. Next, in the
+            code-behind after the call to InitializeComponent() in the constructor add the following code:</p>
+            <figure>
+            <pre><code class="csharp">var layout = new RelativeLayout();
+Content = layout;
+
+var aquaBox = new BoxView { Color = Color.Aqua };
+layout.Children.Add(aquaBox,
+    widthConstraint: Constraint.RelativeToParent(parent =&gt; parent.Width),
+    heightConstraint: Constraint.RelativeToParent(parent =&gt; parent.Height * 0.3));
+
+var silverBox = new BoxView { Color = Color.Silver };
+layout.Children.Add(silverBox,
+     yConstraint: Constraint.RelativeToView(aquaBox, (RelativeLayout, element) =&gt; element.Height + 20));</code></pre>
+            <figcaption>Fig 03-067</figcaption>
+            </figure>
+            <p>First we create a layout of type RelativeLayout and set the Content of this page to the layout:</p>
+            <figure>
+            <pre><code class="csharp">var layout = new RelativeLayout();
+Content = layout;</code></pre>
+            <figcaption>Fig 03-068</figcaption>
+            </figure>
+            <p>Next we add a new BoxView called aquaBox with a Color of Aqua:</p>
+            <figure>
+            <pre><code class="csharp">var aquaBox = new BoxView { Color = Color.Aqua };</code></pre>
+            <figcaption>Fig 03-069</figcaption>
+            </figure>
+            <p>Next add the aquaBox BoxView to our layout:</p>
+<figure>
+<pre><code class="csharp">layout.Children.Add(aquaBox,
+    widthConstraint: Constraint.RelativeToParent(parent =&gt; parent.Width),
+    heightConstraint: Constraint.RelativeToParent(parent =&gt; parent.Height * 0.3));</code></pre>
+<figcaption>Fig 03-070</figcaption>
+</figure>
+            <p>The Add method has several overloads. The one that we use most often has five parameters with the last
+            four being optional because they are set to null by default. We have used the widthConstraint and
+            heightConstraint optional parameters. To keep our code clean we can use named arguments in C#. We need
+            to supply a Constraint object. We use the Constraint class which has a few factory methods for creating
+            a Constraint object:</p>
+            <ul>
+                <li>FromExpression</li>
+                <li>RelativeToParent</li>
+                <li>RelativeToView</li>
+            </ul>
+            <p>The one we use here is RelativeToParent. The metadata for this method indicates this method gets a
+            Func or RelativeLayout and double (basically whenever you see Func you can use a lambda expression):</p>
+            <figure>
+                <img src="app/xamarin/images/03/Fig03-071.png"/>
+                <figcaption>Fig 03-071</figcaption>
+            </figure>
+            <p>The lambda expression takes an object which is a RelativeLayout and returns a double. I am going to
+            call this parameter parent:</p>
+            <figure>
+            <pre><code class="csharp">parent =&gt;</code></pre>
+            <figcaption>Fig 03-072</figcaption>
+            </figure>
+            <p>I want the width of the aquaBox BoxView to be the same as it's parent:</p>
+            <figure>
+            <pre><code class="csharp">parent.Width</code></pre>
+            <figcaption>Fig 03-073</figcaption>
+            </figure>
+            <p>Now let's apply the heightConstraint:</p>
+            <figure>
+            <pre><code class="csharp">heightConstraint: Constraint.RelativeToParent(parent =&gt; parent.Height * 0.3));</code></pre>
+            <figcaption>Fig 03-074</figcaption>
+            </figure>
+            <p>This lambda expression takes a parent and returns the height of the parent multiplied by 0.3:</p>
+            <figure>
+            <pre><code class="csharp">parent =&gt; parent.Height * 0.3)</code></pre>
+            <figcaption>Fig 03-075</figcaption>
+            </figure>
+            <p>Finally, let's add our Silver BoxView:</p>
+            <figure>
+            <pre><code class="csharp">var silverBox = new BoxView { Color = Color.Silver };</code></pre>
+            <figcaption>Fig 03-076</figcaption>
+            </figure>
+            <p>Next add the silverBox BoxView to our layout:</p>
+            <figure>
+            <pre><code class="csharp">layout.Children.Add(silverBox,</code></pre>
+            <figcaption>Fig 03-077</figcaption>
+            </figure>
+            <p>This time we apply a yConstraint:</p>
+            <figure>
+            <pre><code class="csharp">yConstraint: Constraint.RelativeToView(aquaBox, (RelativeLayout, element) =&gt; element.Height + 20));</code></pre>
+            <figcaption>Fig 03-078</figcaption>
+            </figure>
+            <p>This time round we use RelativeToView and supply aquaBox as the View/Element to use. If we look at the
+            intellisense:</p>
+            <figure>
+                <img src="app/xamarin/images/03/Fig03-079.png"/>
+                <figcaption>Fig 03-079</figcaption>
+            </figure>
+            <p>Again you can see Func which means we are expected to write an inline function which takes two arguments
+            - a RelativeLayout and a View and then returns a double.</p>
+            <p>So again we supply a lambda expression with two arguments - the first is RelativeLayout and the second one
+                is the target View (in this case the aquaBox BoxView) which will call element:</p>
+            <figure>
+            <pre><code class="csharp">(RelativeLayout, element)</code></pre>
+            <figcaption>Fig 03-080</figcaption>
+            </figure>
+            <p>This goes to element.Height + 20:</p>
+            <figure>
+            <pre><code class="csharp">(RelativeLayout, element) =&gt; element.Height + 20</code></pre>
+            <figcaption>Fig 03-081</figcaption>
+            </figure>
+            <p>If you run the application you should see Layout identical to the one we achieved using Xaml.</p>
             <h3>Relative Layout Exercise</h3>
             <p></p>
         </div>

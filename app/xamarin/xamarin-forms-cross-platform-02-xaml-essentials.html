@@ -72,7 +72,7 @@
                 </figure>
                 <p>If you were to run this application the page would only display a label:</p>
                 <figure>
-                    <img src="app/xamarin/images/Fig02-004.png"/>
+                    <img src="app/xamarin/images/02/Fig02-004.png"/>
                     <figcaption>Fig 02-004</figcaption>
                 </figure>
                 <p>and not the slider. To find out why let's search the Xamarin Documentation for the ContentPage class.
@@ -102,7 +102,7 @@ public class ContentPage : TemplatedPage</code></pre>
                 </figure>
                 <p>Now if you run the application again both the Label and Slider will be displayed:</p>
                 <figure>
-                    <img src="app/xamarin/images/Fig02-007.png"/>
+                    <img src="app/xamarin/images/02/Fig02-007.png"/>
                     <figcaption>Fig 02-007</figcaption>
                 </figure>
                 <p>Now let's examine the StackLayout class by search for Xamarin StackLayout Class. This class derives
@@ -161,7 +161,7 @@ where T : View</code></pre>
                 </figure>
                 <p>Now if we run the application and move the slider the value is updated:</p>
                 <figure>
-                    <img src="app/xamarin/images/Fig02-013.png"/>
+                    <img src="app/xamarin/images/02/Fig02-013.png"/>
                     <figcaption>Fig 02-013</figcaption>
                 </figure>
                 <p>At the moment when you first run the app the value of the label is set to HelloWorld. In order to
@@ -219,7 +219,7 @@ private void InitializeComponent() {
                 <p>Data binding basically means we bind a property of a UI Element to the property of another object. In
                     this case we want to bind the Text property of the Label to the Value property of the Slider:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-018.png"/>
+                  <img src="app/xamarin/images/02/Fig02-018.png"/>
                   <figcaption>Fig 02-018</figcaption>
                 </figure>
                 <p>When the Value of the Slider changes the Text Property of the Label is automatically updated. With
@@ -252,7 +252,7 @@ private void InitializeComponent() {
                 <p>Now if we go ahead and run the app you can see that we are back to the previous scenario where there
                 are a number of digits after the decimal point:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-020.png"/>
+                  <img src="app/xamarin/images/02/Fig02-020.png"/>
                   <figcaption>Fig 02-020</figcaption>
                 </figure>
                 <p>Previously we formatted this number with two digits after the decimal point. Let's go ahead and do
@@ -267,7 +267,7 @@ private void InitializeComponent() {
                 </figure>
                 <p>Now if we run the application again we will see the Label only shows two decimal places as desired:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-022.png"/>
+                  <img src="app/xamarin/images/02/Fig02-022.png"/>
                   <figcaption>Fig 02-022</figcaption>
                 </figure>
                 <h3>Binding Context</h3>
@@ -281,7 +281,7 @@ private void InitializeComponent() {
                 <p>Now if we run the application we will see that moving the slider to the left makes the Label more
                 transparent whilst moving it to the right makes it more opaque:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-024.png"/>
+                  <img src="app/xamarin/images/02/Fig02-024.png"/>
                   <figcaption>Fig 02-024</figcaption>
                 </figure>
                 <p>Our Binding Expressions are a little bit noisy at the moment. In both cases we are using the slider
@@ -318,7 +318,7 @@ private void InitializeComponent() {
                 </figure>
                 <p>If we run the application - here is the result:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-029.png"/>
+                  <img src="app/xamarin/images/02/Fig02-029.png"/>
                   <figcaption>Fig 02-029</figcaption>
                 </figure>
                 <p>Again, there is a little bit of duplication in this Xaml. Both the BoxView and the Label are referencing
@@ -361,13 +361,13 @@ private void InitializeComponent() {
                 </figure>
                 <p>remove the VerticalOptions attribute from the StackLayout and run the application in Android:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-033.png"/>
+                  <img src="app/xamarin/images/02/Fig02-033.png"/>
                   <figcaption>Fig 02-033</figcaption>
                 </figure>
                 <p>Note that the BoxView is on top of the page just below the blue bar. Now if we run the same app in
                 iOS:</p>
                 <figure>
-                  <img src="app/xamarin/images/Fig02-034.png"/>
+                  <img src="app/xamarin/images/02/Fig02-034.png"/>
                   <figcaption>Fig 02-034</figcaption>
                 </figure>
                 <p>Note that in iOS the BoxView is positioned at the very top of the screen - underneath the time
@@ -568,7 +568,7 @@ private void InitializeComponent() {
 
                 <p>In the Output window we will see there is a XamlParseException:</p>
                 <figure>
-                    <img src="app/xamarin/images/Fig02-052.png"/>
+                    <img src="app/xamarin/images/02/Fig02-052.png"/>
                     <figcaption>Fig 02-052</figcaption>
                 </figure>
                 <p>The exception says Type OnPlatform not found. So what is happening here is that we don't have an
@@ -576,7 +576,7 @@ private void InitializeComponent() {
                 the app in debug mode. In Visual Studio you press F5 to Start in Debugging. If you do this you will see
                 the exception again:</p>
                 <figure>
-                    <img src="app/xamarin/images/Fig02-053.png"/>
+                    <img src="app/xamarin/images/02/Fig02-053.png"/>
                     <figcaption>Fig 02-053</figcaption>
                 </figure>
                 <p>The problem is we don't see these errors until runtime. We can include our XAML files in compilation
