@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <h3>Introduction</h3>
                 <p>So at this point you know a simple way to load an image from a Url. In this section you are going to
-                learn various ways of adding images to your applications. You will learn about:</p>
+                    learn various ways of adding images to your applications. You will learn about:</p>
                 <ul>
                     <li>How to control the caching of image downloaded from the internet</li>
                     <li>How to display an activity indicator when downloading images</li>
@@ -28,25 +28,26 @@
                     <li>We can embed them in our Portable Class Library (PCL)</li>
                 </ul>
                 <p>If you want to work with platform-specific images (icons for buttons, toolbars etc.) you need to
-                include different images in each application project (Android, iOS, Windows etc.) Throughout the rest
-                of this section we will explore these image sources in more detail.</p>
+                    include different images in each application project (Android, iOS, Windows etc.) Throughout the
+                    rest
+                    of this section we will explore these image sources in more detail.</p>
                 <h3>Downloaded Images</h3>
                 <p>Add a new Content Page called ImagePage.xaml and delete the ContentPage.Content element, add padding
                     if required and set the MainPage property to this new page in the App.cs:</p>
                 <figure>
-                <pre><code class="csharp">MainPage = new UdemyXamarinForms.ImagePage();</code></pre>
-                <figcaption>Fig 04-001</figcaption>
+                    <pre><code class="csharp">MainPage = new UdemyXamarinForms.ImagePage();</code></pre>
+                    <figcaption>Fig 04-001</figcaption>
                 </figure>
                 <p>In the ImagePage.xaml file add an Image element:</p>
                 <figure>
-                <pre><code class="xml">&lt;Image Source=&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;  x:Name="image" /&gt;</code></pre>
-                <figcaption>Fig 04-002</figcaption>
+                    <pre><code class="xml">&lt;Image Source=&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;  x:Name="image" /&gt;</code></pre>
+                    <figcaption>Fig 04-002</figcaption>
                 </figure>
                 <p>Now let's look at what happens behind the scenes when you set the Source property to a Uri. In the
-                code-behind after the call to InitializeComponent() add the following code:</p>
+                    code-behind after the call to InitializeComponent() add the following code:</p>
                 <figure>
-                <pre><code class="csharp">image.Source</code></pre>
-                <figcaption>Fig 04-003</figcaption>
+                    <pre><code class="csharp">image.Source</code></pre>
+                    <figcaption>Fig 04-003</figcaption>
                 </figure>
                 <p>If we look at the type of the Source property we will see it is of type ImageSource:</p>
                 <figure>
@@ -54,82 +55,85 @@
                     <figcaption>Fig 04-004</figcaption>
                 </figure>
                 <p>It is not a string. In XamarinForms we have different image sources. This ImageSource class is the
-                base for all of them. Also note that this is an abstract class so we can't create and ImageSource like
-                this:</p>
+                    base for all of them. Also note that this is an abstract class so we can't create and ImageSource
+                    like
+                    this:</p>
                 <figure>
-                <pre><code class="csharp">new ImageSource()</code></pre>
-                <figcaption>Fig 04-005</figcaption>
+                    <pre><code class="csharp">new ImageSource()</code></pre>
+                    <figcaption>Fig 04-005</figcaption>
                 </figure>
                 <p>Instead we need to use one of it's derivatives. When working with Uris we have two options:</p>
                 <ul>
                     <li>Use one of the factory methods on the ImageSource class:</li>
-                        <ul>
-                            <li>FormUri</li>
-                            <li>FromFile</li>
-                            <li>FromStream</li>
-                            <li>FromResource</li>
-                        </ul>
-                    <li> </li>
+                    <ul>
+                        <li>FormUri</li>
+                        <li>FromFile</li>
+                        <li>FromStream</li>
+                        <li>FromResource</li>
+                    </ul>
+                    <li></li>
                 </ul>
                 <p>In this instance we can use FromUri:</p>
                 <figure>
-                <pre><code class="csharp">var imageSource = ImageSource.FromUri(new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;));</code></pre>
-                <figcaption>Fig 04-006</figcaption>
+                    <pre><code class="csharp">var imageSource = ImageSource.FromUri(new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;));</code></pre>
+                    <figcaption>Fig 04-006</figcaption>
                 </figure>
                 <p>Note that this method return an ImageSource (the abstract base class for all image sources) so we
                     need to explicitly cast this to a UriImageSource</p>
                 <p>As an alternative to the FromUri method we could create a UriImageSource by creating a new
-                UriImageSource directly, set the Uri and store the result in an imageSource object:</p>
+                    UriImageSource directly, set the Uri and store the result in an imageSource object:</p>
                 <figure>
-                <pre><code class="csharp">var imageSource = new UriImageSource { Uri = new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;) };</code></pre>
-                <figcaption>Fig 04-007</figcaption>
+                    <pre><code class="csharp">var imageSource = new UriImageSource { Uri = new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;) };</code></pre>
+                    <figcaption>Fig 04-007</figcaption>
                 </figure>
                 <p>The UriImageSource object has a couple of interesting properties:</p>
                 <ul>
                     <li>CachingEnabled - true by default (24 hours is the default caching period)</li>
                     <li>CacheValidity - a TimeSpan object which specifies the duration for which our cache is valid (24
-                        hours is the default caching period)</li>
+                        hours is the default caching period)
+                    </li>
                 </ul>
                 <p>This means when you use Xaml to add an image to your application and you set the Source to a Uri the
-                Xaml parser will internally create the UriImageSource and because caching is enabled by default that
-                image is cached for 24 hours. Sometimes this is the desired result but sometimes you may wish to disable
-                caching. In those cases you cannot use Xaml. You need to go to code-behind, directly create a
-                UriImageSource object and set CachingEnabled to false:</p>
+                    Xaml parser will internally create the UriImageSource and because caching is enabled by default that
+                    image is cached for 24 hours. Sometimes this is the desired result but sometimes you may wish to
+                    disable
+                    caching. In those cases you cannot use Xaml. You need to go to code-behind, directly create a
+                    UriImageSource object and set CachingEnabled to false:</p>
                 <figure>
-                <pre><code class="csharp">imageSource.CachingEnabled = false;</code></pre>
-                <figcaption>Fig 04-008</figcaption>
+                    <pre><code class="csharp">imageSource.CachingEnabled = false;</code></pre>
+                    <figcaption>Fig 04-008</figcaption>
                 </figure>
                 <p>You can also specify how long the Cache is valid for by using the CacheVadility property:</p>
                 <figure>
-                <pre><code class="csharp">imageSource.CacheValidity = TimeSpan.FromHours(1);</code></pre>
-                <figcaption>Fig 04-008</figcaption>
+                    <pre><code class="csharp">imageSource.CacheValidity = TimeSpan.FromHours(1);</code></pre>
+                    <figcaption>Fig 04-008</figcaption>
                 </figure>
                 <p>Now that we have an ImageSource we can set the image object's Source property:</p>
                 <figure>
-                <pre><code class="csharp">image.Source = imageSource;</code></pre>
-                <figcaption>Fig 04-009</figcaption>
+                    <pre><code class="csharp">image.Source = imageSource;</code></pre>
+                    <figcaption>Fig 04-009</figcaption>
                 </figure>
                 <p>By the way, there is an implicit conversion from a string to UriImageSource. So if I set the
-                image.Source to Uri like this:</p>
+                    image.Source to Uri like this:</p>
                 <figure>
-                <pre><code class="csharp">image.Source = &quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;;</code></pre>
-                <figcaption>Fig 04-010</figcaption>
+                    <pre><code class="csharp">image.Source = &quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;;</code></pre>
+                    <figcaption>Fig 04-010</figcaption>
                 </figure>
                 <p>This string will be implicitly converted to a UriImageSource and that's the reason we can set the
-                Source property of an Image element in Xaml to a string and it will be implicitly converted to a
-                UriImageSource.</p>
+                    Source property of an Image element in Xaml to a string and it will be implicitly converted to a
+                    UriImageSource.</p>
                 <h3>Aspects</h3>
                 <p>Edit the ImagePage.xaml code-behind to look like this:</p>
                 <figure>
                 <pre><code class="csharp">var imageSource = new UriImageSource { Uri = new Uri(&quot;https://www.creativetorbay.com/media/creative-torbay/images/torquay-at-night.jpg&quot;) };
 imageSource.CachingEnabled = false;
 image.Source = imageSource;</code></pre>
-                <figcaption>Fig 04-011</figcaption>
+                    <figcaption>Fig 04-011</figcaption>
                 </figure>
                 <p>Edit the Image element in Xaml to look like this:</p>
                 <figure>
-                <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; /&gt;</code></pre>
-                <figcaption>Fig 04-012</figcaption>
+                    <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; /&gt;</code></pre>
+                    <figcaption>Fig 04-012</figcaption>
                 </figure>
                 <p>If I run the application now this is what we get:</p>
                 <figure>
@@ -137,7 +141,7 @@ image.Source = imageSource;</code></pre>
                     <figcaption>Fig 04-013</figcaption>
                 </figure>
                 <p>So this 1920 by 1080 image is scaled down to fit on the screen. This is known as AspectFit. The
-                Image object has a property called Aspect which is an enumeration with three members:</p>
+                    Image object has a property called Aspect which is an enumeration with three members:</p>
                 <ul>
                     <li>AspectFill</li>
                     <li>AspectFit</li>
@@ -145,8 +149,8 @@ image.Source = imageSource;</code></pre>
                 </ul>
                 <p>This property can be set in code-behind or in Xaml. So in Xaml it would look like this:</p>
                 <figure>
-                <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; Aspect=&quot;Fill&quot; /&gt;</code></pre>
-                <figcaption>Fig 04-014</figcaption>
+                    <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; Aspect=&quot;Fill&quot; /&gt;</code></pre>
+                    <figcaption>Fig 04-014</figcaption>
                 </figure>
                 <p>Which would result in the image being displayed like this:</p>
                 <figure>
@@ -154,31 +158,217 @@ image.Source = imageSource;</code></pre>
                     <figcaption>Fig 04-015</figcaption>
                 </figure>
                 <p>We can see the image is distorted - because we have a landscape image that is stretched to fit into
-                dimensions of this device.</p>
+                    dimensions of this device.</p>
                 <p>We also have AspectFill which results in the image being displayed like this:</p>
                 <figure>
                     <img src="app/xamarin/images/04/Fig04-016.png"/>
                     <figcaption>Fig 04-016</figcaption>
                 </figure>
                 <p>The image fills the entire display area but the aspect is preserved - this results in an image that
-                is not distorted but will more than likely result in cropping. This is useful for displaying background
-                images.</p>
+                    is not distorted but will more than likely result in cropping. This is useful for displaying
+                    background
+                    images.</p>
                 <p>When displaying images from the internet sometimes it can take a short time before the image is
-                loaded. In those cases it is a good idea to display an activity indicator - which is like loader icon
-                in the center of the screen. This is the topic of the next lecture.</p>
+                    loaded. In those cases it is a good idea to display an activity indicator - which is like loader
+                    icon
+                    in the center of the screen. This is the topic of the next lecture.</p>
                 <h3>Activity Indicator</h3>
                 <p>Now let's add an activity indicator on the page. Now, because we are going to have multiple elements
-                we are going to use the AbsoluteLayout because we want to position the activity indicator right in the
-                middle of the page:</p>
+                    we are going to use the AbsoluteLayout because we want to position the activity indicator right in
+                    the
+                    middle of the page:</p>
                 <figure>
                 <pre><code class="xml">&lt;AbsoluteLayout&gt;
     &lt;Image x:Name=&quot;image&quot; Aspect=&quot;Fill&quot; /&gt;
 &lt;/AbsoluteLayout&gt;</code></pre>
-                <figcaption>Fig 04-017</figcaption>
+                    <figcaption>Fig 04-017</figcaption>
                 </figure>
 
+
+                <p>First of all we added an ActivityIndicator with the IsRunning element set to true (by default this
+                    is false):</p>
+                <figure>
+                    <pre><code class="xml">&lt;ActivityIndicator IsRunning=&quot;true&quot;/&gt;</code></pre>
+                    <figcaption>Fig 04-018</figcaption>
+                </figure>
+                <p>Now let's set the Attached Bindable Properties. For the X and Y coordinates we use proportional
+                    values but for the width and height we specify absolute values :</p>
+                <figure>
+                    <pre><code class="xml">AbsoluteLayout.LayoutBounds=&quot;0.5, 0.5, 100, 100&quot;</code></pre>
+                    <figcaption>Fig 04-019</figcaption>
+                </figure>
+                <p>Next we add the LayoutFlags Attached Bindable Property:</p>
+                <figure>
+                    <pre><code class="xml">AbsoluteLayout.LayoutFlags=&quot;PositionProportional&quot;</code></pre>
+                    <figcaption>Fig 04-020</figcaption>
+                </figure>
+                <p>If we were to run the app now you wouldn't see the ActivityIndicator because the image would be
+                    rendered on top of the ActivityIndicator. We can resolve this temporarily by setting the IsVisible
+                    attribute of the Image attribute to false. So the XAML so far looks like this:</p>
+                <figure>
+                <pre><code class="xml">    &lt;AbsoluteLayout&gt;
+    &lt;ActivityIndicator
+            IsRunning=&quot;true&quot;
+            AbsoluteLayout.LayoutBounds=&quot;0.5, 0.5, 100, 100&quot; AbsoluteLayout.LayoutFlags=&quot;PositionProportional&quot;/&gt;
+    &lt;Image x:Name=&quot;image&quot; Aspect=&quot;AspectFill&quot;/&gt;
+&lt;/AbsoluteLayout&gt;</code></pre>
+                    <figcaption>Fig 04-021</figcaption>
+                </figure>
+                <p>If we run the application now we will see the ActivityIndicator in the center of the screen:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-022.png"/>
+                    <figcaption>Fig 04-022</figcaption>
+                </figure>
+                <p>We can change the Color of the ActivityIndicator. First of all change the Color of the ContentPage to
+                    black:</p>
+                <figure>
+                    <pre><code class="xml">&lt;ContentPage BackgroundColor=&quot;Black&quot;</code></pre>
+                    <figcaption>Fig 04-023</figcaption>
+                </figure>
+                <p>Then change the color of the ActivityIndicator to white:</p>
+                <figure>
+                    <pre><code
+                            class="xml">&lt;ActivityIndicator IsRunning=&quot;true&quot; Color=&quot;White&quot;</code></pre>
+                    <figcaption>Fig 04-024</figcaption>
+                </figure>
+                <p>Now our application will look like this:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-025.png"/>
+                    <figcaption>Fig 04-025</figcaption>
+                </figure>
+                <p>Now we only want to show the ActivityIndicator when the Image is downloading so instead of setting
+                    IsRunning to true we will use a Binding expression. I want to bind the IsRunning attribute of the
+                    ActivityIndicator to the IsLoading attribute of the Image:</p>
+                <figure>
+                    <pre><code
+                            class="xml">IsRunning=&quot;{Binding Source={x:Reference image}, Path=IsLoading }&quot;</code></pre>
+                    <figcaption>Fig 04-026</figcaption>
+                </figure>
+                <p>So our Binding expression starts with the Binding keyword inside curly braces. We specify the Source
+                    using another Binding expression (and another set of curly braces). The second Binding expression
+                    contains a Markup extension x:Reference which references the image element. Finally we set the Path
+                    to
+                    IsLoading. This is a read-only property of the image. Whilst the image is being downloaded from the
+                    internet IsLoading will be set to true and when the downloading has finished it will be false.</p>
+                <p>Remove the IsVisible attribute from the Image and preview the app:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-027.png"/>
+                    <figcaption>Fig 04-027</figcaption>
+                </figure>
+                <p>The ActivityIndicator appears and is then hidden when the image is finished loading as expected.
+                    However the Image is not filling the entire page. This is because we put it inside an AbsoluteLayout
+                    and we have not set it's size. So we need to set the LayoutBounds Attached Bindable Property: </p>
+                <figure>
+                    <pre><code class="xml">AbsoluteLayout.LayoutBounds=&quot;0, 0, 1, 1&quot;</code></pre>
+                    <figcaption>Fig 04-028</figcaption>
+                </figure>
+                <p>The numbers specified in the LayoutBounds (X, Y, Width, Height) are all proportional so we also
+                    specify AbsoluteLayout.LayoutFlags="All":</p>
+                <figure>
+                <pre><code class="xml">&lt;Image x:Name=&quot;image&quot; Aspect=&quot;AspectFill&quot;
+    AbsoluteLayout.LayoutBounds=&quot;0, 0, 1, 1&quot;
+    AbsoluteLayout.LayoutFlags=&quot;All&quot;/&gt;</code></pre>
+                    <figcaption>Fig 04-029</figcaption>
+                </figure>
+                <p>Now if we check the result the ActiviyIndicator is displayed and when the image is loaded it fits
+                    as expected:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-030.png"/>
+                    <figcaption>Fig 04-030</figcaption>
+                </figure>
+                <p>The finished Xaml Looks like this:</p>
+                <figure>
+                <pre><code class="xml">&lt;AbsoluteLayout&gt;
+    &lt;ActivityIndicator
+            IsRunning=&quot;{Binding Source={x:Reference image}, Path=IsLoading }&quot;
+            Color=&quot;White&quot;
+            AbsoluteLayout.LayoutBounds=&quot;0.5, 0.5, 100, 100&quot; AbsoluteLayout.LayoutFlags=&quot;PositionProportional&quot;/&gt;
+    &lt;Image x:Name=&quot;image&quot; Aspect=&quot;AspectFill&quot;
+           AbsoluteLayout.LayoutBounds=&quot;0, 0, 1, 1&quot;
+           AbsoluteLayout.LayoutFlags=&quot;All&quot;
+    /&gt;
+&lt;/AbsoluteLayout&gt;</code></pre>
+                    <figcaption>Fig 04-031</figcaption>
+                </figure>
+                <p>Now downloading images is one way to add platform-independent images in your applications. It's
+                    useful
+                    if you want your app to let the user browse some kind of photo gallery. A real-world example of this
+                    is Facebook where you can browse different photos and as each photo is being downloaded you see an
+                    activity indicator. However, in the app we have just built the image we are using is supposed to be
+                    the background image of the app. It doesn't make sense to download it from the internet every time.
+                    So
+                    in the next lecture we will demonstrate how to embed it in the Portable Class Library.</p>
                 <h3>Embedded Images</h3>
-                <p></p>
+                <p>First of all add another Content Page called EmbeddedImagesPage.xaml to your solution, remove the
+                    ContentPage.Content element and add an Image element:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;UdemyXamarinForms.EmbeddedImagesPage&quot;&gt;
+    &lt;Image x:Name=&quot;image&quot; Aspect=&quot;AspectFill&quot;/&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 04-032</figcaption>
+                </figure>
+                <p>Now let's look at how to embed an image in your application. Add a new folder called Images to the
+                    Shared/Portable Class Library project in the Solution. Right click the folder and select
+                    Add>Existing Item and add an image to the folder. Click on the new file in the Solution Explorer
+                    and in the Properties window set the Build Action to Embedded Resource.</p>
+                <p>The Udemy course mentions a Resource Id in Visual Studio but I couldn't find this.</p>
+                <p>By default you cannot set an embedded resource in xaml. We need to setup a custom markup extension
+                    for
+                    that which is a topic for the next lecture. So go to the code-behind and add the following code:</p>
+                <figure>
+                    <pre><code class="csharp">image.Source = ImageSource.FromResource(&quot;UdemyXamarinForms.Images.torquay=at-night.jpg&quot;);</code></pre>
+                    <figcaption>Fig 04-033</figcaption>
+                </figure>
+                <p>The resource id (allegedly consists of: </p>
+                <ul>
+                    <li>The application name</li>
+                    <li>The folder where the resource is located (Images)</li>
+                    <li>The filename</li>
+                </ul>
+                <p>If we run the application we should see the image embedded in the application:</p>
+                <figure>
+                    <img src="app/xamarin/images/04/Fig04-034.png"/>
+                    <figcaption>Fig 04-034</figcaption>
+                </figure>
+                <p>I couldn't get the app described in this lecture working for the following reasons:</p>
+                <ul>
+                    <li>As far as I can see there is no Resource Id in the properties window of Visual Studio</li>
+                    <li>When using the fully qualified Resource Id described above the resource was not found - no
+                        error/exception seemed to be thrown but I just got a blank page when the app ran.
+                    </li>
+                </ul>
+                <p>I resolved this issue by following the instructions in this
+                    <a href="https://forums.xamarin.com/discussion/17953/helpful-shared-project-image-information">
+                        Xamarin Forum article</a>. Specifically the answer provided by DerekWinnicki</p>
+                <p>You have to edit the .projitems file by hand. You simply ensure your embedded resource includes the
+                    "LogicalName" child element. The name provided there is what you would use in your code-behind:</p>
+                <figure>
+                <pre><code class="xml">&lt;ItemGroup&gt;
+    &lt;EmbeddedResource Include=&quot;$(MSBuildThisFileDirectory)Images\torquay-at-night.jpg&quot;&gt;
+      &lt;CopyToOutputDirectory&gt;Always&lt;/CopyToOutputDirectory&gt;
+	  &lt;LogicalName&gt;torquay-at-night.jpg&lt;/LogicalName&gt;
+    &lt;/EmbeddedResource&gt;
+  &lt;/ItemGroup&gt;</code></pre>
+                    <figcaption>Fig 04-035</figcaption>
+                </figure>
+                <p>The name used for the LogicalName becomes the resource identifier in your code:</p>
+                <figure>
+                    <pre><code
+                            class="csharp">image.Source = ImageSource.FromResource(&quot;torquay-at-night.jpg&quot;);</code></pre>
+                    <figcaption>Fig 04-036</figcaption>
+                </figure>
+                <p>Once this fix was in place the image was displayed and the app worked as desired.</p>
+                <p>Oddly the the following diagnostic code still failed to list the resource as found even though the
+                image now displays successfully:</p>
+                <figure>
+                <pre><code class="csharp">var assembly = typeof(EmbeddedImagesPage).GetType().Assembly;
+    foreach (var res in assembly.GetManifestResourceNames())
+        System.Diagnostics.Debug.WriteLine("found resource: " + res);</code></pre>
+                    <figcaption>Fig 04-037</figcaption>
+                </figure>
                 <h3>Embedded Images in XAML</h3>
                 <p></p>
                 <h3>Platform-specific Images</h3>
