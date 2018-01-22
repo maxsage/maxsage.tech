@@ -6,11 +6,198 @@
             </div>
             <div class="panel-body">
                 <h3>Introduction</h3>
-                <p></p>
+                <p>The applications we have built so far have been single page apps. However a lot of real world
+                    applications have more than one page. In this section you will learn about hierarchical
+                    navigation to take the user from one page to another, you'll learn about master-detail pages, tabs,
+                    carousel pages, dsiplaying alerts and action sheets, and finally toolbars.
+                </p>
                 <h3>Hierarchical Navigation</h3>
-                <p></p>
+                <p>Ok let's start with what we call hierarchical navigation:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-001.png"/>
+                    <figcaption>Fig 06-001</figcaption>
+                </figure>
+                <p>In the screen shown above we have a label and a button. When the button is clicked the app
+                    navigates to another page:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-002.png"/>
+                    <figcaption>Fig 06-002</figcaption>
+                </figure>
+                <p>This page displays a title (Introduction) and a button that takes us back to where we came from.
+                    Also in the middle of the page we have a link and another back Button. This is what we call
+                    hierarchical navigation. You have probably seen this in a lot of applications where the first
+                    time you run them they take you through a tour of how the application works. Another example is
+                    a login screen. So when you login successfully the application navigates you to the next page. </p>
+                <p>Here is the same app running in Android:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-003.png"/>
+                    <figcaption>Fig 06-003</figcaption>
+                </figure>
+                <p>You can see they are pretty similar apart from, that by default the navigation bar in Android has
+                    a blue background.</p>
+                <p>We have control over the colour of the navigation bar, the colour of the text, the visibility of the
+                    navigation bar etc. </p>
+                <p>First of all add two Content Pages:</p>
+                <ul>
+                    <li>HierarchicalNavigationWelcomePage.xaml</li>
+                    <li>HierarchicalNavigationIntroductionPage.xaml</li>
+                </ul>
+                <p>The HierarchicalNavigationWelcomePage just contains a StackLayout with a Label and a Button:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;UdemyXamarinForms.PagHierarchicalNavigationWelcomePage&quot;&gt;
+        &lt;StackLayout&gt;
+            &lt;Label Text=&quot;Welcome&quot; HorizontalOptions=&quot;Center&quot; /&gt;
+            &lt;Button Text=&quot;Next&quot; Clicked=&quot;Button_Clicked&quot; /&gt;
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;</code></pre>
+                <figcaption>Fig 06-004</figcaption>
+                </figure>
+                <p>The HierarchicalNavigationIntroductionPage has the same structure:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;UdemyXamarinForms.HierarchicalNavigationIntroductionPage&quot;&gt;
+    &lt;StackLayout HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;&gt;
+        &lt;Label Text=&quot;This is how the app works.&quot; /&gt;
+        &lt;Button Text=&quot;Back&quot; Clicked=&quot;Button_Clicked&quot; /&gt;
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;</code></pre>
+                <figcaption>Fig 06-005</figcaption>
+                </figure>
+                <p>We add a Title attribute for each ContentPage. For HierarchicalNavigationWelcomePage:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage Title=&quot;Welcome&quot;</code></pre>
+                <figcaption>Fig 06-006</figcaption>
+                </figure>
+                <p>And for HierarchicalNavigationIntroductionPage:</p>
+                <figure>
+                <pre><code class="csharp">&lt;ContentPage Title=&quot;Introduction&quot;</code></pre>
+                <figcaption>Fig 06-007</figcaption>
+                </figure>
+                <p>Next in the code-behind for HierarchicalNavigationWelcomePage we implement the event handler for
+                    our button:
+                </p>
+                <figure>
+                <pre><code class="csharp">await Navigation.PushAsync(new HierarchicalNavigationIntroductionPage());</code></pre>
+                <figcaption>Fig 06-008</figcaption>
+                </figure>
+                <p>When our use clicks this button we want to navigate to the next page. To do this we use the
+                    Navigation property of the page. Each Content Page has a navigation property which is of type
+                    INavigation. We use the PushAsync() method passing in  a reference to the page. This method is
+                    an async so we need to add the async and await keywords.</p>
+                <p>Next on the HierarchicalNavigationIntroductionPage again we have a handler for the Back button.
+                    Normally we do not put a back button on a page explicitly. This is because all platforms
+                    display a back button on the navigation bar plus Android and Windows actually do have a
+                    physical back button. We have added this Back button explicitly to better illustrate how
+                    navigation works:</p>
+                <figure>
+                <pre><code class="csharp">async void Button_Clicked(object sender, EventArgs e)
+{
+    await Navigation.PopAsync();
+}</code></pre>
+                <figcaption>Fig 06-009</figcaption>
+                </figure>
+                <p>As you might have guessed hierarchical navigation uses a stack structure to manage navigation. So
+                we push pages onto the Stack:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-010.png"/>
+                    <figcaption>Fig 06-010</figcaption>
+                </figure>
+                <p>And then pop the one that is on the top of the Stack (which is called the Active Page). </p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-011.png"/>
+                    <figcaption>Fig 06-011</figcaption>
+                </figure>
+                <p>In our App.cs class, where we set our MainPage, we need to wrap our Welcome page inside a new
+                    NavigationPage:
+                </p>
+                <figure>
+                <pre><code class="csharp">MainPage = new NavigationPage(new
+                    UdemyXamarinForms.HierarchicalNavigationWelcomePage());</code></pre>
+                <figcaption>Fig 06-012</figcaption>
+                </figure>
+                <p>Now if we run the application we see the welcome page with our Navigation bar and page title:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-013.png"/>
+                    <figcaption>Fig 06-013</figcaption>
+                </figure>
+                <p>If we click next we see the Introduction page:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-014.png"/>
+                    <figcaption>Fig 06-014</figcaption>
+                </figure>
+                <p>So we Push a page on the Stack or Pop the one on the top.</p>
+                <p>Now, what if you want to hide this navigation bar:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-015.png"/>
+                    <figcaption>Fig 06-015</figcaption>
+                </figure>
+                <p>We use the NavigationPage.HasNavigationBar Attached Bindable Property on the ContentPage
+                    element:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage NavigationPage.HasNavigationBar=&quot;false"</code></pre>
+                <figcaption>Fig 06-016</figcaption>
+                </figure>
+                <p>Now if you run the application you can see the Welcome page no longer displays a NavigationBar:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-017.png"/>
+                    <figcaption>Fig 06-017</figcaption>
+                </figure>
+                <p>However, if we navigate to the Introduction page the Navigation Bar is still present:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-018.png"/>
+                    <figcaption>Fig 06-018</figcaption>
+                </figure>
+                <p>The NavigationBar has to be removed explicitly on every page.</p>
+                <p>If we want to change the Navigation Bar text or background color we need to go back to the App.cs
+                    class and set the required properties there:
+                </p>
+                <figure>
+                <pre><code class="csharp">MainPage = new NavigationPage(new UdemyXamarinForms.HierarchicalNavigationWelcomePage())
+    {
+        BarBackgroundColor = Color.Purple,
+        BarTextColor = Color.Plum
+    };</code></pre>
+                <figcaption>Fig 06-019</figcaption>
+                </figure>
+                <p>Next, if you wish to hide the back button that is displayed in the Navigation Bar by default:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-020.png"/>
+                    <figcaption>Fig 06-020</figcaption>
+                </figure>
+                <p>To do this we use the Attached Bindable Properties of the Navigation class on ContentPage to hide
+                the Back button:</p>
+                <figure>
+                <pre><code class="xml">&lt;ContentPage Title=&quot;Introduction&quot;
+        NavigationPage.HasBackButton=&quot;False&quot;</code></pre>
+                <figcaption>Fig 06-021</figcaption>
+                </figure>
+                <p>Now run the application, click next and you will see the back button is no longer displayed in
+                    the Navigation Bar:
+                </p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-022.png"/>
+                    <figcaption>Fig 06-022</figcaption>
+                </figure>
+                <p>However, if you run the application in Android (or Windows) there is a physical back button on the
+                    device. To disable this as well we must override th OnBackButtonPressed method.</p>
+                <figure>
+                <pre><code class="csharp">protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }</code></pre>
+                <figcaption>Fig 06-023</figcaption>
+                </figure>
+                <p>The default method stub returns base.OnBackButtonPressed() which triggers the default behaviour
+                    of the device which will take us back to the previous page. However in our method override we
+                    return true which disables the Back button functionality.</p>
+                <p>Next we will discuss displaying modal pages.</p>
                 <h3>Modal Pages</h3>
-                <p></p>
+                <p>Now we will discuss displaying Modal Pages.</p>
                 <h3>A Simple Master Detail</h3>
                 <p></p>
                 <h3>Master Detail Page</h3>
