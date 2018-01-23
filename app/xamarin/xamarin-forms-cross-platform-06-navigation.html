@@ -187,9 +187,9 @@
                     device. To disable this as well we must override th OnBackButtonPressed method.</p>
                 <figure>
                 <pre><code class="csharp">protected override bool OnBackButtonPressed()
-    {
-        return true;
-    }</code></pre>
+{
+    return true;
+}</code></pre>
                 <figcaption>Fig 06-023</figcaption>
                 </figure>
                 <p>The default method stub returns base.OnBackButtonPressed() which triggers the default behaviour
@@ -197,11 +197,303 @@
                     return true which disables the Back button functionality.</p>
                 <p>Next we will discuss displaying modal pages.</p>
                 <h3>Modal Pages</h3>
-                <p>Now we will discuss displaying Modal Pages.</p>
+                <p>Now we will discuss displaying Modal Pages. Here is the app from the previous lecture:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-024.png"/>
+                  <figcaption>Fig 06-024</figcaption>
+                </figure>
+                <p>I've made a slight modification here - look what happens when I tap the next button:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-025.png"/>
+                  <figcaption>Fig 06-025</figcaption>
+                </figure>
+                <p>The introduction page pops from the bottom of the page and we no longer have the navigation bar
+                    here. So it forces the user to take some action whether that be filling another form or tapping
+                    another button or something. The point here is that the user cannot navigate away until
+                    completing that task.
+                </p>
+                <p>If you want to display a modal page all you have to do is replace the PushAsync method with
+                    PushModalAsync:</p>
+                <figure>
+                    <pre><code class="csharp">await Navigation.PushModalAsync(new ModalIntroductionPage());</code></pre>
+                    <figcaption>Fig 06-026</figcaption>
+                </figure>
+                <p>With a modal page because we no longer have a navigation bar we should explicitly add a button
+                    that will let the user navigate away. We modify the Button clicked code from the previous
+                    example to call PopModalAsync:</p>
+                <figure>
+                    <pre><code class="csharp">await Navigation.PopModalAsync();</code></pre>
+                    <figcaption>Fig 06-027</figcaption>
+                </figure>
+                <p>You should also disable OnBackButtonPressed, as discussed previously:</p>
+                <figure>
+                <pre><code class="csharp">protected override bool OnBackButtonPressed()
+{
+    return true;
+}</code></pre>
+                    <figcaption>Fig 06-028</figcaption>
+                </figure>
                 <h3>A Simple Master Detail</h3>
-                <p></p>
+                <p>In a lot of applications we have what we call master/detail. So here is the list of contacts that
+                we built in the last section:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-029.png"/>
+                  <figcaption>Fig 06-029</figcaption>
+                </figure>
+                <p>If I tap on a contact we go to a new page where we can see details about that contact. Here for
+                    simplicity I am only displaying the contacts name. We could display any number of properties
+                    here but the technique for implementing master/detail remains the same. Also note that the page
+                    title is set to the Contacts name:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-030.png"/>
+                  <figcaption>Fig 06-030</figcaption>
+                </figure>
+                <p>First add two pages to the project:</p>
+                <ul>
+                    <li>ContactPage.xaml - where we have a ListView to display the list of contacts.</li>
+                    <li>ContactDetailPage.xaml - where we have a label to display the contacts name.</li>
+                </ul>
+                <p>Add the following Xaml in the ContactPage:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                 xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                 x:Class=&quot;UdemyXamarinForms.ContactPage&quot;&gt;
+    &lt;ListView x:Name=&quot;listView&quot; ItemSelected=&quot;listView_ItemSelected&quot;&gt;
+        &lt;ListView.ItemTemplate&gt;
+            &lt;DataTemplate&gt;
+                &lt;TextCell Text=&quot;{Binding Name}&quot; Detail=&quot;{Binding Status}&quot;/&gt;
+            &lt;/DataTemplate&gt;
+        &lt;/ListView.ItemTemplate&gt;
+    &lt;/ListView&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 06-031</figcaption>
+                </figure>
+                <p>Next add the following code to the code-behind:</p>
+                <figure>
+                <pre><code class="csharp">public ContactPage ()
+{
+    InitializeComponent ();
+
+    listView.ItemsSource = new List&lt;Contact&gt;
+    {
+        new Contact { Name = &quot;Mosh&quot;, ImageUrl = &quot;http://lorempixel.com/100/100/people/1&quot; },
+        new Contact { Name = &quot;John&quot;, ImageUrl = &quot;http://lorempixel.com/100/100/people/2&quot;, Status = &quot;Hey let's talk!&quot; }
+    };
+}
+
+async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+{
+    if (e.SelectedItem == null)
+        return;
+
+    var contact = e.SelectedItem as Contact;
+    await Navigation.PushAsync(new ContactDetailPage(contact));
+    listView.SelectedItem = null;
+}</code></pre>
+                    <figcaption>Fig 06-032</figcaption>
+                </figure>
+                <p>First we handle the selection. We get the currently selected Contact. We then send the user to
+                    the target page using the Navigation.PushAsync method. As part of the navigation we need to send
+                    this Contact to the target page. There are several methods that XamarinForms offers to achieve
+                    this but my preferred way is to pass the Contact through as a method argument:
+                </p>
+                <p>Next, add the following code to the code-behind of the ContactDetailPage:</p>
+                <figure>
+                <pre><code class="csharp">	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class ContactDetailPage : ContentPage
+	{
+		public ContactDetailPage(Contact contact)
+		{
+            if (contact == null)
+                throw new ArgumentNullException();
+
+            BindingContext = contact;
+
+			InitializeComponent ();
+		}
+
+
+	}</code></pre>
+                    <figcaption>Fig 06-034</figcaption>
+                </figure>
+                <p>In the code above code we add a Contact argument to the constructor. We are also checking that the
+                Contact is not null - throwing an exception if it is.</p>
+                <p>Next it is the responsibility of this class to set it's Binding Context:</p>
+                <figure>
+                    <pre><code class="csharp">BindingContext = contact;</code></pre>
+                    <figcaption>Fig 06-035</figcaption>
+                </figure>
+                <p>Next in the ContactDetailPage add the following Xaml:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;ContentPage Title=&quot;{Binding Name}&quot;
+                 xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                 xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                 x:Class=&quot;UdemyXamarinForms.ContactDetailPage&quot;&gt;
+    &lt;Label Text=&quot;{Binding Name}&quot;/&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 06-036</figcaption>
+                </figure>
+                <p>We use a Binding Expression here to bind the Text property of the Label to the Name of the
+                    Contact. We also use a Binding Expression to set the Title of the page.</p>
+                <p>Finally in the App class we wrap the ContactPage in a new Navigation Page:</p>
+                <figure>
+                    <pre><code class="csharp">MainPage = new NavigationPage(new ContactPage());</code></pre>
+                    <figcaption>Fig 06-037</figcaption>
+                </figure>
+                <p>Now if we run the application:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-038.png"/>
+                  <figcaption>Fig 06-038</figcaption>
+                </figure>
+                <p>The tap a contact:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-039.png"/>
+                  <figcaption>Fig 06-039</figcaption>
+                </figure>
+                <p>Finally we set the ListView SelectedItem to null so that no items are selected when we return
+                    from the detail page:
+                </p>
+                <figure>
+                    <pre><code class="csharp">listView.SelectedItem = null;</code></pre>
+                    <figcaption>Fig 06-040</figcaption>
+                </figure>
+                <p>This code will result in another ItemSelected event being fired so we add code to the top of the
+                method to handle this:</p>
+                <figure>
+                <pre><code class="csharp">if (e.SelectedItem == null)
+                return;</code></pre>
+                    <figcaption>Fig 06-041</figcaption>
+                </figure>
+                <p>So this is how we implement a very simple master/detail. We also have a type of page called
+                    MasterDetailPage - which is the topic of the next lecture.</p>
                 <h3>Master Detail Page</h3>
-                <p></p>
+                <p>We have a type of page in XamarinForms known as MasterDetailPage. The page provides a slightly
+                    different experience than the Master Detail example from the previous section:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-042.png"/>
+                  <figcaption>Fig 06-042</figcaption>
+                </figure>
+                <p>So on the left side is our list of Contacts and on the right side you see a preview of the
+                    detail page. When we select a Contact we are navigated to the detail page. We have a link on the
+                    detail page which takes us back to the MasterPage.
+                </p>
+                <p>The preview looks a bit strange on a mobile device but if you run the app on a tablet this is how
+                it looks:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-043.png"/>
+                  <figcaption>Fig 06-043</figcaption>
+                </figure>
+                <p>We have the Master panel on the left side and the Detail panel on the right side. To implement
+                    this we can modify a version of the ContactPage that we built in the previous example. Add a new
+                ContentPage called ContactPage2.xaml:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+                    &lt;MasterDetailPage
+                            xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                            xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                            x:Class=&quot;UdemyXamarinForms.ContactPage2&quot;
+                            IsPresented=&quot;True&quot;&gt;
+    &lt;MasterDetailPage.Master&gt;
+        &lt;ContentPage Title=&quot;Contacts&quot;&gt;
+            &lt;ListView x:Name=&quot;listView&quot; ItemSelected=&quot;listView_ItemSelected&quot;&gt;
+                &lt;ListView.ItemTemplate&gt;
+                    &lt;DataTemplate&gt;
+                        &lt;TextCell Text=&quot;{Binding Name}&quot; Detail=&quot;{Binding Status}&quot;/&gt;
+                    &lt;/DataTemplate&gt;
+                &lt;/ListView.ItemTemplate&gt;
+            &lt;/ListView&gt;
+        &lt;/ContentPage&gt;
+    &lt;/MasterDetailPage.Master&gt;
+    &lt;MasterDetailPage.Detail&gt;
+        &lt;ContentPage/&gt;
+    &lt;/MasterDetailPage.Detail&gt;
+&lt;/MasterDetailPage&gt;</code></pre>
+                    <figcaption>Fig 06-044</figcaption>
+                </figure>
+                <p>In the code-behind add the following code:</p>
+                <figure>
+                <pre><code class="csharp">[XamlCompilation(XamlCompilationOptions.Compile)]
+public partial class ContactPage2 : MasterDetailPage
+{
+    public ContactPage2 ()
+    {
+        InitializeComponent ();
+
+        listView.ItemsSource = new List&lt;Contact&gt;
+        {
+            new Contact { Name = &quot;Mosh&quot;, ImageUrl = &quot;http://lorempixel.com/100/100/people/1&quot; },
+            new Contact { Name = &quot;John&quot;, ImageUrl = &quot;http://lorempixel.com/100/100/people/2&quot;, Status = &quot;Hey let's talk!&quot; }
+        };
+    }
+
+    void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        var contact = e.SelectedItem as Contact;
+        Detail = new NavigationPage(new ContactDetailPage(contact));
+        IsPresented = false; // IsMasterPresented
+    }
+}</code></pre>
+                    <figcaption>Fig 06-045</figcaption>
+                </figure>
+                <p>We have promoted the page from a Content Page to a MasterDetailPage. In XamarinForms there is an
+                    abstract class called Page which has a few different derivatives:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-046.png"/>
+                  <figcaption>Fig 06-046</figcaption>
+                </figure>
+                <p>One of them is ContentPage which is the one we have used most of the time so far. Another is
+                    MasterDetailPage which is what we are using in this demo.</p>
+                <p>The MasterDetailPage has two properties: Master and Detail both of which are of type Page which
+                    means you can assign them to an instance of any derivative of the Page class.</p>
+                <p>We also go into code-behind and change the parent of this class from ContentPage to
+                    MasterDetailPage:</p>
+                <figure>
+                    <pre><code class="csharp">public partial class ContactPage2 : MasterDetailPage</code></pre>
+                    <figcaption>Fig 06-047</figcaption>
+                </figure>
+                <p>Now we need to set the Master and Detail property of the Page. We do this in the Xaml using
+                    Property Element Syntax:
+                </p>
+                <figure>
+                <pre><code class="xml">&lt;MasterDetailPage.Master&gt;
+&lt;/MasterDetailPage.Master&gt;
+&lt;MasterDetailPage.Detail&gt;
+&lt;/MasterDetailPage.Detail&gt;</code></pre>
+                    <figcaption>Fig 06-048</figcaption>
+                </figure>
+                <p>Now in the Master we want a page with the list of Contacts - we can move our existing code into
+                    the MasterDetailPage.Master section:</p>
+                <figure>
+                <pre><code class="xml">MasterDetailPage.Master&gt;
+&lt;ContentPage Title=&quot;Contacts&quot;&gt;
+    &lt;ListView x:Name=&quot;listView&quot; ItemSelected=&quot;listView_ItemSelected&quot;&gt;
+        &lt;ListView.ItemTemplate&gt;
+            &lt;DataTemplate&gt;
+                &lt;TextCell Text=&quot;{Binding Name}&quot; Detail=&quot;{Binding Status}&quot;/&gt;
+            &lt;/DataTemplate&gt;
+        &lt;/ListView.ItemTemplate&gt;
+    &lt;/ListView&gt;
+&lt;/ContentPage&gt;
+                    &lt;/MasterDetailPage.Master&gt;</code></pre>
+                    <figcaption>Fig 06-049</figcaption>
+                </figure>
+                <p>Don't forget to move the xml namespace declarations and x:Class declaration from the ContentPage
+                    element to the root MasterDetailPage.</p>
+                <p>New we need to set the Detail page. The detail page needs to be set dynamically so we will do
+                    that in the code-behind. However the MasterDetailPage has a strict requirement that the Detail
+                    element in Xaml must be set to something (it cannot be left null). So in this example we just
+                    set it to a blank ContentPage:</p>
+                <figure>
+                <pre><code class="xml">    &lt;MasterDetailPage.Detail&gt;
+    &lt;ContentPage/&gt;
+&lt;/MasterDetailPage.Detail&gt;</code></pre>
+                    <figcaption>Fig 06-050</figcaption>
+                </figure>
+
+
+
                 <h3>Tabbed Page</h3>
                 <p></p>
                 <h3>Carousel Page</h3>
