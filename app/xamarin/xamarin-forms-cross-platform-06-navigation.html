@@ -7,9 +7,9 @@
             <div class="panel-body">
                 <h3>Introduction</h3>
                 <p>The applications we have built so far have been single page apps. However a lot of real world
-                    applications have more than one page. In this section you will learn about hierarchical
-                    navigation to take the user from one page to another, you'll learn about master-detail pages, tabs,
-                    carousel pages, dsiplaying alerts and action sheets, and finally toolbars.
+                    applications have more than one page. In this section you will learn about hierarchical navigation
+                    to take the user from one page to another, you'll learn about master-detail pages, tabs, carousel
+                    pages, dsiplaying alerts and action sheets, and finally toolbars.
                 </p>
                 <h3>Hierarchical Navigation</h3>
                 <p>Ok let's start with what we call hierarchical navigation:</p>
@@ -17,24 +17,24 @@
                     <img src="app/xamarin/images/06/Fig06-001.png"/>
                     <figcaption>Fig 06-001</figcaption>
                 </figure>
-                <p>In the screen shown above we have a label and a button. When the button is clicked the app
-                    navigates to another page:</p>
+                <p>In the screen shown above we have a label and a button. When the button is clicked the app navigates
+                    to another page:</p>
                 <figure>
                     <img src="app/xamarin/images/06/Fig06-002.png"/>
                     <figcaption>Fig 06-002</figcaption>
                 </figure>
-                <p>This page displays a title (Introduction) and a button that takes us back to where we came from.
-                    Also in the middle of the page we have a link and another back Button. This is what we call
-                    hierarchical navigation. You have probably seen this in a lot of applications where the first
-                    time you run them they take you through a tour of how the application works. Another example is
-                    a login screen. So when you login successfully the application navigates you to the next page. </p>
+                <p>This page displays a title (Introduction) and a button that takes us back to where we came from. Also
+                    in the middle of the page we have a link and another back Button. This is what we call hierarchical
+                    navigation. You have probably seen this in a lot of applications where the first time you run them
+                    they take you through a tour of how the application works. Another example is a login screen. So
+                    when you login successfully the application navigates you to the next page. </p>
                 <p>Here is the same app running in Android:</p>
                 <figure>
                     <img src="app/xamarin/images/06/Fig06-003.png"/>
                     <figcaption>Fig 06-003</figcaption>
                 </figure>
-                <p>You can see they are pretty similar apart from, that by default the navigation bar in Android has
-                    a blue background.</p>
+                <p>You can see they are pretty similar apart from, that by default the navigation bar in Android has a
+                    blue background.</p>
                 <p>We have control over the colour of the navigation bar, the colour of the text, the visibility of the
                     navigation bar etc. </p>
                 <p>First of all add two Content Pages:</p>
@@ -53,7 +53,7 @@
             &lt;Button Text=&quot;Next&quot; Clicked=&quot;Button_Clicked&quot; /&gt;
     &lt;/StackLayout&gt;
 &lt;/ContentPage&gt;</code></pre>
-                <figcaption>Fig 06-004</figcaption>
+                    <figcaption>Fig 06-004</figcaption>
                 </figure>
                 <p>The HierarchicalNavigationIntroductionPage has the same structure:</p>
                 <figure>
@@ -66,43 +66,43 @@
         &lt;Button Text=&quot;Back&quot; Clicked=&quot;Button_Clicked&quot; /&gt;
     &lt;/StackLayout&gt;
 &lt;/ContentPage&gt;</code></pre>
-                <figcaption>Fig 06-005</figcaption>
+                    <figcaption>Fig 06-005</figcaption>
                 </figure>
                 <p>We add a Title attribute for each ContentPage. For HierarchicalNavigationWelcomePage:</p>
                 <figure>
-                <pre><code class="xml">&lt;ContentPage Title=&quot;Welcome&quot;</code></pre>
-                <figcaption>Fig 06-006</figcaption>
+                    <pre><code class="xml">&lt;ContentPage Title=&quot;Welcome&quot;</code></pre>
+                    <figcaption>Fig 06-006</figcaption>
                 </figure>
                 <p>And for HierarchicalNavigationIntroductionPage:</p>
                 <figure>
-                <pre><code class="csharp">&lt;ContentPage Title=&quot;Introduction&quot;</code></pre>
-                <figcaption>Fig 06-007</figcaption>
+                    <pre><code class="csharp">&lt;ContentPage Title=&quot;Introduction&quot;</code></pre>
+                    <figcaption>Fig 06-007</figcaption>
                 </figure>
-                <p>Next in the code-behind for HierarchicalNavigationWelcomePage we implement the event handler for
-                    our button:
+                <p>Next in the code-behind for HierarchicalNavigationWelcomePage we implement the event handler for our
+                    button:
                 </p>
                 <figure>
-                <pre><code class="csharp">await Navigation.PushAsync(new HierarchicalNavigationIntroductionPage());</code></pre>
-                <figcaption>Fig 06-008</figcaption>
+                    <pre><code
+                            class="csharp">await Navigation.PushAsync(new HierarchicalNavigationIntroductionPage());</code></pre>
+                    <figcaption>Fig 06-008</figcaption>
                 </figure>
                 <p>When our use clicks this button we want to navigate to the next page. To do this we use the
                     Navigation property of the page. Each Content Page has a navigation property which is of type
-                    INavigation. We use the PushAsync() method passing in  a reference to the page. This method is
-                    an async so we need to add the async and await keywords.</p>
+                    INavigation. We use the PushAsync() method passing in a reference to the page. This method is an
+                    async so we need to add the async and await keywords.</p>
                 <p>Next on the HierarchicalNavigationIntroductionPage again we have a handler for the Back button.
-                    Normally we do not put a back button on a page explicitly. This is because all platforms
-                    display a back button on the navigation bar plus Android and Windows actually do have a
-                    physical back button. We have added this Back button explicitly to better illustrate how
-                    navigation works:</p>
+                    Normally we do not put a back button on a page explicitly. This is because all platforms display a
+                    back button on the navigation bar plus Android and Windows actually do have a physical back button.
+                    We have added this Back button explicitly to better illustrate how navigation works:</p>
                 <figure>
                 <pre><code class="csharp">async void Button_Clicked(object sender, EventArgs e)
 {
     await Navigation.PopAsync();
 }</code></pre>
-                <figcaption>Fig 06-009</figcaption>
+                    <figcaption>Fig 06-009</figcaption>
                 </figure>
-                <p>As you might have guessed hierarchical navigation uses a stack structure to manage navigation. So
-                we push pages onto the Stack:</p>
+                <p>As you might have guessed hierarchical navigation uses a stack structure to manage navigation. So we
+                    push pages onto the Stack:</p>
                 <figure>
                     <img src="app/xamarin/images/06/Fig06-010.png"/>
                     <figcaption>Fig 06-010</figcaption>
@@ -118,7 +118,7 @@
                 <figure>
                 <pre><code class="csharp">MainPage = new NavigationPage(new
                     UdemyXamarinForms.HierarchicalNavigationWelcomePage());</code></pre>
-                <figcaption>Fig 06-012</figcaption>
+                    <figcaption>Fig 06-012</figcaption>
                 </figure>
                 <p>Now if we run the application we see the welcome page with our Navigation bar and page title:</p>
                 <figure>
@@ -136,11 +136,10 @@
                     <img src="app/xamarin/images/06/Fig06-015.png"/>
                     <figcaption>Fig 06-015</figcaption>
                 </figure>
-                <p>We use the NavigationPage.HasNavigationBar Attached Bindable Property on the ContentPage
-                    element:</p>
+                <p>We use the NavigationPage.HasNavigationBar Attached Bindable Property on the ContentPage element:</p>
                 <figure>
-                <pre><code class="xml">&lt;ContentPage NavigationPage.HasNavigationBar=&quot;false"</code></pre>
-                <figcaption>Fig 06-016</figcaption>
+                    <pre><code class="xml">&lt;ContentPage NavigationPage.HasNavigationBar=&quot;false"</code></pre>
+                    <figcaption>Fig 06-016</figcaption>
                 </figure>
                 <p>Now if you run the application you can see the Welcome page no longer displays a NavigationBar:</p>
                 <figure>
@@ -162,22 +161,22 @@
         BarBackgroundColor = Color.Purple,
         BarTextColor = Color.Plum
     };</code></pre>
-                <figcaption>Fig 06-019</figcaption>
+                    <figcaption>Fig 06-019</figcaption>
                 </figure>
                 <p>Next, if you wish to hide the back button that is displayed in the Navigation Bar by default:</p>
                 <figure>
                     <img src="app/xamarin/images/06/Fig06-020.png"/>
                     <figcaption>Fig 06-020</figcaption>
                 </figure>
-                <p>To do this we use the Attached Bindable Properties of the Navigation class on ContentPage to hide
-                the Back button:</p>
+                <p>To do this we use the Attached Bindable Properties of the Navigation class on ContentPage to hide the
+                    Back button:</p>
                 <figure>
                 <pre><code class="xml">&lt;ContentPage Title=&quot;Introduction&quot;
         NavigationPage.HasBackButton=&quot;False&quot;</code></pre>
-                <figcaption>Fig 06-021</figcaption>
+                    <figcaption>Fig 06-021</figcaption>
                 </figure>
-                <p>Now run the application, click next and you will see the back button is no longer displayed in
-                    the Navigation Bar:
+                <p>Now run the application, click next and you will see the back button is no longer displayed in the
+                    Navigation Bar:
                 </p>
                 <figure>
                     <img src="app/xamarin/images/06/Fig06-022.png"/>
@@ -190,27 +189,27 @@
 {
     return true;
 }</code></pre>
-                <figcaption>Fig 06-023</figcaption>
+                    <figcaption>Fig 06-023</figcaption>
                 </figure>
-                <p>The default method stub returns base.OnBackButtonPressed() which triggers the default behaviour
-                    of the device which will take us back to the previous page. However in our method override we
-                    return true which disables the Back button functionality.</p>
+                <p>The default method stub returns base.OnBackButtonPressed() which triggers the default behaviour of
+                    the device which will take us back to the previous page. However in our method override we return
+                    true which disables the Back button functionality.</p>
                 <p>Next we will discuss displaying modal pages.</p>
                 <h3>Modal Pages</h3>
                 <p>Now we will discuss displaying Modal Pages. Here is the app from the previous lecture:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-024.png"/>
-                  <figcaption>Fig 06-024</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-024.png"/>
+                    <figcaption>Fig 06-024</figcaption>
                 </figure>
                 <p>I've made a slight modification here - look what happens when I tap the next button:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-025.png"/>
-                  <figcaption>Fig 06-025</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-025.png"/>
+                    <figcaption>Fig 06-025</figcaption>
                 </figure>
-                <p>The introduction page pops from the bottom of the page and we no longer have the navigation bar
-                    here. So it forces the user to take some action whether that be filling another form or tapping
-                    another button or something. The point here is that the user cannot navigate away until
-                    completing that task.
+                <p>The introduction page pops from the bottom of the page and we no longer have the navigation bar here.
+                    So it forces the user to take some action whether that be filling another form or tapping another
+                    button or something. The point here is that the user cannot navigate away until completing that
+                    task.
                 </p>
                 <p>If you want to display a modal page all you have to do is replace the PushAsync method with
                     PushModalAsync:</p>
@@ -218,9 +217,9 @@
                     <pre><code class="csharp">await Navigation.PushModalAsync(new ModalIntroductionPage());</code></pre>
                     <figcaption>Fig 06-026</figcaption>
                 </figure>
-                <p>With a modal page because we no longer have a navigation bar we should explicitly add a button
-                    that will let the user navigate away. We modify the Button clicked code from the previous
-                    example to call PopModalAsync:</p>
+                <p>With a modal page because we no longer have a navigation bar we should explicitly add a button that
+                    will let the user navigate away. We modify the Button clicked code from the previous example to call
+                    PopModalAsync:</p>
                 <figure>
                     <pre><code class="csharp">await Navigation.PopModalAsync();</code></pre>
                     <figcaption>Fig 06-027</figcaption>
@@ -234,19 +233,19 @@
                     <figcaption>Fig 06-028</figcaption>
                 </figure>
                 <h3>A Simple Master Detail</h3>
-                <p>In a lot of applications we have what we call master/detail. So here is the list of contacts that
-                we built in the last section:</p>
+                <p>In a lot of applications we have what we call master/detail. So here is the list of contacts that we
+                    built in the last section:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-029.png"/>
-                  <figcaption>Fig 06-029</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-029.png"/>
+                    <figcaption>Fig 06-029</figcaption>
                 </figure>
                 <p>If I tap on a contact we go to a new page where we can see details about that contact. Here for
-                    simplicity I am only displaying the contacts name. We could display any number of properties
-                    here but the technique for implementing master/detail remains the same. Also note that the page
-                    title is set to the Contacts name:</p>
+                    simplicity I am only displaying the contacts name. We could display any number of properties here
+                    but the technique for implementing master/detail remains the same. Also note that the page title is
+                    set to the Contacts name:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-030.png"/>
-                  <figcaption>Fig 06-030</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-030.png"/>
+                    <figcaption>Fig 06-030</figcaption>
                 </figure>
                 <p>First add two pages to the project:</p>
                 <ul>
@@ -293,10 +292,10 @@ async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 }</code></pre>
                     <figcaption>Fig 06-032</figcaption>
                 </figure>
-                <p>First we handle the selection. We get the currently selected Contact. We then send the user to
-                    the target page using the Navigation.PushAsync method. As part of the navigation we need to send
-                    this Contact to the target page. There are several methods that XamarinForms offers to achieve
-                    this but my preferred way is to pass the Contact through as a method argument:
+                <p>First we handle the selection. We get the currently selected Contact. We then send the user to the
+                    target page using the Navigation.PushAsync method. As part of the navigation we need to send this
+                    Contact to the target page. There are several methods that XamarinForms offers to achieve this but
+                    my preferred way is to pass the Contact through as a method argument:
                 </p>
                 <p>Next, add the following code to the code-behind of the ContactDetailPage:</p>
                 <figure>
@@ -318,7 +317,7 @@ async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
                     <figcaption>Fig 06-034</figcaption>
                 </figure>
                 <p>In the code above code we add a Contact argument to the constructor. We are also checking that the
-                Contact is not null - throwing an exception if it is.</p>
+                    Contact is not null - throwing an exception if it is.</p>
                 <p>Next it is the responsibility of this class to set it's Binding Context:</p>
                 <figure>
                     <pre><code class="csharp">BindingContext = contact;</code></pre>
@@ -335,8 +334,8 @@ async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 &lt;/ContentPage&gt;</code></pre>
                     <figcaption>Fig 06-036</figcaption>
                 </figure>
-                <p>We use a Binding Expression here to bind the Text property of the Label to the Name of the
-                    Contact. We also use a Binding Expression to set the Title of the page.</p>
+                <p>We use a Binding Expression here to bind the Text property of the Label to the Name of the Contact.
+                    We also use a Binding Expression to set the Title of the page.</p>
                 <p>Finally in the App class we wrap the ContactPage in a new Navigation Page:</p>
                 <figure>
                     <pre><code class="csharp">MainPage = new NavigationPage(new ContactPage());</code></pre>
@@ -344,23 +343,23 @@ async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
                 </figure>
                 <p>Now if we run the application:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-038.png"/>
-                  <figcaption>Fig 06-038</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-038.png"/>
+                    <figcaption>Fig 06-038</figcaption>
                 </figure>
                 <p>The tap a contact:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-039.png"/>
-                  <figcaption>Fig 06-039</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-039.png"/>
+                    <figcaption>Fig 06-039</figcaption>
                 </figure>
-                <p>Finally we set the ListView SelectedItem to null so that no items are selected when we return
-                    from the detail page:
+                <p>Finally we set the ListView SelectedItem to null so that no items are selected when we return from
+                    the detail page:
                 </p>
                 <figure>
                     <pre><code class="csharp">listView.SelectedItem = null;</code></pre>
                     <figcaption>Fig 06-040</figcaption>
                 </figure>
                 <p>This code will result in another ItemSelected event being fired so we add code to the top of the
-                method to handle this:</p>
+                    method to handle this:</p>
                 <figure>
                 <pre><code class="csharp">if (e.SelectedItem == null)
                 return;</code></pre>
@@ -372,22 +371,22 @@ async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
                 <p>We have a type of page in XamarinForms known as MasterDetailPage. The page provides a slightly
                     different experience than the Master Detail example from the previous section:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-042.png"/>
-                  <figcaption>Fig 06-042</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-042.png"/>
+                    <figcaption>Fig 06-042</figcaption>
                 </figure>
-                <p>So on the left side is our list of Contacts and on the right side you see a preview of the
-                    detail page. When we select a Contact we are navigated to the detail page. We have a link on the
-                    detail page which takes us back to the MasterPage.
+                <p>So on the left side is our list of Contacts and on the right side you see a preview of the detail
+                    page. When we select a Contact we are navigated to the detail page. We have a link on the detail
+                    page which takes us back to the MasterPage.
                 </p>
-                <p>The preview looks a bit strange on a mobile device but if you run the app on a tablet this is how
-                it looks:</p>
+                <p>The preview looks a bit strange on a mobile device but if you run the app on a tablet this is how it
+                    looks:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-043.png"/>
-                  <figcaption>Fig 06-043</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-043.png"/>
+                    <figcaption>Fig 06-043</figcaption>
                 </figure>
-                <p>We have the Master panel on the left side and the Detail panel on the right side. To implement
-                    this we can modify a version of the ContactPage that we built in the previous example. Add a new
-                ContentPage called ContactPage2.xaml:</p>
+                <p>We have the Master panel on the left side and the Detail panel on the right side. To implement this
+                    we can modify a version of the ContactPage that we built in the previous example. Add a new
+                    ContentPage called ContactPage2.xaml:</p>
                 <figure>
                 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
                     &lt;MasterDetailPage
@@ -440,21 +439,21 @@ public partial class ContactPage2 : MasterDetailPage
                 <p>We have promoted the page from a Content Page to a MasterDetailPage. In XamarinForms there is an
                     abstract class called Page which has a few different derivatives:</p>
                 <figure>
-                  <img src="app/xamarin/images/06/Fig06-046.png"/>
-                  <figcaption>Fig 06-046</figcaption>
+                    <img src="app/xamarin/images/06/Fig06-046.png"/>
+                    <figcaption>Fig 06-046</figcaption>
                 </figure>
                 <p>One of them is ContentPage which is the one we have used most of the time so far. Another is
                     MasterDetailPage which is what we are using in this demo.</p>
-                <p>The MasterDetailPage has two properties: Master and Detail both of which are of type Page which
-                    means you can assign them to an instance of any derivative of the Page class.</p>
+                <p>The MasterDetailPage has two properties: Master and Detail both of which are of type Page which means
+                    you can assign them to an instance of any derivative of the Page class.</p>
                 <p>We also go into code-behind and change the parent of this class from ContentPage to
                     MasterDetailPage:</p>
                 <figure>
                     <pre><code class="csharp">public partial class ContactPage2 : MasterDetailPage</code></pre>
                     <figcaption>Fig 06-047</figcaption>
                 </figure>
-                <p>Now we need to set the Master and Detail property of the Page. We do this in the Xaml using
-                    Property Element Syntax:
+                <p>Now we need to set the Master and Detail property of the Page. We do this in the Xaml using Property
+                    Element Syntax:
                 </p>
                 <figure>
                 <pre><code class="xml">&lt;MasterDetailPage.Master&gt;
@@ -463,8 +462,8 @@ public partial class ContactPage2 : MasterDetailPage
 &lt;/MasterDetailPage.Detail&gt;</code></pre>
                     <figcaption>Fig 06-048</figcaption>
                 </figure>
-                <p>Now in the Master we want a page with the list of Contacts - we can move our existing code into
-                    the MasterDetailPage.Master section:</p>
+                <p>Now in the Master we want a page with the list of Contacts - we can move our existing code into the
+                    MasterDetailPage.Master section:</p>
                 <figure>
                 <pre><code class="xml">MasterDetailPage.Master&gt;
 &lt;ContentPage Title=&quot;Contacts&quot;&gt;
@@ -481,21 +480,285 @@ public partial class ContactPage2 : MasterDetailPage
                 </figure>
                 <p>Don't forget to move the xml namespace declarations and x:Class declaration from the ContentPage
                     element to the root MasterDetailPage.</p>
-                <p>New we need to set the Detail page. The detail page needs to be set dynamically so we will do
-                    that in the code-behind. However the MasterDetailPage has a strict requirement that the Detail
-                    element in Xaml must be set to something (it cannot be left null). So in this example we just
-                    set it to a blank ContentPage:</p>
+                <p>New we need to set the Detail page. The detail page needs to be set dynamically so we will do that in
+                    the code-behind. However the MasterDetailPage has a strict requirement that the Detail element in
+                    Xaml must be set to something (it cannot be left null). So in this example we just set it to a blank
+                    ContentPage:</p>
                 <figure>
                 <pre><code class="xml">    &lt;MasterDetailPage.Detail&gt;
     &lt;ContentPage/&gt;
 &lt;/MasterDetailPage.Detail&gt;</code></pre>
                     <figcaption>Fig 06-050</figcaption>
                 </figure>
-
-
-
+                <p>When an item is selected we want to replace this detail page with a different Page. To do this we
+                    modify the code behind in the ItemSelected handler. First of all in MasterDetailPages we don't want
+                    to deselect the currently selected item because if the user loads this application in a tablet
+                    (where both the Master and Detail pages are visible simultaneously) you want the master to remain
+                    selected at all times. For this reason we remove the code that sets the SelectedItem to null:
+                </p>
+                <figure>
+                    <pre><code class="csharp">listView.SelectedItem = null;</code></pre>
+                    <figcaption>Fig 06-051</figcaption>
+                </figure>
+                <p>And the code that checks if the SelectedItem is equal to null:</p>
+                <figure>
+                <pre><code class="csharp">if (e.SelectedItem == null)
+                return;</code></pre>
+                    <figcaption>Fig 06-052</figcaption>
+                </figure>
+                <p>So now we get the contact (which is the currently SelectedItem):</p>
+                <figure>
+                    <pre><code class="csharp">var contact = e.SelectedItem as Contact;</code></pre>
+                    <figcaption>Fig 06-053</figcaption>
+                </figure>
+                <p>Now instead of using the Navigation property (as in the previous example) we want to set the Detail
+                    property:</p>
+                <figure>
+                    <pre><code class="csharp">Detail = new ContactDetailPage(contact);</code></pre>
+                    <figcaption>Fig 06-054</figcaption>
+                </figure>
+                <p>We can also remove the async keyword (because we are no longer using await).</p>
+                <p>Lastly, in order to present the detail page we need to set IsPresented to false:</p>
+                <figure>
+                    <pre><code class="csharp">IsPresented = false;</code></pre>
+                    <figcaption>Fig 06-055</figcaption>
+                </figure>
+                <p>The name of this property is somewhat confusing! It would be better if this property was called
+                    IsMasterPresented. This is because when we set this to false the Master is hidden and the detail is
+                    brought into view on a mobile device. On a tablet in landscape mode both Master and Detail are
+                    presented at all times.</p>
+                <p>If we run the application at this point we will see an empty page. When we use MasterDetailPage by
+                    default the detail page is presented which looks a little bit strange because the user should always
+                    select a Master before the detail is presented.
+                </p>
+                <p>To workaround that we go into the Xaml and for the MasterDetailPage element and set IsPresented to
+                    true:</p>
+                <figure>
+                <pre><code class="xml">&lt;MasterDetailPage
+    xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+    x:Class=&quot;UdemyXamarinForms.ContactPage2&quot;
+    IsPresented=&quot;True&quot;&gt;</code></pre>
+                    <figcaption>Fig 06-056</figcaption>
+                </figure>
+                <p>In the App.cs class we no longer use a NavigationPage so we directly assign the MainPage to
+                    ContactPage2:</p>
+                <figure>
+                    <pre><code class="csharp">MainPage = new ContactPage2();</code></pre>
+                    <figcaption>Fig 06-057</figcaption>
+                </figure>
+                <p>If we run the application now:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-058.png"/>
+                    <figcaption>Fig 06-058</figcaption>
+                </figure>
+                <p>Initially we see our Contacts list is displayed with a blank area to the right of the page (this is
+                    our detail preview area). If you select an item the detail page will be displayed but there is no
+                    way to get back to the Master page:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-059.png"/>
+                    <figcaption>Fig 06-059</figcaption>
+                </figure>
+                <p>To fix this we need to go to our ItemSelected handler and wrap the ContactDetailPage inside a
+                    NavigationPage:</p>
+                <figure>
+                    <pre><code class="csharp">Detail = new NavigationPage(new ContactDetailPage(contact));</code></pre>
+                    <figcaption>Fig 06-060</figcaption>
+                </figure>
+                <p>This NavigationPage will add a navigation bar along with a Back button:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-061.png"/>
+                    <figcaption>Fig 06-061</figcaption>
+                </figure>
+                <p>Next we will look at how to add Tabs to your applications.</p>
                 <h3>Tabbed Page</h3>
-                <p></p>
+                <p>In this next app we have two tabs on the bottom of the screen - page 1 and page 2:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-062.png"/>
+                    <figcaption>Fig 06-062</figcaption>
+                </figure>
+                <p>In iOS tabs appear at the bottom of the screen and often they have an Icon. In Android and Windows
+                    they appear on the top of the screen.</p>
+                <p>Add a Content Page called TabNavigationPage.xaml:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;TabbedPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                xmlns:local=&quot;clr-namespace:UdemyXamarinForms&quot;
+                x:Class=&quot;UdemyXamarinForms.TabNavigationPage&quot;&gt;
+    &lt;NavigationPage Title=&quot;Contacts&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;x:Arguments&gt;
+            &lt;local:ContactPage&gt;&lt;/local:ContactPage&gt;
+        &lt;/x:Arguments&gt;
+    &lt;/NavigationPage&gt;
+    &lt;NavigationPage Title=&quot;Page1&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;x:Arguments&gt;
+            &lt;local:GridPage/&gt;
+        &lt;/x:Arguments&gt;
+    &lt;/NavigationPage&gt;
+
+    &lt;ContentPage Title=&quot;Page2&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;Label Text=&quot;Content of Page2&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+    &lt;/ContentPage&gt;
+&lt;/TabbedPage&gt;</code></pre>
+                    <figcaption>Fig 06-063</figcaption>
+                </figure>
+                <p>In the App.cs assign MainPage to TabNavigationPage:</p>
+                <figure>
+                    <pre><code class="csharp">MainPage = new TabNavigationPage();</code></pre>
+                    <figcaption>Fig 06-064</figcaption>
+                </figure>
+                <p>We change the type of the page to TabbedPage which is another derivative of the Page class:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-065.png"/>
+                    <figcaption>Fig 06-065</figcaption>
+                </figure>
+                <p>Also don't forget to change the parent class in code-behind from ContentPage to TabbedPage:</p>
+                <figure>
+                    <pre><code class="csharp">public partial class TabNavigationPage : TabbedPage</code></pre>
+                    <figcaption>Fig 06-066</figcaption>
+                </figure>
+                <p>TabbedPage has a property called Children which is of type IList of Page which means we can Add any
+                    derivative of the Page type (ContentPage, NavigationPage etc.) to the Children List:</p>
+                <figure>
+                <pre><code class="csharp">this.Children.Add(new ContentPage());
+this.Children.Add(new NavigationPage(new ContentPage()));
+this.Children.Add(new ContactPage());</code></pre>
+                    <figcaption>Fig 06-067</figcaption>
+                </figure>
+                <p>In real world applications, most of the time, we add these pages in the Xaml. The Children property
+                    is the ContentProperty for the TabbedPage which means we can add our pages like this:</p>
+                <figure>
+                <pre><code class="xml">&lt;TabbedPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+   xmlns:local=&quot;clr-namespace:UdemyXamarinForms&quot;
+   x:Class=&quot;UdemyXamarinForms.TabNavigationPage&quot;&gt;
+    &lt;ContentPage Title=&quot;Page1&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;Label Text=&quot;Content of Page1&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+    &lt;/ContentPage&gt;
+    &lt;ContentPage Title=&quot;Page2&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;Label Text=&quot;Content of Page2&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+    &lt;/ContentPage&gt;
+&lt;/TabbedPage</code></pre>
+                    <figcaption>Fig 06-068</figcaption>
+                </figure>
+                <p>Now if we run the application we get two tabs:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-069.png"/>
+                    <figcaption>Fig 06-069</figcaption>
+                </figure>
+                <p>In real world applications your pages would be more complex than this example. For that reason it is
+                    better to implement each page in a separate Xaml file and simply reference them here.</p>
+                <p>To achieve this we first need to add an xml namespace declaration because we are going to use a type
+                    that is not part of the standard Xaml:</p>
+                <figure>
+                    <pre><code class="xml">xmlns:local=&quot;clr-namespace:UdemyXamarinForms&quot;</code></pre>
+                    <figcaption>Fig 06-070</figcaption>
+                </figure>
+                <p>Next we add another page like so:</p>
+                <figure>
+                    <pre><code class="xml">&lt;local:ContactPage&gt;&lt;/local:ContactPage&gt;</code></pre>
+                    <figcaption>Fig 06-071</figcaption>
+                </figure>
+                <p>If we run the application we see the first tab is our MasterDetail Page as we implemented it in the
+                    previous example:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-072.png"/>
+                    <figcaption>Fig 06-072</figcaption>
+                </figure>
+                <p>The pages are independent of each other. The second tab just displays a page containing a label:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-074.png"/>
+                    <figcaption>Fig 06-074</figcaption>
+                </figure>
+                <p>What if I want to add a navigation bar here. We need to wrap this page inside a navigation page:
+                </p>
+                <figure>
+                <pre><code class="xml">&lt;NavigationPage&gt;
+    &lt;ContentPage Title=&quot;Page1&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;Label Text=&quot;Content of Page1&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+    &lt;/ContentPage&gt;
+&lt;/NavigationPage&gt;</code></pre>
+                    <figcaption>Fig 06-075</figcaption>
+                </figure>
+                <p>If we were to try and run the application now we would get an error something like this:</p>
+                <figure>
+                    <pre><code
+                            class="csharp">Can not set the content of NavigationPage as it doesn't have a ContentPropertyAttribute</code></pre>
+                    <figcaption>Fig 06-076</figcaption>
+                </figure>
+                <p>because NavigationPage needs a root page. Earlier when we created a Navigation page we passed the
+                    target page in the constructor:
+                </p>
+                <figure>
+                    <pre><code class="csharp">new NavigationPage(new ContactDetailPage());</code></pre>
+                    <figcaption>Fig 06-077</figcaption>
+                </figure>
+                <p>Now how can we pass an argument to the constructor of a class when using Xaml? We use an element that
+                    is defined in Microsoft Xaml called x:Arguments (just like we have x:Class or x:Name):</p>
+                <figure>
+                <pre><code class="xml">&lt;NavigationPage&gt;
+    &lt;x:Arguments&gt;
+        &lt;ContentPage Title=&quot;Page1&quot; Icon=&quot;clock.png&quot;&gt;
+            &lt;Label Text=&quot;Content of Page1&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot; /&gt;
+        &lt;/ContentPage&gt;
+    &lt;/x:Arguments&gt;
+&lt;/NavigationPage&gt;</code></pre>
+                    <figcaption>Fig 06-078</figcaption>
+                </figure>
+                <p>When the Xaml parser parses this file it will create a Navigation page object and it will use this
+                    ContentPage as the argument to the constructor of NavigationPage.
+                </p>
+                <p>If we run the application:</p>
+                <figure>
+                    <img src="app/xamarin/images/06/Fig06-079.png"/>
+                    <figcaption>Fig 06-079</figcaption>
+                </figure>
+                <p>Note that our second tab does not have a Title or an Icon. This is because now it is the
+                    NavigationPage element that we are adding to the Children of the TabbedPage. To resolve this we move
+                    the Title and Icon properties from the ContentPage element to the NavigationPage element:</p>
+                <figure>
+                <pre><code class="xml">&lt;NavigationPage Title=&quot;Page1&quot; Icon=&quot;clock.png&quot;&gt;
+    &lt;x:Arguments&gt;
+        &lt;ContentPage&gt;
+            &lt;Label Text=&quot;Content of Page1&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+        &lt;/ContentPage&gt;
+    &lt;/x:Arguments&gt;
+&lt;/NavigationPage&gt;</code></pre>
+                    <figcaption>Fig 06-080</figcaption>
+                </figure>
+                <p>Finally we can replace the ContentPage defined in Xaml with a reference to an external page:</p>
+                <figure>
+                <pre><code class="xml">&lt;NavigationPage Title=&quot;Page1&quot; Icon=&quot;clock.png&quot;&gt;
+        &lt;x:Arguments&gt;
+            &lt;local:GridPage/&gt;
+        &lt;/x:Arguments&gt;
+    &lt;/NavigationPage&gt;</code></pre>
+                    <figcaption>Fig 06-081</figcaption>
+                </figure>
+                <p>Obviously this page already exists in our project.</p>
+                <p><strong>Please note - </strong> ContactPage is not a very good example to use in the
+                    TabNavigationPage because without the code to in the App.cs file to wrap it in a NavigationPage:</p>
+                <figure>
+                    <pre><code class="csharp">MainPage = new NavigationPage(new ContactPage());</code></pre>
+                    <figcaption>Fig 06-082</figcaption>
+                </figure>
+                <p>We get an exception:</p>
+                <figure>
+                    <pre><code class="csharp">PushAsync is not supported globally on Android, please use a NavigationPage.</code></pre>
+                    <figcaption>Fig 06-083</figcaption>
+                </figure>
+                <p>Although not described in the Udemy video this can be resolved by wrapping the ContactPage
+                    definition in Xaml in a Navigation Page:</p>
+                <figure>
+                <pre><code class="xml">&lt;NavigationPage Title=&quot;Contacts&quot; Icon=&quot;clock.png&quot;&gt;
+    &lt;x:Arguments&gt;
+        &lt;local:ContactPage&gt;&lt;/local:ContactPage&gt;
+    &lt;/x:Arguments&gt;
+&lt;/NavigationPage&gt;</code></pre>
+                    <figcaption>Fig 06-084</figcaption>
+                </figure>
+                <p>Although this does appear to introduce some unwanted space at the top of the page display.</p>
                 <h3>Carousel Page</h3>
                 <p></p>
                 <h3>Displaying Popups</h3>
