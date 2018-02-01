@@ -760,11 +760,219 @@ this.Children.Add(new ContactPage());</code></pre>
                 </figure>
                 <p>Although this does appear to introduce some unwanted space at the top of the page display.</p>
                 <h3>Carousel Page</h3>
-                <p></p>
+                <p>Now look at this page:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-085.png"/>
+                  <figcaption>Fig 06-085</figcaption>
+                </figure>
+                <p>If I swipe to the left I go to the next page:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-086.png"/>
+                  <figcaption>Fig 06-086</figcaption>
+                </figure>
+                <p>Or if I swipe to the right I go to the previous page. This is what we call a Carousel Page. If
+                    you have used SnapChat you have seen a real world example of a Carousel Page. In terms of
+                    implementation Carousel Page is very similar to Tab Page. Add a new Content Page called
+                    CarouselPage.xaml:</p>
+                <figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;CarouselPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                  xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                  x:Class=&quot;UdemyXamarinForms.CarouselPageDemo&quot;
+                  Icon=&quot;clock.png&quot;&gt;
+    &lt;ContentPage&gt;
+        &lt;Label Text=&quot;Content of Page1&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+    &lt;/ContentPage&gt;
+    &lt;ContentPage&gt;
+        &lt;Label Text=&quot;Content of Page2&quot; HorizontalOptions=&quot;Center&quot; VerticalOptions=&quot;Center&quot;/&gt;
+    &lt;/ContentPage&gt;
+&lt;/CarouselPage&gt;</code></pre>
+                    <figcaption>Fig 06-087</figcaption>
+                </figure>
+                <p>The key difference between a CarouselPage and a TabbedPage is in the Children property - the type
+                of the Children Property is IList of ContentPage instead of IList of Page. That means we can only
+                    add ContentPage or one of it's derivatives as the Children of CarouselPage. In other words, for
+                    example, I cannot add a NavigationPage here.</p>
+                <p>Similarly to TabbedPages here you can either add a page inline or you can reference an external
+                    page.</p>
                 <h3>Displaying Popups</h3>
-                <p></p>
+                <p>In previous lectures we have worked with alerts. Now I want to show you a different type of alert:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-088.png"/>
+                  <figcaption>Fig 06-088</figcaption>
+                </figure>
+                <p>Here we have an alert with two buttons. We can use this to capture a response from the user. We
+                    also have what is called an Action Sheet:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-089.png"/>
+                  <figcaption>Fig 06-089</figcaption>
+                </figure>
+                <p>An ActionSheet allows the user to choose from several buttons.</p>
+                <p>Add a new ContentPage called ConfirmationBoxDemo:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             x:Class=&quot;UdemyXamarinForms.ConfirmationBoxDemo&quot;&gt;
+    &lt;Button Text=&quot;Click Me&quot; Clicked=&quot;Button_Clicked&quot;/&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 06-090</figcaption>
+                </figure>
+                <p>In the code-behind we handle the button clicked event. We still use the DisplayAlert method but
+                    this time we use a different overload. The DisplayAlert method has two overloads - the one that
+                    takes three parameters which we used before:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-091.png"/>
+                  <figcaption>Fig 06-091</figcaption>
+                </figure>
+                <p>And one that takes four parameters:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-092.png"/>
+                  <figcaption>Fig 06-092</figcaption>
+                </figure>
+                <p>The return type of this overload is Task of bool which means when await this method you will get
+                    a boolean result. In contrast the other overload has return tye of Task which is void.</p>
+                <p>So let's use the overload that takes four parameters:</p>
+                <figure>
+                <pre><code class="csharp">async void Button_Clicked(object sender, EventArgs e)
+{
+    var response = await DisplayAlert(&quot;Warning&quot;, &quot;Are you sure?&quot;, &quot;Yes&quot;, &quot;No&quot;);
+    if (response)
+        DisplayAlert(&quot;Done&quot;, &quot;Your response will be saved!&quot;, &quot;OK&quot;);
+}</code></pre>
+                    <figcaption>Fig 06-093</figcaption>
+                </figure>
+                <p>The yellow underline you will see under the second DisplayAlert method is there because we
+                    haven't awaited the method. In this case whether we add await or not doesn't matter because there
+                    is no code after this line. If we had additional code after this line that you wanted to be
+                    executed after the user taps the ok button then we would have to add an await to the call.</p>
+                <p>Run the application and click the button:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-094.png"/>
+                  <figcaption>Fig 06-094</figcaption>
+                </figure>
+                <p>Click yes:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-095.png"/>
+                  <figcaption>Fig 06-095</figcaption>
+                </figure>
+                <p>Now let's see how we can display an ActionSheet. Create a new ContentPage called ActionSheetDemo
+                    with the same Xaml as the previous example:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+                    &lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                                 xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                                 x:Class=&quot;UdemyXamarinForms.ActionSheetDemo&quot;&gt;
+    &lt;Button Text=&quot;Click Me&quot; Clicked=&quot;Button_Clicked&quot;/&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 06-096</figcaption>
+                </figure>
+                <p>With the following code-behind:</p>
+                <figure>
+                <pre><code class="csharp">async private void Button_Clicked(object sender, EventArgs e)
+{
+    var response = await DisplayActionSheet(&quot;Title&quot;, &quot;Cancel&quot;, &quot;Delete&quot;, &quot;Copy Link&quot;, &quot;Message&quot;, &quot;Email&quot;);
+    await DisplayAlert(&quot;Response&quot;, response, &quot;OK&quot;);
+}</code></pre>
+                    <figcaption>Fig 06-097</figcaption>
+                </figure>
+                <p>You can see the call to DisplayActionSheet which has the following parameters:</p>
+                <ul>
+                    <li>Title</li>
+                    <li>The Label for the Cancel Button</li>
+                    <li>If one of our buttons is going to perform a destructive operation (e.g. delete a record) we can
+                        add it here and it will be rendered with a different style. If you don't require a button
+                        of this type you can just pass null here.
+                    </li>
+                    <li>A parameter of type params string[] which means we can add a string array or add as many
+                        arguments as you want (this example has three buttons - "Copy Link", "Message" and "Email" .</li>
+                </ul>
+                <p>Now run the application and click the button:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-098.png"/>
+                  <figcaption>Fig 06-098</figcaption>
+                </figure>
+                <p>Note that the Delete button is rendered in red because we passed it as the third argument to the
+                    DisplayActionSheet method (string destruction).</p>
+                <p>If we tap Copy Link you can see the response in an alert:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-099.png"/>
+                  <figcaption>Fig 06-099</figcaption>
+                </figure>
+                <p>In a real-world application, depending on the response, we can do different things.</p>
                 <h3>Toolbar Items</h3>
-                <p></p>
+                <p>We are going to wrap up the section with a talk about Toolbar items. So in this demo app we have
+                a typical navigation bar but we also have a button for adding a new contact:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-100.png"/>
+                  <figcaption>Fig 06-100</figcaption>
+                </figure>
+                <p>These Toolbar items are usually used, as in this example, for adding a new object. Create a new
+                    Content Page called ToolbarItemsDemo:</p>
+                <figure>
+                <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage Title=&quot;Contacts&quot;
+            xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+            xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+            x:Class=&quot;UdemyXamarinForms.ToolbarItemsDemo&quot;&gt;
+    &lt;ContentPage.ToolbarItems&gt;
+        &lt;ToolbarItem Icon=&quot;plus.png&quot; Text=&quot;New&quot; Activated=&quot;ToolbarItem_Activated&quot; Order=&quot;Primary&quot;/&gt;
+        &lt;ToolbarItem Icon=&quot;plus.png&quot; Text=&quot;New&quot; Activated=&quot;ToolbarItem_Activated&quot; Order=&quot;Secondary&quot;/&gt;
+    &lt;/ContentPage.ToolbarItems&gt;
+&lt;/ContentPage&gt;</code></pre>
+                    <figcaption>Fig 06-101</figcaption>
+                </figure>
+                <p>We set the Title. To add toolbar items we use Property Element Syntax - ContentPage has a
+                    property called ToolbarItems to which you can add one or more ToolbarItem elements. The most
+                    important property of ToolbarItem is icon which you specifies the name of a resource file in one
+                    of our application projects as we have seen before. </p>
+                <p>The text property is only shown in certain circumstances. The Activated event hooks up to an
+                    event handler in which we just display an alert:</p>
+                <figure>
+                <pre><code class="csharp">private void ToolbarItem_Activated(object sender, EventArgs e)
+{
+    DisplayAlert(&quot;Activated&quot;, &quot;ToolbarItem Activate&quot;, &quot;OK&quot;);
+}</code></pre>
+                    <figcaption>Fig 06-102</figcaption>
+                </figure>
+                <p>In a real world application when the user taps a ToolbarItem we would display a modal dialogue
+                    box for the user to enter some information such as composing a message or creating a new album.</p>
+                <p>Back in the Xaml file on the ToolbarItem we add another property called Order with a value of
+                Primary(the default) or Secondary.</p>
+                <p>Lastly, a common mistake is to forget to wrap the ToolbarItems in a NavigationPage which will
+                    result in none of the ToolbarItems being visible. In this
+                    example we can do that in the App.cs file:</p>
+                <figure>
+                    <pre><code class="csharp">MainPage = new NavigationPage(new ToolbarItemsDemo());</code></pre>
+                    <figcaption>Fig 06-103</figcaption>
+                </figure>
+                <p>Now if we run the application:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-104.png"/>
+                  <figcaption>Fig 06-104</figcaption>
+                </figure>
+                <p>You see two ToolbarItems. The one on the top is the Primary and then one below is the Secondary.
+                    Note that the Text property is only shown on the Secondary Toolbar.</p>
+                <p>When we click either of them for now we just get the alert:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-105.png"/>
+                  <figcaption>Fig 06-105</figcaption>
+                </figure>
+                <p>In Android the icons appear differently. The primary icons appear here:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-106.png"/>
+                  <figcaption>Fig 06-106</figcaption>
+                </figure>
+                <p>And the secondary icons appear under this menu:</p>
+                <figure>
+                  <img src="app/xamarin/images/06/Fig06-107.png"/>
+                  <figcaption>Fig 06-107</figcaption>
+                </figure>
+                <p>One thing to pay attention to here is that because the navigation bar in Android is blue by
+                    default the icon should be white with a transparent background. In contrast for iOS use a black
+                    icon on a transparent background. When that icon is rendered as a primary toolbar item it will
+                    appear as blue. When it is rendered as a secondary toolbar item it will appear as black. So the
+                    operating system itself will take care of this.</p>
                 <h3>Cheat Sheet</h3>
                 <p></p>
                 <h3>Exercise - InstagramApp</h3>
