@@ -32,6 +32,10 @@ import {
 } from './wpf/wpf.component';
 
 import {
+    SqliteComponent,
+} from './sqlite/sqlite.component';
+
+import {
     XamarinComponent,
     XamarinFormsCrossPlatform00CourseContentsComponent,
     XamarinFormsCrossPlatform01GettingStartedComponent,
@@ -45,6 +49,8 @@ import {
     XamarinFormsCrossPlatform09ModelViewViewModelArchitecturalPatternComponent,
     XamarinFormsCrossPlatform10BeyondTheBasicsComponent
 } from './xamarin/xamarin.component';
+
+
 
 import {
     Angular2Component,
@@ -140,6 +146,7 @@ class PreHighlight {
                         <ul class='nav navbar-nav'>
                             <li><a [routerLink]="['WPF']">WPF</a></li>
                             <li><a [routerLink]="['Xamarin']">Xamarin</a></li>
+                            <li><a [routerLink]="['Sqlite']">SQLite</a></li>
                             <li><a [routerLink]="['Angular2']">Angular 2</a></li>
                             <li><a [routerLink]="['TypeScript']">TypeScript</a></li>
                             <li><a [routerLink]="['JavaScript']">JavaScript</a></li>
@@ -183,6 +190,8 @@ class PreHighlight {
     { path: '/wpf-data-binding-in-depth-07-design-time-data-binding', name: 'WPFDataBindingInDepth07DesignTimeDataBinding', component: WPFDataBindingInDepth07DesignTimeDataBindingComponent },
     { path: '/wpf-data-binding-in-depth-08-containers-and-collection-controls', name: 'WPFDataBindingInDepth08ContainersAndCollectionControls', component: WPFDataBindingInDepth08ContainersAndCollectionControlsComponent },
     { path: '/wpf-data-binding-in-depth-09-data-input-validation', name: 'WPFDataBindingInDepth09DataInputValidation', component: WPFDataBindingInDepth09DataInputValidationComponent },
+
+    { path: '/sqlite', name: 'Sqlite', component: SqliteComponent },
 
     { path: '/xamarin', name: 'Xamarin', component: XamarinComponent },
     { path: '/xamarin-forms-cross-platform-00-course-contents', name: 'XamarinFormsCrossPlatform00CourseContents', component: XamarinFormsCrossPlatform00CourseContentsComponent },
